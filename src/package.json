@@ -1,0 +1,53 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build && vite build --ssr"
+    },
+    "devDependencies": {
+        "@iconify/vue": "^4.1.2",
+        "@inertiajs/vue3": "^1.0.0",
+        "@tailwindcss/forms": "^0.5.3",
+        "@vitejs/plugin-vue": "^5.0.0",
+        "@vue/server-renderer": "^3.4.0",
+        "autoprefixer": "^10.4.20",
+        "axios": "^1.7.4",
+        "laravel-vite-plugin": "^1.0",
+        "postcss": "^8.4.47",
+        "tailwindcss": "^3.4.14",
+        "unplugin-auto-import": "^19.0.0",
+        "unplugin-vue-components": "^28.0.0",
+        "vite": "^5.0",
+        "vue": "^3.4.0"
+    },
+    "dependencies": {
+        "@tiptap/extension-bullet-list": "^2.10.3",
+        "@tiptap/extension-color": "^2.10.3",
+        "@tiptap/extension-hard-break": "^2.10.3",
+        "@tiptap/extension-highlight": "^2.10.3",
+        "@tiptap/extension-image": "^2.10.3",
+        "@tiptap/extension-list-item": "^2.10.3",
+        "@tiptap/extension-ordered-list": "^2.10.3",
+        "@tiptap/extension-paragraph": "^2.10.3",
+        "@tiptap/extension-placeholder": "^2.10.3",
+        "@tiptap/extension-table": "^2.10.3",
+        "@tiptap/extension-table-cell": "^2.10.3",
+        "@tiptap/extension-table-header": "^2.10.3",
+        "@tiptap/extension-table-row": "^2.10.3",
+        "@tiptap/extension-text-style": "^2.10.3",
+        "@tiptap/extension-underline": "^2.10.3",
+        "@tiptap/pm": "^2.10.3",
+        "@tiptap/starter-kit": "^2.10.3",
+        "@tiptap/vue-3": "^2.10.3",
+        "@vuelidate/core": "^2.0.3",
+        "@vuelidate/validators": "^2.0.4",
+        "@vueuse/components": "^11.1.0",
+        "@vueuse/core": "^11.1.0",
+        "dayjs": "^1.11.13",
+        "element-plus": "^2.9.3",
+        "id3-parser": "^3.0.0",
+        "notivue": "^2.4.5",
+        "pinia": "^2.2.4"
+    }
+}

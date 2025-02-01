@@ -1,0 +1,113 @@
+<?php
+
+use App\Http\Controllers\App\User\ProfileController;
+use Illuminate\Support\Facades\Route;
+
+//Route::get('/welcome', function () {
+//    return Inertia::render('Welcome', [
+//        'canLogin' => Route::has('login'),
+//        'canRegister' => Route::has('register'),
+//        'laravelVersion' => Application::VERSION,
+//        'phpVersion' => PHP_VERSION,
+//    ]);
+//});
+
+// Pages menu
+Route::get('/', [\App\Http\Controllers\App\IndexController::class, 'index'])->name('index');
+Route::get('/grammar', [\App\Http\Controllers\App\GrammarController::class, 'index'])->name('grammar');
+Route::get('/grammar/item/{id}', [\App\Http\Controllers\App\GrammarController::class, 'show'])->name('grammar.show');
+Route::get('/lyrics', [\App\Http\Controllers\App\LyricsController::class, 'index'])->name('lyrics');
+Route::get('/lyrics/item/{id}', [\App\Http\Controllers\App\LyricsController::class, 'show'])->name('lyrics.show');
+Route::get('/lessons', [\App\Http\Controllers\App\LessonsController::class, 'index'])->name('lessons');
+Route::get('/lessons/item/{id}', [\App\Http\Controllers\App\LessonsController::class, 'show'])->name('lesson.show');
+Route::get('/dictionary', [\App\Http\Controllers\App\DictionaryController::class, 'index'])->name('dictionary');
+Route::get('/dictionary/word/{id}', [\App\Http\Controllers\App\DictionaryController::class, 'show'])->name('dictionary.show');
+Route::get('/info/terms-user', [\App\Http\Controllers\App\Info\InfoController::class, 'termsUser'])->name('info.terms-user');
+Route::get('/privacy-policy', [\App\Http\Controllers\App\Info\InfoController::class, 'privacyPolicy'])->name('info.privacy-policy');
+
+// Search
+Route::post('/search', [\App\Http\Controllers\App\SearchController::class, 'searchAll']);
+
+// Search song
+Route::get('song/search-by-artist-and-title', [\App\Http\Controllers\App\Song\SongController::class, 'searchByArtistAndTitle']);
+Route::get('song/search-hints', [\App\Http\Controllers\App\Song\SongController::class, 'searchHints']);
+Route::get('song/show/{id}', [\App\Http\Controllers\App\Song\SongController::class, 'show']);
+Route::get('song/search', [\App\Http\Controllers\App\Song\SongController::class, 'search'])->name('song.search');
+
+// Search  word
+Route::get('word/learning-write', [\App\Http\Controllers\App\Word\WordController::class, 'randomList']);
+Route::get('word/test-yourself', [\App\Http\Controllers\App\Word\WordController::class, 'testYourSelf']);
+Route::get('word/search', [\App\Http\Controllers\App\Word\WordController::class, 'search'])->name('word.search');
+
+// User
+Route::get('/user/show/{id}', [\App\Http\Controllers\App\User\UserController::class, 'show'])->name('user.show');
+
+// Post
+Route::get('/post/show/{id}', [\App\Http\Controllers\App\PostController::class, 'show'])->name('post.show');
+
+//Route::get('/dashboard', function () {
+//    return Inertia::render('Dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    // User
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('profile/avatar-upload', [ProfileController::class, 'uploadAvatar']);
+    Route::post('profile/avatar-remove', [ProfileController::class, 'removeAvatar']);
+    Route::get('/users', [\App\Http\Controllers\App\User\UserController::class, 'index'])->name('users');
+    Route::get('/user/posts', [\App\Http\Controllers\App\User\UserPostController::class, 'index'])->name('user.posts');
+    Route::get('/user/post/edit/{id}', [\App\Http\Controllers\App\User\UserPostController::class, 'edit'])->name('user.post.edit');
+    Route::post('/user/post/update/{id}', [\App\Http\Controllers\App\User\UserPostController::class, 'update'])->name('user.post.update');
+
+    // Post
+    Route::get('/post/create', [\App\Http\Controllers\App\PostController::class, 'create'])->name('post.create');
+    Route::post('/post/store', [\App\Http\Controllers\App\PostController::class, 'store'])->name('post.store');
+    Route::get('/post/edit/{id}', [\App\Http\Controllers\App\PostController::class, 'edit'])->name('post.edit');
+    Route::post('/post/update/{id}', [\App\Http\Controllers\App\PostController::class, 'update'])->name('post.update');
+    Route::post('/post-comment/store', [\App\Http\Controllers\App\PostCommentController::class, 'store'])->name('post-comment.store');
+});
+
+// Admin
+Route::middleware(['auth', 'verified', 'is-admin'])->group(function () {
+    Route::get('/admin', [\App\Http\Controllers\Admin\IndexController::class, 'index'])->name('admin.index');
+
+    // Post
+    Route::get('/admin/posts', [\App\Http\Controllers\Admin\Post\PostController::class, 'index'])->name('admin.posts');
+    Route::post('/admin/post/update-status/{id}', [\App\Http\Controllers\Admin\Post\PostController::class, 'updateStatus'])->name('admin.post.update-status');
+
+    // Post status
+    Route::get('/admin/post-statuses', [\App\Http\Controllers\Admin\Post\PostStatusController::class, 'index'])->name('admin.posts-statuses');
+    Route::get('/admin/post-status/create', [\App\Http\Controllers\Admin\Post\PostStatusController::class, 'create'])->name('admin.post-status.create');
+    Route::post('/admin/post-status/store', [\App\Http\Controllers\Admin\Post\PostStatusController::class, 'store'])->name('admin.post-status.store');
+    Route::get('/admin/post-status/edit/{id}', [\App\Http\Controllers\Admin\Post\PostStatusController::class, 'edit'])->name('admin.post-status.edit');
+    Route::post('/admin/post-status/update/{id}', [\App\Http\Controllers\Admin\Post\PostStatusController::class, 'update'])->name('admin.post-status.update');
+    Route::post('/admin/post-status/delete/{id}', [\App\Http\Controllers\Admin\Post\PostStatusController::class, 'delete'])->name('admin.post-status.delete');
+
+    // Post comment
+    Route::get('/admin/posts-comments', [\App\Http\Controllers\Admin\PostComment\PostCommentController::class, 'index'])->name('admin.posts-comments');
+    Route::post('/admin/post-comment/toggle-show/{id}', [\App\Http\Controllers\Admin\PostComment\PostCommentController::class, 'toggleShow'])->name('admin.posts-comment.toggle-show');
+
+    // Transcription
+    Route::get('/admin/transcription', [\App\Http\Controllers\Admin\Transcription\TranscriptionController::class, 'index'])->name('admin.transcription');
+    Route::post('/admin/transcription/train', [\App\Http\Controllers\Admin\Transcription\TranscriptionController::class, 'train'])->name('admin.transcription.train');
+    Route::post('admin/transcription/transcribe', [\App\Http\Controllers\Admin\Transcription\TranscriptionController::class, 'transcribe'])->name('admin.transcription.transcribe');
+
+    // Proverbs
+    Route::get('/admin/proverbs', [\App\Http\Controllers\Admin\Proverb\ProverbController::class, 'index'])->name('admin.proverbs');
+    Route::get('/admin/proverb/create', [\App\Http\Controllers\Admin\Proverb\ProverbController::class, 'create'])->name('admin.proverb.create');
+    Route::post('/admin/proverb/store', [\App\Http\Controllers\Admin\Proverb\ProverbController::class, 'store'])->name('admin.proverb.store');
+    Route::get('/admin/proverb/edit/{id}', [\App\Http\Controllers\Admin\Proverb\ProverbController::class, 'edit'])->name('admin.proverb.edit');
+    Route::post('/admin/proverb/update/{id}', [\App\Http\Controllers\Admin\Proverb\ProverbController::class, 'update'])->name('admin.proverb.update');
+//    Route::post('/admin/proverb/delete/{id}', [\App\Http\Controllers\Admin\Proverb\ProverbController::class, 'delete'])->name('admin.proverb.delete');
+
+    Route::get('/admin/songs', [\App\Http\Controllers\Admin\Song\SongController::class, 'index'])->name('admin.songs');
+    Route::get('/admin/song/create', [\App\Http\Controllers\Admin\Song\SongController::class, 'create'])->name('admin.song.create');
+    Route::post('/admin/song/store', [\App\Http\Controllers\Admin\Song\SongController::class, 'store'])->name('admin.song.store');
+    Route::get('/admin/song/edit/{id}', [\App\Http\Controllers\Admin\Song\SongController::class, 'edit'])->name('admin.song.edit');
+    Route::post('/admin/song/update/{id}', [\App\Http\Controllers\Admin\Song\SongController::class, 'update'])->name('admin.song.update');
+//    Route::post('/admin/song/delete/{id}', [\App\Http\Controllers\Admin\Song\SongController::class, 'delete'])->name('admin.song.delete');
+});
+
+require __DIR__.'/auth.php';

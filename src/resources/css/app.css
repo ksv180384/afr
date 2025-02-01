@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply min-h-screen text-gray-800;
+    font-family: Verdana, Geneva, sans-serif;
+    background-image: url('/img/rewallscom7292.jpg');
+    background-attachment: fixed;
+}
+
+
+.container-max{
+    @apply max-w-[1440px] w-full mx-auto;
+}
+
+.Pervod{
+    @apply text-green-600;
+}
+
+.link{
+    color: #176093;
+    text-decoration: none;
+}
+
+.link-small{
+    @apply rounded-md text-sm text-sky-700 underline hover:text-sky-900;
+}
+
+.tiptap ul{
+    padding-inline-start: 40px;
+}
+
+.tiptap ul li{
+    list-style: disc;
+}
+
+.tiptap ol{
+    padding-inline-start: 40px;
+}
+
+.tiptap ol li{
+    list-style-type: decimal;
+}
+
+.tiptap h3{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.tiptap blockquote{
+    @apply border-l-4 ps-2;
+}
+
+.tiptap hr{
+    @apply my-3;
+}
+
+.tiptap p{
+    @apply py-2;
+}
+
+.tiptap li>p{
+    @apply py-0;
+}
+
+.post-content table tbody tr th{
+    @apply bg-gray-200 px-2 py-1;
+}
+
+.post-content table tbody tr td {
+
+}
+
+.post-content table.table-border tbody tr th{
+    @apply border border-gray-300;
+}
+
+.post-content table.table-border tbody tr td {
+    @apply border border-gray-300;
+}
+
+table.table-border tbody tr th,
+table.table-border tbody tr td{
+    @apply border !border-solid !border-gray-600;
+}
