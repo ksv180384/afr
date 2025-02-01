@@ -13,11 +13,8 @@ const props = defineProps({
   errors: { type: Object, default: null },
 });
 
-const subtitlesFr = ref(props.song.ar_text_fr);
-const subtitlesRu = ref(props.song.ar_text_ru);
-const subtitlesTranscription = ref(props.song.ar_text_transcription);
-
-console.log(subtitlesFr.value)
+const subtitles = ref(props.song.ar_text_fr);
+console.log(props.song)
 </script>
 
 <template>
@@ -37,11 +34,7 @@ console.log(subtitlesFr.value)
     </div>
 
     <div>
-      <afr-maker-subtitles
-        :fr="subtitlesFr"
-        :ru="subtitlesRu"
-        :transcription="subtitlesTranscription"
-      />
+      <afr-maker-subtitles v-model="subtitles" />
     </div>
   </admin-layout>
 </template>
