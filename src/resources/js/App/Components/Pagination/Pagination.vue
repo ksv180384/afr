@@ -76,8 +76,7 @@ const paginationLinks = computed(() => {
 }
 
 .pagination ul{
-  display: flex;
-  flex-direction: row;
+  @apply flex flex-row items-center;
 }
 
 .pagination ul li{

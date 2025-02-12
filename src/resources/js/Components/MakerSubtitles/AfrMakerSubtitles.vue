@@ -1,5 +1,5 @@
 <script setup>
-import {ref, watch, nextTick} from 'vue';
+import {ref, nextTick} from 'vue';
 import {Icon} from '@iconify/vue';
 
 const model = defineModel();

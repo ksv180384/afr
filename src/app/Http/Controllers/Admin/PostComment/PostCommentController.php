@@ -8,6 +8,7 @@ use App\Http\Resources\Admin\PaginateResource;
 use App\Http\Resources\Admin\PostComment\PostCommentResource;
 use App\Models\PostComment\PostComment;
 use App\Services\Admin\PostComment\PostCommentService;
+use Illuminate\Http\JsonResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -30,7 +31,11 @@ class PostCommentController extends Controller
         ]);
     }
 
-    public function toggleShow(int $id)
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function toggleShow(int $id): JsonResponse
     {
         $comment = PostComment::query()->findOrFail($id);
         $comment->is_show = !$comment->is_show;

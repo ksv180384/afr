@@ -2,6 +2,7 @@
 
 namespace App\Services\App;
 
+use App\Filters\Admin\DictionaryFilter;
 use App\Filters\WordFilters;
 use App\Models\Word\Word;
 use Illuminate\Database\Eloquent\Collection;
@@ -85,11 +86,12 @@ class WordService {
      */
     public function search(string $searchText, string $lang = 'fr'): Collection
     {
+        $resultFields = ['id', 'word', 'translation', 'transcription', 'example'];
         if($lang === 'fr'){
             $searchText = preg_replace("#\b(la |le |les |un |une |se )#", "", $searchText);
-            $wordsList = Word::where('word', 'LIKE', '%' . $searchText . '%')->get(['id', 'word', 'translation', 'example']);
+            $wordsList = Word::where('word', 'LIKE', '%' . $searchText . '%')->get($resultFields);
         }else{
-            $wordsList = Word::where('translation', 'LIKE', '%' . $searchText . '%')->get(['id', 'word', 'translation', 'example']);
+            $wordsList = Word::where('translation', 'LIKE', '%' . $searchText . '%')->get($resultFields);
             $wordsList = $wordsList->map(function ($item){
                 $word = $item->word;
                 $item->word = $item->translation;
@@ -185,5 +187,19 @@ class WordService {
         }
 
         return $result;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function searchFrAll(): Collection
+    {
+        $filter = new DictionaryFilter(request());
+
+        $words = Word::query()
+            ->filter($filter)
+            ->get(['id', 'word', 'translation', 'transcription', 'example']);
+
+        return $words;
     }
 }

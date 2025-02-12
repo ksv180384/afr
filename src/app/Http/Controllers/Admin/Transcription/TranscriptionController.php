@@ -33,7 +33,7 @@ class TranscriptionController extends Controller
         $resTrain = $transcriptionService->transcribe($request->text);
 
         return response()->json([
-            'message' => $resTrain,
+            'transcription' => $resTrain,
         ]);
     }
 }

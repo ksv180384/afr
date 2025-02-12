@@ -12,6 +12,7 @@ const props = defineProps({
 const isLoadingTrain = ref(false);
 const isLoadingTranscribe = ref(false);
 const text = ref('');
+const transcription = ref('');
 
 const trainModel = async () => {
   try {
@@ -33,7 +34,7 @@ const transcribe = async () => {
     isLoadingTranscribe.value = true;
 
     const res = await api.transcription.transcribe({ text: text.value });
-
+    transcription.value = res.transcription;
   }
   catch (e) {
     console.error(e);
@@ -64,6 +65,9 @@ const transcribe = async () => {
           :rows="4"
           type="textarea"
         />
+      </div>
+      <div>
+        {{ transcription }}
       </div>
       <div class="mt-4">
         <el-button @click="transcribe">Получить транскрипцию на ру</el-button>

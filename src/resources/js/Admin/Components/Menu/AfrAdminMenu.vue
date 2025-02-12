@@ -25,9 +25,6 @@ import AfrAdminMenuItem from '@/Admin/Components/Menu/AfrAdminMenuItem.vue';
 
   <div class="mt-8 px-2">
     <afr-admin-menu-item>
-      Слова
-    </afr-admin-menu-item>
-    <afr-admin-menu-item>
       Анекдоты
     </afr-admin-menu-item>
     <afr-admin-menu-item>

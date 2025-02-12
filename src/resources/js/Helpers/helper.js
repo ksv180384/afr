@@ -17,7 +17,9 @@ export const objToUrlParams = (params) => {
                 p[`${item}[${arrKey}]`] = `${params[item][arrKey]}`;
             }
         } else {
+          if(params[item]){
             p[item] = params[item];
+          }
         }
     });
     return '?' + new URLSearchParams(p).toString();
@@ -125,4 +127,23 @@ export const getUrlParam = (paramName) => {
   const param = new URLSearchParams(window.location.search).get(paramName);
   return param || null;
 };
+
+export const isObjectEmpty = (obj) => {
+  return Object.values(obj).every(value => {
+    // Проверяем, является ли значение пустым
+    if (value === null || value === undefined || value === '') {
+      return true;
+    }
+    // Если значение число, проверяем, равно ли оно 0
+    if (typeof value === 'number') {
+      return value === 0;
+    }
+    // Если значение объект или массив, проверяем, пуст ли он
+    if (typeof value === 'object' && value !== null) {
+      return Object.keys(value).length === 0;
+    }
+    return false;
+  });
+};
+
 

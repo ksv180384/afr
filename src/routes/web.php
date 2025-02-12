@@ -108,6 +108,15 @@ Route::middleware(['auth', 'verified', 'is-admin'])->group(function () {
     Route::get('/admin/song/edit/{id}', [\App\Http\Controllers\Admin\Song\SongController::class, 'edit'])->name('admin.song.edit');
     Route::post('/admin/song/update/{id}', [\App\Http\Controllers\Admin\Song\SongController::class, 'update'])->name('admin.song.update');
 //    Route::post('/admin/song/delete/{id}', [\App\Http\Controllers\Admin\Song\SongController::class, 'delete'])->name('admin.song.delete');
+
+    // dictionary (словарь, слова)
+    Route::get('/admin/dictionary/search', [\App\Http\Controllers\Admin\Dictionary\DictionaryController::class, 'search'])->name('admin.dictionary.search');
+    Route::get('/admin/dictionary', [\App\Http\Controllers\Admin\Dictionary\DictionaryController::class, 'index'])->name('admin.dictionary');
+    Route::get('/admin/dictionary/create', [\App\Http\Controllers\Admin\Dictionary\DictionaryController::class, 'create'])->name('admin.dictionary.create');
+    Route::post('/admin/dictionary/store', [\App\Http\Controllers\Admin\Dictionary\DictionaryController::class, 'store'])->name('admin.dictionary.store');
+    Route::get('/admin/dictionary/edit/{id}', [\App\Http\Controllers\Admin\Dictionary\DictionaryController::class, 'edit'])->name('admin.dictionary.edit');
+    Route::post('/admin/dictionary/update/{id}', [\App\Http\Controllers\Admin\Dictionary\DictionaryController::class, 'update'])->name('admin.dictionary.update');
+    Route::post('/admin/dictionary/delete/{id}', [\App\Http\Controllers\Admin\Dictionary\DictionaryController::class, 'delete'])->name('admin.dictionary.delete');
 });
 
 require __DIR__.'/auth.php';

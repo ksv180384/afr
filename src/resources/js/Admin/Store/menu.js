@@ -30,6 +30,11 @@ export default [
     title: 'Песни'
   },
   {
+    path: '/admin/dictionary',
+    name: 'admin.dictionary',
+    title: 'Словарь'
+  },
+  {
     path: '/admin/transcription',
     name: 'admin.transcription',
     title: 'Fr в транскрипцию'
