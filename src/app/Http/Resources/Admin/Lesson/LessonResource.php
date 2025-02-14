@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Admin\Dictionary;
+namespace App\Http\Resources\Admin\Lesson;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class WordResource extends JsonResource
+class LessonResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +16,7 @@ class WordResource extends JsonResource
     {
         $result = [
             'id' => $this->id,
-            'word' => $this->word,
-            'translation' => $this->translation,
-            'transcription' => $this->transcription,
-
+            'title' => $this->title,
         ];
 
         return $result;

@@ -117,6 +117,14 @@ Route::middleware(['auth', 'verified', 'is-admin'])->group(function () {
     Route::get('/admin/dictionary/edit/{id}', [\App\Http\Controllers\Admin\Dictionary\DictionaryController::class, 'edit'])->name('admin.dictionary.edit');
     Route::post('/admin/dictionary/update/{id}', [\App\Http\Controllers\Admin\Dictionary\DictionaryController::class, 'update'])->name('admin.dictionary.update');
     Route::post('/admin/dictionary/delete/{id}', [\App\Http\Controllers\Admin\Dictionary\DictionaryController::class, 'delete'])->name('admin.dictionary.delete');
+
+    // lessons
+    Route::get('/admin/lessons', [\App\Http\Controllers\Admin\Lesson\LessonController::class, 'index'])->name('admin.lessons');
+    Route::get('/admin/lessons/create', [\App\Http\Controllers\Admin\Lesson\LessonController::class, 'create'])->name('admin.lessons.create');
+    Route::post('/admin/lessons/store', [\App\Http\Controllers\Admin\Lesson\LessonController::class, 'store'])->name('admin.lessons.store');
+    Route::get('/admin/lessons/edit/{id}', [\App\Http\Controllers\Admin\Lesson\LessonController::class, 'edit'])->name('admin.lessons.edit');
+    Route::post('/admin/lessons/update/{id}', [\App\Http\Controllers\Admin\Lesson\LessonController::class, 'update'])->name('admin.lessons.update');
+    Route::post('/admin/lessons/delete/{id}', [\App\Http\Controllers\Admin\Lesson\LessonController::class, 'delete'])->name('admin.lessons.delete');
 });
 
 require __DIR__.'/auth.php';

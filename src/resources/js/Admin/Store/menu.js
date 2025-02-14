@@ -35,6 +35,11 @@ export default [
     title: 'Словарь'
   },
   {
+    path: '/admin/lessons',
+    name: 'admin.lessons',
+    title: 'Уроки'
+  },
+  {
     path: '/admin/transcription',
     name: 'admin.transcription',
     title: 'Fr в транскрипцию'
