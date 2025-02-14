@@ -44,6 +44,10 @@ class Filter
                 continue;
             }
 
+            if(is_string($value)){
+                $value = urldecode($value);
+            }
+
             if (method_exists($this, $methodName)) {
                 if (in_array($method, static::KEYS_TO_BOOL, true)) {
                     $value = (bool)$value;

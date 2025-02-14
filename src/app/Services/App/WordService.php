@@ -20,11 +20,36 @@ class WordService {
     {
         $word = Word::query()->select([
             'id',
+            'id_part_of_speech',
             'word',
             'translation',
             'transcription',
             'example',
         ])->findOrFail($id);
+
+        return $word;
+    }
+
+    /**
+     * @param array $wordData
+     * @return Word
+     */
+    public function create(array $wordData): Word
+    {
+        $word = Word::query()->create($wordData);
+
+        return $word;
+    }
+
+    /**
+     * @param int $id
+     * @param array $wordData
+     * @return Word
+     */
+    public function update(int $id, array $wordData): Word
+    {
+        $word = Word::query()->findOrFail($id);
+        $word->update($wordData);
 
         return $word;
     }

@@ -18,7 +18,7 @@ export const objToUrlParams = (params) => {
             }
         } else {
           if(params[item]){
-            p[item] = params[item];
+            p[item] = encodeURIComponent(params[item]);
           }
         }
     });

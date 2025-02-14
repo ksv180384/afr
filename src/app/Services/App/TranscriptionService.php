@@ -87,7 +87,10 @@ class TranscriptionService
         $result = $this->replaceFrenchEClosedSyllableUnderStress($text);
         $result = $this->removeConsonantsSilentEndings($text);
         $result = $this->replaceUnstressedE($text);
+        $result = $this->replaceTtreEndingWithTr($text);
+        $result = $this->replaceErEndingWithE($text);
         $result = $this->replaceFleetingE($text);
+        $result = $this->replaceReEndingWithR($text);
         $result = $this->removeFinalE($text);
         $result = $this->replaceErEnding($text);
         $result = $this->replaceAWithCyrillicA($text);
@@ -135,9 +138,15 @@ class TranscriptionService
 
         $functionsList = [
             'replaceNnementWithNyeMye', // 7 - конец слова
+            'replaceTtreEndingWithTr', // 3 - конец слова
+            'replaceLleEndingWithL', // 3 - конец слова
+            'replaceNneEndingWithN', // 3 - конец слова
             'replaceErEnding', // 2 - конец слова
+            'replaceErEndingWithE', // 2 - конец слова
+            'replaceReEndingWithR', // 2 - конец слова
             'removeFinalE', // 1 или 2 - конец слова
             'removeConsonantsSilentEndings', // 1 - конец слова
+            'replaceCieWithSy', // 3
             'replaceEuWithCyrillicYo', // 2 -3
             'replaceAuEauWithCyrillicO', // 2 -3
             'replaceIlWithYOrIy', // 2 -3
@@ -158,7 +167,9 @@ class TranscriptionService
             'replaceEmWithYm', // 2
             'replaceOnOmWithOn', // 2
             'replaceTiWithCOrT', // 2
+            'replaceAllCcWithK', // 2
             'replaceTAndTh', // 1 - 2
+            'replaceCEndingWithEmpty', // 1 - конец слова
             'replaceFleetingE', // 1 - середина слова
             'replaceFrenchEClosedSyllableUnderStress', // 1 - середина слова
             'replaceUnstressedE', // 1 - в безударном
@@ -180,14 +191,17 @@ class TranscriptionService
             'replaceXWithRules', // 1
             'replaceFWithF', // 1
             'replaceBWithB', // 1
+            'replaceDWithD', // 1
+            'replaceMWithM', // 1
+            'replaceRWithR', // 1
         ];
 
-        foreach ($words as $word){
-            foreach ($functionsList as $function){
+        foreach ($words as $word) {
+            foreach ($functionsList as $function) {
                 $trItems = $this->$function($word, $function);
-                if($trItems){
-                    foreach ($trItems as $trItem){
-                        if(!$this->isPositionInArray($trItem, $transcribedWords)) {
+                if ($trItems) {
+                    foreach ($trItems as $trItem) {
+                        if (!$this->isPositionInArray($trItem, $transcribedWords)) {
                             $transcribedWords[] = $trItem;
                         }
                     }
@@ -195,13 +209,37 @@ class TranscriptionService
             }
         }
 
-       // enfant
+
+        // enfant
 //        dd($transcribedWords);
 //        $transcribedWords = array_values($transcribedWords);
 
+        // Сортируем результаты по позиции
         usort($transcribedWords, function ($a, $b) {
             return $a['position'] <=> $b['position'];
         });
+        // Применяем правило переноса звуков между словами
+        $transcribedText = implode(' ', $words); // Объединяем слова в одну строку
+        $liaisonResults = $this->handleLiaison($transcribedText);
+
+        // Добавляем результаты переноса звуков в общий массив
+        foreach ($liaisonResults as $liaisonItem) {
+            if (!$this->isPositionInArray($liaisonItem, $transcribedWords)) {
+                $transcribedWords[] = $liaisonItem;
+            }
+        }
+
+    // Снова сортируем результаты по позиции
+        usort($transcribedWords, function ($a, $b) {
+            return $a['position'] <=> $b['position'];
+        });
+
+        // Применяем все замены к тексту
+        foreach ($transcribedWords as $trItem) {
+            $transcribedText = substr_replace($transcribedText, $trItem['replacement'], $trItem['position'], $trItem['length']);
+        }
+
+
         dump(collect($transcribedWords)->pluck('replacement'));
         dump(collect($transcribedWords)->pluck('replace'));
         dd(collect($transcribedWords)->map(function ($item){
@@ -214,6 +252,7 @@ class TranscriptionService
         // Обрабатываем каждое слово
 //        foreach ($words as $word) {
 
+//            $word = $this->applyReplacements($word, 'replaceLleEndingWithL'); // 3 - конец слова
 //            $word = $this->applyReplacements($word, 'replaceErEnding'); // 2 - конец слова
 //            $word = $this->applyReplacements($word, 'removeFinalE'); // 1 или 2 - конец слова
 //            $word = $this->applyReplacements($word, 'removeConsonantsSilentEndings'); // 1 - конец слова
@@ -227,6 +266,7 @@ class TranscriptionService
 //            $word = $this->applyReplacements($word, 'replaceChWithCyrillicSh'); // 2
 //            $word = $this->applyReplacements($word, 'replacePhWithCyrillicF'); // 2
 //            $word = $this->applyReplacements($word, 'replaceGnWithCyrillic'); // 2
+//            $word = $this->applyReplacements($word, 'replaceAllCcWithK'); // 2
 //            $word = $this->applyReplacements($word, 'replaceAiEiWithCyrillicE'); // 2
 //            $word = $this->applyReplacements($word, 'replaceOiWithYa'); // 2
 //            $word = $this->applyReplacements($word, 'replaceQuWithK'); // 2
@@ -258,6 +298,7 @@ class TranscriptionService
 //            $word = $this->applyReplacements($word, 'replaceXWithRules'); // 1
 //            $word = $this->applyReplacements($word, 'replaceFWithF'); // 1
 //            $word = $this->applyReplacements($word, 'replaceBWithB'); // 1
+//            $word = $this->applyReplacements($word, 'replaceDWithD'); // 1
 
 
             // Добавляем обработанное слово в массив
@@ -269,10 +310,32 @@ class TranscriptionService
 */
     }
 
+    private function handleLiaison($text) {
+        $results = [];
+        $words = explode(' ', $text);
+        $length = count($words);
+
+        for ($i = 0; $i < $length - 1; $i++) {
+            $currentWord = $words[$i];
+            $nextWord = $words[$i + 1];
+
+            // Пример: если текущее слово заканчивается на согласный, а следующее начинается с гласного
+            if (preg_match('/[bcdfghjklmnpqrstvwxyz]$/i', $currentWord) && preg_match('/^[aeiouy]/i', $nextWord)) {
+                $results[] = [
+                    'function' => 'handleLiaison',
+                    'description' => 'Liaison between words',
+                    'replacement' => '-', // Например, добавляем дефис для обозначения переноса
+                    'replace' => ' ',
+                    'position' => strlen(implode(' ', array_slice($words, 0, $i + 1))),
+                    'length' => 1,
+                ];
+            }
+        }
+
+        return $results;
+    }
+
     private function isPositionInArray($position, $array) {
-//        dump($position);
-//        dump($array);
-//        dump('--------------------');
         foreach ($array as $element) {
             if (isset($element['position']) && isset($element['length'])) {
                 $start = $element['position'];
@@ -2026,5 +2089,259 @@ class TranscriptionService
 
         // Если ничего не найдено, возвращаем null
         return !empty($results) ? $results : null;
+    }
+
+    private function replaceLleEndingWithL(string $word): ?array
+    {
+        $targetCombination = 'lle'; // Целевое сочетание
+        $replacementCombination = 'ль';
+
+        // Проверяем, заканчивается ли слово на "lle"
+        if (mb_substr($word, -3) === $targetCombination) {
+            return [[
+                'function' => 'replaceLleWithLy',
+                'description' => 'lle на конце слова читается как "ль"',
+                'replacement' => $replacementCombination, // На что меняем
+                'replace' => $targetCombination, // Что меняем
+                'position' => mb_strlen($word) - 3, // Позиция символа "lle"
+                'length' => 3 // Количество символов для замены
+            ]];
+        }
+
+        // Если правило не подходит, возвращаем null
+        return null;
+    }
+
+    private function replaceDWithD(string $word): ?array
+    {
+        // Находим все позиции буквы 'd' в слове
+        $results = [];
+        $position = 0;
+
+        // Ищем каждое вхождение 'd'
+        while (($position = mb_strpos($word, 'd', $position)) !== false) {
+            $results[] = [
+                'function' => 'replaceDWithD',
+                'description' => 'буква "d" читается как "д"',
+                'replacement' => 'д', // На что меняем
+                'replace' => 'd', // Что меняем
+                'position' => $position, // Позиция символа "d"
+                'length' => 1 // Количество символов для замены
+            ];
+
+            // Перемещаем позицию для поиска следующего вхождения
+            $position += 1;
+        }
+
+        // Если ничего не найдено, возвращаем null
+        if (empty($results)) {
+            return null;
+        }
+
+        return $results;
+    }
+
+    private function replaceMWithM(string $word): ?array {
+        // Находим все позиции буквы 'm' в слове
+        $results = [];
+        $position = 0;
+
+        // Ищем каждое вхождение 'm'
+        while (($position = mb_strpos($word, 'm', $position)) !== false) {
+            $results[] = [
+                'function' => 'replaceMWithM',
+                'description' => 'буква "m" читается как "м"',
+                'replacement' => 'м', // На что меняем
+                'replace' => 'm', // Что меняем
+                'position' => $position, // Позиция символа "m"
+                'length' => 1 // Количество символов для замены
+            ];
+
+            // Перемещаем позицию для поиска следующего вхождения
+            $position += 1;
+        }
+
+        // Если ничего не найдено, возвращаем null
+        if (empty($results)) {
+            return null;
+        }
+
+        return $results;
+    }
+
+    private function replaceTtreEndingWithTr(string $word): ?array {
+        // Проверяем, заканчивается ли слово на 'ttre'
+        if (mb_substr($word, -4) === 'ttre') {
+            return [[
+                'function' => 'replaceTtreEndingWithTr',
+                'description' => 'ttre на конце слова читается как "тр"',
+                'replacement' => 'тр', // На что меняем
+                'replace' => 'ttre', // Что меняем
+                'position' => mb_strlen($word) - 4, // Позиция символа "ttre"
+                'length' => 4 // Количество символов для замены
+            ]];
+        }
+
+        // Если правило не подходит, возвращаем null
+        return null;
+    }
+
+    private function replaceErEndingWithE(string $word): ?array
+    {
+        // Проверяем, заканчивается ли слово на 'er'
+        if (mb_substr($word, -2) === 'er') {
+            return [[
+                'function' => 'replaceErEndingWithE',
+                'description' => 'er на конце слова читается как "е"',
+                'replacement' => 'е', // На что меняем
+                'replace' => 'er', // Что меняем
+                'position' => mb_strlen($word) - 2, // Позиция символа "er"
+                'length' => 2 // Количество символов для замены
+            ]];
+        }
+
+        // Если правило не подходит, возвращаем null
+        return null;
+    }
+
+    private function replaceAllCcWithK(string $word): ?array
+    {
+        // Находим все позиции подстроки 'cc' в слове
+        $results = [];
+        $position = 0;
+
+        // Ищем каждое вхождение 'cc'
+        while (($position = mb_strpos($word, 'cc', $position)) !== false) {
+            $results[] = [
+                'function' => 'replaceAllCcWithK',
+                'description' => 'cc читается как "к"',
+                'replacement' => 'к', // На что меняем
+                'replace' => 'cc', // Что меняем
+                'position' => $position, // Позиция символа "cc"
+                'length' => 2 // Количество символов для замены
+            ];
+
+            // Перемещаем позицию для поиска следующего вхождения
+            $position += 2; // Длина 'cc' равна 2
+        }
+
+        // Если ничего не найдено, возвращаем null
+        if (empty($results)) {
+            return null;
+        }
+
+        return $results;
+    }
+
+    private function replaceReEndingWithR(string $word): ?array
+    {
+        // Проверяем, заканчивается ли слово на 're'
+        if (mb_substr($word, -2) === 're') {
+            return [[
+                'function' => 'replaceReEndingWithR',
+                'description' => 're на конце слова читается как "р"',
+                'replacement' => 'р', // На что меняем
+                'replace' => 're', // Что меняем
+                'position' => mb_strlen($word) - 2, // Позиция символа "re"
+                'length' => 2 // Количество символов для замены
+            ]];
+        }
+
+        // Если правило не подходит, возвращаем null
+        return null;
+    }
+
+    private function replaceRWithR(string $word): ?array
+    {
+        // Находим все позиции буквы 'r' в слове
+        $results = [];
+        $position = 0;
+
+        // Ищем каждое вхождение 'r'
+        while (($position = mb_strpos($word, 'r', $position)) !== false) {
+            $results[] = [
+                'function' => 'replaceRWithR',
+                'description' => 'буква "r" читается как "р"',
+                'replacement' => 'р', // На что меняем
+                'replace' => 'r', // Что меняем
+                'position' => $position, // Позиция символа "r"
+                'length' => 1 // Количество символов для замены
+            ];
+
+            // Перемещаем позицию для поиска следующего вхождения
+            $position += 1;
+        }
+
+        // Если ничего не найдено, возвращаем null
+        if (empty($results)) {
+            return null;
+        }
+
+        return $results;
+    }
+
+    private function replaceCEndingWithEmpty(string $word): ?array
+    {
+        // Проверяем, заканчивается ли слово на 'c'
+        if (mb_substr($word, -1) === 's') {
+            return [[
+                'function' => 'replaceCEndingWithEmpty',
+                'description' => 'буква "s" на конце слова не читается',
+                'replacement' => '', // На что меняем (пустая строка, так как буква не читается)
+                'replace' => 's', // Что меняем
+                'position' => mb_strlen($word) - 1, // Позиция символа "c"
+                'length' => 1 // Количество символов для замены
+            ]];
+        }
+
+        // Если правило не подходит, возвращаем null
+        return null;
+    }
+
+    private function replaceCieWithSy(string $word): ?array
+    {
+        // Находим все позиции подстроки 'cie' в слове
+        $results = [];
+        $position = 0;
+
+        // Ищем каждое вхождение 'cie'
+        while (($position = mb_strpos($word, 'cie', $position)) !== false) {
+            $results[] = [
+                'function' => 'replaceCieWithSy',
+                'description' => 'cie читается как "сье"',
+                'replacement' => 'сье', // На что меняем
+                'replace' => 'cie', // Что меняем
+                'position' => $position, // Позиция символа "cie"
+                'length' => 3 // Количество символов для замены
+            ];
+
+            // Перемещаем позицию для поиска следующего вхождения
+            $position += 3; // Длина 'cie' равна 3
+        }
+
+        // Если ничего не найдено, возвращаем null
+        if (empty($results)) {
+            return null;
+        }
+
+        return $results;
+    }
+
+    private function replaceNneEndingWithN(string $word): ?array
+    {
+        // Проверяем, заканчивается ли слово на 'nne'
+        if (mb_substr($word, -3) === 'nne') {
+            return [[
+                'function' => 'replaceNneEndingWithN',
+                'description' => 'nne на конце слова читается как "н"',
+                'replacement' => 'н', // На что меняем
+                'replace' => 'nne', // Что меняем
+                'position' => mb_strlen($word) - 3, // Позиция символа "nne"
+                'length' => 3 // Количество символов для замены
+            ]];
+        }
+
+        // Если правило не подходит, возвращаем null
+        return null;
     }
 }

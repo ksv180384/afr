@@ -3,6 +3,7 @@ import { Link } from '@inertiajs/vue3';
 import menu from '@/Admin/Store/menu.js';
 
 import AfrAdminMenuItem from '@/Admin/Components/Menu/AfrAdminMenuItem.vue';
+
 </script>
 
 <template>
@@ -15,6 +16,7 @@ import AfrAdminMenuItem from '@/Admin/Components/Menu/AfrAdminMenuItem.vue';
       <afr-admin-menu-item
         v-for="menuItem in menu"
         :key="menuItem.name"
+        :is-active="route().current(menuItem.name)"
       >
         <Link :href="route(menuItem.name)">
           {{ menuItem.title }}
