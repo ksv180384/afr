@@ -1,5 +1,6 @@
 <script setup>
 import menu from '@/App/Store/menu.js';
+import widgetsMenu from '@/App/Store/widgetsMenu.js';
 
 import Navigation from '@/App/Components/Header/Navigation/Navigation.vue';
 import Search from '@/App/Components/Header/Search/Search.vue';
@@ -28,6 +29,7 @@ const props = defineProps({
         <afr-sidebar
           :user="authUser"
           :menu="menu"
+          :widgetsMenu="widgetsMenu"
           :sub-menu="subMenu"
         />
       </div>

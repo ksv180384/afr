@@ -45,6 +45,11 @@ Route::get('/user/show/{id}', [\App\Http\Controllers\App\User\UserController::cl
 // Post
 Route::get('/post/show/{id}', [\App\Http\Controllers\App\PostController::class, 'show'])->name('post.show');
 
+// widgets (используется в мобильной версии)
+Route::get('/widget/player', [\App\Http\Controllers\App\Widget\WidgetController::class, 'player'])->name('widget.player');
+Route::get('/widget/learning-write', [\App\Http\Controllers\App\Widget\WidgetController::class, 'learningWrite'])->name('widget.learning-write');
+Route::get('/widget/check-yourself', [\App\Http\Controllers\App\Widget\WidgetController::class, 'checkYourself'])->name('widget.check-yourself');
+
 //Route::get('/dashboard', function () {
 //    return Inertia::render('Dashboard');
 //})->middleware(['auth', 'verified'])->name('dashboard');

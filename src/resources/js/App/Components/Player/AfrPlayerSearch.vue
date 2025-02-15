@@ -54,7 +54,6 @@ const loadSong = async (songId) => {
 >
   <afr-input
     v-model="searchText"
-    size="small"
     placeholder="Поиск подходящей песни..."
     @input="onInputSearch"
     @focusin="onInputSearch"
@@ -89,6 +88,7 @@ const loadSong = async (songId) => {
   @apply absolute text-center bg-white rounded-b text-gray-500 shadow-lg overflow-hidden w-full;
   /*width: calc(100% + 1rem);
   transform: translateX(-0.5rem);*/
+  z-index: 11;
 }
 
 .search-result ul li{

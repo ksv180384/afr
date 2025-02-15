@@ -2,7 +2,7 @@
 import { ref, watch, onMounted, onBeforeUnmount } from 'vue';
 import { Icon } from '@iconify/vue';
 
-import AfrSidebarMenu from '@/App/Components/Header/Sidebar/AfrSidebarMenu.vue';
+// import AfrSidebarMenu from '@/App/Components/Header/Sidebar/AfrSidebarMenu.vue';
 import AfrCloseBtn from '@/App/Components/Form/AfrCloseBtn.vue';
 import AfrSidebarSubMenu from '@/App/Components/Header/Sidebar/AfrSidebarSubMenu.vue';
 
@@ -10,6 +10,7 @@ const props = defineProps({
   user: { type: Object, default: {} },
   menu: { type: Array, default: [] },
   subMenu: { type: Array, default: null },
+  widgetsMenu: { type: Array, default: null },
 });
 
 const isSidebarVisible = ref(false);
@@ -82,16 +83,17 @@ onBeforeUnmount(() => {
     >
       <afr-close-btn class="absolute right-2 top-2 z-10" size="large" @click="toggleSidebar"/>
 
-      <template v-if="subMenu">
+<!--      <template v-if="subMenu">-->
         <afr-sidebar-sub-menu
           :menu="menu"
+          :widgetsMenu="widgetsMenu"
           :sub-menu="subMenu"
           :user="user"
         />
-      </template>
-      <template v-else>
-        <afr-sidebar-menu :menu="menu" :user="user"/>
-      </template>
+<!--      </template>-->
+<!--      <template v-else>-->
+<!--        <afr-sidebar-menu :menu="menu" :user="user"/>-->
+<!--      </template>-->
     </aside>
   </transition>
 </div>

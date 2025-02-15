@@ -1,11 +1,14 @@
 <script setup>
-import { useSlots } from 'vue';
+import { useSlots, computed } from 'vue';
 
 const model = defineModel();
 defineProps({
   position: { type: String, default: 'top' },
 });
 const slots = useSlots();
+const slotsDefault = computed(() => {
+  return slots.default().filter(item => item.props);
+});
 
 const changeTab = (tabName) => {
   model.value = tabName;
@@ -15,7 +18,7 @@ const changeTab = (tabName) => {
 <template>
 <div class="afr-tabs">
   <div v-if="position === 'top'" class="afr-tabs-header">
-    <template v-for="tab in slots.default()">
+    <template v-for="tab in slotsDefault">
       <div
         class="afr-tabs-header-btn"
         :class="{ 'is-active-tab': tab.props.name === model }"
@@ -25,11 +28,11 @@ const changeTab = (tabName) => {
       </div>
     </template>
   </div>
-  <template v-for="afrTabPlane in slots.default()">
+  <template v-for="afrTabPlane in slotsDefault">
     <component :is="afrTabPlane" v-if="model === afrTabPlane.props.name"></component>
   </template>
   <div v-if="position === 'bottom'" class="afr-tabs-footer">
-    <template v-for="tab in slots.default()">
+    <template v-for="tab in slotsDefault">
       <div
         class="afr-tabs-header-btn"
         :class="{ 'is-active-tab': tab.props.name === model }"

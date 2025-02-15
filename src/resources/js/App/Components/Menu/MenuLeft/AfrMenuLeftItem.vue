@@ -10,36 +10,36 @@ defineProps({
 </script>
 
 <template>
-<li :class="{ 'active': isActive }">
+<div :class="{ 'active': isActive }">
   <Link :href="href" :title="title">
     <slot/>
   </Link>
-</li>
+</div>
 </template>
 
 <style scoped>
-li{
+div{
   @apply border-sky-500 leading-5 border-b relative text-sky-900 transition-transform duration-1000;
 }
 
-li:hover{
+div:hover{
   @apply text-sky-100;
 }
 
-li:before{
+div:before{
   @apply absolute inset-0 bg-sky-700 transform scale-x-0 origin-left transition-transform duration-100;
   content: '';
 }
 
-li:hover:before{
+div:hover:before{
   @apply scale-x-100;
 }
 
-li.active{
+div.active{
   @apply bg-sky-700 text-sky-100;
 }
 
-li>a{
+div>a{
   @apply relative inline-block px-2 py-3 w-full;
 }
 </style>

@@ -34,7 +34,7 @@ const goToProfile = () => {
     <nav class="sidebar-nav">
       <ul>
         <template v-for="menuItem in menu">
-          <li :class="{ 'active': page.url.split('/')[1] === menuItem.path.split('/')[1] }">
+          <li :class="{ 'active': route().current(menuItem.name) }">
             <Link :href="route(menuItem.name)">{{ menuItem.title }}</Link>
           </li>
         </template>

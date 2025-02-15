@@ -7,7 +7,7 @@ defineProps({
 
 <template>
   <div class="menu">
-    <ul>
+
       <slot/>
 <!--      <li-->
 <!--        v-for="menuItem in menu"-->
@@ -21,11 +21,15 @@ defineProps({
 <!--          {{ menuItem.title }}-->
 <!--        </Link>-->
 <!--      </li>-->
-    </ul>
+
   </div>
 </template>
 
 <style scoped>
+.menu{
+  @apply h-full;
+}
+
 .menu ul{
   @apply px-3 py-2;
 }

@@ -41,7 +41,7 @@ watch(
 
 <style scoped>
 .afr-player-text-block{
-  @apply h-full overflow-hidden rounded-md bg-sky-50 p-4 flex-grow shadow-[0_0_10px_-3px_rgba(0,0,0,0.6)] relative;
+  @apply h-full overflow-hidden rounded-md bg-sky-50 p-4 mx-2 lg:mx-0 flex-grow shadow-[0_0_10px_-3px_rgba(0,0,0,0.6)] relative;
 }
 
 .afr-player-text-block:before{

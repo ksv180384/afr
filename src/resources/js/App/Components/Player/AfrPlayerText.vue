@@ -20,7 +20,7 @@ const props = defineProps({
 
 <style scoped>
 .afr-player-text{
-  @apply w-full mb-2 flex flex-grow gap-2 h-[220px] px-4;
+  @apply w-full mb-2 flex flex-col lg:flex-row flex-grow gap-2 lg:h-[220px] h-[calc(100vh-300px)];
 }
 
 </style>

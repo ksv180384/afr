@@ -32,9 +32,6 @@ import AfrAdminMenuItem from '@/Admin/Components/Menu/AfrAdminMenuItem.vue';
     <afr-admin-menu-item>
       Грамматика
     </afr-admin-menu-item>
-    <afr-admin-menu-item>
-      Уроки
-    </afr-admin-menu-item>
   </div>
 </div>
 </template>

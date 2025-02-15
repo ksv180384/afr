@@ -101,18 +101,20 @@ onMounted(() => {
       </template>
 
       <div class="flex flex-col py-3">
-        <div class="flex justify-end font-bold">
-          {{ balls }}
-        </div>
+        <div class="flex flex-col">
+          <div class="flex justify-end font-bold">
+            {{ balls }}
+          </div>
 
-        <template v-if="wordActive?.answer_options">
-          <template v-for="answerOption in wordActive.answer_options" :key="answerOption.id">
-            <afr-word-item :word="answerOption" :answer="wordActive.answer" @click="check"/>
+          <template v-if="wordActive?.answer_options">
+            <template v-for="answerOption in wordActive.answer_options" :key="answerOption.id">
+              <afr-word-item :word="answerOption" :answer="wordActive.answer" @click="check"/>
+            </template>
           </template>
-        </template>
 
-        <div class="flex justify-center my-4">
-          <afr-player-word :word="wordActive?.answer?.word" class="me-3" @click.stop="() => false"/>
+          <div class="flex justify-center my-4">
+            <afr-player-word :word="wordActive?.answer?.word" class="me-3" @click.stop="() => false"/>
+          </div>
         </div>
 
         <div
@@ -136,7 +138,7 @@ onMounted(() => {
 
 <style scoped>
 .history-words-list{
-  @apply absolute bg-white p-2 rounded overflow-auto ms-[496px] -mt-[64px] w-[200px] h-[360px];
+  @apply lg:absolute bg-white p-2 rounded overflow-auto lg:ms-[496px] lg:-mt-[64px] lg:w-[200px] h-[200px] lg:h-[360px]  border-t;
   /*margin-left: 496px;
   margin-top: -64px;
   width: 200px;

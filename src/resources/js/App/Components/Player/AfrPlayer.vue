@@ -305,10 +305,10 @@ onMounted(() => {
   <div class="afr-player-component">
 
     <div>
-      <div v-if="fileName">
+      <div v-if="fileName" class="lg:px-0 px-4">
         <div class="afr-player-file-name">{{ fileName }}</div>
         <div class="mt-2 flex flex-row items-center justify-between">
-          <div class="text-xs">Продолжительность: {{ durationHuman }} мин</div>
+          <div class="text-sm lg:text-xs">Продолжительность: {{ durationHuman }} мин</div>
           <afr-close-btn size="small" title="Отмена" @click="close"/>
         </div>
 
@@ -328,7 +328,7 @@ onMounted(() => {
           class="afr-player-info"
           @click="() => refInputMp3.click()"
         >
-          Перетащите mp3 файл. Программа попытается сама найти текст, если не найдет,
+          Перетащите mp3 файл или нажмите на выделенную область. Программа попытается сама найти текст, если не найдет,
           то введите исполнителя и название необходимой песни.
           <div class="text-center py-1 text-lg">mp3</div>
         </div>
@@ -367,22 +367,27 @@ onMounted(() => {
         <div class="afr-player-btn" title="Stop" @click="stop">
           <Icon icon="mingcute:stop-line" />
         </div>
-        <div class="afr-track-info">
-          <div class="afr-track-tags">
-            <div class="afr-artist">
-              {{ artist }}
-            </div>
-            <div class="afr-track">
-              {{ track }}
-            </div>
-          </div>
-          <div v-if="imageLink" class="afr-track-image">
-            <img :src="imageLink" :alt="album" :title="album"/>
-          </div>
-        </div>
 
-        <div v-if="durationHuman" class="afr-track-time">
-          {{currentTimeHuman}} / {{ durationHuman }}
+        <div class="flex flex-col flex-1 lg:flex-row">
+
+          <div class="afr-track-info">
+            <div class="afr-track-tags">
+              <div class="afr-artist">
+                {{ artist }}
+              </div>
+              <div class="afr-track">
+                {{ track }}
+              </div>
+            </div>
+            <div v-if="imageLink" class="afr-track-image">
+              <img :src="imageLink" :alt="album" :title="album"/>
+            </div>
+          </div>
+
+          <div v-if="durationHuman" class="afr-track-time">
+            {{currentTimeHuman}} / {{ durationHuman }}
+          </div>
+
         </div>
 
         <AfrVolume :volume="volume * 100" @change="changeVolume"/>
@@ -402,11 +407,11 @@ onMounted(() => {
 }
 
 .afr-player-bar{
-  @apply fixed bottom-0 max-w-[1440px] w-full mx-auto z-10 rounded-t -ms-2;
+  @apply fixed bottom-0 lg:max-w-[1440px] w-full mx-auto z-10 rounded-t lg:-ms-2;
 }
 
 .afr-player-load-file{
-  @apply p-2 border-blue-500 border rounded-lg border-dashed relative;
+  @apply p-2 mx-2 border-blue-500 border rounded-lg border-dashed relative;
 }
 
 .is-over-drop-zone{
@@ -414,11 +419,11 @@ onMounted(() => {
 }
 
 .afr-player-info{
-  @apply text-xs leading-5 cursor-pointer;
+  @apply lg:text-xs text-lg lg:leading-5 leading-8 cursor-pointer;
 }
 
 .afr-player-file-name{
-  @apply text-xs text-nowrap truncate text-center;
+  @apply  text-lg lg:text-xs font-semibold text-nowrap truncate text-center;
 }
 
 .afr-player-controls{
@@ -426,11 +431,11 @@ onMounted(() => {
 }
 
 .afr-player-btn{
-  @apply p-4 cursor-pointer hover:bg-blue-100;
+  @apply px-3 lg:px-2 py-4 lg:p-4 cursor-pointer hover:bg-blue-100;
 }
 
 .afr-track-info{
-  @apply flex items-center ms-2.5 flex-grow;
+  @apply flex items-center lg:ms-2.5 flex-grow;
 }
 
 .afr-track-tags{
@@ -442,7 +447,7 @@ onMounted(() => {
 }
 
 .afr-track-image img{
-  @apply w-[60px] h-[60px] object-contain;
+  @apply w-[60px] h-[60px] object-contain hidden lg:block;
 }
 
 .afr-artist{
@@ -454,6 +459,6 @@ onMounted(() => {
 }
 
 .afr-track-time{
-  @apply text-xs;
+  @apply text-xs lg:text-sm flex justify-start items-center;
 }
 </style>
