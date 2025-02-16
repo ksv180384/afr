@@ -27,7 +27,9 @@ defineProps({
 
 <style scoped>
 .menu{
-  @apply h-full;
+  height: 100vh;
+  overflow-y: auto;
+  padding-bottom: 40px;
 }
 
 .menu ul{

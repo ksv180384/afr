@@ -57,7 +57,7 @@ const titlePage = `Грамматика Французского языка - ${
 
 <style scoped>
 .grammar-container{
-  @apply flex flex-row;
+  @apply flex flex-row overflow-auto;
 }
 
 .grammar-menu{

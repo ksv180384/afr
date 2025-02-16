@@ -109,7 +109,8 @@ onBeforeUnmount(() => {
 }
 
 .sidebar-container{
-  @apply fixed top-0 left-0 h-screen w-[400px] max-w-full bg-sky-50 shadow-lg transform transition-transform duration-300;
+  @apply fixed left-0 w-[400px] max-w-full bg-sky-50 shadow-lg transform transition-transform duration-300;
+  top: env(safe-area-inset-top); /* Учитывает высоту адресной строки */
 }
 
 .bg-sidebar{
