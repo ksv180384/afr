@@ -18,7 +18,7 @@ const colorFemale = computed(() => {
 
 <template>
   <span
-    v-if="gender && gender.id === 2"
+    v-if="gender && gender.id === 1"
     class="inline-block"
     title="Мужчина"
   >
@@ -30,7 +30,7 @@ const colorFemale = computed(() => {
     />
   </span>
   <span
-    v-else-if="gender && gender.id === 1"
+    v-else-if="gender && gender.id === 2"
     class="inline-block"
     title="Женщина"
   >
