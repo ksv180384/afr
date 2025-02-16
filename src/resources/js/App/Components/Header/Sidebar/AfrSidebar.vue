@@ -5,6 +5,7 @@ import { Icon } from '@iconify/vue';
 // import AfrSidebarMenu from '@/App/Components/Header/Sidebar/AfrSidebarMenu.vue';
 import AfrCloseBtn from '@/App/Components/Form/AfrCloseBtn.vue';
 import AfrSidebarSubMenu from '@/App/Components/Header/Sidebar/AfrSidebarSubMenu.vue';
+import ProfileControl from '@/App/Components/Header/Authentification/ProfileControl.vue';
 
 const props = defineProps({
   user: { type: Object, default: {} },
@@ -58,7 +59,8 @@ onBeforeUnmount(() => {
 
 <template>
 <div class="afr-sidebar">
-  <div>
+  <div class="flex items-center gap-2">
+    <profile-control :user="user"/>
     <div
       class="menu-mini"
       @click="toggleSidebar"
@@ -109,8 +111,8 @@ onBeforeUnmount(() => {
 }
 
 .sidebar-container{
-  @apply fixed left-0 w-[400px] max-w-full bg-sky-50 shadow-lg transform transition-transform duration-300;
-  top: env(safe-area-inset-top); /* Учитывает высоту адресной строки */
+  @apply fixed top-0 left-0 w-[400px] max-w-full bg-sky-50 shadow-lg transform transition-transform duration-300;
+  min-height: calc(100vh - env(safe-area-inset-top)); /* Учитывает высоту адресной строки */
 }
 
 .bg-sidebar{

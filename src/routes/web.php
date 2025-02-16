@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\App\User\ProfileController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 //Route::get('/welcome', function () {
@@ -24,6 +25,11 @@ Route::get('/dictionary', [\App\Http\Controllers\App\DictionaryController::class
 Route::get('/dictionary/word/{id}', [\App\Http\Controllers\App\DictionaryController::class, 'show'])->name('dictionary.show');
 Route::get('/info/terms-user', [\App\Http\Controllers\App\Info\InfoController::class, 'termsUser'])->name('info.terms-user');
 Route::get('/privacy-policy', [\App\Http\Controllers\App\Info\InfoController::class, 'privacyPolicy'])->name('info.privacy-policy');
+
+
+Route::get('/link', function (){
+    Artisan::call('storage:link');
+});
 
 // Search
 Route::post('/search', [\App\Http\Controllers\App\SearchController::class, 'searchAll']);

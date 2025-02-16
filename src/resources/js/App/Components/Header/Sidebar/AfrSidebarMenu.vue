@@ -28,6 +28,16 @@ const goToProfile = () => {
         {{ user.name }}
       </div>
     </template>
+    <template v-else>
+      <div class="flex">
+        <div class="flex-1 text-center">
+          <Link :href="route('login')" class="link">Вход</Link>
+        </div>
+        <div class="flex-1 text-center">
+          <Link :href="route('register')" class="link">Регистрация</Link>
+        </div>
+      </div>
+    </template>
   </div>
 
   <div class="p-4">
@@ -46,7 +56,7 @@ const goToProfile = () => {
 
 <style scoped>
 .afr-sidebar-menu{
-  @apply flex flex-col h-full;
+  @apply flex flex-col h-screen;
 }
 
 .sidebar-nav{
