@@ -26,11 +26,6 @@ Route::get('/dictionary/word/{id}', [\App\Http\Controllers\App\DictionaryControl
 Route::get('/info/terms-user', [\App\Http\Controllers\App\Info\InfoController::class, 'termsUser'])->name('info.terms-user');
 Route::get('/privacy-policy', [\App\Http\Controllers\App\Info\InfoController::class, 'privacyPolicy'])->name('info.privacy-policy');
 
-
-Route::get('/link', function (){
-    Artisan::call('storage:link');
-});
-
 // Search
 Route::post('/search', [\App\Http\Controllers\App\SearchController::class, 'searchAll']);
 
