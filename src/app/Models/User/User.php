@@ -79,7 +79,7 @@ class User extends Authenticatable implements MustVerifyEmail
         if(empty($this->rang)){
             throw ValidationException::withMessages(['message' => 'Невозможно определить права пользователя.']);
         }
-        return $this->rang->alias == 'administrator';
+        return $this->rang?->alias == 'administrator';
     }
 
     public function getIsModeratorAttribute(){
