@@ -60,7 +60,9 @@ onBeforeUnmount(() => {
 <template>
 <div class="afr-sidebar">
   <div class="flex items-center gap-2">
-    <profile-control :user="user"/>
+    <template v-if="user">
+      <profile-control :user="user"/>
+    </template>
     <div
       class="menu-mini"
       @click="toggleSidebar"
@@ -111,8 +113,7 @@ onBeforeUnmount(() => {
 }
 
 .sidebar-container{
-  @apply fixed top-0 left-0 w-[400px] max-w-full bg-sky-50 shadow-lg transform transition-transform duration-300;
-  min-height: calc(100vh - env(safe-area-inset-top)); /* Учитывает высоту адресной строки */
+  @apply fixed top-0 h-full left-0 w-[400px] max-w-full bg-sky-50 shadow-lg transform transition-transform duration-300;
 }
 
 .bg-sidebar{

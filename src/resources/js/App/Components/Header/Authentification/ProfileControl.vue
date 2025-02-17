@@ -43,7 +43,7 @@ const logout = async () => {
           Панель администратора
         </a>
         <DropdownLink :href="route('post.create')">
-          <span class="text-green-600 flex flex-row items-center gap-2"><Icon icon="material-symbols:add-box" width="24" height="24" /> Добавить пост</span>
+          <span class="text-green-600 flex flex-row text-nowrap items-center gap-2"><Icon icon="material-symbols:add-box" width="24" height="24" /> Добавить пост</span>
         </DropdownLink>
         <DropdownLink :href="route('user.posts')">
           Мои посты

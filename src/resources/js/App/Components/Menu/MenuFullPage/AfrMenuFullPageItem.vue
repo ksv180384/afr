@@ -17,14 +17,18 @@ const props = defineProps({
 
 <style scoped>
 li{
-  @apply text-center;
+  @apply text-center border-b border-solid border-sky-200 transition-transform duration-700;
+}
+
+li:last-child{
+  @apply !border-b-0;
 }
 
 li>a{
-  @apply py-2 inline-block border-b border-solid border-sky-200 transition-transform duration-700;
+  @apply py-2 inline-block;
 }
 
-li>a:hover{
+li:hover{
   @apply border-dashed border-sky-900 text-sky-800;
 }
 </style>

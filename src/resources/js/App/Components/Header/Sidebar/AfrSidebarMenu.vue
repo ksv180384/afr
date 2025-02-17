@@ -56,7 +56,7 @@ const goToProfile = () => {
 
 <style scoped>
 .afr-sidebar-menu{
-  @apply flex flex-col h-screen;
+  @apply flex flex-col h-full;
 }
 
 .sidebar-nav{
