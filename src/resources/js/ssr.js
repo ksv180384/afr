@@ -25,8 +25,8 @@ createServer((page) =>
         title: (title) => `${title} - ${appName}`,
         resolve: (name) =>
             resolvePageComponent(
-                `./Pages/${name}.vue`,
-                import.meta.glob('./Pages/**/*.vue'),
+                `./App/Pages/${name}.vue`,
+                import.meta.glob('./App/Pages/**/*.vue'),
             ),
         setup({ App, props, plugin }) {
             return createSSRApp({ render: () => h(App, props) })
@@ -39,4 +39,5 @@ createServer((page) =>
               .use(pinia);
         },
     }),
+  5010
 );

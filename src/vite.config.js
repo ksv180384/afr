@@ -11,7 +11,7 @@ export default defineConfig(({ command, mode }) => {
 
   return {
     server: {
-      host: true,
+      host: '0.0.0.0',
       port: 5004,
       hmr: {
         host: 'localhost',
@@ -23,7 +23,10 @@ export default defineConfig(({ command, mode }) => {
           'resources/js/app.js',
           'resources/js/admin.js',
         ],
-        ssr: 'resources/js/ssr.js',
+        ssr: [
+          'resources/js/ssr.js',
+          'resources/js/ssr_admin.js',
+        ],
         refresh: true,
       }),
       vue({

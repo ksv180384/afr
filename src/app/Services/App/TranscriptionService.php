@@ -5,6 +5,7 @@ namespace App\Services\App;
 use App\Models\Word\Word;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class TranscriptionService
@@ -131,13 +132,15 @@ class TranscriptionService
         return $result;
     }
 */
-    function transcribe($text) {
+    public function transcribe($text) {
+        $text = Str::lower($text);
         // Разбиваем текст на слова
         $words = explode(' ', $text);
         $transcribedWords = [];
 
         $functionsList = [
             'replaceNnementWithNyeMye', // 7 - конец слова
+            'replacePuisWithПюи', // 4 - конец слова
             'replaceTtreEndingWithTr', // 3 - конец слова
             'replaceLleEndingWithL', // 3 - конец слова
             'replaceNneEndingWithN', // 3 - конец слова
@@ -194,14 +197,47 @@ class TranscriptionService
             'replaceDWithD', // 1
             'replaceMWithM', // 1
             'replaceRWithR', // 1
+            'replacePWithP', // 1
+            'replaceTWithT', // 1
+            'replaceNWithН', // 1
         ];
 
+        // Обрабатываем каждое слово отдельно
         foreach ($words as $word) {
+            $transcribedText = $word;
+
+            // Применяем каждую функцию замены
+            foreach ($functionsList as $function) {
+                $replacements = $this->$function($transcribedText);
+                if ($replacements) {
+                    // Сортируем замены от конца слова к началу
+                    usort($replacements, function ($a, $b) {
+                        return $b['position'] - $a['position'];
+                    });
+
+                    // Применяем замены
+                    foreach ($replacements as $replacement) {
+                        $transcribedText = mb_substr($transcribedText, 0, $replacement['position'])
+                            . $replacement['replacement']
+                            . mb_substr($transcribedText, $replacement['position'] + $replacement['length']);
+                    }
+                }
+            }
+
+            $transcribedWords[] = $transcribedText;
+        }
+
+        // Объединяем слова обратно в предложение
+        return implode(' ', $transcribedWords);
+
+        /*
+        foreach ($words as $keyWord => $word) {
             foreach ($functionsList as $function) {
                 $trItems = $this->$function($word, $function);
                 if ($trItems) {
                     foreach ($trItems as $trItem) {
-                        if (!$this->isPositionInArray($trItem, $transcribedWords)) {
+                        $startPosition = !empty($words[$keyWord-1]) ? mb_strlen($words[$keyWord-1]) : 0;
+                        if (!$this->isPositionInArray($trItem, $transcribedWords, $startPosition)) {
                             $transcribedWords[] = $trItem;
                         }
                     }
@@ -248,6 +284,7 @@ class TranscriptionService
         dd($transcribedWords);
 
         return $transcribedWords;
+        */
 /*
         // Обрабатываем каждое слово
 //        foreach ($words as $word) {
@@ -335,10 +372,10 @@ class TranscriptionService
         return $results;
     }
 
-    private function isPositionInArray($position, $array) {
+    private function isPositionInArray($position, $array, $startPosition = 0) {
         foreach ($array as $element) {
             if (isset($element['position']) && isset($element['length'])) {
-                $start = $element['position'];
+                $start = $startPosition + $element['position'];
                 $end = $start + $element['length'] - 1;
                 if ($position['position'] >= $start && $position['position'] <= $end) {
                     return true; // Позиция найдена
@@ -2343,5 +2380,111 @@ class TranscriptionService
 
         // Если правило не подходит, возвращаем null
         return null;
+    }
+
+    private function replacePWithP(string $word): ?array {
+        // Находим все позиции буквы 'p' в слове
+        $results = [];
+        $position = 0;
+
+        // Ищем каждое вхождение 'p'
+        while (($position = mb_strpos($word, 'p', $position)) !== false) {
+            $results[] = [
+                'function' => 'replacePWithP',
+                'description' => 'буква "p" читается как "п"',
+                'replacement' => 'п', // На что меняем
+                'replace' => 'p', // Что меняем
+                'position' => $position, // Позиция символа "p"
+                'length' => 1 // Количество символов для замены
+            ];
+
+            // Перемещаем позицию для поиска следующего вхождения
+            $position += 1;
+        }
+
+        // Если ничего не найдено, возвращаем null
+        if (empty($results)) {
+            return null;
+        }
+
+        return $results;
+    }
+
+    private function replaceTWithT(string $word): ?array {
+        // Находим все позиции буквы 't' в слове
+        $results = [];
+        $position = 0;
+
+        // Ищем каждое вхождение 't'
+        while (($position = mb_strpos($word, 't', $position)) !== false) {
+            $results[] = [
+                'function' => 'replaceTWithT',
+                'description' => 'буква "t" читается как "т"',
+                'replacement' => 'т', // На что меняем
+                'replace' => 't', // Что меняем
+                'position' => $position, // Позиция символа "t"
+                'length' => 1 // Количество символов для замены
+            ];
+
+            // Перемещаем позицию для поиска следующего вхождения
+            $position += 1;
+        }
+
+        // Если ничего не найдено, возвращаем null
+        if (empty($results)) {
+            return null;
+        }
+
+        return $results;
+    }
+
+    private function replacePuisWithПюи(string $word): ?array {
+        // Проверяем, заканчивается ли слово на 'puis'
+        if (mb_substr($word, -4) === 'puis') {
+            // Формируем результат замены
+            $results = [
+                [
+                    'function' => 'replacePuisWithПюи',
+                    'description' => 'окончание "puis" читается как "пюи"',
+                    'replacement' => 'пюи', // На что меняем
+                    'replace' => 'puis',   // Что меняем
+                    'position' => mb_strlen($word) - 4, // Позиция начала окончания
+                    'length' => 4 // Количество символов для замены
+                ]
+            ];
+
+            return $results;
+        }
+
+        // Если слово не заканчивается на 'puis', возвращаем null
+        return null;
+    }
+
+    private function replaceNWithН(string $word): ?array {
+        // Находим все позиции буквы 'n' в слове
+        $results = [];
+        $position = 0;
+
+        // Ищем каждое вхождение 'n'
+        while (($position = mb_strpos($word, 'n', $position)) !== false) {
+            $results[] = [
+                'function' => 'replaceNWithН',
+                'description' => 'буква "n" читается как "н"',
+                'replacement' => 'н', // На что меняем
+                'replace' => 'n',    // Что меняем
+                'position' => $position, // Позиция символа "n"
+                'length' => 1 // Количество символов для замены
+            ];
+
+            // Перемещаем позицию для поиска следующего вхождения
+            $position += 1;
+        }
+
+        // Если ничего не найдено, возвращаем null
+        if (empty($results)) {
+            return null;
+        }
+
+        return $results;
     }
 }

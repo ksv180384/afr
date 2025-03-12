@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, onMounted } from 'vue';
+import { reactive, ref, onMounted, onUnmounted } from 'vue';
 import api from '@/App/Services/Api';
 import { Icon } from '@iconify/vue';
 import parse from 'id3-parser';
@@ -77,7 +77,9 @@ const close = () => {
   duration.value = null;
   durationHuman.value = 0;
   imageLink.value = null;
-  refInputMp3.value.value = '';
+  if(refInputMp3.value){
+    refInputMp3.value.value = '';
+  }
 }
 
 const checkPlayerTime = () => {
@@ -297,7 +299,10 @@ onMounted(() => {
   if(localStorage.getItem('player-volume')){
     volume.value = localStorage.getItem('player-volume');
   }
+});
 
+onUnmounted(() => {
+  close(); 
 });
 </script>
 
