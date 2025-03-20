@@ -16,6 +16,8 @@ import TableCell from '@tiptap/extension-table-cell';
 import TableHeader from '@tiptap/extension-table-header';
 import TableRow from '@tiptap/extension-table-row';
 import Image from '@tiptap/extension-image';
+import TextAlign from '@tiptap/extension-text-align';
+import ImageResize from 'tiptap-extension-resize-image';
 
 const model = defineModel();
 const refInputImageLink = ref(null);
@@ -78,8 +80,12 @@ const editor = useEditor({
         class: 'content-image',
       },
     }),
+    ImageResize,
     Color.configure({ types: [TextStyle.name, ListItem.name] }),
     TextStyle.configure({ types: [ListItem.name] }),
+    TextAlign.configure({
+      types: ['heading', 'paragraph'],
+    }),
     StarterKit,
     Highlight,
     Underline,
@@ -201,6 +207,30 @@ watch(
         @click="editor.chain().focus().toggleUnderline().run()" :class="{ 'is-active': editor && editor.isActive('underline') }"
       >
         <Icon icon="icon-park-outline:text-underline" width="16" height="16" />
+      </button>
+      <button
+        title="К левому краю"
+        :class="{ 'is-active': editor && editor.isActive({ textAlign: 'left' }) }"
+        type="button"
+        @click="editor.chain().focus().setTextAlign('left').run()"
+      >
+        <Icon icon="quill:text-left" width="16" height="16" />
+      </button>
+      <button
+        title="По центру"
+        :class="{ 'is-active': editor && editor.isActive({ textAlign: 'center' }) }"
+        type="button"
+        @click="editor.chain().focus().setTextAlign('center').run()"
+      >
+        <Icon icon="quill:text-center" width="16" height="16" />
+      </button>
+      <button
+        title="К правому краю"
+        :class="{ 'is-active': editor && editor.isActive({ textAlign: 'right' }) }"
+        type="button"
+        @click="editor.chain().focus().setTextAlign('right').run()"
+      >
+        <Icon icon="quill:text-right" width="16" height="16" />
       </button>
       <button
         title="Подсветить текст"
@@ -415,7 +445,8 @@ watch(
 
 <style scoped>
 .text-controls-container{
-  @apply flex flex-row flex-wrap gap-1 px-1 py-2 max-w-full;
+  @apply flex flex-row flex-wrap gap-1 px-1 py-2 max-w-full sticky top-[56px] bg-blue-100 rounded-t-lg;
+  z-index: 1;
 }
 
 .text-controls-container button{

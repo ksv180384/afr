@@ -125,7 +125,7 @@ useClickOutside(
 
 .afr-options-list{
   @apply absolute bg-white drop-shadow-lg mt-1 rounded transition-transform transform duration-300;
-         z-index: 1;
+         z-index: 2;
   min-width: calc(100% + 4px);
   margin-left: -2px;
 }
