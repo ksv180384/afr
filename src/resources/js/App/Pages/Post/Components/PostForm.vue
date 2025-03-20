@@ -52,7 +52,31 @@ const submit = () => {
 <template>
   <div class="min-h-full flex flex-col px-4 py-2">
     <div class="flex my-4 gap-2">
-      <div v-if="isEdit" class="w-40">
+      <div class="flex-1">
+        <afr-input
+          v-model="form.title"
+          placeholder="Заголовок поста"
+          type="text"
+        />
+        <afr-input-error-message v-if="errors.title">{{ errors.title }}</afr-input-error-message>
+      </div>
+    </div>
+    <div v-if="isNotStatus" class="mb-4">
+      Текущий статус: <span class="font-semibold">{{ post?.status.title }}</span>
+    </div>
+    <afr-editor v-model="form.content"/>
+    <afr-input-error-message v-if="errors.content">{{ errors.content }}</afr-input-error-message>
+    <div class="flex justify-between gap-2 mt-4">
+      <div>
+        <afr-button
+          :disabled="!isEdit"
+          type="success"
+          @click="submit"
+        >
+          {{ btnTitleSubmit }}
+        </afr-button>
+      </div>
+      <div v-if="isEdit" class="w-full">
         <afr-select
           v-model="form.status_id"
           placeholder="Статус"
@@ -69,27 +93,6 @@ const submit = () => {
       <div v-else class="px-2 rounded py-1 text-nowrap bg-red-100">
         {{ post.status.title }}
       </div>
-      <div class="flex-1">
-        <afr-input
-          v-model="form.title"
-          placeholder="Заголовок поста"
-          type="text"
-        />
-        <afr-input-error-message v-if="errors.title">{{ errors.title }}</afr-input-error-message>
-      </div>
-    </div>
-    <div v-if="isNotStatus" class="mb-4">
-      Текущий статус: <span class="font-semibold">{{ post?.status.title }}</span>
-    </div>
-    <afr-editor v-model="form.content"/>
-    <afr-input-error-message v-if="errors.content">{{ errors.content }}</afr-input-error-message>
-    <div class="mt-4">
-      <afr-button
-        :disabled="!isEdit"
-        @click="submit"
-      >
-        {{ btnTitleSubmit }}
-      </afr-button>
     </div>
   </div>
 </template>
