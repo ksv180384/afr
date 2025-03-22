@@ -103,8 +103,7 @@ class HtmlTruncatorService
                     break;
                 }
 
-                $posPreviewText = Str::position($joinHtmlItem[$k], $previewTextItem) + $previewTextItemLength;
-                $resultHtml .= mb_substr($joinHtmlItem[$k], 0, $posPreviewText);
+                $resultHtml .= $joinHtmlItem[$k];
             }
         }
 
