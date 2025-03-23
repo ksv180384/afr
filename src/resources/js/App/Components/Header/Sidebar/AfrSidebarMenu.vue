@@ -60,7 +60,7 @@ const goToProfile = () => {
 }
 
 .sidebar-nav{
-  @apply pb-10;
+  @apply pb-8;
 }
 
 .sidebar-nav li{

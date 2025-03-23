@@ -76,6 +76,10 @@ body {
 
 }
 
+.post-content table.w-full tbody tr td {
+    width: 33.33%;
+}
+
 .post-content table.table-border tbody tr th{
     @apply border border-gray-300;
 }

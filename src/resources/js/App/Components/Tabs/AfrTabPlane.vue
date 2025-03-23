@@ -13,6 +13,6 @@ const props = defineProps({
 
 <style scoped>
 .afr-tab-plane{
-  @apply h-full;
+  @apply h-full overflow-auto;
 }
 </style>

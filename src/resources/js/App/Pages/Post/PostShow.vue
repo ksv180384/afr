@@ -106,7 +106,7 @@ const submitComment = () => {
 }
 
 .post-item h1{
-  @apply text-3xl font-medium mb-6;
+  @apply text-2xl lg:text-3xl font-medium mb-2 lg:mb-6;
 }
 
 .header-info{
