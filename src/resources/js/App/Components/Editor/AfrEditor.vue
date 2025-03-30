@@ -182,7 +182,6 @@ watch(editor, (newEditor) => {
   newEditor.on('selectionUpdate', () => {
     const fontSize = newEditor.getAttributes('textStyle').fontSize || 16;
     if (fontSize) {
-      console.log(fontSize)
       selectFontSize.value = parseInt(fontSize)
     }
   })
@@ -221,9 +220,9 @@ watch(editor, (newEditor) => {
           @click="editor.chain().focus().setColor('#16a34a').run()"
         ></button>
         <button
-          class="btn-preset-color !bg-[#FF943D]"
-          :class="{ 'is-active': editor && editor.isActive('textStyle', { color: '#FBBC88' })}"
-          @click="editor.chain().focus().setColor('#FF943D').run()"
+          class="btn-preset-color !bg-[#ea580c]"
+          :class="{ 'is-active': editor && editor.isActive('textStyle', { color: '#ea580c' })}"
+          @click="editor.chain().focus().setColor('#ea580c').run()"
         ></button>
       </div>
       <button
