@@ -131,6 +131,14 @@ Route::middleware(['auth', 'verified', 'is-admin'])->group(function () {
     Route::get('/admin/lessons/edit/{id}', [\App\Http\Controllers\Admin\Lesson\LessonController::class, 'edit'])->name('admin.lessons.edit');
     Route::post('/admin/lessons/update/{id}', [\App\Http\Controllers\Admin\Lesson\LessonController::class, 'update'])->name('admin.lessons.update');
     Route::post('/admin/lessons/delete/{id}', [\App\Http\Controllers\Admin\Lesson\LessonController::class, 'delete'])->name('admin.lessons.delete');
+
+    // grammars
+    Route::get('/admin/grammars', [\App\Http\Controllers\Admin\Grammar\GrammarController::class, 'index'])->name('admin.grammars');
+    Route::get('/admin/grammars/create', [\App\Http\Controllers\Admin\Grammar\GrammarController::class, 'create'])->name('admin.grammars.create');
+    Route::post('/admin/grammars/store', [\App\Http\Controllers\Admin\Grammar\GrammarController::class, 'store'])->name('admin.grammars.store');
+    Route::get('/admin/grammars/edit/{id}', [\App\Http\Controllers\Admin\Grammar\GrammarController::class, 'edit'])->name('admin.grammars.edit');
+    Route::post('/admin/grammars/update/{id}', [\App\Http\Controllers\Admin\Grammar\GrammarController::class, 'update'])->name('admin.grammars.update');
+    Route::post('/admin/grammars/delete/{id}', [\App\Http\Controllers\Admin\Grammar\GrammarController::class, 'delete'])->name('admin.grammars.delete');
 });
 
 require __DIR__.'/auth.php';

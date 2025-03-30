@@ -206,6 +206,9 @@ watch(editor, (newEditor) => {
           <afr-option label="18" :value="18"/>
           <afr-option label="19" :value="19"/>
           <afr-option label="20" :value="20"/>
+          <afr-option label="22" :value="22"/>
+          <afr-option label="24" :value="24"/>
+          <afr-option label="26" :value="26"/>
         </afr-select>
       </div>
       <div class="flex items-center gap-1 border border-sky-800 px-0.5 rounded">

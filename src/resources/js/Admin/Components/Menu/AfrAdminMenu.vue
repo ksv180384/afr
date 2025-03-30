@@ -29,9 +29,6 @@ import AfrAdminMenuItem from '@/Admin/Components/Menu/AfrAdminMenuItem.vue';
     <afr-admin-menu-item>
       Анекдоты
     </afr-admin-menu-item>
-    <afr-admin-menu-item>
-      Грамматика
-    </afr-admin-menu-item>
   </div>
 </div>
 </template>

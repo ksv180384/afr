@@ -35,6 +35,11 @@ export default [
     title: 'Словарь'
   },
   {
+    path: '/admin/grammars',
+    name: 'admin.grammars',
+    title: 'Грамматика'
+  },
+  {
     path: '/admin/lessons',
     name: 'admin.lessons',
     title: 'Уроки'
