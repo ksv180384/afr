@@ -18,12 +18,15 @@ import TableRow from '@tiptap/extension-table-row';
 import Image from '@tiptap/extension-image';
 import TextAlign from '@tiptap/extension-text-align';
 import ImageResize from 'tiptap-extension-resize-image';
+import { FontSize } from './FontSize';
+import AfrSelect from '@/App/Components/Form/Select/AfrSelect.vue';
+import AfrOption from '@/App/Components/Form/Select/AfrOption.vue';
 
 const model = defineModel();
 const refInputImageLink = ref(null);
 const isShowAddImageField = ref(false);
 const imageLink = ref('');
-
+const selectFontSize = ref(16);
 
 const CustomTable = Table.extend({
   addAttributes() {
@@ -89,6 +92,7 @@ const editor = useEditor({
     StarterKit,
     Highlight,
     Underline,
+    FontSize,
     HardBreak.extend({
       addKeyboardShortcuts () {
         return {
@@ -149,6 +153,11 @@ const addTableClass = (className) => {
   }
 };
 
+const changeFontSize = () => {
+  console.log(selectFontSize.value)
+  editor.value.chain().focus().setFontSize(`${selectFontSize.value}px`).run();
+}
+
 watch(
   () => model.value,
   (newVal) => {
@@ -166,11 +175,57 @@ watch(
     }
   }
 );
+watch(editor, (newEditor) => {
+  if (!newEditor) return
+
+  // Обновляем выбранный размер при изменении выделения
+  newEditor.on('selectionUpdate', () => {
+    const fontSize = newEditor.getAttributes('textStyle').fontSize || 16;
+    if (fontSize) {
+      console.log(fontSize)
+      selectFontSize.value = parseInt(fontSize)
+    }
+  })
+}, { immediate: true })
 </script>
 
 <template>
   <div class="bg-blue-100 rounded-lg">
     <div class="text-controls-container">
+      <div class="flex items-center text-sky-800 gap-2 border border-sky-800 ps-2 pe-0.5 text-xs rounded">
+        Размер шрифта
+        <afr-select
+          v-model="selectFontSize"
+          @change="changeFontSize"
+        >
+          <afr-option label="13" :value="13"/>
+          <afr-option label="14" :value="14"/>
+          <afr-option label="15" :value="15"/>
+          <afr-option label="16" :value="16"/>
+          <afr-option label="17" :value="17"/>
+          <afr-option label="17" :value="17"/>
+          <afr-option label="18" :value="18"/>
+          <afr-option label="19" :value="19"/>
+          <afr-option label="20" :value="20"/>
+        </afr-select>
+      </div>
+      <div class="flex items-center gap-1 border border-sky-800 px-0.5 rounded">
+        <input
+          type="color"
+          @input="editor && editor.chain().focus().setColor($event.target.value).run()"
+          :value="editor && editor.getAttributes('textStyle').color"
+        >
+        <button
+          class="btn-preset-color !bg-[#16a34a]"
+          :class="{ 'is-active': editor && editor.isActive('textStyle', { color: '#16a34a' })}"
+          @click="editor.chain().focus().setColor('#16a34a').run()"
+        ></button>
+        <button
+          class="btn-preset-color !bg-[#FF943D]"
+          :class="{ 'is-active': editor && editor.isActive('textStyle', { color: '#FBBC88' })}"
+          @click="editor.chain().focus().setColor('#FF943D').run()"
+        ></button>
+      </div>
       <button
         title="Заголовок"
         :class="{ 'is-active': editor && editor.isActive('heading', { level: 3 }) }"
@@ -558,5 +613,9 @@ watch(
 
 img.content-image{
   @apply max-w-full;
+}
+
+.btn-preset-color{
+  @apply !w-[26px] !h-[26px] !border-0;
 }
 </style>

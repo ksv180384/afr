@@ -23,7 +23,7 @@ const refActiveItem = ref(null);
 
 const activeItem = computed(() => {
   const sl = slots.default?.()?.filter(item => item.children === null);
-  const child = slots.default?.()?.find(item => item.children !== null).children || [];
+  const child = slots.default?.()?.find(item => item.children !== null)?.children || [];
   const slotsList = [...sl, ...child];
   return slotsList.find(item => String(item.props?.value) === String(model.value))?.props?.label || '';
 });
