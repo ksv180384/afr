@@ -202,7 +202,6 @@ watch(editor, (newEditor) => {
           <afr-option label="15" :value="15"/>
           <afr-option label="16" :value="16"/>
           <afr-option label="17" :value="17"/>
-          <afr-option label="17" :value="17"/>
           <afr-option label="18" :value="18"/>
           <afr-option label="19" :value="19"/>
           <afr-option label="20" :value="20"/>
