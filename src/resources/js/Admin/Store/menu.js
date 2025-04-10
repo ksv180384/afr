@@ -45,6 +45,11 @@ export default [
     title: 'Уроки'
   },
   {
+    path: '/admin/users',
+    name: 'admin.users',
+    title: 'Пользователи'
+  },
+  {
     path: '/admin/transcription',
     name: 'admin.transcription',
     title: 'Fr в транскрипцию'

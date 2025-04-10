@@ -139,6 +139,9 @@ Route::middleware(['auth', 'verified', 'is-admin'])->group(function () {
     Route::get('/admin/grammars/edit/{id}', [\App\Http\Controllers\Admin\Grammar\GrammarController::class, 'edit'])->name('admin.grammars.edit');
     Route::post('/admin/grammars/update/{id}', [\App\Http\Controllers\Admin\Grammar\GrammarController::class, 'update'])->name('admin.grammars.update');
     Route::post('/admin/grammars/delete/{id}', [\App\Http\Controllers\Admin\Grammar\GrammarController::class, 'delete'])->name('admin.grammars.delete');
+
+    // users
+    Route::get('/admin/users', [\App\Http\Controllers\Admin\User\UserController::class, 'index'])->name('admin.users');
 });
 
 require __DIR__.'/auth.php';
