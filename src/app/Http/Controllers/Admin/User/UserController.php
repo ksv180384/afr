@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\User;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\User\BanRequest;
 use App\Http\Resources\App\User\UserResource;
 use App\Http\Resources\PaginateResource;
 use App\Services\Admin\User\UserService;
@@ -23,5 +24,13 @@ class UserController extends Controller
             'users' => UserResource::collection($users->items()),
             'pagination' => $pagination,
         ]);
+    }
+
+    public function ban(BanRequest $request,  UserService $userService)
+    {
+        $banData = $request->validated();
+        $user = $userService->ban($banData['id'], $banData['ban']);
+
+        return response()->json(['user' => UserResource::make($user)]);
     }
 }

@@ -19,6 +19,7 @@ class UserResource extends JsonResource
             'avatar_link' => $this->avatar_link,
             'name' => $this->name,
             'rang' => $this->rang,
+            'is_ban' => $this->is_ban,
         ];
 
         return $result;

@@ -3,8 +3,13 @@ import { Link } from '@inertiajs/vue3';
 
 const props = defineProps({
   user: { type: Object, default: {} },
+  updatedBan: { type: Boolean, default: false },
 });
+const emits = defineEmits(['ban']);
 
+const ban = (id) => {
+  emits('ban', id);
+}
 </script>
 
 <template>
@@ -21,6 +26,40 @@ const props = defineProps({
       {{ user.name }}
     </div>
     <div class="text-xs">{{ user.rang.title }}</div>
+    <div>
+      <el-popconfirm
+        class="box-item"
+        title="Вы уверены?"
+        hide-icon
+        confirm-button-text="Да"
+        cancel-button-text="Нет"
+        placement="bottom-start"
+        @confirm="ban(user)"
+      >
+        <template #reference>
+          <template v-if="user.is_ban">
+            <el-button
+              type="success"
+              plain
+              size="small"
+              :loading="updatedBan"
+            >
+              Разбанить
+            </el-button>
+          </template>
+          <template v-else>
+            <el-button
+              type="danger"
+              plain
+              size="small"
+              :loading="updatedBan"
+            >
+              Забанить
+            </el-button>
+          </template>
+        </template>
+      </el-popconfirm>
+    </div>
   </div>
 </div>
 </template>
