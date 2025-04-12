@@ -80,7 +80,7 @@ const onChangeStatus = () => {
         <el-button text :loading="isUpdatingStatus"></el-button>
         <el-select
           v-model="statusId"
-          class="w-auto"
+          class="flex-1"
           placeholder="Статус"
           :disabled="isUpdatingStatus"
           @change="onChangeStatus"
