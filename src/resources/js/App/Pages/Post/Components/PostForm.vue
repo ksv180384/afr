@@ -21,7 +21,7 @@ const form = useForm({
   title: props.post?.title ?? '',
   // content: '<p>I\'m running Tiptap with Vue.js. 🎉</p>',
   content: props.post?.content ?? '',
-  status_id: props.post?.status_id ?? props.statuses?.find(item => item.alias === 'draft')?.id ?? null,
+  status_id: props.post?.status?.id ?? props.statuses?.find(item => item.alias === 'draft')?.id ?? null,
 });
 
 const btnTitleSubmit = computed(() => {

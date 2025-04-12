@@ -85,7 +85,7 @@ const props = defineProps({
 }
 
 .content-container{
-  @apply flex-1 overflow-hidden flex flex-col gap-0.5 min-h-full;
+  @apply flex-1 flex flex-col gap-0.5 min-h-full;
 }
 
 .proverb-container{
