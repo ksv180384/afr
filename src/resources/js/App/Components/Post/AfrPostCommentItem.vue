@@ -10,11 +10,14 @@ const props = defineProps({
 <template>
   <div class="afr-post-comment-item">
     <div class="flex items-center gap-2 mb-2">
-      <img :src="user.avatar_link" class="w-[32px] h-[32px] object-cover rounded-full" :alt="user.name">
+      <img :src="user.avatar_link" class="w-[42px] h-[42px] object-cover rounded-full" :alt="user.name">
       <div class="font-semibold">
         <Link :href="route('user.show', { id: user.id })">
           {{ user.name }}
         </Link>
+        <div class="text-xs font-normal text-gray-500">
+          {{ comment.created }}
+        </div>
       </div>
     </div>
     <div v-html="comment.comment"></div>
