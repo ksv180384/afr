@@ -15,7 +15,7 @@ const props = defineProps({
         <Link :href="route('user.show', { id: user.id })">
           {{ user.name }}
         </Link>
-        <div class="text-xs font-normal text-gray-500">
+        <div class="text-xs font-normal text-gray-500" :title="comment.created_at">
           {{ comment.created }}
         </div>
       </div>
