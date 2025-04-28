@@ -94,6 +94,8 @@ const submit = () => {
         {{ post.status.title }}
       </div>
     </div>
+
+    <afr-input-error-message v-if="errors.ban">{{ errors.ban }}</afr-input-error-message>
   </div>
 </template>
 

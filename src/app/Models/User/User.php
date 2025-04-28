@@ -5,7 +5,7 @@ namespace App\Models\User;
 use App\Models\Player\PlayerSongs;
 use App\Notifications\ResetPasswordNotification;
 use Carbon\Carbon;
-use Database\Factories\UserFactory;
+use Database\Factories\User\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -89,7 +89,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->rang->alias == 'moderator';
     }
 
-    public function getisBanAttribute(){
+    public function getIsBanAttribute(){
         if(empty($this->rang)){
             throw ValidationException::withMessages(['message' => 'Невозможно определить права пользователя.']);
         }

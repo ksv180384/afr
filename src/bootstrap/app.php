@@ -19,7 +19,8 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->alias([
-            'is-admin' => \App\Http\Middleware\AdminMiddleware::class
+            'is-admin' => \App\Http\Middleware\AdminMiddleware::class,
+            'is-user-ban' => \App\Http\Middleware\CheckBannedUserMiddleware::class
         ]);
 
         //

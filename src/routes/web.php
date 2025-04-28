@@ -65,14 +65,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/users', [\App\Http\Controllers\App\User\UserController::class, 'index'])->name('users');
     Route::get('/user/posts', [\App\Http\Controllers\App\User\UserPostController::class, 'index'])->name('user.posts');
     Route::get('/user/post/edit/{id}', [\App\Http\Controllers\App\User\UserPostController::class, 'edit'])->name('user.post.edit');
-    Route::post('/user/post/update/{id}', [\App\Http\Controllers\App\User\UserPostController::class, 'update'])->name('user.post.update');
+    Route::post('/user/post/update/{id}', [\App\Http\Controllers\App\User\UserPostController::class, 'update'])->middleware(['is-user-ban'])->name('user.post.update');
 
     // Post
     Route::get('/post/create', [\App\Http\Controllers\App\PostController::class, 'create'])->name('post.create');
-    Route::post('/post/store', [\App\Http\Controllers\App\PostController::class, 'store'])->name('post.store');
+    Route::post('/post/store', [\App\Http\Controllers\App\PostController::class, 'store'])->middleware(['is-user-ban'])->name('post.store');
     Route::get('/post/edit/{id}', [\App\Http\Controllers\App\PostController::class, 'edit'])->name('post.edit');
-    Route::post('/post/update/{id}', [\App\Http\Controllers\App\PostController::class, 'update'])->name('post.update');
-    Route::post('/post-comment/store', [\App\Http\Controllers\App\PostCommentController::class, 'store'])->name('post-comment.store');
+    Route::post('/post/update/{id}', [\App\Http\Controllers\App\PostController::class, 'update'])->middleware(['is-user-ban'])->name('post.update');
+    Route::post('/post-comment/store', [\App\Http\Controllers\App\PostCommentController::class, 'store'])->middleware(['is-user-ban'])->name('post-comment.store');
 });
 
 // Admin
