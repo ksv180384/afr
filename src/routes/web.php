@@ -17,15 +17,15 @@ use Inertia\Inertia;
 Route::get('/create-storage-link', function() {
     if (!file_exists(public_path('storage'))) {
         Artisan::call('storage:link');
-        return Inertia::render('Message', [
+        return response()->json([
             'message' => 'Storage link created successfully'
         ]);
     }
 
-    return Inertia::render('Message', [
-        'message' => 'Storage link already exists'
+    return response()->json([
+        'message' => 'Уже есть'
     ]);
-})->middleware('auth'); // Защитите роут если нужно
+}); // Защитите роут если нужно
 
 // Pages menu
 Route::get('/', [\App\Http\Controllers\App\IndexController::class, 'index'])->name('index');
