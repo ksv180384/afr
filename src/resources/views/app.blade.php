@@ -20,6 +20,8 @@
 </head>
 <body class="font-sans antialiased">
 @inertia
+
+@production
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript" >
     (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -34,5 +36,6 @@
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/13697989" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
+@endproduction
 </body>
 </html>
