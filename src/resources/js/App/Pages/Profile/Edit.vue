@@ -18,6 +18,7 @@ import AfrCheckbox from '@/App/Components/Form/AfrCheckbox.vue';
 import InputError from "@/App/Components/InputError.vue";
 
 const props = defineProps({
+  authUser: { type: Object, default: null },
   words: { type: Array, default: [] },
   proverb: { type: Object, default: {} },
   mustVerifyEmail: { type: Boolean, },
@@ -108,7 +109,7 @@ const removeAvatar = async () => {
   </Head>
 
   <default-layout
-    :auth-user="user"
+    :auth-user="authUser"
     :words="words"
     :proverb="proverb"
   >

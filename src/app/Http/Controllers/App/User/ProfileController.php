@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\App\User;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\ProfileUpdateRequest;
 use App\Http\Requests\User\UploadAvatar;
@@ -29,6 +30,7 @@ class ProfileController extends Controller
         ProverbService $proverbService,
     ): Response
     {
+        $authUser = Helper::getUserData();
         $words = $wordService->wordsRandom();
         $proverb = $proverbService->proverbRandomOne();
 
@@ -51,6 +53,7 @@ class ProfileController extends Controller
         ]);
 
         return Inertia::render('Profile/Edit', [
+            'authUser' => $authUser,
             'words' => $words,
             'proverb' => $proverb,
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
