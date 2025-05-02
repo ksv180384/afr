@@ -1,2 +1,13 @@
 User-agent: *
-Disallow:
+Disallow: /registr.php
+Disallow: /index.php?user
+Disallow: /index.php?ecrire
+Disallow: /member.php?u
+Disallow: /wstat/
+Disallow: /admin/
+Disallow: /img/
+Disallow: /avatar/
+Disallow: /histoire/
+Disallow: /Audio/
+Disallow: /soldat_moi/
+Disallow: /class/
