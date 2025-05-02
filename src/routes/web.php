@@ -3,6 +3,7 @@
 use App\Http\Controllers\App\User\ProfileController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 //Route::get('/welcome', function () {
 //    return Inertia::render('Welcome', [
@@ -12,6 +13,19 @@ use Illuminate\Support\Facades\Route;
 //        'phpVersion' => PHP_VERSION,
 //    ]);
 //});
+
+Route::get('/create-storage-link', function() {
+    if (!file_exists(public_path('storage'))) {
+        Artisan::call('storage:link');
+        return Inertia::render('Message', [
+            'message' => 'Storage link created successfully'
+        ]);
+    }
+
+    return Inertia::render('Message', [
+        'message' => 'Storage link already exists'
+    ]);
+})->middleware('auth'); // Защитите роут если нужно
 
 // Pages menu
 Route::get('/', [\App\Http\Controllers\App\IndexController::class, 'index'])->name('index');

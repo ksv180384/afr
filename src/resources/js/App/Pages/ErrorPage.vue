@@ -43,9 +43,15 @@ const description = computed(() => {
     </div>
   </template>
   <template v-else>
-    <div>
-      <h1>{{ title }}</h1>
-      <div>{{ description }}</div>
+    <div class="error-indicator">
+      <div class="error-indicator-content">
+        <div class="error-indicator-header">
+          {{ title }}
+        </div>
+        <div class="error-indicator-text">
+          {{ description }}
+        </div>
+      </div>
     </div>
   </template>
 </template>
