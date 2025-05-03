@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref } from 'vue';
+import { reactive, ref, watch } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import AfrInputErrorMessage from "@/App/Components/Form/AfrInputErrorMessage.vue";
 
@@ -8,7 +8,7 @@ const props = defineProps({
   song: { type: Object, default: null },
   errors: { type: Object, default: null },
 });
-const emits = defineEmits(['submit']);
+const emits = defineEmits(['submit', 'change']);
 
 const refForm = ref(null);
 const form = useForm({
@@ -36,7 +36,7 @@ const rules = reactive({
   text_transcription: [
     { required: true, message: 'Транскрипция не должна быть пуста', trigger: 'change' },
   ],
-})
+});
 
 const submit = async () => {
   const isFormValid = await refForm.value.validate((valid) => valid);
@@ -47,6 +47,21 @@ const submit = async () => {
 
   emits('submit', form);
 }
+
+watch(
+  () => form,
+  (newVal) => {
+    emits('change', {
+      artist_id: newVal.artist_id,
+      title: newVal.title,
+      text_fr: newVal.text_fr.split('\n'),
+      text_ru: newVal.text_ru.split('\n'),
+      text_transcription: newVal.text_transcription.split('\n'),
+      hidden: newVal.hidden,
+    });
+  },
+  { deep: true },
+);
 </script>
 
 <template>
@@ -125,7 +140,9 @@ const submit = async () => {
         </div>
       </div>
 
-      <afr-input-error-message v-if="errors.error">{{ errors.error }}</afr-input-error-message>
+      <afr-input-error-message v-if="errors.error">
+        {{ errors.error }}
+      </afr-input-error-message>
     </el-form>
   </div>
 </template>

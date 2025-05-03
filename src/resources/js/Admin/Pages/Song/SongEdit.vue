@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import {reactive, ref} from 'vue';
 import { Head } from '@inertiajs/vue3';
 
 import AdminLayout from '@/Admin/Layouts/AdminLayout.vue';
@@ -12,10 +12,23 @@ const props = defineProps({
   song: { type: Object, required: true },
   errors: { type: Object, default: null },
 });
+const songData = reactive({
+  title: props.song.title,
+  text_fr: props.song.text_fr,
+  text_ru: props.song.text_ru,
+  text_transcription: props.song.text_transcription,
+  ar_text_fr: props.song.ar_text_fr,
+  ar_text_ru: props.song.ar_text_ru,
+  ar_text_transcription: props.song.ar_text_transcription,
+});
 
-const subtitlesFr = ref(props.song.ar_text_fr);
-const subtitlesRu = ref(props.song.ar_text_ru);
-const subtitlesTranscription = ref(props.song.ar_text_transcription);
+const subtitlesFr = ref(songData.ar_text_fr);
+const subtitlesRu = ref(songData.ar_text_ru);
+const subtitlesTranscription = ref(songData.ar_text_transcription);
+
+const changeForm = (formData) => {
+  console.log(formData);
+}
 </script>
 
 <template>
@@ -31,7 +44,12 @@ const subtitlesTranscription = ref(props.song.ar_text_transcription);
     </Head>
 
     <div>
-      <song-form :song="song" :artists="artists" :errors="errors"/>
+      <song-form
+        :song="songData"
+        :artists="artists"
+        :errors="errors"
+        @change="changeForm"
+      />
     </div>
 
     <div>
