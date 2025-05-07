@@ -43,14 +43,16 @@ body{
 }
 
 .layout-admin-container{
-  @apply flex min-h-full;
+  @apply min-h-full;
 }
 
 .left-container{
-  @apply bg-blue-100 w-[280px] min-h-screen;
+  @apply inline-block bg-blue-100 w-[280px] min-h-screen;
+  vertical-align: top;
 }
 
 .content-container{
-  @apply flex-1 flex flex-col gap-0.5 min-h-screen;
+  @apply inline-block min-h-screen;
+  width: calc(100% - 280px);
 }
 </style>

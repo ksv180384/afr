@@ -1,11 +1,8 @@
 <script setup>
 import { ref } from 'vue';
-import { Link } from '@inertiajs/vue3';
 import { Icon } from '@iconify/vue';
 
 import AfrPostInfoItem from '@/App/Components/Post/AfrPostInfoItem.vue';
-import AfrSelect from '@/App/Components/Form/Select/AfrSelect.vue';
-import AfrOption from '@/App/Components/Form/Select/AfrOption.vue';
 
 const props = defineProps({
   post: { type: Object, default: {} },

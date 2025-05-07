@@ -54,4 +54,9 @@ export default [
     name: 'admin.transcription',
     title: 'Fr в транскрипцию'
   },
+  {
+    path: '/admin/referers',
+    name: 'admin.referers',
+    title: 'Посещаемость'
+  },
 ];

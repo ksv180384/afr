@@ -157,6 +157,10 @@ Route::middleware(['auth', 'verified', 'is-admin'])->group(function () {
     // users
     Route::get('/admin/users', [\App\Http\Controllers\Admin\User\UserController::class, 'index'])->name('admin.users');
     Route::post('/admin/user/ban', [\App\Http\Controllers\Admin\User\UserController::class, 'ban'])->name('admin.users.ban');
+
+    // referers
+    Route::get('/admin/referers', [\App\Http\Controllers\Admin\UserReferer\UserRefererController::class, 'index'])->name('admin.referers');
+
 });
 
 require __DIR__.'/auth.php';
