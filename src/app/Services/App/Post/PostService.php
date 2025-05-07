@@ -152,7 +152,7 @@ class PostService
         $postView = PostView::query()
             ->where('post_id', $postId)
             ->where(function ($q) use ($userId, $userKey) {
-                $q->where('user_id', $userId)
+                $q->where('user_id', $userId ?? 0)
                     ->orWhere('user_key', $userKey);
             })
             ->first();
