@@ -15,6 +15,7 @@ const getIconProps = (url) => {
 
   if (!url) return null
 
+  // откуда
   if (url.includes('google.com') || url.includes('google.ru')) {
     return { icon: 'prime:google', width: 20, height: 20 }
   }
@@ -23,7 +24,16 @@ const getIconProps = (url) => {
     return { icon: 'brandico:yandex-rect', width: 20, height: 20 }
   }
 
-  return null;
+  // куда
+  if (url.includes('lyrics')) {
+    return { icon: 'fa6-solid:music', width: 20, height: 20 }
+  }
+
+  if (url.includes('grammar')) {
+    return { icon: 'tabler:text-grammar', width: 20, height: 20 }
+  }
+
+  return { icon: 'pajamas:severity-unknown', width: 20, height: 20 };
 }
 </script>
 
@@ -78,7 +88,13 @@ const getIconProps = (url) => {
           <el-table-column prop="landing_page" label="Куда" width="300">
             <template #default="scope">
 
-              {{ scope.row.landing_page }}
+              <div class="flex flex-row gap-2">
+                <Icon
+                  v-if="getIconProps(scope.row.landing_page)"
+                  v-bind="getIconProps(scope.row.landing_page)"
+                />
+                {{ scope.row.landing_page }}
+              </div>
 
             </template>
           </el-table-column>
