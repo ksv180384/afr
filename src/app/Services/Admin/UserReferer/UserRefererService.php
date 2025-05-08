@@ -14,6 +14,7 @@ class UserRefererService
     {
         $userReferers = UserReferer::query()
             ->with(['user'])
+            ->orderByDesc('created_at')
             ->paginate($paginate);
 
         return $userReferers;
