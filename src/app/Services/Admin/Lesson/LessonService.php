@@ -17,10 +17,6 @@ class LessonService
             ->select([
                 'id',
                 'title',
-                'description',
-                'content',
-                'created_at',
-                'updated_at',
             ])
             ->get();
 
