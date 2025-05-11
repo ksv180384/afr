@@ -30,6 +30,11 @@ export default [
     title: 'Песни'
   },
   {
+    path: '/admin/songs-comments',
+    name: 'admin.songs-comments',
+    title: 'Комментарии к песням'
+  },
+  {
     path: '/admin/dictionary',
     name: 'admin.dictionary',
     title: 'Словарь'

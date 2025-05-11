@@ -20,7 +20,7 @@ const getIconProps = (url) => {
     return { icon: 'prime:google', width: 20, height: 20 }
   }
 
-  if (url.includes('yandex.ru') || url.includes('yandex.com')) {
+  if (url.includes('yandex') || url.includes('ya.ru')) {
     return { icon: 'brandico:yandex-rect', width: 20, height: 20 }
   }
 

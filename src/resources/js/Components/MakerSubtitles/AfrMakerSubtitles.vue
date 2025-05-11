@@ -1,6 +1,8 @@
 <script setup>
-import {ref, nextTick} from 'vue';
-import {Icon} from '@iconify/vue';
+import { ref, nextTick, watch } from 'vue';
+import { Icon } from '@iconify/vue';
+import { UploadFilled, Close } from '@element-plus/icons-vue';
+import dayjs from "dayjs";
 
 const model = defineModel();
 const props = defineProps({
@@ -8,10 +10,17 @@ const props = defineProps({
   ru: {type: Array, default: []},
   transcription: {type: Array, default: []},
 });
+const emits = defineEmits(['change']);
 
 const refsInputSubtitlesFr = ref([]);
 const refsInputSubtitlesRu = ref([]);
 const refsInputSubtitlesTr = ref([]);
+const timeInterval = ref(null);
+const audio = ref(null);
+const isPlay = ref(false);
+const currentTime = ref(0);
+const currentTimeHuman = ref(0);
+const activeElementIndex = ref(null);
 const subtitlesFr = ref(props.fr ? props.fr : [{time: 0, text: ''}]);
 const subtitlesRu = ref(props.ru ? props.ru : [{time: 0, text: ''}]);
 const subtitlesTr = ref(props.transcription ? props.transcription : [{time: 0, text: ''}]);
@@ -134,6 +143,12 @@ const inputSubtitlesItem = (e, index, type) => {
       }
     }
   }
+
+  // emits('change', {
+  //   fr: subtitlesFr.value,
+  //   ru: subtitlesRu.value,
+  //   tr: subtitlesTr.value,
+  // });
 }
 
 const keydownSubtitlesItem = (e, index, type) => {
@@ -188,27 +203,150 @@ const keyupSubtitlesItem = (e, index, type) => {
   }
   keyKodeActive = null;
 }
+
+const uploadAudio = (uploadFile) => {
+  const file = uploadFile.raw;
+  const file_type =  file.type;
+  if (file_type.indexOf('audio') !== -1){
+    audioFileInit(file);
+  }
+};
+
+const audioFileInit = async (file) => {
+  const sound = URL.createObjectURL(file);
+  audio.value = new Audio(sound);
+  audio.value.onloadedmetadata = async () => {
+    audio.value.volume = 0.5;
+  }
+};
+
+const removeAudio = () => {
+  stop();
+  audio.value = null;
+}
+
+const play = (time, elementIndex) => {
+  activeElementIndex.value = elementIndex
+  const [minutes, seconds] = time.split(':').map(Number);
+  const timeInSeconds = minutes * 60 + seconds;
+  isPlay.value = true;
+  audio.value.currentTime = timeInSeconds;
+  audio.value.play();
+  timeInterval.value = setInterval(checkPlayerTime, 30);
+}
+
+const stop = () => {
+  isPlay.value = false;
+  clearTimeout(timeInterval.value);
+  if(audio.value){
+    // audio.value.currentTime = 0;
+    audio.value.pause();
+    checkPlayerTime();
+  }
+}
+
+const checkPlayerTime = () => {
+  if(audio.value){
+    // Устанавливаем позицию прогресс бара
+    currentTime.value = audio.value.currentTime; // Текущее время проигрывания трека
+    const totalMs = currentTime.value * 1000;
+    currentTimeHuman.value = dayjs(totalMs)
+      .format('mm:ss')
+      .concat('.')
+      .concat(dayjs(totalMs).format('SSS'));
+  }
+}
+
+const addTimeToElement = () => {
+  subtitlesFr.value[activeElementIndex.value].time = currentTimeHuman.value;
+}
+
+watch(() => props.fr,
+  (newVal) => {
+  subtitlesFr.value = newVal ? newVal : [{time: 0, text: ''}];
+    emits('change', {
+      fr: subtitlesFr.value,
+      ru: subtitlesRu.value,
+      tr: subtitlesTr.value,
+    });
+  },
+  { deep: true }
+);
+watch(() => props.ru,
+  (newVal) => {
+    subtitlesRu.value = newVal ? newVal : [{time: 0, text: ''}];
+    emits('change', {
+      fr: subtitlesFr.value,
+      ru: subtitlesRu.value,
+      tr: subtitlesTr.value,
+    });
+  },
+  { deep: true }
+);
+watch(() => props.transcription,
+  (newVal) => {
+    subtitlesTr.value = newVal ? newVal : [{time: 0, text: ''}];
+    emits('change', {
+      fr: subtitlesFr.value,
+      ru: subtitlesRu.value,
+      tr: subtitlesTr.value,
+    });
+  },
+  { deep: true }
+);
 </script>
 
 <template>
-  <div class="flex flex-col">
+  <div>
+    <div v-if="!audio" class="px-4">
+      <el-upload
+        class="upload-demo"
+        drag
+        :auto-upload="false"
+        :show-file-list="false"
+        @change="uploadAudio"
+      >
+        <el-icon class="el-icon--upload"><upload-filled /></el-icon>
+        <div class="el-upload__text">
+          Перетащите сюда mp3 файл или <em>загрузите его кликнув сюда</em>
+        </div>
+        <template #tip>
+          <div class="el-upload__tip">
+            mp3 файл
+          </div>
+        </template>
+      </el-upload>
+    </div>
+    <div v-else class="px-4">
+      <el-button :icon="Close" class="w-full" @click="removeAudio">Выгрузить mp3 файл</el-button>
+    </div>
 
-    <template v-if="subtitlesFr.length">
-      <template v-for="(sItem, key) in subtitlesFr">
-        <div class="flex flex-row bg-white py-3">
-          <div class="flex items-center px-3 py-1 cursor-pointer hover:bg-sky-100">
-            <Icon icon="mingcute:play-line"/>
-          </div>
-          <div class="flex items-center">
-            <input
-              v-model="subtitlesFr[key].time"
-              class="px-3 py-1 outline-none w-20"
-            />
-          </div>
-          <div class="flex-1">
+    <div class="flex flex-col">
+
+      <div
+        class="fixed bottom-0 left-1/2 transform -translate-x-1/2 text-lg bg-white px-4 py-1 cursor-pointer rounded shadow"
+        @click="addTimeToElement"
+      >
+        {{ currentTimeHuman }}
+      </div>
+
+      <template v-if="subtitlesFr.length">
+        <template v-for="(sItem, key) in subtitlesFr">
+          <div class="flex flex-row py-3" :class="[activeElementIndex === key ? 'bg-green-50' : 'bg-white']">
+            <div class="flex items-center cursor-pointer hover:bg-sky-100">
+              <Icon v-if="!isPlay" icon="mingcute:play-line" class="w-full h-full px-3 py-1" @click="play(subtitlesFr[key].time, key)"/>
+              <Icon v-else icon="mingcute:stop-line" class="w-full h-full px-3 py-1" @click="stop"/>
+            </div>
+            <div class="flex items-center">
+              <input
+                v-model="subtitlesFr[key].time"
+                class="px-3 py-1 outline-none w-20 bg-transparent"
+              />
+            </div>
+            <div class="flex-1">
             <textarea
               ref="refsInputSubtitlesFr"
-              class="w-full px-3 py-1 outline-none resize-none overflow-hidden"
+              class="w-full px-3 py-1 outline-none resize-none overflow-hidden bg-transparent"
               type="text"
               placeholder="Fr"
               rows="1"
@@ -217,33 +355,34 @@ const keyupSubtitlesItem = (e, index, type) => {
               @keydown="(e) => keydownSubtitlesItem(e, key, 'fr')"
               @keyup="(e) => keyupSubtitlesItem(e, key, 'fr')"
             />
-            <textarea
-              ref="refsInputSubtitlesRu"
-              class="w-full px-3 py-1 outline-none resize-none overflow-hidden text-green-600 placeholder-green-600 placeholder-opacity-60"
-              type="text"
-              placeholder="Ru"
-              rows="1"
-              v-model="subtitlesRu[key].text"
-              @input="(e) => inputSubtitlesItem(e, key, 'ru')"
-              @keydown="(e) => keydownSubtitlesItem(e, key, 'ru')"
-              @keyup="(e) => keyupSubtitlesItem(e, key, 'ru')"
-            />
-            <textarea
-              ref="refsInputSubtitlesTr"
-              class="w-full px-3 py-1 outline-none resize-none overflow-hidden text-orange-400 placeholder-orange-400 placeholder-opacity-60"
-              type="text"
-              placeholder="Транскрипция"
-              rows="1"
-              v-model="subtitlesTr[key].text"
-              @input="(e) => inputSubtitlesItem(e, key, 'tr')"
-              @keydown="(e) => keydownSubtitlesItem(e, key, 'tr')"
-              @keyup="(e) => keyupSubtitlesItem(e, key, 'tr')"
-            />
+              <textarea
+                ref="refsInputSubtitlesRu"
+                class="w-full px-3 py-1 outline-none resize-none overflow-hidden text-green-600 placeholder-green-600 placeholder-opacity-60 bg-transparent"
+                type="text"
+                placeholder="Ru"
+                rows="1"
+                v-model="subtitlesRu[key].text"
+                @input="(e) => inputSubtitlesItem(e, key, 'ru')"
+                @keydown="(e) => keydownSubtitlesItem(e, key, 'ru')"
+                @keyup="(e) => keyupSubtitlesItem(e, key, 'ru')"
+              />
+              <textarea
+                ref="refsInputSubtitlesTr"
+                class="w-full px-3 py-1 outline-none resize-none overflow-hidden text-orange-400 placeholder-orange-400 placeholder-opacity-60 bg-transparent"
+                type="text"
+                placeholder="Транскрипция"
+                rows="1"
+                v-model="subtitlesTr[key].text"
+                @input="(e) => inputSubtitlesItem(e, key, 'tr')"
+                @keydown="(e) => keydownSubtitlesItem(e, key, 'tr')"
+                @keyup="(e) => keyupSubtitlesItem(e, key, 'tr')"
+              />
+            </div>
           </div>
-        </div>
+        </template>
       </template>
-    </template>
 
+    </div>
   </div>
 </template>
 

@@ -87,6 +87,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/post/edit/{id}', [\App\Http\Controllers\App\PostController::class, 'edit'])->name('post.edit');
     Route::post('/post/update/{id}', [\App\Http\Controllers\App\PostController::class, 'update'])->middleware(['is-user-ban'])->name('post.update');
     Route::post('/post-comment/store', [\App\Http\Controllers\App\PostCommentController::class, 'store'])->middleware(['is-user-ban'])->name('post-comment.store');
+
+    Route::post('/song-comment/store', [\App\Http\Controllers\App\SongComment\SongCommentController::class, 'store'])->middleware(['is-user-ban'])->name('song-comment.store');
 });
 
 // Admin
@@ -160,6 +162,10 @@ Route::middleware(['auth', 'verified', 'is-admin'])->group(function () {
 
     // referers
     Route::get('/admin/referers', [\App\Http\Controllers\Admin\UserReferer\UserRefererController::class, 'index'])->name('admin.referers');
+
+    // songs comments
+    Route::get('/admin/songs-comments', [\App\Http\Controllers\Admin\SongComment\SongCommentController::class, 'index'])->name('admin.songs-comments');
+    Route::post('/admin/songs-comment/toggle-show/{id}', [\App\Http\Controllers\Admin\SongComment\SongCommentController::class, 'toggleShow'])->name('admin.songs-comment.toggle-show');
 
 });
 

@@ -5,6 +5,7 @@ namespace App\Models\PostComment;
 use App\Models\Post\Post;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
+use Stevebauman\Purify\Casts\PurifyHtmlOnGet;
 
 class PostComment extends Model
 {
@@ -13,6 +14,10 @@ class PostComment extends Model
         'post_id',
         'parent_post_comment_id',
         'comment',
+    ];
+
+    protected $casts = [
+        'comment' => PurifyHtmlOnGet::class,
     ];
 
     public function user()

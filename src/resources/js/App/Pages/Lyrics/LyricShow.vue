@@ -1,20 +1,37 @@
 <script setup>
 import { ref } from 'vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 
 import MiniLayout from '@/App/Layouts/MiniLayout.vue';
+import AfrCommentItem from '@/App/Components/Comment/AfrCommentItem.vue';
+import AfrAddComment from '@/App/Components/Comment/AfrAddComment.vue';
+import AfrInputErrorMessage from '@/App/Components/Form/AfrInputErrorMessage.vue';
 
 const props = defineProps({
   authUser: { type: Object, default: null },
   song: { type: Object, default: {} },
+  comments: { type: Array, default: null },
+  errors: { type: Object, required: true },
 });
 
 const activeColumn = ref('fr');
+const form = useForm({
+  comment: '',
+  song_id: props.song.id,
+});
 
 const changeColumn = (val) => {
   activeColumn.value = val;
 }
 
+const submitComment = () => {
+
+  form.post(route('song-comment.store'), {
+    // onFinish: (res) => {},
+    preserveScroll: true,
+    onSuccess: () => form.reset('comment'),
+  });
+}
 </script>
 
 <template>
@@ -22,7 +39,7 @@ const changeColumn = (val) => {
     :auth-user="authUser"
   >
     <Head>
-      <title>{{ song.title }} - {{ song.artist_name }}</title>
+      <title>{{ song.title }} - {{ song.artist_name }} перевод, транскрипция</title>
       <meta name="description" :content="`${song.title} - ${song.artist_name} - текст, перевод, транскрипция на русском`" />
       <meta property="og:title" :content="`${song.title} - ${song.artist_name}`" />
       <meta property="og:description" :content="`${song.title} - ${song.artist_name} - текст, перевод, транскрипция на русском`" />
@@ -30,7 +47,7 @@ const changeColumn = (val) => {
 
     <div class="lyric-show-container">
 
-      <h1 class="font-bold text-2xl text-center py-4">{{ song.title }} - {{ song.artist_name }}</h1>
+      <h1 class="font-bold text-2xl text-center py-4">{{ song.artist_name }} - {{ song.title }}</h1>
 
       <div class="lyric-show-content">
 
@@ -51,6 +68,34 @@ const changeColumn = (val) => {
           </template>
           </tbody>
         </table>
+
+      </div>
+
+      <div class="px-8">
+        <div v-if="authUser" class="p-2 bg-sky-50 rounded">
+          <afr-add-comment
+            v-model="form.comment"
+            placeholder="Введите текст комментария"
+            @submit="submitComment"
+          />
+
+          <div v-if="errors" class="mt-2">
+            <afr-input-error-message v-for="error in errors">
+              {{ error }}
+            </afr-input-error-message>
+          </div>
+        </div>
+
+        <div class="p-2 bg-sky-50 rounded">
+          <template v-if="comments.length">
+            <afr-comment-item
+              v-for="comment in comments"
+              :key="comments.id"
+              :user="comment.user"
+              :comment="comment"
+            />
+          </template>
+        </div>
 
       </div>
     </div>

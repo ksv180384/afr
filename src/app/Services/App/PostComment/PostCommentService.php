@@ -14,8 +14,10 @@ class PostCommentService
     public function getPostComments(int $postId): Collection
     {
         $postComments = PostComment::query()
+            ->with(['user:id,name,avatar'])
             ->where('post_id', $postId)
             ->where('is_show', true)
+            ->orderByDesc('created_at')
             ->get();
 
         return $postComments;

@@ -2,9 +2,9 @@
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 import DefaultLayout from '@/App/Layouts/DefaultLayout.vue';
-import AfrPostAddComment from '@/App/Components/Post/AfrPostAddComment.vue';
+import AfrAddComment from '@/App/Components/Comment/AfrAddComment.vue';
+import AfrCommentItem from '@/App/Components/Comment/AfrCommentItem.vue';
 import AfrInputErrorMessage from '@/App/Components/Form/AfrInputErrorMessage.vue';
-import AfrPostCommentItem from '@/App/Components/Post/AfrPostCommentItem.vue';
 
 const props = defineProps({
   authUser: { type: Object, default: null },
@@ -69,7 +69,7 @@ const submitComment = () => {
       </article>
 
       <div v-if="authUser" class="p-2 bg-sky-50 rounded">
-        <afr-post-add-comment
+        <afr-add-comment
           v-model="form.comment"
           placeholder="Введите текст комментария"
           @submit="submitComment"
@@ -84,7 +84,7 @@ const submitComment = () => {
 
       <div class="p-2 bg-sky-50 rounded">
         <template v-if="comments.length">
-          <afr-post-comment-item
+          <afr-comment-item
             v-for="comment in comments"
             :key="comments.id"
             :user="comment.user"

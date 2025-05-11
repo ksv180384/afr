@@ -28,6 +28,9 @@ const subtitlesTranscription = ref(songData.ar_text_transcription);
 
 const changeForm = (formData) => {
   console.log(formData);
+  subtitlesFr.value = formData.text_fr.split('\n');
+  subtitlesRu.value = formData.text_ru.split('\n');
+  subtitlesTranscription.value = formData.text_transcription.split('\n');
 }
 </script>
 

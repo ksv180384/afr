@@ -9,7 +9,7 @@ const props = defineProps({
 
 <template>
   <div class="afr-post-comment-item">
-    <div class="flex items-center gap-2 mb-2">
+    <div class="flex items-center gap-2 mb-2 p-2">
       <img :src="user.avatar_link" class="w-[42px] h-[42px] object-cover rounded-full" :alt="user.name">
       <div class="font-semibold">
         <Link :href="route('user.show', { id: user.id })">
@@ -20,13 +20,13 @@ const props = defineProps({
         </div>
       </div>
     </div>
-    <div v-html="comment.comment"></div>
+    <div v-html="comment.comment" class="px-4"></div>
   </div>
 </template>
 
 <style scoped>
 .afr-post-comment-item{
-  @apply flex flex-col py-1 border-b border-blue-100 pb-3 mb-3;
+  @apply flex flex-col bg-white pb-3 mb-3 rounded-3xl;
 }
 
 .afr-post-comment-item:last-child{

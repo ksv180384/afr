@@ -54,11 +54,22 @@ watch(
     emits('change', {
       artist_id: newVal.artist_id,
       title: newVal.title,
-      text_fr: newVal.text_fr.split('\n'),
-      text_ru: newVal.text_ru.split('\n'),
-      text_transcription: newVal.text_transcription.split('\n'),
+      text_fr: newVal.text_fr,
+      text_ru: newVal.text_ru,
+      text_transcription: newVal.text_transcription,
       hidden: newVal.hidden,
     });
+  },
+  { deep: true },
+);
+
+watch(
+  () => props.song,
+  (newVal) => {
+    console.log(newVal)
+    form.text_fr = newVal.text_fr;
+    form.text_ru = newVal.text_ru;
+    form.text_transcription = newVal.text_transcription;
   },
   { deep: true },
 );
@@ -83,12 +94,13 @@ watch(
           </el-form-item>
         </div>
         <div class="flex-1">
-          <el-form-item label="Исполнитель" label-position="top" prop="title">
+          <el-form-item label="Исполнитель" label-position="top" prop="artist_id">
             <el-select
               v-model="form.artist_id"
               class="w-auto"
               placeholder="Исполнитель"
               filterable
+              allow-create
             >
               <el-option
                 v-for="artists in artists"
