@@ -49,16 +49,14 @@ const getIconProps = (url) => {
       <meta property="og:description" content="Посещаемость" />
     </Head>
 
-    <div class="flex px-3 justify-between pt-2">
-      <div class="flex justify-end">
-        <pagination
-          :current-page="pagination.current_page"
-          :last-page="pagination.last_page"
-          :per-page="pagination.per_page"
-          :total="pagination.total"
-          :route-name="'admin.referers'"
-        />
-      </div>
+    <div class="flex justify-end">
+      <pagination
+        :current-page="pagination.current_page"
+        :last-page="pagination.last_page"
+        :per-page="pagination.per_page"
+        :total="pagination.total"
+        :route-name="'admin.referers'"
+      />
     </div>
 
     <div class="min-w-0">
@@ -67,6 +65,7 @@ const getIconProps = (url) => {
           :data="userReferers"
           style="width: 100%;"
           class="min-w-0"
+          height="calc(100vh - 110px)"
         >
           <el-table-column fixed prop="icon" label="" width="50">
             <template #default="scope">
@@ -78,14 +77,14 @@ const getIconProps = (url) => {
 
             </template>
           </el-table-column>
-          <el-table-column prop="referer_url" label="Откуда" width="300">
+          <el-table-column prop="referer_url" label="Откуда" width="320">
             <template #default="scope">
 
               {{ scope.row.referer_url }}
 
             </template>
           </el-table-column>
-          <el-table-column prop="landing_page" label="Куда" width="300">
+          <el-table-column prop="landing_page" label="Куда" width="340" show-overflow-tooltip>
             <template #default="scope">
 
               <div class="flex flex-row gap-2">
@@ -154,7 +153,7 @@ const getIconProps = (url) => {
 
             </template>
           </el-table-column>
-          <el-table-column prop="created_at" label="Дата" fixed="right" width="120">
+          <el-table-column prop="created_at" label="Дата" fixed="right" width="130">
             <template #default="scope">
 
               <span :title="scope.row.created_at">{{ scope.row.created }}</span>
