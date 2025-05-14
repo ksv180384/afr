@@ -44,7 +44,7 @@ return [
             'HTML.Doctype' => 'HTML 4.01 Transitional',
             'HTML.Allowed' => 'h1,h2,h3,h4,h5,h6,b,u,strong,i,em,s,del,a[href|title],ul,ol,li,p[style],br,span[class|style],img[width|height|alt|src|style],blockquote,table[class|style],tbody,thead,tr,td[colspan|rowspan],th[colspan|rowspan]',
             'HTML.ForbiddenElements' => '',
-            'CSS.AllowedProperties' => 'font,font-size,font-weight,margin,margin-top,margin-bottom,margin-left,margin-right,font-style,font-family,text-decoration,padding-left,color,background-color,text-align,min-width',
+            'CSS.AllowedProperties' => 'font,font-size,font-weight,margin,margin-top,margin-bottom,margin-left,margin-right,font-style,font-family,text-decoration,padding-left,color,background-color,text-align,min-width,width',
             'AutoFormat.AutoParagraph' => false,
             'AutoFormat.RemoveEmpty' => false,
         ],
