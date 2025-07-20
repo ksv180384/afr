@@ -12,6 +12,7 @@ import AfrProgressBar from '@/App/Components/Player/AfrProgressBar.vue';
 import AfrPlayerText from '@/App/Components/Player/AfrPlayerText.vue';
 import AfrCloseBtn from '@/App/Components/Form/AfrCloseBtn.vue';
 import AfrPlayerSearch from '@/App/Components/Player/AfrPlayerSearch.vue';
+import InputError from '@/App/Components/InputError.vue';
 
 const refInputMp3 = ref(null);
 const refDropzone = ref(null);
@@ -302,7 +303,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  close(); 
+  close();
 });
 </script>
 
@@ -321,6 +322,10 @@ onUnmounted(() => {
           class="mt-2"
           @loadSong="onLoadSearchSong"
         />
+
+        <template v-if="!songText.fr.length">
+          <InputError message="Текст не найден, попробуйте найти его через поиск"/>
+        </template>
 
       </div>
       <div

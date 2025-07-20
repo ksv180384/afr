@@ -117,7 +117,7 @@ class SongService
      * @param string $fileName - название файла трека
      * @return PlayerSongs
      */
-    public function searchByArtistAndTitle(string $artist, string $title, string $fileName): PlayerSongs
+    public function searchByArtistAndTitle(string $artist, string $title, string $fileName): PlayerSongs | null
     {
 
         $searchText = (new PlayerService())->getSongNameFromFileName($fileName);
