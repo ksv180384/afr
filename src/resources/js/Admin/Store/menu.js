@@ -30,6 +30,11 @@ export default [
     title: 'Песни'
   },
   {
+    path: '/admin/songs-undiscovered',
+    name: 'admin.songs-undiscovered',
+    title: 'Ненайденные песни'
+  },
+  {
     path: '/admin/songs-comments',
     name: 'admin.songs-comments',
     title: 'Комментарии к песням'

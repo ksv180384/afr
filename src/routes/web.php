@@ -131,6 +131,9 @@ Route::middleware(['auth', 'verified', 'is-admin'])->group(function () {
     Route::post('/admin/song/update/{id}', [\App\Http\Controllers\Admin\Song\SongController::class, 'update'])->name('admin.song.update');
 //    Route::post('/admin/song/delete/{id}', [\App\Http\Controllers\Admin\Song\SongController::class, 'delete'])->name('admin.song.delete');
 
+    // Ненайденные песни
+    Route::get('/admin/songs-undiscovered', [\App\Http\Controllers\Admin\Song\SongUndiscoveredController::class, 'index'])->name('admin.songs-undiscovered');
+
     // dictionary (словарь, слова)
     Route::get('/admin/dictionary/search', [\App\Http\Controllers\Admin\Dictionary\DictionaryController::class, 'search'])->name('admin.dictionary.search');
     Route::get('/admin/dictionary', [\App\Http\Controllers\Admin\Dictionary\DictionaryController::class, 'index'])->name('admin.dictionary');
