@@ -13,5 +13,6 @@ class PlayerSearchSong extends Model
         'artist',
         'title',
         'title_file',
+        'song_id',
     ];
 }

@@ -66,7 +66,6 @@ watch(
 watch(
   () => props.song,
   (newVal) => {
-    console.log(newVal)
     form.text_fr = newVal.text_fr;
     form.text_ru = newVal.text_ru;
     form.text_transcription = newVal.text_transcription;

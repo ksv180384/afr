@@ -6,6 +6,7 @@ use App\Models\User\Gender;
 use App\Models\User\Rang;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -32,7 +33,7 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => static::$password ??= bcrypt(md5('password')),
+            'password' => Hash::make(md5('password')),
             'remember_token' => Str::random(10),
             'gender_id' => $gender->id,
             'rang_id' => $rang->id,

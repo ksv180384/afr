@@ -1,8 +1,9 @@
 <script setup>
 import { ref, nextTick, watch } from 'vue';
 import { Icon } from '@iconify/vue';
-import { UploadFilled, Close } from '@element-plus/icons-vue';
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
+
+import AfrPlayerSubtitres from '@/Components/MakerSubtitles/AfrPlayerSubtitres.vue';
 
 const model = defineModel();
 const props = defineProps({
@@ -15,12 +16,9 @@ const emits = defineEmits(['change']);
 const refsInputSubtitlesFr = ref([]);
 const refsInputSubtitlesRu = ref([]);
 const refsInputSubtitlesTr = ref([]);
-const timeInterval = ref(null);
-const audio = ref(null);
+const refPlayerSubtitres = ref();
+const activeElementIndex = ref(0);
 const isPlay = ref(false);
-const currentTime = ref(0);
-const currentTimeHuman = ref(0);
-const activeElementIndex = ref(null);
 const subtitlesFr = ref(props.fr ? props.fr : [{time: 0, text: ''}]);
 const subtitlesRu = ref(props.ru ? props.ru : [{time: 0, text: ''}]);
 const subtitlesTr = ref(props.transcription ? props.transcription : [{time: 0, text: ''}]);
@@ -204,63 +202,97 @@ const keyupSubtitlesItem = (e, index, type) => {
   keyKodeActive = null;
 }
 
-const uploadAudio = (uploadFile) => {
-  const file = uploadFile.raw;
-  const file_type =  file.type;
-  if (file_type.indexOf('audio') !== -1){
-    audioFileInit(file);
-  }
-};
-
-const audioFileInit = async (file) => {
-  const sound = URL.createObjectURL(file);
-  audio.value = new Audio(sound);
-  audio.value.onloadedmetadata = async () => {
-    audio.value.volume = 0.5;
-  }
-};
-
-const removeAudio = () => {
-  stop();
-  audio.value = null;
-}
-
-const play = (time, elementIndex) => {
-  activeElementIndex.value = elementIndex
-  const [minutes, seconds] = time.split(':').map(Number);
-  const timeInSeconds = minutes * 60 + seconds;
+const play = (indexRow, timeStart) => {
+  refPlayerSubtitres.value.play(timeStart);
+  activeElementIndex.value = indexRow;
   isPlay.value = true;
-  audio.value.currentTime = timeInSeconds;
-  audio.value.play();
-  timeInterval.value = setInterval(checkPlayerTime, 30);
 }
 
 const stop = () => {
   isPlay.value = false;
-  clearTimeout(timeInterval.value);
-  if(audio.value){
-    // audio.value.currentTime = 0;
-    audio.value.pause();
-    checkPlayerTime();
+  refPlayerSubtitres.value.stop();
+}
+
+// const onSetTime = (time) => {
+//   const totalMs = time * 1000;
+//   subtitlesFr.value[activeElementIndex.value].time = dayjs(totalMs)
+//     .format('mm:ss')
+//     .concat('.')
+//     .concat(dayjs(totalMs).format('SSS'));
+//   console.log(subtitlesFr.value)
+//   if(subtitlesFr.value.length > activeElementIndex.value){
+//     activeElementIndex.value++;
+//   }
+//   // console.log(activeElementIndex.value);
+//   // console.log(subtitlesFr.value.length);
+// }
+
+const onSetTime = (time) => {
+  const totalMs = time * 1000;
+  const newTimeStr = dayjs(totalMs)
+    .format('mm:ss')
+    .concat('.')
+    .concat(dayjs(totalMs).format('SSS'));
+
+  // Устанавливаем время для текущего элемента
+  subtitlesFr.value[activeElementIndex.value].time = newTimeStr;
+
+  // Обновляем все последующие элементы, у которых время меньше нового
+  for (let i = activeElementIndex.value + 1; i < subtitlesFr.value.length; i++) {
+    const currentTime = subtitlesFr.value[i].time;
+
+    // Пропускаем, если время не задано (пустая строка или null)
+    if (!currentTime || currentTime === "00:00") {
+      subtitlesFr.value[i].time = newTimeStr;
+      continue;
+    }
+
+    // Сравниваем время в миллисекундах
+    const currentTimeMs = convertTimeStringToMs(currentTime);
+    if (currentTimeMs < totalMs) {
+      subtitlesFr.value[i].time = newTimeStr;
+    } else {
+      break; // Если время больше или равно, выходим из цикла
+    }
+  }
+
+  // Переходим к следующему элементу, если возможно
+  if (activeElementIndex.value < subtitlesFr.value.length - 1) {
+    activeElementIndex.value++;
+  }
+};
+
+// Функция для конвертации строки времени в миллисекунды
+const convertTimeStringToMs = (timeStr) => {
+  const [mmss, ms] = timeStr.split('.');
+  const [mm, ss] = mmss.split(':');
+  return (parseInt(mm) * 60 + parseInt(ss)) * 1000 + parseInt(ms);
+}
+
+const onChangeActiveRowIndex = (val) => {
+  activeElementIndex.value += val;
+  if(activeElementIndex.value < 0){
+    activeElementIndex.value = 0;
+  }
+  if(activeElementIndex.value >= subtitlesFr.value.length){
+    activeElementIndex.value = subtitlesFr.value.length - 1;
   }
 }
 
-const checkPlayerTime = () => {
-  if(audio.value){
-    // Устанавливаем позицию прогресс бара
-    currentTime.value = audio.value.currentTime; // Текущее время проигрывания трека
-    const totalMs = currentTime.value * 1000;
-    currentTimeHuman.value = dayjs(totalMs)
-      .format('mm:ss')
-      .concat('.')
-      .concat(dayjs(totalMs).format('SSS'));
-  }
-}
-
-const addTimeToElement = () => {
-  subtitlesFr.value[activeElementIndex.value].time = currentTimeHuman.value;
-}
-
+watch(() => props,
+  (newVal) => {
+    subtitlesFr.value = newVal.fr ? newVal.fr : [{time: 0, text: ''}];
+    subtitlesRu.value = newVal.ru ? newVal.ru : [{time: 0, text: ''}];
+    subtitlesTr.value = newVal.transcription ? newVal.transcription : [{time: 0, text: ''}];
+    emits('change', {
+      fr: subtitlesFr.value,
+      ru: subtitlesRu.value,
+      tr: subtitlesTr.value,
+    });
+  },
+  { deep: true }
+);
+/*
 watch(() => props.fr,
   (newVal) => {
   subtitlesFr.value = newVal ? newVal : [{time: 0, text: ''}];
@@ -272,6 +304,7 @@ watch(() => props.fr,
   },
   { deep: true }
 );
+
 watch(() => props.ru,
   (newVal) => {
     subtitlesRu.value = newVal ? newVal : [{time: 0, text: ''}];
@@ -293,48 +326,25 @@ watch(() => props.transcription,
     });
   },
   { deep: true }
-);
+);*/
 </script>
 
 <template>
   <div>
-    <div v-if="!audio" class="px-4">
-      <el-upload
-        class="upload-demo"
-        drag
-        :auto-upload="false"
-        :show-file-list="false"
-        @change="uploadAudio"
-      >
-        <el-icon class="el-icon--upload"><upload-filled /></el-icon>
-        <div class="el-upload__text">
-          Перетащите сюда mp3 файл или <em>загрузите его кликнув сюда</em>
-        </div>
-        <template #tip>
-          <div class="el-upload__tip">
-            mp3 файл
-          </div>
-        </template>
-      </el-upload>
-    </div>
-    <div v-else class="px-4">
-      <el-button :icon="Close" class="w-full" @click="removeAudio">Выгрузить mp3 файл</el-button>
-    </div>
+
+    <afr-player-subtitres
+      ref="refPlayerSubtitres"
+      @setTime="onSetTime"
+      @changeActiveRowIndex="onChangeActiveRowIndex"
+    />
 
     <div class="flex flex-col">
-
-      <div
-        class="fixed bottom-0 left-1/2 transform -translate-x-1/2 text-lg bg-white px-4 py-1 cursor-pointer rounded shadow"
-        @click="addTimeToElement"
-      >
-        {{ currentTimeHuman }}
-      </div>
 
       <template v-if="subtitlesFr.length">
         <template v-for="(sItem, key) in subtitlesFr">
           <div class="flex flex-row py-3" :class="[activeElementIndex === key ? 'bg-green-50' : 'bg-white']">
             <div class="flex items-center cursor-pointer hover:bg-sky-100">
-              <Icon v-if="!isPlay" icon="mingcute:play-line" class="w-full h-full px-3 py-1" @click="play(subtitlesFr[key].time, key)"/>
+              <Icon v-if="!isPlay" icon="mingcute:play-line" class="w-full h-full px-3 py-1" @click="play(key, subtitlesFr[key].time)"/>
               <Icon v-else icon="mingcute:stop-line" class="w-full h-full px-3 py-1" @click="stop"/>
             </div>
             <div class="flex items-center">
