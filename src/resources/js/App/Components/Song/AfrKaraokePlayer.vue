@@ -59,13 +59,26 @@ watch(activeLanguage, () => nextTick(updateHighlightPosition));
 function parseLrc(text) {
   if (!text) return [];
   const result = [];
+  const timeTagRegex = /\[(\d+):(\d+\.?\d*)\]/g;
+
   for (const line of text.split('\n')) {
-    const match = line.match(/\[(\d+):(\d+\.?\d*)\](.*)/);
-    if (match) {
-      result.push({
-        time: parseInt(match[1]) * 60 + parseFloat(match[2]),
-        text: match[3].trim(),
-      });
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+
+    const times = [];
+    let match;
+    timeTagRegex.lastIndex = 0;
+    while ((match = timeTagRegex.exec(trimmed)) !== null) {
+      const minutes = parseInt(match[1], 10);
+      const seconds = parseFloat(match[2]);
+      times.push(minutes * 60 + seconds);
+    }
+    if (times.length === 0) continue;
+
+    const textPart = trimmed.replace(/^(\[\d+:\d+\.?\d*\])+/, '').trim();
+
+    for (const time of times) {
+      result.push({ time, text: textPart });
     }
   }
   return result.sort((a, b) => a.time - b.time);
