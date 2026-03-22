@@ -6,6 +6,7 @@ use App\Filters\SongFilters;
 use App\Models\Player\PlayerArtistsSong;
 use App\Models\Player\PlayerSongs;
 use App\Services\PlayerService;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -52,20 +53,15 @@ class SongService
      */
     public function getById(int $id): PlayerSongs
     {
-        $song = PlayerSongs::query()
-            ->select([
-                'id',
-                'artist_name',
-                'title',
-                'text_fr',
-                'text_ru',
-                'text_transcription',
-            ])
+        $columns = ['id', 'artist_name', 'title', 'text_fr', 'text_ru', 'text_transcription'];
+        if (Schema::hasColumn('player_songs', 'duration')) {
+            $columns[] = 'duration';
+        }
+        return PlayerSongs::query()
+            ->select($columns)
             ->where('hidden', false)
             ->where('id', $id)
             ->first();
-
-        return $song;
     }
 
     /**

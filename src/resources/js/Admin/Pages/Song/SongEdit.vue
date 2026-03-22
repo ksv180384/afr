@@ -13,6 +13,7 @@ const props = defineProps({
   errors: { type: Object, default: null },
 });
 const songData = reactive({
+  ...props.song,
   title: props.song.title,
   text_fr: props.song.text_fr,
   text_ru: props.song.text_ru,
@@ -26,12 +27,62 @@ const subtitlesFr = ref(songData.ar_text_fr);
 const subtitlesRu = ref(songData.ar_text_ru);
 const subtitlesTranscription = ref(songData.ar_text_transcription);
 
+const parseSubtitleLine = (line) => {
+  const timeRegex = /^\[(\d{2}:\d{2}(?:\.\d{1,3})?)\](.*)/;
+  const match = line.match(timeRegex);
+  if (match) {
+    const [_, time, text] = match;
+    return { time, text };
+  }
+  return { time: '00:00', text: line };
+};
+
 const changeForm = (formData) => {
-  console.log(formData);
-  subtitlesFr.value = formData.text_fr.split('\n');
-  subtitlesRu.value = formData.text_ru.split('\n');
-  subtitlesTranscription.value = formData.text_transcription.split('\n');
-}
+  songData.title = formData.title;
+  songData.duration = formData.duration;
+  const processLines = (text) => {
+    if (!text) return [];
+    return text.split('\n').map(line => parseSubtitleLine(line));
+  };
+  const frLines = processLines(formData.text_fr);
+  const ruLines = processLines(formData.text_ru);
+  const transcriptionLines = processLines(formData.text_transcription);
+  const maxLength = Math.max(frLines.length, ruLines.length, transcriptionLines.length);
+  const padArray = (arr) => {
+    const add = Array(maxLength - arr.length).fill({ time: '00:00', text: '' });
+    return [...arr, ...add];
+  };
+  subtitlesFr.value = padArray(frLines);
+  subtitlesRu.value = padArray(ruLines).map((item, key) => {
+    item.time = subtitlesFr.value[key].time;
+    return item;
+  });
+  subtitlesTranscription.value = padArray(transcriptionLines).map((item, key) => {
+    item.time = subtitlesFr.value[key].time;
+    return item;
+  });
+};
+
+const arTextToStringForm = (arr) => {
+  return arr.map(item => {
+    const time = item.time || '00:00';
+    const text = item.text !== undefined ? item.text : '';
+    return `[${time}]${text}`;
+  }).join('\n');
+};
+
+const changeMakerSubtitles = (subtitlesData) => {
+  songData.text_fr = arTextToStringForm(subtitlesData.fr);
+  songData.text_ru = arTextToStringForm(subtitlesData.ru);
+  songData.text_transcription = arTextToStringForm(subtitlesData.tr);
+};
+
+const submit = (form) => {
+  form.post(route('admin.song.update', { id: props.song.id }), {
+    onFinish: () => {},
+    preserveScroll: true,
+  });
+};
 </script>
 
 <template>
@@ -52,6 +103,7 @@ const changeForm = (formData) => {
         :artists="artists"
         :errors="errors"
         @change="changeForm"
+        @submit="submit"
       />
     </div>
 
@@ -60,6 +112,7 @@ const changeForm = (formData) => {
         :fr="subtitlesFr"
         :ru="subtitlesRu"
         :transcription="subtitlesTranscription"
+        @change="changeMakerSubtitles"
       />
     </div>
   </admin-layout>

@@ -17,6 +17,7 @@ class PlayerSongs extends Model
         'artist_id',
         'artist_name',
         'title',
+        'duration',
         'text_fr',
         'text_ru',
         'text_transcription',

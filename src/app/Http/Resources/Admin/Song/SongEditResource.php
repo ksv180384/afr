@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Admin\Song;
 
+use App\Helpers\Helper;
 use App\Services\PlayerService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -15,19 +16,21 @@ class SongEditResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $arTextFr = collect((new PlayerService())->formatTextToArray($this->text_fr))->map(function ($item, $key){
+        $playerService = new PlayerService();
+        $arTextFr = collect($playerService->formatTextToArray((string) ($this->text_fr ?? '')))->map(function ($item, $key) {
             return ['time' => $key, 'text' => $item];
         });
-        $arTextRu = collect((new PlayerService())->formatTextToArray($this->text_ru))->map(function ($item, $key){
+        $arTextRu = collect($playerService->formatTextToArray((string) ($this->text_ru ?? '')))->map(function ($item, $key) {
             return ['time' => $key, 'text' => $item];
         });
-        $arTextTranscription = collect((new PlayerService())->formatTextToArray($this->text_transcription))->map(function ($item, $key){
+        $arTextTranscription = collect($playerService->formatTextToArray((string) ($this->text_transcription ?? '')))->map(function ($item, $key) {
             return ['time' => $key, 'text' => $item];
         });
 
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'duration' => Helper::durationDecimalToMmSs($this->duration),
             'text_fr' => $this->text_fr,
             'ar_text_fr' => $arTextFr->values(),
             'ar_text_ru' => $arTextRu->values(),

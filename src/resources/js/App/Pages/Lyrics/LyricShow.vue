@@ -6,6 +6,7 @@ import MiniLayout from '@/App/Layouts/MiniLayout.vue';
 import AfrCommentItem from '@/App/Components/Comment/AfrCommentItem.vue';
 import AfrAddComment from '@/App/Components/Comment/AfrAddComment.vue';
 import AfrInputErrorMessage from '@/App/Components/Form/AfrInputErrorMessage.vue';
+import AfrKaraokePlayer from '@/App/Components/Song/AfrKaraokePlayer.vue';
 
 const props = defineProps({
   authUser: { type: Object, default: null },
@@ -48,6 +49,19 @@ const submitComment = () => {
     <div class="lyric-show-container">
 
       <h1 class="font-bold text-2xl text-center py-4">{{ song.artist_name }} - {{ song.title }}</h1>
+
+      <div class="flex justify-center mb-3">
+        <afr-karaoke-player
+          :song-id="song.id"
+          :song-title="song.title"
+          :song-artist="song.artist_name"
+          :text-raw-fr="song.text_raw_fr"
+          :text-raw-ru="song.text_raw_ru"
+          :text-raw-transcription="song.text_raw_transcription"
+          :song-duration-seconds="song.duration_seconds ?? null"
+          :song-duration-formatted="song.duration_formatted ?? null"
+        />
+      </div>
 
       <div class="lyric-show-content">
 

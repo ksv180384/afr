@@ -12,13 +12,15 @@ const emits = defineEmits(['submit', 'change']);
 
 const refForm = ref(null);
 const form = useForm({
-  artist_id: props.song?.artist?.id || null,
+  artist_id: props.song?.artist?.id ?? props.song?.artist_id ?? null,
   title: props.song?.title || '',
+  duration: props.song?.duration ?? null,
   text_fr: props.song?.text_fr || '',
   text_ru: props.song?.text_ru || '',
   text_transcription: props.song?.text_transcription || '',
-  hidden: props.song?.hidden || true,
+  hidden: props.song?.hidden ?? true,
 });
+const durationPattern = /^\d+:(?:[0-5]\d|[0-9])$/;
 const rules = reactive({
   artist_id : [
     { required: true, message: 'Выберите исполнителя', trigger: 'change' },
@@ -26,6 +28,18 @@ const rules = reactive({
   title: [
     { required: true, message: 'Название не должно быть пустым', trigger: 'change' },
     { min: 2, message: 'Название должно быть не менее 2-х символов', trigger: 'change' },
+  ],
+  duration: [
+    {
+      validator: (_, value, cb) => {
+        if (!value) return cb();
+        if (!durationPattern.test(String(value).trim())) {
+          return cb(new Error('Формат: минуты:секунды (например, 2:36)'));
+        }
+        cb();
+      },
+      trigger: 'change',
+    },
   ],
   text_fr: [
     { required: true, message: 'Текст песни не должен быть пустым', trigger: 'change' },
@@ -54,6 +68,7 @@ watch(
     emits('change', {
       artist_id: newVal.artist_id,
       title: newVal.title,
+      duration: newVal.duration,
       text_fr: newVal.text_fr,
       text_ru: newVal.text_ru,
       text_transcription: newVal.text_transcription,
@@ -66,9 +81,12 @@ watch(
 watch(
   () => props.song,
   (newVal) => {
-    form.text_fr = newVal.text_fr;
-    form.text_ru = newVal.text_ru;
-    form.text_transcription = newVal.text_transcription;
+    if (newVal) {
+      form.text_fr = newVal.text_fr ?? '';
+      form.text_ru = newVal.text_ru ?? '';
+      form.text_transcription = newVal.text_transcription ?? '';
+      form.duration = newVal.duration ?? null;
+    }
   },
   { deep: true },
 );
@@ -108,6 +126,15 @@ watch(
                 :value="artists.id"
               />
             </el-select>
+          </el-form-item>
+        </div>
+        <div class="flex-1">
+          <el-form-item label="Продолжительность" label-position="top" prop="duration">
+            <el-input
+              v-model="form.duration"
+              placeholder="Например: 2:36"
+              class="w-full"
+            />
           </el-form-item>
         </div>
       </div>

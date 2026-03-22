@@ -12,7 +12,7 @@ onMounted(() => {
   document.addEventListener('mousemove', volumePointMoveAction);
 });
 onUnmounted(() => {
-  document.removeEventListener('mousemove', volumePointEnd);
+  document.removeEventListener('mouseup', volumePointEnd);
   document.removeEventListener('mousemove', volumePointMoveAction);
 });
 
@@ -35,7 +35,6 @@ const refVolumeProgress = ref(null);
 const volumePointStart = (e) => {
   volumePointMove.value = true;
   volumePointMoveStartPosition.value = e.pageY;
-  //const volumePointTop = refVolumePoint.value.getBoundingClientRect().top;
   const rectProgress = refVolumeProgress.value.getBoundingClientRect();
   volumeProgressHeight.value = rectProgress.height;
   volumeProgressPositionTop.value = rectProgress.top;

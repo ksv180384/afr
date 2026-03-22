@@ -66,4 +66,38 @@ class Helper
     {
         return preg_match('/^[a-zA-Z0-9\s.,!?\'"()]+$/', $text);
     }
+
+    /**
+     * Конвертирует продолжительность из десятичных минут в формат m:ss (например, 2.6 -> "2:36")
+     */
+    public static function durationDecimalToMmSs(?float $decimal): ?string
+    {
+        if ($decimal === null || $decimal < 0) {
+            return null;
+        }
+        $minutes = (int) floor($decimal);
+        $seconds = (int) round(($decimal - $minutes) * 60);
+        if ($seconds >= 60) {
+            $minutes += 1;
+            $seconds = 0;
+        }
+        return sprintf('%d:%02d', $minutes, $seconds);
+    }
+
+    /**
+     * Конвертирует продолжительность из формата m:ss в десятичные минуты (например, "2:36" -> 2.6)
+     */
+    public static function durationMmSsToDecimal(mixed $mmSs): ?float
+    {
+        $mmSs = $mmSs === null ? '' : trim((string) $mmSs);
+        if ($mmSs === '') {
+            return null;
+        }
+        if (!preg_match('/^(\d+):([0-5]?\d)$/', $mmSs, $m)) {
+            return null;
+        }
+        $minutes = (int) $m[1];
+        $seconds = (int) $m[2];
+        return $minutes + $seconds / 60;
+    }
 }

@@ -33,6 +33,7 @@ Route::get('/grammar', [\App\Http\Controllers\App\GrammarController::class, 'ind
 Route::get('/grammar/item/{id}', [\App\Http\Controllers\App\GrammarController::class, 'show'])->name('grammar.show');
 Route::get('/lyrics', [\App\Http\Controllers\App\LyricsController::class, 'index'])->name('lyrics');
 Route::get('/lyrics/item/{id}', [\App\Http\Controllers\App\LyricsController::class, 'show'])->name('lyrics.show');
+Route::post('/lyrics/karaoke-upload-log', [\App\Http\Controllers\App\KaraokeUploadLogController::class, 'store'])->name('lyrics.karaoke-upload-log');
 Route::get('/lessons', [\App\Http\Controllers\App\LessonsController::class, 'index'])->name('lessons');
 Route::get('/lessons/item/{id}', [\App\Http\Controllers\App\LessonsController::class, 'show'])->name('lesson.show');
 Route::get('/dictionary', [\App\Http\Controllers\App\DictionaryController::class, 'index'])->name('dictionary');

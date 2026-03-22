@@ -14,6 +14,7 @@ const props = defineProps({
 
 const songData = reactive({
   title: '',
+  duration: null,
   text_fr: '',
   text_ru: '',
   text_transcription: '',
@@ -120,12 +121,18 @@ const arTextToStringForm = (arr) => {
 //     .join('\n');
 // }
 
-const changeMakerSubtitles = (subtitresData) =>{
+const changeMakerSubtitles = (subtitresData) => {
   songData.text_fr = arTextToStringForm(subtitresData.fr);
   songData.text_ru = arTextToStringForm(subtitresData.ru);
   songData.text_transcription = arTextToStringForm(subtitresData.tr);
+};
 
-}
+const submit = (form) => {
+  form.post(route('admin.song.store'), {
+    onFinish: () => {},
+    preserveScroll: true,
+  });
+};
 </script>
 
 <template>
@@ -146,6 +153,7 @@ const changeMakerSubtitles = (subtitresData) =>{
         :artists="artists"
         :errors="errors"
         @change="changeForm"
+        @submit="submit"
       />
     </div>
 

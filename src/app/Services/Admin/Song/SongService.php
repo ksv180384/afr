@@ -4,6 +4,7 @@ namespace App\Services\Admin\Song;
 
 use App\Models\Player\PlayerSongs;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Schema;
 
 class SongService
 {
@@ -46,19 +47,15 @@ class SongService
      */
     public function getById(int $id): PlayerSongs
     {
-        $song = PlayerSongs::query()
-            ->select([
-                'id',
-                'artist_id',
-                'title',
-                'text_fr',
-                'text_ru',
-                'text_transcription',
-            ])
+        $columns = ['id', 'artist_id', 'title', 'text_fr', 'text_ru', 'text_transcription', 'hidden'];
+        if (Schema::hasColumn('player_songs', 'duration')) {
+            $columns[] = 'duration';
+        }
+
+        return PlayerSongs::query()
+            ->select($columns)
             ->with(['artist:id,name'])
             ->where('id', $id)
             ->first();
-
-        return $song;
     }
 }
