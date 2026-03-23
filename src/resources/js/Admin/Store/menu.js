@@ -69,4 +69,9 @@ export default [
     name: 'admin.referers',
     title: 'Посещаемость'
   },
+  {
+    path: '/admin/karaoke-upload-logs',
+    name: 'admin.karaoke-upload-logs',
+    title: 'Логи загрузки караоке'
+  },
 ];

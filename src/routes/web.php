@@ -171,6 +171,9 @@ Route::middleware(['auth', 'verified', 'is-admin'])->group(function () {
     Route::get('/admin/songs-comments', [\App\Http\Controllers\Admin\SongComment\SongCommentController::class, 'index'])->name('admin.songs-comments');
     Route::post('/admin/songs-comment/toggle-show/{id}', [\App\Http\Controllers\Admin\SongComment\SongCommentController::class, 'toggleShow'])->name('admin.songs-comment.toggle-show');
 
+    // karaoke upload logs
+    Route::get('/admin/karaoke-upload-logs', [\App\Http\Controllers\Admin\KaraokeUploadLog\KaraokeUploadLogController::class, 'index'])->name('admin.karaoke-upload-logs');
+
 });
 
 require __DIR__.'/auth.php';
