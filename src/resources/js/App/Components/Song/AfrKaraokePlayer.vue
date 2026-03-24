@@ -99,7 +99,9 @@ const lineProgressForTime = (index, t) => {
   const lines = lrcLines.value;
   if (index < 0 || index >= lines.length) return 0;
   const lineTime = lines[index].time;
-  const nextTime = index < lines.length - 1 ? lines[index + 1].time : lineTime + 5;
+  const endT = duration.value > lineTime ? duration.value : lineTime + 5;
+  const nextTime =
+    index < lines.length - 1 ? lines[index + 1].time : endT;
   if (t < lineTime) return 0;
   if (t >= nextTime) return 1;
   return (t - lineTime) / (nextTime - lineTime);
@@ -220,13 +222,20 @@ const updateHighlightPosition = (t = null, smoothScroll = true) => {
   const top2 = nextEl ? nextEl.offsetTop : top1 + h1;
   const h2 = nextEl ? nextEl.offsetHeight : h1;
   const centerY = top1 + (top2 - top1) * progress + (h1 + (h2 - h1) * progress) / 2;
-  const viewportCenter = container.clientHeight / 2;
+
+  const cs = getComputedStyle(container);
+  const padTop = parseFloat(cs.paddingTop) || 0;
+  const padBottom = parseFloat(cs.paddingBottom) || 0;
+  const viewportH = Math.max(0, container.clientHeight - padTop - padBottom);
+  const viewportCenterY = viewportH / 2;
 
   if (smoothScroll) {
-    const targetOffset = Math.max(0, centerY - viewportCenter);
-    const maxOffset = contentEl ? Math.max(0, contentEl.offsetHeight - container.clientHeight) : 0;
-    scrollOffset.value = Math.min(targetOffset, maxOffset);
-    highlightTop.value = centerY < viewportCenter ? centerY : viewportCenter;
+    const targetOffset = Math.max(0, centerY - viewportCenterY);
+    const contentH = contentEl ? Math.max(contentEl.scrollHeight, contentEl.offsetHeight) : 0;
+    const maxOffset = Math.max(0, contentH - viewportH);
+    const newOffset = Math.min(targetOffset, maxOffset);
+    scrollOffset.value = newOffset;
+    highlightTop.value = padTop + centerY - newOffset;
   }
 };
 
