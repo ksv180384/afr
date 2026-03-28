@@ -31,6 +31,8 @@ Route::get('/clear-cache', function() {
     Artisan::call('view:clear');
     Artisan::call('config:clear');
     Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('package:discover');
     return response()->json([
         'message' => 'Clear cache successfully'
     ]);
