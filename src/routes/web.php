@@ -14,18 +14,27 @@ use Inertia\Inertia;
 //    ]);
 //});
 
-Route::get('/create-storage-link', function() {
-    if (!file_exists(public_path('storage'))) {
-        Artisan::call('storage:link');
-        return response()->json([
-            'message' => 'Storage link created successfully'
-        ]);
-    }
+//Route::get('/create-storage-link', function() {
+//    if (!file_exists(public_path('storage'))) {
+//        Artisan::call('storage:link');
+//        return response()->json([
+//            'message' => 'Storage link created successfully'
+//        ]);
+//    }
+//
+//    return response()->json([
+//        'message' => 'Уже есть'
+//    ]);
+//}); // Защитите роут если нужно
 
+Route::get('/clear-cache', function() {
+    Artisan::call('view:clear');
+    Artisan::call('config:clear');
+    Artisan::call('cache:clear');
     return response()->json([
-        'message' => 'Уже есть'
+        'message' => 'Clear cache successfully'
     ]);
-}); // Защитите роут если нужно
+});
 
 // Pages menu
 Route::get('/', [\App\Http\Controllers\App\IndexController::class, 'index'])->name('index');
