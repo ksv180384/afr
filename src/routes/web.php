@@ -41,13 +41,15 @@ Route::get('/dictionary/word/{id}', [\App\Http\Controllers\App\DictionaryControl
 Route::get('/info/terms-user', [\App\Http\Controllers\App\Info\InfoController::class, 'termsUser'])->name('info.terms-user');
 Route::get('/privacy-policy', [\App\Http\Controllers\App\Info\InfoController::class, 'privacyPolicy'])->name('info.privacy-policy');
 
+Route::get('/sitemap.xml', \App\Http\Controllers\App\SitemapController::class)->name('sitemap');
+
 // Search
 Route::post('/search', [\App\Http\Controllers\App\SearchController::class, 'searchAll']);
 
 // Search song
 Route::get('song/search-by-artist-and-title', [\App\Http\Controllers\App\Song\SongController::class, 'searchByArtistAndTitle']);
 Route::get('song/search-hints', [\App\Http\Controllers\App\Song\SongController::class, 'searchHints']);
-Route::get('song/show/{id}', [\App\Http\Controllers\App\Song\SongController::class, 'show']);
+Route::get('song/show/{id}', [\App\Http\Controllers\App\Song\SongController::class, 'show'])->name('song.show');
 Route::get('song/search', [\App\Http\Controllers\App\Song\SongController::class, 'search'])->name('song.search');
 
 // Search  word

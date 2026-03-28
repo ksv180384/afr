@@ -11,6 +11,7 @@ use App\Http\Resources\PaginateResource;
 use App\Models\Post\Post;
 use App\Services\App\Post\PostService;
 use App\Services\App\Post\PostStatusService;
+use App\Jobs\SendTelegramLogJob;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -66,9 +67,7 @@ class UserPostController extends Controller
     {
         $post = $postService->update($id, $request->all());
 
-        logger()
-            ->channel('telegram')
-            ->alert('Обновлен пост: ' . route('post.show', ['id' => $post->id]));
+        SendTelegramLogJob::dispatch('Обновлен пост: ' . route('post.show', ['id' => $post->id]))->afterResponse();
 
         if($request->redirect){
             return redirect($request->redirect);

@@ -2,13 +2,20 @@
 
 namespace App\Services\Admin\Song;
 
+use App\Helpers\Helper;
+use App\Models\Player\PlayerArtistsSong;
 use App\Models\Player\PlayerSongs;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Schema;
 
 class SongService
 {
     const SONGS_PAGINATE = 40;
+
+    public function __construct(
+        private readonly ArtistService $artistService,
+    ) {}
 
     /**
      * @param int $limit
@@ -17,8 +24,7 @@ class SongService
      */
     public function getSongsPagination(int $limit, bool $isHidden = false): LengthAwarePaginator
     {
-
-        $songs = PlayerSongs::query()
+        return PlayerSongs::query()
             ->select([
                 'player_songs.id',
                 'player_songs.artist_id',
@@ -29,20 +35,15 @@ class SongService
             ])
             ->with(['artist:id,name'])
             ->with(['user:id,name'])
-            ->when(!$isHidden, function ($q){
+            ->when(!$isHidden, function ($q) {
                 $q->where('hidden', false);
             })
             ->orderBy('artist_name', 'ASC')
             ->orderBy('title', 'ASC')
             ->paginate($limit);
-
-        return $songs;
     }
 
-
     /**
-     * Получает песню
-     * int $id - идентификатор записи
      * @return PlayerSongs
      */
     public function getById(int $id): PlayerSongs
@@ -57,5 +58,48 @@ class SongService
             ->with(['artist:id,name'])
             ->where('id', $id)
             ->first();
+    }
+
+    public function store(Request $request): PlayerSongs
+    {
+        $artist = $this->artistService->resolveArtist(
+            $request->input('artist_id'),
+            $request->input('artist_name'),
+        );
+
+        return PlayerSongs::create([
+            'artist_id' => $artist->id,
+            'artist_name' => $artist->name,
+            'title' => $request->input('title'),
+            'text_fr' => $request->input('text_fr'),
+            'text_ru' => $request->input('text_ru'),
+            'text_transcription' => $request->input('text_transcription'),
+            'hidden' => $request->boolean('hidden'),
+            'user_id' => Helper::getUserData()['id'] ?? null,
+            'duration' => Helper::durationMmSsToDecimal($request->input('duration')),
+        ]);
+    }
+
+    public function update(int $id, Request $request): PlayerSongs
+    {
+        $song = PlayerSongs::findOrFail($id);
+
+        $artist = $this->artistService->resolveArtist(
+            $request->input('artist_id'),
+            $request->input('artist_name'),
+        );
+
+        $song->update([
+            'artist_id' => $artist->id,
+            'artist_name' => $artist->name,
+            'title' => $request->input('title'),
+            'text_fr' => $request->input('text_fr'),
+            'text_ru' => $request->input('text_ru'),
+            'text_transcription' => $request->input('text_transcription'),
+            'hidden' => $request->boolean('hidden'),
+            'duration' => Helper::durationMmSsToDecimal($request->input('duration')),
+        ]);
+
+        return $song;
     }
 }

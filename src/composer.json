@@ -6,15 +6,16 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "ext-dom": "*",
         "ezyang/htmlpurifier": "^4.18",
         "inertiajs/inertia-laravel": "^1.0",
         "intervention/image": "^3.9",
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "spatie/laravel-sitemap": "^8.0",
         "stevebauman/purify": "^6.2",
-        "tightenco/ziggy": "^2.0",
-        "ext-dom": "*"
+        "tightenco/ziggy": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin\Song;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Validator;
 
 class CreateSongRequest extends FormRequest
 {
@@ -11,13 +12,46 @@ class CreateSongRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        $id = $this->input('artist_id');
+        $artistId = (is_numeric($id) && (int) $id > 0) ? (int) $id : null;
+
+        $name = $this->input('artist_name');
+        $artistName = (is_string($name) && trim($name) !== '') ? trim($name) : null;
+
+        $this->merge([
+            'artist_id' => $artistId,
+            'artist_name' => $artistName,
+        ]);
+    }
+
+    public function withValidator(Validator $validator): void
+    {
+        $validator->after(function (Validator $validator): void {
+            $artistId = $this->input('artist_id');
+            $artistName = $this->input('artist_name');
+
+            $hasId = $artistId !== null;
+            $hasName = $artistName !== null;
+
+            if (! $hasId && ! $hasName) {
+                $validator->errors()->add(
+                    'artist_id',
+                    'Выберите исполнителя из списка или введите имя нового исполнителя.'
+                );
+            }
+        });
+    }
+
     /**
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            'artist_id' => ['required', 'exists:player_artists_songs,id'],
+            'artist_id' => ['nullable', 'integer', 'exists:player_artists_songs,id'],
+            'artist_name' => ['nullable', 'string', 'min:1', 'max:255'],
             'title' => ['required', 'string', 'min:2'],
             'duration' => [
                 'nullable',

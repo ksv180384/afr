@@ -14,6 +14,7 @@ use App\Services\App\Post\PostStatusService;
 use App\Services\App\PostComment\PostCommentService;
 use App\Services\App\ProverbService;
 use App\Services\App\WordService;
+use App\Jobs\SendTelegramLogJob;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -53,9 +54,7 @@ class PostController extends Controller
     {
         $post = $postService->create($request->all());
 
-        logger()
-            ->channel('telegram')
-            ->alert('Добавлен новый пост: ' . route('post.show', ['id' => $post->id]));
+        SendTelegramLogJob::dispatch('Добавлен новый пост: ' . route('post.show', ['id' => $post->id]))->afterResponse();
 
         return Redirect::route('user.posts');
     }
@@ -89,9 +88,7 @@ class PostController extends Controller
     {
         $post = $postService->update($id, $request->all());
 
-        logger()
-            ->channel('telegram')
-            ->alert('Обновлен пост: ' . route('post.show', ['id' => $post->id]));
+        SendTelegramLogJob::dispatch('Обновлен пост: ' . route('post.show', ['id' => $post->id]))->afterResponse();
 
         return Redirect::route('user.posts');
     }

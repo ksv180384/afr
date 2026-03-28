@@ -101,6 +101,7 @@ const submit = (form) => {
       <song-form
         :song="songData"
         :artists="artists"
+        :allow-create-artist="true"
         :errors="errors"
         @change="changeForm"
         @submit="submit"

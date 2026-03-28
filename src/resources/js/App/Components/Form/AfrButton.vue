@@ -44,6 +44,7 @@ const classBg = computed(() => props.bg ? 'bg' : '');
 const classRound = computed(() => props.round ? 'round' : '');
 const classCircle = computed(() => props.circle ? 'circle' : '');
 const classDisabled = computed(() => props.disabled ? 'is-disabled' : '');
+const classLoading = computed(() => props.loading ? 'is-loading' : '');
 
 const onClick = () => {
   if(props.loading || props.disabled){
@@ -56,7 +57,7 @@ const onClick = () => {
 
 <template>
   <button
-    :class="[classSize, classType, classPlain, classLink, classText, classBg, classRound, classCircle, classDisabled]"
+    :class="[classSize, classType, classPlain, classLink, classText, classBg, classRound, classCircle, classDisabled, classLoading]"
     :disabled="disabled || loading"
     :type="nativeType"
     @click="onClick"
@@ -95,6 +96,10 @@ button>svg{
 button.is-disabled,
 button.is-disabled button{
   @apply cursor-not-allowed;
+}
+
+button.is-loading{
+  @apply cursor-wait opacity-70;
 }
 
 .type-default{

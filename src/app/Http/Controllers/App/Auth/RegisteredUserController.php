@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisteredRequest;
 use App\Models\User\Rang;
 use App\Models\User\User;
+use App\Jobs\SendTelegramLogJob;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -42,9 +43,7 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        logger()
-            ->channel('telegram')
-            ->alert('Зарегистрирован новый пользователь: ' . $user->email);
+        SendTelegramLogJob::dispatch('Зарегистрирован новый пользователь: ' . $user->email)->afterResponse();
 
         Auth::login($user);
 

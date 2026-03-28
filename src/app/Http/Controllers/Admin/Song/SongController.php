@@ -10,94 +10,58 @@ use App\Http\Resources\Admin\Song\ArtistForSelectResource;
 use App\Http\Resources\Admin\Song\SongEditResource;
 use App\Http\Resources\Admin\Song\SongResource;
 use App\Http\Resources\PaginateResource;
-use App\Models\Player\PlayerArtistsSong;
-use App\Models\Player\PlayerSongs;
 use App\Services\Admin\Song\ArtistService;
 use App\Services\Admin\Song\SongService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Schema;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class SongController extends Controller
 {
-    /**
-     * @param SongService $songService
-     * @return \Inertia\Response
-     */
-    public function index(SongService $songService): Response
+    public function __construct(
+        private readonly SongService $songService,
+        private readonly ArtistService $artistService,
+    ) {}
+
+    public function index(): Response
     {
-        $authUser = Helper::getUserData();
-        $songs = $songService->getSongsPagination(SongService::SONGS_PAGINATE, true);
+        $songs = $this->songService->getSongsPagination(SongService::SONGS_PAGINATE, true);
 
         return Inertia::render('Song/Songs', [
-            'authUser' => $authUser,
+            'authUser' => Helper::getUserData(),
             'songs' => SongResource::collection($songs->items()),
             'pagination' => PaginateResource::make($songs),
         ]);
     }
 
-    public function create(ArtistService $artistService)
+    public function create(): Response
     {
-        $authUser = Helper::getUserData();
-        $artists = $artistService->getArtistsForSelect();
-
         return Inertia::render('Song/SongCreate', [
-            'authUser' => $authUser,
-            'artists' => ArtistForSelectResource::collection($artists),
+            'authUser' => Helper::getUserData(),
+            'artists' => ArtistForSelectResource::collection($this->artistService->getArtistsForSelect()),
         ]);
     }
 
     public function store(CreateSongRequest $request): RedirectResponse
     {
-        $artist = PlayerArtistsSong::findOrFail($request->artist_id);
-        $data = [
-            'artist_id' => $request->artist_id,
-            'artist_name' => $artist->name,
-            'title' => $request->title,
-            'text_fr' => $request->text_fr,
-            'text_ru' => $request->text_ru,
-            'text_transcription' => $request->text_transcription,
-            'hidden' => $request->boolean('hidden'),
-            'user_id' => Helper::getUserData()['id'] ?? null,
-            'duration' => Helper::durationMmSsToDecimal($request->duration),
-        ];
-
-        $song = PlayerSongs::create($data);
+        $song = $this->songService->store($request);
 
         return redirect()->route('admin.song.edit', ['id' => $song->id]);
     }
 
-    public function edit(int $id, SongService $songService, ArtistService $artistService)
+    public function edit(int $id): Response
     {
-        $authUser = Helper::getUserData();
-        $song = $songService->getById($id);
-        $artists = $artistService->getArtistsForSelect();
-
         return Inertia::render('Song/SongEdit', [
-            'authUser' => $authUser,
-            'song' => SongEditResource::make($song),
-            'artists' => ArtistForSelectResource::collection($artists),
+            'authUser' => Helper::getUserData(),
+            'song' => SongEditResource::make($this->songService->getById($id)),
+            'artists' => ArtistForSelectResource::collection($this->artistService->getArtistsForSelect()),
         ]);
     }
 
     public function update(int $id, UpdateSongRequest $request): RedirectResponse
     {
-        $song = PlayerSongs::findOrFail($id);
-        $artist = PlayerArtistsSong::findOrFail($request->artist_id);
-        $data = [
-            'artist_id' => $request->artist_id,
-            'artist_name' => $artist->name,
-            'title' => $request->title,
-            'text_fr' => $request->text_fr,
-            'text_ru' => $request->text_ru,
-            'text_transcription' => $request->text_transcription,
-            'hidden' => $request->boolean('hidden'),
-            'duration' => Helper::durationMmSsToDecimal($request->duration),
-        ];
+        $this->songService->update($id, $request);
 
-        $song->update($data);
-
-        return redirect()->route('admin.song.edit', ['id' => $song->id]);
+        return redirect()->route('admin.song.edit', ['id' => $id]);
     }
 }

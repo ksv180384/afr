@@ -70,6 +70,7 @@ const submit = () => {
       <div>
         <afr-button
           :disabled="!isEdit"
+          :loading="form.processing"
           type="success"
           @click="submit"
         >

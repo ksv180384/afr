@@ -8,13 +8,24 @@ use Illuminate\Database\Eloquent\Collection;
 class ArtistService
 {
     /**
-     * Получаем исполнителей для вывода в селекте
      * @return Collection
      */
     public function getArtistsForSelect(): Collection
     {
-        $artists = PlayerArtistsSong::query()->orderBy('name')->get(['id', 'name']);
+        return PlayerArtistsSong::query()->orderBy('name')->get(['id', 'name']);
+    }
 
-        return $artists;
+    /**
+     * Находит существующего исполнителя по ID или создаёт нового по имени.
+     */
+    public function resolveArtist(?int $artistId, ?string $artistName): PlayerArtistsSong
+    {
+        if ($artistId !== null) {
+            return PlayerArtistsSong::findOrFail($artistId);
+        }
+
+        return PlayerArtistsSong::query()->firstOrCreate(
+            ['name' => $artistName],
+        );
     }
 }
