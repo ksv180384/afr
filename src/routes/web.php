@@ -27,16 +27,16 @@ use Inertia\Inertia;
 //    ]);
 //}); // Защитите роут если нужно
 
-Route::get('/clear-cache', function() {
-    Artisan::call('view:clear');
-    Artisan::call('config:clear');
-    Artisan::call('cache:clear');
-    Artisan::call('route:clear');
-    Artisan::call('package:discover');
-    return response()->json([
-        'message' => 'Clear cache successfully'
-    ]);
-});
+//Route::get('/clear-cache', function() {
+//    Artisan::call('view:clear');
+//    Artisan::call('config:clear');
+//    Artisan::call('cache:clear');
+//    Artisan::call('route:clear');
+//    Artisan::call('package:discover');
+//    return response()->json([
+//        'message' => 'Clear cache successfully'
+//    ]);
+//});
 
 // Pages menu
 Route::get('/', [\App\Http\Controllers\App\IndexController::class, 'index'])->name('index');
