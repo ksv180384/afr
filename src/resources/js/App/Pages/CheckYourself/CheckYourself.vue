@@ -1,5 +1,6 @@
 <script setup>
 import MiniLayout from '@/App/Layouts/MiniLayout.vue';
+import SeoHead from '@/App/Components/Seo/SeoHead.vue';
 import AfrCheckYourself from '@/App/Components/CheckYourself/AfrCheckYourself.vue';
 
 const props = defineProps({
@@ -12,6 +13,11 @@ const props = defineProps({
   <mini-layout
     :auth-user="authUser"
   >
+    <seo-head
+      title="Проверь себя - тест французских слов"
+      description="Проверьте свои знания французских слов"
+      :no-index="true"
+    />
     <div class="check-yourself">
       <afr-check-yourself />
     </div>

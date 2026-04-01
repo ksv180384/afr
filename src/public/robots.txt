@@ -1,13 +1,10 @@
 User-agent: *
-Disallow: /registr.php
-Disallow: /index.php?user
-Disallow: /index.php?ecrire
-Disallow: /member.php?u
-Disallow: /wstat/
+Allow: /
+
 Disallow: /admin/
-Disallow: /img/
-Disallow: /avatar/
-Disallow: /histoire/
-Disallow: /Audio/
-Disallow: /soldat_moi/
-Disallow: /class/
+Disallow: /profile
+Disallow: /user/posts
+Disallow: /user/post/
+Disallow: /widget/
+
+Sitemap: https://apprendrefr.ru/sitemap.xml

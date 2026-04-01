@@ -2,8 +2,11 @@
 
 namespace App\Services\App\Sitemap;
 
+use App\Models\Grammar;
+use App\Models\Lesson;
 use App\Models\Player\PlayerSongs;
 use App\Models\Post\Post;
+use App\Models\Word\Word;
 use DateTimeInterface;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
@@ -25,12 +28,42 @@ class SitemapService
     {
         $sitemap = Sitemap::create();
 
+        $this->addStaticPages($sitemap);
+        $this->addPosts($sitemap);
+        $this->addLyrics($sitemap);
+        $this->addGrammars($sitemap);
+        $this->addLessons($sitemap);
+        $this->addDictionaryWords($sitemap);
+
+        return $sitemap;
+    }
+
+    private function addStaticPages(Sitemap $sitemap): void
+    {
         $sitemap->add(
             Url::create(config('app.url'))
                 ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
                 ->setPriority(1.0)
         );
 
+        $staticPages = [
+            ['route' => 'grammar', 'freq' => Url::CHANGE_FREQUENCY_WEEKLY, 'priority' => 0.8],
+            ['route' => 'lessons', 'freq' => Url::CHANGE_FREQUENCY_WEEKLY, 'priority' => 0.8],
+            ['route' => 'lyrics', 'freq' => Url::CHANGE_FREQUENCY_WEEKLY, 'priority' => 0.8],
+            ['route' => 'dictionary', 'freq' => Url::CHANGE_FREQUENCY_WEEKLY, 'priority' => 0.7],
+        ];
+
+        foreach ($staticPages as $page) {
+            $sitemap->add(
+                Url::create(route($page['route']))
+                    ->setChangeFrequency($page['freq'])
+                    ->setPriority($page['priority'])
+            );
+        }
+    }
+
+    private function addPosts(Sitemap $sitemap): void
+    {
         Post::query()
             ->select(['id', 'updated_at'])
             ->whereHas('status', function ($q) {
@@ -49,7 +82,10 @@ class SitemapService
                     );
                 }
             });
+    }
 
+    private function addLyrics(Sitemap $sitemap): void
+    {
         PlayerSongs::query()
             ->select(['id', 'updated_at'])
             ->where('hidden', false)
@@ -58,7 +94,7 @@ class SitemapService
                 foreach ($songs as $song) {
                     $sitemap->add(
                         $this->makeUrlTag(
-                            route('song.show', ['id' => $song->id]),
+                            route('lyrics.show', ['id' => $song->id]),
                             $song->updated_at,
                             Url::CHANGE_FREQUENCY_WEEKLY,
                             0.7
@@ -66,8 +102,63 @@ class SitemapService
                     );
                 }
             });
+    }
 
-        return $sitemap;
+    private function addGrammars(Sitemap $sitemap): void
+    {
+        Grammar::query()
+            ->select(['id', 'updated_at'])
+            ->orderBy('id')
+            ->chunk(500, function ($grammars) use ($sitemap) {
+                foreach ($grammars as $grammar) {
+                    $sitemap->add(
+                        $this->makeUrlTag(
+                            route('grammar.show', ['id' => $grammar->id]),
+                            $grammar->updated_at,
+                            Url::CHANGE_FREQUENCY_MONTHLY,
+                            0.7
+                        )
+                    );
+                }
+            });
+    }
+
+    private function addLessons(Sitemap $sitemap): void
+    {
+        Lesson::query()
+            ->select(['id', 'updated_at'])
+            ->orderBy('id')
+            ->chunk(500, function ($lessons) use ($sitemap) {
+                foreach ($lessons as $lesson) {
+                    $sitemap->add(
+                        $this->makeUrlTag(
+                            route('lesson.show', ['id' => $lesson->id]),
+                            $lesson->updated_at,
+                            Url::CHANGE_FREQUENCY_MONTHLY,
+                            0.7
+                        )
+                    );
+                }
+            });
+    }
+
+    private function addDictionaryWords(Sitemap $sitemap): void
+    {
+        Word::query()
+            ->select(['id'])
+            ->orderBy('id')
+            ->chunk(500, function ($words) use ($sitemap) {
+                foreach ($words as $word) {
+                    $sitemap->add(
+                        $this->makeUrlTag(
+                            route('dictionary.show', ['id' => $word->id]),
+                            null,
+                            Url::CHANGE_FREQUENCY_MONTHLY,
+                            0.5
+                        )
+                    );
+                }
+            });
     }
 
     private function makeUrlTag(string $location, mixed $lastModified, string $changeFrequency, float $priority): Url

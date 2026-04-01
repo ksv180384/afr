@@ -10,7 +10,7 @@ const props = defineProps({
 <template>
   <div class="afr-post-comment-item">
     <div class="flex items-center gap-2 mb-2 p-2">
-      <img :src="user.avatar_link" class="w-[42px] h-[42px] object-cover rounded-full" :alt="user.name">
+      <img :src="user.avatar_link" class="w-[42px] h-[42px] object-cover rounded-full" :alt="user.name" loading="lazy">
       <div class="font-semibold">
         <Link :href="route('user.show', { id: user.id })">
           {{ user.name }}

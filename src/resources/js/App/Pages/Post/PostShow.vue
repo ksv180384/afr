@@ -1,7 +1,8 @@
 <script setup>
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Link, useForm } from '@inertiajs/vue3';
 
 import DefaultLayout from '@/App/Layouts/DefaultLayout.vue';
+import SeoHead from '@/App/Components/Seo/SeoHead.vue';
 import AfrAddComment from '@/App/Components/Comment/AfrAddComment.vue';
 import AfrCommentItem from '@/App/Components/Comment/AfrCommentItem.vue';
 import AfrInputErrorMessage from '@/App/Components/Form/AfrInputErrorMessage.vue';
@@ -36,19 +37,24 @@ const submitComment = () => {
     :words="words"
     :proverb="proverb"
   >
-    <Head>
-      <title>{{ post.title }} | {{ post.user.name }}</title>
-      <meta name="description" :content="`${post.title} | ${post.user.name}`" />
-      <meta property="og:title" :content="`${post.title} | ${post.user.name}`" />
-      <meta property="og:description" :content="`${post.title} | ${post.user.name}`" />
-    </Head>
+    <seo-head
+      :title="`${post.title} | ${post.user.name}`"
+      :description="`${post.title} | ${post.user.name}`"
+      :json-ld="{
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        'headline': post.title,
+        'author': { '@type': 'Person', 'name': post.user.name },
+        'datePublished': post.created_at,
+      }"
+    />
 
     <div class="flex flex-col gap-0.5 min-h-full bg-sky-50">
       <article class="post-item border-b border-sky-800 !rounded-b-none">
         <header>
           <div class="header-info">
             <div class="header-info-user">
-              <img :src="post.user.avatar_link" :alt="post.user.name" />
+              <img :src="post.user.avatar_link" :alt="post.user.name" loading="lazy" />
               <Link
                 :href="route('user.show', { id: post.user.id })"
               >

@@ -1,7 +1,6 @@
 <script setup>
-import { Head } from '@inertiajs/vue3';
-
 import DefaultLayout from '@/App/Layouts/DefaultLayout.vue';
+import SeoHead from '@/App/Components/Seo/SeoHead.vue';
 import AfrTermsUserContent from '@/App/Components/Info/AfrTermsUserContent.vue';
 
 const props = defineProps({
@@ -18,12 +17,11 @@ const props = defineProps({
     :words="words"
     :proverb="proverb"
   >
-    <Head>
-      <title>Правила пользовательского соглашения - ApprendreFr</title>
-      <meta name="description" content="Правила пользовательского соглашения - ApprendreFr" />
-      <meta property="og:title" content="Правила пользовательского соглашения - ApprendreFr" />
-      <meta property="og:description" content="Правила пользовательского соглашения - ApprendreFr" />
-    </Head>
+    <seo-head
+      title="Правила пользовательского соглашения - ApprendreFr"
+      description="Правила пользовательского соглашения - ApprendreFr"
+      :no-index="true"
+    />
 
     <div class="bg-sky-50">
       <h1 class="text-center mt-8 text-xl font-semibold">Правила пользовательского соглашения</h1>

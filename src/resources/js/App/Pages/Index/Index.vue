@@ -1,8 +1,7 @@
 <script setup>
-import { Head } from '@inertiajs/vue3';
-
 import DefaultLayout from '@/App/Layouts/DefaultLayout.vue';
 import AfrPostItem from '@/App/Components/Post/AfrPostItem.vue';
+import SeoHead from '@/App/Components/Seo/SeoHead.vue';
 
 const props = defineProps({
   authUser: { type: Object, default: null },
@@ -12,6 +11,14 @@ const props = defineProps({
   paginate: { type: Object, default: {} },
 });
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  'name': 'ApprendreFr',
+  'url': 'https://apprendrefr.ru',
+  'description': 'Французский язык - изучение, переводы, русская транскрипция',
+  'inLanguage': 'ru',
+};
 </script>
 
 <template>
@@ -20,12 +27,11 @@ const props = defineProps({
   :words="words"
   :proverb="proverb"
 >
-  <Head>
-    <title>Французский язык - изучение</title>
-    <meta name="description" content="Французский язык - изучение, переводы, русская транскрипция" />
-    <meta property="og:title" content="Французский язык - изучение, переводы, русская транскрипция" />
-    <meta property="og:description" content="Французский язык - изучение, переводы, русская транскрипция" />
-  </Head>
+  <seo-head
+    title="Французский язык - изучение"
+    description="Французский язык - изучение, переводы, русская транскрипция"
+    :json-ld="jsonLd"
+  />
 
   <div class="flex flex-col gap-1">
     <template v-for="post in posts">

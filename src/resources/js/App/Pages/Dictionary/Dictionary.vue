@@ -1,9 +1,10 @@
 <script setup>
 import { ref } from 'vue';
-import { Head, Link } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
 import { Icon } from '@iconify/vue';
 
 import MiniLayout from '@/App/Layouts/MiniLayout.vue';
+import SeoHead from '@/App/Components/Seo/SeoHead.vue';
 import Pagination from '@/App/Components/Pagination/Pagination.vue';
 import AfrWordDialog from "@/App/Components/Words/AfrWordDialog.vue";
 import AfrPlayerWord from "@/App/Components/AfrPlayerWord.vue";
@@ -18,6 +19,7 @@ const props = defineProps({
 });
 
 const title = ref(props.lang === 'ru' ? 'Русско-французский словарь' : 'Французско-русский словарь');
+const hasFilters = !!(props.query.parts_of_speech || props.query.page || props.query.lang);
 const isShowWordModal = ref(false);
 const activeWord = ref(null);
 
@@ -31,12 +33,11 @@ const showModalWord = (word) => {
   <mini-layout
     :auth-user="authUser"
   >
-    <Head>
-      <title>{{ title }}</title>
-      <meta name="description" :content="`${title} - перевод, транскрипция, примеры`" />
-      <meta property="og:title" :content="title" />
-      <meta property="og:description" :content="`${title} - перевод, транскрипция, примеры`" />
-    </Head>
+    <seo-head
+      :title="title"
+      :description="`${title} - перевод, транскрипция, примеры`"
+      :no-index="hasFilters"
+    />
 
     <div class="dictionary-container">
       <div class="dictionary-content">

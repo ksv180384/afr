@@ -1,7 +1,8 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
 
 import DefaultLayout from '@/App/Layouts/DefaultLayout.vue';
+import SeoHead from '@/App/Components/Seo/SeoHead.vue';
 
 const props = defineProps({
   authUser: { type: Object, default: null },
@@ -18,12 +19,10 @@ const props = defineProps({
     :words="words"
     :proverb="proverb"
   >
-    <Head>
-      <title>Тексты, транскрипции и переводы французских песен</title>
-      <meta name="description" content="Тексты, транскрипции и переводы французских песен" />
-      <meta property="og:title" content="Тексты, транскрипции и переводы французских песен" />
-      <meta property="og:description" content="Тексты, транскрипции и переводы французских песен" />
-    </Head>
+    <seo-head
+      title="Тексты, транскрипции и переводы французских песен"
+      description="Тексты, транскрипции и переводы французских песен"
+    />
 
     <div class="lyrics-container">
 

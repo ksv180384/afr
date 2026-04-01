@@ -80,7 +80,7 @@ class PostService
      */
     public function getPostByIdAvailable(int $id): Post
     {
-        $post = Post::query()
+        return Post::query()
             ->where(function ($q) {
                 $q->whereHas('status', function ($q) {
                     $q->where('alias', 'published');
@@ -92,8 +92,6 @@ class PostService
             })
             ->where('id', $id)
             ->firstOrFail();
-
-        return $post;
     }
 
     /**

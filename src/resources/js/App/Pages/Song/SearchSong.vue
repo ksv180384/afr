@@ -1,7 +1,6 @@
 <script setup>
-import { Head } from '@inertiajs/vue3';
-
 import DefaultLayout from '@/App/Layouts/DefaultLayout.vue';
+import SeoHead from '@/App/Components/Seo/SeoHead.vue';
 import AfrSongCard from '@/App/Components/Song/AfrSongCard.vue';
 import AfrEmptyDataPage from "@/App/Components/AfrEmptyDataPage.vue";
 import Pagination from '@/App/Components/Pagination/Pagination.vue';
@@ -22,12 +21,11 @@ const props = defineProps({
     :words="words"
     :proverb="proverb"
   >
-    <Head>
-      <title>Поиск песни: {{ searchText }}</title>
-      <meta name="description" :content="`Поиск песни: ${searchText}`" />
-      <meta property="og:title" :content="`Поиск песни: ${searchText}`" />
-      <meta property="og:description" :content="`Поиск песни: ${searchText}`" />
-    </Head>
+    <seo-head
+      :title="`Поиск песни: ${searchText}`"
+      :description="`Поиск песни: ${searchText}`"
+      :no-index="true"
+    />
 
     <div class="flex flex-col bg-sky-50 py-2 min-h-full">
       <template v-if="songsSearch">

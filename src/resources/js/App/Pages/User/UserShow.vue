@@ -1,11 +1,11 @@
 <script setup>
 import { computed } from 'vue';
-import { Head } from '@inertiajs/vue3';
 import { declensionYears } from '@/Helpers/helper.js';
 import { Icon } from '@iconify/vue';
 import dayjs from '@/Plugins/dayjsRu.js';
 
 import DefaultLayout from '@/App/Layouts/DefaultLayout.vue';
+import SeoHead from '@/App/Components/Seo/SeoHead.vue';
 import AfrGender from '@/App/Components/AfrGender.vue';
 
 const props = defineProps({
@@ -40,19 +40,18 @@ const age = computed(() => {
     :words="words"
     :proverb="proverb"
   >
-    <Head>
-      <title>Пользователь {{ user.name }}</title>
-      <meta name="description" :content="`Пользователь ${user.name}`" />
-      <meta property="og:title" :content="`Пользователь ${user.name}`" />
-      <meta property="og:description" :content="`Пользователь ${user.name}`" />
-    </Head>
+    <seo-head
+      :title="`Пользователь ${user.name}`"
+      :description="`Пользователь ${user.name}`"
+      :no-index="true"
+    />
 
     <div class="user-wrapper">
 
       <div class="flex flex-col lg:flex-row gap-2 lg:gap-4">
         <div class="flex flex-col items-center">
           <div class="img-block">
-            <img :src="user.avatar_link" :alt="user.name">
+            <img :src="user.avatar_link" :alt="user.name" loading="lazy">
           </div>
         </div>
         <div class="flex flex-col gap-1 flex-1">

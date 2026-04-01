@@ -16,7 +16,7 @@ defineProps({
   <header>
     <div class="header-info">
       <div class="header-info-user">
-        <img :src="post.user.avatar_link" :alt="post.user.name" />
+        <img :src="post.user.avatar_link" :alt="post.user.name" loading="lazy" />
         <div class="flex flex-col gap-1">
           <h2>
             <Link

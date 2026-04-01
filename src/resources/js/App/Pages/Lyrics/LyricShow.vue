@@ -1,8 +1,9 @@
 <script setup>
-import { ref } from 'vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { ref, computed } from 'vue';
+import { useForm } from '@inertiajs/vue3';
 
 import MiniLayout from '@/App/Layouts/MiniLayout.vue';
+import SeoHead from '@/App/Components/Seo/SeoHead.vue';
 import AfrCommentItem from '@/App/Components/Comment/AfrCommentItem.vue';
 import AfrAddComment from '@/App/Components/Comment/AfrAddComment.vue';
 import AfrInputErrorMessage from '@/App/Components/Form/AfrInputErrorMessage.vue';
@@ -25,6 +26,17 @@ const changeColumn = (val) => {
   activeColumn.value = val;
 }
 
+const seoTitle = computed(() => `${props.song.title} - ${props.song.artist_name} перевод, транскрипция`);
+const seoDescription = computed(() => `${props.song.title} - ${props.song.artist_name} - текст, перевод, транскрипция на русском`);
+
+const jsonLd = computed(() => ({
+  '@context': 'https://schema.org',
+  '@type': 'MusicComposition',
+  'name': props.song.title,
+  'composer': { '@type': 'Person', 'name': props.song.artist_name },
+  'inLanguage': 'fr',
+}));
+
 const submitComment = () => {
 
   form.post(route('song-comment.store'), {
@@ -39,12 +51,11 @@ const submitComment = () => {
   <mini-layout
     :auth-user="authUser"
   >
-    <Head>
-      <title>{{ song.title }} - {{ song.artist_name }} перевод, транскрипция</title>
-      <meta name="description" :content="`${song.title} - ${song.artist_name} - текст, перевод, транскрипция на русском`" />
-      <meta property="og:title" :content="`${song.title} - ${song.artist_name}`" />
-      <meta property="og:description" :content="`${song.title} - ${song.artist_name} - текст, перевод, транскрипция на русском`" />
-    </Head>
+    <seo-head
+      :title="seoTitle"
+      :description="seoDescription"
+      :json-ld="jsonLd"
+    />
 
     <div class="lyric-show-container">
 

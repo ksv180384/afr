@@ -1,8 +1,8 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import { Head } from '@inertiajs/vue3';
 
 import MiniLayout from '@/App/Layouts/MiniLayout.vue';
+import SeoHead from '@/App/Components/Seo/SeoHead.vue';
 import AfrMenuLeft from '@/App/Components/Menu/MenuLeft/AfrMenuLeft.vue';
 import AfrMenuLeftItem from '@/App/Components/Menu/MenuLeft/AfrMenuLeftItem.vue';
 import AfrPlayerWord from '@/App/Components/AfrPlayerWord.vue';
@@ -51,12 +51,10 @@ onMounted(() => {
     :auth-user="authUser"
     :sub-menu="subMenu"
   >
-    <Head>
-      <title>{{ titlePage }}</title>
-      <meta name="description" :content="lessonContent.description" />
-      <meta property="og:title" :content="titlePage" />
-      <meta property="og:description" :content="lessonContent.description" />
-    </Head>
+    <seo-head
+      :title="titlePage"
+      :description="lessonContent.description"
+    />
 
     <div class="lesson-container">
       <div class="lesson-menu">

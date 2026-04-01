@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue';
+import SeoHead from '@/App/Components/Seo/SeoHead.vue';
 
 const props = defineProps({status: Number})
 
@@ -23,6 +24,11 @@ const description = computed(() => {
 </script>
 
 <template>
+  <seo-head
+    :title="title || 'Ошибка'"
+    :description="description || ''"
+    :no-index="true"
+  />
   <template v-if="status === 404">
     <div class="error-indicator">
       <div class="error-indicator-content">

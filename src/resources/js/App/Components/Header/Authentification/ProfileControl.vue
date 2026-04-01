@@ -28,7 +28,7 @@ const logout = async () => {
     <Dropdown align="right" width="50">
       <template #trigger>
         <div class="cursor-pointer" :title="user.name">
-          <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" :src="user.avatar_link"/>
+          <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" :src="user.avatar_link" :alt="user.name" loading="lazy"/>
         </div>
       </template>
 

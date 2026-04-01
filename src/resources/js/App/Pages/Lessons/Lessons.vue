@@ -1,7 +1,6 @@
 <script setup>
-import { Head } from '@inertiajs/vue3';
-
 import MiniLayout from '@/App/Layouts/MiniLayout.vue';
+import SeoHead from '@/App/Components/Seo/SeoHead.vue';
 import AfrMenuFullPageItem from '@/App/Components/Menu/MenuFullPage/AfrMenuFullPageItem.vue';
 import AfrMenuFullPage from '@/App/Components/Menu/MenuFullPage/AfrMenuFullPage.vue';
 
@@ -17,12 +16,10 @@ const titlePage = `Уроки французского языка`;
   <mini-layout
     :auth-user="authUser"
   >
-    <Head>
-      <title>{{ titlePage }}</title>
-      <meta name="description" content="Уроки французского языка. Каждый урок французского языка для начинающих представлен в виде темы для общения." />
-      <meta property="og:title" :content="titlePage" />
-      <meta property="og:description" content="Уроки французского языка. Каждый урок французского языка для начинающих представлен в виде темы для общения." />
-    </Head>
+    <seo-head
+      :title="titlePage"
+      description="Уроки французского языка. Каждый урок французского языка для начинающих представлен в виде темы для общения."
+    />
 
     <div class="grammar-container">
       <div class="grammar-content">

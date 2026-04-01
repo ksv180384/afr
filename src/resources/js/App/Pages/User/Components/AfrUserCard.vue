@@ -10,7 +10,7 @@ const props = defineProps({
 <template>
 <div class="flex flex-row">
   <div class="rounded-full drop-shadow-lg p-1 bg-blue-200">
-    <img :src="user.avatar_link" class="w-[80px] h-[80px] object-cover bg-white rounded-full" :alt="user.name"/>
+    <img :src="user.avatar_link" class="w-[80px] h-[80px] object-cover bg-white rounded-full" :alt="user.name" loading="lazy"/>
   </div>
   <div class="bg-white rounded-r-xl ps-14 -ms-10 py-2 pe-4 border border-blue-100 flex-1">
     <div>

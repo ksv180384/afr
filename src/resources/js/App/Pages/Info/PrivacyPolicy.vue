@@ -1,7 +1,6 @@
 <script setup>
-import { Head } from '@inertiajs/vue3';
-
 import DefaultLayout from '@/App/Layouts/DefaultLayout.vue';
+import SeoHead from '@/App/Components/Seo/SeoHead.vue';
 import AfrPrivacyPolicyContent from '@/App/Components/Info/AfrPrivacyPolicyContent.vue';
 
 const props = defineProps({
@@ -18,12 +17,11 @@ const props = defineProps({
     :words="words"
     :proverb="proverb"
   >
-    <Head>
-      <title>Политика по защите персональных данных - ApprendreFr</title>
-      <meta name="description" content="Политика по защите персональных данных - ApprendreFr" />
-      <meta property="og:title" content="Политика по защите персональных данных - ApprendreFr" />
-      <meta property="og:description" content="Политика по защите персональных данных - ApprendreFr" />
-    </Head>
+    <seo-head
+      title="Политика по защите персональных данных - ApprendreFr"
+      description="Политика по защите персональных данных - ApprendreFr"
+      :no-index="true"
+    />
 
     <div class="bg-sky-50">
       <h1 class="text-center mt-8 text-xl font-semibold">Политика по защите персональных данных</h1>

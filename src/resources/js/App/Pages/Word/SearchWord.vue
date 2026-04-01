@@ -1,7 +1,6 @@
 <script setup>
-import { Head } from '@inertiajs/vue3';
-
 import DefaultLayout from '@/App/Layouts/DefaultLayout.vue';
+import SeoHead from '@/App/Components/Seo/SeoHead.vue';
 import AfrWordCard from '@/App/Components/Words/AfrWordCard.vue';
 import AfrEmptyDataPage from '@/App/Components/AfrEmptyDataPage.vue';
 import Pagination from '@/App/Components/Pagination/Pagination.vue';
@@ -22,12 +21,11 @@ const props = defineProps({
     :words="words"
     :proverb="proverb"
   >
-    <Head>
-      <title>Слово: {{ searchText }}</title>
-      <meta name="description" :content="`Слово: ${searchText}`" />
-      <meta property="og:title" :content="`Слово: ${searchText}`" />
-      <meta property="og:description" :content="`Слово: ${searchText}`" />
-    </Head>
+    <seo-head
+      :title="`Слово: ${searchText}`"
+      :description="`Слово: ${searchText}`"
+      :no-index="true"
+    />
 
     <div class="flex flex-col gap-4 bg-sky-50 px-4 py-2 min-h-full">
       <template v-if="wordSearch">

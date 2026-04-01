@@ -1,8 +1,8 @@
 <script setup>
 import { computed } from 'vue';
-import { Head } from '@inertiajs/vue3';
 
 import MiniLayout from '@/App/Layouts/MiniLayout.vue';
+import SeoHead from '@/App/Components/Seo/SeoHead.vue';
 import AfrMenuLeft from '@/App/Components/Menu/MenuLeft/AfrMenuLeft.vue';
 import AfrMenuLeftItem from '@/App/Components/Menu/MenuLeft/AfrMenuLeftItem.vue';
 
@@ -27,12 +27,10 @@ const titlePage = `Грамматика Французского языка - ${
     :sub-menu="subMenu"
 
   >
-    <Head>
-      <title>{{ titlePage }}</title>
-      <meta name="description" :content="grammarContent.description" />
-      <meta property="og:title" :content="titlePage" />
-      <meta property="og:description" :content="grammarContent.description" />
-    </Head>
+    <seo-head
+      :title="titlePage"
+      :description="grammarContent.description"
+    />
 
     <div class="grammar-container">
       <div class="grammar-menu">
