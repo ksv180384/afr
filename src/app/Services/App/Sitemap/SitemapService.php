@@ -30,8 +30,8 @@ class SitemapService
         $this->addStaticPages($sitemap);
         $this->addPosts($sitemap);
         $this->addLyrics($sitemap);
-        $this->addLessons($sitemap);
-        $this->addDictionaryWords($sitemap);
+//        $this->addLessons($sitemap);
+//        $this->addDictionaryWords($sitemap);
 
         return $sitemap;
     }
