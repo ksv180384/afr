@@ -2,7 +2,6 @@
 
 namespace App\Services\App\Sitemap;
 
-use App\Models\Grammar;
 use App\Models\Lesson;
 use App\Models\Player\PlayerSongs;
 use App\Models\Post\Post;
@@ -31,7 +30,6 @@ class SitemapService
         $this->addStaticPages($sitemap);
         $this->addPosts($sitemap);
         $this->addLyrics($sitemap);
-        $this->addGrammars($sitemap);
         $this->addLessons($sitemap);
         $this->addDictionaryWords($sitemap);
 
@@ -97,25 +95,6 @@ class SitemapService
                             route('lyrics.show', ['id' => $song->id]),
                             $song->updated_at,
                             Url::CHANGE_FREQUENCY_WEEKLY,
-                            0.7
-                        )
-                    );
-                }
-            });
-    }
-
-    private function addGrammars(Sitemap $sitemap): void
-    {
-        Grammar::query()
-            ->select(['id', 'updated_at'])
-            ->orderBy('id')
-            ->chunk(500, function ($grammars) use ($sitemap) {
-                foreach ($grammars as $grammar) {
-                    $sitemap->add(
-                        $this->makeUrlTag(
-                            route('grammar.show', ['id' => $grammar->id]),
-                            $grammar->updated_at,
-                            Url::CHANGE_FREQUENCY_MONTHLY,
                             0.7
                         )
                     );
