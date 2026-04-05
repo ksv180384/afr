@@ -19,6 +19,30 @@ const subMenu = computed(() => props.menu.map(item => ({
 })));
 
 const titlePage = `Грамматика Французского языка - ${props.grammarContent.title}`;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    'headline': props.grammarContent.title,
+    'description': props.grammarContent.description,
+    'inLanguage': 'ru',
+    'isPartOf': {
+      '@type': 'WebSite',
+      'name': 'ApprendreFr',
+      'url': 'https://apprendrefr.ru',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      { '@type': 'ListItem', 'position': 1, 'name': 'Главная', 'item': 'https://apprendrefr.ru' },
+      { '@type': 'ListItem', 'position': 2, 'name': 'Грамматика', 'item': 'https://apprendrefr.ru/grammar' },
+      { '@type': 'ListItem', 'position': 3, 'name': props.grammarContent.title },
+    ],
+  },
+];
 </script>
 
 <template>
@@ -30,6 +54,7 @@ const titlePage = `Грамматика Французского языка - ${
     <seo-head
       :title="titlePage"
       :description="grammarContent.description"
+      :json-ld="jsonLd"
     />
 
     <div class="grammar-container">

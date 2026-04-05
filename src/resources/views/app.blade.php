@@ -6,14 +6,18 @@
 
     <title inertia>{{ config('app.name', 'ApprendreFr') }}</title>
 
-    <link rel="canonical" href="{{ url()->current() }}" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="{{ config('app.name', 'ApprendreFr') }}" />
     <meta property="og:locale" content="ru_RU" />
+    <meta property="og:image" content="{{ asset('img/og-default.jpg') }}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
@@ -27,6 +31,22 @@
 </head>
 <body class="font-sans antialiased">
 @inertia
+
+<noscript>
+    <div style="max-width:800px;margin:0 auto;padding:40px 20px;font-family:sans-serif">
+        <h1>ApprendreFr — Французский язык онлайн</h1>
+        <p>Изучайте французский язык: грамматика, уроки, тексты песен с переводом и транскрипцией, словарь.</p>
+        <nav>
+            <ul>
+                <li><a href="/">Главная</a></li>
+                <li><a href="/grammar">Грамматика французского языка</a></li>
+                <li><a href="/lessons">Уроки французского языка</a></li>
+                <li><a href="/lyrics">Тексты и переводы французских песен</a></li>
+                <li><a href="/dictionary">Французско-русский словарь</a></li>
+            </ul>
+        </nav>
+    </div>
+</noscript>
 
 @production
     <!-- Yandex.Metrika counter (deferred to not block rendering) -->

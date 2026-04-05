@@ -19,7 +19,7 @@ const notivue = createNotivue({
 const pinia = createPinia();
 
 createInertiaApp({
-    title: (title) => `${title}`,
+    title: (title) => title ? `${title} | ApprendreFr` : 'ApprendreFr',
     resolve: (name) =>
         resolvePageComponent(
             `./App/Pages/${name}.vue`,

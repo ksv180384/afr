@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
   <footer class="afr-footer">
     <div class="afr-footer-content">
       <ul class="text-center">
-        <li>© 2010 - {{ dayjs().format('YYYY') }} гг ApprendereFr.ru</li>
+        <li>© 2010 - {{ dayjs().format('YYYY') }} гг ApprendreFr.ru</li>
         <li>e-mail: admin@apprendrefr.ru</li>
         <li class="infos-block">
           <Link class="link mx-10" :href="route('info.terms-user')">Правила пользовательского соглашения</Link>

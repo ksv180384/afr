@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'prerender' => [
+        'token' => env('PRERENDER_TOKEN'),
+        'url' => env('PRERENDER_URL', 'https://service.prerender.io/'),
+    ],
+
 ];

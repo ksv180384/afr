@@ -29,13 +29,24 @@ const changeColumn = (val) => {
 const seoTitle = computed(() => `${props.song.title} - ${props.song.artist_name} перевод, транскрипция`);
 const seoDescription = computed(() => `${props.song.title} - ${props.song.artist_name} - текст, перевод, транскрипция на русском`);
 
-const jsonLd = computed(() => ({
-  '@context': 'https://schema.org',
-  '@type': 'MusicComposition',
-  'name': props.song.title,
-  'composer': { '@type': 'Person', 'name': props.song.artist_name },
-  'inLanguage': 'fr',
-}));
+const jsonLd = computed(() => [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'MusicComposition',
+    'name': props.song.title,
+    'composer': { '@type': 'Person', 'name': props.song.artist_name },
+    'inLanguage': 'fr',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      { '@type': 'ListItem', 'position': 1, 'name': 'Главная', 'item': 'https://apprendrefr.ru' },
+      { '@type': 'ListItem', 'position': 2, 'name': 'Тексты песен', 'item': 'https://apprendrefr.ru/lyrics' },
+      { '@type': 'ListItem', 'position': 3, 'name': `${props.song.artist_name} - ${props.song.title}` },
+    ],
+  },
+]);
 
 const submitComment = () => {
 

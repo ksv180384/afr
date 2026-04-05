@@ -39,14 +39,24 @@ const submitComment = () => {
   >
     <seo-head
       :title="`${post.title} | ${post.user.name}`"
-      :description="`${post.title} | ${post.user.name}`"
-      :json-ld="{
-        '@context': 'https://schema.org',
-        '@type': 'Article',
-        'headline': post.title,
-        'author': { '@type': 'Person', 'name': post.user.name },
-        'datePublished': post.created_at,
-      }"
+      :description="`${post.title} — статья автора ${post.user.name} на ApprendreFr. Читайте и обсуждайте материалы по французскому языку.`"
+      :json-ld="[
+        {
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          'headline': post.title,
+          'author': { '@type': 'Person', 'name': post.user.name },
+          'datePublished': post.created_at,
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          'itemListElement': [
+            { '@type': 'ListItem', 'position': 1, 'name': 'Главная', 'item': 'https://apprendrefr.ru' },
+            { '@type': 'ListItem', 'position': 2, 'name': post.title },
+          ],
+        },
+      ]"
     />
 
     <div class="flex flex-col gap-0.5 min-h-full bg-sky-50">

@@ -25,6 +25,31 @@ const subMenu = computed(() => props.menu.map(item => ({
 
 const titlePage = `Тема урока ${props.lessonContent.title}`;
 
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'LearningResource',
+    'name': props.lessonContent.title,
+    'description': props.lessonContent.description,
+    'educationalLevel': 'beginner',
+    'inLanguage': 'ru',
+    'isPartOf': {
+      '@type': 'WebSite',
+      'name': 'ApprendreFr',
+      'url': 'https://apprendrefr.ru',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      { '@type': 'ListItem', 'position': 1, 'name': 'Главная', 'item': 'https://apprendrefr.ru' },
+      { '@type': 'ListItem', 'position': 2, 'name': 'Уроки', 'item': 'https://apprendrefr.ru/lessons' },
+      { '@type': 'ListItem', 'position': 3, 'name': props.lessonContent.title },
+    ],
+  },
+];
+
 onMounted(() => {
   const contentHtmlContainer = document.createElement('div');
   contentHtmlContainer.innerHTML = props.lessonContent.content;
@@ -54,6 +79,7 @@ onMounted(() => {
     <seo-head
       :title="titlePage"
       :description="lessonContent.description"
+      :json-ld="jsonLd"
     />
 
     <div class="lesson-container">
