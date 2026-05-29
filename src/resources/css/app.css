@@ -4,6 +4,8 @@
 
 body {
     @apply min-h-screen text-gray-800;
+    margin: 0 !important;
+    margin-bottom: 0 !important;
     font-family: Verdana, Geneva, sans-serif;
     background-image: url('/img/rewallscom7292.jpg');
     background-attachment: fixed;

@@ -175,6 +175,7 @@ Route::middleware(['auth', 'verified', 'is-admin'])->group(function () {
 
     // users
     Route::get('/admin/users', [\App\Http\Controllers\Admin\User\UserController::class, 'index'])->name('admin.users');
+    Route::get('/admin/user/show/{id}', [\App\Http\Controllers\Admin\User\UserController::class, 'show'])->name('admin.user.show');
     Route::post('/admin/user/ban', [\App\Http\Controllers\Admin\User\UserController::class, 'ban'])->name('admin.users.ban');
 
     // referers

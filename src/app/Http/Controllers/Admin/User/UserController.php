@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin\User;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\BanRequest;
-use App\Http\Resources\App\User\UserResource;
+use App\Http\Resources\Admin\User\UserResource;
+use App\Http\Resources\Admin\User\UserShowResource;
 use App\Http\Resources\PaginateResource;
 use App\Services\Admin\User\UserService;
 use Illuminate\Http\Request;
@@ -13,16 +14,29 @@ use Inertia\Inertia;
 
 class UserController extends Controller
 {
-    public function index(UserService $userService)
+    public function index(Request $request, UserService $userService)
     {
         $authUser = Helper::getUserData();
-        $users = $userService->getUsersPagination(UserService::USER_PAGINATE);
+        $filters = $request->only(['search', 'sort', 'direction']);
+        $users = $userService->getUsersPagination(UserService::USER_PAGINATE, $filters);
         $pagination = PaginateResource::make($users);
 
         return Inertia::render('User/Users', [
             'authUser' => $authUser,
             'users' => UserResource::collection($users->items()),
             'pagination' => $pagination,
+            'filters' => $filters,
+        ]);
+    }
+
+    public function show(int $id, UserService $userService)
+    {
+        $authUser = Helper::getUserData();
+        $user = $userService->getUser($id);
+
+        return Inertia::render('User/UserShow', [
+            'authUser' => $authUser,
+            'user' => UserShowResource::make($user),
         ]);
     }
 

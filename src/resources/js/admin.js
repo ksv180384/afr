@@ -11,6 +11,16 @@ import 'element-plus/dist/index.css';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
+const resetBodyMargin = () => {
+  if (document.body.style.margin !== '0px') {
+    document.body.style.margin = '0';
+  }
+
+  if (document.body.style.marginBottom !== '0px') {
+    document.body.style.marginBottom = '0';
+  }
+};
+
 createInertiaApp({
   title: (title) => `${title} - ${appName}`,
   resolve: (name) =>
@@ -19,6 +29,14 @@ createInertiaApp({
       import.meta.glob('./Admin/Pages/**/*.vue'),
     ),
   setup({ el, App, props, plugin }) {
+    resetBodyMargin();
+
+    const bodyStyleObserver = new MutationObserver(resetBodyMargin);
+    bodyStyleObserver.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['style'],
+    });
+
     return createApp({ render: () => h(App, props) })
       .use(plugin)
       .use(ZiggyVue)
