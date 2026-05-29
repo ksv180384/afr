@@ -1,4 +1,5 @@
 <script setup>
+import { computed } from 'vue';
 import { Link, useForm } from '@inertiajs/vue3';
 
 import DefaultLayout from '@/App/Layouts/DefaultLayout.vue';
@@ -21,10 +22,55 @@ const form = useForm({
   post_id: props.post.id,
 });
 
-const submitComment = () => {
+const postPlainText = computed(() => {
+  if (typeof document === 'undefined') {
+    return props.post.title;
+  }
 
+  const container = document.createElement('div');
+  container.innerHTML = props.post.content || '';
+
+  return (container.textContent || '').replace(/\s+/g, ' ').trim();
+});
+
+const seoDescription = computed(() => {
+  if (!postPlainText.value) {
+    return `${props.post.title} - статья автора ${props.post.user.name} на ApprendreFr о французском языке.`;
+  }
+
+  return postPlainText.value.length > 180
+    ? `${postPlainText.value.slice(0, 177)}...`
+    : postPlainText.value;
+});
+
+const currentUrl = computed(() => typeof window === 'undefined' ? 'https://apprendrefr.ru' : window.location.href);
+const jsonLd = computed(() => [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `${currentUrl.value}#article`,
+    'headline': props.post.title,
+    'description': seoDescription.value,
+    'author': { '@type': 'Person', 'name': props.post.user.name },
+    'datePublished': props.post.created_at_iso || props.post.created_at,
+    'dateModified': props.post.updated_at_iso || props.post.updated_at,
+    'inLanguage': 'ru',
+    'mainEntityOfPage': currentUrl.value,
+    'url': currentUrl.value,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${currentUrl.value}#breadcrumbs`,
+    'itemListElement': [
+      { '@type': 'ListItem', 'position': 1, 'name': 'Главная', 'item': 'https://apprendrefr.ru' },
+      { '@type': 'ListItem', 'position': 2, 'name': props.post.title, 'item': currentUrl.value },
+    ],
+  },
+]);
+
+const submitComment = () => {
   form.post(route('post-comment.store'), {
-    // onFinish: (res) => {},
     preserveScroll: true,
     onSuccess: () => form.reset('comment'),
   });
@@ -38,25 +84,9 @@ const submitComment = () => {
     :proverb="proverb"
   >
     <seo-head
-      :title="`${post.title} | ${post.user.name}`"
-      :description="`${post.title} — статья автора ${post.user.name} на ApprendreFr. Читайте и обсуждайте материалы по французскому языку.`"
-      :json-ld="[
-        {
-          '@context': 'https://schema.org',
-          '@type': 'Article',
-          'headline': post.title,
-          'author': { '@type': 'Person', 'name': post.user.name },
-          'datePublished': post.created_at,
-        },
-        {
-          '@context': 'https://schema.org',
-          '@type': 'BreadcrumbList',
-          'itemListElement': [
-            { '@type': 'ListItem', 'position': 1, 'name': 'Главная', 'item': 'https://apprendrefr.ru' },
-            { '@type': 'ListItem', 'position': 2, 'name': post.title },
-          ],
-        },
-      ]"
+      :title="post.title"
+      :description="seoDescription"
+      :json-ld="jsonLd"
     />
 
     <div class="flex flex-col gap-0.5 min-h-full bg-sky-50">
@@ -117,10 +147,6 @@ const submitComment = () => {
   @apply bg-sky-50 rounded p-2;
 }
 
-.post-item header{
-
-}
-
 .post-item h1{
   @apply text-2xl lg:text-3xl font-medium mb-2 lg:mb-6;
 }
@@ -139,9 +165,5 @@ const submitComment = () => {
 
 .header-info-user a{
   @apply font-semibold text-sm;
-}
-
-.header-info-date{
-
 }
 </style>

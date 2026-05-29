@@ -18,15 +18,19 @@ const subMenu = computed(() => props.menu.map(item => ({
   is_active: route().current('grammar.show', { id: item.id })
 })));
 
-const titlePage = `Грамматика Французского языка - ${props.grammarContent.title}`;
+const titlePage = computed(() => `${props.grammarContent.title} - грамматика французского языка`);
+const currentUrl = computed(() => typeof window === 'undefined' ? 'https://apprendrefr.ru' : window.location.href);
 
-const jsonLd = [
+const jsonLd = computed(() => [
   {
     '@context': 'https://schema.org',
     '@type': 'Article',
+    '@id': `${currentUrl.value}#article`,
     'headline': props.grammarContent.title,
     'description': props.grammarContent.description,
     'inLanguage': 'ru',
+    'mainEntityOfPage': currentUrl.value,
+    'url': currentUrl.value,
     'isPartOf': {
       '@type': 'WebSite',
       'name': 'ApprendreFr',
@@ -36,20 +40,20 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
+    '@id': `${currentUrl.value}#breadcrumbs`,
     'itemListElement': [
       { '@type': 'ListItem', 'position': 1, 'name': 'Главная', 'item': 'https://apprendrefr.ru' },
       { '@type': 'ListItem', 'position': 2, 'name': 'Грамматика', 'item': 'https://apprendrefr.ru/grammar' },
-      { '@type': 'ListItem', 'position': 3, 'name': props.grammarContent.title },
+      { '@type': 'ListItem', 'position': 3, 'name': props.grammarContent.title, 'item': currentUrl.value },
     ],
   },
-];
+]);
 </script>
 
 <template>
   <mini-layout
     :auth-user="authUser"
     :sub-menu="subMenu"
-
   >
     <seo-head
       :title="titlePage"
@@ -111,4 +115,3 @@ const jsonLd = [
   @apply font-bold;
 }
 </style>
-

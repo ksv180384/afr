@@ -49,6 +49,12 @@
 
 @if ($seo['pageType'] === 'Lyrics/LyricShow')
     @include('seo.lyrics-show-noscript', ['song' => data_get($page, 'props.song')])
+@elseif ($seo['pageType'] === 'Post/PostShow')
+    @include('seo.post-show-noscript', ['post' => data_get($page, 'props.post')])
+@elseif ($seo['pageType'] === 'Grammar/GrammarShow')
+    @include('seo.grammar-show-noscript', ['grammarContent' => data_get($page, 'props.grammarContent')])
+@elseif ($seo['pageType'] === 'Lessons/LessonShow')
+    @include('seo.lesson-show-noscript', ['lessonContent' => data_get($page, 'props.lessonContent')])
 @else
 <noscript>
     <div style="max-width:800px;margin:0 auto;padding:40px 20px;font-family:sans-serif">

@@ -25,13 +25,14 @@ class InertiaSeoMeta
 
         return match ($component) {
             'Grammar/Grammar' => self::grammarIndex($meta, $appName),
-            'Grammar/GrammarShow' => self::grammarShow($meta, $appName, data_get($page, 'props.grammarContent')),
+            'Grammar/GrammarShow' => self::grammarShow($meta, $appName, data_get($page, 'props.grammarContent'), $canonicalUrl),
             'Lessons/Lessons' => self::lessonsIndex($meta, $appName),
-            'Lessons/LessonShow' => self::lessonShow($meta, $appName, data_get($page, 'props.lessonContent')),
+            'Lessons/LessonShow' => self::lessonShow($meta, $appName, data_get($page, 'props.lessonContent'), $canonicalUrl),
             'Dictionary/Dictionary' => self::dictionaryIndex($meta, $appName, $request),
             'Dictionary/DictionaryShow' => self::dictionaryShow($meta, $appName, data_get($page, 'props.word')),
             'Lyrics/Lyrics' => self::lyricsIndex($meta, $appName),
             'Lyrics/LyricShow' => self::lyricShow($meta, $appName, data_get($page, 'props.song'), $canonicalUrl),
+            'Post/PostShow' => self::postShow($meta, $appName, data_get($page, 'props.post'), $canonicalUrl),
             default => $meta,
         };
     }
@@ -45,7 +46,7 @@ class InertiaSeoMeta
         ];
     }
 
-    private static function grammarShow(array $meta, string $appName, mixed $content): array
+    private static function grammarShow(array $meta, string $appName, mixed $content, string $canonicalUrl): array
     {
         $title = data_get($content, 'title');
 
@@ -53,10 +54,56 @@ class InertiaSeoMeta
             return $meta;
         }
 
+        $description = data_get($content, 'description') ?: 'Грамматика французского языка: ' . $title . '. Правила, объяснения и примеры.';
+        $articleEntityId = $canonicalUrl . '#article';
+        $breadcrumbsEntityId = $canonicalUrl . '#breadcrumbs';
+
         return [
             ...$meta,
             'title' => $title . ' - грамматика французского языка | ' . $appName,
-            'description' => data_get($content, 'description') ?: 'Грамматика французского языка: ' . $title . '. Правила, объяснения и примеры.',
+            'description' => $description,
+            'jsonLd' => [
+                [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'Article',
+                    '@id' => $articleEntityId,
+                    'headline' => $title,
+                    'description' => $description,
+                    'inLanguage' => 'ru',
+                    'mainEntityOfPage' => $canonicalUrl,
+                    'url' => $canonicalUrl,
+                    'isPartOf' => [
+                        '@type' => 'WebSite',
+                        'name' => $appName,
+                        'url' => url('/'),
+                    ],
+                ],
+                [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'BreadcrumbList',
+                    '@id' => $breadcrumbsEntityId,
+                    'itemListElement' => [
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 1,
+                            'name' => 'Главная',
+                            'item' => url('/'),
+                        ],
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 2,
+                            'name' => 'Грамматика',
+                            'item' => route('grammar'),
+                        ],
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 3,
+                            'name' => $title,
+                            'item' => $canonicalUrl,
+                        ],
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -69,7 +116,7 @@ class InertiaSeoMeta
         ];
     }
 
-    private static function lessonShow(array $meta, string $appName, mixed $content): array
+    private static function lessonShow(array $meta, string $appName, mixed $content, string $canonicalUrl): array
     {
         $title = data_get($content, 'title');
 
@@ -77,10 +124,58 @@ class InertiaSeoMeta
             return $meta;
         }
 
+        $description = data_get($content, 'description') ?: 'Урок французского языка: ' . $title . '. Слова, примеры и упражнения для начинающих.';
+        $learningEntityId = $canonicalUrl . '#learning-resource';
+        $breadcrumbsEntityId = $canonicalUrl . '#breadcrumbs';
+
         return [
             ...$meta,
             'title' => $title . ' - урок французского языка | ' . $appName,
-            'description' => data_get($content, 'description') ?: 'Урок французского языка: ' . $title . '. Слова, примеры и упражнения для начинающих.',
+            'description' => $description,
+            'jsonLd' => [
+                [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'LearningResource',
+                    '@id' => $learningEntityId,
+                    'name' => $title,
+                    'description' => $description,
+                    'educationalLevel' => 'beginner',
+                    'learningResourceType' => 'lesson',
+                    'inLanguage' => 'ru',
+                    'mainEntityOfPage' => $canonicalUrl,
+                    'url' => $canonicalUrl,
+                    'isPartOf' => [
+                        '@type' => 'WebSite',
+                        'name' => $appName,
+                        'url' => url('/'),
+                    ],
+                ],
+                [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'BreadcrumbList',
+                    '@id' => $breadcrumbsEntityId,
+                    'itemListElement' => [
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 1,
+                            'name' => 'Главная',
+                            'item' => url('/'),
+                        ],
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 2,
+                            'name' => 'Уроки',
+                            'item' => route('lessons'),
+                        ],
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 3,
+                            'name' => $title,
+                            'item' => $canonicalUrl,
+                        ],
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -200,5 +295,75 @@ class InertiaSeoMeta
                 ],
             ],
         ];
+    }
+
+    private static function postShow(array $meta, string $appName, mixed $post, string $canonicalUrl): array
+    {
+        $title = data_get($post, 'title');
+        $author = data_get($post, 'user.name');
+
+        if (!$title) {
+            return $meta;
+        }
+
+        $description = self::makePostDescription($post, $title, $author);
+        $articleEntityId = $canonicalUrl . '#article';
+        $breadcrumbsEntityId = $canonicalUrl . '#breadcrumbs';
+
+        return [
+            ...$meta,
+            'title' => $title . ' | ' . $appName,
+            'description' => $description,
+            'jsonLd' => [
+                [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'Article',
+                    '@id' => $articleEntityId,
+                    'headline' => $title,
+                    'description' => $description,
+                    'author' => [
+                        '@type' => 'Person',
+                        'name' => $author ?: $appName,
+                    ],
+                    'datePublished' => data_get($post, 'created_at_iso') ?: data_get($post, 'created_at'),
+                    'dateModified' => data_get($post, 'updated_at_iso') ?: data_get($post, 'updated_at'),
+                    'inLanguage' => 'ru',
+                    'mainEntityOfPage' => $canonicalUrl,
+                    'url' => $canonicalUrl,
+                ],
+                [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'BreadcrumbList',
+                    '@id' => $breadcrumbsEntityId,
+                    'itemListElement' => [
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 1,
+                            'name' => 'Главная',
+                            'item' => url('/'),
+                        ],
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 2,
+                            'name' => $title,
+                            'item' => $canonicalUrl,
+                        ],
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    private static function makePostDescription(mixed $post, string $title, ?string $author): string
+    {
+        $text = trim(preg_replace('/\s+/u', ' ', strip_tags((string) data_get($post, 'content', ''))));
+
+        if ($text !== '') {
+            return mb_strlen($text) > 180 ? mb_substr($text, 0, 177) . '...' : $text;
+        }
+
+        $authorText = $author ? ' автора ' . $author : '';
+
+        return $title . ' - статья' . $authorText . ' на ApprendreFr о французском языке.';
     }
 }
