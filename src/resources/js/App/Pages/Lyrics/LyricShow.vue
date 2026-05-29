@@ -28,22 +28,36 @@ const changeColumn = (val) => {
 
 const seoTitle = computed(() => `${props.song.artist_name} - ${props.song.title}: текст, перевод и транскрипция`);
 const seoDescription = computed(() => `Французский текст песни ${props.song.artist_name} - ${props.song.title} с переводом на русский и транскрипцией. Слушайте караоке и изучайте произношение.`);
+const currentUrl = computed(() => typeof window === 'undefined' ? 'https://apprendrefr.ru' : window.location.href);
 
 const jsonLd = computed(() => [
   {
     '@context': 'https://schema.org',
     '@type': 'MusicComposition',
+    '@id': `${currentUrl.value}#music-composition`,
     'name': props.song.title,
     'composer': { '@type': 'Person', 'name': props.song.artist_name },
     'inLanguage': 'fr',
+    'url': currentUrl.value,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'LearningResource',
+    '@id': `${currentUrl.value}#learning-resource`,
+    'name': `${props.song.artist_name} - ${props.song.title}: текст, перевод и транскрипция`,
+    'description': seoDescription.value,
+    'learningResourceType': 'lyrics translation',
+    'inLanguage': ['fr', 'ru'],
+    'url': currentUrl.value,
   },
   {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
+    '@id': `${currentUrl.value}#breadcrumbs`,
     'itemListElement': [
       { '@type': 'ListItem', 'position': 1, 'name': 'Главная', 'item': 'https://apprendrefr.ru' },
       { '@type': 'ListItem', 'position': 2, 'name': 'Тексты песен', 'item': 'https://apprendrefr.ru/lyrics' },
-      { '@type': 'ListItem', 'position': 3, 'name': `${props.song.artist_name} - ${props.song.title}` },
+      { '@type': 'ListItem', 'position': 3, 'name': `${props.song.artist_name} - ${props.song.title}`, 'item': currentUrl.value },
     ],
   },
 ]);

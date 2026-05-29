@@ -142,6 +142,9 @@ class InertiaSeoMeta
         $pageTitle = $songArtist . ' - ' . $songTitle . ': текст, перевод и транскрипция | ' . $appName;
         $description = 'Французский текст песни ' . $songArtist . ' - ' . $songTitle
             . ' с переводом на русский и транскрипцией. Слушайте караоке и изучайте произношение.';
+        $musicEntityId = $canonicalUrl . '#music-composition';
+        $learningEntityId = $canonicalUrl . '#learning-resource';
+        $breadcrumbsEntityId = $canonicalUrl . '#breadcrumbs';
 
         return [
             ...$meta,
@@ -151,6 +154,7 @@ class InertiaSeoMeta
                 [
                     '@context' => 'https://schema.org',
                     '@type' => 'MusicComposition',
+                    '@id' => $musicEntityId,
                     'name' => $songTitle,
                     'composer' => [
                         '@type' => 'Person',
@@ -162,6 +166,7 @@ class InertiaSeoMeta
                 [
                     '@context' => 'https://schema.org',
                     '@type' => 'LearningResource',
+                    '@id' => $learningEntityId,
                     'name' => $songArtist . ' - ' . $songTitle . ': текст, перевод и транскрипция',
                     'description' => $description,
                     'learningResourceType' => 'lyrics translation',
@@ -171,6 +176,7 @@ class InertiaSeoMeta
                 [
                     '@context' => 'https://schema.org',
                     '@type' => 'BreadcrumbList',
+                    '@id' => $breadcrumbsEntityId,
                     'itemListElement' => [
                         [
                             '@type' => 'ListItem',
