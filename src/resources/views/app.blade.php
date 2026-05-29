@@ -4,7 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title inertia>{{ config('app.name', 'ApprendreFr') }}</title>
+    @php($seo = \App\Support\InertiaSeoMeta::make($page))
+
+    <title inertia>{{ $seo['title'] }}</title>
+    <meta name="description" content="{{ $seo['description'] }}" />
+    @if ($seo['noIndex'])
+        <meta name="robots" content="noindex, follow" />
+    @endif
+    <link rel="canonical" href="{{ $seo['canonicalUrl'] }}" />
 
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -13,11 +20,19 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="{{ config('app.name', 'ApprendreFr') }}" />
     <meta property="og:locale" content="ru_RU" />
+    <meta property="og:url" content="{{ $seo['canonicalUrl'] }}" />
+    <meta property="og:title" content="{{ $seo['title'] }}" />
+    <meta property="og:description" content="{{ $seo['description'] }}" />
     <meta property="og:image" content="{{ asset('img/og-default.jpg') }}" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ $seo['title'] }}" />
+    <meta name="twitter:description" content="{{ $seo['description'] }}" />
+    @if ($seo['jsonLd'])
+        <script type="application/ld+json">{!! json_encode($seo['jsonLd'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}</script>
+    @endif
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
@@ -32,6 +47,9 @@
 <body class="font-sans antialiased">
 @inertia
 
+@if ($seo['pageType'] === 'Lyrics/LyricShow')
+    @include('seo.lyrics-show-noscript', ['song' => data_get($page, 'props.song')])
+@else
 <noscript>
     <div style="max-width:800px;margin:0 auto;padding:40px 20px;font-family:sans-serif">
         <h1>ApprendreFr — Французский язык онлайн</h1>
@@ -47,6 +65,8 @@
         </nav>
     </div>
 </noscript>
+
+@endif
 
 @production
     <!-- Yandex.Metrika counter (deferred to not block rendering) -->

@@ -26,8 +26,8 @@ const changeColumn = (val) => {
   activeColumn.value = val;
 }
 
-const seoTitle = computed(() => `${props.song.title} - ${props.song.artist_name} перевод, транскрипция`);
-const seoDescription = computed(() => `${props.song.title} - ${props.song.artist_name} - текст, перевод, транскрипция на русском`);
+const seoTitle = computed(() => `${props.song.artist_name} - ${props.song.title}: текст, перевод и транскрипция`);
+const seoDescription = computed(() => `Французский текст песни ${props.song.artist_name} - ${props.song.title} с переводом на русский и транскрипцией. Слушайте караоке и изучайте произношение.`);
 
 const jsonLd = computed(() => [
   {
