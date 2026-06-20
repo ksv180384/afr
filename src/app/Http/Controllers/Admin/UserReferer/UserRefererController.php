@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\UserReferer\UserRefererResource;
 use App\Http\Resources\PaginateResource;
 use App\Services\Admin\UserReferer\UserRefererService;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class UserRefererController extends Controller
@@ -22,6 +21,7 @@ class UserRefererController extends Controller
             'authUser' => $authUser,
             'userReferers' => UserRefererResource::collection($userReferers->items()),
             'pagination' => $pagination,
+            'sourceStatsToday' => $refererService->getTodaySourceStats(),
         ]);
     }
 }

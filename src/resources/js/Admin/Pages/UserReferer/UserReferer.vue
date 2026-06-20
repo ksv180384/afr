@@ -1,4 +1,5 @@
 <script setup>
+import { computed } from 'vue';
 import { Head } from '@inertiajs/vue3';
 import { Icon } from '@iconify/vue';
 
@@ -7,24 +8,35 @@ import Pagination from '@/App/Components/Pagination/Pagination.vue';
 
 const props = defineProps({
   authUser: { type: Object, default: null },
-  userReferers: { type: Array, default: null },
+  userReferers: { type: Array, default: () => [] },
   pagination: { type: Object, default: null },
+  sourceStatsToday: { type: Object, default: () => ({ google: 0, yandex: 0, other: 0 }) },
 });
 
-const getIconProps = (url) => {
+const sourceIconProps = {
+  google: { icon: 'prime:google', width: 20, height: 20 },
+  yandex: { icon: 'brandico:yandex-rect', width: 20, height: 20 },
+  other: { icon: 'pajamas:severity-unknown', width: 20, height: 20, color: '#d99a12' },
+};
 
+const sourceLabels = {
+  google: 'Google',
+  yandex: 'Яндекс',
+  other: 'Другие сайты',
+};
+
+const sourceStatItems = computed(() => ['google', 'yandex', 'other'].map((source) => ({
+  source,
+  label: sourceLabels[source],
+  count: props.sourceStatsToday?.[source] ?? 0,
+  icon: sourceIconProps[source],
+})));
+
+const getSourceIconProps = (source) => sourceIconProps[source] ?? sourceIconProps.other;
+
+const getLandingIconProps = (url) => {
   if (!url) return null
 
-  // откуда
-  if (url.includes('google.com') || url.includes('google.ru')) {
-    return { icon: 'prime:google', width: 20, height: 20 }
-  }
-
-  if (url.includes('yandex') || url.includes('ya.ru')) {
-    return { icon: 'brandico:yandex-rect', width: 20, height: 20 }
-  }
-
-  // куда
   if (url.includes('lyrics')) {
     return { icon: 'fa6-solid:music', width: 20, height: 20 }
   }
@@ -33,7 +45,7 @@ const getIconProps = (url) => {
     return { icon: 'tabler:text-grammar', width: 20, height: 20 }
   }
 
-  return { icon: 'pajamas:severity-unknown', width: 20, height: 20 };
+  return { icon: 'pajamas:severity-unknown', width: 20, height: 20, color: '#d99a12' };
 }
 </script>
 
@@ -41,6 +53,7 @@ const getIconProps = (url) => {
   <admin-layout
     :auth-user="authUser"
     title="Посещаемость"
+    fixed-height
   >
     <Head>
       <title>Посещаемость</title>
@@ -49,7 +62,21 @@ const getIconProps = (url) => {
       <meta property="og:description" content="Посещаемость" />
     </Head>
 
-    <div class="flex justify-end">
+    <div class="flex shrink-0 flex-wrap items-center justify-between gap-2">
+      <div class="flex flex-wrap items-center gap-2">
+        <div
+          v-for="item in sourceStatItems"
+          :key="item.source"
+          class="flex h-8 min-w-[138px] items-center justify-between gap-2 rounded border border-slate-200 bg-white px-2 text-sm shadow-sm"
+        >
+          <span class="flex items-center gap-1.5 text-slate-600">
+            <Icon v-bind="item.icon" />
+            {{ item.label }} сегодня
+          </span>
+          <span class="font-semibold text-slate-900">{{ item.count }}</span>
+        </div>
+      </div>
+
       <pagination
         :current-page="pagination.current_page"
         :last-page="pagination.last_page"
@@ -59,25 +86,22 @@ const getIconProps = (url) => {
       />
     </div>
 
-    <div class="min-w-0">
-      <div class="overflow-x-auto">
+    <div class="min-h-0 min-w-0 flex-1 overflow-hidden">
+      <div class="h-full overflow-x-auto">
         <el-table
           :data="userReferers"
           style="width: 100%;"
           class="min-w-0"
-          height="calc(100vh - 110px)"
+          height="100%"
         >
           <el-table-column fixed prop="icon" label="" width="50">
             <template #default="scope">
 
-              <Icon
-                v-if="getIconProps(scope.row.referer_url)"
-                v-bind="getIconProps(scope.row.referer_url)"
-              />
+              <Icon v-bind="getSourceIconProps(scope.row.referer_source)" />
 
             </template>
           </el-table-column>
-          <el-table-column prop="referer_url" label="Откуда" width="320">
+          <el-table-column prop="referer_url" label="Откуда" width="320" show-overflow-tooltip>
             <template #default="scope">
 
               {{ scope.row.referer_url }}
@@ -89,8 +113,8 @@ const getIconProps = (url) => {
 
               <div class="flex flex-row gap-2">
                 <Icon
-                  v-if="getIconProps(scope.row.landing_page)"
-                  v-bind="getIconProps(scope.row.landing_page)"
+                  v-if="getLandingIconProps(scope.row.landing_page)"
+                  v-bind="getLandingIconProps(scope.row.landing_page)"
                 />
                 {{ scope.row.landing_page }}
               </div>
@@ -164,7 +188,7 @@ const getIconProps = (url) => {
       </div>
     </div>
 
-    <div class="flex justify-end">
+    <div class="flex shrink-0 justify-end">
       <pagination
         :current-page="pagination.current_page"
         :last-page="pagination.last_page"
@@ -179,5 +203,3 @@ const getIconProps = (url) => {
 <style scoped>
 
 </style>
-
-

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Admin\UserReferer;
 
+use App\Services\Admin\UserReferer\UserRefererService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,6 +20,7 @@ class UserRefererResource extends JsonResource
             'user' => $this->user ? $this->user->only(['id', 'name']) : null,
             'ip_address' => $this->ip_address,
             'referer_url' => $this->referer_url,
+            'referer_source' => UserRefererService::detectRefererSource($this->referer_url),
             'landing_page' => $this->landing_page,
             'utm_source' => $this->utm_source,
             'utm_medium' => $this->utm_medium,
