@@ -1,5 +1,7 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { ref, watch } from 'vue';
+import { Head, Link, router } from '@inertiajs/vue3';
+import { Search } from '@element-plus/icons-vue';
 
 import AdminLayout from '@/Admin/Layouts/AdminLayout.vue';
 import Pagination from '@/App/Components/Pagination/Pagination.vue';
@@ -8,6 +10,31 @@ const props = defineProps({
   authUser: { type: Object, default: null },
   songs: { type: Array, default: null },
   pagination: { type: Object, default: null },
+  filters: { type: Object, default: () => ({}) },
+});
+
+const search = ref(props.filters.text ?? '');
+let searchTimeoutId = null;
+
+watch(search, () => {
+  if (searchTimeoutId) {
+    clearTimeout(searchTimeoutId);
+  }
+
+  searchTimeoutId = setTimeout(() => {
+    router.get(
+      route('admin.songs'),
+      {
+        text: search.value || undefined,
+        page: 1,
+      },
+      {
+        preserveScroll: true,
+        preserveState: true,
+        replace: true,
+      },
+    );
+  }, 300);
 });
 
 </script>
@@ -24,14 +51,23 @@ const props = defineProps({
       <meta property="og:description" content="Тексты песен" />
     </Head>
 
-    <div class="flex px-3 justify-between pt-2">
-      <Link :href="route('admin.song.create')">
+    <div class="grid grid-cols-1 gap-2 px-3 pt-2 md:grid-cols-[180px_minmax(260px,416px)_280px] md:items-center">
+      <Link :href="route('admin.song.create')" class="justify-self-start">
         <el-button plain type="success">
           Добавить песню
         </el-button>
       </Link>
 
-      <div class="flex justify-end">
+      <div class="w-full md:justify-self-center">
+        <el-input
+          v-model="search"
+          clearable
+          :prefix-icon="Search"
+          placeholder="Поиск по исполнителю или названию песни"
+        />
+      </div>
+
+      <div class="flex min-h-[26px] w-full justify-end md:w-[280px] md:justify-self-end">
         <pagination
           :current-page="pagination.current_page"
           :last-page="pagination.last_page"
