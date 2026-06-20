@@ -31,6 +31,7 @@ class SongController extends Controller
             'authUser' => Helper::getUserData(),
             'songs' => SongResource::collection($songs->items()),
             'pagination' => PaginateResource::make($songs),
+            'filters' => request()->only('text'),
         ]);
     }
 

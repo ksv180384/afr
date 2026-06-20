@@ -2,6 +2,7 @@
 
 namespace App\Services\Admin\Song;
 
+use App\Filters\SongFilters;
 use App\Helpers\Helper;
 use App\Models\Player\PlayerArtistsSong;
 use App\Models\Player\PlayerSongs;
@@ -24,6 +25,8 @@ class SongService
      */
     public function getSongsPagination(int $limit, bool $isHidden = false): LengthAwarePaginator
     {
+        $filter = new SongFilters(request());
+
         return PlayerSongs::query()
             ->select([
                 'player_songs.id',
@@ -35,12 +38,14 @@ class SongService
             ])
             ->with(['artist:id,name'])
             ->with(['user:id,name'])
+            ->filter($filter)
             ->when(!$isHidden, function ($q) {
                 $q->where('hidden', false);
             })
             ->orderBy('artist_name', 'ASC')
             ->orderBy('title', 'ASC')
-            ->paginate($limit);
+            ->paginate($limit)
+            ->withQueryString();
     }
 
     /**
