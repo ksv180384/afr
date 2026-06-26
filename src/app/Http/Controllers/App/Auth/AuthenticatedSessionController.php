@@ -34,6 +34,10 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
 //        return redirect()->intended(route('index', absolute: false));
+        if ($request->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $request->user()->hasVerifiedEmail()) {
+            return redirect(route('verification.notice', absolute: false));
+        }
+
         return back();
     }
 

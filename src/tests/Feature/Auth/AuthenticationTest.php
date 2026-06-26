@@ -19,6 +19,18 @@ test('users can authenticate using the login screen', function () {
     $this->assertAuthenticated();
 });
 
+test('unverified users are redirected to email verification notice', function () {
+    $user = User::factory()->unverified()->create();
+
+    $response = $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
+
+    $this->assertAuthenticated();
+    $response->assertRedirect(route('verification.notice', absolute: false));
+});
+
 test('users can not authenticate with invalid password', function () {
     $user = User::query()->latest()->first();
 

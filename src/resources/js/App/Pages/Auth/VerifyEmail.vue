@@ -29,17 +29,15 @@ const verificationLinkSent = computed(
 
     <afr-auth-card title="Подтверждение Email" class="w-[400px]">
       <div class="mb-4 text-sm text-gray-600">
-        Спасибо, что зарегистрировались! Прежде чем приступить к работе, не могли бы вы подтвердить свой
-        адрес электронной почты, перейдя по ссылке, которую мы только что отправили вам по электронной почте? Если ты
-        если вы не получили это письмо, мы с радостью вышлем вам другое.
+        Спасибо за регистрацию! Мы отправили письмо со ссылкой для подтверждения на указанный Email.
+        Перейдите по ссылке из письма, чтобы завершить регистрацию. Если письмо не пришло, можно отправить его повторно.
       </div>
 
       <div
         class="mb-4 text-sm font-medium text-green-600"
         v-if="verificationLinkSent"
       >
-        Новую ссылку для подтверждения был отправлен на ваш адрес электронной почты
-        указанный при регистрации.
+        Новая ссылка для подтверждения отправлена на Email, указанный при регистрации.
       </div>
 
       <form @submit.prevent="submit">
@@ -48,7 +46,7 @@ const verificationLinkSent = computed(
 <!--            :class="{ 'opacity-25': form.processing }"-->
 <!--            :disabled="form.processing"-->
 <!--          >-->
-<!--            Отправить Email подтверждения-->
+<!--            Отправить письмо повторно-->
 <!--          </PrimaryButton>-->
           <afr-button
             class="w-full"
@@ -56,7 +54,7 @@ const verificationLinkSent = computed(
             native-type="submit"
             :loading="form.processing"
           >
-            Отправить Email подтверждения
+            Отправить письмо повторно
           </afr-button>
 
           <div class="mt-3">

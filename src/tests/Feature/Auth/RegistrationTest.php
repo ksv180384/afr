@@ -14,13 +14,13 @@ test('new users can register', function () {
     Event::fake([Registered::class]);
 
     $response = $this->post('/register', [
-        'name' => 'Test User2',
-        'email' => 'test2@example.com',
+        'name' => uniqid('user'),
+        'email' => uniqid('test'). '@example.com',
         'password' => 'password',
         'password_confirmation' => 'password',
         'confirmation_rules' => true,
     ]);
 
     $this->assertAuthenticated();
-    $response->assertRedirect(route('index', absolute: false));
+    $response->assertRedirect(route('verification.notice', absolute: false));
 });
