@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\User;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\BanRequest;
+use App\Http\Requests\Admin\User\ToggleEmailVerificationRequest;
 use App\Http\Resources\Admin\User\UserResource;
 use App\Http\Resources\Admin\User\UserShowResource;
 use App\Http\Resources\PaginateResource;
@@ -46,5 +47,16 @@ class UserController extends Controller
         $user = $userService->ban($banData['id'], $banData['ban']);
 
         return response()->json(['user' => UserResource::make($user)]);
+    }
+
+    public function toggleEmailVerification(ToggleEmailVerificationRequest $request, UserService $userService)
+    {
+        $verificationData = $request->validated();
+        $user = $userService->toggleEmailVerification(
+            $verificationData['id'],
+            $verificationData['verified'],
+        );
+
+        return response()->json(['user' => UserShowResource::make($user)]);
     }
 }

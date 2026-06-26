@@ -177,6 +177,7 @@ Route::middleware(['auth', 'verified', 'is-admin'])->group(function () {
     Route::get('/admin/users', [\App\Http\Controllers\Admin\User\UserController::class, 'index'])->name('admin.users');
     Route::get('/admin/user/show/{id}', [\App\Http\Controllers\Admin\User\UserController::class, 'show'])->name('admin.user.show');
     Route::post('/admin/user/ban', [\App\Http\Controllers\Admin\User\UserController::class, 'ban'])->name('admin.users.ban');
+    Route::post('/admin/user/toggle-email-verification', [\App\Http\Controllers\Admin\User\UserController::class, 'toggleEmailVerification'])->name('admin.users.toggle-email-verification');
 
     // referers
     Route::get('/admin/referers', [\App\Http\Controllers\Admin\UserReferer\UserRefererController::class, 'index'])->name('admin.referers');

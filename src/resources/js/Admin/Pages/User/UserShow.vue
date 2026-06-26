@@ -11,6 +11,7 @@ const props = defineProps({
 
 const user = ref({ ...props.user });
 const updatingToggleBanned = ref(false);
+const updatingEmailVerification = ref(false);
 
 const ban = async () => {
   try {
@@ -32,6 +33,28 @@ const ban = async () => {
   }
   finally {
     updatingToggleBanned.value = false;
+  }
+};
+
+const toggleEmailVerification = async () => {
+  try {
+    updatingEmailVerification.value = true;
+
+    const res = await api.user.toggleEmailVerification({
+      id: user.value.id,
+      verified: !user.value.email_verified_at,
+    });
+
+    user.value = {
+      ...user.value,
+      ...res.user,
+    };
+  }
+  catch (e) {
+    console.error(e);
+  }
+  finally {
+    updatingEmailVerification.value = false;
   }
 };
 
@@ -141,7 +164,7 @@ const privacyFields = computed(() => [
               <el-tag v-if="user.is_admin" type="success">Администратор</el-tag>
               <el-tag v-if="user.is_moderator" type="warning">Модератор</el-tag>
             </div>
-            <div>
+            <div class="profile-actions">
               <el-popconfirm
                 class="box-item"
                 title="Вы уверены?"
@@ -167,6 +190,34 @@ const privacyFields = computed(() => [
                     :loading="updatingToggleBanned"
                   >
                     Забанить
+                  </el-button>
+                </template>
+              </el-popconfirm>
+              <el-popconfirm
+                class="box-item"
+                title="Вы уверены?"
+                hide-icon
+                confirm-button-text="Да"
+                cancel-button-text="Нет"
+                placement="bottom-start"
+                @confirm="toggleEmailVerification"
+              >
+                <template #reference>
+                  <el-button
+                    v-if="user.email_verified_at"
+                    type="warning"
+                    plain
+                    :loading="updatingEmailVerification"
+                  >
+                    Снять подтверждение email
+                  </el-button>
+                  <el-button
+                    v-else
+                    type="success"
+                    plain
+                    :loading="updatingEmailVerification"
+                  >
+                    Подтвердить email
                   </el-button>
                 </template>
               </el-popconfirm>
@@ -256,6 +307,10 @@ const privacyFields = computed(() => [
 }
 
 .profile-meta{
+  @apply flex flex-wrap gap-2;
+}
+
+.profile-actions{
   @apply flex flex-wrap gap-2;
 }
 

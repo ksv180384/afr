@@ -4,6 +4,7 @@ namespace App\Services\Admin\User;
 
 use App\Models\User\Rang;
 use App\Models\User\User;
+use Illuminate\Support\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserService
@@ -105,5 +106,14 @@ class UserService
         $user->save();
 
         return $user;
+    }
+
+    public function toggleEmailVerification(int $userId, bool $verified): User
+    {
+        $user = User::query()->findOrFail($userId);
+        $user->email_verified_at = $verified ? Carbon::now() : null;
+        $user->save();
+
+        return $this->getUser($user->id);
     }
 }
