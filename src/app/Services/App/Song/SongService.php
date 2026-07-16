@@ -28,12 +28,11 @@ class SongService
         $songs = PlayerSongs::query()
             ->select([
                 'player_songs.id',
-                'player_songs.artist_id',
                 'player_songs.artist_name',
                 'player_songs.title',
                 'player_songs.hidden',
             ])
-            ->with(['artist:id,name'])
+            ->with(['artists:id,name'])
             ->filter($filter)
             ->when(!$isHidden, function ($q){
                 $q->where('hidden', false);
@@ -79,11 +78,11 @@ class SongService
         }
 
         $songs = $songsQuery
+            ->with(['artists:id,name'])
             ->orderBy('artist_name', 'ASC')
             ->orderBy('title', 'ASC')
             ->get([
                 'id',
-                'artist_id',
                 'artist_name',
                 'title',
             ]);
@@ -98,7 +97,7 @@ class SongService
     {
         $artists = PlayerArtistsSong::query()
             ->with(['songs' => function ($q) {
-                $q->select('id', 'title', 'artist_id')->where('hidden', false);
+                $q->select('player_songs.id', 'player_songs.title')->where('hidden', false);
             }])
             ->orderBy('name')
             ->get();
@@ -119,7 +118,6 @@ class SongService
         $searchText = (new PlayerService())->getSongNameFromFileName($fileName);
 
         $song = PlayerSongs::select([
-                'player_songs.artist_id',
                 'player_songs.artist_name',
                 'player_songs.title',
                 'player_songs.text_fr',
@@ -134,12 +132,17 @@ class SongService
             ->where('player_songs.hidden', '=', 0)
             ->where(function ($q) use ($artist, $title, $searchText) {
                 return $q->when($artist, function ($q) use ($artist) {
-                        return $q->orWhere('player_songs.artist_name', '=', $artist);
+                        return $q->where(function ($artistQuery) use ($artist) {
+                            $artistQuery
+                                ->where('player_songs.artist_name', '=', $artist)
+                                ->orWhereHas('artists', fn ($relationQuery) => $relationQuery
+                                    ->where('player_artists_songs.name', '=', $artist));
+                        });
                     })
                     ->when($title, function ($q) use ($title) {
                         return $q->orWhere('player_songs.title', '=', $title);
                     })
-                    ->when(!$title && !$title && $searchText, function ($q) use ($searchText) {
+                    ->when(!$artist && !$title && $searchText, function ($q) use ($searchText) {
                         return $q->whereRaw("MATCH(player_songs.artist_name, player_songs.title) AGAINST (? IN BOOLEAN MODE)", [$searchText]);
                     });
             })
@@ -154,21 +157,21 @@ class SongService
      */
     public function search(string $searchText): Collection
     {
-
-        $searchText = preg_replace('/[^a-zA-Zа-яА-Я0-9à-ÿ]/u', '', $searchText);
+        $searchText = trim($searchText);
 
         $songs = PlayerSongs::select([
                 'player_songs.id',
-                'player_songs.artist_id',
                 'player_songs.artist_name',
                 'player_songs.title',
             ])
-            ->leftJoin('users', 'player_songs.user_id', '=', 'users.id')
-            ->join('player_artists_songs', 'player_songs.artist_id', '=', 'player_artists_songs.id')
             ->where('player_songs.hidden', '=', 0)
-            // TODO Добавить в таблицу поле для поиска, которое объединяет player_artists_songs.name, player_songs.title без символов
-            ->whereRaw("REGEXP_REPLACE(CONCAT(player_artists_songs.name, player_songs.title), '[^a-zA-Z0-9à-ÿ]', '') LIKE ?", ['%' . $searchText . '%'])
-//            ->whereRaw("MATCH(player_artists_songs.name, player_songs.title) AGAINST (? IN BOOLEAN MODE)", [$searchText])
+            ->where(function ($query) use ($searchText) {
+                $query
+                    ->where('player_songs.artist_name', 'LIKE', '%' . $searchText . '%')
+                    ->orWhere('player_songs.title', 'LIKE', '%' . $searchText . '%')
+                    ->orWhereHas('artists', fn ($artistQuery) => $artistQuery
+                        ->where('player_artists_songs.name', 'LIKE', '%' . $searchText . '%'));
+            })
             ->limit(self::SONGS_SEARCH_LIMIT)
             ->get();
 

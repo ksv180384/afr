@@ -82,10 +82,10 @@ watch(search, () => {
       <template v-for="song in songs" :key="song.id">
         <Link
           :href="route('admin.song.edit', { id: song.id })"
-          :title="`${song.artist.name} - ${song.title}`"
+          :title="`${song.artist_name} - ${song.title}`"
           class="flex flex-row items-center px-2 py-2 border-b border-gray-300 hover:bg-blue-100"
         >
-          <span class="font-semibold w-[50px] text-xs">#{{ song.id }}</span><span class="font-bold">{{ song.artist.name }}</span> - {{ song.title }}
+          <span class="font-semibold w-[50px] text-xs">#{{ song.id }}</span><span class="font-bold">{{ song.artist_name }}</span> - {{ song.title }}
         </Link>
       </template>
     </div>

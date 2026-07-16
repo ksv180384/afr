@@ -9,7 +9,7 @@ const props = defineProps({
 <template>
   <Link :href="route('lyrics.show', { id: song.id })" class="px-4 py-2 hover:bg-blue-100">
     <div class="font-semibold">
-      {{ song.artist.name }}
+      {{ song.artist_name ?? song.artist?.name }}
     </div>
     <div class="text-lg">
       {{ song.title }}

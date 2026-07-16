@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Builder;
 
 class SongFilters extends Filter
 {
+    /**
+     * Фильтрует песни по названию и по имени любого связанного исполнителя.
+     */
     protected function text(string $value): Builder
     {
         $value = trim($value);
@@ -15,12 +18,13 @@ class SongFilters extends Filter
         }
 
         return $this->builder
-            ->join('player_artists_songs', 'player_songs.artist_id', '=', 'player_artists_songs.id')
             ->where(function (Builder $query) use ($value) {
                 $query
-                    ->where('player_artists_songs.name', 'LIKE', '%' . $value . '%')
-                    ->orWhere('player_songs.artist_name', 'LIKE', '%' . $value . '%')
-                    ->orWhere('player_songs.title', 'LIKE', '%' . $value . '%');
+                    ->where('player_songs.artist_name', 'LIKE', '%' . $value . '%')
+                    ->orWhere('player_songs.title', 'LIKE', '%' . $value . '%')
+                    ->orWhereHas('artists', function (Builder $artistQuery) use ($value) {
+                        $artistQuery->where('player_artists_songs.name', 'LIKE', '%' . $value . '%');
+                    });
             });
     }
 }

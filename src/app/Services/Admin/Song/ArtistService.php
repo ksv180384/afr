@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Collection;
 class ArtistService
 {
     /**
+     * Возвращает отсортированный список исполнителей для полей выбора в админке.
+     *
      * @return Collection
      */
     public function getArtistsForSelect(): Collection
@@ -16,16 +18,26 @@ class ArtistService
     }
 
     /**
-     * Находит существующего исполнителя по ID или создаёт нового по имени.
+     * Находит выбранных исполнителей или создаёт новых, сохраняя порядок и убирая дубликаты.
+     *
+     * @param array<int, array{id: int|null, name: string|null}> $artists
      */
-    public function resolveArtist(?int $artistId, ?string $artistName): PlayerArtistsSong
+    public function resolveArtists(array $artists): Collection
     {
-        if ($artistId !== null) {
-            return PlayerArtistsSong::findOrFail($artistId);
+        $resolved = new Collection();
+
+        foreach ($artists as $artistData) {
+            $artist = ! empty($artistData['id'])
+                ? PlayerArtistsSong::findOrFail($artistData['id'])
+                : PlayerArtistsSong::query()->firstOrCreate([
+                    'name' => trim($artistData['name']),
+                ]);
+
+            if (! $resolved->contains('id', $artist->id)) {
+                $resolved->push($artist);
+            }
         }
 
-        return PlayerArtistsSong::query()->firstOrCreate(
-            ['name' => $artistName],
-        );
+        return $resolved;
     }
 }

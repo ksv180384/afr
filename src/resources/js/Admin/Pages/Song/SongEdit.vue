@@ -88,7 +88,7 @@ const submit = (form) => {
 <template>
   <admin-layout
     :auth-user="authUser"
-    :title="`Редактировать песню ${song.artist.name} - ${song.title}`"
+    :title="`Редактировать песню ${song.artist_name} - ${song.title}`"
   >
     <Head>
       <title>Редактировать песню {{ song.title }} - Панель администратора</title>

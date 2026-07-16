@@ -109,6 +109,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'verified', 'is-admin'])->group(function () {
     Route::get('/admin', [\App\Http\Controllers\Admin\IndexController::class, 'index'])->name('admin.index');
 
+    Route::get('/admin/migrations', [\App\Http\Controllers\Admin\System\MigrationController::class, 'index'])->name('admin.migrations');
+    Route::post('/admin/migrations/run', [\App\Http\Controllers\Admin\System\MigrationController::class, 'run'])->name('admin.migrations.run');
+
     // Post
     Route::get('/admin/posts', [\App\Http\Controllers\Admin\Post\PostController::class, 'index'])->name('admin.posts');
     Route::post('/admin/post/update-status/{id}', [\App\Http\Controllers\Admin\Post\PostController::class, 'updateStatus'])->name('admin.post.update-status');

@@ -5,6 +5,11 @@ export default [
     title: 'Информация'
   },
   {
+    path: '/admin/migrations',
+    name: 'admin.migrations',
+    title: 'Миграции'
+  },
+  {
     path: '/admin/posts',
     name: 'admin.posts',
     title: 'Посты'

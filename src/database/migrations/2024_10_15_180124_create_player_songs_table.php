@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Создаёт таблицу песен и полнотекстовый индекс для поиска по исполнителю и названию.
      */
     public function up(): void
     {
@@ -28,11 +28,13 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
         });
 
-        DB::statement('ALTER TABLE `player_songs` ADD FULLTEXT artist_name_title_index(artist_name , title)');
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('ALTER TABLE `player_songs` ADD FULLTEXT artist_name_title_index(artist_name , title)');
+        }
     }
 
     /**
-     * Reverse the migrations.
+     * Удаляет таблицу песен при откате миграции.
      */
     public function down(): void
     {

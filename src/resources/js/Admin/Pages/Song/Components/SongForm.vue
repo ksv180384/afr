@@ -13,8 +13,7 @@ const emits = defineEmits(['submit', 'change']);
 
 const refForm = ref(null);
 const form = useForm({
-  artist_id: props.song?.artist?.id ?? props.song?.artist_id ?? null,
-  artist_name: '',
+  artists: (props.song?.artists ?? []).map((artist) => ({ id: Number(artist.id), name: null })),
   title: props.song?.title || '',
   duration: props.song?.duration ?? null,
   text_fr: props.song?.text_fr || '',
@@ -23,63 +22,29 @@ const form = useForm({
   hidden: props.song?.hidden ?? true,
 });
 
-const artistFreeText = ref('');
+/** Формирует служебное значение для существующего исполнителя в el-select. */
+const artistToken = (artist) => `id:${artist.id}`;
+const artistValues = ref((props.song?.artists ?? []).map(artistToken));
 
-const resolveArtistFromText = () => {
-  const q = String(artistFreeText.value ?? '').trim();
-  if (!q) {
-    form.artist_id = null;
-    form.artist_name = '';
-    return;
-  }
-  const match = props.artists.find((a) => a.name === q);
-  if (match) {
-    form.artist_id = match.id;
-    form.artist_name = '';
-  } else if (props.allowCreateArtist) {
-    form.artist_id = null;
-    form.artist_name = q;
-  }
-};
-
-const fetchArtistSuggestions = (queryString, cb) => {
-  const q = String(queryString ?? '').trim().toLowerCase();
-  cb(
-    props.artists
-      .filter((a) => !q || a.name.toLowerCase().includes(q))
-      .map((a) => ({ value: a.name, id: a.id })),
-  );
-};
-
-const onArtistAutocompleteSelect = (item) => {
-  form.artist_id = item.id;
-  form.artist_name = '';
-};
-
-const onArtistAutocompleteClear = () => {
-  form.artist_id = null;
-  form.artist_name = '';
-  artistFreeText.value = '';
-};
-
-const syncArtistFreeTextFromForm = () => {
-  if (form.artist_name) {
-    artistFreeText.value = form.artist_name;
-    return;
-  }
-  if (form.artist_id != null && form.artist_id !== '') {
-    const a = props.artists.find((x) => x.id === form.artist_id);
-    if (a) {
-      artistFreeText.value = a.name;
+/**
+ * Преобразует значения мультивыбора в массив существующих и новых исполнителей,
+ * который ожидает серверная валидация.
+ */
+const artistsFromValues = (values) => {
+  return values.map((value) => {
+    const token = String(value).trim();
+    if (token.startsWith('id:')) {
+      return { id: Number(token.slice(3)), name: null };
     }
-    return;
-  }
-  artistFreeText.value = '';
+    return { id: null, name: token };
+  }).filter((artist) => artist.id || artist.name);
 };
 
 watch(
-  () => [form.artist_id, form.artist_name],
-  () => syncArtistFreeTextFromForm(),
+  artistValues,
+  (values) => {
+    form.artists = artistsFromValues(values);
+  },
   { immediate: true },
 );
 
@@ -157,16 +122,12 @@ const handleTextEnter = (event, field) => {
 
 const durationPattern = /^\d+:(?:[0-5]\d|[0-9])$/;
 const rules = reactive({
-  artist_id: [
+  artists: [
     {
-      validator: (_, __, cb) => {
-        const hasId = form.artist_id !== null && form.artist_id !== undefined && form.artist_id !== '';
-        const hasName = Boolean(form.artist_name && String(form.artist_name).trim());
-        if (props.allowCreateArtist) {
-          (hasId || hasName) ? cb() : cb(new Error('Выберите исполнителя или введите имя нового'));
-        } else {
-          hasId ? cb() : cb(new Error('Выберите исполнителя из списка'));
-        }
+      validator: (_, value, cb) => {
+        Array.isArray(value) && value.length > 0
+          ? cb()
+          : cb(new Error('Выберите хотя бы одного исполнителя или введите имя нового'));
       },
       trigger: 'change',
     },
@@ -198,23 +159,13 @@ const rules = reactive({
   ],
 });
 
+/** Проверяет форму и передаёт подготовленные данные родительской странице. */
 const submit = async () => {
-  resolveArtistFromText();
-
   const isFormValid = await refForm.value.validate((valid) => valid);
 
   if(!isFormValid){
     return true;
   }
-
-  const artistText = String(artistFreeText.value ?? '').trim();
-  const matched = artistText ? props.artists.find((a) => a.name === artistText) : null;
-
-  form.transform((data) => ({
-    ...data,
-    artist_id: matched ? matched.id : null,
-    artist_name: (!matched && artistText) ? artistText : null,
-  }));
 
   emits('submit', form);
 }
@@ -223,8 +174,7 @@ watch(
   () => form,
   (newVal) => {
     emits('change', {
-      artist_id: newVal.artist_id,
-      artist_name: newVal.artist_name,
+      artists: newVal.artists,
       title: newVal.title,
       duration: newVal.duration,
       text_fr: newVal.text_fr,
@@ -261,9 +211,8 @@ watch(
       return;
     }
     if (s.id != null && s.id !== '') {
-      const rawId = s.artist?.id ?? s.artist_id ?? null;
-      form.artist_id = rawId != null ? Number(rawId) : null;
-      form.artist_name = '';
+      artistValues.value = (s.artists ?? []).map(artistToken);
+      form.artists = artistsFromValues(artistValues.value);
     }
     form.title = s.title ?? '';
     form.duration = s.duration ?? null;
@@ -299,17 +248,24 @@ watch(
           </el-form-item>
         </div>
         <div class="flex-1">
-          <el-form-item label="Исполнитель" label-position="top" prop="artist_id">
-            <el-autocomplete
-              v-model="artistFreeText"
+          <el-form-item label="Исполнители" label-position="top" prop="artists">
+            <el-select
+              v-model="artistValues"
               class="w-full"
-              :fetch-suggestions="fetchArtistSuggestions"
-              :placeholder="allowCreateArtist ? 'Выберите или введите нового' : 'Выберите исполнителя'"
+              multiple
+              filterable
+              :allow-create="allowCreateArtist"
+              default-first-option
+              placeholder="Выберите или введите исполнителей"
               clearable
-              @select="onArtistAutocompleteSelect"
-              @clear="onArtistAutocompleteClear"
-              @blur="resolveArtistFromText"
-            />
+            >
+              <el-option
+                v-for="artist in artists"
+                :key="artist.id"
+                :label="artist.name"
+                :value="artistToken(artist)"
+              />
+            </el-select>
           </el-form-item>
         </div>
         <div class="flex-1">

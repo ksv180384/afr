@@ -15,8 +15,16 @@ class PlayerArtistsSong extends Model
         'name',
     ];
 
+    /**
+     * Возвращает все песни, в которых участвует исполнитель.
+     */
     public function songs()
     {
-        return $this->hasMany(PlayerSongs::class, 'artist_id');
+        return $this->belongsToMany(
+            PlayerSongs::class,
+            'player_artist_song',
+            'artist_id',
+            'song_id',
+        )->withPivot('position');
     }
 }

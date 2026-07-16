@@ -8,7 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class SearchSongResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
+     * Формирует данные песни для поисковой выдачи API.
      *
      * @return array<string, mixed>
      */
@@ -17,7 +17,8 @@ class SearchSongResource extends JsonResource
         $result = [
             'id' => $this->id,
             'artist_name' => $this->artist_name,
-            'artist' => $this->artist,
+            'artist' => ['name' => $this->artist_name],
+            'artists' => $this->whenLoaded('artists'),
             'title' => $this->title,
         ];
 

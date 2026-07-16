@@ -9,7 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class SongResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
+     * Формирует краткие данные песни и список исполнителей для админки.
      *
      * @return array<string, mixed>
      */
@@ -17,7 +17,9 @@ class SongResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'artist' => $this->artist,
+            'artist_name' => $this->artist_name,
+            'artist' => ['name' => $this->artist_name],
+            'artists' => ArtistForSelectResource::collection($this->whenLoaded('artists')),
             'title' => $this->title,
             'hidden' => $this->hidden,
             'user' => UserMiniResource::make($this->user),

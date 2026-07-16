@@ -14,7 +14,6 @@ class PlayerSongs extends Model
     use Filterable;
 
     protected $fillable = [
-        'artist_id',
         'artist_name',
         'title',
         'duration',
@@ -29,9 +28,17 @@ class PlayerSongs extends Model
         'hidden' => 'boolean',
     ];
 
-    public function artist()
+    /**
+     * Возвращает исполнителей песни в порядке, заданном в pivot-таблице.
+     */
+    public function artists()
     {
-        return $this->belongsTo(PlayerArtistsSong::class, 'artist_id');
+        return $this->belongsToMany(
+            PlayerArtistsSong::class,
+            'player_artist_song',
+            'song_id',
+            'artist_id',
+        )->withPivot('position')->orderByPivot('position');
     }
 
     public function user()

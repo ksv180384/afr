@@ -15,7 +15,21 @@ class SongFactory extends Factory
     protected $model = PlayerSongs::class;
 
     /**
-     * Define the model's default state.
+     * После создания тестовой песни добавляет соответствующую связь с исполнителем.
+     */
+    public function configure(): static
+    {
+        return $this->afterCreating(function (PlayerSongs $song): void {
+            $artist = PlayerArtistsSong::query()->where('name', $song->artist_name)->first();
+
+            if ($artist !== null) {
+                $song->artists()->attach($artist->id, ['position' => 0]);
+            }
+        });
+    }
+
+    /**
+     * Формирует значения полей для тестовой песни.
      *
      * @return array<string, mixed>
      */
@@ -25,7 +39,6 @@ class SongFactory extends Factory
         $user = User::inRandomOrder()->first();
 
         return [
-            'artist_id' => $artist->id,
             'artist_name' => $artist->name,
             'title' => fake()->text(10),
             'text_fr' => fake()->sentence(20),

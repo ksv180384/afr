@@ -10,7 +10,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class SongEditResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
+     * Формирует данные песни и её исполнителей для страницы редактирования.
      *
      * @return array<string, mixed>
      */
@@ -38,7 +38,9 @@ class SongEditResource extends JsonResource
             'text_ru' => $this->text_ru,
             'text_transcription' => $this->text_transcription,
             'hidden' => $this->hidden,
-            'artist' => $this->artist,
+            'artist_name' => $this->artist_name,
+            'artist' => ['name' => $this->artist_name],
+            'artists' => ArtistForSelectResource::collection($this->whenLoaded('artists')),
         ];
     }
 }
