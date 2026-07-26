@@ -102,9 +102,33 @@ const submitComment = () => {
       <div class="lyric-show-content">
 
         <div class="activate-column">
-          <div class="btn-activate" :class="{ 'active': activeColumn === 'fr' }" @click="changeColumn('fr')">FR</div>
-          <div class="btn-activate" :class="{ 'active': activeColumn === 'ru' }" @click="changeColumn('ru')">RU</div>
-          <div class="btn-activate" :class="{ 'active': activeColumn === 'tr' }" @click="changeColumn('tr')">TR</div>
+          <button
+            type="button"
+            class="btn-activate"
+            :class="{ 'active': activeColumn === 'fr' }"
+            :aria-pressed="activeColumn === 'fr'"
+            @click="changeColumn('fr')"
+          >
+            Текст
+          </button>
+          <button
+            type="button"
+            class="btn-activate"
+            :class="{ 'active': activeColumn === 'ru' }"
+            :aria-pressed="activeColumn === 'ru'"
+            @click="changeColumn('ru')"
+          >
+            Перевод
+          </button>
+          <button
+            type="button"
+            class="btn-activate"
+            :class="{ 'active': activeColumn === 'tr' }"
+            :aria-pressed="activeColumn === 'tr'"
+            @click="changeColumn('tr')"
+          >
+            Транскрипция
+          </button>
         </div>
 
         <table class="song-table">
@@ -158,7 +182,7 @@ const submitComment = () => {
 }
 
 .lyric-show-content{
-  @apply px-4;
+  @apply pl-4 pr-[72px] lg:px-4;
 }
 
 .song-table{
@@ -179,15 +203,21 @@ const submitComment = () => {
 
 .activate-column{
   @apply fixed flex flex-col bg-white rounded shadow-md border border-white overflow-hidden
-         top-1/2 -translate-y-1/2 right-6;
+         top-1/2 -translate-y-1/2 right-2 z-10;
 }
 
 .btn-activate{
-  @apply w-[40px] h-[40px] flex justify-center items-center font-medium cursor-pointer lg:hidden duration-300 ease-in-out;
+  @apply w-[34px] min-h-[72px] py-3 flex justify-center items-center border-b border-slate-200
+         text-sm font-medium cursor-pointer lg:hidden duration-300 ease-in-out
+         last:border-b-0 hover:bg-sky-50 focus-visible:outline-none focus-visible:ring-2
+         focus-visible:ring-inset focus-visible:ring-sky-500;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
 }
 
 .btn-activate.active{
-  @apply bg-sky-700 text-white;
+  @apply bg-sky-700 text-white hover:bg-sky-700;
 }
 
 </style>
