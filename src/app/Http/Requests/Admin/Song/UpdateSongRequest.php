@@ -3,7 +3,9 @@
 namespace App\Http\Requests\Admin\Song;
 
 use App\Models\Player\PlayerArtistsSong;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateSongRequest extends FormRequest
 {
@@ -30,8 +32,8 @@ class UpdateSongRequest extends FormRequest
             })
             ->filter(fn (array $artist) => $artist['id'] !== null || $artist['name'] !== null)
             ->unique(fn (array $artist) => $artist['id'] !== null
-                ? 'id:' . $artist['id']
-                : 'name:' . mb_strtolower($artist['name']))
+                ? 'id:'.$artist['id']
+                : 'name:'.mb_strtolower($artist['name']))
             ->values()
             ->all();
 
@@ -75,7 +77,7 @@ class UpdateSongRequest extends FormRequest
                 'max:20',
                 function (string $attribute, mixed $value, \Closure $fail) {
                     $value = trim((string) $value);
-                    if ($value !== '' && !preg_match('/^\d+:(?:[0-5]\d|[0-9])$/', $value)) {
+                    if ($value !== '' && ! preg_match('/^\d+:(?:[0-5]\d|[0-9])$/', $value)) {
                         $fail('Продолжительность должна быть в формате минуты:секунды (например, 2:36)');
                     }
                 },
@@ -84,6 +86,24 @@ class UpdateSongRequest extends FormRequest
             'text_ru' => ['required', 'string'],
             'text_transcription' => ['required', 'string'],
             'hidden' => ['boolean'],
+            'lyrics_versions' => ['sometimes', 'array', 'max:20'],
+            'lyrics_versions.*' => ['array'],
+            'lyrics_versions.*.id' => [
+                'nullable',
+                'integer',
+                Rule::exists('player_song_lyrics_versions', 'id')->where(
+                    fn (Builder $query) => $query->where('song_id', (int) $this->route('id')),
+                ),
+            ],
+            'lyrics_versions.*.duration' => [
+                'required',
+                'string',
+                'max:20',
+                'regex:/^\\d+:(?:[0-5]\\d|[0-9])$/',
+            ],
+            'lyrics_versions.*.text_fr' => ['required', 'string'],
+            'lyrics_versions.*.text_ru' => ['required', 'string'],
+            'lyrics_versions.*.text_transcription' => ['required', 'string'],
         ];
     }
 }

@@ -20,6 +20,7 @@ const form = useForm({
   text_ru: props.song?.text_ru || '',
   text_transcription: props.song?.text_transcription || '',
   hidden: props.song?.hidden ?? true,
+  lyrics_versions: (props.song?.lyrics_versions ?? []).map((version) => ({ ...version })),
 });
 
 /** Формирует служебное значение для существующего исполнителя в el-select. */
@@ -63,6 +64,20 @@ const textFields = ['text_fr', 'text_ru', 'text_transcription'];
 const isTextFocused = ref(false);
 const onTextFocus = () => { isTextFocused.value = true; };
 const onTextBlur = () => { isTextFocused.value = false; };
+
+const addLyricsVersion = () => {
+  form.lyrics_versions.push({
+    id: null,
+    duration: '',
+    text_fr: '',
+    text_ru: '',
+    text_transcription: '',
+  });
+};
+
+const removeLyricsVersion = (index) => {
+  form.lyrics_versions.splice(index, 1);
+};
 
 /**
  * Определяет номер строки по позиции курсора в тексте.
@@ -181,6 +196,7 @@ watch(
       text_ru: newVal.text_ru,
       text_transcription: newVal.text_transcription,
       hidden: newVal.hidden,
+      lyrics_versions: newVal.lyrics_versions,
     });
   },
   { deep: true },
@@ -217,6 +233,7 @@ watch(
     form.title = s.title ?? '';
     form.duration = s.duration ?? null;
     form.hidden = s.hidden ?? true;
+    form.lyrics_versions = (s.lyrics_versions ?? []).map((version) => ({ ...version }));
     applySongTextsFromProps(s);
   },
   { immediate: true },
@@ -321,6 +338,71 @@ watch(
           </el-form-item>
         </div>
       </div>
+
+      <div class="mt-5 border-t border-slate-200 pt-4">
+        <div class="mb-3 flex items-center justify-between gap-3">
+          <div>
+            <h3 class="text-base font-semibold text-slate-800">Дополнительные версии текста</h3>
+            <p class="text-xs text-slate-500">Для записей песни с другой продолжительностью и таймингом.</p>
+          </div>
+          <el-button type="primary" plain @click="addLyricsVersion">
+            Добавить текст
+          </el-button>
+        </div>
+
+        <el-empty
+          v-if="form.lyrics_versions.length === 0"
+          description="Дополнительных версий пока нет"
+          :image-size="64"
+        />
+
+        <div
+          v-for="(version, index) in form.lyrics_versions"
+          :key="version.id ?? `new-${index}`"
+          class="mb-4 rounded-lg border border-slate-200 bg-slate-50 p-4"
+        >
+          <div class="mb-3 flex items-end justify-between gap-3">
+            <el-form-item
+              :label="`Версия ${index + 2}: продолжительность`"
+              :prop="`lyrics_versions.${index}.duration`"
+              class="mb-0 w-64"
+            >
+              <el-input v-model="version.duration" placeholder="Например: 3:42" />
+            </el-form-item>
+            <el-button type="danger" plain @click="removeLyricsVersion(index)">
+              Удалить этот текст
+            </el-button>
+          </div>
+
+          <div class="grid grid-cols-1 gap-3 lg:grid-cols-3">
+            <el-form-item label="Текст песни" :prop="`lyrics_versions.${index}.text_fr`" label-position="top">
+              <el-input
+                v-model="version.text_fr"
+                :rows="14"
+                type="textarea"
+                placeholder="Введите текст с временными метками"
+              />
+            </el-form-item>
+            <el-form-item label="Перевод песни" :prop="`lyrics_versions.${index}.text_ru`" label-position="top">
+              <el-input
+                v-model="version.text_ru"
+                :rows="14"
+                type="textarea"
+                placeholder="Введите перевод с временными метками"
+              />
+            </el-form-item>
+            <el-form-item label="Транскрипция песни" :prop="`lyrics_versions.${index}.text_transcription`" label-position="top">
+              <el-input
+                v-model="version.text_transcription"
+                :rows="14"
+                type="textarea"
+                placeholder="Введите транскрипцию с временными метками"
+              />
+            </el-form-item>
+          </div>
+        </div>
+      </div>
+
       <div class="flex flex-row flex-wrap items-center justify-between gap-3">
         <el-form-item
           label="Песня видна пользователям"
@@ -341,6 +423,12 @@ watch(
 
       <afr-input-error-message v-if="errors.error">
         {{ errors.error }}
+      </afr-input-error-message>
+      <afr-input-error-message
+        v-for="(message, field) in form.errors"
+        :key="field"
+      >
+        {{ message }}
       </afr-input-error-message>
     </el-form>
   </div>

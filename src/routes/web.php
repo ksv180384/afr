@@ -5,16 +5,16 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-//Route::get('/welcome', function () {
+// Route::get('/welcome', function () {
 //    return Inertia::render('Welcome', [
 //        'canLogin' => Route::has('login'),
 //        'canRegister' => Route::has('register'),
 //        'laravelVersion' => Application::VERSION,
 //        'phpVersion' => PHP_VERSION,
 //    ]);
-//});
+// });
 
-//Route::get('/create-storage-link', function() {
+// Route::get('/create-storage-link', function() {
 //    if (!file_exists(public_path('storage'))) {
 //        Artisan::call('storage:link');
 //        return response()->json([
@@ -25,9 +25,9 @@ use Inertia\Inertia;
 //    return response()->json([
 //        'message' => 'Уже есть'
 //    ]);
-//}); // Защитите роут если нужно
+// }); // Защитите роут если нужно
 
-//Route::get('/clear-cache', function() {
+// Route::get('/clear-cache', function() {
 //    Artisan::call('view:clear');
 //    Artisan::call('config:clear');
 //    Artisan::call('cache:clear');
@@ -36,7 +36,7 @@ use Inertia\Inertia;
 //    return response()->json([
 //        'message' => 'Clear cache successfully'
 //    ]);
-//});
+// });
 
 // Pages menu
 Route::get('/', [\App\Http\Controllers\App\IndexController::class, 'index'])->name('index');
@@ -45,6 +45,7 @@ Route::get('/grammar/item/{id}', [\App\Http\Controllers\App\GrammarController::c
 Route::get('/lyrics', [\App\Http\Controllers\App\LyricsController::class, 'index'])->name('lyrics');
 Route::get('/lyrics/item/{id}', [\App\Http\Controllers\App\LyricsController::class, 'show'])->name('lyrics.show');
 Route::post('/lyrics/karaoke-upload-log', [\App\Http\Controllers\App\KaraokeUploadLogController::class, 'store'])->name('lyrics.karaoke-upload-log');
+Route::post('/lyrics/karaoke-upload-log/{log}/file', [\App\Http\Controllers\App\KaraokeUploadLogController::class, 'upload'])->name('lyrics.karaoke-upload-log.file');
 Route::get('/lessons', [\App\Http\Controllers\App\LessonsController::class, 'index'])->name('lessons');
 Route::get('/lessons/item/{id}', [\App\Http\Controllers\App\LessonsController::class, 'show'])->name('lesson.show');
 Route::get('/dictionary', [\App\Http\Controllers\App\DictionaryController::class, 'index'])->name('dictionary');
@@ -79,9 +80,9 @@ Route::get('/widget/player', [\App\Http\Controllers\App\Widget\WidgetController:
 Route::get('/widget/learning-write', [\App\Http\Controllers\App\Widget\WidgetController::class, 'learningWrite'])->name('widget.learning-write');
 Route::get('/widget/check-yourself', [\App\Http\Controllers\App\Widget\WidgetController::class, 'checkYourself'])->name('widget.check-yourself');
 
-//Route::get('/dashboard', function () {
+// Route::get('/dashboard', function () {
 //    return Inertia::render('Dashboard');
-//})->middleware(['auth', 'verified'])->name('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     // User
@@ -139,14 +140,14 @@ Route::middleware(['auth', 'verified', 'is-admin'])->group(function () {
     Route::post('/admin/proverb/store', [\App\Http\Controllers\Admin\Proverb\ProverbController::class, 'store'])->name('admin.proverb.store');
     Route::get('/admin/proverb/edit/{id}', [\App\Http\Controllers\Admin\Proverb\ProverbController::class, 'edit'])->name('admin.proverb.edit');
     Route::post('/admin/proverb/update/{id}', [\App\Http\Controllers\Admin\Proverb\ProverbController::class, 'update'])->name('admin.proverb.update');
-//    Route::post('/admin/proverb/delete/{id}', [\App\Http\Controllers\Admin\Proverb\ProverbController::class, 'delete'])->name('admin.proverb.delete');
+    //    Route::post('/admin/proverb/delete/{id}', [\App\Http\Controllers\Admin\Proverb\ProverbController::class, 'delete'])->name('admin.proverb.delete');
 
     Route::get('/admin/songs', [\App\Http\Controllers\Admin\Song\SongController::class, 'index'])->name('admin.songs');
     Route::get('/admin/song/create', [\App\Http\Controllers\Admin\Song\SongController::class, 'create'])->name('admin.song.create');
     Route::post('/admin/song/store', [\App\Http\Controllers\Admin\Song\SongController::class, 'store'])->name('admin.song.store');
     Route::get('/admin/song/edit/{id}', [\App\Http\Controllers\Admin\Song\SongController::class, 'edit'])->name('admin.song.edit');
     Route::post('/admin/song/update/{id}', [\App\Http\Controllers\Admin\Song\SongController::class, 'update'])->name('admin.song.update');
-//    Route::post('/admin/song/delete/{id}', [\App\Http\Controllers\Admin\Song\SongController::class, 'delete'])->name('admin.song.delete');
+    //    Route::post('/admin/song/delete/{id}', [\App\Http\Controllers\Admin\Song\SongController::class, 'delete'])->name('admin.song.delete');
 
     // Ненайденные песни
     Route::get('/admin/songs-undiscovered', [\App\Http\Controllers\Admin\Song\SongUndiscoveredController::class, 'index'])->name('admin.songs-undiscovered');
@@ -191,6 +192,8 @@ Route::middleware(['auth', 'verified', 'is-admin'])->group(function () {
 
     // karaoke upload logs
     Route::get('/admin/karaoke-upload-logs', [\App\Http\Controllers\Admin\KaraokeUploadLog\KaraokeUploadLogController::class, 'index'])->name('admin.karaoke-upload-logs');
+    Route::get('/admin/karaoke-upload-logs/{log}/file', [\App\Http\Controllers\Admin\KaraokeUploadLog\KaraokeUploadLogController::class, 'showFile'])->name('admin.karaoke-upload-logs.file');
+    Route::delete('/admin/karaoke-upload-logs/{log}/file', [\App\Http\Controllers\Admin\KaraokeUploadLog\KaraokeUploadLogController::class, 'deleteFile'])->name('admin.karaoke-upload-logs.file.delete');
 
 });
 

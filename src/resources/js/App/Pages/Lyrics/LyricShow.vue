@@ -96,6 +96,7 @@ const submitComment = () => {
           :text-raw-transcription="song.text_raw_transcription"
           :song-duration-seconds="song.duration_seconds ?? null"
           :song-duration-formatted="song.duration_formatted ?? null"
+          :lyrics-versions="song.lyrics_versions ?? []"
         />
       </div>
 

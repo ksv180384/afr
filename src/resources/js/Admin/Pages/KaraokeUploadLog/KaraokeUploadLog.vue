@@ -1,5 +1,7 @@
 <script setup>
-import { Head } from '@inertiajs/vue3';
+import { ref } from 'vue';
+import { Head, router } from '@inertiajs/vue3';
+import { ElMessage, ElMessageBox } from 'element-plus';
 
 import AdminLayout from '@/Admin/Layouts/AdminLayout.vue';
 import Pagination from '@/App/Components/Pagination/Pagination.vue';
@@ -9,6 +11,32 @@ const props = defineProps({
   logs: { type: Array, default: null },
   pagination: { type: Object, default: null },
 });
+
+const fileDialogVisible = ref(false);
+const selectedLog = ref(null);
+
+const showFile = (log) => {
+  selectedLog.value = log;
+  fileDialogVisible.value = true;
+};
+
+const deleteFile = async (log) => {
+  try {
+    await ElMessageBox.confirm(
+      `Удалить файл «${log.file_name}»? Восстановить его будет невозможно.`,
+      'Удаление аудиофайла',
+      { type: 'warning', confirmButtonText: 'Удалить', cancelButtonText: 'Отмена' },
+    );
+    router.delete(route('admin.karaoke-upload-logs.file.delete', { log: log.id }), {
+      preserveScroll: true,
+      onSuccess: () => {
+        fileDialogVisible.value = false;
+        selectedLog.value = null;
+        ElMessage.success('Аудиофайл удалён');
+      },
+    });
+  } catch (_) {}
+};
 </script>
 
 <template>
@@ -67,6 +95,19 @@ const props = defineProps({
               {{ scope.row.user?.name ?? 'Гость' }}
             </template>
           </el-table-column>
+          <el-table-column label="Аудиофайл" width="210">
+            <template #default="scope">
+              <div v-if="scope.row.has_file" class="flex items-center gap-2">
+                <el-button size="small" type="primary" plain @click="showFile(scope.row)">
+                  Просмотреть
+                </el-button>
+                <el-button size="small" type="danger" plain @click="deleteFile(scope.row)">
+                  Удалить
+                </el-button>
+              </div>
+              <span v-else class="text-slate-400">—</span>
+            </template>
+          </el-table-column>
           <el-table-column prop="created_at" label="Дата" fixed="right" width="130">
             <template #default="scope">
               <span :title="scope.row.created_at">{{ scope.row.created }}</span>
@@ -85,6 +126,23 @@ const props = defineProps({
         :route-name="'admin.karaoke-upload-logs'"
       />
     </div>
+
+    <el-dialog v-model="fileDialogVisible" title="Загруженный аудиофайл" width="min(560px, 92vw)">
+      <template v-if="selectedLog">
+        <div class="mb-3">
+          <div class="font-medium text-slate-800">{{ selectedLog.song_artist }} — {{ selectedLog.song_title }}</div>
+          <div class="text-sm text-slate-500">
+            {{ selectedLog.file_name }}<template v-if="selectedLog.file_size_formatted"> · {{ selectedLog.file_size_formatted }}</template>
+          </div>
+        </div>
+        <audio :key="selectedLog.id" controls class="w-full" :src="selectedLog.file_url" />
+        <div class="mt-4 flex justify-end">
+          <el-button type="danger" plain @click="deleteFile(selectedLog)">
+            Удалить файл
+          </el-button>
+        </div>
+      </template>
+    </el-dialog>
   </admin-layout>
 </template>
 
