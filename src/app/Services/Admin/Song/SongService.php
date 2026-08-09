@@ -27,6 +27,7 @@ class SongService
     public function getSongsPagination(int $limit, bool $isHidden = false): LengthAwarePaginator
     {
         $filter = new SongFilters(request());
+        $sort = request()->string('sort')->toString();
 
         return PlayerSongs::query()
             ->select([
@@ -35,6 +36,7 @@ class SongService
                 'player_songs.title',
                 'player_songs.hidden',
                 'player_songs.user_id',
+                'player_songs.created_at',
             ])
             ->with(['artists:id,name'])
             ->with(['user:id,name'])
@@ -42,8 +44,15 @@ class SongService
             ->when(!$isHidden, function ($q) {
                 $q->where('hidden', false);
             })
-            ->orderBy('artist_name', 'ASC')
-            ->orderBy('title', 'ASC')
+            ->when(
+                in_array($sort, ['created_desc', 'created_asc'], true),
+                fn ($query) => $query
+                    ->orderBy('player_songs.created_at', $sort === 'created_asc' ? 'ASC' : 'DESC')
+                    ->orderBy('player_songs.id', $sort === 'created_asc' ? 'ASC' : 'DESC'),
+                fn ($query) => $query
+                    ->orderBy('artist_name', 'ASC')
+                    ->orderBy('title', 'ASC'),
+            )
             ->paginate($limit)
             ->withQueryString();
     }
@@ -118,5 +127,12 @@ class SongService
 
             return $song->load('artists');
         });
+    }
+
+    public function countSongs(): int
+    {
+        $countSongs = PlayerSongs::query()->where('hidden', false)->count();
+
+        return $countSongs;
     }
 }

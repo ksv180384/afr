@@ -9,12 +9,25 @@ const props = defineProps({
   total: { type: Number, default: null },
   limitLinks: { type: Number, default: 1 },
   routeName: { type: String, required: true },
+  compact: { type: Boolean, default: false },
 });
 
 const { query } = usePage().props;
 
 const paginationLinks = computed(() => {
   const links = [];
+
+  if (props.compact) {
+    const endPage = Math.min(props.lastPage, Math.max(3, props.currentPage + 1));
+    const startPage = Math.max(1, endPage - 2);
+
+    for (let page = startPage; page <= endPage; page++) {
+      links.push({ url: route(props.routeName, { ...query, page }), label: page });
+    }
+
+    return links.map(item => ({ ...item, active: item.label === props.currentPage }));
+  }
+
   if (props.currentPage > 3) {
     links.push({ url: route(props.routeName, { ...query, page: 1 }), label: 1 });
     if (props.currentPage > 4) {
@@ -52,7 +65,11 @@ const paginationLinks = computed(() => {
 </script>
 
 <template>
-<div v-if="paginationLinks.length > 1" class="pagination">
+<div
+  v-if="paginationLinks.length > 1"
+  class="pagination"
+  :class="{ 'pagination--compact': compact }"
+>
   <ul>
     <li v-for="link in paginationLinks" :key="link.label" :class="{ 'active': link.active }">
       <template v-if="link.url">
@@ -75,6 +92,11 @@ const paginationLinks = computed(() => {
   border-radius: 0.25rem;
 }
 
+.pagination--compact{
+  width: auto;
+  background: #fff;
+}
+
 .pagination ul{
   @apply flex flex-row items-center;
 }
@@ -85,6 +107,10 @@ const paginationLinks = computed(() => {
   align-items: center;
   width: 42px;
   height: 26px;
+}
+
+.pagination--compact ul li{
+  width: 28px;
 }
 
 .pagination ul li.active{

@@ -22,6 +22,9 @@ class SongFilters extends Filter
                 $query
                     ->where('player_songs.artist_name', 'LIKE', '%' . $value . '%')
                     ->orWhere('player_songs.title', 'LIKE', '%' . $value . '%')
+                    ->when(ctype_digit($value), function (Builder $idQuery) use ($value) {
+                        $idQuery->orWhere('player_songs.id', (int) $value);
+                    })
                     ->orWhereHas('artists', function (Builder $artistQuery) use ($value) {
                         $artistQuery->where('player_artists_songs.name', 'LIKE', '%' . $value . '%');
                     });

@@ -65,3 +65,32 @@ test('admin and public filters find a song by any linked artist', function () {
     expect($adminSongs->pluck('id')->all())->toBe([$song->id])
         ->and($publicSongs->pluck('id')->all())->toBe([$song->id]);
 });
+
+test('admin songs can be sorted by creation date in both directions', function () {
+    $older = PlayerSongs::create([
+        'artist_name' => 'Zulu',
+        'title' => 'Older Song',
+        'text_fr' => 'Bonjour',
+        'text_ru' => 'Привет',
+        'text_transcription' => 'Бонжур',
+        'hidden' => false,
+    ]);
+    $older->forceFill(['created_at' => now()->subDay()])->saveQuietly();
+
+    $newer = PlayerSongs::create([
+        'artist_name' => 'Alpha',
+        'title' => 'Newer Song',
+        'text_fr' => 'Salut',
+        'text_ru' => 'Привет',
+        'text_transcription' => 'Салю',
+        'hidden' => false,
+    ]);
+
+    request()->replace(['sort' => 'created_desc']);
+    expect(app(AdminSongService::class)->getSongsPagination(40, true)->pluck('id')->all())
+        ->toBe([$newer->id, $older->id]);
+
+    request()->replace(['sort' => 'created_asc']);
+    expect(app(AdminSongService::class)->getSongsPagination(40, true)->pluck('id')->all())
+        ->toBe([$older->id, $newer->id]);
+});

@@ -26,12 +26,14 @@ class SongController extends Controller
     public function index(): Response
     {
         $songs = $this->songService->getSongsPagination(SongService::SONGS_PAGINATE, true);
+        $countSongs = $this->songService->countSongs();
 
         return Inertia::render('Song/Songs', [
             'authUser' => Helper::getUserData(),
             'songs' => SongResource::collection($songs->items()),
             'pagination' => PaginateResource::make($songs),
-            'filters' => request()->only('text'),
+            'filters' => request()->only('text', 'sort'),
+            'countSongs' => $countSongs,
         ]);
     }
 
