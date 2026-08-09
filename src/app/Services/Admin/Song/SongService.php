@@ -19,11 +19,6 @@ class SongService
         private readonly ArtistService $artistService,
     ) {}
 
-    /**
-     * @param int $limit
-     * @param bool $isHidden
-     * @return LengthAwarePaginator
-     */
     public function getSongsPagination(int $limit, bool $isHidden = false): LengthAwarePaginator
     {
         $filter = new SongFilters(request());
@@ -41,7 +36,7 @@ class SongService
             ->with(['artists:id,name'])
             ->with(['user:id,name'])
             ->filter($filter)
-            ->when(!$isHidden, function ($q) {
+            ->when(! $isHidden, function ($q) {
                 $q->where('hidden', false);
             })
             ->when(
@@ -57,9 +52,6 @@ class SongService
             ->withQueryString();
     }
 
-    /**
-     * @return PlayerSongs
-     */
     public function getById(int $id): PlayerSongs
     {
         $columns = ['id', 'artist_name', 'title', 'text_fr', 'text_ru', 'text_transcription', 'hidden'];
@@ -69,7 +61,7 @@ class SongService
 
         return PlayerSongs::query()
             ->select($columns)
-            ->with(['artists:id,name'])
+            ->with(['artists:id,name', 'lyricsVersions'])
             ->where('id', $id)
             ->first();
     }
@@ -97,7 +89,9 @@ class SongService
                 fn (PlayerArtistsSong $artist, int $position) => [$artist->id => ['position' => $position]],
             )->all());
 
-            return $song->load('artists');
+            $this->syncLyricsVersions($song, $request->input('lyrics_versions', []));
+
+            return $song->load(['artists', 'lyricsVersions']);
         });
     }
 
@@ -125,7 +119,9 @@ class SongService
                 fn (PlayerArtistsSong $artist, int $position) => [$artist->id => ['position' => $position]],
             )->all());
 
-            return $song->load('artists');
+            $this->syncLyricsVersions($song, $request->input('lyrics_versions', []));
+
+            return $song->load(['artists', 'lyricsVersions']);
         });
     }
 
@@ -134,5 +130,34 @@ class SongService
         $countSongs = PlayerSongs::query()->where('hidden', false)->count();
 
         return $countSongs;
+    }
+
+    private function syncLyricsVersions(PlayerSongs $song, array $versions): void
+    {
+        $keptIds = [];
+
+        foreach ($versions as $versionData) {
+            $attributes = [
+                'duration' => Helper::durationMmSsToDecimal($versionData['duration']),
+                'text_fr' => $versionData['text_fr'],
+                'text_ru' => $versionData['text_ru'],
+                'text_transcription' => $versionData['text_transcription'],
+            ];
+
+            if (! empty($versionData['id'])) {
+                $version = $song->lyricsVersions()->findOrFail((int) $versionData['id']);
+                $version->update($attributes);
+            } else {
+                $version = $song->lyricsVersions()->create($attributes);
+            }
+
+            $keptIds[] = $version->id;
+        }
+
+        $deleteQuery = $song->lyricsVersions();
+        if ($keptIds !== []) {
+            $deleteQuery->whereNotIn('id', $keptIds);
+        }
+        $deleteQuery->delete();
     }
 }

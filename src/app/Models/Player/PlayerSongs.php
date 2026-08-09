@@ -7,11 +7,12 @@ use App\Traits\Filterable;
 use Database\Factories\Song\SongFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PlayerSongs extends Model
 {
-    use HasFactory;
     use Filterable;
+    use HasFactory;
 
     protected $fillable = [
         'artist_name',
@@ -44,6 +45,11 @@ class PlayerSongs extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function lyricsVersions(): HasMany
+    {
+        return $this->hasMany(PlayerSongLyricsVersion::class, 'song_id')->orderBy('duration');
     }
 
     protected static function newFactory(): SongFactory

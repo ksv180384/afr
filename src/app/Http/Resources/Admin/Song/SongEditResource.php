@@ -16,7 +16,7 @@ class SongEditResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $playerService = new PlayerService();
+        $playerService = new PlayerService;
         $arTextFr = collect($playerService->formatTextToArray((string) ($this->text_fr ?? '')))->map(function ($item, $key) {
             return ['time' => $key, 'text' => $item];
         });
@@ -41,6 +41,13 @@ class SongEditResource extends JsonResource
             'artist_name' => $this->artist_name,
             'artist' => ['name' => $this->artist_name],
             'artists' => ArtistForSelectResource::collection($this->whenLoaded('artists')),
+            'lyrics_versions' => $this->whenLoaded('lyricsVersions', fn () => $this->lyricsVersions->map(fn ($version) => [
+                'id' => $version->id,
+                'duration' => Helper::durationDecimalToMmSs($version->duration),
+                'text_fr' => $version->text_fr,
+                'text_ru' => $version->text_ru,
+                'text_transcription' => $version->text_transcription,
+            ])->values()),
         ];
     }
 }

@@ -14,10 +14,19 @@ class KaraokeUploadLog extends Model
         'song_title',
         'song_artist',
         'file_name',
+        'file_path',
+        'file_mime_type',
+        'file_size',
+        'upload_token',
         'file_duration_seconds',
         'db_duration_seconds',
         'duration_matched',
         'user_id',
+    ];
+
+    protected $hidden = [
+        'file_path',
+        'upload_token',
     ];
 
     protected $casts = [

@@ -14,6 +14,7 @@ const props = defineProps({
   textRawTranscription: { type: String, default: '' },
   songDurationSeconds: { type: Number, default: null },
   songDurationFormatted: { type: String, default: null },
+  lyricsVersions: { type: Array, default: () => [] },
 });
 
 const showModal = ref(false);
@@ -21,6 +22,7 @@ const audioUrl = ref(null);
 const fileName = ref('');
 const fileInputRef = ref(null);
 const audioRef = ref(null);
+const audioFile = ref(null);
 const isPlaying = ref(false);
 const currentTime = ref(0);
 const duration = ref(0);
@@ -32,6 +34,9 @@ const highlightVisible = ref(false);
 const highlightTop = ref(0);
 const scrollOffset = ref(0);
 const durationMismatch = ref(false);
+const uploadState = ref('idle');
+const selectedLyrics = ref(null);
+let uploadStarted = false;
 let rafId = null;
 
 const DURATION_TOLERANCE_SEC = 2;
@@ -86,9 +91,9 @@ function parseLrc(text) {
 
 const activeRawText = computed(() => {
   const map = {
-    fr: props.textRawFr,
-    ru: props.textRawRu,
-    tr: props.textRawTranscription,
+    fr: selectedLyrics.value?.text_raw_fr ?? props.textRawFr,
+    ru: selectedLyrics.value?.text_raw_ru ?? props.textRawRu,
+    tr: selectedLyrics.value?.text_raw_transcription ?? props.textRawTranscription,
   };
   return map[activeLanguage.value] || '';
 });
@@ -124,6 +129,8 @@ const processFile = (file) => {
   if (!fileType.startsWith('audio/') && !/\.(mp3|m4a|ogg|wav|webm)$/i.test(file.name)) {
     return;
   }
+  audioFile.value = file;
+  uploadStarted = false;
   fileName.value = file.name;
   if (audioUrl.value) URL.revokeObjectURL(audioUrl.value);
   audioUrl.value = URL.createObjectURL(file);
@@ -134,6 +141,8 @@ const processFile = (file) => {
   scrollOffset.value = 0;
   isPlaying.value = false;
   durationMismatch.value = false;
+  uploadState.value = 'idle';
+  selectedLyrics.value = null;
 };
 
 const onFileSelected = (e) => {
@@ -179,6 +188,7 @@ const removeFile = () => {
     fileInputRef.value.value = '';
   }
   fileName.value = '';
+  audioFile.value = null;
   audioUrl.value = null;
   currentTime.value = 0;
   duration.value = 0;
@@ -188,6 +198,9 @@ const removeFile = () => {
   scrollOffset.value = 0;
   isPlaying.value = false;
   durationMismatch.value = false;
+  uploadState.value = 'idle';
+  selectedLyrics.value = null;
+  uploadStarted = false;
 };
 
 const togglePlay = () => {
@@ -285,23 +298,53 @@ const onLoadedMetadata = () => {
   if (audioRef.value) {
     duration.value = audioRef.value.duration;
     audioRef.value.volume = volume.value;
-    const dbSec = props.songDurationSeconds;
-    let matched = false;
-    if (dbSec != null && typeof dbSec === 'number') {
-      const audioSec = audioRef.value.duration;
-      const diff = Math.abs(audioSec - dbSec);
-      durationMismatch.value = diff > DURATION_TOLERANCE_SEC;
-      matched = diff <= DURATION_TOLERANCE_SEC;
-    } else {
-      durationMismatch.value = false;
-      matched = true;
-    }
-    logKaraokeUpload(matched);
+    const versions = props.lyricsVersions.length ? props.lyricsVersions : [{
+      id: null,
+      is_main: true,
+      duration_seconds: props.songDurationSeconds,
+      duration_formatted: props.songDurationFormatted,
+      text_raw_fr: props.textRawFr,
+      text_raw_ru: props.textRawRu,
+      text_raw_transcription: props.textRawTranscription,
+    }];
+    const candidates = versions
+      .filter((version) => version.duration_seconds != null && Number.isFinite(Number(version.duration_seconds)))
+      .map((version) => ({
+        version,
+        difference: Math.abs(Number(version.duration_seconds) - audioRef.value.duration),
+      }))
+      .sort((a, b) => a.difference - b.difference);
+    const matchedVersion = candidates[0]?.difference <= DURATION_TOLERANCE_SEC
+      ? candidates[0].version
+      : null;
+
+    selectedLyrics.value = matchedVersion;
+    durationMismatch.value = matchedVersion === null;
+    nextTick(() => updateHighlightPosition(0, false));
+    logKaraokeUpload();
   }
 };
 
-const logKaraokeUpload = (durationMatched) => {
-  if (props.songId == null) return;
+const uploadKaraokeFile = (logId, uploadToken, file) => {
+  const data = new FormData();
+  data.append('upload_token', uploadToken);
+  data.append('audio', file, file.name);
+
+  uploadState.value = 'uploading';
+  axios.post(route('lyrics.karaoke-upload-log.file', { log: logId }), data)
+    .then(() => {
+      uploadState.value = 'done';
+    })
+    .catch(() => {
+      uploadState.value = 'error';
+    });
+};
+
+const logKaraokeUpload = () => {
+  if (props.songId == null || uploadStarted) return;
+  uploadStarted = true;
+  const fileForUpload = audioFile.value;
+
   axios.post(route('lyrics.karaoke-upload-log'), {
     song_id: props.songId,
     song_title: props.songTitle || '',
@@ -309,8 +352,16 @@ const logKaraokeUpload = (durationMatched) => {
     file_name: fileName.value || '',
     file_duration_seconds: duration.value || 0,
     db_duration_seconds: props.songDurationSeconds ?? null,
-    duration_matched: durationMatched,
-  }).catch(() => {});
+  })
+    .then(({ data }) => {
+      if (data.upload_required && fileForUpload) {
+        uploadKaraokeFile(data.log_id, data.upload_token, fileForUpload);
+      }
+    })
+    .catch(() => {
+      uploadState.value = 'error';
+      uploadStarted = false;
+    });
 };
 const onPlay = () => {
   isPlaying.value = true;
@@ -408,6 +459,18 @@ onBeforeUnmount(() => {
         Версия загруженной песни не совпадает с той, по которой выставлялись временные метки для караоке.
         Вам нужна версия песни продолжительностью <strong>{{ songDurationFormatted ?? (songDurationSeconds != null ? formatTime(songDurationSeconds) : '') }}</strong>.
         Загружено: <strong>{{ formatTime(duration) }}</strong>.
+      </div>
+      <div v-if="durationMismatch && uploadState === 'uploading'" class="afr-karaoke-upload-status text-sky-700">
+        <Icon icon="mdi:loading" class="text-xl animate-spin" />
+        <span>Аудиофайл загружается, чтобы администратор мог добавить синхронизированный текст для этой версии песни…</span>
+      </div>
+      <div v-if="durationMismatch && uploadState === 'done'" class="afr-karaoke-upload-status text-emerald-700">
+        <Icon icon="mdi:check-circle-outline" class="text-xl" />
+        <span>Аудиофайл успешно загружен.</span>
+      </div>
+      <div v-if="durationMismatch && uploadState === 'error'" class="afr-karaoke-upload-status text-red-700">
+        <Icon icon="mdi:alert-circle-outline" class="text-xl" />
+        <span>Не удалось загрузить аудиофайл.</span>
       </div>
 
       <template v-if="audioUrl">
@@ -530,6 +593,10 @@ onBeforeUnmount(() => {
 
 .afr-karaoke-duration-warning {
   @apply mt-2 p-3 rounded-lg bg-red-50 border border-red-300 text-red-800 text-sm;
+}
+
+.afr-karaoke-upload-status {
+  @apply mt-2 flex items-center gap-2 rounded-lg bg-white/70 px-3 py-2 text-sm;
 }
 
 .afr-player-bar {

@@ -6,20 +6,16 @@ use App\Filters\SongFilters;
 use App\Models\Player\PlayerArtistsSong;
 use App\Models\Player\PlayerSongs;
 use App\Services\PlayerService;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Schema;
 
 class SongService
 {
     const SONGS_SEARCH_LIMIT = 10;
+
     const SONGS_PAGINATE = 40;
 
-    /**
-     * @param int $limit
-     * @param bool $isHidden
-     * @return LengthAwarePaginator
-     */
     public function getSongsPagination(int $limit, bool $isHidden = false): LengthAwarePaginator
     {
 
@@ -34,7 +30,7 @@ class SongService
             ])
             ->with(['artists:id,name'])
             ->filter($filter)
-            ->when(!$isHidden, function ($q){
+            ->when(! $isHidden, function ($q) {
                 $q->where('hidden', false);
             })
             ->orderBy('artist_name', 'ASC')
@@ -44,11 +40,9 @@ class SongService
         return $songs;
     }
 
-
     /**
      * Получает песню
      * int $id - идентификатор записи
-     * @return PlayerSongs
      */
     public function getById(int $id): PlayerSongs
     {
@@ -56,8 +50,10 @@ class SongService
         if (Schema::hasColumn('player_songs', 'duration')) {
             $columns[] = 'duration';
         }
+
         return PlayerSongs::query()
             ->select($columns)
+            ->with('lyricsVersions')
             ->where('hidden', false)
             ->where('id', $id)
             ->first();
@@ -65,14 +61,14 @@ class SongService
 
     /**
      * Получает список всех активных песен
-     * @param bool $isAll - получать все, включая скрытые
-     * @return \Illuminate\Database\Eloquent\Collection
+     *
+     * @param  bool  $isAll  - получать все, включая скрытые
      */
     public function getSongs(bool $isAll = false): Collection
     {
-        if($isAll){
+        if ($isAll) {
             $songsQuery = PlayerSongs::query();
-        }else{
+        } else {
             $songsQuery = PlayerSongs::query()
                 ->where('hidden', false);
         }
@@ -90,9 +86,6 @@ class SongService
         return $songs;
     }
 
-    /**
-     * @return Collection
-     */
     public function getArtistsSongs(): Collection
     {
         $artists = PlayerArtistsSong::query()
@@ -107,43 +100,43 @@ class SongService
 
     /**
      * Получает трек по названию и исполнителю
-     * @param string $artist - исполнитель
-     * @param string $title - название трека
-     * @param string $fileName - название файла трека
-     * @return PlayerSongs
+     *
+     * @param  string  $artist  - исполнитель
+     * @param  string  $title  - название трека
+     * @param  string  $fileName  - название файла трека
      */
-    public function searchByArtistAndTitle(string $artist, string $title, string $fileName): PlayerSongs | null
+    public function searchByArtistAndTitle(string $artist, string $title, string $fileName): ?PlayerSongs
     {
 
-        $searchText = (new PlayerService())->getSongNameFromFileName($fileName);
+        $searchText = (new PlayerService)->getSongNameFromFileName($fileName);
 
         $song = PlayerSongs::select([
-                'player_songs.artist_name',
-                'player_songs.title',
-                'player_songs.text_fr',
-                'player_songs.text_ru',
-                'player_songs.text_transcription',
-                'player_songs.user_id',
-                'player_songs.created_at',
-                'player_songs.updated_at',
-                'users.name',
-            ])
+            'player_songs.artist_name',
+            'player_songs.title',
+            'player_songs.text_fr',
+            'player_songs.text_ru',
+            'player_songs.text_transcription',
+            'player_songs.user_id',
+            'player_songs.created_at',
+            'player_songs.updated_at',
+            'users.name',
+        ])
             ->leftJoin('users', 'player_songs.user_id', '=', 'users.id')
             ->where('player_songs.hidden', '=', 0)
             ->where(function ($q) use ($artist, $title, $searchText) {
                 return $q->when($artist, function ($q) use ($artist) {
-                        return $q->where(function ($artistQuery) use ($artist) {
-                            $artistQuery
-                                ->where('player_songs.artist_name', '=', $artist)
-                                ->orWhereHas('artists', fn ($relationQuery) => $relationQuery
-                                    ->where('player_artists_songs.name', '=', $artist));
-                        });
-                    })
+                    return $q->where(function ($artistQuery) use ($artist) {
+                        $artistQuery
+                            ->where('player_songs.artist_name', '=', $artist)
+                            ->orWhereHas('artists', fn ($relationQuery) => $relationQuery
+                                ->where('player_artists_songs.name', '=', $artist));
+                    });
+                })
                     ->when($title, function ($q) use ($title) {
                         return $q->orWhere('player_songs.title', '=', $title);
                     })
-                    ->when(!$artist && !$title && $searchText, function ($q) use ($searchText) {
-                        return $q->whereRaw("MATCH(player_songs.artist_name, player_songs.title) AGAINST (? IN BOOLEAN MODE)", [$searchText]);
+                    ->when(! $artist && ! $title && $searchText, function ($q) use ($searchText) {
+                        return $q->whereRaw('MATCH(player_songs.artist_name, player_songs.title) AGAINST (? IN BOOLEAN MODE)', [$searchText]);
                     });
             })
             ->first();
@@ -152,25 +145,24 @@ class SongService
     }
 
     /**
-     * @param string $searchText - название песни или артиста
-     * @return Collection
+     * @param  string  $searchText  - название песни или артиста
      */
     public function search(string $searchText): Collection
     {
         $searchText = trim($searchText);
 
         $songs = PlayerSongs::select([
-                'player_songs.id',
-                'player_songs.artist_name',
-                'player_songs.title',
-            ])
+            'player_songs.id',
+            'player_songs.artist_name',
+            'player_songs.title',
+        ])
             ->where('player_songs.hidden', '=', 0)
             ->where(function ($query) use ($searchText) {
                 $query
-                    ->where('player_songs.artist_name', 'LIKE', '%' . $searchText . '%')
-                    ->orWhere('player_songs.title', 'LIKE', '%' . $searchText . '%')
+                    ->where('player_songs.artist_name', 'LIKE', '%'.$searchText.'%')
+                    ->orWhere('player_songs.title', 'LIKE', '%'.$searchText.'%')
                     ->orWhereHas('artists', fn ($artistQuery) => $artistQuery
-                        ->where('player_artists_songs.name', 'LIKE', '%' . $searchText . '%'));
+                        ->where('player_artists_songs.name', 'LIKE', '%'.$searchText.'%'));
             })
             ->limit(self::SONGS_SEARCH_LIMIT)
             ->get();
@@ -180,7 +172,8 @@ class SongService
 
     /**
      * Поиск по тексту
-     * @param $searchText - название песни или артиста
+     *
+     * @param  $searchText  - название песни или артиста
      * @return mixed
      */
     /*
