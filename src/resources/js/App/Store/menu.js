@@ -24,4 +24,9 @@ export default [
         name: 'dictionary',
         title: 'Словарь'
     },
+    {
+        path: '/games',
+        name: 'games',
+        title: 'Игры'
+    },
 ];

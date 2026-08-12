@@ -51,6 +51,7 @@
         "id3-parser": "^3.0.0",
         "notivue": "^2.4.5",
         "pinia": "^2.2.4",
-        "tiptap-extension-resize-image": "^1.2.1"
+        "tiptap-extension-resize-image": "^1.2.1",
+        "phaser": "^3.90.0"
     }
 }
