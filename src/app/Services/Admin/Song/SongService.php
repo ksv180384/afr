@@ -4,6 +4,7 @@ namespace App\Services\Admin\Song;
 
 use App\Filters\SongFilters;
 use App\Helpers\Helper;
+use App\Services\Admin\Artist\ArtistLineupService;
 use App\Models\Player\PlayerArtistsSong;
 use App\Models\Player\PlayerSongs;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class SongService
 
     public function __construct(
         private readonly ArtistService $artistService,
+        private readonly ArtistLineupService $artistLineupService,
     ) {}
 
     public function getSongsPagination(int $limit, bool $isHidden = false): LengthAwarePaginator
@@ -89,6 +91,8 @@ class SongService
                 fn (PlayerArtistsSong $artist, int $position) => [$artist->id => ['position' => $position]],
             )->all());
 
+            $this->artistLineupService->syncForSong($song, $artists);
+
             $this->syncLyricsVersions($song, $request->input('lyrics_versions', []));
 
             return $song->load(['artists', 'lyricsVersions']);
@@ -118,6 +122,8 @@ class SongService
             $song->artists()->sync($artists->mapWithKeys(
                 fn (PlayerArtistsSong $artist, int $position) => [$artist->id => ['position' => $position]],
             )->all());
+
+            $this->artistLineupService->syncForSong($song, $artists);
 
             $this->syncLyricsVersions($song, $request->input('lyrics_versions', []));
 

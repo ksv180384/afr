@@ -42,6 +42,11 @@ class PlayerSongs extends Model
         )->withPivot('position')->orderByPivot('position');
     }
 
+    public function artistLineup()
+    {
+        return $this->belongsTo(PlayerArtistLineup::class, 'artist_lineup_id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

@@ -10,6 +10,11 @@ export default [
     title: 'Миграции'
   },
   {
+    path: '/admin/phpinfo',
+    name: 'admin.phpinfo',
+    title: 'PHP info'
+  },
+  {
     path: '/admin/posts',
     name: 'admin.posts',
     title: 'Посты'
@@ -33,6 +38,11 @@ export default [
     path: '/admin/songs',
     name: 'admin.songs',
     title: 'Песни'
+  },
+  {
+    path: '/admin/artists',
+    name: 'admin.artists',
+    title: 'Исполнители'
   },
   {
     path: '/admin/songs-undiscovered',

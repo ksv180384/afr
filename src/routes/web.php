@@ -114,6 +114,7 @@ Route::middleware(['auth', 'verified', 'is-admin'])->group(function () {
 
     Route::get('/admin/migrations', [\App\Http\Controllers\Admin\System\MigrationController::class, 'index'])->name('admin.migrations');
     Route::post('/admin/migrations/run', [\App\Http\Controllers\Admin\System\MigrationController::class, 'run'])->name('admin.migrations.run');
+    Route::get('/admin/phpinfo', \App\Http\Controllers\Admin\System\PhpInfoController::class)->name('admin.phpinfo');
 
     // Post
     Route::get('/admin/posts', [\App\Http\Controllers\Admin\Post\PostController::class, 'index'])->name('admin.posts');
@@ -150,6 +151,12 @@ Route::middleware(['auth', 'verified', 'is-admin'])->group(function () {
     Route::get('/admin/song/edit/{id}', [\App\Http\Controllers\Admin\Song\SongController::class, 'edit'])->name('admin.song.edit');
     Route::post('/admin/song/update/{id}', [\App\Http\Controllers\Admin\Song\SongController::class, 'update'])->name('admin.song.update');
     //    Route::post('/admin/song/delete/{id}', [\App\Http\Controllers\Admin\Song\SongController::class, 'delete'])->name('admin.song.delete');
+
+    // Artists
+    Route::get('/admin/artists', [\App\Http\Controllers\Admin\Artist\ArtistController::class, 'index'])->name('admin.artists');
+    Route::get('/admin/artists/edit/{id}', [\App\Http\Controllers\Admin\Artist\ArtistController::class, 'edit'])->name('admin.artists.edit');
+    Route::post('/admin/artists/update/{id}', [\App\Http\Controllers\Admin\Artist\ArtistController::class, 'update'])->name('admin.artists.update');
+    Route::post('/admin/artist-lineups/update/{id}', [\App\Http\Controllers\Admin\Artist\ArtistController::class, 'updateLineup'])->name('admin.artist-lineups.update');
 
     // Ненайденные песни
     Route::get('/admin/songs-undiscovered', [\App\Http\Controllers\Admin\Song\SongUndiscoveredController::class, 'index'])->name('admin.songs-undiscovered');

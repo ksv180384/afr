@@ -5,6 +5,8 @@ WORKDIR /var/www/afr
 RUN apt-get update && apt-get install -y \
     ca-certificates \
     curl \
+    nodejs \
+    npm \
     zlib1g-dev \
     g++ \
     git \
@@ -16,8 +18,9 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
+    libwebp-dev \
     && update-ca-certificates \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install intl opcache pdo pdo_mysql gd zip \
     && pecl install apcu \
     && docker-php-ext-enable apcu
@@ -26,10 +29,6 @@ RUN apt-get update && apt-get install -y \
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
 # Node.js
-RUN curl -sL https://deb.nodesource.com/setup_current.x -o nodesource_setup.sh
-RUN bash nodesource_setup.sh
-RUN apt-get install nodejs -y
-RUN npm install npm@latest -g
 RUN command -v node
 RUN command -v npm
 

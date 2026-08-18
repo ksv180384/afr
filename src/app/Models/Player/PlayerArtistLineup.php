@@ -6,14 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
-class PlayerArtistsSong extends Model
+class PlayerArtistLineup extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
-
     protected $fillable = [
-        'name',
+        'signature',
         'description',
         'image_path',
     ];
@@ -22,27 +20,19 @@ class PlayerArtistsSong extends Model
         'image_url',
     ];
 
-    /**
-     * Возвращает все песни, в которых участвует исполнитель.
-     */
-    public function songs()
+    public function artists()
     {
         return $this->belongsToMany(
-            PlayerSongs::class,
-            'player_artist_song',
+            PlayerArtistsSong::class,
+            'player_artist_lineup_members',
+            'artist_lineup_id',
             'artist_id',
-            'song_id',
-        )->withPivot('position');
+        );
     }
 
-    public function lineups()
+    public function songs()
     {
-        return $this->belongsToMany(
-            PlayerArtistLineup::class,
-            'player_artist_lineup_members',
-            'artist_id',
-            'artist_lineup_id',
-        );
+        return $this->hasMany(PlayerSongs::class, 'artist_lineup_id');
     }
 
     public function getImageUrlAttribute(): ?string

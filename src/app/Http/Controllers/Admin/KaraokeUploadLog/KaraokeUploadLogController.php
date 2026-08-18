@@ -9,22 +9,27 @@ use App\Http\Resources\Admin\PaginateResource;
 use App\Models\KaraokeUploadLog;
 use App\Services\Admin\KaraokeUploadLog\KaraokeUploadLogService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class KaraokeUploadLogController extends Controller
 {
-    public function index(KaraokeUploadLogService $karaokeUploadLogService)
+    public function index(Request $request, KaraokeUploadLogService $karaokeUploadLogService)
     {
         $authUser = Helper::getUserData();
-        $logs = $karaokeUploadLogService->getLogsPagination(KaraokeUploadLogService::PAGINATE);
+        $filters = [
+            'exclude_admin' => $request->boolean('exclude_admin'),
+        ];
+        $logs = $karaokeUploadLogService->getLogsPagination(KaraokeUploadLogService::PAGINATE, $filters);
         $pagination = PaginateResource::make($logs);
 
         return Inertia::render('KaraokeUploadLog/KaraokeUploadLog', [
             'authUser' => $authUser,
             'logs' => KaraokeUploadLogResource::collection($logs->items()),
             'pagination' => $pagination,
+            'filters' => $filters,
         ]);
     }
 
