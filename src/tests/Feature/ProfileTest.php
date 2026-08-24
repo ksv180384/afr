@@ -1,8 +1,14 @@
 <?php
 
+use App\Models\Proverb;
 use App\Models\User\User;
 
 test('profile page is displayed', function () {
+    Proverb::query()->create([
+        'text' => 'Qui vivra verra.',
+        'translation' => 'Поживём — увидим.',
+    ]);
+
     $user = User::factory()->create();
 
     $response = $this
@@ -19,7 +25,8 @@ test('profile information can be updated', function () {
         ->actingAs($user)
         ->patch('/profile', [
             'name' => 'Test User',
-            'email' => 'test@example.com',
+            'day_birthday' => false,
+            'yar_birthday' => false,
         ]);
 
     $response
@@ -29,8 +36,6 @@ test('profile information can be updated', function () {
     $user->refresh();
 
     $this->assertSame('Test User', $user->name);
-    $this->assertSame('test@example.com', $user->email);
-    $this->assertNull($user->email_verified_at);
 });
 
 test('email verification status is unchanged when the email address is unchanged', function () {
@@ -40,7 +45,8 @@ test('email verification status is unchanged when the email address is unchanged
         ->actingAs($user)
         ->patch('/profile', [
             'name' => 'Test User',
-            'email' => $user->email,
+            'day_birthday' => false,
+            'yar_birthday' => false,
         ]);
 
     $response

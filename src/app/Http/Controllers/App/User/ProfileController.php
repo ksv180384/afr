@@ -8,6 +8,7 @@ use App\Http\Requests\User\ProfileUpdateRequest;
 use App\Http\Requests\User\UploadAvatar;
 use App\Models\User\Gender;
 use App\Models\User\UserConfigsView;
+use App\Rules\CustomCurrentPassword;
 use App\Services\App\ProverbService;
 use App\Services\App\UserService;
 use App\Services\App\WordService;
@@ -28,8 +29,7 @@ class ProfileController extends Controller
         Request $request,
         WordService $wordService,
         ProverbService $proverbService,
-    ): Response
-    {
+    ): Response {
         $authUser = Helper::getUserData();
         $words = $wordService->wordsRandom();
         $proverb = $proverbService->proverbRandomOne();
@@ -69,18 +69,18 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request, UserService $userService): RedirectResponse
     {
-//        $request->user()->fill($request->validated());
+        //        $request->user()->fill($request->validated());
 
-//        if ($request->user()->isDirty('email')) {
-//            $request->user()->email_verified_at = null;
-//        }
+        //        if ($request->user()->isDirty('email')) {
+        //            $request->user()->email_verified_at = null;
+        //        }
 
         $validatedData = collect($request->validated());
         $userData = $validatedData->only(['name', 'birthday', 'gender_id', 'info', 'residence'])->toArray();
         $userInfoData = $validatedData->only(['odnoklassniki', 'skype', 'telegram', 'vk', 'whatsapp', 'youtube'])->toArray();
         $userConfigData = $validatedData->only([
             'view_email', 'view_info', 'view_odnoklassniki', 'view_residence', 'view_sex', 'view_skype',
-            'view_telegram', 'view_vk', 'view_whatsapp', 'view_youtube', 'day_birthday', 'yar_birthday'
+            'view_telegram', 'view_vk', 'view_whatsapp', 'view_youtube', 'day_birthday', 'yar_birthday',
         ])->mapWithKeys(function ($value, $key) {
             $keyMapping = [
                 'view_email' => 'email',
@@ -115,7 +115,7 @@ class ProfileController extends Controller
             'data' => [
                 'avatar' => Auth::user()->avatar,
                 'avatar_link' => Auth::user()->avatar_link,
-            ]
+            ],
         ]);
     }
 
@@ -128,7 +128,7 @@ class ProfileController extends Controller
             'data' => [
                 'avatar' => Auth::user()->avatar,
                 'avatar_link' => Auth::user()->avatar_link,
-            ]
+            ],
         ]);
     }
 
@@ -138,7 +138,7 @@ class ProfileController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         $request->validate([
-            'password' => ['required', 'current_password'],
+            'password' => ['required', new CustomCurrentPassword],
         ]);
 
         $user = $request->user();

@@ -9,7 +9,7 @@ test('login screen can be rendered', function () {
 });
 
 test('users can authenticate using the login screen', function () {
-    $user = User::query()->latest()->first();
+    $user = User::factory()->create();
 
     $response = $this->post('/login', [
         'email' => $user->email,
@@ -32,7 +32,7 @@ test('unverified users are redirected to email verification notice', function ()
 });
 
 test('users can not authenticate with invalid password', function () {
-    $user = User::query()->latest()->first();
+    $user = User::factory()->create();
 
     $this->post('/login', [
         'email' => $user->email,
@@ -43,7 +43,7 @@ test('users can not authenticate with invalid password', function () {
 });
 
 test('users can logout', function () {
-    $user = User::query()->latest()->first();
+    $user = User::factory()->create();
 
     $response = $this->actingAs($user)->post('/logout');
 
