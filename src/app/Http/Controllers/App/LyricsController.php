@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\App;
 
 use App\Helpers\Helper;
-use App\Http\Resources\App\SongComment\SongCommentResource;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\App\ArtistIndexResource;
+use App\Http\Resources\App\ArtistShowResource;
+use App\Http\Resources\App\SongComment\SongCommentResource;
 use App\Http\Resources\App\SongShowResource;
 use App\Services\App\ProverbService;
 use App\Services\App\Song\SongService;
@@ -15,18 +17,11 @@ use Inertia\Response;
 
 class LyricsController extends Controller
 {
-    /**
-     * @param WordService $wordService
-     * @param ProverbService $proverbService
-     * @param SongService $songService
-     * @return Response
-     */
     public function index(
         WordService $wordService,
         ProverbService $proverbService,
         SongService $songService,
-    ): Response
-    {
+    ): Response {
         $authUser = Helper::getUserData();
         $words = $wordService->wordsRandom();
         $proverb = $proverbService->proverbRandomOne();
@@ -36,16 +31,24 @@ class LyricsController extends Controller
             'words' => $words,
             'proverb' => $proverb,
             'authUser' => $authUser,
-            'artists' => $artists,
+            'artists' => ArtistIndexResource::collection($artists),
         ]);
     }
 
-    /**
-     * @param int $id
-     * @param SongService $songService
-     * @param SongCommentService $commentService
-     * @return \Inertia\Response
-     */
+    public function artist(
+        int $id,
+        WordService $wordService,
+        ProverbService $proverbService,
+        SongService $songService,
+    ): Response {
+        return Inertia::render('Lyrics/ArtistShow', [
+            'words' => $wordService->wordsRandom(),
+            'proverb' => $proverbService->proverbRandomOne(),
+            'authUser' => Helper::getUserData(),
+            'artist' => ArtistShowResource::make($songService->getArtistWithSongs($id)),
+        ]);
+    }
+
     public function show(int $id, SongService $songService, SongCommentService $commentService): Response
     {
         $authUser = Helper::getUserData();

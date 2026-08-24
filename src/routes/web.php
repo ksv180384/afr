@@ -43,13 +43,14 @@ Route::get('/', [\App\Http\Controllers\App\IndexController::class, 'index'])->na
 Route::get('/grammar', [\App\Http\Controllers\App\GrammarController::class, 'index'])->name('grammar');
 Route::get('/grammar/item/{id}', [\App\Http\Controllers\App\GrammarController::class, 'show'])->name('grammar.show');
 Route::get('/lyrics', [\App\Http\Controllers\App\LyricsController::class, 'index'])->name('lyrics');
-Route::get('/lyrics/item/{id}', [\App\Http\Controllers\App\LyricsController::class, 'show'])->name('lyrics.show');
+Route::get('/lyrics/artist/{id}', [\App\Http\Controllers\App\LyricsController::class, 'artist'])->whereNumber('id')->name('lyrics.artist.show');
+Route::get('/lyrics/item/{id}', [\App\Http\Controllers\App\LyricsController::class, 'show'])->whereNumber('id')->name('lyrics.show');
 Route::post('/lyrics/karaoke-upload-log', [\App\Http\Controllers\App\KaraokeUploadLogController::class, 'store'])->name('lyrics.karaoke-upload-log');
 Route::post('/lyrics/karaoke-upload-log/{log}/file', [\App\Http\Controllers\App\KaraokeUploadLogController::class, 'upload'])->name('lyrics.karaoke-upload-log.file');
 Route::get('/lessons', [\App\Http\Controllers\App\LessonsController::class, 'index'])->name('lessons');
 Route::get('/lessons/item/{id}', [\App\Http\Controllers\App\LessonsController::class, 'show'])->name('lesson.show');
 Route::get('/dictionary', [\App\Http\Controllers\App\DictionaryController::class, 'index'])->name('dictionary');
-Route::get('/dictionary/word/{id}', [\App\Http\Controllers\App\DictionaryController::class, 'show'])->name('dictionary.show');
+Route::get('/dictionary/word/{id}', [\App\Http\Controllers\App\DictionaryController::class, 'show'])->whereNumber('id')->name('dictionary.show');
 Route::get('/games', [\App\Http\Controllers\App\GamesController::class, 'index'])->name('games');
 Route::get('/games/falling-translations', [\App\Http\Controllers\App\GamesController::class, 'fallingTranslations'])->name('games.falling-translations');
 Route::get('/info/terms-user', [\App\Http\Controllers\App\Info\InfoController::class, 'termsUser'])->name('info.terms-user');

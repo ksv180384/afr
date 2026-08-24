@@ -3,6 +3,7 @@
 namespace App\Services\App\Sitemap;
 
 use App\Models\Lesson;
+use App\Models\Player\PlayerArtistsSong;
 use App\Models\Player\PlayerSongs;
 use App\Models\Post\Post;
 use App\Models\Word\Word;
@@ -30,8 +31,9 @@ class SitemapService
         $this->addStaticPages($sitemap);
         $this->addPosts($sitemap);
         $this->addLyrics($sitemap);
-//        $this->addLessons($sitemap);
-//        $this->addDictionaryWords($sitemap);
+        $this->addArtists($sitemap);
+        //        $this->addLessons($sitemap);
+        //        $this->addDictionaryWords($sitemap);
 
         return $sitemap;
     }
@@ -76,6 +78,26 @@ class SitemapService
                             $post->updated_at,
                             Url::CHANGE_FREQUENCY_WEEKLY,
                             0.8
+                        )
+                    );
+                }
+            });
+    }
+
+    private function addArtists(Sitemap $sitemap): void
+    {
+        PlayerArtistsSong::query()
+            ->select(['id'])
+            ->whereHas('songs', fn ($query) => $query->where('hidden', false))
+            ->orderBy('id')
+            ->chunk(500, function ($artists) use ($sitemap) {
+                foreach ($artists as $artist) {
+                    $sitemap->add(
+                        $this->makeUrlTag(
+                            route('lyrics.artist.show', ['id' => $artist->id]),
+                            null,
+                            Url::CHANGE_FREQUENCY_WEEKLY,
+                            0.7
                         )
                     );
                 }

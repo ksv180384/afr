@@ -23,7 +23,7 @@
     <meta property="og:url" content="{{ $seo['canonicalUrl'] }}" />
     <meta property="og:title" content="{{ $seo['title'] }}" />
     <meta property="og:description" content="{{ $seo['description'] }}" />
-    <meta property="og:image" content="{{ asset('img/og-default.jpg') }}" />
+    <meta property="og:image" content="{{ $seo['imageUrl'] }}" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
@@ -49,6 +49,10 @@
 
 @if ($seo['pageType'] === 'Lyrics/LyricShow')
     @include('seo.lyrics-show-noscript', ['song' => data_get($page, 'props.song')])
+@elseif ($seo['pageType'] === 'Lyrics/Lyrics')
+    @include('seo.lyrics-index-noscript', ['artists' => data_get($page, 'props.artists', [])])
+@elseif ($seo['pageType'] === 'Lyrics/ArtistShow')
+    @include('seo.artist-show-noscript', ['artist' => data_get($page, 'props.artist')])
 @elseif ($seo['pageType'] === 'Post/PostShow')
     @include('seo.post-show-noscript', ['post' => data_get($page, 'props.post')])
 @elseif ($seo['pageType'] === 'Grammar/GrammarShow')

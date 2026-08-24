@@ -53,7 +53,10 @@ class SongService
 
         return PlayerSongs::query()
             ->select($columns)
-            ->with('lyricsVersions')
+            ->with([
+                'lyricsVersions',
+                'artists:id,name',
+            ])
             ->where('hidden', false)
             ->where('id', $id)
             ->first();
@@ -89,13 +92,52 @@ class SongService
     public function getArtistsSongs(): Collection
     {
         $artists = PlayerArtistsSong::query()
+            ->select(['id', 'name', 'image_path', 'description'])
+            ->whereHas('songs', fn ($query) => $query->where('hidden', false))
             ->with(['songs' => function ($q) {
-                $q->select('player_songs.id', 'player_songs.title')->where('hidden', false);
+                $q->select('player_songs.id', 'player_songs.title')
+                    ->where('hidden', false)
+                    ->orderBy('player_songs.title');
             }])
+            ->withCount([
+                'songs as songs_count' => fn ($query) => $query->where('hidden', false),
+            ])
             ->orderBy('name')
             ->get();
 
         return $artists;
+    }
+
+    public function getArtistWithSongs(int $id): PlayerArtistsSong
+    {
+        return PlayerArtistsSong::query()
+            ->select(['id', 'name', 'image_path', 'description'])
+            ->whereHas('songs', fn ($query) => $query->where('hidden', false))
+            ->with([
+                'songs' => fn ($query) => $query
+                    ->select([
+                        'player_songs.id',
+                        'player_songs.artist_name',
+                        'player_songs.title',
+                    ])
+                    ->where('hidden', false)
+                    ->orderBy('player_songs.title'),
+                'lineups' => fn ($query) => $query
+                    ->whereHas('songs', fn ($songsQuery) => $songsQuery->where('hidden', false))
+                    ->with([
+                        'artists' => fn ($artistsQuery) => $artistsQuery
+                            ->select(['player_artists_songs.id', 'name', 'image_path'])
+                            ->orderBy('name'),
+                        'songs' => fn ($songsQuery) => $songsQuery
+                            ->select(['id', 'artist_lineup_id', 'artist_name', 'title'])
+                            ->where('hidden', false)
+                            ->orderBy('title'),
+                    ]),
+            ])
+            ->withCount([
+                'songs as songs_count' => fn ($query) => $query->where('hidden', false),
+            ])
+            ->findOrFail($id);
     }
 
     /**

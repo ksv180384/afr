@@ -1,6 +1,7 @@
 @php
     $songTitle = data_get($song, 'title');
     $songArtist = data_get($song, 'artist_name');
+    $artists = data_get($song, 'artists', []);
     $textFr = data_get($song, 'text_fr', []);
     $textRu = data_get($song, 'text_ru', []);
     $textTranscription = data_get($song, 'text_transcription', []);
@@ -18,9 +19,20 @@
         <h1 style="margin:0 0 12px;font-size:28px;line-height:1.2">
             {{ $songArtist }} - {{ $songTitle }}: текст, перевод и транскрипция
         </h1>
-        <p style="margin:0 0 24px">
+        <p style="margin:0 0 12px">
             Французский текст песни {{ $songArtist }} - {{ $songTitle }} с переводом на русский и транскрипцией.
         </p>
+        @if (count($artists) > 0)
+            <p style="margin:0 0 24px">
+                Исполнители:
+                @foreach ($artists as $artist)
+                    @if (!$loop->first)<span> + </span>@endif
+                    <a href="{{ route('lyrics.artist.show', ['id' => data_get($artist, 'id')]) }}">
+                        {{ data_get($artist, 'name') }}
+                    </a>
+                @endforeach
+            </p>
+        @endif
 
         @if ($rowsCount > 0)
             <table style="width:100%;border-collapse:collapse;font-size:15px">

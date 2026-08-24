@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
-import { useForm } from '@inertiajs/vue3';
+import { Link, useForm } from '@inertiajs/vue3';
 
 import MiniLayout from '@/App/Layouts/MiniLayout.vue';
 import SeoHead from '@/App/Components/Seo/SeoHead.vue';
@@ -85,6 +85,20 @@ const submitComment = () => {
     <div class="lyric-show-container">
 
       <h1 class="font-bold text-2xl text-center py-4">{{ song.artist_name }} - {{ song.title }}</h1>
+
+      <nav
+        v-if="song.artists?.length"
+        class="artist-links"
+        aria-label="Исполнители песни"
+      >
+        <span>Исполнители:</span>
+        <template v-for="(artist, index) in song.artists" :key="artist.id">
+          <span v-if="index" aria-hidden="true">+</span>
+          <Link :href="route('lyrics.artist.show', { id: artist.id })">
+            {{ artist.name }}
+          </Link>
+        </template>
+      </nav>
 
       <div class="flex justify-center mb-3">
         <afr-karaoke-player
@@ -219,6 +233,14 @@ const submitComment = () => {
 
 .btn-activate.active{
   @apply bg-sky-700 text-white hover:bg-sky-700;
+}
+
+.artist-links {
+  @apply mb-4 flex flex-wrap items-center justify-center gap-2 px-4 text-sm text-slate-500;
+}
+
+.artist-links a {
+  @apply rounded-full bg-white px-3 py-1 font-semibold text-sky-700 shadow-sm hover:text-sky-900 hover:underline;
 }
 
 </style>

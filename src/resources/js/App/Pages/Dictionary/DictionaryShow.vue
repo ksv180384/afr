@@ -39,6 +39,7 @@ const jsonLd = [
       :title="title"
       :description="description"
       :json-ld="jsonLd"
+      :no-index="true"
     />
 
     <div class="flex flex-col min-h-full justify-center p-4">

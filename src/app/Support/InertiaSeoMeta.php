@@ -3,6 +3,7 @@
 namespace App\Support;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class InertiaSeoMeta
 {
@@ -18,6 +19,7 @@ class InertiaSeoMeta
             'title' => $appName,
             'description' => 'Изучайте французский язык: грамматика, уроки, тексты песен с переводом и транскрипцией, словарь.',
             'canonicalUrl' => $canonicalUrl,
+            'imageUrl' => asset('img/og-default.jpg'),
             'noIndex' => false,
             'jsonLd' => null,
             'pageType' => $component,
@@ -31,6 +33,7 @@ class InertiaSeoMeta
             'Dictionary/Dictionary' => self::dictionaryIndex($meta, $appName, $request),
             'Dictionary/DictionaryShow' => self::dictionaryShow($meta, $appName, data_get($page, 'props.word')),
             'Lyrics/Lyrics' => self::lyricsIndex($meta, $appName),
+            'Lyrics/ArtistShow' => self::artistShow($meta, $appName, data_get($page, 'props.artist'), $canonicalUrl),
             'Lyrics/LyricShow' => self::lyricShow($meta, $appName, data_get($page, 'props.song'), $canonicalUrl),
             'Post/PostShow' => self::postShow($meta, $appName, data_get($page, 'props.post'), $canonicalUrl),
             default => $meta,
@@ -41,7 +44,7 @@ class InertiaSeoMeta
     {
         return [
             ...$meta,
-            'title' => 'Грамматика французского языка | ' . $appName,
+            'title' => 'Грамматика французского языка | '.$appName,
             'description' => 'Грамматика французского языка: правила, объяснения и примеры для изучающих французский.',
         ];
     }
@@ -50,17 +53,17 @@ class InertiaSeoMeta
     {
         $title = data_get($content, 'title');
 
-        if (!$title) {
+        if (! $title) {
             return $meta;
         }
 
-        $description = data_get($content, 'description') ?: 'Грамматика французского языка: ' . $title . '. Правила, объяснения и примеры.';
-        $articleEntityId = $canonicalUrl . '#article';
-        $breadcrumbsEntityId = $canonicalUrl . '#breadcrumbs';
+        $description = data_get($content, 'description') ?: 'Грамматика французского языка: '.$title.'. Правила, объяснения и примеры.';
+        $articleEntityId = $canonicalUrl.'#article';
+        $breadcrumbsEntityId = $canonicalUrl.'#breadcrumbs';
 
         return [
             ...$meta,
-            'title' => $title . ' - грамматика французского языка | ' . $appName,
+            'title' => $title.' - грамматика французского языка | '.$appName,
             'description' => $description,
             'jsonLd' => [
                 [
@@ -111,7 +114,7 @@ class InertiaSeoMeta
     {
         return [
             ...$meta,
-            'title' => 'Уроки французского языка | ' . $appName,
+            'title' => 'Уроки французского языка | '.$appName,
             'description' => 'Уроки французского языка для начинающих: темы для общения, слова, упражнения и произношение.',
         ];
     }
@@ -120,17 +123,17 @@ class InertiaSeoMeta
     {
         $title = data_get($content, 'title');
 
-        if (!$title) {
+        if (! $title) {
             return $meta;
         }
 
-        $description = data_get($content, 'description') ?: 'Урок французского языка: ' . $title . '. Слова, примеры и упражнения для начинающих.';
-        $learningEntityId = $canonicalUrl . '#learning-resource';
-        $breadcrumbsEntityId = $canonicalUrl . '#breadcrumbs';
+        $description = data_get($content, 'description') ?: 'Урок французского языка: '.$title.'. Слова, примеры и упражнения для начинающих.';
+        $learningEntityId = $canonicalUrl.'#learning-resource';
+        $breadcrumbsEntityId = $canonicalUrl.'#breadcrumbs';
 
         return [
             ...$meta,
-            'title' => $title . ' - урок французского языка | ' . $appName,
+            'title' => $title.' - урок французского языка | '.$appName,
             'description' => $description,
             'jsonLd' => [
                 [
@@ -187,8 +190,8 @@ class InertiaSeoMeta
 
         return [
             ...$meta,
-            'title' => $dictionaryTitle . ' | ' . $appName,
-            'description' => $dictionaryTitle . ': перевод, транскрипция, произношение и примеры употребления слов.',
+            'title' => $dictionaryTitle.' | '.$appName,
+            'description' => $dictionaryTitle.': перевод, транскрипция, произношение и примеры употребления слов.',
             'noIndex' => $request->hasAny(['parts_of_speech', 'page', 'lang']),
         ];
     }
@@ -198,21 +201,22 @@ class InertiaSeoMeta
         $wordText = data_get($word, 'word');
         $translation = data_get($word, 'translation');
 
-        if (!$wordText || !$translation) {
+        if (! $wordText || ! $translation) {
             return $meta;
         }
 
-        $description = $wordText . ' - ' . $translation;
+        $description = $wordText.' - '.$translation;
         $transcription = data_get($word, 'transcription');
 
         if ($transcription) {
-            $description .= ' (' . $transcription . ')';
+            $description .= ' ('.$transcription.')';
         }
 
         return [
             ...$meta,
-            'title' => $wordText . ' - ' . $translation . ' | ' . $appName,
-            'description' => $description . ': перевод, транскрипция, произношение и примеры употребления.',
+            'title' => $wordText.' - '.$translation.' | '.$appName,
+            'description' => $description.': перевод, транскрипция, произношение и примеры употребления.',
+            'noIndex' => true,
         ];
     }
 
@@ -220,8 +224,89 @@ class InertiaSeoMeta
     {
         return [
             ...$meta,
-            'title' => 'Тексты французских песен с переводом и транскрипцией | ' . $appName,
+            'title' => 'Тексты французских песен с переводом и транскрипцией | '.$appName,
             'description' => 'Тексты французских песен с построчным переводом на русский язык, транскрипцией и караоке для изучения произношения.',
+        ];
+    }
+
+    private static function artistShow(array $meta, string $appName, mixed $artist, string $canonicalUrl): array
+    {
+        $artistName = data_get($artist, 'name');
+
+        if (! $artistName) {
+            return $meta;
+        }
+
+        $profileDescription = trim(preg_replace(
+            '/\s+/u',
+            ' ',
+            strip_tags((string) data_get($artist, 'description', '')),
+        ));
+        $description = $profileDescription !== ''
+            ? Str::limit($profileDescription, 180)
+            : 'Песни исполнителя '.$artistName
+                .': французские тексты с переводом на русский язык и транскрипцией.';
+
+        $collectionEntityId = $canonicalUrl.'#artist-songs';
+        $breadcrumbsEntityId = $canonicalUrl.'#breadcrumbs';
+        $songs = collect(data_get($artist, 'songs', []));
+
+        return [
+            ...$meta,
+            'title' => $artistName.' — песни, тексты и переводы | '.$appName,
+            'description' => $description,
+            'imageUrl' => data_get($artist, 'image_url') ?: $meta['imageUrl'],
+            'jsonLd' => [
+                [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'CollectionPage',
+                    '@id' => $collectionEntityId,
+                    'name' => $artistName.' — песни, тексты и переводы',
+                    'description' => $description,
+                    'url' => $canonicalUrl,
+                    'inLanguage' => 'ru',
+                    'mainEntity' => [
+                        '@type' => 'ItemList',
+                        'numberOfItems' => $songs->count(),
+                        'itemListElement' => $songs->values()->map(
+                            fn ($song, int $index) => [
+                                '@type' => 'ListItem',
+                                'position' => $index + 1,
+                                'name' => data_get($song, 'artist_name').' — '.data_get($song, 'title'),
+                                'url' => route('lyrics.show', ['id' => data_get($song, 'id')]),
+                            ],
+                        )->all(),
+                    ],
+                    ...(data_get($artist, 'image_url')
+                        ? ['image' => data_get($artist, 'image_url')]
+                        : []),
+                ],
+                [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'BreadcrumbList',
+                    '@id' => $breadcrumbsEntityId,
+                    'itemListElement' => [
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 1,
+                            'name' => 'Главная',
+                            'item' => url('/'),
+                        ],
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 2,
+                            'name' => 'Тексты песен',
+                            'item' => route('lyrics'),
+                        ],
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 3,
+                            'name' => $artistName,
+                            'item' => $canonicalUrl,
+                        ],
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -230,16 +315,16 @@ class InertiaSeoMeta
         $songTitle = data_get($song, 'title');
         $songArtist = data_get($song, 'artist_name');
 
-        if (!$songTitle || !$songArtist) {
+        if (! $songTitle || ! $songArtist) {
             return $meta;
         }
 
-        $pageTitle = $songArtist . ' - ' . $songTitle . ': текст, перевод и транскрипция | ' . $appName;
-        $description = 'Французский текст песни ' . $songArtist . ' - ' . $songTitle
-            . ' с переводом на русский и транскрипцией. Слушайте караоке и изучайте произношение.';
-        $musicEntityId = $canonicalUrl . '#music-composition';
-        $learningEntityId = $canonicalUrl . '#learning-resource';
-        $breadcrumbsEntityId = $canonicalUrl . '#breadcrumbs';
+        $pageTitle = $songArtist.' - '.$songTitle.': текст, перевод и транскрипция | '.$appName;
+        $description = 'Французский текст песни '.$songArtist.' - '.$songTitle
+            .' с переводом на русский и транскрипцией. Слушайте караоке и изучайте произношение.';
+        $musicEntityId = $canonicalUrl.'#music-composition';
+        $learningEntityId = $canonicalUrl.'#learning-resource';
+        $breadcrumbsEntityId = $canonicalUrl.'#breadcrumbs';
 
         return [
             ...$meta,
@@ -262,7 +347,7 @@ class InertiaSeoMeta
                     '@context' => 'https://schema.org',
                     '@type' => 'LearningResource',
                     '@id' => $learningEntityId,
-                    'name' => $songArtist . ' - ' . $songTitle . ': текст, перевод и транскрипция',
+                    'name' => $songArtist.' - '.$songTitle.': текст, перевод и транскрипция',
                     'description' => $description,
                     'learningResourceType' => 'lyrics translation',
                     'inLanguage' => ['fr', 'ru'],
@@ -288,7 +373,7 @@ class InertiaSeoMeta
                         [
                             '@type' => 'ListItem',
                             'position' => 3,
-                            'name' => $songArtist . ' - ' . $songTitle,
+                            'name' => $songArtist.' - '.$songTitle,
                             'item' => $canonicalUrl,
                         ],
                     ],
@@ -302,17 +387,17 @@ class InertiaSeoMeta
         $title = data_get($post, 'title');
         $author = data_get($post, 'user.name');
 
-        if (!$title) {
+        if (! $title) {
             return $meta;
         }
 
         $description = self::makePostDescription($post, $title, $author);
-        $articleEntityId = $canonicalUrl . '#article';
-        $breadcrumbsEntityId = $canonicalUrl . '#breadcrumbs';
+        $articleEntityId = $canonicalUrl.'#article';
+        $breadcrumbsEntityId = $canonicalUrl.'#breadcrumbs';
 
         return [
             ...$meta,
-            'title' => $title . ' | ' . $appName,
+            'title' => $title.' | '.$appName,
             'description' => $description,
             'jsonLd' => [
                 [
@@ -359,11 +444,11 @@ class InertiaSeoMeta
         $text = trim(preg_replace('/\s+/u', ' ', strip_tags((string) data_get($post, 'content', ''))));
 
         if ($text !== '') {
-            return mb_strlen($text) > 180 ? mb_substr($text, 0, 177) . '...' : $text;
+            return mb_strlen($text) > 180 ? mb_substr($text, 0, 177).'...' : $text;
         }
 
-        $authorText = $author ? ' автора ' . $author : '';
+        $authorText = $author ? ' автора '.$author : '';
 
-        return $title . ' - статья' . $authorText . ' на ApprendreFr о французском языке.';
+        return $title.' - статья'.$authorText.' на ApprendreFr о французском языке.';
     }
 }

@@ -62,6 +62,12 @@ class SongShowResource extends JsonResource
             'text_raw_ru' => $this->text_ru ?? '',
             'text_raw_transcription' => $this->text_transcription ?? '',
             'lyrics_versions' => $lyricsVersions,
+            'artists' => $this->whenLoaded('artists', fn () => $this->artists
+                ->map(fn ($artist) => [
+                    'id' => $artist->id,
+                    'name' => $artist->name,
+                ])
+                ->values()),
         ];
     }
 }
