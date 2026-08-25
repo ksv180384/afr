@@ -331,7 +331,7 @@ const uploadKaraokeFile = (logId, uploadToken, file) => {
   data.append('audio', file, file.name);
 
   uploadState.value = 'uploading';
-  axios.post(route('lyrics.karaoke-upload-log.file', { log: logId }), data)
+  axios.post(route('karaoke-upload-log.file', { log: logId }), data)
     .then(() => {
       uploadState.value = 'done';
     })
@@ -345,7 +345,7 @@ const logKaraokeUpload = () => {
   uploadStarted = true;
   const fileForUpload = audioFile.value;
 
-  axios.post(route('lyrics.karaoke-upload-log'), {
+  axios.post(route('karaoke-upload-log'), {
     song_id: props.songId,
     song_title: props.songTitle || '',
     song_artist: props.songArtist || '',

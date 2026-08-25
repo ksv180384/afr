@@ -10,11 +10,6 @@ export default [
         title: 'Грамматика'
     },
     {
-        path: '/lyrics',
-        name: 'lyrics',
-        title: 'Тексты песен'
-    },
-    {
         path: '/lessons',
         name: 'lessons',
         title: 'Уроки'

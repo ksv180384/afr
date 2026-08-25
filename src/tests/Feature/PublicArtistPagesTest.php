@@ -5,7 +5,6 @@ use App\Models\Player\PlayerArtistsSong;
 use App\Models\Player\PlayerSongs;
 use App\Models\Proverb;
 use App\Services\App\Sitemap\SitemapService;
-use Inertia\Testing\AssertableInertia as Assert;
 
 beforeEach(function () {
     Proverb::create([
@@ -14,7 +13,7 @@ beforeEach(function () {
     ]);
 });
 
-test('lyrics catalog contains only artists with visible songs and accepts missing profile fields', function () {
+test('lyrics catalog and song pages are unavailable even for visible songs', function () {
     $artist = PlayerArtistsSong::create([
         'name' => 'Zaz',
         'description' => null,
@@ -32,19 +31,11 @@ test('lyrics catalog contains only artists with visible songs and accepts missin
 
     PlayerArtistsSong::create(['name' => 'Artist without songs']);
 
-    $this->get(route('lyrics'))
-        ->assertOk()
-        ->assertInertia(fn (Assert $page) => $page
-            ->component('Lyrics/Lyrics', false)
-            ->has('artists', 1)
-            ->where('artists.0.id', $artist->id)
-            ->where('artists.0.name', 'Zaz')
-            ->where('artists.0.image_url', null)
-            ->where('artists.0.songs_count', 1)
-            ->where('artists.0.songs.0.id', $song->id));
+    $this->get('/lyrics')->assertNotFound();
+    $this->get('/lyrics/item/'.$song->id)->assertNotFound();
 });
 
-test('artist page renders songs and lineups when descriptions and images are absent', function () {
+test('artist pages are unavailable even when visible songs and lineups exist', function () {
     $jeck = PlayerArtistsSong::create(['name' => 'Jeck']);
     $carla = PlayerArtistsSong::create(['name' => 'Carla']);
     $lineup = PlayerArtistLineup::create(['signature' => $jeck->id.':'.$carla->id]);
@@ -64,19 +55,7 @@ test('artist page renders songs and lineups when descriptions and images are abs
     ]);
     $song->forceFill(['artist_lineup_id' => $lineup->id])->save();
 
-    $this->get(route('lyrics.artist.show', ['id' => $jeck->id]))
-        ->assertOk()
-        ->assertInertia(fn (Assert $page) => $page
-            ->component('Lyrics/ArtistShow', false)
-            ->where('artist.id', $jeck->id)
-            ->where('artist.description', null)
-            ->where('artist.image_url', null)
-            ->where('artist.songs.0.id', $song->id)
-            ->has('artist.lineups', 1)
-            ->where('artist.lineups.0.description', null)
-            ->where('artist.lineups.0.image_url', null)
-            ->has('artist.lineups.0.artists', 2)
-            ->where('artist.lineups.0.songs.0.id', $song->id));
+    $this->get('/lyrics/artist/'.$jeck->id)->assertNotFound();
 });
 
 test('artist page is unavailable when artist has no visible songs', function () {
@@ -91,10 +70,10 @@ test('artist page is unavailable when artist has no visible songs', function () 
     ]);
     $song->artists()->attach($artist->id, ['position' => 0]);
 
-    $this->get(route('lyrics.artist.show', ['id' => $artist->id]))->assertNotFound();
+    $this->get('/lyrics/artist/'.$artist->id)->assertNotFound();
 });
 
-test('sitemap contains public artist pages with visible songs', function () {
+test('sitemap excludes the lyrics catalog and all artist and song pages', function () {
     if (! class_exists(\Spatie\Sitemap\Sitemap::class)) {
         $this->markTestSkipped('Composer dependencies in the container are not synchronized.');
     }
@@ -112,9 +91,17 @@ test('sitemap contains public artist pages with visible songs', function () {
 
     $xml = app(SitemapService::class)->renderXml();
 
-    expect($xml)->toContain(route('lyrics.artist.show', ['id' => $artist->id]));
+    expect($xml)->not->toContain('/lyrics');
 });
 
-test('artist detail route accepts numeric identifiers only', function () {
+test('removed artist detail route stays unavailable for malformed identifiers', function () {
     $this->get('/lyrics/artist/1.')->assertNotFound();
+});
+
+test('music player widget is unavailable and absent from the homepage', function () {
+    $this->get('/widget/player')->assertNotFound();
+
+    $this->get('/')
+        ->assertOk()
+        ->assertDontSee('/widget/player', false);
 });

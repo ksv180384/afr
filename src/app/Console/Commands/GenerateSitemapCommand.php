@@ -9,7 +9,7 @@ class GenerateSitemapCommand extends Command
 {
     protected $signature = 'sitemap:generate';
 
-    protected $description = 'Сгенерировать sitemap.xml (главная, опубликованные посты, видимые песни)';
+    protected $description = 'Сгенерировать sitemap.xml (главная, публичные разделы, опубликованные посты)';
 
     public function handle(SitemapService $sitemapService): int
     {

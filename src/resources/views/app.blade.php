@@ -47,13 +47,7 @@
 <body class="font-sans antialiased">
 @inertia
 
-@if ($seo['pageType'] === 'Lyrics/LyricShow')
-    @include('seo.lyrics-show-noscript', ['song' => data_get($page, 'props.song')])
-@elseif ($seo['pageType'] === 'Lyrics/Lyrics')
-    @include('seo.lyrics-index-noscript', ['artists' => data_get($page, 'props.artists', [])])
-@elseif ($seo['pageType'] === 'Lyrics/ArtistShow')
-    @include('seo.artist-show-noscript', ['artist' => data_get($page, 'props.artist')])
-@elseif ($seo['pageType'] === 'Post/PostShow')
+@if ($seo['pageType'] === 'Post/PostShow')
     @include('seo.post-show-noscript', ['post' => data_get($page, 'props.post')])
 @elseif ($seo['pageType'] === 'Grammar/GrammarShow')
     @include('seo.grammar-show-noscript', ['grammarContent' => data_get($page, 'props.grammarContent')])
@@ -63,13 +57,12 @@
 <noscript>
     <div style="max-width:800px;margin:0 auto;padding:40px 20px;font-family:sans-serif">
         <h1>ApprendreFr — Французский язык онлайн</h1>
-        <p>Изучайте французский язык: грамматика, уроки, тексты песен с переводом и транскрипцией, словарь.</p>
+        <p>Изучайте французский язык: грамматика, уроки и словарь с переводом и транскрипцией.</p>
         <nav>
             <ul>
                 <li><a href="/">Главная</a></li>
                 <li><a href="/grammar">Грамматика французского языка</a></li>
                 <li><a href="/lessons">Уроки французского языка</a></li>
-                <li><a href="/lyrics">Тексты и переводы французских песен</a></li>
                 <li><a href="/dictionary">Французско-русский словарь</a></li>
             </ul>
         </nav>

@@ -1,42 +1,22 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { router } from '@inertiajs/vue3';
-import useClickOutside from '@/Composables/useClickOutside.js';
 import { vOnClickOutside } from '@vueuse/components';
 import api from '@/App/Services/Api';
 
 import { Icon } from '@iconify/vue';
 import WordItem from '@/App/Components/Header/Search/WordItem.vue';
-import SongItem from '@/App/Components/Header/Search/SongItem.vue';
 import AfrWordDialog from '@/App/Components/Words/AfrWordDialog.vue';
 
-const searchTypes = [
-  { id: 'word', title: 'Слово' },
-  { id: 'song', title: 'Песня' },
-];
-const refSearchTypesList = ref(null);
-const refBtnTypesList = ref(null);
 const searchText = ref(router.page.props?.searchText || '');
 const hints = ref([]);
-const isShowListBlock = ref(false);
-const activeSearchType = ref(router.page?.component === 'Song/SearchSong' ? 1 : 0);
 const isShow = ref(false);
 const isSearchLoading = ref(false);
 const isShowDropdown = computed(() => isShow.value && searchText.value.length >= 2/* && props.hints.length*/);
-const activeSearchTypeTitle = computed(() => searchTypes[activeSearchType.value].title);
-const activeSearchTypeId = computed(() => searchTypes[activeSearchType.value].id);
 const wordInfo = ref({});
 const isShowWordInfoModal = ref(false);
 
 let searchTimeout = null;
-
-useClickOutside(
-  refSearchTypesList,
-  () => {
-    isShowListBlock.value = false
-  },
-  refBtnTypesList
-);
 
 const textLang = computed(() => {
   const fr_pattern = /[a-zëôêûâîùçèàé]+/i;
@@ -56,16 +36,6 @@ const textLang = computed(() => {
   }
   return null;
 });
-
-const changeSearchType = (index) => {
-  activeSearchType.value = index;
-  isShowListBlock.value = false;
-  loadHintsSearch();
-}
-
-const toggleListBlock = () => {
-  isShowListBlock.value = !isShowListBlock.value;
-}
 
 const clickOutSide = (e) => {
   if(e.target.id === 'inputSearch'){
@@ -87,7 +57,7 @@ const loadHintsSearch = () => {
   isSearchLoading.value = true;
   searchTimeout = setTimeout(() => {
     isShow.value = true;
-    loadSearchHints({ text: searchText.value, type: activeSearchTypeId.value, lang: textLang.value });
+    loadSearchHints({ text: searchText.value, type: 'word', lang: textLang.value });
   }, 500);
 }
 
@@ -120,47 +90,14 @@ const onShowInfoWord = (id) => {
   isShowWordInfoModal.value = true;
 }
 
-const onSelectSong = (selectSong) => {
-  searchText.value = `${selectSong.artist_name} - ${selectSong.title}`;
-  // loadHintsSearch();
-  isShow.value = false;
-}
-
 const goToSearch = () => {
-  if(searchTypes[activeSearchType.value].id === 'word'){
-    router.visit(route('word.search', { text: searchText.value }))
-  }
-  else if(searchTypes[activeSearchType.value].id === 'song'){
-    router.visit(route('song.search', { text: searchText.value }))
-  }
+  router.visit(route('word.search', { text: searchText.value }))
 }
 </script>
 
 <template>
   <div class="search">
     <div class="search-container">
-      <div class="search-select-container">
-        <div
-          ref="refBtnTypesList"
-          class="select-active"
-          @click="toggleListBlock"
-        >
-          {{ activeSearchTypeTitle }}
-        </div>
-        <ul
-          ref="refSearchTypesList"
-          v-show="isShowListBlock"
-        >
-          <li
-            v-for="(type, index) in searchTypes"
-            :key="type.id"
-            @click="changeSearchType(index)"
-          >
-            {{ type.title }}
-          </li>
-        </ul>
-      </div>
-
       <div class="input-block">
         <input
           v-model="searchText"
@@ -197,21 +134,13 @@ const goToSearch = () => {
           Ничего не найдено
         </li>
       </template>
-      <template v-else-if="activeSearchTypeId === 'word'">
+      <template v-else>
         <WordItem
           v-for="word in hints"
           :key="word.id"
           :word="word"
           @select="onSelectWord"
           @showInfo="onShowInfoWord"
-        />
-      </template>
-      <template v-else>
-        <SongItem
-          v-for="song in hints"
-          :key="song.id"
-          :song="song"
-          @select="onSelectSong"
         />
       </template>
     </ul>
@@ -236,24 +165,12 @@ const goToSearch = () => {
   @apply flex flex-row items-center rounded overflow-hidden;
 }
 
-.search .select-active{
-  @apply bg-blue-300 text-gray-50 w-20 py-1 text-center cursor-pointer;
-}
-
-.search-select-container ul{
-  @apply absolute text-center w-20 bg-white rounded text-gray-500 shadow-md overflow-hidden;
-}
-
-.search-select-container ul li{
-  @apply py-1 cursor-pointer transition duration-300 hover:bg-blue-50;
-}
-
 .input-block{
   @apply flex flex-row items-center;
 }
 
 .input-block input{
-  @apply w-36 outline-none;
+  @apply w-56 outline-none;
   padding: 5px 2rem 5px 6px;
 }
 

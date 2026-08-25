@@ -26,7 +26,7 @@ test('an unmatched karaoke recording saves its log before the audio upload', fun
     Storage::fake('local');
     $song = karaokeSong();
 
-    $logResponse = $this->post(route('lyrics.karaoke-upload-log'), [
+    $logResponse = $this->post(route('karaoke-upload-log'), [
         'song_id' => $song->id,
         'song_title' => $song->title,
         'song_artist' => $song->artist_name,
@@ -44,7 +44,7 @@ test('an unmatched karaoke recording saves its log before the audio upload', fun
     expect($log->file_path)->toBeNull()
         ->and($log->upload_token)->not->toBeNull();
 
-    $uploadResponse = $this->post(route('lyrics.karaoke-upload-log.file', ['log' => $log->id]), [
+    $uploadResponse = $this->post(route('karaoke-upload-log.file', ['log' => $log->id]), [
         'upload_token' => $logResponse->json('upload_token'),
         'audio' => UploadedFile::fake()->create('other-version.mp3', 100, 'audio/mpeg'),
     ]);
@@ -59,7 +59,7 @@ test('an unmatched karaoke recording saves its log before the audio upload', fun
 test('an interrupted audio upload still leaves the unmatched-version log', function () {
     $song = karaokeSong();
 
-    $this->post(route('lyrics.karaoke-upload-log'), [
+    $this->post(route('karaoke-upload-log'), [
         'song_id' => $song->id,
         'song_title' => $song->title,
         'song_artist' => $song->artist_name,
@@ -86,7 +86,7 @@ test('an additional lyrics version does not request a matching recording upload'
         'text_transcription' => '[00:00]Транскрипция',
     ]);
 
-    $response = $this->post(route('lyrics.karaoke-upload-log'), [
+    $response = $this->post(route('karaoke-upload-log'), [
         'song_id' => $song->id,
         'song_title' => $song->title,
         'song_artist' => $song->artist_name,
@@ -115,7 +115,7 @@ test('an audio upload requires the one-time token for its log', function () {
         'upload_token' => str_repeat('a', 64),
     ]);
 
-    $this->post(route('lyrics.karaoke-upload-log.file', ['log' => $log->id]), [
+    $this->post(route('karaoke-upload-log.file', ['log' => $log->id]), [
         'upload_token' => str_repeat('b', 64),
         'audio' => UploadedFile::fake()->create('protected.mp3', 100, 'audio/mpeg'),
     ])->assertNotFound();

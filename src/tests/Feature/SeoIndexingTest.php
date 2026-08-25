@@ -18,23 +18,16 @@ test('dictionary word pages are marked noindex', function () {
     expect($meta['noIndex'])->toBeTrue();
 });
 
-test('lyrics index fallback contains crawlable song links', function () {
-    $html = view('seo.lyrics-index-noscript', [
-        'artists' => [[
-            'name' => 'Zaz',
-            'songs' => [[
-                'id' => 408,
-                'title' => 'Je veux',
-            ]],
-        ]],
-    ])->render();
+test('default seo description does not promote the removed lyrics section', function () {
+    $meta = InertiaSeoMeta::make([
+        'component' => 'Index/Index',
+        'props' => [],
+    ], Request::create('/'));
 
-    expect($html)
-        ->toContain('/lyrics/item/408"')
-        ->toContain('Je veux');
+    expect($meta['description'])->not->toContain('тексты песен');
 });
 
-test('lyrics and dictionary detail routes accept numeric identifiers only', function () {
+test('removed lyrics routes and malformed dictionary routes are unavailable', function () {
     $this->get('/lyrics/item/408.')->assertNotFound();
     $this->get('/dictionary/word/417.')->assertNotFound();
 });

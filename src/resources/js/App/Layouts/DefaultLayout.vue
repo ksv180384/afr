@@ -5,7 +5,6 @@
 import AfrHeader from '@/App/Components/Header/AfrHeader.vue';
 import AfrFooter from '@/App/Components/Footer/AfrFooter.vue';
 import AfrCard from '@/App/Components/Card/AfrCard.vue';
-import AfrPlayer from '@/App/Components/Player/AfrPlayer.vue';
 import AfrWords from '@/App/Components/Words/AfrWords.vue';
 import AfrProverb from "@/App/Components/Proverb/AfrProverb.vue";
 import AfrAnecdote from '@/App/Components/Anecdote/AfrAnecdote.vue';
@@ -32,8 +31,8 @@ const props = defineProps({
     <div class="container-max layout-two-center">
       <div class="left-container">
 
-        <afr-card header="Плеер">
-          <afr-player/>
+        <afr-card header="Слова">
+          <afr-words :words="words"/>
         </afr-card>
 
         <afr-card>
@@ -41,10 +40,6 @@ const props = defineProps({
             <afr-learning-write/>
             <afr-check-yourself/>
           </div>
-        </afr-card>
-
-        <afr-card header="Слова">
-          <afr-words :words="words"/>
         </afr-card>
 
         <afr-card header="Анекдот">

@@ -11,18 +11,13 @@ use Illuminate\Http\RedirectResponse;
 
 class SongCommentController extends Controller
 {
-    /**
-     * @param CreateSongCommentRequest $request
-     * @param SongCommentService $songCommentService
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store(CreateSongCommentRequest $request, SongCommentService $songCommentService): RedirectResponse
     {
         $songCommentData = $request->validated();
         $songCommentService->create($songCommentData);
         $song = PlayerSongs::query()->find($songCommentData['song_id']);
 
-        SendTelegramLogJob::dispatch('Добавлен комментарий к посту "' . $song->artist_name . ' - ' . $song->title  . '": ' . route('lyrics.show', ['id' => $song->id]))->afterResponse();
+        SendTelegramLogJob::dispatch('Добавлен комментарий к песне "'.$song->artist_name.' - '.$song->title.'"')->afterResponse();
 
         return back()->with('status', 'Комментарий успешно отправлен.');
     }

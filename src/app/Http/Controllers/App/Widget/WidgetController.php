@@ -8,15 +8,6 @@ use Inertia\Inertia;
 
 class WidgetController extends Controller
 {
-    public function player()
-    {
-        $authUser = Helper::getUserData();
-
-        return Inertia::render('Player/Player', [
-            'authUser' => $authUser,
-        ]);
-    }
-
     public function learningWrite()
     {
         $authUser = Helper::getUserData();

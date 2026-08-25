@@ -3,7 +3,6 @@
 namespace App\Support;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class InertiaSeoMeta
 {
@@ -17,7 +16,7 @@ class InertiaSeoMeta
 
         $meta = [
             'title' => $appName,
-            'description' => 'Изучайте французский язык: грамматика, уроки, тексты песен с переводом и транскрипцией, словарь.',
+            'description' => 'Изучайте французский язык: грамматика, уроки и словарь с переводом и транскрипцией.',
             'canonicalUrl' => $canonicalUrl,
             'imageUrl' => asset('img/og-default.jpg'),
             'noIndex' => false,
@@ -32,9 +31,6 @@ class InertiaSeoMeta
             'Lessons/LessonShow' => self::lessonShow($meta, $appName, data_get($page, 'props.lessonContent'), $canonicalUrl),
             'Dictionary/Dictionary' => self::dictionaryIndex($meta, $appName, $request),
             'Dictionary/DictionaryShow' => self::dictionaryShow($meta, $appName, data_get($page, 'props.word')),
-            'Lyrics/Lyrics' => self::lyricsIndex($meta, $appName),
-            'Lyrics/ArtistShow' => self::artistShow($meta, $appName, data_get($page, 'props.artist'), $canonicalUrl),
-            'Lyrics/LyricShow' => self::lyricShow($meta, $appName, data_get($page, 'props.song'), $canonicalUrl),
             'Post/PostShow' => self::postShow($meta, $appName, data_get($page, 'props.post'), $canonicalUrl),
             default => $meta,
         };
@@ -217,168 +213,6 @@ class InertiaSeoMeta
             'title' => $wordText.' - '.$translation.' | '.$appName,
             'description' => $description.': перевод, транскрипция, произношение и примеры употребления.',
             'noIndex' => true,
-        ];
-    }
-
-    private static function lyricsIndex(array $meta, string $appName): array
-    {
-        return [
-            ...$meta,
-            'title' => 'Тексты французских песен с переводом и транскрипцией | '.$appName,
-            'description' => 'Тексты французских песен с построчным переводом на русский язык, транскрипцией и караоке для изучения произношения.',
-        ];
-    }
-
-    private static function artistShow(array $meta, string $appName, mixed $artist, string $canonicalUrl): array
-    {
-        $artistName = data_get($artist, 'name');
-
-        if (! $artistName) {
-            return $meta;
-        }
-
-        $profileDescription = trim(preg_replace(
-            '/\s+/u',
-            ' ',
-            strip_tags((string) data_get($artist, 'description', '')),
-        ));
-        $description = $profileDescription !== ''
-            ? Str::limit($profileDescription, 180)
-            : 'Песни исполнителя '.$artistName
-                .': французские тексты с переводом на русский язык и транскрипцией.';
-
-        $collectionEntityId = $canonicalUrl.'#artist-songs';
-        $breadcrumbsEntityId = $canonicalUrl.'#breadcrumbs';
-        $songs = collect(data_get($artist, 'songs', []));
-
-        return [
-            ...$meta,
-            'title' => $artistName.' — песни, тексты и переводы | '.$appName,
-            'description' => $description,
-            'imageUrl' => data_get($artist, 'image_url') ?: $meta['imageUrl'],
-            'jsonLd' => [
-                [
-                    '@context' => 'https://schema.org',
-                    '@type' => 'CollectionPage',
-                    '@id' => $collectionEntityId,
-                    'name' => $artistName.' — песни, тексты и переводы',
-                    'description' => $description,
-                    'url' => $canonicalUrl,
-                    'inLanguage' => 'ru',
-                    'mainEntity' => [
-                        '@type' => 'ItemList',
-                        'numberOfItems' => $songs->count(),
-                        'itemListElement' => $songs->values()->map(
-                            fn ($song, int $index) => [
-                                '@type' => 'ListItem',
-                                'position' => $index + 1,
-                                'name' => data_get($song, 'artist_name').' — '.data_get($song, 'title'),
-                                'url' => route('lyrics.show', ['id' => data_get($song, 'id')]),
-                            ],
-                        )->all(),
-                    ],
-                    ...(data_get($artist, 'image_url')
-                        ? ['image' => data_get($artist, 'image_url')]
-                        : []),
-                ],
-                [
-                    '@context' => 'https://schema.org',
-                    '@type' => 'BreadcrumbList',
-                    '@id' => $breadcrumbsEntityId,
-                    'itemListElement' => [
-                        [
-                            '@type' => 'ListItem',
-                            'position' => 1,
-                            'name' => 'Главная',
-                            'item' => url('/'),
-                        ],
-                        [
-                            '@type' => 'ListItem',
-                            'position' => 2,
-                            'name' => 'Тексты песен',
-                            'item' => route('lyrics'),
-                        ],
-                        [
-                            '@type' => 'ListItem',
-                            'position' => 3,
-                            'name' => $artistName,
-                            'item' => $canonicalUrl,
-                        ],
-                    ],
-                ],
-            ],
-        ];
-    }
-
-    private static function lyricShow(array $meta, string $appName, mixed $song, string $canonicalUrl): array
-    {
-        $songTitle = data_get($song, 'title');
-        $songArtist = data_get($song, 'artist_name');
-
-        if (! $songTitle || ! $songArtist) {
-            return $meta;
-        }
-
-        $pageTitle = $songArtist.' - '.$songTitle.': текст, перевод и транскрипция | '.$appName;
-        $description = 'Французский текст песни '.$songArtist.' - '.$songTitle
-            .' с переводом на русский и транскрипцией. Слушайте караоке и изучайте произношение.';
-        $musicEntityId = $canonicalUrl.'#music-composition';
-        $learningEntityId = $canonicalUrl.'#learning-resource';
-        $breadcrumbsEntityId = $canonicalUrl.'#breadcrumbs';
-
-        return [
-            ...$meta,
-            'title' => $pageTitle,
-            'description' => $description,
-            'jsonLd' => [
-                [
-                    '@context' => 'https://schema.org',
-                    '@type' => 'MusicComposition',
-                    '@id' => $musicEntityId,
-                    'name' => $songTitle,
-                    'composer' => [
-                        '@type' => 'Person',
-                        'name' => $songArtist,
-                    ],
-                    'inLanguage' => 'fr',
-                    'url' => $canonicalUrl,
-                ],
-                [
-                    '@context' => 'https://schema.org',
-                    '@type' => 'LearningResource',
-                    '@id' => $learningEntityId,
-                    'name' => $songArtist.' - '.$songTitle.': текст, перевод и транскрипция',
-                    'description' => $description,
-                    'learningResourceType' => 'lyrics translation',
-                    'inLanguage' => ['fr', 'ru'],
-                    'url' => $canonicalUrl,
-                ],
-                [
-                    '@context' => 'https://schema.org',
-                    '@type' => 'BreadcrumbList',
-                    '@id' => $breadcrumbsEntityId,
-                    'itemListElement' => [
-                        [
-                            '@type' => 'ListItem',
-                            'position' => 1,
-                            'name' => 'Главная',
-                            'item' => url('/'),
-                        ],
-                        [
-                            '@type' => 'ListItem',
-                            'position' => 2,
-                            'name' => 'Тексты песен',
-                            'item' => route('lyrics'),
-                        ],
-                        [
-                            '@type' => 'ListItem',
-                            'position' => 3,
-                            'name' => $songArtist.' - '.$songTitle,
-                            'item' => $canonicalUrl,
-                        ],
-                    ],
-                ],
-            ],
         ];
     }
 
