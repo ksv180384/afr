@@ -1,0 +1,997 @@
+{
+  "unit_id": "B1-U06",
+  "package_id": "programme-b1-u06-v1",
+  "package_file": "B1-U06.v1.json",
+  "session_ids": [
+    "B1-U06-L01",
+    "B1-U06-L02",
+    "B1-U06-L03",
+    "B1-U06-L04",
+    "B1-U06-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "competence",
+      "lexeme_key": "fr:competence:professional-skill",
+      "fr": "une compétence",
+      "ru": [
+        "профессиональный навык, компетенция"
+      ],
+      "transcription_ru": "юн ко(н)пэта́(н)с",
+      "first_session_id": "B1-U06-L01"
+    },
+    {
+      "id": "poste",
+      "lexeme_key": "fr:poste:job-position",
+      "fr": "un poste",
+      "ru": [
+        "должность, рабочая позиция"
+      ],
+      "transcription_ru": "э(н) пост",
+      "first_session_id": "B1-U06-L01"
+    },
+    {
+      "id": "entretien",
+      "lexeme_key": "fr:entretien:job-interview",
+      "fr": "un entretien",
+      "ru": [
+        "собеседование о работе"
+      ],
+      "transcription_ru": "э(н) на(н)трэтьэ́(н)",
+      "first_session_id": "B1-U06-L01"
+    },
+    {
+      "id": "responsabilite",
+      "lexeme_key": "fr:responsabilite:job-responsibility",
+      "fr": "une responsabilité",
+      "ru": [
+        "обязанность в рамках работы"
+      ],
+      "transcription_ru": "юн рэспо(н)сабилитэ́",
+      "first_session_id": "B1-U06-L02"
+    },
+    {
+      "id": "gerer",
+      "lexeme_key": "fr:gerer:manage-work-arrangements",
+      "fr": "gérer",
+      "ru": [
+        "организовывать, вести рабочие дела"
+      ],
+      "transcription_ru": "жэрэ́",
+      "first_session_id": "B1-U06-L02"
+    },
+    {
+      "id": "motivation",
+      "lexeme_key": "fr:motivation:reason-for-job-interest",
+      "fr": "la motivation",
+      "ru": [
+        "мотивация, причина интереса к работе"
+      ],
+      "transcription_ru": "ла мотивасьо́(н)",
+      "first_session_id": "B1-U06-L03"
+    },
+    {
+      "id": "developper",
+      "lexeme_key": "fr:developper:develop-skills",
+      "fr": "développer",
+      "ru": [
+        "развивать навыки"
+      ],
+      "transcription_ru": "дэвлопэ́",
+      "first_session_id": "B1-U06-L03"
+    },
+    {
+      "id": "ce-poste-m-interesse",
+      "lexeme_key": "fr:ce-poste-m-interesse:state-job-interest",
+      "fr": "ce poste m’intéresse",
+      "ru": [
+        "меня интересует эта должность"
+      ],
+      "transcription_ru": "сё пост мэ(н)тэрэ́с",
+      "first_session_id": "B1-U06-L03"
+    },
+    {
+      "id": "mission",
+      "lexeme_key": "fr:mission:job-duty-assignment",
+      "fr": "une mission",
+      "ru": [
+        "порученная работа, задача должности"
+      ],
+      "transcription_ru": "юн мисьо́(н)",
+      "first_session_id": "B1-U06-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:a-mon-avis:personal-opinion",
+    "fr:auparavant:earlier-relative-time",
+    "fr:autre:other",
+    "fr:avoir:compound-past-auxiliary",
+    "fr:bonjour:greeting",
+    "fr:cafe:venue",
+    "fr:calme:quiet-place",
+    "fr:cependant:contrast-reservation",
+    "fr:cher:expensive",
+    "fr:collegue:work-colleague",
+    "fr:confirmer:confirm-arrangement",
+    "fr:cordialement:neutral-email-closing",
+    "fr:deja:prior-learning-experience",
+    "fr:depuis:ongoing-since-duration",
+    "fr:deux:cardinal-number",
+    "fr:disponibilite:person-time-availability",
+    "fr:disponible:available-in-schedule",
+    "fr:dix:cardinal-number",
+    "fr:donc:consequence-conclusion",
+    "fr:ecrire:write",
+    "fr:encore:additional-quantity",
+    "fr:entreprise:company",
+    "fr:equipe:work-team",
+    "fr:francais:french-language",
+    "fr:heure:clock-hour",
+    "fr:hier:yesterday",
+    "fr:horaire:work-schedule",
+    "fr:ici:here-location",
+    "fr:je-voudrais:polite-request",
+    "fr:jeudi:weekday",
+    "fr:madame-monsieur:unknown-recipient-salutation",
+    "fr:maintenant:now",
+    "fr:matin:morning",
+    "fr:message:short-written-message",
+    "fr:midi:noon",
+    "fr:mois:calendar-month",
+    "fr:objet:email-subject",
+    "fr:par-exemple:illustrating-example",
+    "fr:parce-que:because-reason",
+    "fr:pendant:duration-preposition",
+    "fr:pourriez-vous:polite-action-request",
+    "fr:preciser:clarify-service-details",
+    "fr:preparer:prepare-food",
+    "fr:rendez-vous:appointment",
+    "fr:repondre:reply-to-message",
+    "fr:tache:work-task",
+    "fr:terminer:finish-task",
+    "fr:travailler:work",
+    "fr:trois:cardinal-number",
+    "fr:un:cardinal-number",
+    "fr:vendredi:weekday",
+    "fr:y:place-pronoun"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "B1.U06.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "B1-U06-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U06-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U06-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U06-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U06-L02",
+          "task_id": "Q01",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U06-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U06-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U06-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U06-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U06-L05",
+          "task_id": "Q01",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U06-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U06-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U06.APPLY",
+      "evidence": [
+        {
+          "session_id": "B1-U06-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U06-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U06-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U06-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U06-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U06-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U06-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U06-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U05.APPLY",
+      "evidence": [
+        {
+          "session_id": "B1-U06-L01",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U03.APPLY",
+      "evidence": [
+        {
+          "session_id": "B1-U06-L03",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U03.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "B1-U06-L04",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:competence:professional-skill",
+      "reason": "Соотнести навык участника с задачей проекта."
+    },
+    {
+      "lexeme_key": "fr:responsabilite:job-responsibility",
+      "reason": "Различать обязанность и конкретную задачу."
+    },
+    {
+      "lexeme_key": "fr:gerer:manage-work-arrangements",
+      "reason": "Вернуть организацию совместной работы и встреч."
+    },
+    {
+      "lexeme_key": "fr:mission:job-duty-assignment",
+      "reason": "Повторить порученную задачу в связи с действием."
+    },
+    {
+      "lexeme_key": "fr:developper:develop-skills",
+      "reason": "Назвать развитие навыков как цель проекта."
+    },
+    {
+      "lexeme_key": "fr:depuis:ongoing-since-duration",
+      "reason": "Отличать продолжающийся период от завершённого результата."
+    },
+    {
+      "lexeme_key": "fr:pendant:duration-preposition",
+      "reason": "Повторить ограниченную длительность совместной работы."
+    },
+    {
+      "lexeme_key": "fr:par-exemple:illustrating-example",
+      "reason": "Подкреплять рассказ конкретным случаем."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "duration_measured": false,
+    "import_performed": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "transcriptions_structurally_checked": true,
+    "application_validator_passed": true,
+    "full_reused_objects_preserved": true,
+    "new_lexeme_collisions_checked": true,
+    "reading_load_checked": true,
+    "L05_no_new_mandatory_material": true
+  },
+  "open_issues": [
+    "Проверить наличие B1-U05-L05 в целевой базе: зависимость существует в подготовленном пакете, импорт не подтверждён.",
+    "Редактору проверить естественность ответов собеседования, контраст периодов, различие навыка и обязанности и приблизительные транскрипции.",
+    "Прослушать браузерную озвучку новых выражений и пяти рассказов. Время аудио и прохождения не измерено.",
+    "Выполнить предпросмотр и пробное прохождение пяти занятий на сайте. Принятие пользователем, импорт и публикация не подтверждены."
+  ],
+  "progress": {
+    "current_unit": "B1-U06",
+    "prepared_session_ids": [
+      "B1-U06-L01",
+      "B1-U06-L02",
+      "B1-U06-L03",
+      "B1-U06-L04",
+      "B1-U06-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "B1-U07",
+    "next_unit_title": "Учёба и проекты",
+    "previous_unit": "B1-U05",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Полная текущая тема из пяти занятий; следующая тема не начата.",
+    "Девять новых значений по занятиям: три, два, три, одно, ноль. Каждое объяснено до проверки; в L05 нового обязательного материала нет.",
+    "L01 повторяет завершение письма из B1-U05, L03 релевантный пример из B1-U03, L04 рамку мнения из B1-U03. Принятие, импорт и освоение не предполагаются.",
+    "Навык, должность и собеседование различены. Дата встречи не объявляется подтверждением найма.",
+    "Depuis с настоящим описывает текущую работу. Pendant называет длительность; завершение прежней работы ясно из прошедшего времени и смены компании, а не из предлога самого по себе.",
+    "Je gérais / je répondais описывают обычные действия; j’ai terminé — отдельный результат. Выбранные формы не получают новых лексических ключей.",
+    "Responsabilité и mission могут пересекаться по смыслу и не противопоставляются как взаимоисключающие переводы.",
+    "Опыт поддерживает мотивацию, но не доказывает всех навыков или гарантированного найма.",
+    "Ключ je-peux:permission-request не переносится на профессиональную способность: навык описан конкретным действием.",
+    "Полные прежние карточки, ключи и review_items сохраняются. График работы отличается от времени собеседования.",
+    "В L04 ne sont pas encore précisés объяснено как выбранный образец чтения, без полной таблицы страдательных конструкций.",
+    "Все ситуации вымышлены. Ответы только выбором и сборкой готовых блоков; свободное устное собеседование не оценивается.",
+    "Озвучка только браузером: fr-FR, asset_id=null. Нет аудиофайлов и внешних сервисов. База, прежние пакеты, основной реестр, levels и curricula не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "B1-U06-L01",
+      "new_lexeme_keys": [
+        "fr:competence:professional-skill",
+        "fr:poste:job-position",
+        "fr:entretien:job-interview"
+      ],
+      "reused_lexeme_keys": [
+        "fr:auparavant:earlier-relative-time",
+        "fr:autre:other",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:bonjour:greeting",
+        "fr:cordialement:neutral-email-closing",
+        "fr:depuis:ongoing-since-duration",
+        "fr:deux:cardinal-number",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:ecrire:write",
+        "fr:entreprise:company",
+        "fr:equipe:work-team",
+        "fr:francais:french-language",
+        "fr:heure:clock-hour",
+        "fr:ici:here-location",
+        "fr:je-voudrais:polite-request",
+        "fr:jeudi:weekday",
+        "fr:madame-monsieur:unknown-recipient-salutation",
+        "fr:maintenant:now",
+        "fr:matin:morning",
+        "fr:message:short-written-message",
+        "fr:mois:calendar-month",
+        "fr:objet:email-subject",
+        "fr:pendant:duration-preposition",
+        "fr:preciser:clarify-service-details",
+        "fr:repondre:reply-to-message",
+        "fr:tache:work-task",
+        "fr:travailler:work",
+        "fr:trois:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U06-L02",
+      "new_lexeme_keys": [
+        "fr:responsabilite:job-responsibility",
+        "fr:gerer:manage-work-arrangements"
+      ],
+      "reused_lexeme_keys": [
+        "fr:autre:other",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:collegue:work-colleague",
+        "fr:depuis:ongoing-since-duration",
+        "fr:deux:cardinal-number",
+        "fr:disponible:available-in-schedule",
+        "fr:entreprise:company",
+        "fr:entretien:job-interview",
+        "fr:francais:french-language",
+        "fr:ici:here-location",
+        "fr:je-voudrais:polite-request",
+        "fr:jeudi:weekday",
+        "fr:maintenant:now",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:mois:calendar-month",
+        "fr:pendant:duration-preposition",
+        "fr:poste:job-position",
+        "fr:preciser:clarify-service-details",
+        "fr:rendez-vous:appointment",
+        "fr:repondre:reply-to-message",
+        "fr:tache:work-task",
+        "fr:terminer:finish-task",
+        "fr:travailler:work",
+        "fr:trois:cardinal-number",
+        "fr:un:cardinal-number",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U06-L03",
+      "new_lexeme_keys": [
+        "fr:motivation:reason-for-job-interest",
+        "fr:developper:develop-skills",
+        "fr:ce-poste-m-interesse:state-job-interest"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-mon-avis:personal-opinion",
+        "fr:autre:other",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:cafe:venue",
+        "fr:calme:quiet-place",
+        "fr:cependant:contrast-reservation",
+        "fr:cher:expensive",
+        "fr:collegue:work-colleague",
+        "fr:competence:professional-skill",
+        "fr:confirmer:confirm-arrangement",
+        "fr:deja:prior-learning-experience",
+        "fr:ecrire:write",
+        "fr:entreprise:company",
+        "fr:entretien:job-interview",
+        "fr:equipe:work-team",
+        "fr:francais:french-language",
+        "fr:gerer:manage-work-arrangements",
+        "fr:hier:yesterday",
+        "fr:je-voudrais:polite-request",
+        "fr:jeudi:weekday",
+        "fr:message:short-written-message",
+        "fr:mois:calendar-month",
+        "fr:par-exemple:illustrating-example",
+        "fr:parce-que:because-reason",
+        "fr:pendant:duration-preposition",
+        "fr:poste:job-position",
+        "fr:preciser:clarify-service-details",
+        "fr:rendez-vous:appointment",
+        "fr:repondre:reply-to-message",
+        "fr:tache:work-task",
+        "fr:travailler:work",
+        "fr:trois:cardinal-number",
+        "fr:y:place-pronoun"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U06-L04",
+      "new_lexeme_keys": [
+        "fr:mission:job-duty-assignment"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-mon-avis:personal-opinion",
+        "fr:bonjour:greeting",
+        "fr:cafe:venue",
+        "fr:calme:quiet-place",
+        "fr:collegue:work-colleague",
+        "fr:competence:professional-skill",
+        "fr:disponibilite:person-time-availability",
+        "fr:dix:cardinal-number",
+        "fr:donc:consequence-conclusion",
+        "fr:encore:additional-quantity",
+        "fr:entretien:job-interview",
+        "fr:equipe:work-team",
+        "fr:francais:french-language",
+        "fr:gerer:manage-work-arrangements",
+        "fr:heure:clock-hour",
+        "fr:horaire:work-schedule",
+        "fr:je-voudrais:polite-request",
+        "fr:jeudi:weekday",
+        "fr:message:short-written-message",
+        "fr:poste:job-position",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:preparer:prepare-food",
+        "fr:rendez-vous:appointment",
+        "fr:repondre:reply-to-message",
+        "fr:tache:work-task",
+        "fr:travailler:work"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U06-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:auparavant:earlier-relative-time",
+        "fr:autre:other",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:bonjour:greeting",
+        "fr:ce-poste-m-interesse:state-job-interest",
+        "fr:competence:professional-skill",
+        "fr:confirmer:confirm-arrangement",
+        "fr:depuis:ongoing-since-duration",
+        "fr:deux:cardinal-number",
+        "fr:developper:develop-skills",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:ecrire:write",
+        "fr:entreprise:company",
+        "fr:entretien:job-interview",
+        "fr:equipe:work-team",
+        "fr:francais:french-language",
+        "fr:gerer:manage-work-arrangements",
+        "fr:heure:clock-hour",
+        "fr:hier:yesterday",
+        "fr:horaire:work-schedule",
+        "fr:je-voudrais:polite-request",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:mission:job-duty-assignment",
+        "fr:mois:calendar-month",
+        "fr:parce-que:because-reason",
+        "fr:pendant:duration-preposition",
+        "fr:poste:job-position",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:rendez-vous:appointment",
+        "fr:repondre:reply-to-message",
+        "fr:terminer:finish-task",
+        "fr:travailler:work",
+        "fr:trois:cardinal-number",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "B1-U06-L01",
+      "material": "Настоящее + depuis; passé composé + pendant с ясной сменой компании."
+    },
+    {
+      "session_id": "B1-U06-L02",
+      "material": "Je gérais / je répondais; j’ai terminé; обязанности и отдельный результат."
+    },
+    {
+      "session_id": "B1-U06-L03",
+      "material": "Ce poste m’intéresse parce que; je voudrais développer; пример в поддержку."
+    },
+    {
+      "session_id": "B1-U06-L04",
+      "material": "Quelles sont les missions; pourriez-vous préciser les horaires; выбранное ne sont pas encore précisés."
+    },
+    {
+      "session_id": "B1-U06-L05",
+      "material": "Интеграция прежнего материала без нового обязательного содержания."
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:competence:professional-skill",
+      "evidence": [
+        {
+          "session_id": "B1-U06-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U06-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:poste:job-position",
+      "evidence": [
+        {
+          "session_id": "B1-U06-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:entretien:job-interview",
+      "evidence": [
+        {
+          "session_id": "B1-U06-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U06-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U06-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U06-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:responsabilite:job-responsibility",
+      "evidence": [
+        {
+          "session_id": "B1-U06-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U06-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:gerer:manage-work-arrangements",
+      "evidence": [
+        {
+          "session_id": "B1-U06-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U06-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U06-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U06-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U06-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:motivation:reason-for-job-interest",
+      "evidence": [
+        {
+          "session_id": "B1-U06-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U06-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:developper:develop-skills",
+      "evidence": [
+        {
+          "session_id": "B1-U06-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U06-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:ce-poste-m-interesse:state-job-interest",
+      "evidence": [
+        {
+          "session_id": "B1-U06-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U06-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:mission:job-duty-assignment",
+      "evidence": [
+        {
+          "session_id": "B1-U06-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U06-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U06-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "text_conventions": {
+    "situation_status": "Оригинальные вымышленные ответы кандидатов и описание должности; факты разных рассказов не переносятся между ними.",
+    "external_services_required": false,
+    "free_speaking_assessed": false
+  },
+  "reading_word_counts": [
+    61,
+    60,
+    63,
+    62,
+    79,
+    79
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 35,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      7
+    ],
+    "new_lexemes": 9,
+    "external_prerequisites": [
+      "B1-U05-L05"
+    ],
+    "external_reference_status": "exists in prepared previous package; target database/import unverified",
+    "reused_lexeme_keys": 52,
+    "reading_word_counts": [
+      61,
+      60,
+      63,
+      62,
+      79,
+      79
+    ],
+    "unit_complete": true
+  },
+  "application_validation": {
+    "report_file": "B1-U06.validation.json",
+    "valid": true,
+    "file_hash": "6dbfd9e7cc67a46ec8b74a74a4702b58d478c4bc69ccf09c8cdb93a3f9911014",
+    "errors": 0,
+    "warning_counts": {
+      "browser_tts": 5,
+      "editorial_review_required": 5
+    },
+    "requires_editorial_review": true,
+    "database_modified": false
+  }
+}
