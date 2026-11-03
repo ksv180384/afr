@@ -1,0 +1,120 @@
+{
+  "description": "Невалидные полные пакеты для регрессионных тестов. Не импортировать как контент.",
+  "error_contract": "code — конкретная причина в details/errors; верхний API code — validation_failed либо version_conflict/unsupported_schema_version из этапа 01. path — JSON Pointer (RFC 6901).",
+  "database_context": "Если context не задан, внешние сущности считаются отсутствующими. existing_package задаёт уже импортированные версии для проверки неизменяемости.",
+  "cases": [
+    {
+      "file": "unknown-reference.json",
+      "layer": "semantic",
+      "expected_errors": [
+        {
+          "code": "reference_not_found",
+          "path": "/sessions/1/prerequisite_ids/0"
+        }
+      ],
+      "description": "Неизвестная prerequisite-сессия; в тестовом контексте БД внешних сущностей нет."
+    },
+    {
+      "file": "duplicate-task-id.json",
+      "layer": "semantic",
+      "expected_errors": [
+        {
+          "code": "duplicate_id",
+          "path": "/sessions/0/tasks/1/id"
+        }
+      ],
+      "description": "ID повторён внутри одной сессии. Q01 в разных сессиях, напротив, допустим."
+    },
+    {
+      "file": "unsupported-task-type.json",
+      "layer": "schema",
+      "expected_errors": [
+        {
+          "code": "unsupported_task_type",
+          "path": "/sessions/0/tasks/0/type"
+        }
+      ],
+      "description": "Шестой тип вопросов не поддерживается."
+    },
+    {
+      "file": "unsupported-schema-version.json",
+      "layer": "schema",
+      "expected_errors": [
+        {
+          "code": "unsupported_schema_version",
+          "path": "/schema_version"
+        }
+      ],
+      "description": "Версия формата не поддерживается; это не номер редакции материала."
+    },
+    {
+      "file": "prerequisite-cycle.json",
+      "layer": "semantic",
+      "expected_errors": [
+        {
+          "code": "prerequisite_cycle",
+          "path": "/sessions/0/prerequisite_ids/0"
+        }
+      ],
+      "description": "Две существующие сессии образуют цикл зависимостей."
+    },
+    {
+      "file": "changed-existing-version.json",
+      "layer": "semantic",
+      "expected_errors": [
+        {
+          "code": "version_conflict",
+          "path": "/sessions/0/version"
+        }
+      ],
+      "description": "В БД считается импортированным содержимое примера v1; тот же ID/version с иным payload отклоняется.",
+      "context": {
+        "existing_package": "../pre-a1-u01-examples.json"
+      }
+    },
+    {
+      "file": "missing-transcription.json",
+      "layer": "schema",
+      "expected_errors": [
+        {
+          "code": "transcription_required",
+          "path": "/sessions/0/tasks/2/choices/0/transcription_ru"
+        }
+      ],
+      "description": "Транскрипция обязательна даже у французского отвлекающего варианта."
+    },
+    {
+      "file": "unknown-field.json",
+      "layer": "schema",
+      "expected_errors": [
+        {
+          "code": "unknown_field",
+          "path": "/sessions/0/status"
+        }
+      ],
+      "description": "Публикация управляется отдельно; status запрещён в импортном payload."
+    },
+    {
+      "file": "mixed-fill-branches.json",
+      "layer": "schema",
+      "expected_errors": [
+        {
+          "code": "invalid_task_fields",
+          "path": "/sessions/0/tasks/3/accepted_answers"
+        }
+      ],
+      "description": "Режим choice не принимает accepted_answers ветки text."
+    },
+    {
+      "file": "assessed-not-in-material.json",
+      "layer": "semantic",
+      "expected_errors": [
+        {
+          "code": "invalid_assessed_vocabulary",
+          "path": "/sessions/0/tasks/3/assessed_vocabulary_ids/0"
+        }
+      ],
+      "description": "Оцениваемый словарь не является подмножеством vocabulary_ids шага."
+    }
+  ]
+}

@@ -1,0 +1,1867 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:afr:daily-practice:session-package:1",
+  "title": "Пакет учебных сессий fr-ru — v1",
+  "description": "Неизвестные поля запрещены. Схема проверяет структуру, а межобъектные ссылки, ID, циклы и редакторская готовность проверяются отдельно.",
+  "$comment": "Лимиты синхронизированы с src/config/daily_practice.php этапа 01. Размер UTF-8 до 10485760 байт, глубина JSON до 32, повторные ключи объектов и отсутствие raw HTML проверяются до/после разбора серверным валидатором этапа 04; это не стандартные keywords JSON Schema.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "type": "integer"
+    },
+    "package_id": {
+      "$ref": "#/$defs/id"
+    },
+    "language_pair": {
+      "const": "fr-ru"
+    },
+    "sessions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/session"
+      },
+      "minItems": 0,
+      "maxItems": 100
+    },
+    "levels": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/catalogLevel"
+      },
+      "minItems": 0,
+      "maxItems": 7
+    },
+    "units": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/unit"
+      },
+      "minItems": 0,
+      "maxItems": 1000
+    },
+    "curricula": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/curriculum"
+      },
+      "minItems": 0,
+      "maxItems": 1000
+    }
+  },
+  "required": [
+    "schema_version",
+    "package_id",
+    "language_pair",
+    "sessions"
+  ],
+  "additionalProperties": false,
+  "anyOf": [
+    {
+      "required": [
+        "sessions"
+      ],
+      "properties": {
+        "sessions": {
+          "minItems": 1
+        }
+      }
+    },
+    {
+      "required": [
+        "levels"
+      ],
+      "properties": {
+        "levels": {
+          "minItems": 1
+        }
+      }
+    },
+    {
+      "required": [
+        "units"
+      ],
+      "properties": {
+        "units": {
+          "minItems": 1
+        }
+      }
+    },
+    {
+      "required": [
+        "curricula"
+      ],
+      "properties": {
+        "curricula": {
+          "minItems": 1
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 20000,
+      "pattern": "^(?=[\\s\\S]*\\S)[^<>]+$"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$(?![\\s\\S])"
+    },
+    "transcription": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 20000,
+      "allOf": [
+        {
+          "pattern": "[А-Яа-яЁё]"
+        },
+        {
+          "pattern": "^[А-Яа-яЁё́\\s.,!?;:…()\\[\\]«»„“”\"'’/\\-–—]+$"
+        }
+      ]
+    },
+    "level": {
+      "enum": [
+        "PRE_A1",
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1",
+        "C2"
+      ]
+    },
+    "slug": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$(?![\\s\\S])"
+    },
+    "pronunciationNote": {
+      "type": "object",
+      "properties": {
+        "fr": {
+          "$ref": "#/$defs/text"
+        },
+        "transcription_ru": {
+          "$ref": "#/$defs/transcription"
+        }
+      },
+      "required": [
+        "fr",
+        "transcription_ru"
+      ],
+      "additionalProperties": false
+    },
+    "example": {
+      "type": "object",
+      "properties": {
+        "fr": {
+          "$ref": "#/$defs/text"
+        },
+        "ru": {
+          "$ref": "#/$defs/text"
+        },
+        "transcription_ru": {
+          "$ref": "#/$defs/transcription"
+        }
+      },
+      "required": [
+        "fr",
+        "ru",
+        "transcription_ru"
+      ],
+      "additionalProperties": false
+    },
+    "audio": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "$ref": "#/$defs/text"
+        },
+        "transcription_ru": {
+          "$ref": "#/$defs/transcription"
+        },
+        "lang": {
+          "const": "fr-FR"
+        },
+        "asset_id": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/id"
+            }
+          ]
+        }
+      },
+      "required": [
+        "text",
+        "transcription_ru",
+        "lang",
+        "asset_id"
+      ],
+      "additionalProperties": false
+    },
+    "choice": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "text": {
+          "$ref": "#/$defs/text"
+        },
+        "text_lang": {
+          "enum": [
+            "fr",
+            "ru"
+          ]
+        },
+        "transcription_ru": {
+          "$ref": "#/$defs/transcription"
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "text_lang"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "text_lang": {
+                "const": "fr"
+              }
+            },
+            "required": [
+              "text_lang"
+            ]
+          },
+          "then": {
+            "required": [
+              "transcription_ru"
+            ]
+          }
+        }
+      ]
+    },
+    "prompt": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "$ref": "#/$defs/text"
+        },
+        "text_lang": {
+          "enum": [
+            "fr",
+            "ru"
+          ]
+        },
+        "transcription_ru": {
+          "$ref": "#/$defs/transcription"
+        },
+        "audio": {
+          "$ref": "#/$defs/audio"
+        }
+      },
+      "required": [
+        "text",
+        "text_lang"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "text_lang": {
+                "const": "fr"
+              }
+            },
+            "required": [
+              "text_lang"
+            ]
+          },
+          "then": {
+            "required": [
+              "transcription_ru"
+            ]
+          }
+        }
+      ]
+    },
+    "feedback": {
+      "type": "object",
+      "properties": {
+        "correct": {
+          "$ref": "#/$defs/text"
+        },
+        "incorrect": {
+          "$ref": "#/$defs/text"
+        },
+        "pronunciation_notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pronunciationNote"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        }
+      },
+      "required": [
+        "correct",
+        "incorrect"
+      ],
+      "additionalProperties": false
+    },
+    "objective": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/text"
+            },
+            {
+              "maxLength": 255
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "title"
+      ],
+      "additionalProperties": false
+    },
+    "introduction": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "before_task_id": {
+          "$ref": "#/$defs/id"
+        },
+        "text": {
+          "$ref": "#/$defs/text"
+        },
+        "vocabulary_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "audio": {
+          "$ref": "#/$defs/audio"
+        },
+        "pronunciation_notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pronunciationNote"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        }
+      },
+      "required": [
+        "id",
+        "before_task_id",
+        "text",
+        "vocabulary_ids"
+      ],
+      "additionalProperties": false
+    },
+    "explanationBlock": {
+      "type": "object",
+      "properties": {
+        "heading": {
+          "$ref": "#/$defs/text"
+        },
+        "paragraphs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/text"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        },
+        "examples": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/example"
+          },
+          "minItems": 0,
+          "maxItems": 1000
+        },
+        "pronunciation_notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pronunciationNote"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        }
+      },
+      "required": [
+        "heading",
+        "paragraphs",
+        "examples"
+      ],
+      "additionalProperties": false
+    },
+    "publicPage": {
+      "type": "object",
+      "properties": {
+        "slug": {
+          "$ref": "#/$defs/slug"
+        },
+        "summary": {
+          "$ref": "#/$defs/text"
+        },
+        "explanation_blocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/explanationBlock"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        },
+        "seo_title": {
+          "$ref": "#/$defs/text"
+        },
+        "seo_description": {
+          "$ref": "#/$defs/text"
+        },
+        "related_session_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "slug",
+        "summary",
+        "explanation_blocks"
+      ],
+      "additionalProperties": false
+    },
+    "singleChoiceTask": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "const": "single_choice"
+        },
+        "instruction": {
+          "$ref": "#/$defs/text"
+        },
+        "prompt": {
+          "$ref": "#/$defs/prompt"
+        },
+        "hint": {
+          "$ref": "#/$defs/text"
+        },
+        "feedback": {
+          "$ref": "#/$defs/feedback"
+        },
+        "objective_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "skill": {
+          "enum": [
+            "vocabulary",
+            "listening",
+            "reading",
+            "grammar",
+            "sentence_building"
+          ]
+        },
+        "vocabulary_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "assessed_vocabulary_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "pronunciation_notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pronunciationNote"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        },
+        "choices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/choice"
+          },
+          "minItems": 2,
+          "maxItems": 6
+        },
+        "correct_choice_id": {
+          "$ref": "#/$defs/id"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "instruction",
+        "prompt",
+        "feedback",
+        "objective_ids",
+        "skill",
+        "vocabulary_ids",
+        "assessed_vocabulary_ids",
+        "choices",
+        "correct_choice_id"
+      ],
+      "additionalProperties": false
+    },
+    "matchingPairsTask": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "const": "matching_pairs"
+        },
+        "instruction": {
+          "$ref": "#/$defs/text"
+        },
+        "prompt": {
+          "$ref": "#/$defs/prompt"
+        },
+        "hint": {
+          "$ref": "#/$defs/text"
+        },
+        "feedback": {
+          "$ref": "#/$defs/feedback"
+        },
+        "objective_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "skill": {
+          "enum": [
+            "vocabulary",
+            "listening",
+            "reading",
+            "grammar",
+            "sentence_building"
+          ]
+        },
+        "vocabulary_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "assessed_vocabulary_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "pronunciation_notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pronunciationNote"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        },
+        "left_items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/choice"
+          },
+          "minItems": 2,
+          "maxItems": 6
+        },
+        "right_items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/choice"
+          },
+          "minItems": 2,
+          "maxItems": 6
+        },
+        "correct_pairs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "left_id": {
+                "$ref": "#/$defs/id"
+              },
+              "right_id": {
+                "$ref": "#/$defs/id"
+              },
+              "assessed_vocabulary_ids": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/id"
+                },
+                "minItems": 0,
+                "maxItems": 1000,
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "left_id",
+              "right_id",
+              "assessed_vocabulary_ids"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 2,
+          "maxItems": 6
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "instruction",
+        "prompt",
+        "feedback",
+        "objective_ids",
+        "skill",
+        "vocabulary_ids",
+        "assessed_vocabulary_ids",
+        "left_items",
+        "right_items",
+        "correct_pairs"
+      ],
+      "additionalProperties": false
+    },
+    "fillBlankChoiceTask": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "const": "fill_blank"
+        },
+        "instruction": {
+          "$ref": "#/$defs/text"
+        },
+        "prompt": {
+          "$ref": "#/$defs/prompt"
+        },
+        "hint": {
+          "$ref": "#/$defs/text"
+        },
+        "feedback": {
+          "$ref": "#/$defs/feedback"
+        },
+        "objective_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "skill": {
+          "enum": [
+            "vocabulary",
+            "listening",
+            "reading",
+            "grammar",
+            "sentence_building"
+          ]
+        },
+        "vocabulary_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "assessed_vocabulary_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "pronunciation_notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pronunciationNote"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        },
+        "text_before": {
+          "type": "string",
+          "maxLength": 20000,
+          "pattern": "^[^_]*$"
+        },
+        "text_after": {
+          "type": "string",
+          "maxLength": 20000,
+          "pattern": "^[^_]*$"
+        },
+        "text_before_transcription_ru": {
+          "anyOf": [
+            {
+              "const": ""
+            },
+            {
+              "$ref": "#/$defs/transcription"
+            }
+          ]
+        },
+        "text_after_transcription_ru": {
+          "anyOf": [
+            {
+              "const": ""
+            },
+            {
+              "$ref": "#/$defs/transcription"
+            }
+          ]
+        },
+        "completed_phrases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pronunciationNote"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        },
+        "input_mode": {
+          "const": "choice"
+        },
+        "choices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/choice"
+          },
+          "minItems": 2,
+          "maxItems": 6
+        },
+        "correct_choice_id": {
+          "$ref": "#/$defs/id"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "instruction",
+        "prompt",
+        "feedback",
+        "objective_ids",
+        "skill",
+        "vocabulary_ids",
+        "assessed_vocabulary_ids",
+        "text_before",
+        "text_after",
+        "text_before_transcription_ru",
+        "text_after_transcription_ru",
+        "completed_phrases",
+        "input_mode",
+        "choices",
+        "correct_choice_id"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "text_before": {
+                "const": ""
+              }
+            },
+            "required": [
+              "text_before"
+            ]
+          },
+          "then": {
+            "properties": {
+              "text_before_transcription_ru": {
+                "const": ""
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "text_before_transcription_ru": {
+                "$ref": "#/$defs/transcription"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "text_after": {
+                "const": ""
+              }
+            },
+            "required": [
+              "text_after"
+            ]
+          },
+          "then": {
+            "properties": {
+              "text_after_transcription_ru": {
+                "const": ""
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "text_after_transcription_ru": {
+                "$ref": "#/$defs/transcription"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "fillBlankTextTask": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "const": "fill_blank"
+        },
+        "instruction": {
+          "$ref": "#/$defs/text"
+        },
+        "prompt": {
+          "$ref": "#/$defs/prompt"
+        },
+        "hint": {
+          "$ref": "#/$defs/text"
+        },
+        "feedback": {
+          "$ref": "#/$defs/feedback"
+        },
+        "objective_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "skill": {
+          "enum": [
+            "vocabulary",
+            "listening",
+            "reading",
+            "grammar",
+            "sentence_building"
+          ]
+        },
+        "vocabulary_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "assessed_vocabulary_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "pronunciation_notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pronunciationNote"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        },
+        "text_before": {
+          "type": "string",
+          "maxLength": 20000,
+          "pattern": "^[^_]*$"
+        },
+        "text_after": {
+          "type": "string",
+          "maxLength": 20000,
+          "pattern": "^[^_]*$"
+        },
+        "text_before_transcription_ru": {
+          "anyOf": [
+            {
+              "const": ""
+            },
+            {
+              "$ref": "#/$defs/transcription"
+            }
+          ]
+        },
+        "text_after_transcription_ru": {
+          "anyOf": [
+            {
+              "const": ""
+            },
+            {
+              "$ref": "#/$defs/transcription"
+            }
+          ]
+        },
+        "completed_phrases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pronunciationNote"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        },
+        "input_mode": {
+          "const": "text"
+        },
+        "answer_lang": {
+          "enum": [
+            "fr",
+            "ru"
+          ]
+        },
+        "accepted_answers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/text"
+          },
+          "minItems": 1,
+          "maxItems": 1000,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "instruction",
+        "prompt",
+        "feedback",
+        "objective_ids",
+        "skill",
+        "vocabulary_ids",
+        "assessed_vocabulary_ids",
+        "text_before",
+        "text_after",
+        "text_before_transcription_ru",
+        "text_after_transcription_ru",
+        "completed_phrases",
+        "input_mode",
+        "answer_lang",
+        "accepted_answers"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "answer_lang": {
+                "const": "fr"
+              }
+            },
+            "required": [
+              "answer_lang"
+            ]
+          },
+          "then": {
+            "required": [
+              "pronunciation_notes"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "text_before": {
+                "const": ""
+              }
+            },
+            "required": [
+              "text_before"
+            ]
+          },
+          "then": {
+            "properties": {
+              "text_before_transcription_ru": {
+                "const": ""
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "text_before_transcription_ru": {
+                "$ref": "#/$defs/transcription"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "text_after": {
+                "const": ""
+              }
+            },
+            "required": [
+              "text_after"
+            ]
+          },
+          "then": {
+            "properties": {
+              "text_after_transcription_ru": {
+                "const": ""
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "text_after_transcription_ru": {
+                "$ref": "#/$defs/transcription"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "wordOrderTask": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "const": "word_order"
+        },
+        "instruction": {
+          "$ref": "#/$defs/text"
+        },
+        "prompt": {
+          "$ref": "#/$defs/prompt"
+        },
+        "hint": {
+          "$ref": "#/$defs/text"
+        },
+        "feedback": {
+          "$ref": "#/$defs/feedback"
+        },
+        "objective_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "skill": {
+          "enum": [
+            "vocabulary",
+            "listening",
+            "reading",
+            "grammar",
+            "sentence_building"
+          ]
+        },
+        "vocabulary_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "assessed_vocabulary_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "pronunciation_notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pronunciationNote"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        },
+        "tokens": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/id"
+              },
+              "text": {
+                "$ref": "#/$defs/text"
+              },
+              "text_lang": {
+                "const": "fr"
+              },
+              "transcription_ru": {
+                "$ref": "#/$defs/transcription"
+              }
+            },
+            "required": [
+              "id",
+              "text",
+              "text_lang",
+              "transcription_ru"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 2,
+          "maxItems": 1000
+        },
+        "accepted_orders": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/id"
+            },
+            "minItems": 2,
+            "maxItems": 1000,
+            "uniqueItems": true
+          },
+          "minItems": 1,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "completed_phrases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pronunciationNote"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "instruction",
+        "prompt",
+        "feedback",
+        "objective_ids",
+        "skill",
+        "vocabulary_ids",
+        "assessed_vocabulary_ids",
+        "tokens",
+        "accepted_orders",
+        "completed_phrases"
+      ],
+      "additionalProperties": false
+    },
+    "shortAnswerTask": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "const": "short_answer"
+        },
+        "instruction": {
+          "$ref": "#/$defs/text"
+        },
+        "prompt": {
+          "$ref": "#/$defs/prompt"
+        },
+        "hint": {
+          "$ref": "#/$defs/text"
+        },
+        "feedback": {
+          "$ref": "#/$defs/feedback"
+        },
+        "objective_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "skill": {
+          "enum": [
+            "vocabulary",
+            "listening",
+            "reading",
+            "grammar",
+            "sentence_building"
+          ]
+        },
+        "vocabulary_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "assessed_vocabulary_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "pronunciation_notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pronunciationNote"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        },
+        "answer_lang": {
+          "enum": [
+            "fr",
+            "ru"
+          ]
+        },
+        "accepted_answers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/text"
+          },
+          "minItems": 1,
+          "maxItems": 1000,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "instruction",
+        "prompt",
+        "feedback",
+        "objective_ids",
+        "skill",
+        "vocabulary_ids",
+        "assessed_vocabulary_ids",
+        "answer_lang",
+        "accepted_answers"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "answer_lang": {
+                "const": "fr"
+              }
+            },
+            "required": [
+              "answer_lang"
+            ]
+          },
+          "then": {
+            "required": [
+              "pronunciation_notes"
+            ]
+          }
+        }
+      ]
+    },
+    "singleChoiceReview": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "const": "single_choice"
+        },
+        "instruction": {
+          "$ref": "#/$defs/text"
+        },
+        "prompt": {
+          "$ref": "#/$defs/prompt"
+        },
+        "hint": {
+          "$ref": "#/$defs/text"
+        },
+        "feedback": {
+          "$ref": "#/$defs/feedback"
+        },
+        "pronunciation_notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pronunciationNote"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        },
+        "choices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/choice"
+          },
+          "minItems": 2,
+          "maxItems": 6
+        },
+        "correct_choice_id": {
+          "$ref": "#/$defs/id"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "instruction",
+        "prompt",
+        "feedback",
+        "choices",
+        "correct_choice_id"
+      ],
+      "additionalProperties": false
+    },
+    "shortAnswerReview": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "const": "short_answer"
+        },
+        "instruction": {
+          "$ref": "#/$defs/text"
+        },
+        "prompt": {
+          "$ref": "#/$defs/prompt"
+        },
+        "hint": {
+          "$ref": "#/$defs/text"
+        },
+        "feedback": {
+          "$ref": "#/$defs/feedback"
+        },
+        "pronunciation_notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pronunciationNote"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        },
+        "answer_lang": {
+          "enum": [
+            "fr",
+            "ru"
+          ]
+        },
+        "accepted_answers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/text"
+          },
+          "minItems": 1,
+          "maxItems": 1000,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "instruction",
+        "prompt",
+        "feedback",
+        "answer_lang",
+        "accepted_answers"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "answer_lang": {
+                "const": "fr"
+              }
+            },
+            "required": [
+              "answer_lang"
+            ]
+          },
+          "then": {
+            "required": [
+              "pronunciation_notes"
+            ]
+          }
+        }
+      ]
+    },
+    "task": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/singleChoiceTask"
+        },
+        {
+          "$ref": "#/$defs/matchingPairsTask"
+        },
+        {
+          "$ref": "#/$defs/fillBlankChoiceTask"
+        },
+        {
+          "$ref": "#/$defs/fillBlankTextTask"
+        },
+        {
+          "$ref": "#/$defs/wordOrderTask"
+        },
+        {
+          "$ref": "#/$defs/shortAnswerTask"
+        }
+      ]
+    },
+    "reviewItem": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/singleChoiceReview"
+        },
+        {
+          "$ref": "#/$defs/shortAnswerReview"
+        }
+      ]
+    },
+    "vocabulary": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "lexeme_key": {
+          "$ref": "#/$defs/id"
+        },
+        "fr": {
+          "$ref": "#/$defs/text"
+        },
+        "ru": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/text"
+          },
+          "minItems": 1,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "transcription_ru": {
+          "$ref": "#/$defs/transcription"
+        },
+        "example": {
+          "$ref": "#/$defs/example"
+        },
+        "dictionary_word_id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 9223372036854775807
+        },
+        "review_items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reviewItem"
+          },
+          "minItems": 0,
+          "maxItems": 1000
+        }
+      },
+      "required": [
+        "id",
+        "lexeme_key",
+        "fr",
+        "ru",
+        "transcription_ru",
+        "review_items"
+      ],
+      "additionalProperties": false
+    },
+    "catalogLevel": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/level"
+        },
+        "title": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/text"
+            },
+            {
+              "maxLength": 255
+            }
+          ]
+        },
+        "summary": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/text"
+            },
+            {
+              "maxLength": 16383
+            }
+          ]
+        },
+        "learning_outcomes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/text"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        },
+        "pronunciation_notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pronunciationNote"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        }
+      },
+      "required": [
+        "code",
+        "title",
+        "summary",
+        "learning_outcomes"
+      ],
+      "additionalProperties": false
+    },
+    "unit": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "level": {
+          "$ref": "#/$defs/level"
+        },
+        "slug": {
+          "$ref": "#/$defs/slug"
+        },
+        "title": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/text"
+            },
+            {
+              "maxLength": 255
+            }
+          ]
+        },
+        "summary": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/text"
+            },
+            {
+              "maxLength": 16383
+            }
+          ]
+        },
+        "learning_outcomes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/text"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "pronunciation_notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pronunciationNote"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        }
+      },
+      "required": [
+        "id",
+        "level",
+        "slug",
+        "title",
+        "summary",
+        "learning_outcomes",
+        "order"
+      ],
+      "additionalProperties": false
+    },
+    "curriculum": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "level": {
+          "$ref": "#/$defs/level"
+        },
+        "required_objective_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "checkpoint_session_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "level",
+        "required_objective_ids",
+        "checkpoint_session_ids"
+      ],
+      "additionalProperties": false
+    },
+    "session": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "level": {
+          "$ref": "#/$defs/level"
+        },
+        "unit_id": {
+          "$ref": "#/$defs/id"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "kind": {
+          "enum": [
+            "practice",
+            "checkpoint"
+          ]
+        },
+        "prerequisite_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 1000,
+          "uniqueItems": true
+        },
+        "title": {
+          "$ref": "#/$defs/text"
+        },
+        "description": {
+          "$ref": "#/$defs/text"
+        },
+        "duration_minutes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "objectives": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/objective"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        },
+        "skills": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "vocabulary",
+              "listening",
+              "reading",
+              "grammar",
+              "sentence_building"
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 5,
+          "uniqueItems": true
+        },
+        "introductions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/introduction"
+          },
+          "minItems": 0,
+          "maxItems": 1000
+        },
+        "vocabulary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/vocabulary"
+          },
+          "minItems": 0,
+          "maxItems": 1000
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/task"
+          },
+          "minItems": 6,
+          "maxItems": 8
+        },
+        "public_page": {
+          "$ref": "#/$defs/publicPage"
+        },
+        "pronunciation_notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pronunciationNote"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "level",
+        "unit_id",
+        "order",
+        "kind",
+        "prerequisite_ids",
+        "title",
+        "description",
+        "duration_minutes",
+        "objectives",
+        "skills",
+        "vocabulary",
+        "tasks"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "checkpoint"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "tasks": {
+                "items": {
+                  "properties": {
+                    "objective_ids": {
+                      "minItems": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

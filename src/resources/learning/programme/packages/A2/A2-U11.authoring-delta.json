@@ -1,0 +1,1086 @@
+{
+  "unit_id": "A2-U11",
+  "package_file": "A2-U11.v1.json",
+  "session_ids": [
+    "A2-U11-L01",
+    "A2-U11-L02",
+    "A2-U11-L03",
+    "A2-U11-L04",
+    "A2-U11-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "feter",
+      "lexeme_key": "fr:feter:celebrate-occasion",
+      "fr": "fêter",
+      "ru": [
+        "праздновать событие"
+      ],
+      "transcription_ru": "фэтэ́",
+      "first_session_id": "A2-U11-L01"
+    },
+    {
+      "id": "fete",
+      "lexeme_key": "fr:fete:celebration-gathering",
+      "fr": "une fête",
+      "ru": [
+        "праздник, праздничная встреча"
+      ],
+      "transcription_ru": "юн фэ́т",
+      "first_session_id": "A2-U11-L01"
+    },
+    {
+      "id": "anniversaire",
+      "lexeme_key": "fr:anniversaire:birthday",
+      "fr": "un anniversaire",
+      "ru": [
+        "день рождения"
+      ],
+      "transcription_ru": "э(н) нанивэрсэ́р",
+      "first_session_id": "A2-U11-L01"
+    },
+    {
+      "id": "cadeau",
+      "lexeme_key": "fr:cadeau:gift",
+      "fr": "un cadeau",
+      "ru": [
+        "подарок"
+      ],
+      "transcription_ru": "э(н) кадо́",
+      "first_session_id": "A2-U11-L02"
+    },
+    {
+      "id": "gateau",
+      "lexeme_key": "fr:gateau:cake",
+      "fr": "un gâteau",
+      "ru": [
+        "торт в ситуации праздничной покупки"
+      ],
+      "transcription_ru": "э(н) гато́",
+      "first_session_id": "A2-U11-L02"
+    },
+    {
+      "id": "feliciter",
+      "lexeme_key": "fr:feliciter:congratulate-achievement",
+      "fr": "féliciter",
+      "ru": [
+        "поздравлять с успехом"
+      ],
+      "transcription_ru": "фэлиситэ́",
+      "first_session_id": "A2-U11-L03"
+    },
+    {
+      "id": "reussite",
+      "lexeme_key": "fr:reussite:successful-result",
+      "fr": "une réussite",
+      "ru": [
+        "успех, удачный результат дела"
+      ],
+      "transcription_ru": "юн рэюси́т",
+      "first_session_id": "A2-U11-L03"
+    },
+    {
+      "id": "bon-anniversaire",
+      "lexeme_key": "fr:bon-anniversaire:birthday-wish",
+      "fr": "bon anniversaire",
+      "ru": [
+        "поздравление с днём рождения"
+      ],
+      "transcription_ru": "бон анивэрсэ́р",
+      "first_session_id": "A2-U11-L03"
+    },
+    {
+      "id": "soiree",
+      "lexeme_key": "fr:soiree:social-evening",
+      "fr": "une soirée",
+      "ru": [
+        "вечер-встреча, проведённый вместе"
+      ],
+      "transcription_ru": "юн суарэ́",
+      "first_session_id": "A2-U11-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:acheter:buy",
+    "fr:aller:near-future-auxiliary",
+    "fr:appartement:apartment",
+    "fr:apporter:bring-object",
+    "fr:avoir:compound-past-auxiliary",
+    "fr:bruyant:noisy-place",
+    "fr:cafe:coffee",
+    "fr:calme:quiet-place",
+    "fr:cher:expensive",
+    "fr:cinema:cinema-venue",
+    "fr:diner:evening-meal",
+    "fr:disponible:available-in-schedule",
+    "fr:famille:family",
+    "fr:frere:brother",
+    "fr:gare:railway-station",
+    "fr:heure:clock-hour",
+    "fr:hier:yesterday",
+    "fr:hotel:hotel",
+    "fr:huit:cardinal-number",
+    "fr:invitation:written-invitation",
+    "fr:inviter:invite-to-leisure",
+    "fr:je-voudrais:polite-request",
+    "fr:lumineux:well-lit",
+    "fr:maison:house-home",
+    "fr:mardi:weekday",
+    "fr:meilleur:better-quality",
+    "fr:merci:thanks",
+    "fr:meuble:furnished-accommodation",
+    "fr:midi:noon",
+    "fr:moins:less-comparison",
+    "fr:musee:museum",
+    "fr:parc:park",
+    "fr:pendant-que:simultaneous-time-clause",
+    "fr:preparer:prepare-food",
+    "fr:pres-de:near-place",
+    "fr:proprietaire:property-owner",
+    "fr:que:relative-direct-object",
+    "fr:qui:relative-subject",
+    "fr:soeur:sister",
+    "fr:soir:evening",
+    "fr:trois:cardinal-number",
+    "fr:vendredi:weekday",
+    "fr:visite:property-viewing",
+    "fr:visiter:visit-place"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A2.U11.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U11-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U11-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U11-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U11-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U11-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U11-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U11-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U11-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U11-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U11-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U11.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U11-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U11-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U11-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U11-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U11-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U11-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U11-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U10.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U11-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U08.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U11-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U11-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U04.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U11-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U11-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U11-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:acheter:buy",
+      "reason": "Вернуть покупку предмета с прежним ключом."
+    },
+    {
+      "lexeme_key": "fr:cadeau:gift",
+      "reason": "Повторить подарок отдельно от торта и повода встречи."
+    },
+    {
+      "lexeme_key": "fr:gateau:cake",
+      "reason": "Сохранять конкретный предмет праздничной покупки."
+    },
+    {
+      "lexeme_key": "fr:apporter:bring-object",
+      "reason": "Отличать принести предмет от только купить или запланировать покупку."
+    },
+    {
+      "lexeme_key": "fr:feter:celebrate-occasion",
+      "reason": "Вернуть празднование и выбранную прошедшую форму с прежним ключом."
+    },
+    {
+      "lexeme_key": "fr:invitation:written-invitation",
+      "reason": "Повторить само приглашение отдельно от события."
+    },
+    {
+      "lexeme_key": "fr:soiree:social-evening",
+      "reason": "Сохранять вечер-встречу отдельно от времени суток."
+    },
+    {
+      "lexeme_key": "fr:merci:thanks",
+      "reason": "Возвращать благодарность с явно названной причиной."
+    },
+    {
+      "lexeme_key": "fr:feliciter:congratulate-achievement",
+      "reason": "Не заменять поздравление с успехом благодарностью."
+    },
+    {
+      "lexeme_key": "fr:pendant-que:simultaneous-time-clause",
+      "reason": "Повторить одновременные фон и событие, не выводить обязательное прерывание."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "new_local_ids_do_not_overwrite_existing_meanings": true,
+    "known_invitation_thanks_buying_food_preparation_and_bringing_keys_preserved": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "selected_past_forms_explained_before_testing": true,
+    "birthday_and_success_contexts_explicitly_separated": true,
+    "evening_hour_explicit_and_explained_before_question": true,
+    "social_evening_distinguished_from_time_of_day": true,
+    "background_event_tasks_use_existing_same_level_objective": true,
+    "transcriptions_structurally_checked_without_claim_of_listening": true,
+    "apostrophes_kept_in_whole_tokens": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A2-U10-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Редактору проверить естественность приглашений, поздравления с успехом и благодарности за вечер, ясность ролей и распределения покупок, выбранные формы рассказа в прошлом.",
+    "Прослушать браузерную озвучку fête / fêter, cadeau / gâteau, anniversaire, bon anniversaire, féliciter / félicite, réussite, soirée, préparais и a apporté. Длительность аудио и занятий не измерена.",
+    "Выполнить предпросмотр и пробное прохождение: явно названный вечерний час, адресат приглашения, подарок и торт, повод поздравления, причина благодарности, фон и завершённое событие."
+  ],
+  "progress": {
+    "current_unit": "A2-U11",
+    "prepared_session_ids": [
+      "A2-U11-L01",
+      "A2-U11-L02",
+      "A2-U11-L03",
+      "A2-U11-L04",
+      "A2-U11-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A2-U12",
+    "next_unit_title": "Покупки в интернете",
+    "previous_unit": "A2-U10",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку только A2-U11; принятие и импорт предыдущих пакетов пользователем не подтверждены. Не утверждается, что ученик их освоил.",
+    "Новые значения по занятиям: три, два, три, одно, ноль. В каждом введении не более трёх карточек; новый обязательный материал в L05 отсутствует.",
+    "В L01 повторяется качество кофе и сравнение группы из A2-U10. В L03 возвращается день, час и владелец на просмотре из A2-U08; в L04 — сравнение жилья из той же темы. Прежние объекты карточек сохраняются полностью.",
+    "Fête — событие-встреча, fêter — действие праздновать. Anniversaire здесь только день рождения, без значения годовщины других событий.",
+    "Cadeau и gâteau — разные предметы. Книга может быть подарком в реальной жизни, поэтому в выборе карточки явно требуется назвать покупку именно словом подарок; книга без контекста не объявляется неподходящим подарком.",
+    "В планах действуют конкретные покупатели, а сестра может быть человеком, чей день рождения празднуют. Не делается вывод, что она сама покупает оба предмета.",
+    "Inviter сохраняет прежнее значение приглашения на досуговое событие. Invitation сохраняет само приглашение. Подмена названием новой темы не создаёт дублирующих ключей.",
+    "Préparer сохраняет прежнее значение приготовления еды и используется с ужином. Не расширяется до организации всего события. Acheter и apporter сохраняют свои прежние значения; покупка, план и принесённый предмет не отождествляются.",
+    "Bon anniversaire — готовое поздравление с днём рождения. Féliciter введено в прозрачном контексте успеха в деле, с новой réussite, а не как универсальная замена обычной формулы дня рождения.",
+    "Сообщения о дне рождения и успехе в L03 явно разделены заголовками. Наличие торта, подарка или общего праздника само по себе не определяет повод поздравления.",
+    "Soirée здесь — проведённый вместе вечер-встреча, а не просто временное le soir. Merci сохраняет прежний ключ; дополнение задаёт разные причины благодарности.",
+    "Выбранные формы je préparais le dîner, mon frère a apporté un cadeau и j’ai fêté mon anniversaire объяснены до первой проверки. Это применение знакомого контраста imparfait / passé composé, без введения нового времени.",
+    "Pendant que связывает фон и событие по одновременности. Не утверждается обязательное прерывание или завершение готовки в момент принесённого подарка. В L05 действие брата не получает автоматически момент действия сестры.",
+    "Проверки фона и события ссылаются на неизменную A2.U04.APPLY. Они не получают цели поздравления или благодарности только ради статистики.",
+    "Вечерний час назван прямо через à huit heures du soir, с объяснением до вопроса. Приглашение и благодарность в диалоге разделены репликами; роль, пол и возраст по голосу не определяются.",
+    "Все события, приглашения и сообщения вымышленные. Реальные приглашения и сообщения не отправлялись, покупки не совершались.",
+    "Озвучка только браузерным API: fr-FR, asset_id=null. Нет аудиофайлов, внешних сервисов, набора текста и обязательной записи голоса.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A2-U11-L01",
+      "new_lexeme_keys": [
+        "fr:feter:celebrate-occasion",
+        "fr:fete:celebration-gathering",
+        "fr:anniversaire:birthday"
+      ],
+      "reused_lexeme_keys": [
+        "fr:acheter:buy",
+        "fr:appartement:apartment",
+        "fr:cafe:coffee",
+        "fr:cher:expensive",
+        "fr:cinema:cinema-venue",
+        "fr:diner:evening-meal",
+        "fr:disponible:available-in-schedule",
+        "fr:famille:family",
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:hotel:hotel",
+        "fr:huit:cardinal-number",
+        "fr:invitation:written-invitation",
+        "fr:inviter:invite-to-leisure",
+        "fr:je-voudrais:polite-request",
+        "fr:maison:house-home",
+        "fr:meilleur:better-quality",
+        "fr:merci:thanks",
+        "fr:moins:less-comparison",
+        "fr:musee:museum",
+        "fr:parc:park",
+        "fr:pres-de:near-place",
+        "fr:soir:evening",
+        "fr:trois:cardinal-number",
+        "fr:vendredi:weekday",
+        "fr:visiter:visit-place"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U11-L02",
+      "new_lexeme_keys": [
+        "fr:cadeau:gift",
+        "fr:gateau:cake"
+      ],
+      "reused_lexeme_keys": [
+        "fr:acheter:buy",
+        "fr:aller:near-future-auxiliary",
+        "fr:anniversaire:birthday",
+        "fr:diner:evening-meal",
+        "fr:disponible:available-in-schedule",
+        "fr:famille:family",
+        "fr:fete:celebration-gathering",
+        "fr:feter:celebrate-occasion",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:invitation:written-invitation",
+        "fr:inviter:invite-to-leisure",
+        "fr:je-voudrais:polite-request",
+        "fr:maison:house-home",
+        "fr:preparer:prepare-food",
+        "fr:soeur:sister",
+        "fr:soir:evening",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U11-L03",
+      "new_lexeme_keys": [
+        "fr:feliciter:congratulate-achievement",
+        "fr:reussite:successful-result",
+        "fr:bon-anniversaire:birthday-wish"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:near-future-auxiliary",
+        "fr:anniversaire:birthday",
+        "fr:appartement:apartment",
+        "fr:apporter:bring-object",
+        "fr:cadeau:gift",
+        "fr:calme:quiet-place",
+        "fr:fete:celebration-gathering",
+        "fr:feter:celebrate-occasion",
+        "fr:invitation:written-invitation",
+        "fr:inviter:invite-to-leisure",
+        "fr:je-voudrais:polite-request",
+        "fr:lumineux:well-lit",
+        "fr:mardi:weekday",
+        "fr:merci:thanks",
+        "fr:midi:noon",
+        "fr:parc:park",
+        "fr:pres-de:near-place",
+        "fr:proprietaire:property-owner",
+        "fr:soir:evening",
+        "fr:vendredi:weekday",
+        "fr:visite:property-viewing",
+        "fr:visiter:visit-place"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U11-L04",
+      "new_lexeme_keys": [
+        "fr:soiree:social-evening"
+      ],
+      "reused_lexeme_keys": [
+        "fr:anniversaire:birthday",
+        "fr:appartement:apartment",
+        "fr:apporter:bring-object",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:bon-anniversaire:birthday-wish",
+        "fr:bruyant:noisy-place",
+        "fr:cadeau:gift",
+        "fr:calme:quiet-place",
+        "fr:diner:evening-meal",
+        "fr:famille:family",
+        "fr:feliciter:congratulate-achievement",
+        "fr:feter:celebrate-occasion",
+        "fr:frere:brother",
+        "fr:gare:railway-station",
+        "fr:hier:yesterday",
+        "fr:invitation:written-invitation",
+        "fr:je-voudrais:polite-request",
+        "fr:lumineux:well-lit",
+        "fr:maison:house-home",
+        "fr:merci:thanks",
+        "fr:meuble:furnished-accommodation",
+        "fr:moins:less-comparison",
+        "fr:parc:park",
+        "fr:pendant-que:simultaneous-time-clause",
+        "fr:preparer:prepare-food",
+        "fr:pres-de:near-place",
+        "fr:que:relative-direct-object",
+        "fr:qui:relative-subject",
+        "fr:reussite:successful-result",
+        "fr:soir:evening",
+        "fr:visiter:visit-place"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U11-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:acheter:buy",
+        "fr:aller:near-future-auxiliary",
+        "fr:anniversaire:birthday",
+        "fr:apporter:bring-object",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:bon-anniversaire:birthday-wish",
+        "fr:cadeau:gift",
+        "fr:diner:evening-meal",
+        "fr:disponible:available-in-schedule",
+        "fr:famille:family",
+        "fr:feliciter:congratulate-achievement",
+        "fr:fete:celebration-gathering",
+        "fr:feter:celebrate-occasion",
+        "fr:frere:brother",
+        "fr:gateau:cake",
+        "fr:heure:clock-hour",
+        "fr:hier:yesterday",
+        "fr:huit:cardinal-number",
+        "fr:invitation:written-invitation",
+        "fr:inviter:invite-to-leisure",
+        "fr:je-voudrais:polite-request",
+        "fr:maison:house-home",
+        "fr:merci:thanks",
+        "fr:pendant-que:simultaneous-time-clause",
+        "fr:preparer:prepare-food",
+        "fr:reussite:successful-result",
+        "fr:soeur:sister",
+        "fr:soir:evening",
+        "fr:soiree:social-evening",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A2-U11-L01",
+      "material": "Перенос Je vous invite на праздник; Je voudrais fêter mon anniversaire; выбранный вечерний час à huit heures du soir."
+    },
+    {
+      "session_id": "A2-U11-L02",
+      "material": "Повторение ближайшего плана Je vais acheter / mon frère va acheter; Je vais préparer le dîner."
+    },
+    {
+      "session_id": "A2-U11-L03",
+      "material": "Bon anniversaire; выбранная форма Je vous félicite pour cette réussite; различие поздравления и благодарности."
+    },
+    {
+      "session_id": "A2-U11-L04",
+      "material": "Merci pour la soirée / le cadeau / l’invitation; выбранные je préparais, a apporté и j’ai fêté для фона и завершённого события."
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:feter:celebrate-occasion",
+      "evidence": [
+        {
+          "session_id": "A2-U11-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U11-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U11-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:fete:celebration-gathering",
+      "evidence": [
+        {
+          "session_id": "A2-U11-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:anniversaire:birthday",
+      "evidence": [
+        {
+          "session_id": "A2-U11-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U11-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U11-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U11-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:cadeau:gift",
+      "evidence": [
+        {
+          "session_id": "A2-U11-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U11-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U11-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:gateau:cake",
+      "evidence": [
+        {
+          "session_id": "A2-U11-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U11-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U11-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U11-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:feliciter:congratulate-achievement",
+      "evidence": [
+        {
+          "session_id": "A2-U11-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U11-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U11-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:reussite:successful-result",
+      "evidence": [
+        {
+          "session_id": "A2-U11-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U11-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U11-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:bon-anniversaire:birthday-wish",
+      "evidence": [
+        {
+          "session_id": "A2-U11-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:soiree:social-evening",
+      "evidence": [
+        {
+          "session_id": "A2-U11-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U11-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U11-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    }
+  ],
+  "text_conventions": {
+    "situation_status": "Оригинальные вымышленные приглашения, планы, поздравления и семейные рассказы.",
+    "occasion_scope": "День рождения и успех в деле названы явно, не выводятся из подарка или голоса.",
+    "time_scope": "Вечерний час указан прямо; фон и событие связаны только явно заданной временной рамкой.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 9,
+    "external_prerequisites": [
+      "A2-U10-L05"
+    ],
+    "external_reference_status": "A2-U10-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 10
+      },
+      "file_hash": "d657c27b7a007ae64ae1e71b988b6007aa5ffb58f3668c47a64a6f49ef196ddc",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 44,
+    "text_lengths": [
+      {
+        "session_id": "A2-U11-L01",
+        "reading_word_counts": [
+          42,
+          42
+        ],
+        "listening_word_counts": [
+          42
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U11-L02",
+        "reading_word_counts": [
+          42,
+          32
+        ],
+        "listening_word_counts": [
+          32
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U11-L03",
+        "reading_word_counts": [
+          35,
+          36
+        ],
+        "listening_word_counts": [
+          36
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U11-L04",
+        "reading_word_counts": [
+          38,
+          31
+        ],
+        "listening_word_counts": [
+          31
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U11-L05",
+        "reading_word_counts": [
+          32,
+          33
+        ],
+        "listening_word_counts": [
+          33,
+          33
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "Je voudrais fêter mon anniversaire",
+        "session_id": "A2-U11-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Je vous invite à une fête",
+        "session_id": "A2-U11-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "À huit heures du soir",
+        "session_id": "A2-U11-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Un cadeau",
+        "session_id": "A2-U11-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "un gâteau",
+        "session_id": "A2-U11-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Bon anniversaire",
+        "session_id": "A2-U11-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je vous félicite pour cette réussite",
+        "session_id": "A2-U11-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Merci pour la soirée",
+        "session_id": "A2-U11-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je préparais le dîner",
+        "session_id": "A2-U11-L04",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Mon frère a apporté un cadeau",
+        "session_id": "A2-U11-L04",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "J’ai fêté mon anniversaire",
+        "session_id": "A2-U11-L04",
+        "task_id": "Q03"
+      }
+    ],
+    "level_description_included": false,
+    "curricula_included": false
+  }
+}

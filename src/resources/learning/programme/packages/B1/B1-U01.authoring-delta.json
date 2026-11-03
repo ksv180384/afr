@@ -1,0 +1,923 @@
+{
+  "unit_id": "B1-U01",
+  "package_id": "programme-b1-u01-v1",
+  "package_file": "B1-U01.v1.json",
+  "session_ids": [
+    "B1-U01-L01",
+    "B1-U01-L02",
+    "B1-U01-L03",
+    "B1-U01-L04",
+    "B1-U01-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "evenement",
+      "lexeme_key": "fr:evenement:personal-event",
+      "fr": "un événement",
+      "ru": [
+        "событие личного рассказа"
+      ],
+      "transcription_ru": "э(н) нэвэнма́(н)",
+      "first_session_id": "B1-U01-L01"
+    },
+    {
+      "id": "recit",
+      "lexeme_key": "fr:recit:personal-narrative",
+      "fr": "un récit",
+      "ru": [
+        "связный рассказ о событии"
+      ],
+      "transcription_ru": "э(н) рэси́",
+      "first_session_id": "B1-U01-L01"
+    },
+    {
+      "id": "auparavant",
+      "lexeme_key": "fr:auparavant:earlier-relative-time",
+      "fr": "auparavant",
+      "ru": [
+        "до этого: раньше названного момента"
+      ],
+      "transcription_ru": "опарава́(н)",
+      "first_session_id": "B1-U01-L02"
+    },
+    {
+      "id": "eprouver",
+      "lexeme_key": "fr:eprouver:experience-emotion",
+      "fr": "éprouver",
+      "ru": [
+        "испытывать чувство"
+      ],
+      "transcription_ru": "эпрувэ́",
+      "first_session_id": "B1-U01-L03"
+    },
+    {
+      "id": "joie",
+      "lexeme_key": "fr:joie:joy-emotion",
+      "fr": "la joie",
+      "ru": [
+        "радость"
+      ],
+      "transcription_ru": "ла жуа́",
+      "first_session_id": "B1-U01-L03"
+    },
+    {
+      "id": "peur",
+      "lexeme_key": "fr:peur:fear-emotion",
+      "fr": "la peur",
+      "ru": [
+        "страх"
+      ],
+      "transcription_ru": "ла пёр",
+      "first_session_id": "B1-U01-L03"
+    },
+    {
+      "id": "se-rendre-compte",
+      "lexeme_key": "fr:se-rendre-compte:realise-fact",
+      "fr": "se rendre compte",
+      "ru": [
+        "осознавать, понимать для себя факт"
+      ],
+      "transcription_ru": "сё ра(н)др ко(н)т",
+      "first_session_id": "B1-U01-L04"
+    },
+    {
+      "id": "grace-a",
+      "lexeme_key": "fr:grace-a:beneficial-cause",
+      "fr": "grâce à",
+      "ru": [
+        "благодаря: причина благоприятного результата"
+      ],
+      "transcription_ru": "грас а́",
+      "first_session_id": "B1-U01-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:aller:near-future-auxiliary",
+    "fr:anniversaire:birthday",
+    "fr:arriver:transport-arrive",
+    "fr:attendre:wait",
+    "fr:avec-elle:with-her",
+    "fr:avoir:compound-past-auxiliary",
+    "fr:ca-va-bien:positive_wellbeing",
+    "fr:cadeau:gift",
+    "fr:deja:prior-learning-experience",
+    "fr:diner:evening-meal",
+    "fr:disponible:available-in-schedule",
+    "fr:donner-des-nouvelles:share-personal-news",
+    "fr:ecrire:write",
+    "fr:ensemble:together",
+    "fr:ensuite:next-step",
+    "fr:etre:compound-past-auxiliary",
+    "fr:famille:family",
+    "fr:fete:celebration-gathering",
+    "fr:feter:celebrate-occasion",
+    "fr:frere:brother",
+    "fr:gare:railway-station",
+    "fr:heure:clock-hour",
+    "fr:hier:yesterday",
+    "fr:huit:cardinal-number",
+    "fr:je-voudrais:polite-request",
+    "fr:la:there-location",
+    "fr:livre:book",
+    "fr:maintenant:now",
+    "fr:maison:house-home",
+    "fr:malade:self-reported-illness",
+    "fr:merci:thanks",
+    "fr:pendant-que:simultaneous-time-clause",
+    "fr:preparer:prepare-food",
+    "fr:puis:then-sequence",
+    "fr:rentrer:return-home",
+    "fr:retard:transport-delay",
+    "fr:samedi:weekday",
+    "fr:soeur:sister",
+    "fr:soir:evening",
+    "fr:souvenir:memory-of-past",
+    "fr:tarif:service-price",
+    "fr:terminer:finish-task",
+    "fr:vendredi:weekday"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "B1.U01.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "B1-U01-L01",
+          "task_id": "Q01",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U01-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U01-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U01-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U01-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U01-L02",
+          "task_id": "Q01",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U01-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U01-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U01-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U01-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U01-L03",
+          "task_id": "Q01",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U01-L05",
+          "task_id": "Q01",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U01-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U01-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        }
+      ],
+      "status": "covered_in_prepared_tasks"
+    },
+    {
+      "objective_id": "B1.U01.APPLY",
+      "evidence": [
+        {
+          "session_id": "B1-U01-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U01-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U01-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U01-L04",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U01-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U01-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U01-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U01-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U01-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U01-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        }
+      ],
+      "status": "covered_in_prepared_tasks"
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:auparavant:earlier-relative-time",
+      "reason": "Отличать прежний момент от следующего действия при изменении плана."
+    },
+    {
+      "lexeme_key": "fr:ensuite:next-step",
+      "reason": "Восстанавливать порядок действий в договорённости."
+    },
+    {
+      "lexeme_key": "fr:grace-a:beneficial-cause",
+      "reason": "Отличать полезную причину от условия и времени."
+    },
+    {
+      "lexeme_key": "fr:se-rendre-compte:realise-fact",
+      "reason": "Вернуть осознание обстоятельства перед уточнением договорённости."
+    },
+    {
+      "lexeme_key": "fr:disponible:available-in-schedule",
+      "reason": "Сопоставлять доступность со временем совместного плана."
+    },
+    {
+      "lexeme_key": "fr:je-voudrais:polite-request",
+      "reason": "Повторять желание отдельно от обязательства или обещания."
+    },
+    {
+      "lexeme_key": "fr:eprouver:experience-emotion",
+      "reason": "Вернуть реакцию на изменение совместного плана."
+    },
+    {
+      "lexeme_key": "fr:joie:joy-emotion",
+      "reason": "Выбрать радость как реакцию на благоприятную договорённость."
+    },
+    {
+      "lexeme_key": "fr:peur:fear-emotion",
+      "reason": "Отличать страх от положительной реакции, не выводя чувство без контекста."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "duration_measured": false,
+    "import_performed": false,
+    "existing_L01_L02_content_preserved": true,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "transcriptions_structurally_checked": true,
+    "application_validator_passed": true,
+    "full_reused_objects_preserved": true,
+    "new_lexeme_collisions_checked": true,
+    "reading_load_checked": true,
+    "L05_no_new_mandatory_material": true
+  },
+  "open_issues": [
+    "Редактору проверить французские модели чувств и осознания, естественность рассказов, приблизительные транскрипции и соответствие B1.",
+    "Прослушать браузерную озвучку всех новых выражений и моделей прошлого времени. Время аудио и занятий не измерено.",
+    "Выполнить предпросмотр и пробное прохождение пяти занятий на сайте. Импорт и принятие пользователем не подтверждены."
+  ],
+  "progress": {
+    "current_unit": "B1-U01",
+    "prepared_session_ids": [
+      "B1-U01-L01",
+      "B1-U01-L02",
+      "B1-U01-L03",
+      "B1-U01-L04",
+      "B1-U01-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "B1-U02",
+    "next_unit_title": "Договорённости",
+    "previous_unit": "A2-U20",
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Текущая тема дополнена до пяти полных занятий в одном каноническом файле. Следующая тема не начата.",
+    "Существующие ID, версии и содержание L01–L02 сохранены без изменений. Добавлены L03–L05 версии 1. Новый package_id обозначает объединённую партию; импорт не выполнялся.",
+    "Новые значения по занятиям: два, одно, три, два, ноль. Лимит не заполняется ради количества. В L05 нет нового обязательного материала.",
+    "В L02 plus-que-parfait вводится после ясной последовательности завершения готовки и последующего возвращения. В L03–L05 это различие повторяется.",
+    "Pendant que обозначает одновременность; ни прерывание, ни завершение процесса не выводятся автоматически. Auparavant указывает предшествование.",
+    "Éprouver показан с чувствами joie и peur: выбранные формы фонового чувства и реакции. Само время глагола не определяет положительное или отрицательное чувство.",
+    "Se rendre compte показан выбранной моделью je me suis rendu compte que; её осознанный факт объясняется до оценки. Ma sœur était là pour moi объяснено как присутствие и поддержка.",
+    "Grâce à обозначает полезную причину, а не просто порядок событий. Участие сестры в готовке названо прямо.",
+    "Выводы ограничены конкретным опытом. Желание готовить вместе в субботу не выдаётся за безусловное обещание или правило обо всей семье.",
+    "Все прежние карточки и ключи сохраняются целиком. Для выбранных глагольных форм новые ключи не создаются.",
+    "Все ответы выбираются или собираются из готовых блоков. Нет свободного текста, обязательного голоса или разорванных апострофов в сборках.",
+    "Тексты оригинальные и вымышленные. Озвучка только браузером: fr-FR, asset_id=null. Внешние сервисы и аудиофайлы не используются.",
+    "Описание уровня B1 сохранено из первого частичного пакета; curricula не добавлялись. Прежние пакеты, основной реестр и база сайта не изменены."
+  ],
+  "session_material": [
+    {
+      "session_id": "B1-U01-L01",
+      "new_lexeme_keys": [
+        "fr:evenement:personal-event",
+        "fr:recit:personal-narrative"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:near-future-auxiliary",
+        "fr:anniversaire:birthday",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:cadeau:gift",
+        "fr:diner:evening-meal",
+        "fr:disponible:available-in-schedule",
+        "fr:donner-des-nouvelles:share-personal-news",
+        "fr:ecrire:write",
+        "fr:ensuite:next-step",
+        "fr:etre:compound-past-auxiliary",
+        "fr:famille:family",
+        "fr:fete:celebration-gathering",
+        "fr:feter:celebrate-occasion",
+        "fr:frere:brother",
+        "fr:hier:yesterday",
+        "fr:je-voudrais:polite-request",
+        "fr:livre:book",
+        "fr:maison:house-home",
+        "fr:pendant-que:simultaneous-time-clause",
+        "fr:preparer:prepare-food",
+        "fr:rentrer:return-home",
+        "fr:soeur:sister",
+        "fr:souvenir:memory-of-past",
+        "fr:tarif:service-price",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U01-L02",
+      "new_lexeme_keys": [
+        "fr:auparavant:earlier-relative-time"
+      ],
+      "reused_lexeme_keys": [
+        "fr:anniversaire:birthday",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:cadeau:gift",
+        "fr:deja:prior-learning-experience",
+        "fr:diner:evening-meal",
+        "fr:donner-des-nouvelles:share-personal-news",
+        "fr:ecrire:write",
+        "fr:ensuite:next-step",
+        "fr:etre:compound-past-auxiliary",
+        "fr:famille:family",
+        "fr:fete:celebration-gathering",
+        "fr:feter:celebrate-occasion",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:je-voudrais:polite-request",
+        "fr:livre:book",
+        "fr:maison:house-home",
+        "fr:pendant-que:simultaneous-time-clause",
+        "fr:preparer:prepare-food",
+        "fr:recit:personal-narrative",
+        "fr:rentrer:return-home",
+        "fr:soeur:sister",
+        "fr:soir:evening",
+        "fr:souvenir:memory-of-past"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U01-L03",
+      "new_lexeme_keys": [
+        "fr:eprouver:experience-emotion",
+        "fr:joie:joy-emotion",
+        "fr:peur:fear-emotion"
+      ],
+      "reused_lexeme_keys": [
+        "fr:arriver:transport-arrive",
+        "fr:attendre:wait",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:ca-va-bien:positive_wellbeing",
+        "fr:deja:prior-learning-experience",
+        "fr:diner:evening-meal",
+        "fr:donner-des-nouvelles:share-personal-news",
+        "fr:ecrire:write",
+        "fr:ensuite:next-step",
+        "fr:etre:compound-past-auxiliary",
+        "fr:frere:brother",
+        "fr:gare:railway-station",
+        "fr:hier:yesterday",
+        "fr:je-voudrais:polite-request",
+        "fr:maison:house-home",
+        "fr:malade:self-reported-illness",
+        "fr:merci:thanks",
+        "fr:preparer:prepare-food",
+        "fr:puis:then-sequence",
+        "fr:rentrer:return-home",
+        "fr:retard:transport-delay",
+        "fr:soeur:sister"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U01-L04",
+      "new_lexeme_keys": [
+        "fr:se-rendre-compte:realise-fact",
+        "fr:grace-a:beneficial-cause"
+      ],
+      "reused_lexeme_keys": [
+        "fr:auparavant:earlier-relative-time",
+        "fr:avec-elle:with-her",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:diner:evening-meal",
+        "fr:ensemble:together",
+        "fr:ensuite:next-step",
+        "fr:eprouver:experience-emotion",
+        "fr:etre:compound-past-auxiliary",
+        "fr:famille:family",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:hier:yesterday",
+        "fr:huit:cardinal-number",
+        "fr:je-voudrais:polite-request",
+        "fr:joie:joy-emotion",
+        "fr:la:there-location",
+        "fr:maintenant:now",
+        "fr:maison:house-home",
+        "fr:peur:fear-emotion",
+        "fr:preparer:prepare-food",
+        "fr:puis:then-sequence",
+        "fr:rentrer:return-home",
+        "fr:samedi:weekday",
+        "fr:soeur:sister",
+        "fr:terminer:finish-task"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U01-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:anniversaire:birthday",
+        "fr:arriver:transport-arrive",
+        "fr:attendre:wait",
+        "fr:auparavant:earlier-relative-time",
+        "fr:avec-elle:with-her",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:cadeau:gift",
+        "fr:diner:evening-meal",
+        "fr:ensuite:next-step",
+        "fr:eprouver:experience-emotion",
+        "fr:etre:compound-past-auxiliary",
+        "fr:famille:family",
+        "fr:feter:celebrate-occasion",
+        "fr:frere:brother",
+        "fr:grace-a:beneficial-cause",
+        "fr:heure:clock-hour",
+        "fr:hier:yesterday",
+        "fr:huit:cardinal-number",
+        "fr:je-voudrais:polite-request",
+        "fr:joie:joy-emotion",
+        "fr:la:there-location",
+        "fr:maintenant:now",
+        "fr:maison:house-home",
+        "fr:pendant-que:simultaneous-time-clause",
+        "fr:peur:fear-emotion",
+        "fr:preparer:prepare-food",
+        "fr:puis:then-sequence",
+        "fr:samedi:weekday",
+        "fr:se-rendre-compte:realise-fact",
+        "fr:soeur:sister"
+      ],
+      "task_count": 7
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "B1-U01-L01",
+      "material": "Повторение passé composé / imparfait: событие и фон."
+    },
+    {
+      "session_id": "B1-U01-L02",
+      "material": "J’avais déjà préparé; предшествующее завершение после ясного примера."
+    },
+    {
+      "session_id": "B1-U01-L03",
+      "material": "J’éprouvais de la peur / j’ai éprouvé de la joie; выбранные формы фонового чувства и реакции."
+    },
+    {
+      "session_id": "B1-U01-L04",
+      "material": "Je me suis rendu compte que; grâce à и полезная причина; выбранный факт поддержки."
+    },
+    {
+      "session_id": "B1-U01-L05",
+      "material": "Интеграция прежнего материала без новых обязательных значений или конструкций."
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:evenement:personal-event",
+      "evidence": [
+        {
+          "session_id": "B1-U01-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:recit:personal-narrative",
+      "evidence": [
+        {
+          "session_id": "B1-U01-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:auparavant:earlier-relative-time",
+      "evidence": [
+        {
+          "session_id": "B1-U01-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U01-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U01-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L05",
+          "task_id": "Q01",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U01-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:eprouver:experience-emotion",
+      "evidence": [
+        {
+          "session_id": "B1-U01-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U01-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:joie:joy-emotion",
+      "evidence": [
+        {
+          "session_id": "B1-U01-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U01-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U01-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L04",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:peur:fear-emotion",
+      "evidence": [
+        {
+          "session_id": "B1-U01-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U01-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U01-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:se-rendre-compte:realise-fact",
+      "evidence": [
+        {
+          "session_id": "B1-U01-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U01-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U01-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:grace-a:beneficial-cause",
+      "evidence": [
+        {
+          "session_id": "B1-U01-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U01-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U01-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U01-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "catalog_metadata": {
+    "levels_included": true,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "version_notes": {
+    "existing_session_ids_preserved": [
+      "B1-U01-L01",
+      "B1-U01-L02"
+    ],
+    "existing_session_content_changed": false,
+    "added_session_ids": [
+      "B1-U01-L03",
+      "B1-U01-L04",
+      "B1-U01-L05"
+    ],
+    "previous_package_id": "programme-b1-u01-part1-v1",
+    "current_package_id": "programme-b1-u01-v1"
+  },
+  "reading_word_counts": [
+    64,
+    62,
+    61,
+    62,
+    73,
+    73
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 35,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      7
+    ],
+    "new_lexemes": 8,
+    "external_prerequisites": [],
+    "external_reference_status": "none; all internal prerequisite sessions are included",
+    "reused_lexeme_keys": 43,
+    "reading_word_counts": [
+      64,
+      62,
+      61,
+      62,
+      73,
+      73
+    ],
+    "unit_complete": true
+  },
+  "application_validation": {
+    "report_file": "B1-U01.validation.json",
+    "valid": true,
+    "file_hash": "cbaef253a204d6965634797a9b5cb18397cd9350dd37df02f535d62158671ec1",
+    "errors": 0,
+    "warning_counts": {
+      "browser_tts": 6,
+      "editorial_review_required": 5
+    },
+    "requires_editorial_review": true,
+    "database_modified": false
+  },
+  "text_conventions": {
+    "situation_status": "Оригинальные вымышленные семейные рассказы и ожидание родственника на вокзале; факты отдельных рассказов не смешиваются.",
+    "external_services_required": false,
+    "free_speaking_assessed": false
+  }
+}

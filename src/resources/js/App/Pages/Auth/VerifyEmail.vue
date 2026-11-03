@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
 import AfrAuthLayout from '@/App/Layouts/AfrAuthLayout.vue';
@@ -12,6 +12,7 @@ const props = defineProps({
   },
 });
 
+const page = usePage();
 const form = useForm({});
 
 const submit = () => {
@@ -40,6 +41,7 @@ const verificationLinkSent = computed(
         Новая ссылка для подтверждения отправлена на Email, указанный при регистрации.
       </div>
 
+      <Link v-if="page.props.daily_practice_enabled" href="/daily" class="link">Продолжить практику до подтверждения Email</Link>
       <form @submit.prevent="submit">
         <div class="mt-4 flex flex-col items-center justify-between">
 <!--          <PrimaryButton-->

@@ -1,0 +1,1120 @@
+{
+  "unit_id": "A2-U06",
+  "package_file": "A2-U06.v1.json",
+  "session_ids": [
+    "A2-U06-L01",
+    "A2-U06-L02",
+    "A2-U06-L03",
+    "A2-U06-L04",
+    "A2-U06-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "prendre-rendez-vous",
+      "lexeme_key": "fr:prendre-rendez-vous:book-appointment",
+      "fr": "prendre rendez-vous",
+      "ru": [
+        "записаться на услугу, договориться о приёме"
+      ],
+      "transcription_ru": "пра(н)др ра(н)дэ ву́",
+      "first_session_id": "A2-U06-L01"
+    },
+    {
+      "id": "coiffeur",
+      "lexeme_key": "fr:coiffeur:hairdresser",
+      "fr": "un coiffeur",
+      "ru": [
+        "парикмахер (показанная французская форма)"
+      ],
+      "transcription_ru": "э(н) куафё́р",
+      "first_session_id": "A2-U06-L01"
+    },
+    {
+      "id": "coupe",
+      "lexeme_key": "fr:coupe:haircut-service",
+      "fr": "une coupe",
+      "ru": [
+        "стрижка как услуга"
+      ],
+      "transcription_ru": "юн ку́п",
+      "first_session_id": "A2-U06-L01"
+    },
+    {
+      "id": "tarif",
+      "lexeme_key": "fr:tarif:service-price",
+      "fr": "un tarif",
+      "ru": [
+        "тариф, цена указанной услуги"
+      ],
+      "transcription_ru": "э(н) тари́ф",
+      "first_session_id": "A2-U06-L02"
+    },
+    {
+      "id": "shampooing",
+      "lexeme_key": "fr:shampooing:hair-wash-service",
+      "fr": "un shampooing",
+      "ru": [
+        "мытьё головы как услуга"
+      ],
+      "transcription_ru": "э(н) ша(н)пуэ́(н)",
+      "first_session_id": "A2-U06-L02"
+    },
+    {
+      "id": "inclus",
+      "lexeme_key": "fr:inclus:included-in-service-price",
+      "fr": "inclus",
+      "ru": [
+        "включён в цену предложения"
+      ],
+      "transcription_ru": "э(н)клю́",
+      "first_session_id": "A2-U06-L02"
+    },
+    {
+      "id": "reporter",
+      "lexeme_key": "fr:reporter:postpone-appointment",
+      "fr": "reporter",
+      "ru": [
+        "переносить запись на более поздний срок"
+      ],
+      "transcription_ru": "рёпортэ́",
+      "first_session_id": "A2-U06-L03"
+    },
+    {
+      "id": "pourriez-vous",
+      "lexeme_key": "fr:pourriez-vous:polite-action-request",
+      "fr": "pourriez-vous",
+      "ru": [
+        "могли бы вы: вежливая просьба к собеседнику"
+      ],
+      "transcription_ru": "пурье ву́",
+      "first_session_id": "A2-U06-L04"
+    },
+    {
+      "id": "preciser",
+      "lexeme_key": "fr:preciser:clarify-service-details",
+      "fr": "préciser",
+      "ru": [
+        "уточнять сведения об услуге"
+      ],
+      "transcription_ru": "прэсизэ́",
+      "first_session_id": "A2-U06-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:adorer:love-activity",
+    "fr:aimer:enjoy-activity",
+    "fr:aller:go",
+    "fr:avoir-l-intention-de:intend-to-act",
+    "fr:avoir:compound-past-auxiliary",
+    "fr:billet:transport-ticket",
+    "fr:bonjour:greeting",
+    "fr:bureau:office-workplace",
+    "fr:choisir:choose-option",
+    "fr:cinema:cinema-venue",
+    "fr:d-ici:by-deadline",
+    "fr:date:calendar-date",
+    "fr:decider-de:decide-to-act",
+    "fr:demain:tomorrow",
+    "fr:disponible:available-in-schedule",
+    "fr:et:and",
+    "fr:etre:compound-past-auxiliary",
+    "fr:euro:currency-unit",
+    "fr:film:film",
+    "fr:finalement:final-outcome",
+    "fr:heure:clock-hour",
+    "fr:jai:possession",
+    "fr:je-veux:want",
+    "fr:je-voudrais:polite-request",
+    "fr:jeudi:weekday",
+    "fr:la-semaine-prochaine:next-week",
+    "fr:la:direct-object-pronoun-feminine",
+    "fr:le-week-end-dernier:last-weekend",
+    "fr:le:direct-object-pronoun-masculine",
+    "fr:lundi:weekday",
+    "fr:maison:house-home",
+    "fr:mardi:weekday",
+    "fr:matin:morning",
+    "fr:merci:thanks",
+    "fr:midi:noon",
+    "fr:musee:museum",
+    "fr:neuf:cardinal-number",
+    "fr:oui:affirmative-answer",
+    "fr:par-carte:card-payment",
+    "fr:parce-que:because-reason",
+    "fr:payer:pay",
+    "fr:prendre:use-transport",
+    "fr:puis:then-sequence",
+    "fr:quinze:cardinal-number",
+    "fr:regarder:look-watch",
+    "fr:rendez-vous:appointment",
+    "fr:rentrer:return-home",
+    "fr:samedi:weekday",
+    "fr:seulement:only",
+    "fr:si:real-condition",
+    "fr:sil-vous-plait:polite-request",
+    "fr:train:train",
+    "fr:travailler:work",
+    "fr:vendredi:weekday",
+    "fr:vingt:cardinal-number",
+    "fr:visiter:visit-place",
+    "fr:y:place-pronoun"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A2.U06.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U06-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U06-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U06-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U06-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U06-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U06-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U06-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U06-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U06-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U06.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U06-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U06-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U06-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U06-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U06-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U06-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U06-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U06-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U05.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U06-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U03.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U06-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U03.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U06-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:prendre-rendez-vous:book-appointment",
+      "reason": "Вернуть действие записи в следующем бытовом контексте."
+    },
+    {
+      "lexeme_key": "fr:rendez-vous:appointment",
+      "reason": "Сохранить прежний ключ назначенной встречи отдельно от действия записаться."
+    },
+    {
+      "lexeme_key": "fr:pourriez-vous:polite-action-request",
+      "reason": "Повторить готовую вежливую просьбу к собеседнику."
+    },
+    {
+      "lexeme_key": "fr:preciser:clarify-service-details",
+      "reason": "Вернуть уточнение конкретных сведений, без подмены переносом."
+    },
+    {
+      "lexeme_key": "fr:reporter:postpone-appointment",
+      "reason": "Повторить перенос на более поздний срок."
+    },
+    {
+      "lexeme_key": "fr:parce-que:because-reason",
+      "reason": "Сохранить прямо названную причину просьбы."
+    },
+    {
+      "lexeme_key": "fr:je-voudrais:polite-request",
+      "reason": "Вернуть знакомую формулу вежливой просьбы."
+    },
+    {
+      "lexeme_key": "fr:heure:clock-hour",
+      "reason": "Повторить час записи отдельно от цены и других чисел."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "new_local_ids_do_not_overwrite_existing_meanings": true,
+    "existing_appointment_noun_and_polite_request_keys_preserved": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "booking_action_specialist_service_and_time_distinguished": true,
+    "service_price_and_inclusion_distinguished": true,
+    "negative_inclusion_does_not_invent_extra_price": true,
+    "postponement_preserves_old_new_time_and_explicit_reason": true,
+    "request_not_equated_with_completed_transfer": true,
+    "clarification_distinguished_from_rescheduling": true,
+    "object_pronoun_uses_french_appointment_gender": true,
+    "prices_and_appointments_are_fictional_learning_data": true,
+    "transcriptions_structurally_checked_without_claim_of_listening": true,
+    "apostrophes_kept_in_whole_tokens": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A2-U05-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Редактору проверить естественность записи к парикмахеру, просьб о переносе и уточнении, смысловой контраст цены и включённой услуги, дозировку готовых вежливых форм.",
+    "Прослушать браузерную озвучку дат и часов, чисел с euros, shampooing est inclus и новых вежливых форм. Длительность аудио и занятий не измерена.",
+    "Выполнить предпросмотр и пробное прохождение: просьба и подтверждение, старое и новое время, причина, цена, отрицание включения, уточнение без изменения."
+  ],
+  "progress": {
+    "current_unit": "A2-U06",
+    "prepared_session_ids": [
+      "A2-U06-L01",
+      "A2-U06-L02",
+      "A2-U06-L03",
+      "A2-U06-L04",
+      "A2-U06-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A2-U07",
+    "next_unit_title": "У врача",
+    "previous_unit": "A2-U05",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A2-U06. Принятие и импорт предыдущих пакетов не подтверждены; повторение использует полные объекты подготовленного материала.",
+    "Новые лексические значения распределены как три, три, одно, два и ноль. В одном введении не более трёх карточек. L05 нового обязательного материала не вводит.",
+    "Контекст — вымышленная запись к парикмахеру. Все суммы, предложения и записи оригинальные учебные примеры, не цены реального поставщика и не практическое бронирование.",
+    "Prendre rendez-vous называет действие записаться. Существующее fr:rendez-vous:appointment сохраняет значение назначенной встречи и полный объект; не заменяется новым ключом для услуги.",
+    "Coiffeur показан в одной французской форме, без оценки пола говорящего по голосу. Coupe — стрижка как услуга, не другое значение слова разрез или кубок.",
+    "Shampooing в этой теме — мытьё головы как услуга, не флакон средства. Inclus учится как включён в указанную цену, в показанной мужской форме с этим названием услуги.",
+    "Отрицание n’est pas inclus меняет условие включения. Из невключённой услуги не выводится неизвестная дополнительная сумма, из просьбы без мытья не выводится новая цена.",
+    "Reporter используется только как перенос существующей записи на более поздний день той же учебной недели: понедельник на вторник, вторник на четверг или пятницу. Это не отмена и не автоматическое подтверждение изменения.",
+    "Je voudrais сохраняет прежний ключ вежливой просьбы. В L03 повторена позиция объектного le в Je voudrais le reporter. Французский rendez-vous мужского рода, даже если русский перевод запись женского рода.",
+    "Pourriez-vous и préciser вводятся как готовая вежливая просьба уточнить цену, дату и время. Полная таблица условного наклонения или новые условные предложения не вводятся.",
+    "Уточнить дату и время — запросить сведения, не перенести запись. Только стрижка ограничивает собственный запрос, без утверждения о согласованной новой цене.",
+    "Просьба клиента и ответ сотрудника различаются по словам текста и заданным ролям. Реальная запись, оплата, перенос или отправка сообщения никому не выполняются.",
+    "В L01 повторены крайний срок и условие плана A2-U05, в L03 — последовательность событий A2-U03, в L04 — факт просмотра и впечатление из той же темы. Это не подтверждает принятие прошлых пакетов или освоение учеником.",
+    "Время работы не переносится на запись. В каждом задании собственные услуга, день, час, цена и включённые условия; данные из другого текста не подставляются автоматически.",
+    "Все ответы выбираются или собираются из целых блоков. Готовое pourriez-vous, апострофы и связки не разрываются. Озвучка только браузером, без аудиофайлов или внешних сервисов.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A2-U06-L01",
+      "new_lexeme_keys": [
+        "fr:prendre-rendez-vous:book-appointment",
+        "fr:coiffeur:hairdresser",
+        "fr:coupe:haircut-service"
+      ],
+      "reused_lexeme_keys": [
+        "fr:avoir-l-intention-de:intend-to-act",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:billet:transport-ticket",
+        "fr:bonjour:greeting",
+        "fr:bureau:office-workplace",
+        "fr:choisir:choose-option",
+        "fr:d-ici:by-deadline",
+        "fr:decider-de:decide-to-act",
+        "fr:demain:tomorrow",
+        "fr:disponible:available-in-schedule",
+        "fr:film:film",
+        "fr:heure:clock-hour",
+        "fr:jai:possession",
+        "fr:je-veux:want",
+        "fr:je-voudrais:polite-request",
+        "fr:la-semaine-prochaine:next-week",
+        "fr:lundi:weekday",
+        "fr:mardi:weekday",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:prendre:use-transport",
+        "fr:regarder:look-watch",
+        "fr:rendez-vous:appointment",
+        "fr:si:real-condition",
+        "fr:sil-vous-plait:polite-request",
+        "fr:train:train",
+        "fr:travailler:work"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U06-L02",
+      "new_lexeme_keys": [
+        "fr:tarif:service-price",
+        "fr:shampooing:hair-wash-service",
+        "fr:inclus:included-in-service-price"
+      ],
+      "reused_lexeme_keys": [
+        "fr:bonjour:greeting",
+        "fr:bureau:office-workplace",
+        "fr:coiffeur:hairdresser",
+        "fr:coupe:haircut-service",
+        "fr:disponible:available-in-schedule",
+        "fr:et:and",
+        "fr:euro:currency-unit",
+        "fr:heure:clock-hour",
+        "fr:je-voudrais:polite-request",
+        "fr:lundi:weekday",
+        "fr:mardi:weekday",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:par-carte:card-payment",
+        "fr:payer:pay",
+        "fr:prendre-rendez-vous:book-appointment",
+        "fr:quinze:cardinal-number",
+        "fr:rendez-vous:appointment",
+        "fr:travailler:work",
+        "fr:vingt:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U06-L03",
+      "new_lexeme_keys": [
+        "fr:reporter:postpone-appointment"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:go",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:cinema:cinema-venue",
+        "fr:coiffeur:hairdresser",
+        "fr:coupe:haircut-service",
+        "fr:disponible:available-in-schedule",
+        "fr:etre:compound-past-auxiliary",
+        "fr:film:film",
+        "fr:finalement:final-outcome",
+        "fr:heure:clock-hour",
+        "fr:je-voudrais:polite-request",
+        "fr:jeudi:weekday",
+        "fr:le-week-end-dernier:last-weekend",
+        "fr:le:direct-object-pronoun-masculine",
+        "fr:lundi:weekday",
+        "fr:maison:house-home",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:midi:noon",
+        "fr:musee:museum",
+        "fr:neuf:cardinal-number",
+        "fr:oui:affirmative-answer",
+        "fr:parce-que:because-reason",
+        "fr:prendre-rendez-vous:book-appointment",
+        "fr:puis:then-sequence",
+        "fr:regarder:look-watch",
+        "fr:rendez-vous:appointment",
+        "fr:rentrer:return-home",
+        "fr:samedi:weekday",
+        "fr:travailler:work",
+        "fr:visiter:visit-place",
+        "fr:y:place-pronoun"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U06-L04",
+      "new_lexeme_keys": [
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details"
+      ],
+      "reused_lexeme_keys": [
+        "fr:adorer:love-activity",
+        "fr:aimer:enjoy-activity",
+        "fr:aller:go",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:cinema:cinema-venue",
+        "fr:coupe:haircut-service",
+        "fr:date:calendar-date",
+        "fr:disponible:available-in-schedule",
+        "fr:etre:compound-past-auxiliary",
+        "fr:euro:currency-unit",
+        "fr:film:film",
+        "fr:finalement:final-outcome",
+        "fr:heure:clock-hour",
+        "fr:inclus:included-in-service-price",
+        "fr:je-voudrais:polite-request",
+        "fr:le-week-end-dernier:last-weekend",
+        "fr:maison:house-home",
+        "fr:mardi:weekday",
+        "fr:merci:thanks",
+        "fr:midi:noon",
+        "fr:musee:museum",
+        "fr:puis:then-sequence",
+        "fr:regarder:look-watch",
+        "fr:rendez-vous:appointment",
+        "fr:rentrer:return-home",
+        "fr:reporter:postpone-appointment",
+        "fr:seulement:only",
+        "fr:shampooing:hair-wash-service",
+        "fr:sil-vous-plait:polite-request",
+        "fr:tarif:service-price",
+        "fr:vingt:cardinal-number",
+        "fr:visiter:visit-place"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U06-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:bonjour:greeting",
+        "fr:coiffeur:hairdresser",
+        "fr:coupe:haircut-service",
+        "fr:date:calendar-date",
+        "fr:disponible:available-in-schedule",
+        "fr:euro:currency-unit",
+        "fr:heure:clock-hour",
+        "fr:inclus:included-in-service-price",
+        "fr:je-voudrais:polite-request",
+        "fr:la:direct-object-pronoun-feminine",
+        "fr:le:direct-object-pronoun-masculine",
+        "fr:lundi:weekday",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:merci:thanks",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:oui:affirmative-answer",
+        "fr:par-carte:card-payment",
+        "fr:parce-que:because-reason",
+        "fr:payer:pay",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:prendre-rendez-vous:book-appointment",
+        "fr:quinze:cardinal-number",
+        "fr:rendez-vous:appointment",
+        "fr:reporter:postpone-appointment",
+        "fr:seulement:only",
+        "fr:shampooing:hair-wash-service",
+        "fr:tarif:service-price",
+        "fr:travailler:work",
+        "fr:vendredi:weekday",
+        "fr:vingt:cardinal-number"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A2-U06-L01",
+      "material": "Знакомое Je voudrais + prendre rendez-vous; действие записи и назначенная встреча; услуга, день и час."
+    },
+    {
+      "session_id": "A2-U06-L02",
+      "material": "Le tarif est de…; мужская форма inclus с shampooing; известное отрицание n’est pas inclus."
+    },
+    {
+      "session_id": "A2-U06-L03",
+      "material": "Je voudrais reporter… / Je voudrais le reporter; новое время и известная причина parce que."
+    },
+    {
+      "session_id": "A2-U06-L04",
+      "material": "Готовое Pourriez-vous préciser…; уточнение цены, даты и времени; seulement для ограничения запроса."
+    }
+  ],
+  "text_conventions": {
+    "situation_status": "Оригинальные вымышленные сцены услуги парикмахера.",
+    "price_scope": "Суммы и включённые услуги заданы только конкретным текстом.",
+    "appointment_scope": "Запись, просьба о переносе и уточнение сведений — разные действия.",
+    "postponement_scope": "Запрошен более поздний день в пределах учебной недели.",
+    "speaker_roles": "Клиент и сотрудник заданы порядком реплик и условием, не голосом.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:prendre-rendez-vous:book-appointment",
+      "evidence": [
+        {
+          "session_id": "A2-U06-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:coiffeur:hairdresser",
+      "evidence": [
+        {
+          "session_id": "A2-U06-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:coupe:haircut-service",
+      "evidence": [
+        {
+          "session_id": "A2-U06-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U06-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U06-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:tarif:service-price",
+      "evidence": [
+        {
+          "session_id": "A2-U06-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U06-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:shampooing:hair-wash-service",
+      "evidence": [
+        {
+          "session_id": "A2-U06-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U06-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:inclus:included-in-service-price",
+      "evidence": [
+        {
+          "session_id": "A2-U06-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U06-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:reporter:postpone-appointment",
+      "evidence": [
+        {
+          "session_id": "A2-U06-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U06-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:pourriez-vous:polite-action-request",
+      "evidence": [
+        {
+          "session_id": "A2-U06-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U06-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:preciser:clarify-service-details",
+      "evidence": [
+        {
+          "session_id": "A2-U06-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U06-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U06-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 9,
+    "external_prerequisites": [
+      "A2-U05-L05"
+    ],
+    "external_reference_status": "A2-U05-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 10
+      },
+      "file_hash": "f9f7385bef003b8c0a6814c0a8213ef3d5335a6c229fa7f757854d3d45358a18",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 57,
+    "text_lengths": [
+      {
+        "session_id": "A2-U06-L01",
+        "reading_word_counts": [
+          32,
+          32
+        ],
+        "listening_word_counts": [
+          29
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U06-L02",
+        "reading_word_counts": [
+          32,
+          36
+        ],
+        "listening_word_counts": [
+          33
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U06-L03",
+        "reading_word_counts": [
+          32,
+          32
+        ],
+        "listening_word_counts": [
+          35
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U06-L04",
+        "reading_word_counts": [
+          34,
+          39
+        ],
+        "listening_word_counts": [
+          36
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U06-L05",
+        "reading_word_counts": [
+          34,
+          38
+        ],
+        "listening_word_counts": [
+          35,
+          37
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "prendre rendez-vous",
+        "session_id": "A2-U06-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "un coiffeur",
+        "session_id": "A2-U06-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "une coupe",
+        "session_id": "A2-U06-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Le tarif est de vingt euros",
+        "session_id": "A2-U06-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "shampooing est inclus",
+        "session_id": "A2-U06-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "n’est pas inclus",
+        "session_id": "A2-U06-L02",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "reporter mon rendez-vous",
+        "session_id": "A2-U06-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je voudrais le reporter",
+        "session_id": "A2-U06-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Pourriez-vous préciser",
+        "session_id": "A2-U06-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "seulement une coupe",
+        "session_id": "A2-U06-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "la date et l’heure",
+        "session_id": "A2-U06-L04",
+        "task_id": "Q02"
+      }
+    ],
+    "level_description_included": false,
+    "curricula_included": false
+  }
+}

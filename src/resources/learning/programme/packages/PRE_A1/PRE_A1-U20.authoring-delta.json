@@ -1,0 +1,752 @@
+{
+  "unit_id": "PRE_A1-U20",
+  "package_file": "PRE_A1-U20.v1.json",
+  "session_ids": [
+    "PRE_A1-U20-L01",
+    "PRE_A1-U20-L02",
+    "PRE_A1-U20-L03",
+    "PRE_A1-U20-L04",
+    "PRE_A1-U20-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "aidez-moi",
+      "lexeme_key": "fr:aidez-moi:help-request",
+      "fr": "aidez-moi",
+      "ru": [
+        "помогите мне (общая просьба о помощи)"
+      ],
+      "transcription_ru": "эдэ муа́",
+      "first_session_id": "PRE_A1-U20-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:a-cote-de:next-to",
+    "fr:asseyez-vous:sit-request",
+    "fr:au-revoir:farewell",
+    "fr:aujourdhui:today",
+    "fr:bleu:blue",
+    "fr:boite:box",
+    "fr:bonjour:greeting",
+    "fr:cafe:coffee",
+    "fr:cafe:venue",
+    "fr:cest-ou:place-location-question",
+    "fr:cest:identify-object",
+    "fr:chaud:hot-temperature",
+    "fr:comment-tu-tappelles:informal_name_question",
+    "fr:dans:inside",
+    "fr:demain:tomorrow",
+    "fr:deux:cardinal-number",
+    "fr:ecole:school",
+    "fr:elle:feminine-subject",
+    "fr:entrez:enter-request",
+    "fr:et-toi:reciprocal_question",
+    "fr:frere:brother",
+    "fr:il-pleut:raining",
+    "fr:il:masculine-subject",
+    "fr:jaime:food-liking",
+    "fr:je-mappelle:self_introduction",
+    "fr:je-prends:choosing-item",
+    "fr:je-veux:want",
+    "fr:je-voudrais:polite-request",
+    "fr:lire:read",
+    "fr:livre:book",
+    "fr:magasin:shop",
+    "fr:medecin:doctor",
+    "fr:merci:thanks",
+    "fr:mon:first-person-masculine-possessive",
+    "fr:pain:bread",
+    "fr:parc:park",
+    "fr:pardon:apology",
+    "fr:pere:father",
+    "fr:pomme:apple",
+    "fr:puis:then-sequence",
+    "fr:quel-temps-fait-il:weather-question",
+    "fr:qui-est-ce:identity-question",
+    "fr:rendez-vous:appointment",
+    "fr:repetez-sil-vous-plait:request-repeat",
+    "fr:rouge:red",
+    "fr:rue:street",
+    "fr:sil-vous-plait:polite-request",
+    "fr:sous:under",
+    "fr:stylo:pen",
+    "fr:table:table",
+    "fr:un:indefinite-masculine",
+    "fr:une:indefinite-feminine",
+    "fr:vendeur:salesperson",
+    "fr:voila:presenting"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "PRE_A1.U20.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U20-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U20-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U20-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U20-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U20-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U20-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q04",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U20.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U20-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U20-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U20-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U20-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q05",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U19.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U20-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U17.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U20-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U13.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U20-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U07.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U06.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U18.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U09.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U15.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U03.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U12.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U17.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U16.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.CLARIFY.REQUEST",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:je-mappelle:self_introduction",
+      "reason": "Вернуть готовое собственное представление в начале следующего уровня без изменения ключа."
+    },
+    {
+      "lexeme_key": "fr:je-voudrais:polite-request",
+      "reason": "Сохранить мягкую просьбу при повторении известных вещей."
+    },
+    {
+      "lexeme_key": "fr:aidez-moi:help-request",
+      "reason": "Повторить общую просьбу помочь до дальнейшего уточнения вида помощи."
+    },
+    {
+      "lexeme_key": "fr:repetez-sil-vous-plait:request-repeat",
+      "reason": "Сохранить точную просьбу повторить, не подменяя её общей помощью."
+    },
+    {
+      "lexeme_key": "fr:pardon:apology",
+      "reason": "Повторять существующее значение извинения в явном контексте; новое привлечение внимания объяснять отдельно при необходимости."
+    },
+    {
+      "lexeme_key": "fr:cest-ou:place-location-question",
+      "reason": "Вернуть готовый вопрос о расположении без нового ключа."
+    },
+    {
+      "lexeme_key": "fr:matin:morning",
+      "reason": "Использовать знакомую рамку утра перед новыми привычками следующего уровня."
+    },
+    {
+      "lexeme_key": "fr:soir:evening",
+      "reason": "Использовать знакомую вечернюю рамку до введения новых слов распорядка."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "local_database_references_checked": true,
+    "registry_collisions_checked": true,
+    "package_hash_verified": true,
+    "pronunciation_coverage_warnings_absent": true,
+    "new_lexeme_evidence_checked": true,
+    "no_new_grammar": true,
+    "checkpoint_kind_and_skill_balance_checked": true,
+    "checkpoint_all_four_level_regions_checked": true,
+    "checkpoint_answers_checked": true,
+    "legacy_keys_and_full_cards_preserved": true,
+    "apostrophe_hyphen_and_polite_formula_tokens_preserved": true,
+    "shuffled_choice_feedback_checked": true,
+    "reading_length_checked": true,
+    "no_unused_local_vocabulary": true,
+    "prepared_level_inventory_checked": true,
+    "level_formal_objective_coverage_checked": true,
+    "level_authoring_delta_evidence_crosschecked": true
+  },
+  "open_issues": [
+    "До импорта целевая база должна содержать PRE_A1-U19-L05; пакет не создаёт отсутствующую внешнюю зависимость.",
+    "У существующей карточки c’est сохранилась узкая русская помета о предмете, хотя семейные занятия уже использовали ключ для людей. Полный объект в итоговом повторении сохранён. Отдельное уточнение пометы редактором требует соблюдения правил версий.",
+    "Человеку нужно проверить язык интегрированных ситуаций, условные русские транскрипции и содержательное покрытие целей; прослушать браузерную озвучку, выполнить предпросмотр и пробное прохождение.",
+    "Ориентир 6 минут на занятие не измерен. Итоговые восемь заданий не являются исчерпывающей проверкой каждого слова или каждой цели уровня."
+  ],
+  "progress": {
+    "current_unit": "PRE_A1-U20",
+    "prepared_session_ids": [
+      "PRE_A1-U20-L01",
+      "PRE_A1-U20-L02",
+      "PRE_A1-U20-L03",
+      "PRE_A1-U20-L04",
+      "PRE_A1-U20-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A1-U01",
+    "next_unit_title": "Распорядок дня",
+    "previous_unit": "PRE_A1-U19",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false,
+    "prepared_level_unit_count": 20,
+    "prepared_level_session_count": 100,
+    "next_level_not_started": "A1"
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает только текущую тему. Следующий уровень не начат; подтверждения принятия или импорта предыдущих пакетов не получено.",
+    "Тема интегрирует уже изученные слова и конструкции. Новых грамматических правил, времён или таблиц нет. Единственное новое лексическое значение — целая общая просьба помочь, явно объяснённая перед первым оцениваемым вопросом о ней.",
+    "В первых четырёх занятиях соответственно 0, 0, 0 и 1 новое значение. В контрольном занятии нового обязательного материала нет.",
+    "Знакомство без образца означает отсутствие готового ответа во вводной карточке; задания остаются выбором или сборкой, без свободного рассказа и ввода текста.",
+    "Существующие ключи представления, просьб, прощания и извинения сохранены с полными объектами. Старый словарный шаблон имени сохраняет исходный вид, а во всех заданиях и полных фразах указаны конкретные имена.",
+    "Ответный вопрос о собеседнике интерпретируется по текущему контексту имени, а не объявляется вопросом об имени во всех ситуациях.",
+    "Простите повторяется в уже известном значении извинения за перебивание. Новое значение обращения к прохожему не создаётся под старым ключом; уличный вопрос начинается со знакомого приветствия.",
+    "Для точного задания на повторение выбирается конкретная изученная просьба повторить. Общая просьба помочь не объявляется универсальным синонимом всех частных просьб.",
+    "Имена и вымышленные названия улиц уже были показаны; в заданиях свои явно заданные сведения без постоянной биографии и без карты настоящего города.",
+    "Контроль выбирает материал из всех четырёх частей уровня. Он не проверяет каждую из двадцати тем и каждую цель отдельно; формальная накопленная карта проверяется по всем подготовленным занятиям.",
+    "В контроле по два задания на аудирование, чтение, лексику и грамматику или сборку. Вводная карточка и public_page не содержат таблицы готовых ответов.",
+    "Апострофы, формы с дефисом и формула вежливости сохраняются целыми в сборке. Подписанная сборка и грамматическое восстановление не объявляются независимым оцениванием всей лексики.",
+    "Основной реестр и предыдущие пакеты не изменены. Новые ключи предложены отдельно до принятия."
+  ],
+  "session_material": [
+    {
+      "session_id": "PRE_A1-U20-L01",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:asseyez-vous:sit-request",
+        "fr:au-revoir:farewell",
+        "fr:bonjour:greeting",
+        "fr:comment-tu-tappelles:informal_name_question",
+        "fr:entrez:enter-request",
+        "fr:et-toi:reciprocal_question",
+        "fr:je-mappelle:self_introduction",
+        "fr:puis:then-sequence",
+        "fr:qui-est-ce:identity-question"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U20-L02",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:cafe:coffee",
+        "fr:jaime:food-liking",
+        "fr:je-mappelle:self_introduction",
+        "fr:je-prends:choosing-item",
+        "fr:je-veux:want",
+        "fr:je-voudrais:polite-request",
+        "fr:livre:book",
+        "fr:merci:thanks",
+        "fr:pain:bread",
+        "fr:pomme:apple",
+        "fr:sil-vous-plait:polite-request",
+        "fr:un:indefinite-masculine",
+        "fr:une:indefinite-feminine",
+        "fr:voila:presenting"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U20-L03",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:boite:box",
+        "fr:bonjour:greeting",
+        "fr:cafe:venue",
+        "fr:cest-ou:place-location-question",
+        "fr:dans:inside",
+        "fr:demain:tomorrow",
+        "fr:ecole:school",
+        "fr:magasin:shop",
+        "fr:parc:park",
+        "fr:quel-temps-fait-il:weather-question",
+        "fr:qui-est-ce:identity-question",
+        "fr:rendez-vous:appointment",
+        "fr:rue:street",
+        "fr:stylo:pen"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U20-L04",
+      "new_lexeme_keys": [
+        "fr:aidez-moi:help-request"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-cote-de:next-to",
+        "fr:boite:box",
+        "fr:entrez:enter-request",
+        "fr:livre:book",
+        "fr:merci:thanks",
+        "fr:pardon:apology",
+        "fr:repetez-sil-vous-plait:request-repeat",
+        "fr:sil-vous-plait:polite-request"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U20-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:aidez-moi:help-request",
+        "fr:asseyez-vous:sit-request",
+        "fr:aujourdhui:today",
+        "fr:bleu:blue",
+        "fr:cafe:coffee",
+        "fr:cafe:venue",
+        "fr:cest:identify-object",
+        "fr:chaud:hot-temperature",
+        "fr:demain:tomorrow",
+        "fr:deux:cardinal-number",
+        "fr:elle:feminine-subject",
+        "fr:entrez:enter-request",
+        "fr:frere:brother",
+        "fr:il-pleut:raining",
+        "fr:il:masculine-subject",
+        "fr:je-voudrais:polite-request",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:magasin:shop",
+        "fr:medecin:doctor",
+        "fr:mon:first-person-masculine-possessive",
+        "fr:pere:father",
+        "fr:puis:then-sequence",
+        "fr:rendez-vous:appointment",
+        "fr:repetez-sil-vous-plait:request-repeat",
+        "fr:rouge:red",
+        "fr:sil-vous-plait:polite-request",
+        "fr:sous:under",
+        "fr:stylo:pen",
+        "fr:table:table",
+        "fr:un:indefinite-masculine",
+        "fr:une:indefinite-feminine",
+        "fr:vendeur:salesperson"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [],
+  "reused_grammar": [
+    {
+      "session_id": "PRE_A1-U20-L01",
+      "material": "Готовое собственное представление и вопрос об имени; ответный вопрос в явно заданном контексте."
+    },
+    {
+      "session_id": "PRE_A1-U20-L02",
+      "material": "Известная мягкая просьба и изученные артикли перед одной знакомой вещью."
+    },
+    {
+      "session_id": "PRE_A1-U20-L03",
+      "material": "Знакомый вопрос о расположении, ответ названием улицы и приветствие."
+    },
+    {
+      "session_id": "PRE_A1-U20-L04",
+      "material": "Уже изученный тип готовой просьбы с дополнением мне и формулой вежливости; новое только лексическое наполнение просьбы о помощи."
+    }
+  ],
+  "checkpoint_scope": {
+    "session_id": "PRE_A1-U20-L05",
+    "kind": "checkpoint",
+    "source_units": [
+      "PRE_A1-U01",
+      "PRE_A1-U03",
+      "PRE_A1-U06",
+      "PRE_A1-U07",
+      "PRE_A1-U09",
+      "PRE_A1-U12",
+      "PRE_A1-U13",
+      "PRE_A1-U15",
+      "PRE_A1-U16",
+      "PRE_A1-U17",
+      "PRE_A1-U18",
+      "PRE_A1-U19",
+      "PRE_A1-U20"
+    ],
+    "level_regions": [
+      "PRE_A1-U01..U05",
+      "PRE_A1-U06..U10",
+      "PRE_A1-U11..U15",
+      "PRE_A1-U16..U20"
+    ],
+    "skill_evidence": {
+      "listening": [
+        "Q01",
+        "Q05"
+      ],
+      "reading": [
+        "Q02",
+        "Q06"
+      ],
+      "vocabulary": [
+        "Q03",
+        "Q07"
+      ],
+      "grammar": [
+        "Q04"
+      ],
+      "sentence_building": [
+        "Q08"
+      ]
+    },
+    "new_material": false,
+    "coverage_limit": "Representative sample across all four level regions; not an exhaustive test of every unit, word or objective."
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:aidez-moi:help-request",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U20-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U20-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q05",
+          "skill": "listening"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 1,
+    "external_prerequisites": [
+      "PRE_A1-U19-L05"
+    ],
+    "external_reference_status": "reference_package_and_local_project_validator_passed; other_target_databases_unverified",
+    "project_validator": {
+      "valid": true,
+      "errors": [],
+      "file_hash": "46996c054e798deaf24b13dcbd247f7fed5a4e0e434c85cede8780a909b217a6",
+      "warning_counts": {
+        "editorial_review_required": 5,
+        "browser_tts": 7
+      },
+      "requires_editorial_review": true,
+      "report_file": "PRE_A1-U20.validation.json"
+    },
+    "max_french_reading_prompt_words": 12,
+    "new_lexical_meanings": 1,
+    "checkpoint_skill_counts": {
+      "listening": 2,
+      "reading": 2,
+      "vocabulary": 2,
+      "grammar": 1,
+      "sentence_building": 1
+    },
+    "level_audit": {
+      "report_file": "PRE_A1-U20.level-audit.json",
+      "units": 20,
+      "sessions": 100,
+      "tasks": 723,
+      "mandatory_objectives": 48,
+      "authoring_deltas_checked": 19,
+      "baseline": "supplied U01 v2 example checked directly",
+      "formal_policy_passed": true,
+      "semantic_editorial_review_performed": false
+    }
+  }
+}

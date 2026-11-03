@@ -1,0 +1,975 @@
+{
+  "unit_id": "A2-U20",
+  "package_file": "A2-U20.v1.json",
+  "package_id": "programme-a2-u20-v1",
+  "session_ids": [
+    "A2-U20-L01",
+    "A2-U20-L02",
+    "A2-U20-L03",
+    "A2-U20-L04",
+    "A2-U20-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "experience",
+      "lexeme_key": "fr:experience:personal-experience",
+      "fr": "une expérience",
+      "ru": [
+        "личный опыт, пережитое событие"
+      ],
+      "transcription_ru": "юн экспэрья́(н)с",
+      "first_session_id": "A2-U20-L01"
+    },
+    {
+      "id": "prochain",
+      "lexeme_key": "fr:prochain:next-in-sequence",
+      "fr": "prochain",
+      "ru": [
+        "следующий в последовательности"
+      ],
+      "transcription_ru": "прошэ́(н)",
+      "first_session_id": "A2-U20-L02"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:a-bientot:see-you-soon",
+    "fr:a-ta-place:advice-perspective",
+    "fr:aide:assistance",
+    "fr:aller:go",
+    "fr:aller:near-future-auxiliary",
+    "fr:amicalement:friendly-signoff",
+    "fr:ans:age-years",
+    "fr:arriver:transport-arrive",
+    "fr:autre:other",
+    "fr:avoir-l-intention-de:intend-to-act",
+    "fr:avoir:compound-past-auxiliary",
+    "fr:billet:transport-ticket",
+    "fr:bruyant:noisy-place",
+    "fr:calme:quiet-place",
+    "fr:chambre:hotel-room",
+    "fr:cher:expensive",
+    "fr:choisir:choose-option",
+    "fr:commande:merchandise-order",
+    "fr:correspondance:transport-connection",
+    "fr:corriger:correct-mistake",
+    "fr:coupe:haircut-service",
+    "fr:dans-le-sac:in-bag",
+    "fr:delai:task-completion-deadline",
+    "fr:demain:tomorrow",
+    "fr:deux:cardinal-number",
+    "fr:disponible:available-in-schedule",
+    "fr:dix:cardinal-number",
+    "fr:ecrire:write",
+    "fr:en-especes:cash-payment",
+    "fr:en:quantity-pronoun",
+    "fr:erreur:mistake",
+    "fr:est-ce-que-tu-es-disponible:ask-availability",
+    "fr:etre:compound-past-auxiliary",
+    "fr:euro:currency-unit",
+    "fr:film:film",
+    "fr:foret:forest",
+    "fr:frere:brother",
+    "fr:heure:clock-hour",
+    "fr:inclus:included-in-service-price",
+    "fr:j-espere-que:hope-statement",
+    "fr:jai:age-frame",
+    "fr:jai:possession",
+    "fr:je-veux:want",
+    "fr:je-voudrais:polite-request",
+    "fr:la-semaine-prochaine:next-week",
+    "fr:la:direct-object-pronoun-feminine",
+    "fr:lac:lake",
+    "fr:le:direct-object-pronoun-masculine",
+    "fr:livre:book",
+    "fr:lui:indirect-object-singular",
+    "fr:mais:contrast-conjunction",
+    "fr:maison:house-home",
+    "fr:mardi:weekday",
+    "fr:matin:morning",
+    "fr:merci:thanks",
+    "fr:midi:noon",
+    "fr:musee:museum",
+    "fr:neuf:cardinal-number",
+    "fr:numero:identifier",
+    "fr:oui:affirmative-answer",
+    "fr:par-carte:card-payment",
+    "fr:parc:park",
+    "fr:parce-que:because-reason",
+    "fr:partir:transport-leave",
+    "fr:payer:pay",
+    "fr:pendant-que:simultaneous-time-clause",
+    "fr:pendant:duration-preposition",
+    "fr:plus:greater-degree-comparison",
+    "fr:pourriez-vous:polite-action-request",
+    "fr:preciser:clarify-service-details",
+    "fr:prendre-rendez-vous:book-appointment",
+    "fr:prendre:use-transport",
+    "fr:pres-de:near-place",
+    "fr:pull:sweater",
+    "fr:quai:railway-platform",
+    "fr:quand-jetais-enfant:childhood-background-frame",
+    "fr:quinze:cardinal-number",
+    "fr:randonnee:recreational-hike",
+    "fr:regarder:look-watch",
+    "fr:rendez-vous:appointment",
+    "fr:rentrer:return-home",
+    "fr:reporter:postpone-appointment",
+    "fr:reservation:hotel-booking",
+    "fr:salut:informal_greeting",
+    "fr:sentier:walking-path",
+    "fr:shampooing:hair-wash-service",
+    "fr:si:real-condition",
+    "fr:signaler:report-problem",
+    "fr:soeur:sister",
+    "fr:soir:evening",
+    "fr:souvent:often",
+    "fr:tache:work-task",
+    "fr:tarif:service-price",
+    "fr:terminer:finish-task",
+    "fr:train:train",
+    "fr:travailler:work",
+    "fr:trois:cardinal-number",
+    "fr:trop:excessive-degree",
+    "fr:tu-devrais:advice-action",
+    "fr:un-jour:one-day-past-narrative",
+    "fr:vendeur:salesperson",
+    "fr:vendredi:weekday",
+    "fr:venir-de:recently-completed-action",
+    "fr:visiter:visit-place",
+    "fr:y:place-pronoun"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A2.U20.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U20-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U20-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U20-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U20-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U20-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U20-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U20-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U20-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U20-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U20-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U20-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U20-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U20-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U20-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U20.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U20-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U20-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U20-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U20-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U20-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U20-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U20-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U20-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U20-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U20-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U20-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U20-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U20-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U19.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U20-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U20-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U17.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U20-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U20-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U02.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U20-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U04.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U20-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U06.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U20-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U12.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U20-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U12.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U20-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U05.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U20-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U18.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U20-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:experience:personal-experience",
+      "reason": "Отличать личный опыт от будущего намерения."
+    },
+    {
+      "lexeme_key": "fr:choisir:choose-option",
+      "reason": "Сохранять причину выбора, не добавляя неуказанных условий."
+    },
+    {
+      "lexeme_key": "fr:prochain:next-in-sequence",
+      "reason": "Отличать следующий вариант от уже совершённого события."
+    },
+    {
+      "lexeme_key": "fr:la-semaine-prochaine:next-week",
+      "reason": "Вернуть известный будущий период."
+    },
+    {
+      "lexeme_key": "fr:avoir-l-intention-de:intend-to-act",
+      "reason": "Сохранять намерение отдельно от результата."
+    },
+    {
+      "lexeme_key": "fr:est-ce-que-tu-es-disponible:ask-availability",
+      "reason": "Не превращать вопрос в согласие адресата."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_ids_keys_and_french_forms_checked": true,
+    "reading_lengths_checked": true,
+    "checkpoint_structure_checked": true,
+    "level_authoring_audit_passed": true,
+    "no_new_grammar_or_lexemes_in_l05": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Зависимость A2-U19-L05 найдена проектным валидатором. Это не подтверждает публикацию или принятие пользователем.",
+    "Редактору проверить естественность рассказа об опыте, причины выбора, диалога услуги и письма о планах; проверить репрезентативность контрольной выборки.",
+    "Прослушать браузерную озвучку, выполнить предпросмотр и прохождение; измерить время. Эти действия фактически не выполнялись."
+  ],
+  "progress": {
+    "current_unit": "A2-U20",
+    "prepared_session_ids": [
+      "A2-U20-L01",
+      "A2-U20-L02",
+      "A2-U20-L03",
+      "A2-U20-L04",
+      "A2-U20-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "B1-U01",
+    "next_unit_title": "Личный опыт"
+  },
+  "scope_notes": [
+    "Один полный пакет пяти занятий; L05 — checkpoint по плану. Две новые лексические единицы распределены как одна, одна, ноль, ноль, ноль. В L05 нового обязательного материала и новой грамматики нет.",
+    "Expérience здесь личный опыт, не научный эксперимент. Старое choisir сохраняет ключ и полный объект.",
+    "Prochain показан в мужском роде в сочетании le prochain train; прежняя la semaine prochaine сохраняется как готовое выражение. Полная таблица согласования не вводится.",
+    "В L01 повторяется исправление ошибки из A2-U19. В L03 возвращается условие совета из A2-U17, в L04 — причина рекомендации оттуда же. Прежние карточки не изменены.",
+    "Опыт прошлого, желание, намерение, будущий план, вопрос и подтверждённый результат различаются. Запись и желаемый способ оплаты не подтверждают выполненную услугу или платёж.",
+    "Контроль содержит два listening, два reading, два vocabulary, grammar и sentence_building. Выбраны ранние и поздние бытовые темы: транспорт, фон и событие, услуга, местоимения, проблема и личное письмо о планах.",
+    "Восемь вопросов не проверяют исчерпывающе все сорок целей уровня. Накопленное покрытие всех ста занятий проверяется отдельно и не равно результату прохождения учеником.",
+    "Все поездки, цены, услуги и планы вымышлены для языка. Реальные поездки и услуги не рекомендуются; бронирования, платежи и сообщения не выполнялись.",
+    "Озвучка только браузером: fr-FR, asset_id=null. Нет аудиофайлов и внешних сервисов, обязательного микрофона или свободного ввода.",
+    "Завершение авторских материалов A2 не подтверждает весь CEFR: свободная речь и письмо требуют отдельной проверки. Импорт, публикация, прослушивание и сайт-прохождение не выполнялись; принятие пользователем не подтверждено.",
+    "Curricula не создаётся: по методике это отдельная задача после готовности уровня. Следующая тема B1-U01 не начата."
+  ],
+  "session_material": [
+    {
+      "session_id": "A2-U20-L01",
+      "new_lexeme_keys": [
+        "fr:experience:personal-experience"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aide:assistance",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:chambre:hotel-room",
+        "fr:choisir:choose-option",
+        "fr:corriger:correct-mistake",
+        "fr:delai:task-completion-deadline",
+        "fr:deux:cardinal-number",
+        "fr:disponible:available-in-schedule",
+        "fr:en-especes:cash-payment",
+        "fr:erreur:mistake",
+        "fr:frere:brother",
+        "fr:je-voudrais:polite-request",
+        "fr:la-semaine-prochaine:next-week",
+        "fr:mais:contrast-conjunction",
+        "fr:matin:morning",
+        "fr:merci:thanks",
+        "fr:midi:noon",
+        "fr:musee:museum",
+        "fr:numero:identifier",
+        "fr:parc:park",
+        "fr:preciser:clarify-service-details",
+        "fr:pres-de:near-place",
+        "fr:reservation:hotel-booking",
+        "fr:signaler:report-problem",
+        "fr:soeur:sister",
+        "fr:tarif:service-price",
+        "fr:train:train",
+        "fr:trois:cardinal-number",
+        "fr:vendredi:weekday",
+        "fr:venir-de:recently-completed-action",
+        "fr:visiter:visit-place"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U20-L02",
+      "new_lexeme_keys": [
+        "fr:prochain:next-in-sequence"
+      ],
+      "reused_lexeme_keys": [
+        "fr:autre:other",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:cher:expensive",
+        "fr:choisir:choose-option",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:en-especes:cash-payment",
+        "fr:euro:currency-unit",
+        "fr:experience:personal-experience",
+        "fr:frere:brother",
+        "fr:je-voudrais:polite-request",
+        "fr:la-semaine-prochaine:next-week",
+        "fr:mais:contrast-conjunction",
+        "fr:matin:morning",
+        "fr:midi:noon",
+        "fr:musee:museum",
+        "fr:par-carte:card-payment",
+        "fr:parc:park",
+        "fr:parce-que:because-reason",
+        "fr:partir:transport-leave",
+        "fr:payer:pay",
+        "fr:plus:greater-degree-comparison",
+        "fr:pres-de:near-place",
+        "fr:soeur:sister",
+        "fr:tarif:service-price",
+        "fr:train:train",
+        "fr:vendredi:weekday",
+        "fr:venir-de:recently-completed-action",
+        "fr:visiter:visit-place"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U20-L03",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-ta-place:advice-perspective",
+        "fr:aller:go",
+        "fr:autre:other",
+        "fr:bruyant:noisy-place",
+        "fr:calme:quiet-place",
+        "fr:choisir:choose-option",
+        "fr:coupe:haircut-service",
+        "fr:dix:cardinal-number",
+        "fr:en-especes:cash-payment",
+        "fr:euro:currency-unit",
+        "fr:foret:forest",
+        "fr:heure:clock-hour",
+        "fr:inclus:included-in-service-price",
+        "fr:je-veux:want",
+        "fr:je-voudrais:polite-request",
+        "fr:lac:lake",
+        "fr:mais:contrast-conjunction",
+        "fr:par-carte:card-payment",
+        "fr:payer:pay",
+        "fr:plus:greater-degree-comparison",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:prendre-rendez-vous:book-appointment",
+        "fr:quinze:cardinal-number",
+        "fr:randonnee:recreational-hike",
+        "fr:sentier:walking-path",
+        "fr:shampooing:hair-wash-service",
+        "fr:si:real-condition",
+        "fr:tache:work-task",
+        "fr:tarif:service-price",
+        "fr:terminer:finish-task",
+        "fr:tu-devrais:advice-action",
+        "fr:vendredi:weekday",
+        "fr:venir-de:recently-completed-action"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U20-L04",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-bientot:see-you-soon",
+        "fr:a-ta-place:advice-perspective",
+        "fr:aller:go",
+        "fr:aller:near-future-auxiliary",
+        "fr:amicalement:friendly-signoff",
+        "fr:autre:other",
+        "fr:avoir-l-intention-de:intend-to-act",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:bruyant:noisy-place",
+        "fr:calme:quiet-place",
+        "fr:choisir:choose-option",
+        "fr:disponible:available-in-schedule",
+        "fr:en-especes:cash-payment",
+        "fr:est-ce-que-tu-es-disponible:ask-availability",
+        "fr:foret:forest",
+        "fr:j-espere-que:hope-statement",
+        "fr:je-voudrais:polite-request",
+        "fr:la-semaine-prochaine:next-week",
+        "fr:lac:lake",
+        "fr:mais:contrast-conjunction",
+        "fr:midi:noon",
+        "fr:musee:museum",
+        "fr:parce-que:because-reason",
+        "fr:prendre:use-transport",
+        "fr:randonnee:recreational-hike",
+        "fr:salut:informal_greeting",
+        "fr:sentier:walking-path",
+        "fr:soeur:sister",
+        "fr:soir:evening",
+        "fr:train:train",
+        "fr:trop:excessive-degree",
+        "fr:tu-devrais:advice-action",
+        "fr:vendredi:weekday",
+        "fr:venir-de:recently-completed-action",
+        "fr:visiter:visit-place"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U20-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-bientot:see-you-soon",
+        "fr:aller:go",
+        "fr:aller:near-future-auxiliary",
+        "fr:amicalement:friendly-signoff",
+        "fr:ans:age-years",
+        "fr:arriver:transport-arrive",
+        "fr:avoir-l-intention-de:intend-to-act",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:billet:transport-ticket",
+        "fr:choisir:choose-option",
+        "fr:commande:merchandise-order",
+        "fr:correspondance:transport-connection",
+        "fr:corriger:correct-mistake",
+        "fr:coupe:haircut-service",
+        "fr:dans-le-sac:in-bag",
+        "fr:demain:tomorrow",
+        "fr:deux:cardinal-number",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:ecrire:write",
+        "fr:en:quantity-pronoun",
+        "fr:erreur:mistake",
+        "fr:est-ce-que-tu-es-disponible:ask-availability",
+        "fr:etre:compound-past-auxiliary",
+        "fr:experience:personal-experience",
+        "fr:film:film",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:jai:age-frame",
+        "fr:jai:possession",
+        "fr:je-voudrais:polite-request",
+        "fr:la-semaine-prochaine:next-week",
+        "fr:la:direct-object-pronoun-feminine",
+        "fr:le:direct-object-pronoun-masculine",
+        "fr:livre:book",
+        "fr:lui:indirect-object-singular",
+        "fr:maison:house-home",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:midi:noon",
+        "fr:musee:museum",
+        "fr:neuf:cardinal-number",
+        "fr:oui:affirmative-answer",
+        "fr:parc:park",
+        "fr:parce-que:because-reason",
+        "fr:partir:transport-leave",
+        "fr:payer:pay",
+        "fr:pendant-que:simultaneous-time-clause",
+        "fr:pendant:duration-preposition",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:prendre:use-transport",
+        "fr:pres-de:near-place",
+        "fr:prochain:next-in-sequence",
+        "fr:pull:sweater",
+        "fr:quai:railway-platform",
+        "fr:quand-jetais-enfant:childhood-background-frame",
+        "fr:regarder:look-watch",
+        "fr:rendez-vous:appointment",
+        "fr:rentrer:return-home",
+        "fr:reporter:postpone-appointment",
+        "fr:salut:informal_greeting",
+        "fr:si:real-condition",
+        "fr:signaler:report-problem",
+        "fr:soeur:sister",
+        "fr:soir:evening",
+        "fr:souvent:often",
+        "fr:tarif:service-price",
+        "fr:train:train",
+        "fr:travailler:work",
+        "fr:trois:cardinal-number",
+        "fr:un-jour:one-day-past-narrative",
+        "fr:vendeur:salesperson",
+        "fr:vendredi:weekday",
+        "fr:visiter:visit-place",
+        "fr:y:place-pronoun"
+      ],
+      "task_count": 8
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:experience:personal-experience",
+      "evidence": [
+        {
+          "session_id": "A2-U20-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U20-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:prochain:next-in-sequence",
+      "evidence": [
+        {
+          "session_id": "A2-U20-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U20-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A2-U20-L01",
+      "material": "Повторение J’ai visité / Je voudrais visiter и следующей недели."
+    },
+    {
+      "session_id": "A2-U20-L02",
+      "material": "Следующий поезд; повторение причины выбора с parce que."
+    },
+    {
+      "session_id": "A2-U20-L03",
+      "material": "Повторение просьбы о записи, тарифа, включения услуги и оплаты."
+    },
+    {
+      "session_id": "A2-U20-L04",
+      "material": "Повторение ближайшего будущего, намерения, надежды и вопроса адресату."
+    }
+  ],
+  "checkpoint_task_map": [
+    {
+      "task_id": "Q01",
+      "skill": "listening",
+      "objective_ids": [
+        "A2.U02.UNDERSTAND"
+      ]
+    },
+    {
+      "task_id": "Q02",
+      "skill": "reading",
+      "objective_ids": [
+        "A2.U04.APPLY"
+      ]
+    },
+    {
+      "task_id": "Q03",
+      "skill": "listening",
+      "objective_ids": [
+        "A2.U06.APPLY"
+      ]
+    },
+    {
+      "task_id": "Q04",
+      "skill": "reading",
+      "objective_ids": [
+        "A2.U20.UNDERSTAND"
+      ]
+    },
+    {
+      "task_id": "Q05",
+      "skill": "vocabulary",
+      "objective_ids": [
+        "A2.U12.UNDERSTAND",
+        "A2.U12.APPLY"
+      ]
+    },
+    {
+      "task_id": "Q06",
+      "skill": "vocabulary",
+      "objective_ids": [
+        "A2.U19.APPLY"
+      ]
+    },
+    {
+      "task_id": "Q07",
+      "skill": "grammar",
+      "objective_ids": [
+        "A2.U05.APPLY"
+      ]
+    },
+    {
+      "task_id": "Q08",
+      "skill": "sentence_building",
+      "objective_ids": [
+        "A2.U20.APPLY",
+        "A2.U18.APPLY"
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 2,
+    "external_prerequisites": [
+      "A2-U19-L05"
+    ],
+    "external_reference_status": "A2-U19-L05_found_by_project_validator; publication_and_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 6
+      },
+      "file_hash": "544d1fd1610ffe3d2d3a873baa95b964312da1e4818f1eef08980eb77489c285"
+    },
+    "existing_lexeme_objects_preserved": 105,
+    "text_lengths": [
+      {
+        "session_id": "A2-U20-L01",
+        "reading_word_counts": [
+          36,
+          39
+        ],
+        "listening_word_counts": [
+          39
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U20-L02",
+        "reading_word_counts": [
+          39,
+          34
+        ],
+        "listening_word_counts": [
+          34
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U20-L03",
+        "reading_word_counts": [
+          33,
+          35
+        ],
+        "listening_word_counts": [
+          35
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U20-L04",
+        "reading_word_counts": [
+          34,
+          39
+        ],
+        "listening_word_counts": [
+          39
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U20-L05",
+        "reading_word_counts": [
+          37,
+          38
+        ],
+        "listening_word_counts": [
+          32,
+          37
+        ],
+        "duration_measured": false
+      }
+    ]
+  },
+  "level_coverage_audit": {
+    "file": "A2.level-authoring-audit.json",
+    "units": 20,
+    "sessions": 100,
+    "tasks": 720,
+    "mandatory_objectives": 40,
+    "all_package_schemas_valid": true,
+    "checkpoint_objectives": [
+      "A2.U02.UNDERSTAND",
+      "A2.U04.APPLY",
+      "A2.U05.APPLY",
+      "A2.U06.APPLY",
+      "A2.U12.UNDERSTAND",
+      "A2.U12.APPLY",
+      "A2.U18.APPLY",
+      "A2.U19.APPLY",
+      "A2.U20.UNDERSTAND",
+      "A2.U20.APPLY"
+    ],
+    "objectives_not_separately_sampled_in_final_checkpoint": [
+      "A2.U01.UNDERSTAND",
+      "A2.U01.APPLY",
+      "A2.U02.APPLY",
+      "A2.U03.UNDERSTAND",
+      "A2.U03.APPLY",
+      "A2.U04.UNDERSTAND",
+      "A2.U05.UNDERSTAND",
+      "A2.U06.UNDERSTAND",
+      "A2.U07.UNDERSTAND",
+      "A2.U07.APPLY",
+      "A2.U08.UNDERSTAND",
+      "A2.U08.APPLY",
+      "A2.U09.UNDERSTAND",
+      "A2.U09.APPLY",
+      "A2.U10.UNDERSTAND",
+      "A2.U10.APPLY",
+      "A2.U11.UNDERSTAND",
+      "A2.U11.APPLY",
+      "A2.U13.UNDERSTAND",
+      "A2.U13.APPLY",
+      "A2.U14.UNDERSTAND",
+      "A2.U14.APPLY",
+      "A2.U15.UNDERSTAND",
+      "A2.U15.APPLY",
+      "A2.U16.UNDERSTAND",
+      "A2.U16.APPLY",
+      "A2.U17.UNDERSTAND",
+      "A2.U17.APPLY",
+      "A2.U18.UNDERSTAND",
+      "A2.U19.UNDERSTAND"
+    ],
+    "interpretation": "Аудит созданных материалов, не освоение учеником, не результат импорта и не языковая редактура. Восемь вопросов контроля дают выборку; полнота покрытия накоплена по всем занятиям."
+  },
+  "level_progress": {
+    "level": "A2",
+    "authoring_complete": true,
+    "prepared_units": 20,
+    "prepared_sessions": 100,
+    "user_acceptance_confirmed": false,
+    "site_import_performed": false,
+    "human_review_complete": false,
+    "curricula_created": false,
+    "next_unit_not_started": "B1-U01"
+  }
+}

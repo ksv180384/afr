@@ -1,0 +1,1119 @@
+{
+  "unit_id": "PRE_A1-U03",
+  "package_file": "PRE_A1-U03.v1.json",
+  "session_ids": [
+    "PRE_A1-U03-L01",
+    "PRE_A1-U03-L02",
+    "PRE_A1-U03-L03",
+    "PRE_A1-U03-L04",
+    "PRE_A1-U03-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "zero",
+      "lexeme_key": "fr:zero:cardinal-number",
+      "fr": "zéro",
+      "ru": [
+        "ноль"
+      ],
+      "transcription_ru": "зэро́",
+      "first_session_id": "PRE_A1-U03-L01"
+    },
+    {
+      "id": "un",
+      "lexeme_key": "fr:un:cardinal-number",
+      "fr": "un",
+      "ru": [
+        "один"
+      ],
+      "transcription_ru": "э́(н)",
+      "first_session_id": "PRE_A1-U03-L01"
+    },
+    {
+      "id": "deux",
+      "lexeme_key": "fr:deux:cardinal-number",
+      "fr": "deux",
+      "ru": [
+        "два"
+      ],
+      "transcription_ru": "дё́",
+      "first_session_id": "PRE_A1-U03-L01"
+    },
+    {
+      "id": "trois",
+      "lexeme_key": "fr:trois:cardinal-number",
+      "fr": "trois",
+      "ru": [
+        "три"
+      ],
+      "transcription_ru": "труа́",
+      "first_session_id": "PRE_A1-U03-L01"
+    },
+    {
+      "id": "quatre",
+      "lexeme_key": "fr:quatre:cardinal-number",
+      "fr": "quatre",
+      "ru": [
+        "четыре"
+      ],
+      "transcription_ru": "ка́тр",
+      "first_session_id": "PRE_A1-U03-L01"
+    },
+    {
+      "id": "cinq",
+      "lexeme_key": "fr:cinq:cardinal-number",
+      "fr": "cinq",
+      "ru": [
+        "пять"
+      ],
+      "transcription_ru": "сэ́(н)к",
+      "first_session_id": "PRE_A1-U03-L01"
+    },
+    {
+      "id": "six",
+      "lexeme_key": "fr:six:cardinal-number",
+      "fr": "six",
+      "ru": [
+        "шесть"
+      ],
+      "transcription_ru": "си́с",
+      "first_session_id": "PRE_A1-U03-L02"
+    },
+    {
+      "id": "sept",
+      "lexeme_key": "fr:sept:cardinal-number",
+      "fr": "sept",
+      "ru": [
+        "семь"
+      ],
+      "transcription_ru": "сэ́т",
+      "first_session_id": "PRE_A1-U03-L02"
+    },
+    {
+      "id": "huit",
+      "lexeme_key": "fr:huit:cardinal-number",
+      "fr": "huit",
+      "ru": [
+        "восемь"
+      ],
+      "transcription_ru": "уи́т",
+      "first_session_id": "PRE_A1-U03-L02"
+    },
+    {
+      "id": "neuf",
+      "lexeme_key": "fr:neuf:cardinal-number",
+      "fr": "neuf",
+      "ru": [
+        "девять"
+      ],
+      "transcription_ru": "нё́ф",
+      "first_session_id": "PRE_A1-U03-L02"
+    },
+    {
+      "id": "dix",
+      "lexeme_key": "fr:dix:cardinal-number",
+      "fr": "dix",
+      "ru": [
+        "десять"
+      ],
+      "transcription_ru": "ди́с",
+      "first_session_id": "PRE_A1-U03-L02"
+    },
+    {
+      "id": "onze",
+      "lexeme_key": "fr:onze:cardinal-number",
+      "fr": "onze",
+      "ru": [
+        "одиннадцать"
+      ],
+      "transcription_ru": "о́(н)з",
+      "first_session_id": "PRE_A1-U03-L03"
+    },
+    {
+      "id": "douze",
+      "lexeme_key": "fr:douze:cardinal-number",
+      "fr": "douze",
+      "ru": [
+        "двенадцать"
+      ],
+      "transcription_ru": "ду́з",
+      "first_session_id": "PRE_A1-U03-L03"
+    },
+    {
+      "id": "treize",
+      "lexeme_key": "fr:treize:cardinal-number",
+      "fr": "treize",
+      "ru": [
+        "тринадцать"
+      ],
+      "transcription_ru": "трэ́з",
+      "first_session_id": "PRE_A1-U03-L03"
+    },
+    {
+      "id": "quatorze",
+      "lexeme_key": "fr:quatorze:cardinal-number",
+      "fr": "quatorze",
+      "ru": [
+        "четырнадцать"
+      ],
+      "transcription_ru": "като́рз",
+      "first_session_id": "PRE_A1-U03-L03"
+    },
+    {
+      "id": "quinze",
+      "lexeme_key": "fr:quinze:cardinal-number",
+      "fr": "quinze",
+      "ru": [
+        "пятнадцать"
+      ],
+      "transcription_ru": "кэ́(н)з",
+      "first_session_id": "PRE_A1-U03-L03"
+    },
+    {
+      "id": "seize",
+      "lexeme_key": "fr:seize:cardinal-number",
+      "fr": "seize",
+      "ru": [
+        "шестнадцать"
+      ],
+      "transcription_ru": "сэ́з",
+      "first_session_id": "PRE_A1-U03-L03"
+    },
+    {
+      "id": "dix-sept",
+      "lexeme_key": "fr:dix-sept:cardinal-number",
+      "fr": "dix-sept",
+      "ru": [
+        "семнадцать"
+      ],
+      "transcription_ru": "дисэ́т",
+      "first_session_id": "PRE_A1-U03-L04"
+    },
+    {
+      "id": "dix-huit",
+      "lexeme_key": "fr:dix-huit:cardinal-number",
+      "fr": "dix-huit",
+      "ru": [
+        "восемнадцать"
+      ],
+      "transcription_ru": "дизюи́т",
+      "first_session_id": "PRE_A1-U03-L04"
+    },
+    {
+      "id": "dix-neuf",
+      "lexeme_key": "fr:dix-neuf:cardinal-number",
+      "fr": "dix-neuf",
+      "ru": [
+        "девятнадцать"
+      ],
+      "transcription_ru": "дизнё́ф",
+      "first_session_id": "PRE_A1-U03-L04"
+    },
+    {
+      "id": "vingt",
+      "lexeme_key": "fr:vingt:cardinal-number",
+      "fr": "vingt",
+      "ru": [
+        "двадцать"
+      ],
+      "transcription_ru": "вэ́(н)",
+      "first_session_id": "PRE_A1-U03-L04"
+    },
+    {
+      "id": "numero",
+      "lexeme_key": "fr:numero:identifier",
+      "fr": "le numéro",
+      "ru": [
+        "номер (обозначение талона или места)"
+      ],
+      "transcription_ru": "лё нюмэро́",
+      "first_session_id": "PRE_A1-U03-L02"
+    },
+    {
+      "id": "jai-age",
+      "lexeme_key": "fr:jai:age-frame",
+      "fr": "j’ai",
+      "ru": [
+        "мне (начало образца о возрасте)"
+      ],
+      "transcription_ru": "жэ",
+      "first_session_id": "PRE_A1-U03-L04"
+    },
+    {
+      "id": "ans-age",
+      "lexeme_key": "fr:ans:age-years",
+      "fr": "ans",
+      "ru": [
+        "лет (в образце о возрасте)"
+      ],
+      "transcription_ru": "а́(н)",
+      "first_session_id": "PRE_A1-U03-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:bonjour:greeting",
+    "fr:epelez-sil-vous-plait:request-spelling",
+    "fr:merci:thanks",
+    "fr:nom:family-name",
+    "fr:non:negative-answer",
+    "fr:oui:affirmative-answer",
+    "fr:plus-lentement-sil-vous-plait:request-slower",
+    "fr:repetez-sil-vous-plait:request-repeat",
+    "fr:sil-vous-plait:polite-request"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "PRE_A1.U03.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q05",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q08",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q05",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q08",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U03.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q06",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q08",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q08",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q05",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U02.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.CLARIFY.REQUEST",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q08",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:un:cardinal-number",
+      "reason": "Вернуться к количеству «один» при знакомстве с единичным предметом; артикль является другим значением и потребует отдельного объяснения."
+    },
+    {
+      "lexeme_key": "fr:deux:cardinal-number",
+      "reason": "Сопоставить один и два предмета при введении множественного числа."
+    },
+    {
+      "lexeme_key": "fr:trois:cardinal-number",
+      "reason": "Использовать три знакомых предмета как посильный перенос числительного в новую тему."
+    },
+    {
+      "lexeme_key": "fr:cinq:cardinal-number",
+      "reason": "Повторить маленькое количество и отличие от пятнадцати."
+    },
+    {
+      "lexeme_key": "fr:repetez-sil-vous-plait:request-repeat",
+      "reason": "Сохранить возможность попросить повторить название предмета."
+    },
+    {
+      "lexeme_key": "fr:numero:identifier",
+      "reason": "Вернуть номер как обозначение предмета или карточки, не смешивая с количеством."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "local_database_references_checked": true,
+    "pronunciation_coverage_warnings_absent": true,
+    "all_numbers_have_task_evidence": true
+  },
+  "open_issues": [
+    "Штатная проверка зависимостей в локальной базе пройдена. При импорте в другую базу сначала требуется PRE_A1-U02-L05; её наличие не создаётся файлом U03.",
+    "Человеку нужно прослушать числа и целые образцы возраста французским голосом браузера, проверить транскрипции и пробное прохождение.",
+    "Замерить длительность и нагрузку: оценка 6 минут не измерена; заданный план требует в нескольких занятиях по шесть новых значений."
+  ],
+  "progress": {
+    "current_unit": "PRE_A1-U03",
+    "prepared_session_ids": [
+      "PRE_A1-U03-L01",
+      "PRE_A1-U03-L02",
+      "PRE_A1-U03-L03",
+      "PRE_A1-U03-L04",
+      "PRE_A1-U03-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "PRE_A1-U04",
+    "previous_unit": "PRE_A1-U02",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку U03; отдельного подтверждения импорта или языкового принятия U02 нет.",
+    "Старые смысловые ключи сохранены. Основной реестр не изменён; новые значения переданы отдельным delta до принятия.",
+    "План требует шесть чисел в L01 и L03. L02 содержит пять чисел и слово «номер»; L04 — четыре числа и две части готового образца возраста. Введение разбито на карточки по 1–3 значения, задания ограничены восемью.",
+    "Начало и конец образца возраста имеют отдельные ключи: неизменные части допускают другие уже изученные числа. Это не обучение полной парадигме глагола.",
+    "В L05 нет новых обязательных слов, чисел или конструкций. Оно выборочно объединяет тему, а не подтверждает освоение каждого числа за одно прохождение.",
+    "Подписанная сборка фраз не размечена как оценка всех её слов: assessed_vocabulary_ids в двух заданиях сборки оставлены пустыми."
+  ],
+  "session_material": [
+    {
+      "session_id": "PRE_A1-U03-L01",
+      "new_lexeme_keys": [
+        "fr:zero:cardinal-number",
+        "fr:un:cardinal-number",
+        "fr:deux:cardinal-number",
+        "fr:trois:cardinal-number",
+        "fr:quatre:cardinal-number",
+        "fr:cinq:cardinal-number"
+      ],
+      "reused_lexeme_keys": [
+        "fr:epelez-sil-vous-plait:request-spelling",
+        "fr:merci:thanks",
+        "fr:non:negative-answer",
+        "fr:oui:affirmative-answer",
+        "fr:sil-vous-plait:polite-request"
+      ],
+      "task_count": 8
+    },
+    {
+      "session_id": "PRE_A1-U03-L02",
+      "new_lexeme_keys": [
+        "fr:six:cardinal-number",
+        "fr:sept:cardinal-number",
+        "fr:huit:cardinal-number",
+        "fr:neuf:cardinal-number",
+        "fr:dix:cardinal-number",
+        "fr:numero:identifier"
+      ],
+      "reused_lexeme_keys": [
+        "fr:bonjour:greeting",
+        "fr:cinq:cardinal-number",
+        "fr:epelez-sil-vous-plait:request-spelling",
+        "fr:nom:family-name",
+        "fr:plus-lentement-sil-vous-plait:request-slower",
+        "fr:repetez-sil-vous-plait:request-repeat",
+        "fr:trois:cardinal-number",
+        "fr:un:cardinal-number"
+      ],
+      "task_count": 8
+    },
+    {
+      "session_id": "PRE_A1-U03-L03",
+      "new_lexeme_keys": [
+        "fr:onze:cardinal-number",
+        "fr:douze:cardinal-number",
+        "fr:treize:cardinal-number",
+        "fr:quatorze:cardinal-number",
+        "fr:quinze:cardinal-number",
+        "fr:seize:cardinal-number"
+      ],
+      "reused_lexeme_keys": [
+        "fr:bonjour:greeting",
+        "fr:cinq:cardinal-number",
+        "fr:dix:cardinal-number",
+        "fr:neuf:cardinal-number",
+        "fr:numero:identifier",
+        "fr:quatre:cardinal-number",
+        "fr:sil-vous-plait:polite-request",
+        "fr:six:cardinal-number",
+        "fr:trois:cardinal-number"
+      ],
+      "task_count": 8
+    },
+    {
+      "session_id": "PRE_A1-U03-L04",
+      "new_lexeme_keys": [
+        "fr:dix-sept:cardinal-number",
+        "fr:dix-huit:cardinal-number",
+        "fr:dix-neuf:cardinal-number",
+        "fr:vingt:cardinal-number",
+        "fr:jai:age-frame",
+        "fr:ans:age-years"
+      ],
+      "reused_lexeme_keys": [
+        "fr:douze:cardinal-number",
+        "fr:merci:thanks",
+        "fr:numero:identifier",
+        "fr:onze:cardinal-number",
+        "fr:quatorze:cardinal-number",
+        "fr:seize:cardinal-number"
+      ],
+      "task_count": 8
+    },
+    {
+      "session_id": "PRE_A1-U03-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:ans:age-years",
+        "fr:cinq:cardinal-number",
+        "fr:deux:cardinal-number",
+        "fr:dix-huit:cardinal-number",
+        "fr:dix-neuf:cardinal-number",
+        "fr:dix-sept:cardinal-number",
+        "fr:dix:cardinal-number",
+        "fr:douze:cardinal-number",
+        "fr:huit:cardinal-number",
+        "fr:jai:age-frame",
+        "fr:neuf:cardinal-number",
+        "fr:numero:identifier",
+        "fr:onze:cardinal-number",
+        "fr:quatorze:cardinal-number",
+        "fr:quatre:cardinal-number",
+        "fr:quinze:cardinal-number",
+        "fr:seize:cardinal-number",
+        "fr:sept:cardinal-number",
+        "fr:sil-vous-plait:polite-request",
+        "fr:six:cardinal-number",
+        "fr:treize:cardinal-number",
+        "fr:trois:cardinal-number",
+        "fr:un:cardinal-number",
+        "fr:vingt:cardinal-number",
+        "fr:zero:cardinal-number"
+      ],
+      "task_count": 8
+    }
+  ],
+  "number_evidence": [
+    {
+      "lexeme_key": "fr:zero:cardinal-number",
+      "number": 0,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:un:cardinal-number",
+      "number": 1,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:deux:cardinal-number",
+      "number": 2,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:trois:cardinal-number",
+      "number": 3,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q08",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q08",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:quatre:cardinal-number",
+      "number": 4,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q05",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:cinq:cardinal-number",
+      "number": 5,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:six:cardinal-number",
+      "number": 6,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:sept:cardinal-number",
+      "number": 7,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:huit:cardinal-number",
+      "number": 8,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q05",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:neuf:cardinal-number",
+      "number": 9,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q08",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:dix:cardinal-number",
+      "number": 10,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:onze:cardinal-number",
+      "number": 11,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:douze:cardinal-number",
+      "number": 12,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:treize:cardinal-number",
+      "number": 13,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q06",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:quatorze:cardinal-number",
+      "number": 14,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:quinze:cardinal-number",
+      "number": 15,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q08",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:seize:cardinal-number",
+      "number": 16,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:dix-sept:cardinal-number",
+      "number": 17,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:dix-huit:cardinal-number",
+      "number": 18,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:dix-neuf:cardinal-number",
+      "number": 19,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q05",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:vingt:cardinal-number",
+      "number": 20,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q08",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 40,
+    "tasks_per_session": [
+      8,
+      8,
+      8,
+      8,
+      8
+    ],
+    "new_lexemes": 24,
+    "external_prerequisites": [
+      "PRE_A1-U02-L05"
+    ],
+    "external_reference_status": "Exists in prepared U02 package; full project validator, including local database references, returned no errors. Target database must contain U02 before importing U03.",
+    "project_validator": {
+      "valid": true,
+      "errors": [],
+      "file_hash": "322555fec04e759527d014d1ea42dbb90d64fd11816f9f407b1936e28e24a1f5",
+      "warning_counts": {
+        "editorial_review_required": 5,
+        "browser_tts": 21
+      },
+      "requires_editorial_review": true,
+      "report_file": "PRE_A1-U03.validation.json"
+    }
+  }
+}

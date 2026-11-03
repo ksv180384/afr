@@ -1,0 +1,1026 @@
+{
+  "unit_id": "B1-U04",
+  "package_id": "programme-b1-u04-v1",
+  "package_file": "B1-U04.v1.json",
+  "session_ids": [
+    "B1-U04-L01",
+    "B1-U04-L02",
+    "B1-U04-L03",
+    "B1-U04-L04",
+    "B1-U04-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "panne",
+      "lexeme_key": "fr:panne:equipment-malfunction",
+      "fr": "une panne",
+      "ru": [
+        "неисправность, поломка оборудования"
+      ],
+      "transcription_ru": "юн пан",
+      "first_session_id": "B1-U04-L01"
+    },
+    {
+      "id": "chauffage",
+      "lexeme_key": "fr:chauffage:home-heating",
+      "fr": "le chauffage",
+      "ru": [
+        "отопление в жилье"
+      ],
+      "transcription_ru": "лё шофа́ж",
+      "first_session_id": "B1-U04-L01"
+    },
+    {
+      "id": "fonctionner",
+      "lexeme_key": "fr:fonctionner:equipment-operate",
+      "fr": "fonctionner",
+      "ru": [
+        "работать, функционировать: об оборудовании"
+      ],
+      "transcription_ru": "фо(н)ксьонэ́",
+      "first_session_id": "B1-U04-L01"
+    },
+    {
+      "id": "constater",
+      "lexeme_key": "fr:constater:observe-problem",
+      "fr": "constater",
+      "ru": [
+        "замечать, устанавливать наблюдаемый факт"
+      ],
+      "transcription_ru": "ко(н)статэ́",
+      "first_session_id": "B1-U04-L02"
+    },
+    {
+      "id": "ou-relatif",
+      "lexeme_key": "fr:ou:relative-place",
+      "fr": "où",
+      "ru": [
+        "где, в которой: связь с названным местом"
+      ],
+      "transcription_ru": "у",
+      "first_session_id": "B1-U04-L02"
+    },
+    {
+      "id": "reparer",
+      "lexeme_key": "fr:reparer:repair-equipment",
+      "fr": "réparer",
+      "ru": [
+        "чинить, устранять неисправность оборудования"
+      ],
+      "transcription_ru": "рэпарэ́",
+      "first_session_id": "B1-U04-L03"
+    },
+    {
+      "id": "dont-relatif",
+      "lexeme_key": "fr:dont:relative-de-complement",
+      "fr": "dont",
+      "ru": [
+        "о котором: в выбранной модели «говорить о»"
+      ],
+      "transcription_ru": "до(н)",
+      "first_session_id": "B1-U04-L03"
+    },
+    {
+      "id": "intervenir",
+      "lexeme_key": "fr:intervenir:attend-for-repair",
+      "fr": "intervenir",
+      "ru": [
+        "приходить для устранения неисправности"
+      ],
+      "transcription_ru": "э(н)тэрвэни́р",
+      "first_session_id": "B1-U04-L04"
+    },
+    {
+      "id": "technicien",
+      "lexeme_key": "fr:technicien:repair-technician",
+      "fr": "un technicien",
+      "ru": [
+        "специалист по устранению неисправностей"
+      ],
+      "transcription_ru": "э(н) тэкнисьэ́(н)",
+      "first_session_id": "B1-U04-L04"
+    },
+    {
+      "id": "concerner",
+      "lexeme_key": "fr:concerner:relate-to-problem-object",
+      "fr": "concerner",
+      "ru": [
+        "касаться: относиться к предмету проблемы"
+      ],
+      "transcription_ru": "ко(н)сэрнэ́",
+      "first_session_id": "B1-U04-L01"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:appartement:apartment",
+    "fr:auparavant:earlier-relative-time",
+    "fr:avoir:compound-past-auxiliary",
+    "fr:bonjour:greeting",
+    "fr:cependant:contrast-reservation",
+    "fr:chambre:bedroom",
+    "fr:confirmer:confirm-arrangement",
+    "fr:depuis:ongoing-since-duration",
+    "fr:dimanche:weekday",
+    "fr:disponibilite:person-time-availability",
+    "fr:disponible:available-in-schedule",
+    "fr:dix:cardinal-number",
+    "fr:donc:consequence-conclusion",
+    "fr:encore:additional-quantity",
+    "fr:ensuite:next-step",
+    "fr:envoyer:send-message",
+    "fr:fermer:close-object",
+    "fr:froid:cold-temperature",
+    "fr:grace-a:beneficial-cause",
+    "fr:heure:clock-hour",
+    "fr:je-dois:study-obligation",
+    "fr:je-ne-peux-pas:unavailable-refusal",
+    "fr:je-voudrais:polite-request",
+    "fr:jusqu-a:time-endpoint",
+    "fr:lundi:weekday",
+    "fr:maintenant:now",
+    "fr:mais:contrast-conjunction",
+    "fr:maison:house-home",
+    "fr:mardi:weekday",
+    "fr:matin:morning",
+    "fr:message:short-written-message",
+    "fr:midi:noon",
+    "fr:neuf:cardinal-number",
+    "fr:par-exemple:illustrating-example",
+    "fr:piece:room",
+    "fr:porte:door",
+    "fr:pourriez-vous:polite-action-request",
+    "fr:preciser:clarify-service-details",
+    "fr:preparer:prepare-food",
+    "fr:proprietaire:property-owner",
+    "fr:que:relative-direct-object",
+    "fr:qui:relative-subject",
+    "fr:rendez-vous:appointment",
+    "fr:rendre-visite:visit-person",
+    "fr:samedi:weekday",
+    "fr:se-rendre-compte:realise-fact",
+    "fr:signaler:report-problem",
+    "fr:sil-vous-plait:polite-request",
+    "fr:soeur:sister",
+    "fr:soir:evening",
+    "fr:sous-reserve-de:conditional-arrangement",
+    "fr:tarif:service-price",
+    "fr:travailler:work"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "B1.U04.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "B1-U04-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U04-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U04-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U04-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U04-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U04-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U04-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U04-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U04-L05",
+          "task_id": "Q01",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U04-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U04.APPLY",
+      "evidence": [
+        {
+          "session_id": "B1-U04-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U04-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U04-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U04-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U04-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U04-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U04-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U04-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U04-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U04-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U04-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U03.APPLY",
+      "evidence": [
+        {
+          "session_id": "B1-U04-L01",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U01.APPLY",
+      "evidence": [
+        {
+          "session_id": "B1-U04-L03",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L04",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:panne:equipment-malfunction",
+      "reason": "Назвать предмет официального обращения."
+    },
+    {
+      "lexeme_key": "fr:constater:observe-problem",
+      "reason": "Изложить наблюдаемый факт и день обнаружения."
+    },
+    {
+      "lexeme_key": "fr:reparer:repair-equipment",
+      "reason": "Сформулировать просьбу о конкретном решении."
+    },
+    {
+      "lexeme_key": "fr:intervenir:attend-for-repair",
+      "reason": "Уточнить требуемый визит отдельно от его результата."
+    },
+    {
+      "lexeme_key": "fr:concerner:relate-to-problem-object",
+      "reason": "Связать проблему с точным предметом обращения."
+    },
+    {
+      "lexeme_key": "fr:dont:relative-de-complement",
+      "reason": "Отослать к ранее описанной проблеме в выбранной модели говорить о."
+    },
+    {
+      "lexeme_key": "fr:confirmer:confirm-arrangement",
+      "reason": "Подтвердить детали визита, не объявляя работу выполненной."
+    },
+    {
+      "lexeme_key": "fr:pourriez-vous:polite-action-request",
+      "reason": "Вернуть знакомую вежливую просьбу при официальном обращении."
+    },
+    {
+      "lexeme_key": "fr:chauffage:home-heating",
+      "reason": "Точно назвать предмет официальной просьбы о ремонте."
+    },
+    {
+      "lexeme_key": "fr:fonctionner:equipment-operate",
+      "reason": "Описать наблюдаемую работу прибора отдельно от предположения о причине."
+    },
+    {
+      "lexeme_key": "fr:ou:relative-place",
+      "reason": "Уточнить место неисправности в обращении."
+    },
+    {
+      "lexeme_key": "fr:technicien:repair-technician",
+      "reason": "Отличить адресата обращения, владельца и приглашённого специалиста."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "duration_measured": false,
+    "import_performed": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "transcriptions_structurally_checked": true,
+    "application_validator_passed": true,
+    "full_reused_objects_preserved": true,
+    "new_lexeme_collisions_checked": true,
+    "reading_load_checked": true,
+    "L05_no_new_mandatory_material": true
+  },
+  "open_issues": [
+    "Проверить наличие B1-U03-L05 в целевой базе: зависимость существует в подготовленном пакете, импорт не подтверждён.",
+    "Редактору проверить естественность описания отопления, ясность относительных конструкций, различие обнаружения и начала поломки и приблизительные транскрипции.",
+    "Прослушать браузерную озвучку новых слов, связок и пяти рассказов. Длительность аудио и занятий не измерена.",
+    "Выполнить предпросмотр и пробное прохождение пяти занятий на сайте. Принятие пользователем, импорт и публикация не подтверждены."
+  ],
+  "progress": {
+    "current_unit": "B1-U04",
+    "prepared_session_ids": [
+      "B1-U04-L01",
+      "B1-U04-L02",
+      "B1-U04-L03",
+      "B1-U04-L04",
+      "B1-U04-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "B1-U05",
+    "next_unit_title": "Официальное письмо",
+    "previous_unit": "B1-U03",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Полная текущая тема из пяти занятий. Следующая тема не начата.",
+    "Десять новых значений по занятиям: четыре, два, два, два, ноль. Каждое вводится до проверки; в одной вводной не более трёх слов. В L05 нет нового обязательного материала.",
+    "В L01 повторяется оговорка из B1-U03, в L03 осознание факта из B1-U01, в L04 полезная причина из B1-U01. Используются реально подготовленные полные карточки; принятие, публикация и освоение не предполагаются.",
+    "Panne — неисправность оборудования; chauffage — отопление в жилье; fonctionner — работа оборудования, отдельно от работы человека по профессии. Concerner связывает проблему с предметом.",
+    "Qui / que сохраняют прежние ключи и объекты. На новых предметах повторено различие подлежащего внутри уточнения и прямого объекта сообщения.",
+    "Où введено только как относительная связь с местом. Нового временного значения в этой теме не требуется.",
+    "Dont введено в выбранной модели parler de / la panne dont je parle; расширение к dont vous parlez объяснено до проверки. Не вводится полный перечень значений относительной формы.",
+    "Constater называет обнаружение наблюдаемого факта. Из исправной работы в субботу и обнаружения в понедельник не выводится точный день или час начала поломки.",
+    "Знакомое depuis возвращает продолжающееся состояние. Наблюдение холода и неработающего отопления не выдаётся за установленную техническую причину.",
+    "Réparer задаёт требуемое решение, intervenir — приход для устранения проблемы, technicien — приглашённого специалиста. Возможность прихода не равна выполненному ремонту.",
+    "Подтверждение визита, уточнение тарифа и подтверждение результата — разные действия. Клиент может согласовать время, сохраняя просьбу о ремонте и неизвестность результата.",
+    "Полные прежние словарные объекты, lexeme_key и review_items сохранены целиком. Выбранные формы глаголов не создают новых лексических ключей.",
+    "Все обращения и ситуации оригинальные и вымышленные. Здесь нет диагностики технической причины, инструкций самостоятельного ремонта, реального обращения в службу или утверждений о действующих условиях обслуживания.",
+    "Ответы только выбором и сборкой готовых блоков; апострофы в сборках не разрываются. Нет свободного ввода, обязательного голоса или заявления о проверенном свободном говорении.",
+    "Озвучка только браузером: fr-FR, asset_id=null. Нет аудиофайлов и внешних сервисов. База, прежние пакеты, основной реестр, levels и curricula не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "B1-U04-L01",
+      "new_lexeme_keys": [
+        "fr:panne:equipment-malfunction",
+        "fr:chauffage:home-heating",
+        "fr:fonctionner:equipment-operate",
+        "fr:concerner:relate-to-problem-object"
+      ],
+      "reused_lexeme_keys": [
+        "fr:appartement:apartment",
+        "fr:bonjour:greeting",
+        "fr:cependant:contrast-reservation",
+        "fr:chambre:bedroom",
+        "fr:disponibilite:person-time-availability",
+        "fr:disponible:available-in-schedule",
+        "fr:donc:consequence-conclusion",
+        "fr:envoyer:send-message",
+        "fr:fermer:close-object",
+        "fr:froid:cold-temperature",
+        "fr:je-voudrais:polite-request",
+        "fr:lundi:weekday",
+        "fr:maison:house-home",
+        "fr:matin:morning",
+        "fr:message:short-written-message",
+        "fr:par-exemple:illustrating-example",
+        "fr:piece:room",
+        "fr:porte:door",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:proprietaire:property-owner",
+        "fr:que:relative-direct-object",
+        "fr:qui:relative-subject",
+        "fr:rendez-vous:appointment",
+        "fr:signaler:report-problem"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U04-L02",
+      "new_lexeme_keys": [
+        "fr:constater:observe-problem",
+        "fr:ou:relative-place"
+      ],
+      "reused_lexeme_keys": [
+        "fr:avoir:compound-past-auxiliary",
+        "fr:chambre:bedroom",
+        "fr:chauffage:home-heating",
+        "fr:confirmer:confirm-arrangement",
+        "fr:depuis:ongoing-since-duration",
+        "fr:dimanche:weekday",
+        "fr:disponibilite:person-time-availability",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:fonctionner:equipment-operate",
+        "fr:froid:cold-temperature",
+        "fr:heure:clock-hour",
+        "fr:je-ne-peux-pas:unavailable-refusal",
+        "fr:je-voudrais:polite-request",
+        "fr:lundi:weekday",
+        "fr:maison:house-home",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:panne:equipment-malfunction",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:proprietaire:property-owner",
+        "fr:qui:relative-subject",
+        "fr:rendez-vous:appointment",
+        "fr:samedi:weekday",
+        "fr:signaler:report-problem",
+        "fr:travailler:work"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U04-L03",
+      "new_lexeme_keys": [
+        "fr:reparer:repair-equipment",
+        "fr:dont:relative-de-complement"
+      ],
+      "reused_lexeme_keys": [
+        "fr:avoir:compound-past-auxiliary",
+        "fr:bonjour:greeting",
+        "fr:chambre:bedroom",
+        "fr:chauffage:home-heating",
+        "fr:concerner:relate-to-problem-object",
+        "fr:confirmer:confirm-arrangement",
+        "fr:constater:observe-problem",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:fonctionner:equipment-operate",
+        "fr:heure:clock-hour",
+        "fr:je-ne-peux-pas:unavailable-refusal",
+        "fr:je-voudrais:polite-request",
+        "fr:jusqu-a:time-endpoint",
+        "fr:lundi:weekday",
+        "fr:maintenant:now",
+        "fr:mais:contrast-conjunction",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:neuf:cardinal-number",
+        "fr:panne:equipment-malfunction",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:preparer:prepare-food",
+        "fr:proprietaire:property-owner",
+        "fr:que:relative-direct-object",
+        "fr:rendez-vous:appointment",
+        "fr:rendre-visite:visit-person",
+        "fr:samedi:weekday",
+        "fr:se-rendre-compte:realise-fact",
+        "fr:sil-vous-plait:polite-request",
+        "fr:soeur:sister",
+        "fr:tarif:service-price",
+        "fr:travailler:work"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U04-L04",
+      "new_lexeme_keys": [
+        "fr:intervenir:attend-for-repair",
+        "fr:technicien:repair-technician"
+      ],
+      "reused_lexeme_keys": [
+        "fr:auparavant:earlier-relative-time",
+        "fr:bonjour:greeting",
+        "fr:chambre:bedroom",
+        "fr:chauffage:home-heating",
+        "fr:confirmer:confirm-arrangement",
+        "fr:constater:observe-problem",
+        "fr:disponibilite:person-time-availability",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:dont:relative-de-complement",
+        "fr:encore:additional-quantity",
+        "fr:ensuite:next-step",
+        "fr:envoyer:send-message",
+        "fr:fonctionner:equipment-operate",
+        "fr:grace-a:beneficial-cause",
+        "fr:heure:clock-hour",
+        "fr:je-dois:study-obligation",
+        "fr:je-voudrais:polite-request",
+        "fr:lundi:weekday",
+        "fr:maison:house-home",
+        "fr:mardi:weekday",
+        "fr:message:short-written-message",
+        "fr:ou:relative-place",
+        "fr:panne:equipment-malfunction",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:preparer:prepare-food",
+        "fr:qui:relative-subject",
+        "fr:rendez-vous:appointment",
+        "fr:reparer:repair-equipment",
+        "fr:soeur:sister",
+        "fr:soir:evening",
+        "fr:sous-reserve-de:conditional-arrangement",
+        "fr:tarif:service-price",
+        "fr:travailler:work"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U04-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:avoir:compound-past-auxiliary",
+        "fr:bonjour:greeting",
+        "fr:chambre:bedroom",
+        "fr:chauffage:home-heating",
+        "fr:concerner:relate-to-problem-object",
+        "fr:confirmer:confirm-arrangement",
+        "fr:constater:observe-problem",
+        "fr:dimanche:weekday",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:dont:relative-de-complement",
+        "fr:fonctionner:equipment-operate",
+        "fr:heure:clock-hour",
+        "fr:intervenir:attend-for-repair",
+        "fr:je-ne-peux-pas:unavailable-refusal",
+        "fr:je-voudrais:polite-request",
+        "fr:jusqu-a:time-endpoint",
+        "fr:lundi:weekday",
+        "fr:maintenant:now",
+        "fr:maison:house-home",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:midi:noon",
+        "fr:ou:relative-place",
+        "fr:panne:equipment-malfunction",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:que:relative-direct-object",
+        "fr:qui:relative-subject",
+        "fr:rendez-vous:appointment",
+        "fr:reparer:repair-equipment",
+        "fr:samedi:weekday",
+        "fr:signaler:report-problem",
+        "fr:tarif:service-price",
+        "fr:technicien:repair-technician",
+        "fr:travailler:work"
+      ],
+      "task_count": 7
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "B1-U04-L01",
+      "material": "Повторение qui / que в описании предмета неисправности; отрицание работы прибора."
+    },
+    {
+      "session_id": "B1-U04-L02",
+      "material": "Où: относительное место; constaté / fonctionnait; возврат depuis и границ хронологического вывода."
+    },
+    {
+      "session_id": "B1-U04-L03",
+      "material": "Dont в выбранной связи parler de; вежливая просьба réparer."
+    },
+    {
+      "session_id": "B1-U04-L04",
+      "material": "Dont vous parlez; повторение où; je vous enverrai; визит и результат отдельно."
+    },
+    {
+      "session_id": "B1-U04-L05",
+      "material": "Интеграция прежнего материала, без нового обязательного содержания."
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:panne:equipment-malfunction",
+      "evidence": [
+        {
+          "session_id": "B1-U04-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:chauffage:home-heating",
+      "evidence": [
+        {
+          "session_id": "B1-U04-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U04-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U04-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:fonctionner:equipment-operate",
+      "evidence": [
+        {
+          "session_id": "B1-U04-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U04-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U04-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U04-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U04-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:constater:observe-problem",
+      "evidence": [
+        {
+          "session_id": "B1-U04-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U04-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U04-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U04-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:ou:relative-place",
+      "evidence": [
+        {
+          "session_id": "B1-U04-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U04-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U04-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U04-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:reparer:repair-equipment",
+      "evidence": [
+        {
+          "session_id": "B1-U04-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U04-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U04-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U04-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:dont:relative-de-complement",
+      "evidence": [
+        {
+          "session_id": "B1-U04-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U04-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:intervenir:attend-for-repair",
+      "evidence": [
+        {
+          "session_id": "B1-U04-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U04-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:technicien:repair-technician",
+      "evidence": [
+        {
+          "session_id": "B1-U04-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U04-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:concerner:relate-to-problem-object",
+      "evidence": [
+        {
+          "session_id": "B1-U04-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "text_conventions": {
+    "situation_status": "Оригинальные вымышленные обращения о неисправном отоплении; факты отдельных сообщений не переносятся между ними.",
+    "external_services_required": false,
+    "free_speaking_assessed": false
+  },
+  "reading_word_counts": [
+    66,
+    64,
+    69,
+    71,
+    84,
+    84
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 35,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      7
+    ],
+    "new_lexemes": 10,
+    "external_prerequisites": [
+      "B1-U03-L05"
+    ],
+    "external_reference_status": "exists in prepared previous package; target database/import unverified",
+    "reused_lexeme_keys": 53,
+    "reading_word_counts": [
+      66,
+      64,
+      69,
+      71,
+      84,
+      84
+    ],
+    "unit_complete": true
+  },
+  "application_validation": {
+    "report_file": "B1-U04.validation.json",
+    "valid": true,
+    "file_hash": "3cd4113136a404fa6da4da2bf1c997b8732264a0246e463f3c6ca03325c0b1cf",
+    "errors": 0,
+    "warning_counts": {
+      "browser_tts": 5,
+      "editorial_review_required": 5
+    },
+    "requires_editorial_review": true,
+    "database_modified": false
+  }
+}

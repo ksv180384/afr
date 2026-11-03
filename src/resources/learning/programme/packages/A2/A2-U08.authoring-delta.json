@@ -1,0 +1,1140 @@
+{
+  "unit_id": "A2-U08",
+  "package_file": "A2-U08.v1.json",
+  "session_ids": [
+    "A2-U08-L01",
+    "A2-U08-L02",
+    "A2-U08-L03",
+    "A2-U08-L04",
+    "A2-U08-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "a-louer",
+      "lexeme_key": "fr:a-louer:available-for-rent",
+      "fr": "à louer",
+      "ru": [
+        "сдаётся в аренду"
+      ],
+      "transcription_ru": "а луэ́",
+      "first_session_id": "A2-U08-L01"
+    },
+    {
+      "id": "meuble-logement",
+      "lexeme_key": "fr:meuble:furnished-accommodation",
+      "fr": "meublé",
+      "ru": [
+        "меблированный (о жилье)"
+      ],
+      "transcription_ru": "мёблэ́",
+      "first_session_id": "A2-U08-L01"
+    },
+    {
+      "id": "qui-relatif",
+      "lexeme_key": "fr:qui:relative-subject",
+      "fr": "qui",
+      "ru": [
+        "который: связывает существительное с действием или состоянием этого предмета"
+      ],
+      "transcription_ru": "ки",
+      "first_session_id": "A2-U08-L01"
+    },
+    {
+      "id": "loyer",
+      "lexeme_key": "fr:loyer:rent-payment",
+      "fr": "le loyer",
+      "ru": [
+        "арендная плата"
+      ],
+      "transcription_ru": "лё луайе́",
+      "first_session_id": "A2-U08-L02"
+    },
+    {
+      "id": "charges",
+      "lexeme_key": "fr:charges:advertised-rental-charges",
+      "fr": "les charges",
+      "ru": [
+        "дополнительные платежи, названные в объявлении об аренде"
+      ],
+      "transcription_ru": "лэ ша́рж",
+      "first_session_id": "A2-U08-L02"
+    },
+    {
+      "id": "par-mois",
+      "lexeme_key": "fr:par-mois:per-month",
+      "fr": "par mois",
+      "ru": [
+        "в месяц"
+      ],
+      "transcription_ru": "пар муа́",
+      "first_session_id": "A2-U08-L02"
+    },
+    {
+      "id": "cent",
+      "lexeme_key": "fr:cent:cardinal-number",
+      "fr": "cent",
+      "ru": [
+        "сто"
+      ],
+      "transcription_ru": "са́(н)",
+      "first_session_id": "A2-U08-L02"
+    },
+    {
+      "id": "visite-logement",
+      "lexeme_key": "fr:visite:property-viewing",
+      "fr": "une visite",
+      "ru": [
+        "просмотр жилья"
+      ],
+      "transcription_ru": "юн визи́т",
+      "first_session_id": "A2-U08-L03"
+    },
+    {
+      "id": "proprietaire",
+      "lexeme_key": "fr:proprietaire:property-owner",
+      "fr": "le propriétaire",
+      "ru": [
+        "владелец жилья"
+      ],
+      "transcription_ru": "лё проприетэ́р",
+      "first_session_id": "A2-U08-L03"
+    },
+    {
+      "id": "que-relatif",
+      "lexeme_key": "fr:que:relative-direct-object",
+      "fr": "que",
+      "ru": [
+        "который/которую: связывает предмет с действием над ним"
+      ],
+      "transcription_ru": "кё",
+      "first_session_id": "A2-U08-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:appartement:apartment",
+    "fr:avoir-l-intention-de:intend-to-act",
+    "fr:balcon:balcony",
+    "fr:billet:transport-ticket",
+    "fr:bruyant:noisy-place",
+    "fr:cabinet-medical:doctor-office",
+    "fr:calme:quiet-place",
+    "fr:ce-soir:this-evening",
+    "fr:chambre:bedroom",
+    "fr:choisir:choose-option",
+    "fr:cinq:cardinal-number",
+    "fr:cuisine:kitchen",
+    "fr:d-ici:by-deadline",
+    "fr:demain:tomorrow",
+    "fr:disponible:available-in-schedule",
+    "fr:dix:cardinal-number",
+    "fr:euro:currency-unit",
+    "fr:film:film",
+    "fr:frere:brother",
+    "fr:gare:railway-station",
+    "fr:heure:clock-hour",
+    "fr:il-pleut:raining",
+    "fr:inclus:included-in-service-price",
+    "fr:jai:possession",
+    "fr:je-voudrais:polite-request",
+    "fr:la-semaine-prochaine:next-week",
+    "fr:loin-de:far-from-place",
+    "fr:lumineux:well-lit",
+    "fr:maison:house-home",
+    "fr:mardi:weekday",
+    "fr:matin:morning",
+    "fr:medecin:doctor",
+    "fr:midi:noon",
+    "fr:minute:time-duration-unit",
+    "fr:moins:less-comparison",
+    "fr:neuf:cardinal-number",
+    "fr:par-carte:card-payment",
+    "fr:parc:park",
+    "fr:payer:pay",
+    "fr:pendant:duration-preposition",
+    "fr:pourriez-vous:polite-action-request",
+    "fr:preciser:clarify-service-details",
+    "fr:prendre-rendez-vous:book-appointment",
+    "fr:prendre:use-transport",
+    "fr:pres-de:near-place",
+    "fr:regarder:look-watch",
+    "fr:rendez-vous:appointment",
+    "fr:si:real-condition",
+    "fr:six:cardinal-number",
+    "fr:train:train",
+    "fr:vendredi:weekday",
+    "fr:vingt:cardinal-number",
+    "fr:visiter:visit-place"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A2.U08.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U08-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U08-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U08-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U08-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U08.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U08-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U08-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U08-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U08-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U08-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U08-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U08-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U07.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U08-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U05.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U08-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U08-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:loyer:rent-payment",
+      "reason": "Вернуть арендную плату отдельно от дополнительных платежей."
+    },
+    {
+      "lexeme_key": "fr:charges:advertised-rental-charges",
+      "reason": "Уточнять только прямо названные платежи и их включение."
+    },
+    {
+      "lexeme_key": "fr:par-mois:per-month",
+      "reason": "Повторить период ежемесячной оплаты."
+    },
+    {
+      "lexeme_key": "fr:proprietaire:property-owner",
+      "reason": "Повторить владельца жилья в бытовом диалоге."
+    },
+    {
+      "lexeme_key": "fr:visite:property-viewing",
+      "reason": "Вернуть просмотр как ситуацию, отличая от других посещений."
+    },
+    {
+      "lexeme_key": "fr:qui:relative-subject",
+      "reason": "Повторить простую связь предмета с его собственным свойством."
+    },
+    {
+      "lexeme_key": "fr:que:relative-direct-object",
+      "reason": "Повторить связь квартиры с действием осматривающего её человека."
+    },
+    {
+      "lexeme_key": "fr:moins:less-comparison",
+      "reason": "Вернуть сравнение явно названного свойства."
+    },
+    {
+      "lexeme_key": "fr:preciser:clarify-service-details",
+      "reason": "Уточнять конкретную недостающую подробность."
+    },
+    {
+      "lexeme_key": "fr:meuble:furnished-accommodation",
+      "reason": "Сохранять значение меблированного жилья отдельно от предмета мебели."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "new_local_ids_do_not_overwrite_existing_meanings": true,
+    "known_housing_comparison_and_appointment_keys_preserved": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "furnished_adjective_distinguished_from_furniture_noun": true,
+    "relative_subject_object_and_comparative_functions_distinguished": true,
+    "selected_je_visite_form_explained_before_testing": true,
+    "incluses_reuses_existing_included_meaning": true,
+    "cardinal_cent_and_selected_hundreds_introduced_before_testing": true,
+    "rent_and_named_charges_distinguished": true,
+    "no_unstated_total_cost_inferred": true,
+    "fictional_prices_and_conditions_explicit": true,
+    "transcriptions_structurally_checked_without_claim_of_listening": true,
+    "apostrophes_kept_in_whole_tokens": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A2-U07-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Редактору проверить естественность объявлений и диалогов, ясность разграничения относительных связок и сравнения, соответствие нагрузки A2.",
+    "Прослушать браузерную озвучку meublé, loyer, charges, propriétaire, je visite, cinq cents euros, six cents euros и формы incluses. Длительность аудио и занятий не измерена.",
+    "Выполнить предпросмотр и пробное прохождение на сайте: сумма и период, отрицание включения платежей, день и час просмотра, сравнение двух вариантов."
+  ],
+  "progress": {
+    "current_unit": "A2-U08",
+    "prepared_session_ids": [
+      "A2-U08-L01",
+      "A2-U08-L02",
+      "A2-U08-L03",
+      "A2-U08-L04",
+      "A2-U08-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A2-U09",
+    "next_unit_title": "Соседи и быт",
+    "previous_unit": "A2-U07",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку только A2-U08; принятие и импорт предыдущих пакетов пользователем не подтверждены.",
+    "Новые значения по занятиям: три, четыре, два, одно, ноль. В L02 четыре слова разбиты на два введения до первой проверки; ни в одном введении не более трёх карточек.",
+    "Все объявления, суммы, условия и записи вымышлены для обучения языку. Реальные цены, законодательство, обязательный состав расходов и нормативный перечень мебели не описываются.",
+    "Условие включения касается только названных платежей. Из него не выводится отсутствие любых других расходов. Заданий на невыученные итоговые суммы нет.",
+    "Меблированный — новое прилагательное с отдельным ключом. Прежнее существительное предмет мебели сохраняется без изменения.",
+    "Qui как относительное подлежащее и que как относительное прямое дополнение вводятся через две простые модели. Вопросительное qui и сравнительное que не получают новые относительные ключи.",
+    "В сравнении оценивается прямо названный шум и свойства конкретного варианта; общая стоимость по этим свойствам не выводится.",
+    "Visiter сохраняет значение посещения места; je visite объясняется как его форма до проверки. Une visite получает отдельное конкретное значение просмотра жилья.",
+    "Incluses — согласование знакомого слова inclus, без дублирования значения или изменения прежней карточки. Mois и par mois различаются как название месяца и готовый показатель месячного периода.",
+    "Cent вводится до сумм. Учим только два нужных сочетания с пятью и шестью сотнями; полная система больших чисел и новые правила вычислений не проверяются.",
+    "В L01 повторяются место и время приёма из A2-U07 без медицинских выводов. В L03 и L04 возвращаются крайний срок выбора билета и условие будущей поездки из A2-U05.",
+    "В L05 отсутствуют новый обязательный словарь и новые грамматические модели; это практика, как указано планом.",
+    "Озвучка только браузерным API: fr-FR, без аудиофайлов, внешней генерации и записи голоса. Реальная запись на просмотр не выполнялась.",
+    "Пакет содержит только текущую тему, без levels и curricula. Реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A2-U08-L01",
+      "new_lexeme_keys": [
+        "fr:a-louer:available-for-rent",
+        "fr:meuble:furnished-accommodation",
+        "fr:qui:relative-subject"
+      ],
+      "reused_lexeme_keys": [
+        "fr:appartement:apartment",
+        "fr:balcon:balcony",
+        "fr:cabinet-medical:doctor-office",
+        "fr:calme:quiet-place",
+        "fr:chambre:bedroom",
+        "fr:cuisine:kitchen",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:je-voudrais:polite-request",
+        "fr:loin-de:far-from-place",
+        "fr:lumineux:well-lit",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:medecin:doctor",
+        "fr:parc:park",
+        "fr:prendre-rendez-vous:book-appointment",
+        "fr:pres-de:near-place",
+        "fr:rendez-vous:appointment"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U08-L02",
+      "new_lexeme_keys": [
+        "fr:loyer:rent-payment",
+        "fr:charges:advertised-rental-charges",
+        "fr:par-mois:per-month",
+        "fr:cent:cardinal-number"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-louer:available-for-rent",
+        "fr:appartement:apartment",
+        "fr:balcon:balcony",
+        "fr:calme:quiet-place",
+        "fr:chambre:bedroom",
+        "fr:cinq:cardinal-number",
+        "fr:cuisine:kitchen",
+        "fr:euro:currency-unit",
+        "fr:gare:railway-station",
+        "fr:inclus:included-in-service-price",
+        "fr:loin-de:far-from-place",
+        "fr:lumineux:well-lit",
+        "fr:meuble:furnished-accommodation",
+        "fr:parc:park",
+        "fr:pres-de:near-place",
+        "fr:six:cardinal-number",
+        "fr:vingt:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U08-L03",
+      "new_lexeme_keys": [
+        "fr:visite:property-viewing",
+        "fr:proprietaire:property-owner"
+      ],
+      "reused_lexeme_keys": [
+        "fr:appartement:apartment",
+        "fr:avoir-l-intention-de:intend-to-act",
+        "fr:billet:transport-ticket",
+        "fr:calme:quiet-place",
+        "fr:ce-soir:this-evening",
+        "fr:charges:advertised-rental-charges",
+        "fr:choisir:choose-option",
+        "fr:d-ici:by-deadline",
+        "fr:demain:tomorrow",
+        "fr:disponible:available-in-schedule",
+        "fr:film:film",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:je-voudrais:polite-request",
+        "fr:loyer:rent-payment",
+        "fr:lumineux:well-lit",
+        "fr:mardi:weekday",
+        "fr:midi:noon",
+        "fr:minute:time-duration-unit",
+        "fr:neuf:cardinal-number",
+        "fr:par-carte:card-payment",
+        "fr:parc:park",
+        "fr:payer:pay",
+        "fr:pendant:duration-preposition",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:prendre-rendez-vous:book-appointment",
+        "fr:prendre:use-transport",
+        "fr:pres-de:near-place",
+        "fr:regarder:look-watch",
+        "fr:train:train",
+        "fr:vingt:cardinal-number",
+        "fr:visiter:visit-place"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U08-L04",
+      "new_lexeme_keys": [
+        "fr:que:relative-direct-object"
+      ],
+      "reused_lexeme_keys": [
+        "fr:appartement:apartment",
+        "fr:avoir-l-intention-de:intend-to-act",
+        "fr:billet:transport-ticket",
+        "fr:bruyant:noisy-place",
+        "fr:calme:quiet-place",
+        "fr:demain:tomorrow",
+        "fr:film:film",
+        "fr:frere:brother",
+        "fr:gare:railway-station",
+        "fr:il-pleut:raining",
+        "fr:jai:possession",
+        "fr:je-voudrais:polite-request",
+        "fr:la-semaine-prochaine:next-week",
+        "fr:lumineux:well-lit",
+        "fr:maison:house-home",
+        "fr:meuble:furnished-accommodation",
+        "fr:midi:noon",
+        "fr:moins:less-comparison",
+        "fr:parc:park",
+        "fr:prendre:use-transport",
+        "fr:pres-de:near-place",
+        "fr:qui:relative-subject",
+        "fr:regarder:look-watch",
+        "fr:si:real-condition",
+        "fr:train:train",
+        "fr:visiter:visit-place"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U08-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-louer:available-for-rent",
+        "fr:appartement:apartment",
+        "fr:bruyant:noisy-place",
+        "fr:calme:quiet-place",
+        "fr:cent:cardinal-number",
+        "fr:charges:advertised-rental-charges",
+        "fr:cinq:cardinal-number",
+        "fr:disponible:available-in-schedule",
+        "fr:euro:currency-unit",
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:inclus:included-in-service-price",
+        "fr:je-voudrais:polite-request",
+        "fr:loyer:rent-payment",
+        "fr:lumineux:well-lit",
+        "fr:mardi:weekday",
+        "fr:meuble:furnished-accommodation",
+        "fr:midi:noon",
+        "fr:moins:less-comparison",
+        "fr:par-mois:per-month",
+        "fr:parc:park",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:prendre-rendez-vous:book-appointment",
+        "fr:pres-de:near-place",
+        "fr:proprietaire:property-owner",
+        "fr:que:relative-direct-object",
+        "fr:qui:relative-subject",
+        "fr:six:cardinal-number",
+        "fr:vendredi:weekday",
+        "fr:vingt:cardinal-number",
+        "fr:visite:property-viewing",
+        "fr:visiter:visit-place"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A2-U08-L01",
+      "material": "Относительное qui в модели un appartement qui est calme; предложение аренды и меблированность."
+    },
+    {
+      "session_id": "A2-U08-L02",
+      "material": "Cent, cinq cents euros, six cents euros; par mois; согласование incluses и отрицание включения платежей."
+    },
+    {
+      "session_id": "A2-U08-L03",
+      "material": "Сочетание старого visiter и рамки Je voudrais с новым объектом-квартирой; существительное просмотра; повторение просьбы уточнить час."
+    },
+    {
+      "session_id": "A2-U08-L04",
+      "material": "Форма je visite; относительное que в L’appartement que je visite est meublé; повторение qui est calme и moins bruyant que."
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:a-louer:available-for-rent",
+      "evidence": [
+        {
+          "session_id": "A2-U08-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:meuble:furnished-accommodation",
+      "evidence": [
+        {
+          "session_id": "A2-U08-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U08-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U08-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:qui:relative-subject",
+      "evidence": [
+        {
+          "session_id": "A2-U08-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U08-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:loyer:rent-payment",
+      "evidence": [
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:charges:advertised-rental-charges",
+      "evidence": [
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:par-mois:per-month",
+      "evidence": [
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:cent:cardinal-number",
+      "evidence": [
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U08-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:visite:property-viewing",
+      "evidence": [
+        {
+          "session_id": "A2-U08-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:proprietaire:property-owner",
+      "evidence": [
+        {
+          "session_id": "A2-U08-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U08-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:que:relative-direct-object",
+      "evidence": [
+        {
+          "session_id": "A2-U08-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U08-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U08-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        }
+      ]
+    }
+  ],
+  "linguistic_sources": [
+    {
+      "title": "OQLF — Prononciation de euro",
+      "url": "https://vitrinelinguistique.oqlf.gouv.qc.ca/23630/la-prononciation/prononciation-de-mots-particuliers/prononciation-de-euro",
+      "scope": "Обязательное связывание числительного с euro; различие связующих согласных перед euros.",
+      "access_method": "Веб-страница прочитана; реальная озвучка не прослушивалась."
+    },
+    {
+      "title": "Bureau de la traduction — cent",
+      "url": "https://nos-langues.canada.ca/fr/cles-de-la-redaction/cent",
+      "scope": "Написание cents в сочетаниях пятьсот и шестьсот перед существительным; допустимость традиционного раздельного написания.",
+      "access_method": "Веб-страница прочитана."
+    }
+  ],
+  "text_conventions": {
+    "situation_status": "Оригинальные вымышленные объявления и диалоги.",
+    "price_scope": "Только названные суммы и условия, без рыночных или правовых утверждений.",
+    "speaker_roles": "Человек, ищущий жильё, и собеседник названы условием и репликами; роль не выводится из голоса.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 10,
+    "external_prerequisites": [
+      "A2-U07-L05"
+    ],
+    "external_reference_status": "A2-U07-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 10
+      },
+      "file_hash": "c5b1aa3ec8beb405f99f67ca3c1110742a61e07c2760e12352d2b3fe5f3a3b3c",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 53,
+    "text_lengths": [
+      {
+        "session_id": "A2-U08-L01",
+        "reading_word_counts": [
+          30,
+          33
+        ],
+        "listening_word_counts": [
+          33
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U08-L02",
+        "reading_word_counts": [
+          32,
+          36
+        ],
+        "listening_word_counts": [
+          31
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U08-L03",
+        "reading_word_counts": [
+          32,
+          35
+        ],
+        "listening_word_counts": [
+          36
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U08-L04",
+        "reading_word_counts": [
+          32,
+          38
+        ],
+        "listening_word_counts": [
+          32
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U08-L05",
+        "reading_word_counts": [
+          37,
+          38
+        ],
+        "listening_word_counts": [
+          32,
+          35
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "à louer",
+        "session_id": "A2-U08-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "meublé",
+        "session_id": "A2-U08-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Un appartement qui est calme",
+        "session_id": "A2-U08-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Le loyer",
+        "session_id": "A2-U08-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "par mois",
+        "session_id": "A2-U08-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "six cents euros",
+        "session_id": "A2-U08-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Les charges sont incluses",
+        "session_id": "A2-U08-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "cinq cents euros",
+        "session_id": "A2-U08-L02",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "Une visite",
+        "session_id": "A2-U08-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Le propriétaire",
+        "session_id": "A2-U08-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "je visite",
+        "session_id": "A2-U08-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "L’appartement que je visite est meublé",
+        "session_id": "A2-U08-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "moins bruyant que",
+        "session_id": "A2-U08-L04",
+        "task_id": "Q03"
+      }
+    ],
+    "level_description_included": false,
+    "curricula_included": false
+  }
+}

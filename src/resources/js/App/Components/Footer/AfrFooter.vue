@@ -1,8 +1,9 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 import dayjs from 'dayjs';
 
 
+const page=usePage();
 </script>
 
 <template>

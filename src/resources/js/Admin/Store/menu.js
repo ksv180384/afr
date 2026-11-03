@@ -1,5 +1,10 @@
 export default [
   {
+    path: '/admin/daily-practice',
+    name: 'admin.daily-practice.index',
+    title: 'Задания на сегодня'
+  },
+  {
     path: '/admin',
     name: 'admin.index',
     title: 'Информация'

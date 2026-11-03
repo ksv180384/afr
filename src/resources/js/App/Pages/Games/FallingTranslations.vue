@@ -1,11 +1,13 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
-import { Link } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 import axios from 'axios';
 import GameLayout from '@/App/Layouts/GameLayout.vue';
 import SeoHead from '@/App/Components/Seo/SeoHead.vue';
 
 defineProps({ authUser: { type: Object, default: null } });
+const page = usePage();
+const canSaveToServer = computed(() => !!page.props?.auth?.user?.id);
 
 const gameHost = ref(null);
 const state = ref('ready');
@@ -70,6 +72,7 @@ function resumeProgress() {
 }
 
 async function start() {
+  if (!canSaveToServer.value) return;
   error.value = '';
   state.value = 'loading';
   hints.value = 2;
@@ -294,9 +297,10 @@ onBeforeUnmount(() => {
           <p class="eyebrow">ФРАНЦУЗСКИЙ В ДВИЖЕНИИ</p>
           <h1>Падающие<br>переводы</h1>
           <p>Выбирайте верный перевод. Каждые 4 слова растёт уровень: поочерёдно увеличиваются скорость и количество вариантов.</p>
-          <button class="primary-button" type="button" :disabled="state === 'loading'" @click="start">
+          <button v-if="canSaveToServer" class="primary-button" type="button" :disabled="state === 'loading'" @click="start">
             {{ state === 'loading' ? 'Загрузка…' : 'Начать игру' }}
           </button>
+          <Link v-else class="primary-button inline-flex" href="/login">Войти и начать игру</Link>
           <Link class="games-link" :href="route('games')">Все игры</Link>
           <p v-if="error" class="error">{{ error }}</p>
         </div>
@@ -320,7 +324,8 @@ onBeforeUnmount(() => {
             <div><b>{{ stats.best_streak }}</b><span>лучшая серия</span></div>
             <div><b>{{ stats.correct_count }}</b><span>верных слов</span></div>
           </div>
-          <button class="primary-button" type="button" @click="restart">Играть ещё раз</button>
+          <button v-if="canSaveToServer" class="primary-button" type="button" @click="restart">Играть ещё раз</button>
+          <Link v-else class="primary-button inline-flex" href="/login">Войти и начать игру</Link>
           <Link class="games-link" :href="route('games')">Все игры</Link>
         </div>
       </div>

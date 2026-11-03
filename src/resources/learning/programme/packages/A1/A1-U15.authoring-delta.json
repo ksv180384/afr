@@ -1,0 +1,1148 @@
+{
+  "unit_id": "A1-U15",
+  "package_file": "A1-U15.v1.json",
+  "session_ids": [
+    "A1-U15-L01",
+    "A1-U15-L02",
+    "A1-U15-L03",
+    "A1-U15-L04",
+    "A1-U15-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "printemps",
+      "lexeme_key": "fr:printemps:spring-season",
+      "fr": "le printemps",
+      "ru": [
+        "весна (время года)"
+      ],
+      "transcription_ru": "лё прэ(н)та́(н)",
+      "first_session_id": "A1-U15-L01"
+    },
+    {
+      "id": "ete",
+      "lexeme_key": "fr:ete:summer-season",
+      "fr": "l’été",
+      "ru": [
+        "лето (время года)"
+      ],
+      "transcription_ru": "лэтэ́",
+      "first_session_id": "A1-U15-L01"
+    },
+    {
+      "id": "automne",
+      "lexeme_key": "fr:automne:autumn-season",
+      "fr": "l’automne",
+      "ru": [
+        "осень (время года)"
+      ],
+      "transcription_ru": "лото́н",
+      "first_session_id": "A1-U15-L01"
+    },
+    {
+      "id": "hiver",
+      "lexeme_key": "fr:hiver:winter-season",
+      "fr": "l’hiver",
+      "ru": [
+        "зима (время года)"
+      ],
+      "transcription_ru": "ливэ́р",
+      "first_session_id": "A1-U15-L01"
+    },
+    {
+      "id": "degre",
+      "lexeme_key": "fr:degre:air-temperature-degree",
+      "fr": "un degré",
+      "ru": [
+        "градус температуры воздуха"
+      ],
+      "transcription_ru": "э(н) дёгрэ́",
+      "first_session_id": "A1-U15-L02"
+    },
+    {
+      "id": "temperature",
+      "lexeme_key": "fr:temperature:air-temperature",
+      "fr": "la température",
+      "ru": [
+        "температура воздуха"
+      ],
+      "transcription_ru": "ла та(н)пэратю́р",
+      "first_session_id": "A1-U15-L02"
+    },
+    {
+      "id": "manteau",
+      "lexeme_key": "fr:manteau:coat",
+      "fr": "un manteau",
+      "ru": [
+        "пальто"
+      ],
+      "transcription_ru": "э(н) ма(н)то́",
+      "first_session_id": "A1-U15-L03"
+    },
+    {
+      "id": "porter",
+      "lexeme_key": "fr:porter:wear-clothing",
+      "fr": "porter",
+      "ru": [
+        "носить одежду"
+      ],
+      "transcription_ru": "портэ́",
+      "first_session_id": "A1-U15-L03"
+    },
+    {
+      "id": "parapluie",
+      "lexeme_key": "fr:parapluie:umbrella",
+      "fr": "un parapluie",
+      "ru": [
+        "зонт"
+      ],
+      "transcription_ru": "э(н) параплюи́",
+      "first_session_id": "A1-U15-L03"
+    },
+    {
+      "id": "il-fait-beau",
+      "lexeme_key": "fr:il-fait-beau:fine-weather",
+      "fr": "il fait beau",
+      "ru": [
+        "хорошая погода"
+      ],
+      "transcription_ru": "иль фэ бо́",
+      "first_session_id": "A1-U15-L04"
+    },
+    {
+      "id": "dehors",
+      "lexeme_key": "fr:dehors:outdoors",
+      "fr": "dehors",
+      "ru": [
+        "на улице, вне помещения"
+      ],
+      "transcription_ru": "дёо́р",
+      "first_session_id": "A1-U15-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:aide:assistance",
+    "fr:aimer:enjoy-activity",
+    "fr:aller:go",
+    "fr:ans:age-years",
+    "fr:apprendre:study-subject",
+    "fr:aujourdhui:today",
+    "fr:avec-lui:with-him",
+    "fr:avec-plaisir:willing-acceptance",
+    "fr:brun:brown-hair",
+    "fr:bureau:office-workplace",
+    "fr:cahier:notebook",
+    "fr:chaud:hot-temperature",
+    "fr:cher:expensive",
+    "fr:cheveux:head-hair",
+    "fr:cinema:cinema-venue",
+    "fr:collegue:work-colleague",
+    "fr:commencer:start",
+    "fr:cours:class-session",
+    "fr:cousin:male-cousin",
+    "fr:crayon:pencil",
+    "fr:demain:tomorrow",
+    "fr:demander:ask-for",
+    "fr:deux:cardinal-number",
+    "fr:dix:cardinal-number",
+    "fr:et:and",
+    "fr:euro:currency-unit",
+    "fr:faire-du-sport:do-sport",
+    "fr:film:film",
+    "fr:francais:french-language",
+    "fr:froid:cold-temperature",
+    "fr:gorge:throat",
+    "fr:heure:clock-hour",
+    "fr:hopital:hospital",
+    "fr:huit:cardinal-number",
+    "fr:il-neige:snowing",
+    "fr:il-pleut:raining",
+    "fr:jai-mal:pain-report",
+    "fr:je-voudrais:polite-request",
+    "fr:lire:read",
+    "fr:livre:book",
+    "fr:lundi:weekday",
+    "fr:mardi:weekday",
+    "fr:mathematiques:maths-subject",
+    "fr:midi:noon",
+    "fr:neuf:cardinal-number",
+    "fr:non:negative-answer",
+    "fr:parc:park",
+    "fr:pull:sweater",
+    "fr:quinze:cardinal-number",
+    "fr:regarder:look-watch",
+    "fr:robe:dress",
+    "fr:salle:classroom",
+    "fr:se-promener:take-walk",
+    "fr:seize:cardinal-number",
+    "fr:sil-vous-plait:polite-request",
+    "fr:soleil:sun",
+    "fr:stylo:pen",
+    "fr:tete:head",
+    "fr:timide:shy-person",
+    "fr:travailler:work",
+    "fr:trois:cardinal-number",
+    "fr:vent:wind",
+    "fr:vingt:cardinal-number"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A1.U15.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U15-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U15-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U15-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U15-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U15-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U15-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U15-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U15-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U15-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U15.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U15-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U15-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U15-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U15-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U15-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U15-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U15-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U15-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U14.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U15-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U12.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U15-L05",
+          "task_id": "Q03",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U12.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U11.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U13.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L05",
+          "task_id": "Q02",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U13.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L05",
+          "task_id": "Q02",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U05.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:aimer:enjoy-activity",
+      "reason": "Повторить знакомую рамку любимого занятия в следующей теме предпочтений."
+    },
+    {
+      "lexeme_key": "fr:printemps:spring-season",
+      "reason": "Вернуть сезон в короткой записи личного предпочтения."
+    },
+    {
+      "lexeme_key": "fr:ete:summer-season",
+      "reason": "Повторить лето отдельно от погоды конкретного дня."
+    },
+    {
+      "lexeme_key": "fr:automne:autumn-season",
+      "reason": "Сохранить различие осени и остальных сезонов."
+    },
+    {
+      "lexeme_key": "fr:hiver:winter-season",
+      "reason": "Вернуть зиму как время, не как автоматическую температуру."
+    },
+    {
+      "lexeme_key": "fr:il-fait-beau:fine-weather",
+      "reason": "Повторить прямо названную хорошую погоду."
+    },
+    {
+      "lexeme_key": "fr:porter:wear-clothing",
+      "reason": "Вернуть описание носимой одежды отдельно от просьбы купить или получить её."
+    },
+    {
+      "lexeme_key": "fr:dehors:outdoors",
+      "reason": "Повторить место вне помещения отдельно от сезона и времени суток."
+    },
+    {
+      "lexeme_key": "fr:degre:air-temperature-degree",
+      "reason": "Вернуть единицу температуры в коротком числовом повторении."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "known_weather_temperature_and_leisure_keys_reused": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "checkpoint_skill_balance_checked": true,
+    "checkpoint_u11_u15_and_earlier_sample_checked": true,
+    "fictional_weather_and_direct_clothing_choice_reviewed": true,
+    "temperature_time_and_price_units_reviewed": true,
+    "plan_day_place_and_time_distinctions_reviewed": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A1-U14-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Человеку проверить естественность французских сезонных сочетаний, погодных и плановых реплик и приблизительные русские транскрипции.",
+    "Прослушать браузерную озвучку, особенно сезоны, числа с градусами, пальто, зонт и план прогулки. Время аудио и занятий пока не измерено.",
+    "Выполнить предпросмотр и пробное прохождение, включая контроль: кто и когда работает, строка расписания, описание человека, отрицание при уточнении и план на улице."
+  ],
+  "progress": {
+    "current_unit": "A1-U15",
+    "prepared_session_ids": [
+      "A1-U15-L01",
+      "A1-U15-L02",
+      "A1-U15-L03",
+      "A1-U15-L04",
+      "A1-U15-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A1-U16",
+    "next_unit_title": "Предпочтения",
+    "previous_unit": "A1-U14",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A1-U15. Принятие и импорт предыдущих пакетов не подтверждены; повторение использует полные объекты подготовленных пакетов.",
+    "Новые значения распределены как четыре, два, три, два и ноль. В пятом занятии нового обязательного материала нет.",
+    "Солнце, ветер, дождь, снег, температурные слова chaud/froid, любимые занятия и известная одежда сохраняют прежние ключи и объекты.",
+    "Сезонные сочетания ограничены au printemps, en été, en automne, en hiver. Месяцы, полушария и климатические закономерности не выводятся из этих записей.",
+    "Показаны il fait с температурой и погодными словами и знакомое il y a с солнцем или ветром. Новые полные таблицы безличных конструкций не требуются.",
+    "Все числовые записи температуры относятся к воздуху. Они вымышленные, не сообщают настоящий прогноз и не относятся к температуре тела. Пересчёт шкал не требуется.",
+    "Сезон, число градусов, солнце и ветер — разные прямо названные сведения. Один признак не используется для угадывания остальных.",
+    "Porter выбран как ношение одежды, а не перенос вещей. Пальто и свитер прямо названы на человеке; зонт может быть имеющимся или запрашиваемым предметом.",
+    "Задания читают названный выбор одежды и просьбу. Универсальные рекомендации одежды при любой температуре не устанавливаются.",
+    "Il fait beau означает хорошую погоду; soleil повторяет отдельно названное солнце. Место и время плана берутся из предложения, не выводятся из погоды.",
+    "Dehors обозначает вне помещения; не заменяет час или сезон. Короткий план повторяет знакомое On peut с названием действия.",
+    "Контроль имеет kind=checkpoint и восемь заданий: два listening, два reading, два vocabulary, один grammar и один sentence_building. Основная выборка U11–U15, одно задание возвращает U05. Все цели блока полностью не проверяются.",
+    "В L01 повторено уточнение места боли из A1-U14; в L03 и L04 — расписание и принадлежности из A1-U12. Медицинских рекомендаций в контрольном возврате нет.",
+    "Все сведения о людях, погоде, расписаниях и планах вымышленные. Реальные прогнозы, события и внешние сервисы не нужны для ответа.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A1-U15-L01",
+      "new_lexeme_keys": [
+        "fr:printemps:spring-season",
+        "fr:ete:summer-season",
+        "fr:automne:autumn-season",
+        "fr:hiver:winter-season"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aide:assistance",
+        "fr:aimer:enjoy-activity",
+        "fr:demander:ask-for",
+        "fr:faire-du-sport:do-sport",
+        "fr:film:film",
+        "fr:gorge:throat",
+        "fr:jai-mal:pain-report",
+        "fr:je-voudrais:polite-request",
+        "fr:lire:read",
+        "fr:non:negative-answer",
+        "fr:parc:park",
+        "fr:regarder:look-watch",
+        "fr:se-promener:take-walk",
+        "fr:tete:head"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U15-L02",
+      "new_lexeme_keys": [
+        "fr:degre:air-temperature-degree",
+        "fr:temperature:air-temperature"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aimer:enjoy-activity",
+        "fr:aujourdhui:today",
+        "fr:automne:autumn-season",
+        "fr:chaud:hot-temperature",
+        "fr:demain:tomorrow",
+        "fr:et:and",
+        "fr:ete:summer-season",
+        "fr:euro:currency-unit",
+        "fr:faire-du-sport:do-sport",
+        "fr:froid:cold-temperature",
+        "fr:heure:clock-hour",
+        "fr:lire:read",
+        "fr:neuf:cardinal-number",
+        "fr:parc:park",
+        "fr:printemps:spring-season",
+        "fr:quinze:cardinal-number",
+        "fr:se-promener:take-walk",
+        "fr:soleil:sun",
+        "fr:vent:wind",
+        "fr:vingt:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U15-L03",
+      "new_lexeme_keys": [
+        "fr:manteau:coat",
+        "fr:porter:wear-clothing",
+        "fr:parapluie:umbrella"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aujourdhui:today",
+        "fr:cours:class-session",
+        "fr:demain:tomorrow",
+        "fr:deux:cardinal-number",
+        "fr:dix:cardinal-number",
+        "fr:et:and",
+        "fr:francais:french-language",
+        "fr:froid:cold-temperature",
+        "fr:heure:clock-hour",
+        "fr:il-pleut:raining",
+        "fr:je-voudrais:polite-request",
+        "fr:lundi:weekday",
+        "fr:mardi:weekday",
+        "fr:mathematiques:maths-subject",
+        "fr:neuf:cardinal-number",
+        "fr:pull:sweater",
+        "fr:salle:classroom",
+        "fr:stylo:pen",
+        "fr:trois:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U15-L04",
+      "new_lexeme_keys": [
+        "fr:il-fait-beau:fine-weather",
+        "fr:dehors:outdoors"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aimer:enjoy-activity",
+        "fr:apprendre:study-subject",
+        "fr:aujourdhui:today",
+        "fr:avec-plaisir:willing-acceptance",
+        "fr:cahier:notebook",
+        "fr:cours:class-session",
+        "fr:crayon:pencil",
+        "fr:demain:tomorrow",
+        "fr:dix:cardinal-number",
+        "fr:et:and",
+        "fr:film:film",
+        "fr:heure:clock-hour",
+        "fr:il-neige:snowing",
+        "fr:il-pleut:raining",
+        "fr:je-voudrais:polite-request",
+        "fr:livre:book",
+        "fr:mardi:weekday",
+        "fr:mathematiques:maths-subject",
+        "fr:midi:noon",
+        "fr:parc:park",
+        "fr:regarder:look-watch",
+        "fr:se-promener:take-walk",
+        "fr:sil-vous-plait:polite-request",
+        "fr:soleil:sun"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U15-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:aide:assistance",
+        "fr:aller:go",
+        "fr:ans:age-years",
+        "fr:avec-lui:with-him",
+        "fr:brun:brown-hair",
+        "fr:bureau:office-workplace",
+        "fr:cher:expensive",
+        "fr:cheveux:head-hair",
+        "fr:cinema:cinema-venue",
+        "fr:collegue:work-colleague",
+        "fr:commencer:start",
+        "fr:cours:class-session",
+        "fr:cousin:male-cousin",
+        "fr:degre:air-temperature-degree",
+        "fr:dehors:outdoors",
+        "fr:demander:ask-for",
+        "fr:deux:cardinal-number",
+        "fr:dix:cardinal-number",
+        "fr:ete:summer-season",
+        "fr:francais:french-language",
+        "fr:gorge:throat",
+        "fr:heure:clock-hour",
+        "fr:hiver:winter-season",
+        "fr:hopital:hospital",
+        "fr:huit:cardinal-number",
+        "fr:il-fait-beau:fine-weather",
+        "fr:il-pleut:raining",
+        "fr:jai-mal:pain-report",
+        "fr:je-voudrais:polite-request",
+        "fr:lundi:weekday",
+        "fr:mardi:weekday",
+        "fr:mathematiques:maths-subject",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:non:negative-answer",
+        "fr:parapluie:umbrella",
+        "fr:printemps:spring-season",
+        "fr:robe:dress",
+        "fr:salle:classroom",
+        "fr:se-promener:take-walk",
+        "fr:seize:cardinal-number",
+        "fr:tete:head",
+        "fr:timide:shy-person",
+        "fr:travailler:work",
+        "fr:trois:cardinal-number"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A1-U15-L01",
+      "material": "Выбранные сезонные au printemps, en été, en automne, en hiver со знакомыми занятиями."
+    },
+    {
+      "session_id": "A1-U15-L02",
+      "material": "Il fait quinze/vingt degrés, множественное число degrés; Il fait chaud/froid и повтор Il y a du soleil/vent."
+    },
+    {
+      "session_id": "A1-U15-L03",
+      "material": "Личная форма Je porte с одеждой; повтор J’ai и Je voudrais для наличия и просьбы."
+    },
+    {
+      "session_id": "A1-U15-L04",
+      "material": "Готовая погодная рамка Il fait beau; знакомое On peut se promener с dehors, местом и временем."
+    }
+  ],
+  "text_conventions": {
+    "weather_status": "Вымышленные записи, не настоящий прогноз.",
+    "temperature_scope": "Только температура воздуха, без пересчёта шкал и вывода о здоровье.",
+    "clothing_scope": "Прямо названный выбор человека, не универсальный совет по погоде.",
+    "plan_scope": "Место и время названы словами предложения.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:printemps:spring-season",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U15-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:ete:summer-season",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:automne:autumn-season",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:hiver:winter-season",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U15-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:degre:air-temperature-degree",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U15-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:temperature:air-temperature",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:manteau:coat",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U15-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:porter:wear-clothing",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:parapluie:umbrella",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:il-fait-beau:fine-weather",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:dehors:outdoors",
+      "evidence": [
+        {
+          "session_id": "A1-U15-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U15-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 11,
+    "external_prerequisites": [
+      "A1-U14-L05"
+    ],
+    "external_reference_status": "A1-U14-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 11
+      },
+      "file_hash": "22689030dc5dc3d2e268e8f8672785ee1d13fd1daae7d447dc242454e20c5cf0",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 63,
+    "text_lengths": [
+      {
+        "session_id": "A1-U15-L01",
+        "reading_word_counts": [
+          21,
+          17
+        ],
+        "listening_word_counts": [
+          17
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U15-L02",
+        "reading_word_counts": [
+          17,
+          21
+        ],
+        "listening_word_counts": [
+          21
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U15-L03",
+        "reading_word_counts": [
+          26,
+          18
+        ],
+        "listening_word_counts": [
+          18
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U15-L04",
+        "reading_word_counts": [
+          23,
+          20
+        ],
+        "listening_word_counts": [
+          26
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U15-L05",
+        "reading_word_counts": [
+          26,
+          21
+        ],
+        "listening_word_counts": [
+          20,
+          21
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "au printemps",
+        "session_id": "A1-U15-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "en été",
+        "session_id": "A1-U15-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "en automne",
+        "session_id": "A1-U15-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "en hiver",
+        "session_id": "A1-U15-L01",
+        "task_id": "Q05"
+      },
+      {
+        "frame": "quinze degrés",
+        "session_id": "A1-U15-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "vingt degrés",
+        "session_id": "A1-U15-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Il fait froid",
+        "session_id": "A1-U15-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Je porte un manteau",
+        "session_id": "A1-U15-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "J’ai un parapluie",
+        "session_id": "A1-U15-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Il fait beau",
+        "session_id": "A1-U15-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "se promener dehors",
+        "session_id": "A1-U15-L04",
+        "task_id": "Q03"
+      }
+    ]
+  },
+  "checkpoint_coverage": {
+    "session_id": "A1-U15-L05",
+    "skills": {
+      "listening": 2,
+      "reading": 2,
+      "vocabulary": 2,
+      "grammar": 1,
+      "sentence_building": 1
+    },
+    "units_sampled": [
+      "U05",
+      "U11",
+      "U12",
+      "U13",
+      "U14",
+      "U15"
+    ],
+    "evidence": [
+      {
+        "task_id": "Q01",
+        "skill": "listening",
+        "objective_ids": [
+          "A1.U11.APPLY"
+        ]
+      },
+      {
+        "task_id": "Q02",
+        "skill": "listening",
+        "objective_ids": [
+          "A1.U13.UNDERSTAND",
+          "A1.U13.APPLY"
+        ]
+      },
+      {
+        "task_id": "Q03",
+        "skill": "reading",
+        "objective_ids": [
+          "A1.U12.UNDERSTAND"
+        ]
+      },
+      {
+        "task_id": "Q04",
+        "skill": "reading",
+        "objective_ids": [
+          "A1.U14.UNDERSTAND"
+        ]
+      },
+      {
+        "task_id": "Q05",
+        "skill": "vocabulary",
+        "objective_ids": [
+          "A1.U15.UNDERSTAND"
+        ]
+      },
+      {
+        "task_id": "Q06",
+        "skill": "vocabulary",
+        "objective_ids": [
+          "A1.U15.APPLY"
+        ]
+      },
+      {
+        "task_id": "Q07",
+        "skill": "grammar",
+        "objective_ids": [
+          "A1.U05.APPLY"
+        ]
+      },
+      {
+        "task_id": "Q08",
+        "skill": "sentence_building",
+        "objective_ids": [
+          "A1.U15.APPLY"
+        ]
+      }
+    ],
+    "limitation": "Выборка U11–U15 с возвратом к U05, не полная проверка всех целей блока."
+  }
+}

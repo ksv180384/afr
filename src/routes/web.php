@@ -42,8 +42,8 @@ use Inertia\Inertia;
 Route::get('/', [\App\Http\Controllers\App\IndexController::class, 'index'])->name('index');
 Route::get('/grammar', [\App\Http\Controllers\App\GrammarController::class, 'index'])->name('grammar');
 Route::get('/grammar/item/{id}', [\App\Http\Controllers\App\GrammarController::class, 'show'])->name('grammar.show');
-Route::post('/karaoke-upload-log', [\App\Http\Controllers\App\KaraokeUploadLogController::class, 'store'])->name('karaoke-upload-log');
-Route::post('/karaoke-upload-log/{log}/file', [\App\Http\Controllers\App\KaraokeUploadLogController::class, 'upload'])->name('karaoke-upload-log.file');
+Route::post('/karaoke-upload-log', [\App\Http\Controllers\App\KaraokeUploadLogController::class, 'store'])->middleware('auth')->name('karaoke-upload-log');
+Route::post('/karaoke-upload-log/{log}/file', [\App\Http\Controllers\App\KaraokeUploadLogController::class, 'upload'])->middleware('auth')->name('karaoke-upload-log.file');
 Route::get('/lessons', [\App\Http\Controllers\App\LessonsController::class, 'index'])->name('lessons');
 Route::get('/lessons/item/{id}', [\App\Http\Controllers\App\LessonsController::class, 'show'])->name('lesson.show');
 Route::get('/dictionary', [\App\Http\Controllers\App\DictionaryController::class, 'index'])->name('dictionary');
@@ -202,3 +202,11 @@ Route::middleware(['auth', 'verified', 'is-admin'])->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+require __DIR__.'/daily_practice_admin.php';
+
+Route::get('/practice/preview', \App\Http\Controllers\App\PracticePreviewController::class)->name('practice.preview');
+
+require __DIR__.'/daily_practice_account.php';
+
+require __DIR__.'/practice.php';

@@ -18,6 +18,10 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): Response
     {
+        if (config('daily_practice.enabled') && request()->boolean('practice')) {
+            session()->put('daily_practice_return', true);
+        }
+
         return Inertia::render('Auth/Login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => session('status'),
@@ -33,9 +37,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-//        return redirect()->intended(route('index', absolute: false));
+        //        return redirect()->intended(route('index', absolute: false));
         if ($request->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $request->user()->hasVerifiedEmail()) {
             return redirect(route('verification.notice', absolute: false));
+        }
+
+        if ($request->session()->pull('daily_practice_return')) {
+            return redirect('/daily');
         }
 
         return back();

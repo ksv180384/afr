@@ -1,0 +1,1013 @@
+{
+  "unit_id": "A2-U13",
+  "package_file": "A2-U13.v1.json",
+  "session_ids": [
+    "A2-U13-L01",
+    "A2-U13-L02",
+    "A2-U13-L03",
+    "A2-U13-L04",
+    "A2-U13-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "deja-experience",
+      "lexeme_key": "fr:deja:prior-learning-experience",
+      "fr": "déjà",
+      "ru": [
+        "уже: прежний опыт обучения"
+      ],
+      "transcription_ru": "дэжа́",
+      "first_session_id": "A2-U13-L01"
+    },
+    {
+      "id": "jamais-experience",
+      "lexeme_key": "fr:jamais:never-in-experience-negation",
+      "fr": "jamais",
+      "ru": [
+        "никогда: в отрицании опыта обучения"
+      ],
+      "transcription_ru": "жамэ́",
+      "first_session_id": "A2-U13-L01"
+    },
+    {
+      "id": "formation",
+      "lexeme_key": "fr:formation:training-programme",
+      "fr": "une formation",
+      "ru": [
+        "программа обучения, учебный курс как программа"
+      ],
+      "transcription_ru": "юн формасьо́(н)",
+      "first_session_id": "A2-U13-L02"
+    },
+    {
+      "id": "inscription",
+      "lexeme_key": "fr:inscription:course-enrolment",
+      "fr": "une inscription",
+      "ru": [
+        "запись на обучение"
+      ],
+      "transcription_ru": "юн э(н)скрипсьо́(н)",
+      "first_session_id": "A2-U13-L02"
+    },
+    {
+      "id": "s-inscrire",
+      "lexeme_key": "fr:s-inscrire:enrol-on-course",
+      "fr": "s’inscrire",
+      "ru": [
+        "записываться на обучение"
+      ],
+      "transcription_ru": "сэ(н)скри́р",
+      "first_session_id": "A2-U13-L02"
+    },
+    {
+      "id": "obligatoire",
+      "lexeme_key": "fr:obligatoire:required-in-course",
+      "fr": "obligatoire",
+      "ru": [
+        "обязательный в условиях учебной ситуации"
+      ],
+      "transcription_ru": "облигатуа́р",
+      "first_session_id": "A2-U13-L03"
+    },
+    {
+      "id": "paiement",
+      "lexeme_key": "fr:paiement:payment",
+      "fr": "un paiement",
+      "ru": [
+        "оплата, платёж"
+      ],
+      "transcription_ru": "э(н) пэма́(н)",
+      "first_session_id": "A2-U13-L04"
+    },
+    {
+      "id": "comment-payer",
+      "lexeme_key": "fr:comment-payer:ask-payment-method",
+      "fr": "comment payer ?",
+      "ru": [
+        "как оплатить? вопрос о способе оплаты"
+      ],
+      "transcription_ru": "кома(н) пэйе́",
+      "first_session_id": "A2-U13-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:appartement:apartment",
+    "fr:apporter:bring-object",
+    "fr:apprendre:study-subject",
+    "fr:assez:sufficient-degree",
+    "fr:autre:other",
+    "fr:avantage:benefit-of-option",
+    "fr:avoir:compound-past-auxiliary",
+    "fr:bruit:noise",
+    "fr:bruyant:noisy-place",
+    "fr:calme:quiet-place",
+    "fr:cher:expensive",
+    "fr:choisir:choose-option",
+    "fr:commande:merchandise-order",
+    "fr:commander:order-food",
+    "fr:cours:class-session",
+    "fr:depuis:ongoing-since-duration",
+    "fr:deux:cardinal-number",
+    "fr:disponible:available-in-schedule",
+    "fr:dix:cardinal-number",
+    "fr:en-especes:cash-payment",
+    "fr:en-ligne:online",
+    "fr:en:quantity-pronoun",
+    "fr:euro:currency-unit",
+    "fr:francais:french-language",
+    "fr:frere:brother",
+    "fr:gare:railway-station",
+    "fr:grand:large-object",
+    "fr:heure:clock-hour",
+    "fr:horaire:work-schedule",
+    "fr:huit:cardinal-number",
+    "fr:il-faut:necessary-action",
+    "fr:inconvenient:drawback-of-option",
+    "fr:jai:possession",
+    "fr:je-voudrais:polite-request",
+    "fr:la:direct-object-pronoun-feminine",
+    "fr:livre:book",
+    "fr:mardi:weekday",
+    "fr:matin:morning",
+    "fr:mois:calendar-month",
+    "fr:par-carte:card-payment",
+    "fr:par-mois:per-month",
+    "fr:parc:park",
+    "fr:payer:pay",
+    "fr:petit:small-object",
+    "fr:plus:greater-degree-comparison",
+    "fr:pourriez-vous:polite-action-request",
+    "fr:preciser:clarify-service-details",
+    "fr:pres-de:near-place",
+    "fr:pull:sweater",
+    "fr:quinze:cardinal-number",
+    "fr:soir:evening",
+    "fr:tarif:service-price",
+    "fr:trop:excessive-degree",
+    "fr:un:cardinal-number",
+    "fr:vendredi:weekday",
+    "fr:vingt:cardinal-number"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A2.U13.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U13-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U13-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U13-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U13-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U13-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U13-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U13-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U13-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U13-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U13-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U13-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U13-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U13-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U13.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U13-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U13-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U13-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U13-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U13-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U13-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U13-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U13-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U13-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U12.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U13-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U10.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U13-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U13-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:deja:prior-learning-experience",
+      "reason": "Возвращать прежний опыт отдельно от текущей длительности."
+    },
+    {
+      "lexeme_key": "fr:jamais:never-in-experience-negation",
+      "reason": "Сохранять полную отрицательную рамку опыта."
+    },
+    {
+      "lexeme_key": "fr:depuis:ongoing-since-duration",
+      "reason": "Повторить продолжающееся действие с прежним ключом."
+    },
+    {
+      "lexeme_key": "fr:horaire:work-schedule",
+      "reason": "Вернуть расписание в рабочем контексте с прежним ключом."
+    },
+    {
+      "lexeme_key": "fr:obligatoire:required-in-course",
+      "reason": "Сопоставлять обязательность и конкретное требование."
+    },
+    {
+      "lexeme_key": "fr:formation:training-programme",
+      "reason": "Отличать программу обучения от отдельного занятия."
+    },
+    {
+      "lexeme_key": "fr:inscription:course-enrolment",
+      "reason": "Повторить саму запись отдельно от программы."
+    },
+    {
+      "lexeme_key": "fr:s-inscrire:enrol-on-course",
+      "reason": "Сохранять выбранную рамку действия записаться."
+    },
+    {
+      "lexeme_key": "fr:paiement:payment",
+      "reason": "Различать оплату, сумму и период тарифа."
+    },
+    {
+      "lexeme_key": "fr:comment-payer:ask-payment-method",
+      "reason": "Вернуть вопрос о способе оплаты отдельно от цены."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "new_local_ids_do_not_overwrite_existing_meanings": true,
+    "new_french_forms_checked_against_existing_cards": true,
+    "known_learning_since_schedule_and_payment_keys_preserved": true,
+    "selected_appris_form_explained_before_testing": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "inscription_repeated_in_following_and_final_sessions": true,
+    "monthly_tariff_and_payment_methods_explicit": true,
+    "transcriptions_structurally_checked_without_claim_of_listening": true,
+    "apostrophes_kept_in_whole_tokens": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A2-U12-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Редактору проверить естественность моделей опыта с appris, различие программы и отдельного занятия, рамку записи и вопрос об оплате, перенос знакомого horaire в учебный контекст.",
+    "Прослушать браузерную озвучку déjà, jamais, appris, formation, inscription, m’inscrire, obligatoire, horaire, paiement и Comment payer. Время аудио и занятий не измерено.",
+    "Выполнить предпросмотр и пробное прохождение: опыт и отсутствие опыта, текущий месяц обучения, выбор времени программы, обязательная книга, период тарифа и перечисленные способы оплаты."
+  ],
+  "progress": {
+    "current_unit": "A2-U13",
+    "prepared_session_ids": [
+      "A2-U13-L01",
+      "A2-U13-L02",
+      "A2-U13-L03",
+      "A2-U13-L04",
+      "A2-U13-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A2-U14",
+    "next_unit_title": "Рабочие задачи",
+    "previous_unit": "A2-U12",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку только A2-U13. Принятие и импорт предыдущих пакетов пользователем не подтверждены; не утверждается освоение материала учеником.",
+    "Восемь новых значений по занятиям: два, три, одно, два, ноль. В каждом введении не более трёх карточек; в L05 нового обязательного материала нет.",
+    "В L01 повторены заказ, сумма и оплата из A2-U12. В L03 возвращаются достаточность и чрезмерный шум из A2-U10, в L04 — названное неудобство более высокой цены из той же темы. Полные прежние карточки сохраняются.",
+    "Déjà и jamais введены только в моделях опыта обучения с passé composé. Отрицание показано полной рамкой Je n’ai jamais appris le français; другие значения этих наречий не объединяются в карточки.",
+    "Appris — выбранная форма знакомого apprendre с прежним fr:apprendre:study-subject. Нового ключа ради формы не создаётся. Прежний опыт обучения не объявляется доказательством полного владения языком, уровня или сертификата.",
+    "Formation — программа обучения, cours сохраняет прежнее значение отдельного учебного занятия. Название inscription и действие s’inscrire различаются; m’inscrire объяснено как выбранная рамка говорящего.",
+    "Horaire сохраняет прежний fr:horaire:work-schedule и полный объект рабочего расписания. Его функция организации времени переносится на учебное расписание, без нового ключа только ради смены контекста.",
+    "Depuis сохраняет fr:depuis:ongoing-since-duration. С настоящим J’apprends показана длительность текущего обучения, продолжающегося сейчас; она не равна всему прошлому опыту и не определяет его отсутствие.",
+    "Obligatoire относится к явно названной книге в конкретной учебной ситуации. Желание книги и наличие книги не выдаются за требование.",
+    "Время регистрации, время занятия, текущие месяцы обучения и месячный тариф читаются раздельно. Число месяцев не превращается в число или периодичность занятий.",
+    "Comment payer спрашивает способ оплаты; уточнение tarif спрашивает цену, horaire — расписание. Эти вопросы не взаимозаменяемы.",
+    "Paiement — новое существительное оплаты. Payer, par carte, en espèces, tarif и par mois сохраняют прежние значения и полные карточки.",
+    "Приведённые программы, требования, тарифы, даты и способы оплаты вымышлены. Не выполняется реальная запись, не рекомендуются реальные курсы, не устанавливаются действующие требования учреждения.",
+    "Из месячного тарифа не выводится цена одного занятия, цена книги или включение книги и иных расходов. Если в ответе прямо назван способ оплаты, не делается общий вывод о запрете всех остальных способов.",
+    "В L05 повторяется весь обязательный материал темы. Inscription дополнительно возвращается в следующем и итоговом занятиях, а не остаётся только в первом сопоставлении.",
+    "Все ответы выбираются или собираются из готовых блоков; нет свободного текста и обязательного голоса. Апострофы и выбранные рамки в сборках не разрываются.",
+    "Озвучка только браузером: fr-FR, asset_id=null. Аудиофайлы и внешние сервисы не используются; сообщения и платежи не отправлялись.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A2-U13-L01",
+      "new_lexeme_keys": [
+        "fr:deja:prior-learning-experience",
+        "fr:jamais:never-in-experience-negation"
+      ],
+      "reused_lexeme_keys": [
+        "fr:apprendre:study-subject",
+        "fr:autre:other",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:choisir:choose-option",
+        "fr:commande:merchandise-order",
+        "fr:commander:order-food",
+        "fr:deux:cardinal-number",
+        "fr:disponible:available-in-schedule",
+        "fr:en-ligne:online",
+        "fr:en:quantity-pronoun",
+        "fr:euro:currency-unit",
+        "fr:francais:french-language",
+        "fr:frere:brother",
+        "fr:grand:large-object",
+        "fr:je-voudrais:polite-request",
+        "fr:la:direct-object-pronoun-feminine",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:par-carte:card-payment",
+        "fr:payer:pay",
+        "fr:petit:small-object",
+        "fr:pull:sweater",
+        "fr:soir:evening",
+        "fr:trop:excessive-degree",
+        "fr:vendredi:weekday",
+        "fr:vingt:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U13-L02",
+      "new_lexeme_keys": [
+        "fr:formation:training-programme",
+        "fr:inscription:course-enrolment",
+        "fr:s-inscrire:enrol-on-course"
+      ],
+      "reused_lexeme_keys": [
+        "fr:apprendre:study-subject",
+        "fr:autre:other",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:cours:class-session",
+        "fr:deja:prior-learning-experience",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:francais:french-language",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:jamais:never-in-experience-negation",
+        "fr:je-voudrais:polite-request",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:par-carte:card-payment",
+        "fr:payer:pay",
+        "fr:preciser:clarify-service-details",
+        "fr:soir:evening",
+        "fr:tarif:service-price",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U13-L03",
+      "new_lexeme_keys": [
+        "fr:obligatoire:required-in-course"
+      ],
+      "reused_lexeme_keys": [
+        "fr:appartement:apartment",
+        "fr:apporter:bring-object",
+        "fr:apprendre:study-subject",
+        "fr:assez:sufficient-degree",
+        "fr:bruit:noise",
+        "fr:bruyant:noisy-place",
+        "fr:calme:quiet-place",
+        "fr:choisir:choose-option",
+        "fr:cours:class-session",
+        "fr:deja:prior-learning-experience",
+        "fr:depuis:ongoing-since-duration",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:francais:french-language",
+        "fr:gare:railway-station",
+        "fr:grand:large-object",
+        "fr:heure:clock-hour",
+        "fr:horaire:work-schedule",
+        "fr:il-faut:necessary-action",
+        "fr:inconvenient:drawback-of-option",
+        "fr:inscription:course-enrolment",
+        "fr:jai:possession",
+        "fr:je-voudrais:polite-request",
+        "fr:livre:book",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:mois:calendar-month",
+        "fr:parc:park",
+        "fr:pres-de:near-place",
+        "fr:trop:excessive-degree",
+        "fr:un:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U13-L04",
+      "new_lexeme_keys": [
+        "fr:paiement:payment",
+        "fr:comment-payer:ask-payment-method"
+      ],
+      "reused_lexeme_keys": [
+        "fr:appartement:apartment",
+        "fr:apporter:bring-object",
+        "fr:avantage:benefit-of-option",
+        "fr:bruyant:noisy-place",
+        "fr:calme:quiet-place",
+        "fr:cher:expensive",
+        "fr:cours:class-session",
+        "fr:dix:cardinal-number",
+        "fr:en-especes:cash-payment",
+        "fr:euro:currency-unit",
+        "fr:formation:training-programme",
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:horaire:work-schedule",
+        "fr:il-faut:necessary-action",
+        "fr:inconvenient:drawback-of-option",
+        "fr:je-voudrais:polite-request",
+        "fr:livre:book",
+        "fr:mardi:weekday",
+        "fr:par-carte:card-payment",
+        "fr:par-mois:per-month",
+        "fr:parc:park",
+        "fr:payer:pay",
+        "fr:plus:greater-degree-comparison",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:pres-de:near-place",
+        "fr:s-inscrire:enrol-on-course",
+        "fr:tarif:service-price",
+        "fr:vingt:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U13-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:apporter:bring-object",
+        "fr:apprendre:study-subject",
+        "fr:autre:other",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:comment-payer:ask-payment-method",
+        "fr:cours:class-session",
+        "fr:deja:prior-learning-experience",
+        "fr:depuis:ongoing-since-duration",
+        "fr:deux:cardinal-number",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:en-especes:cash-payment",
+        "fr:euro:currency-unit",
+        "fr:formation:training-programme",
+        "fr:francais:french-language",
+        "fr:heure:clock-hour",
+        "fr:horaire:work-schedule",
+        "fr:huit:cardinal-number",
+        "fr:il-faut:necessary-action",
+        "fr:inscription:course-enrolment",
+        "fr:jamais:never-in-experience-negation",
+        "fr:je-voudrais:polite-request",
+        "fr:livre:book",
+        "fr:mardi:weekday",
+        "fr:mois:calendar-month",
+        "fr:obligatoire:required-in-course",
+        "fr:paiement:payment",
+        "fr:par-mois:per-month",
+        "fr:payer:pay",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:quinze:cardinal-number",
+        "fr:s-inscrire:enrol-on-course",
+        "fr:soir:evening",
+        "fr:tarif:service-price",
+        "fr:un:cardinal-number",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A2-U13-L01",
+      "material": "J’ai déjà appris / Je n’ai jamais appris; выбранная appris от знакомого apprendre, опыт отдельно от желания учиться."
+    },
+    {
+      "session_id": "A2-U13-L02",
+      "material": "Formation / cours / inscription; Je voudrais m’inscrire à cette formation; выбор варианта по доступному времени."
+    },
+    {
+      "session_id": "A2-U13-L03",
+      "material": "Le livre est obligatoire; Il faut apporter un livre; перенос horaire на учебное расписание и J’apprends depuis un mois."
+    },
+    {
+      "session_id": "A2-U13-L04",
+      "material": "Comment payer; сумма и par mois; Paiement : par carte ou en espèces; вопрос о способе отдельно от тарифа и расписания."
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:deja:prior-learning-experience",
+      "evidence": [
+        {
+          "session_id": "A2-U13-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U13-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U13-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U13-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:jamais:never-in-experience-negation",
+      "evidence": [
+        {
+          "session_id": "A2-U13-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U13-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U13-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:formation:training-programme",
+      "evidence": [
+        {
+          "session_id": "A2-U13-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U13-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:inscription:course-enrolment",
+      "evidence": [
+        {
+          "session_id": "A2-U13-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:s-inscrire:enrol-on-course",
+      "evidence": [
+        {
+          "session_id": "A2-U13-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:obligatoire:required-in-course",
+      "evidence": [
+        {
+          "session_id": "A2-U13-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U13-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:paiement:payment",
+      "evidence": [
+        {
+          "session_id": "A2-U13-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:comment-payer:ask-payment-method",
+      "evidence": [
+        {
+          "session_id": "A2-U13-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U13-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "text_conventions": {
+    "situation_status": "Оригинальные вымышленные сообщения об обучении и предложениях программ.",
+    "experience_scope": "Опыт обучения не равен уровню владения; текущая длительность задаётся отдельно.",
+    "cost_scope": "Только названные сумма, период и способ оплаты, без неуказанных расходов или реальных условий учреждения.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 8,
+    "external_prerequisites": [
+      "A2-U12-L05"
+    ],
+    "external_reference_status": "A2-U12-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 10
+      },
+      "file_hash": "fda47f11c1ed82cabf58eb826d44935fb2444efb23881d3f4f82ff3cdd5ec892",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 56,
+    "text_lengths": [
+      {
+        "session_id": "A2-U13-L01",
+        "reading_word_counts": [
+          35,
+          36
+        ],
+        "listening_word_counts": [
+          36
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U13-L02",
+        "reading_word_counts": [
+          36,
+          38
+        ],
+        "listening_word_counts": [
+          38
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U13-L03",
+        "reading_word_counts": [
+          31,
+          31
+        ],
+        "listening_word_counts": [
+          31
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U13-L04",
+        "reading_word_counts": [
+          34,
+          40
+        ],
+        "listening_word_counts": [
+          40
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U13-L05",
+        "reading_word_counts": [
+          38,
+          33
+        ],
+        "listening_word_counts": [
+          30,
+          39
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "J’ai déjà appris le français",
+        "session_id": "A2-U13-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je n’ai jamais appris le français",
+        "session_id": "A2-U13-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je voudrais m’inscrire à cette formation",
+        "session_id": "A2-U13-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Une inscription",
+        "session_id": "A2-U13-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Le livre est obligatoire",
+        "session_id": "A2-U13-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "J’apprends le français depuis un mois",
+        "session_id": "A2-U13-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Comment payer",
+        "session_id": "A2-U13-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Paiement : par carte ou en espèces",
+        "session_id": "A2-U13-L04",
+        "task_id": "Q03"
+      }
+    ],
+    "level_description_included": false,
+    "curricula_included": false
+  }
+}

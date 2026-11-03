@@ -1,0 +1,784 @@
+{
+  "unit_id": "PRE_A1-U14",
+  "package_file": "PRE_A1-U14.v1.json",
+  "session_ids": [
+    "PRE_A1-U14-L01",
+    "PRE_A1-U14-L02",
+    "PRE_A1-U14-L03",
+    "PRE_A1-U14-L04",
+    "PRE_A1-U14-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "matin",
+      "lexeme_key": "fr:matin:morning",
+      "fr": "le matin",
+      "ru": [
+        "утро; утром (в распорядке)"
+      ],
+      "transcription_ru": "лё матэ́(н)",
+      "first_session_id": "PRE_A1-U14-L01"
+    },
+    {
+      "id": "apres-midi",
+      "lexeme_key": "fr:apres-midi:afternoon",
+      "fr": "l’après-midi",
+      "ru": [
+        "вторая половина дня; днём после полудня"
+      ],
+      "transcription_ru": "лапрэ-миди́",
+      "first_session_id": "PRE_A1-U14-L01"
+    },
+    {
+      "id": "soir",
+      "lexeme_key": "fr:soir:evening",
+      "fr": "le soir",
+      "ru": [
+        "вечер; вечером (в распорядке)"
+      ],
+      "transcription_ru": "лё суа́р",
+      "first_session_id": "PRE_A1-U14-L02"
+    },
+    {
+      "id": "nuit",
+      "lexeme_key": "fr:nuit:night",
+      "fr": "la nuit",
+      "ru": [
+        "ночь; ночью"
+      ],
+      "transcription_ru": "ла нюи́",
+      "first_session_id": "PRE_A1-U14-L02"
+    },
+    {
+      "id": "dormir",
+      "lexeme_key": "fr:dormir:sleep",
+      "fr": "dormir",
+      "ru": [
+        "спать"
+      ],
+      "transcription_ru": "дорми́р",
+      "first_session_id": "PRE_A1-U14-L02"
+    },
+    {
+      "id": "maintenant",
+      "lexeme_key": "fr:maintenant:now",
+      "fr": "maintenant",
+      "ru": [
+        "сейчас"
+      ],
+      "transcription_ru": "мэ(н)тёна́(н)",
+      "first_session_id": "PRE_A1-U14-L03"
+    },
+    {
+      "id": "plus-tard",
+      "lexeme_key": "fr:plus-tard:later",
+      "fr": "plus tard",
+      "ru": [
+        "позже (без точного указания времени)"
+      ],
+      "transcription_ru": "плю та́р",
+      "first_session_id": "PRE_A1-U14-L03"
+    },
+    {
+      "id": "bonne-nuit",
+      "lexeme_key": "fr:bonne-nuit:bedtime-wish",
+      "fr": "bonne nuit",
+      "ru": [
+        "спокойной ночи (пожелание перед сном)"
+      ],
+      "transcription_ru": "бон нюи́",
+      "first_session_id": "PRE_A1-U14-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:boire:drink",
+    "fr:bonjour:greeting",
+    "fr:bonsoir:evening_greeting",
+    "fr:demain:tomorrow",
+    "fr:donnez-moi:give-request",
+    "fr:eau:water",
+    "fr:ecrire:write",
+    "fr:je-veux:want",
+    "fr:je-voudrais:polite-request",
+    "fr:je:first-person-subject",
+    "fr:lire:read",
+    "fr:livre:book",
+    "fr:lundi:weekday",
+    "fr:mot:word",
+    "fr:pain:bread",
+    "fr:regarder:look-watch",
+    "fr:rendez-vous:appointment",
+    "fr:sil-vous-plait:polite-request",
+    "fr:tele:television"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "PRE_A1.U14.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U14.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U14-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U14-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U13.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U13.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U11.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:matin:morning",
+      "reason": "Вернуть утреннюю рамку только в уже объяснённом контексте распорядка; новое сочетание с погодой сначала объяснить."
+    },
+    {
+      "lexeme_key": "fr:apres-midi:afternoon",
+      "reason": "Сохранить значение второй половины дня после полудня, а не целого дня."
+    },
+    {
+      "lexeme_key": "fr:soir:evening",
+      "reason": "Повторить вечернюю рамку в знакомой короткой реплике."
+    },
+    {
+      "lexeme_key": "fr:nuit:night",
+      "reason": "Отличать ночь от вечера без догадки по типичности действия."
+    },
+    {
+      "lexeme_key": "fr:maintenant:now",
+      "reason": "Повторить текущий момент в знакомой реплике перед новой темой."
+    },
+    {
+      "lexeme_key": "fr:plus-tard:later",
+      "reason": "Сохранить значение позже без автоматического вывода о завтрашнем дне."
+    },
+    {
+      "lexeme_key": "fr:bonjour:greeting",
+      "reason": "Вернуть дневное приветствие в понятной бытовой ситуации."
+    },
+    {
+      "lexeme_key": "fr:bonsoir:evening_greeting",
+      "reason": "Вернуть вечернее приветствие; не смешивать с пожеланием перед сном."
+    },
+    {
+      "lexeme_key": "fr:bonne-nuit:bedtime-wish",
+      "reason": "При повторении сохранять функцию пожелания перед сном, а не приветствия при приходе."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "local_database_references_checked": true,
+    "registry_collisions_checked": true,
+    "package_hash_verified": true,
+    "pronunciation_coverage_warnings_absent": true,
+    "new_lexeme_evidence_checked": true,
+    "practice_kind_checked": true,
+    "apostrophe_and_fixed_phrase_tokens_preserved": true,
+    "shuffled_choice_feedback_checked": true,
+    "reading_length_checked": true,
+    "four_routine_replies_checked": true,
+    "existing_greeting_keys_preserved": true,
+    "no_unused_local_vocabulary": true
+  },
+  "open_issues": [
+    "До импорта целевая база должна содержать PRE_A1-U13-L05; пакет не создаёт отсутствующую внешнюю зависимость.",
+    "Человеку нужно проверить язык, переводы и условные русские транскрипции; прослушать браузерную озвучку рамок времени, слов ночь и сейчас и пожелания спокойной ночи.",
+    "Выполнить предпросмотр, пробное прохождение и замер длительности. Ориентир 6 минут на занятие не измерен."
+  ],
+  "progress": {
+    "current_unit": "PRE_A1-U14",
+    "prepared_session_ids": [
+      "PRE_A1-U14-L01",
+      "PRE_A1-U14-L02",
+      "PRE_A1-U14-L03",
+      "PRE_A1-U14-L04",
+      "PRE_A1-U14-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "PRE_A1-U15",
+    "previous_unit": "PRE_A1-U13",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку текущей темы. Отдельное подтверждение принятия или импорта предыдущих пакетов не получено.",
+    "Временные рамки с артиклем даны в коротких репликах о распорядке. Конструкции конкретного сегодняшнего утра или вечера не вводятся.",
+    "Вторая половина дня после полудня явно отделена от значения весь день целиком. Часы и точные границы частей суток не вводятся.",
+    "Вечер и ночь различаются по словам реплики, а не по догадке о типичности действия.",
+    "Глагол спать дан в одном полезном образце о себе. Для него сохраняется один ключ, отдельный ключ для формы действия не создаётся.",
+    "Позже само по себе не означает завтра и не задаёт точного времени. Для записей о более поздней встрече используется знакомая номинальная рамка без будущего времени.",
+    "Существующие ключи дневного и вечернего приветствий сохранены. Новое пожелание спокойной ночи явно отделено от приветствия при приходе; строгий час смены приветствий не устанавливается.",
+    "В первых четырёх занятиях соответственно 2, 3, 2 и 1 новое значение. Лексика не расширяется ради количества; остальное время отведено знакомым действиям и повторению. В пятом занятии нового обязательного материала нет.",
+    "В итоговом чтении ровно четыре короткие реплики о распорядке. Сборка фиксирует начало рамкой времени; подписи не объявляются независимой проверкой всех слов.",
+    "Основной реестр и предыдущие пакеты не изменены. Новые ключи предложены отдельно до принятия."
+  ],
+  "session_material": [
+    {
+      "session_id": "PRE_A1-U14-L01",
+      "new_lexeme_keys": [
+        "fr:matin:morning",
+        "fr:apres-midi:afternoon"
+      ],
+      "reused_lexeme_keys": [
+        "fr:boire:drink",
+        "fr:demain:tomorrow",
+        "fr:eau:water",
+        "fr:ecrire:write",
+        "fr:je:first-person-subject",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:lundi:weekday",
+        "fr:mot:word",
+        "fr:rendez-vous:appointment"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U14-L02",
+      "new_lexeme_keys": [
+        "fr:soir:evening",
+        "fr:nuit:night",
+        "fr:dormir:sleep"
+      ],
+      "reused_lexeme_keys": [
+        "fr:apres-midi:afternoon",
+        "fr:ecrire:write",
+        "fr:je:first-person-subject",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:matin:morning",
+        "fr:mot:word",
+        "fr:regarder:look-watch",
+        "fr:tele:television"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U14-L03",
+      "new_lexeme_keys": [
+        "fr:maintenant:now",
+        "fr:plus-tard:later"
+      ],
+      "reused_lexeme_keys": [
+        "fr:demain:tomorrow",
+        "fr:je-veux:want",
+        "fr:je:first-person-subject",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:pain:bread",
+        "fr:rendez-vous:appointment"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U14-L04",
+      "new_lexeme_keys": [
+        "fr:bonne-nuit:bedtime-wish"
+      ],
+      "reused_lexeme_keys": [
+        "fr:bonjour:greeting",
+        "fr:bonsoir:evening_greeting",
+        "fr:donnez-moi:give-request",
+        "fr:je-voudrais:polite-request",
+        "fr:livre:book",
+        "fr:sil-vous-plait:polite-request"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U14-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:apres-midi:afternoon",
+        "fr:boire:drink",
+        "fr:bonjour:greeting",
+        "fr:bonne-nuit:bedtime-wish",
+        "fr:bonsoir:evening_greeting",
+        "fr:demain:tomorrow",
+        "fr:dormir:sleep",
+        "fr:eau:water",
+        "fr:je:first-person-subject",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:maintenant:now",
+        "fr:matin:morning",
+        "fr:nuit:night",
+        "fr:plus-tard:later",
+        "fr:regarder:look-watch",
+        "fr:rendez-vous:appointment",
+        "fr:soir:evening",
+        "fr:tele:television"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "PRE_A1-U14-L01",
+      "material": "Готовые начальные рамки утра и второй половины дня с артиклем в описании распорядка."
+    },
+    {
+      "session_id": "PRE_A1-U14-L02",
+      "material": "Вечерняя и ночная рамки; один образец о себе со значением сплю и два показанных порядка рамки времени."
+    },
+    {
+      "session_id": "PRE_A1-U14-L03",
+      "material": "Текущий момент с уже известным настоящим временем; знакомая номинальная запись о встрече сейчас или позже без будущего времени."
+    },
+    {
+      "session_id": "PRE_A1-U14-L04",
+      "material": "Повторение дневного и вечернего приветствий; готовое пожелание спокойной ночи в ситуации перед сном."
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:matin:morning",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:apres-midi:afternoon",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:soir:evening",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:nuit:night",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:dormir:sleep",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:maintenant:now",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:plus-tard:later",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:bonne-nuit:bedtime-wish",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U14-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 8,
+    "external_prerequisites": [
+      "PRE_A1-U13-L05"
+    ],
+    "external_reference_status": "reference_package_and_local_project_validator_passed; other_target_databases_unverified",
+    "project_validator": {
+      "valid": true,
+      "errors": [],
+      "file_hash": "9208478680a582483108c81ccd1af461c76feda7e128ad037e8280ee31998261",
+      "warning_counts": {
+        "editorial_review_required": 5,
+        "browser_tts": 11
+      },
+      "requires_editorial_review": true,
+      "report_file": "PRE_A1-U14.validation.json"
+    },
+    "max_french_reading_prompt_words": 21
+  }
+}

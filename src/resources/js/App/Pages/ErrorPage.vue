@@ -16,7 +16,7 @@ const title = computed(() => {
 const description = computed(() => {
   return {
     503: 'Извините, сервис временно недоступен из-за технических работ. Попробуйте зайти позже.',
-    500: 'Упс! Произошла ошибка на нашей стороне. Мы уже работаем над решением.',
+    500: 'Сервер не смог обработать запрос. Попробуйте ещё раз позже.',
     404: 'К сожалению, такой страницы не существует. Проверьте адрес или вернитесь на главную.',
     403: 'У вас нет доступа к этой странице. Если это ошибка, свяжитесь с поддержкой.',
   }[props.status];
@@ -29,21 +29,27 @@ const description = computed(() => {
     :description="description || ''"
     :no-index="true"
   />
-  <template v-if="status === 404">
+  <template v-if="status === 404 || status === 500">
     <div class="error-indicator">
       <div class="error-indicator-content">
         <div class="error-indicator-header">
-          Oups, une erreur 404...<small>Упс, ошибка 404...</small>
+          Oups, une erreur {{ status }}...<small>Упс, ошибка {{ status }}...</small>
         </div>
         <div class="error-indicator-text">
-          L'adresse que vous cherchez à afficher n'est malheureusement pas disponible sur
-          le site.<small>Адрес, который вы хотите отобразить, к сожалению, не доступен на сайте.</small>
+          <template v-if="status === 500">
+            Le serveur n'a pas pu traiter votre demande.
+            <small>На сервере произошла ошибка. Не удалось открыть страницу.</small>
+          </template>
+          <template v-else>
+            L'adresse que vous cherchez à afficher n'est malheureusement pas disponible sur le site.
+            <small>Адрес, который вы хотите отобразить, к сожалению, не доступен на сайте.</small>
+          </template>
         </div>
         <div class="error-indicator-text">
-          Veuillez vérifier votre url.<small>Пожалуйста, проверьте ваш URL.</small>
+          {{ status === 500 ? 'Veuillez réessayer plus tard.' : 'Veuillez vérifier votre url.' }}<small>{{ status === 500 ? 'Пожалуйста, попробуйте ещё раз позже.' : 'Пожалуйста, проверьте ваш URL.' }}</small>
         </div>
         <div class="error-indicator-text">
-          <a href="/" class="link">Прейти на главную страницу</a>
+          <a href="/" class="link">Перейти на главную страницу</a>
         </div>
       </div>
     </div>

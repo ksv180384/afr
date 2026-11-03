@@ -1,0 +1,974 @@
+{
+  "unit_id": "B1-U03",
+  "package_id": "programme-b1-u03-v1",
+  "package_file": "B1-U03.v1.json",
+  "session_ids": [
+    "B1-U03-L01",
+    "B1-U03-L02",
+    "B1-U03-L03",
+    "B1-U03-L04",
+    "B1-U03-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "a-mon-avis",
+      "lexeme_key": "fr:a-mon-avis:personal-opinion",
+      "fr": "à mon avis",
+      "ru": [
+        "по моему мнению"
+      ],
+      "transcription_ru": "а мо(н) нави́",
+      "first_session_id": "B1-U03-L01"
+    },
+    {
+      "id": "argument",
+      "lexeme_key": "fr:argument:reason-supporting-position",
+      "fr": "un argument",
+      "ru": [
+        "довод в поддержку позиции"
+      ],
+      "transcription_ru": "э(н) наргюма́(н)",
+      "first_session_id": "B1-U03-L02"
+    },
+    {
+      "id": "puisque",
+      "lexeme_key": "fr:puisque:given-reason",
+      "fr": "puisque",
+      "ru": [
+        "поскольку: причина, поданная как известная"
+      ],
+      "transcription_ru": "пюи́ск",
+      "first_session_id": "B1-U03-L02"
+    },
+    {
+      "id": "donc",
+      "lexeme_key": "fr:donc:consequence-conclusion",
+      "fr": "donc",
+      "ru": [
+        "поэтому, следовательно: вывод"
+      ],
+      "transcription_ru": "до́(н)к",
+      "first_session_id": "B1-U03-L02"
+    },
+    {
+      "id": "en-effet",
+      "lexeme_key": "fr:en-effet:support-previous-claim",
+      "fr": "en effet",
+      "ru": [
+        "действительно: в подтверждение предыдущего утверждения"
+      ],
+      "transcription_ru": "а(н) нэфэ́",
+      "first_session_id": "B1-U03-L03"
+    },
+    {
+      "id": "par-exemple",
+      "lexeme_key": "fr:par-exemple:illustrating-example",
+      "fr": "par exemple",
+      "ru": [
+        "например: ввод конкретного примера"
+      ],
+      "transcription_ru": "пар эгза́(н)пль",
+      "first_session_id": "B1-U03-L03"
+    },
+    {
+      "id": "cependant",
+      "lexeme_key": "fr:cependant:contrast-reservation",
+      "fr": "cependant",
+      "ru": [
+        "однако: противопоставление или оговорка"
+      ],
+      "transcription_ru": "сёпа(н)да́(н)",
+      "first_session_id": "B1-U03-L04"
+    },
+    {
+      "id": "pourtant",
+      "lexeme_key": "fr:pourtant:contrary-expectation",
+      "fr": "pourtant",
+      "ru": [
+        "и всё же, однако: вопреки ожиданию"
+      ],
+      "transcription_ru": "пурта́(н)",
+      "first_session_id": "B1-U03-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:auparavant:earlier-relative-time",
+    "fr:avoir:compound-past-auxiliary",
+    "fr:bruit:noise",
+    "fr:bruyant:noisy-place",
+    "fr:cafe:venue",
+    "fr:calme:quiet-place",
+    "fr:cher:expensive",
+    "fr:choisir:choose-option",
+    "fr:commencer:start",
+    "fr:confirmer:confirm-arrangement",
+    "fr:daccord:agreement",
+    "fr:disponibilite:person-time-availability",
+    "fr:disponible:available-in-schedule",
+    "fr:dix:cardinal-number",
+    "fr:echeance:agreed-deadline",
+    "fr:ensuite:next-step",
+    "fr:gare:railway-station",
+    "fr:grace-a:beneficial-cause",
+    "fr:heure:clock-hour",
+    "fr:hier:yesterday",
+    "fr:horaire:work-schedule",
+    "fr:huit:cardinal-number",
+    "fr:je-ne-peux-pas:unavailable-refusal",
+    "fr:je-voudrais:polite-request",
+    "fr:jusqu-a:time-endpoint",
+    "fr:mais:contrast-conjunction",
+    "fr:maison:house-home",
+    "fr:matin:morning",
+    "fr:meilleur:better-quality",
+    "fr:message:short-written-message",
+    "fr:moins:less-comparison",
+    "fr:neuf:cardinal-number",
+    "fr:parc:park",
+    "fr:parce-que:because-reason",
+    "fr:plus:greater-degree-comparison",
+    "fr:pourriez-vous:polite-action-request",
+    "fr:preciser:clarify-service-details",
+    "fr:preferer:prefer-choice",
+    "fr:prendre:use-transport",
+    "fr:preparer:prepare-food",
+    "fr:pres-de:near-place",
+    "fr:rendez-vous:appointment",
+    "fr:rendre-visite:visit-person",
+    "fr:retrouver:meet-by-arrangement",
+    "fr:samedi:weekday",
+    "fr:se-rendre-compte:realise-fact",
+    "fr:soeur:sister",
+    "fr:soir:evening",
+    "fr:sous-reserve-de:conditional-arrangement",
+    "fr:terminer:finish-task",
+    "fr:train:train",
+    "fr:travailler:work",
+    "fr:trop:excessive-degree",
+    "fr:vendredi:weekday",
+    "fr:y:place-pronoun"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "B1.U03.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "B1-U03-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U03-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U03-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U03-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U03-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U03-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U03-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U03-L05",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U03-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U03.APPLY",
+      "evidence": [
+        {
+          "session_id": "B1-U03-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U03-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U03-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U03-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U03-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U03-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U03-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U03-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U02.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "B1-U03-L01",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U01.APPLY",
+      "evidence": [
+        {
+          "session_id": "B1-U03-L03",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L04",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:parce-que:because-reason",
+      "reason": "Объяснить причину запроса решения бытовой проблемы."
+    },
+    {
+      "lexeme_key": "fr:donc:consequence-conclusion",
+      "reason": "Связать описание проблемы и требуемое действие без необоснованного вывода."
+    },
+    {
+      "lexeme_key": "fr:par-exemple:illustrating-example",
+      "reason": "Привести конкретное наблюдение вместо чрезмерного обобщения."
+    },
+    {
+      "lexeme_key": "fr:cependant:contrast-reservation",
+      "reason": "Сохранить оговорку при согласовании решения."
+    },
+    {
+      "lexeme_key": "fr:en-effet:support-previous-claim",
+      "reason": "Подтвердить описание конкретным наблюдением."
+    },
+    {
+      "lexeme_key": "fr:sous-reserve-de:conditional-arrangement",
+      "reason": "Не терять условие при подтверждении совместного плана устранения проблемы."
+    },
+    {
+      "lexeme_key": "fr:se-rendre-compte:realise-fact",
+      "reason": "Повторить момент осознания проблемы в рассказе."
+    },
+    {
+      "lexeme_key": "fr:a-mon-avis:personal-opinion",
+      "reason": "Отличать личную оценку от наблюдаемого признака бытовой проблемы."
+    },
+    {
+      "lexeme_key": "fr:argument:reason-supporting-position",
+      "reason": "Подкрепить просьбу о решении релевантным доводом."
+    },
+    {
+      "lexeme_key": "fr:pourtant:contrary-expectation",
+      "reason": "Передать расхождение между ожидаемым и наблюдаемым при описании проблемы."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "duration_measured": false,
+    "import_performed": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "transcriptions_structurally_checked": true,
+    "application_validator_passed": true,
+    "full_reused_objects_preserved": true,
+    "new_lexeme_collisions_checked": true,
+    "reading_load_checked": true,
+    "L05_no_new_mandatory_material": true
+  },
+  "open_issues": [
+    "Проверить наличие B1-U02-L05 в целевой базе: зависимость существует в подготовленном пакете, импорт не подтверждён.",
+    "Редактору проверить естественность обсуждений, связь примеров с оценкой, приблизительные транскрипции и соответствие уровню.",
+    "Прослушать браузерную озвучку новых связок и всех пяти рассказов. Время аудио и прохождения не измерено.",
+    "Выполнить предпросмотр и пробное прохождение пяти занятий на сайте. Принятие пользователем, импорт и публикация не подтверждены."
+  ],
+  "progress": {
+    "current_unit": "B1-U03",
+    "prepared_session_ids": [
+      "B1-U03-L01",
+      "B1-U03-L02",
+      "B1-U03-L03",
+      "B1-U03-L04",
+      "B1-U03-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "B1-U04",
+    "next_unit_title": "Бытовые проблемы",
+    "previous_unit": "B1-U02",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Полная текущая тема из пяти занятий; следующая тема не начата.",
+    "Восемь новых значений по занятиям: одно, три, два, два, ноль. Квота новых слов не заполняется ради числа; L05 не вводит нового обязательного материала.",
+    "В L01 повторяется условие доступности из B1-U02; в L03 полезная причина из B1-U01; в L04 осознание факта из B1-U01. Повторение использует реально подготовленные карточки, не предполагая опубликованного контента или освоения учеником.",
+    "À mon avis отмечает позицию, но не делает её объективным фактом. Конкретная оценка кафе не становится правилом обо всех кафе.",
+    "Un argument — довод в поддержку позиции; здесь не ссора. Его релевантность зависит от задачи: тишина важна для работы, меньшая цена может быть другим доводом.",
+    "Puisque подаёт основание как известное или принятое в разговоре. Такая подача не доказывает истинность основания сама по себе. Знакомое parce que сохраняет причинную функцию.",
+    "Donc вводит результат или вывод. В заданиях причина и вывод не меняются местами; наличие связки не заменяет обоснование.",
+    "En effet в этой теме вводит подтверждение предыдущего утверждения. Par exemple вводит конкретный случай. Они могут работать вместе, поэтому не противопоставляются как взаимоисключающие синонимы.",
+    "Пример работы в кафе дополнен наблюдением об отсутствии шума. Один случай поддерживает оценку, но не гарантирует одинаковые условия во все дни и часы.",
+    "Cependant и pourtant могут пересекаться по смыслу. Pourtant часто подчёркивает несоответствие ожиданию, cependant вводит оговорку; ни один вопрос не требует запретить допустимый синоним в подходящем контексте.",
+    "Согласие с ценовой оговоркой не приравнивается к полному отказу. Личная доступность утром не означает готовность общего начала в любой час.",
+    "Полные прежние словарные объекты, ключи и review_items сохраняются целиком. Выбранные глагольные формы не создают новых ключей.",
+    "Прежние preparer и horaire сохраняют ключи при контекстном переносе подготовки на сообщение и графика на работу кафе; полные исходные карточки не переписываются.",
+    "Все обсуждения и ситуации оригинальные и вымышленные; реальные кафе, цены и встречи не рекомендуются. Ответы только выбором и сборкой готовых блоков, без свободного ввода или обязательного голоса.",
+    "Озвучка только браузером: fr-FR, asset_id=null; нет аудиофайлов или внешних сервисов. База, прежние пакеты, основной реестр, levels и curricula не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "B1-U03-L01",
+      "new_lexeme_keys": [
+        "fr:a-mon-avis:personal-opinion"
+      ],
+      "reused_lexeme_keys": [
+        "fr:bruyant:noisy-place",
+        "fr:cafe:venue",
+        "fr:confirmer:confirm-arrangement",
+        "fr:disponibilite:person-time-availability",
+        "fr:disponible:available-in-schedule",
+        "fr:gare:railway-station",
+        "fr:je-voudrais:polite-request",
+        "fr:mais:contrast-conjunction",
+        "fr:maison:house-home",
+        "fr:matin:morning",
+        "fr:message:short-written-message",
+        "fr:parce-que:because-reason",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:preferer:prefer-choice",
+        "fr:prendre:use-transport",
+        "fr:preparer:prepare-food",
+        "fr:pres-de:near-place",
+        "fr:rendez-vous:appointment",
+        "fr:samedi:weekday",
+        "fr:soeur:sister",
+        "fr:sous-reserve-de:conditional-arrangement",
+        "fr:train:train",
+        "fr:travailler:work",
+        "fr:trop:excessive-degree"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U03-L02",
+      "new_lexeme_keys": [
+        "fr:argument:reason-supporting-position",
+        "fr:puisque:given-reason",
+        "fr:donc:consequence-conclusion"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-mon-avis:personal-opinion",
+        "fr:bruyant:noisy-place",
+        "fr:cafe:venue",
+        "fr:calme:quiet-place",
+        "fr:cher:expensive",
+        "fr:choisir:choose-option",
+        "fr:disponible:available-in-schedule",
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:je-voudrais:polite-request",
+        "fr:mais:contrast-conjunction",
+        "fr:matin:morning",
+        "fr:meilleur:better-quality",
+        "fr:message:short-written-message",
+        "fr:moins:less-comparison",
+        "fr:parc:park",
+        "fr:parce-que:because-reason",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:preparer:prepare-food",
+        "fr:pres-de:near-place",
+        "fr:rendez-vous:appointment",
+        "fr:samedi:weekday",
+        "fr:travailler:work",
+        "fr:trop:excessive-degree"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U03-L03",
+      "new_lexeme_keys": [
+        "fr:en-effet:support-previous-claim",
+        "fr:par-exemple:illustrating-example"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-mon-avis:personal-opinion",
+        "fr:auparavant:earlier-relative-time",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:bruit:noise",
+        "fr:cafe:venue",
+        "fr:calme:quiet-place",
+        "fr:choisir:choose-option",
+        "fr:dix:cardinal-number",
+        "fr:donc:consequence-conclusion",
+        "fr:ensuite:next-step",
+        "fr:grace-a:beneficial-cause",
+        "fr:heure:clock-hour",
+        "fr:hier:yesterday",
+        "fr:horaire:work-schedule",
+        "fr:je-voudrais:polite-request",
+        "fr:matin:morning",
+        "fr:message:short-written-message",
+        "fr:parc:park",
+        "fr:preciser:clarify-service-details",
+        "fr:preparer:prepare-food",
+        "fr:pres-de:near-place",
+        "fr:rendez-vous:appointment",
+        "fr:samedi:weekday",
+        "fr:soeur:sister",
+        "fr:soir:evening",
+        "fr:terminer:finish-task",
+        "fr:travailler:work",
+        "fr:vendredi:weekday",
+        "fr:y:place-pronoun"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U03-L04",
+      "new_lexeme_keys": [
+        "fr:cependant:contrast-reservation",
+        "fr:pourtant:contrary-expectation"
+      ],
+      "reused_lexeme_keys": [
+        "fr:cafe:venue",
+        "fr:calme:quiet-place",
+        "fr:cher:expensive",
+        "fr:choisir:choose-option",
+        "fr:commencer:start",
+        "fr:confirmer:confirm-arrangement",
+        "fr:daccord:agreement",
+        "fr:disponibilite:person-time-availability",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:donc:consequence-conclusion",
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:hier:yesterday",
+        "fr:huit:cardinal-number",
+        "fr:je-ne-peux-pas:unavailable-refusal",
+        "fr:je-voudrais:polite-request",
+        "fr:jusqu-a:time-endpoint",
+        "fr:matin:morning",
+        "fr:neuf:cardinal-number",
+        "fr:par-exemple:illustrating-example",
+        "fr:parc:park",
+        "fr:plus:greater-degree-comparison",
+        "fr:pres-de:near-place",
+        "fr:rendre-visite:visit-person",
+        "fr:retrouver:meet-by-arrangement",
+        "fr:samedi:weekday",
+        "fr:se-rendre-compte:realise-fact",
+        "fr:soeur:sister",
+        "fr:sous-reserve-de:conditional-arrangement",
+        "fr:travailler:work",
+        "fr:y:place-pronoun"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U03-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-mon-avis:personal-opinion",
+        "fr:argument:reason-supporting-position",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:bruit:noise",
+        "fr:cafe:venue",
+        "fr:calme:quiet-place",
+        "fr:cependant:contrast-reservation",
+        "fr:cher:expensive",
+        "fr:choisir:choose-option",
+        "fr:commencer:start",
+        "fr:daccord:agreement",
+        "fr:disponibilite:person-time-availability",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:donc:consequence-conclusion",
+        "fr:echeance:agreed-deadline",
+        "fr:en-effet:support-previous-claim",
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:hier:yesterday",
+        "fr:je-voudrais:polite-request",
+        "fr:matin:morning",
+        "fr:meilleur:better-quality",
+        "fr:message:short-written-message",
+        "fr:par-exemple:illustrating-example",
+        "fr:parc:park",
+        "fr:plus:greater-degree-comparison",
+        "fr:preparer:prepare-food",
+        "fr:pres-de:near-place",
+        "fr:puisque:given-reason",
+        "fr:rendez-vous:appointment",
+        "fr:samedi:weekday",
+        "fr:soeur:sister",
+        "fr:sous-reserve-de:conditional-arrangement",
+        "fr:travailler:work",
+        "fr:vendredi:weekday",
+        "fr:y:place-pronoun"
+      ],
+      "task_count": 7
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "B1-U03-L01",
+      "material": "À mon avis; личная оценка отдельно от условия и подтверждения."
+    },
+    {
+      "session_id": "B1-U03-L02",
+      "material": "Un argument; puisque как поданное известное основание; donc как вывод; возврат parce que."
+    },
+    {
+      "session_id": "B1-U03-L03",
+      "material": "En effet; par exemple; знакомое y в выбранных моделях; пределы обобщения единичного опыта."
+    },
+    {
+      "session_id": "B1-U03-L04",
+      "material": "Cependant / pourtant; согласие с оговоркой; противопоставление не равно отказу."
+    },
+    {
+      "session_id": "B1-U03-L05",
+      "material": "Интеграция прежних связок, без нового обязательного материала."
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:a-mon-avis:personal-opinion",
+      "evidence": [
+        {
+          "session_id": "B1-U03-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U03-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U03-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:argument:reason-supporting-position",
+      "evidence": [
+        {
+          "session_id": "B1-U03-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U03-L05",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U03-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:puisque:given-reason",
+      "evidence": [
+        {
+          "session_id": "B1-U03-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U03-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:donc:consequence-conclusion",
+      "evidence": [
+        {
+          "session_id": "B1-U03-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U03-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U03-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:en-effet:support-previous-claim",
+      "evidence": [
+        {
+          "session_id": "B1-U03-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:par-exemple:illustrating-example",
+      "evidence": [
+        {
+          "session_id": "B1-U03-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U03-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U03-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:cependant:contrast-reservation",
+      "evidence": [
+        {
+          "session_id": "B1-U03-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U03-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U03-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:pourtant:contrary-expectation",
+      "evidence": [
+        {
+          "session_id": "B1-U03-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "text_conventions": {
+    "situation_status": "Оригинальные вымышленные обсуждения выбора места для совместной работы.",
+    "external_services_required": false,
+    "free_speaking_assessed": false
+  },
+  "reading_word_counts": [
+    61,
+    64,
+    70,
+    67,
+    91,
+    91
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 35,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      7
+    ],
+    "new_lexemes": 8,
+    "external_prerequisites": [
+      "B1-U02-L05"
+    ],
+    "external_reference_status": "exists in prepared previous package; target database/import unverified",
+    "reused_lexeme_keys": 55,
+    "reading_word_counts": [
+      61,
+      64,
+      70,
+      67,
+      91,
+      91
+    ],
+    "unit_complete": true
+  },
+  "application_validation": {
+    "report_file": "B1-U03.validation.json",
+    "valid": true,
+    "file_hash": "f083620d139ffc25d1369d0bebf986747da85e7d34584d1881145bc633ebc3fb",
+    "errors": 0,
+    "warning_counts": {
+      "browser_tts": 5,
+      "editorial_review_required": 5
+    },
+    "requires_editorial_review": true,
+    "database_modified": false
+  }
+}

@@ -1,0 +1,923 @@
+{
+  "unit_id": "A2-U01",
+  "package_file": "A2-U01.v1.json",
+  "session_ids": [
+    "A2-U01-L01",
+    "A2-U01-L02",
+    "A2-U01-L03",
+    "A2-U01-L04",
+    "A2-U01-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "voyage",
+      "lexeme_key": "fr:voyage:trip",
+      "fr": "un voyage",
+      "ru": [
+        "поездка"
+      ],
+      "transcription_ru": "э(н) вуайа́ж",
+      "first_session_id": "A2-U01-L01"
+    },
+    {
+      "id": "prevoir",
+      "lexeme_key": "fr:prevoir:plan-in-advance",
+      "fr": "prévoir",
+      "ru": [
+        "заранее планировать, предусматривать"
+      ],
+      "transcription_ru": "прэвуа́р",
+      "first_session_id": "A2-U01-L01"
+    },
+    {
+      "id": "le-cod",
+      "lexeme_key": "fr:le:direct-object-pronoun-masculine",
+      "fr": "le",
+      "ru": [
+        "его: замена названного предмета мужского рода"
+      ],
+      "transcription_ru": "лё",
+      "first_session_id": "A2-U01-L02"
+    },
+    {
+      "id": "la-cod",
+      "lexeme_key": "fr:la:direct-object-pronoun-feminine",
+      "fr": "la",
+      "ru": [
+        "её: замена названного предмета женского рода"
+      ],
+      "transcription_ru": "ла",
+      "first_session_id": "A2-U01-L03"
+    },
+    {
+      "id": "bagage",
+      "lexeme_key": "fr:bagage:luggage-item",
+      "fr": "un bagage",
+      "ru": [
+        "одна единица багажа: сумка или чемодан"
+      ],
+      "transcription_ru": "э(н) бага́ж",
+      "first_session_id": "A2-U01-L04"
+    },
+    {
+      "id": "valise",
+      "lexeme_key": "fr:valise:suitcase",
+      "fr": "une valise",
+      "ru": [
+        "чемодан"
+      ],
+      "transcription_ru": "юн вали́з",
+      "first_session_id": "A2-U01-L04"
+    },
+    {
+      "id": "les-cod",
+      "lexeme_key": "fr:les:direct-object-pronoun-plural",
+      "fr": "les",
+      "ru": [
+        "их: замена нескольких названных предметов"
+      ],
+      "transcription_ru": "лэ",
+      "first_session_id": "A2-U01-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:acheter:buy",
+    "fr:aller-retour:return-ticket",
+    "fr:aller-simple:one-way-ticket",
+    "fr:aller:near-future-auxiliary",
+    "fr:apporter:bring-object",
+    "fr:arriver:transport-arrive",
+    "fr:billet:transport-ticket",
+    "fr:bureau:office-workplace",
+    "fr:calme:quiet-place",
+    "fr:chambre:hotel-room",
+    "fr:choisir:choose-option",
+    "fr:cinq:cardinal-number",
+    "fr:dans-le-sac:in-bag",
+    "fr:deux:cardinal-number",
+    "fr:douche:shower-facility",
+    "fr:fermer:close-object",
+    "fr:frere:brother",
+    "fr:heure:clock-hour",
+    "fr:hotel:hotel",
+    "fr:je-veux:want",
+    "fr:je-voudrais:polite-request",
+    "fr:juillet:month-july",
+    "fr:juin:month-june",
+    "fr:maison:house-home",
+    "fr:midi:noon",
+    "fr:neuf:cardinal-number",
+    "fr:partir:transport-leave",
+    "fr:passeport:passport",
+    "fr:prendre:use-transport",
+    "fr:rendre-visite:visit-person",
+    "fr:rentrer:return-home",
+    "fr:reserver:book-hotel-room",
+    "fr:sac:bag",
+    "fr:sejour:hotel-stay",
+    "fr:six:cardinal-number",
+    "fr:train:train",
+    "fr:travailler:work",
+    "fr:un:cardinal-number",
+    "fr:wifi:wireless-internet-access"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A2.U01.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U01-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U01-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U01-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U01-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U01-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U01-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U01-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U01-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U01-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U01-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U01-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U01-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U01-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U01.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U01-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U01-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U01-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U01-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U01-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U01-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U01-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U01-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U01-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U01-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U01-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U01-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U01-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:voyage:trip",
+      "reason": "Вернуть цель поездки при чтении вокзального объявления."
+    },
+    {
+      "lexeme_key": "fr:billet:transport-ticket",
+      "reason": "Сохранить предмет выбора и изменения билета."
+    },
+    {
+      "lexeme_key": "fr:aller-retour:return-ticket",
+      "reason": "Повторить билет туда-обратно отдельно от одной поездки."
+    },
+    {
+      "lexeme_key": "fr:aller-simple:one-way-ticket",
+      "reason": "Вернуть билет в одну сторону."
+    },
+    {
+      "lexeme_key": "fr:train:train",
+      "reason": "Перенести знакомый транспорт в расписание вокзала."
+    },
+    {
+      "lexeme_key": "fr:partir:transport-leave",
+      "reason": "Повторить отправление транспорта с прежним ключом."
+    },
+    {
+      "lexeme_key": "fr:arriver:transport-arrive",
+      "reason": "Повторить прибытие отдельно от отправления."
+    },
+    {
+      "lexeme_key": "fr:le:direct-object-pronoun-masculine",
+      "reason": "Вернуть замену названного билета в той же рамке."
+    },
+    {
+      "lexeme_key": "fr:bagage:luggage-item",
+      "reason": "Сохранить различие багажа и билета в поездке."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "no_external_prerequisites_in_first_level_unit": true,
+    "new_level_description_prepared_after_read_only_catalog_check": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "new_local_ids_do_not_overwrite_existing_meanings": true,
+    "hotel_stay_meaning_preserved_without_generalization": true,
+    "object_pronoun_meanings_distinguished_from_articles": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "pronoun_position_gender_number_and_explicit_referents_reviewed": true,
+    "planning_not_confused_with_confirmed_booking": true,
+    "date_purpose_ticket_and_baggage_distinctions_reviewed": true,
+    "apostrophes_kept_in_whole_tokens": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Первое занятие A2 не имеет внешних зависимостей. Наличие полных прежних карточек не является подтверждением освоения A1 или принятия прошлых пакетов пользователем.",
+    "Редактору проверить естественность французских планов, вопросов, условий проживания и русского перевода местоимений с учётом французского рода.",
+    "Прослушать браузерную озвучку дат, формул с местоимениями и связки les apporter. Длительность аудио и занятий не измерена.",
+    "Выполнить предпросмотр и пробное прохождение пяти занятий, включая выбор предмета замены и количество багажа.",
+    "Описание A2 подготовлено, поскольку в прочитанной записи каталога отсутствовали summary и learning_outcomes. Импорт и публикация каталога не выполнялись."
+  ],
+  "progress": {
+    "current_unit": "A2-U01",
+    "prepared_session_ids": [
+      "A2-U01-L01",
+      "A2-U01-L02",
+      "A2-U01-L03",
+      "A2-U01-L04",
+      "A2-U01-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A2-U02",
+    "next_unit_title": "На вокзале",
+    "previous_unit": "A1-U20",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A2-U01. Принятие и импорт предыдущих пакетов не подтверждены; повторение использует полные объекты подготовленного материала.",
+    "Новые значения распределены как два, одно, одно, три и ноль. Словарь небольшой, поскольку основная работа — связывание знакомых условий и постепенное введение прямого дополнения. L05 не вводит нового обязательного материала.",
+    "Вход предполагает типичные знания A1 и содержит короткую опору на ближайшее намерение. Первое занятие нового уровня имеет пустые prerequisite_ids: межуровневая зависимость не добавляется.",
+    "Voyage — поездка целиком. Séjour повторяет прежнее fr:sejour:hotel-stay только для гостиничного проживания, без расширения карточки до любого пребывания.",
+    "Prévoir — заранее планировать или предусматривать; в задачах это не подтверждение покупки, оплаты, бронирования или фактического включения услуги.",
+    "Pour + название действия показывает цель поездки. Du deux au cinq juin задаёт начало и конец периода, не используется для вычисления числа ночей без отдельного условия.",
+    "Le / la / les как прямые объектные местоимения получают отдельные ключи значений, отличные от артиклей. Старые карточки не переписываются.",
+    "Вводится одна рамка ближайшего намерения: Je vais le choisir, Je vais la réserver, Je vais les apporter. Позиция замены перед инфинитивом, после вспомогательной формы. Полная система местоимений, другие времена и сокращённое l’ перед гласным в единственном числе здесь не вводятся.",
+    "Род определяется французским названием: billet мужского рода, chambre и valise женского. Перевод русского номера или чемодана использует его; это не меняет французское согласование.",
+    "Les заменяет несколько названных предметов, а не ближайший один паспорт. Связка в les apporter показана с русской транскрипцией.",
+    "Un bagage здесь — одна единица багажа; две единицы в учебном плане — чемодан и сумка. Никакие реальные нормы перевозчика, тарифы, включённый багаж или цены не заявляются.",
+    "Каждое сообщение — отдельная ситуация. Цель, даты, билет и удобства одного человека не переносятся на другого.",
+    "Описание уровня A2 включено после чтения каталога: существовала только запись кода с пустыми описанием и результатами. Остальные уровни и прежние темы не включены.",
+    "Пакет содержит текущую тему и описание нового уровня, без curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A2-U01-L01",
+      "new_lexeme_keys": [
+        "fr:voyage:trip",
+        "fr:prevoir:plan-in-advance"
+      ],
+      "reused_lexeme_keys": [
+        "fr:acheter:buy",
+        "fr:aller:near-future-auxiliary",
+        "fr:billet:transport-ticket",
+        "fr:bureau:office-workplace",
+        "fr:chambre:hotel-room",
+        "fr:cinq:cardinal-number",
+        "fr:deux:cardinal-number",
+        "fr:frere:brother",
+        "fr:je-veux:want",
+        "fr:juillet:month-july",
+        "fr:juin:month-june",
+        "fr:maison:house-home",
+        "fr:prendre:use-transport",
+        "fr:rendre-visite:visit-person",
+        "fr:rentrer:return-home",
+        "fr:reserver:book-hotel-room",
+        "fr:sejour:hotel-stay",
+        "fr:six:cardinal-number",
+        "fr:train:train",
+        "fr:travailler:work"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U01-L02",
+      "new_lexeme_keys": [
+        "fr:le:direct-object-pronoun-masculine"
+      ],
+      "reused_lexeme_keys": [
+        "fr:acheter:buy",
+        "fr:aller-retour:return-ticket",
+        "fr:aller-simple:one-way-ticket",
+        "fr:aller:near-future-auxiliary",
+        "fr:arriver:transport-arrive",
+        "fr:billet:transport-ticket",
+        "fr:chambre:hotel-room",
+        "fr:choisir:choose-option",
+        "fr:cinq:cardinal-number",
+        "fr:deux:cardinal-number",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:je-voudrais:polite-request",
+        "fr:juin:month-june",
+        "fr:maison:house-home",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:partir:transport-leave",
+        "fr:prendre:use-transport",
+        "fr:prevoir:plan-in-advance",
+        "fr:rendre-visite:visit-person",
+        "fr:rentrer:return-home",
+        "fr:train:train",
+        "fr:voyage:trip"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U01-L03",
+      "new_lexeme_keys": [
+        "fr:la:direct-object-pronoun-feminine"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller-retour:return-ticket",
+        "fr:aller:near-future-auxiliary",
+        "fr:arriver:transport-arrive",
+        "fr:billet:transport-ticket",
+        "fr:calme:quiet-place",
+        "fr:chambre:hotel-room",
+        "fr:choisir:choose-option",
+        "fr:cinq:cardinal-number",
+        "fr:deux:cardinal-number",
+        "fr:douche:shower-facility",
+        "fr:heure:clock-hour",
+        "fr:hotel:hotel",
+        "fr:je-voudrais:polite-request",
+        "fr:juin:month-june",
+        "fr:le:direct-object-pronoun-masculine",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:partir:transport-leave",
+        "fr:prendre:use-transport",
+        "fr:prevoir:plan-in-advance",
+        "fr:reserver:book-hotel-room",
+        "fr:sejour:hotel-stay",
+        "fr:train:train",
+        "fr:voyage:trip",
+        "fr:wifi:wireless-internet-access"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U01-L04",
+      "new_lexeme_keys": [
+        "fr:bagage:luggage-item",
+        "fr:valise:suitcase",
+        "fr:les:direct-object-pronoun-plural"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:near-future-auxiliary",
+        "fr:apporter:bring-object",
+        "fr:calme:quiet-place",
+        "fr:chambre:hotel-room",
+        "fr:cinq:cardinal-number",
+        "fr:dans-le-sac:in-bag",
+        "fr:deux:cardinal-number",
+        "fr:douche:shower-facility",
+        "fr:fermer:close-object",
+        "fr:hotel:hotel",
+        "fr:je-voudrais:polite-request",
+        "fr:juin:month-june",
+        "fr:la:direct-object-pronoun-feminine",
+        "fr:passeport:passport",
+        "fr:prendre:use-transport",
+        "fr:prevoir:plan-in-advance",
+        "fr:reserver:book-hotel-room",
+        "fr:sac:bag",
+        "fr:sejour:hotel-stay",
+        "fr:train:train",
+        "fr:un:cardinal-number",
+        "fr:voyage:trip",
+        "fr:wifi:wireless-internet-access"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U01-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:aller-retour:return-ticket",
+        "fr:aller-simple:one-way-ticket",
+        "fr:aller:near-future-auxiliary",
+        "fr:apporter:bring-object",
+        "fr:bagage:luggage-item",
+        "fr:billet:transport-ticket",
+        "fr:bureau:office-workplace",
+        "fr:calme:quiet-place",
+        "fr:chambre:hotel-room",
+        "fr:choisir:choose-option",
+        "fr:cinq:cardinal-number",
+        "fr:dans-le-sac:in-bag",
+        "fr:deux:cardinal-number",
+        "fr:douche:shower-facility",
+        "fr:fermer:close-object",
+        "fr:frere:brother",
+        "fr:hotel:hotel",
+        "fr:je-voudrais:polite-request",
+        "fr:juin:month-june",
+        "fr:la:direct-object-pronoun-feminine",
+        "fr:le:direct-object-pronoun-masculine",
+        "fr:les:direct-object-pronoun-plural",
+        "fr:passeport:passport",
+        "fr:prendre:use-transport",
+        "fr:prevoir:plan-in-advance",
+        "fr:rendre-visite:visit-person",
+        "fr:reserver:book-hotel-room",
+        "fr:sac:bag",
+        "fr:sejour:hotel-stay",
+        "fr:six:cardinal-number",
+        "fr:train:train",
+        "fr:travailler:work",
+        "fr:valise:suitcase",
+        "fr:voyage:trip",
+        "fr:wifi:wireless-internet-access"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A2-U01-L01",
+      "material": "Повторение Je vais + инфинитив; цель pour + инфинитив; знакомая рамка периода du… au… с датами."
+    },
+    {
+      "session_id": "A2-U01-L02",
+      "material": "Le как замена названного билета; место перед инфинитивом в Je vais le choisir."
+    },
+    {
+      "session_id": "A2-U01-L03",
+      "material": "La как замена названного номера по французскому женскому роду; Je vais la réserver."
+    },
+    {
+      "session_id": "A2-U01-L04",
+      "material": "Les для группы предметов в Je vais les apporter; связка перед гласным; сравнение с La valise / Les valises."
+    }
+  ],
+  "text_conventions": {
+    "situation_status": "Оригинальные вымышленные планы поездок.",
+    "date_scope": "Учебные даты без привязки к реальному расписанию или году.",
+    "pronoun_scope": "Только явно названный предмет или группа в показанной рамке ближайшего намерения.",
+    "baggage_scope": "Состав конкретного учебного плана, без утверждений о правилах перевозчиков.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": true,
+    "curricula_included": false,
+    "database_modified": false,
+    "existing_A2_description_read_only_checked": true,
+    "existing_A2_snapshot": {
+      "code": "A2",
+      "title": "A2",
+      "summary": null,
+      "learning_outcomes": null,
+      "published_at": null
+    },
+    "reason": "Prepare missing editorial description for existing bare level code; no database write performed."
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:voyage:trip",
+      "evidence": [
+        {
+          "session_id": "A2-U01-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:prevoir:plan-in-advance",
+      "evidence": [
+        {
+          "session_id": "A2-U01-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:le:direct-object-pronoun-masculine",
+      "evidence": [
+        {
+          "session_id": "A2-U01-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U01-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:la:direct-object-pronoun-feminine",
+      "evidence": [
+        {
+          "session_id": "A2-U01-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:bagage:luggage-item",
+      "evidence": [
+        {
+          "session_id": "A2-U01-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U01-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:valise:suitcase",
+      "evidence": [
+        {
+          "session_id": "A2-U01-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U01-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U01-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U01-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:les:direct-object-pronoun-plural",
+      "evidence": [
+        {
+          "session_id": "A2-U01-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U01-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 7,
+    "external_prerequisites": [],
+    "external_reference_status": "none_first_unit_of_A2_no_cross_level_dependency",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 10
+      },
+      "file_hash": "bc61ae677832c633651a1b7c41ebb6f4a3d54930f9163faaeab1bc1dad81b488",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 39,
+    "text_lengths": [
+      {
+        "session_id": "A2-U01-L01",
+        "reading_word_counts": [
+          33,
+          37
+        ],
+        "listening_word_counts": [
+          30
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U01-L02",
+        "reading_word_counts": [
+          35,
+          32
+        ],
+        "listening_word_counts": [
+          35
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U01-L03",
+        "reading_word_counts": [
+          34,
+          36
+        ],
+        "listening_word_counts": [
+          38
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U01-L04",
+        "reading_word_counts": [
+          38,
+          39
+        ],
+        "listening_word_counts": [
+          33
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U01-L05",
+        "reading_word_counts": [
+          40,
+          37
+        ],
+        "listening_word_counts": [
+          32,
+          35
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "prévoir un voyage",
+        "session_id": "A2-U01-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "pour rendre visite à mon frère",
+        "session_id": "A2-U01-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "du deux au cinq juin",
+        "session_id": "A2-U01-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Je vais le choisir",
+        "session_id": "A2-U01-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je vais la réserver",
+        "session_id": "A2-U01-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "un bagage",
+        "session_id": "A2-U01-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "une valise",
+        "session_id": "A2-U01-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je vais les apporter",
+        "session_id": "A2-U01-L04",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Je vais la fermer",
+        "session_id": "A2-U01-L04",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Je vais les fermer",
+        "session_id": "A2-U01-L04",
+        "task_id": "Q06"
+      }
+    ],
+    "level_description_included": true,
+    "curricula_included": false
+  }
+}

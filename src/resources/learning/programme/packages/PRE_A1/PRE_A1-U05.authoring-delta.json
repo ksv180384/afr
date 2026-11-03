@@ -1,0 +1,856 @@
+{
+  "unit_id": "PRE_A1-U05",
+  "package_file": "PRE_A1-U05.v1.json",
+  "session_ids": [
+    "PRE_A1-U05-L01",
+    "PRE_A1-U05-L02",
+    "PRE_A1-U05-L03",
+    "PRE_A1-U05-L04",
+    "PRE_A1-U05-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "formal-name-question",
+      "lexeme_key": "fr:comment-vous-appelez-vous:formal-name-question",
+      "fr": "comment vous appelez-vous ?",
+      "ru": [
+        "Как вас зовут?"
+      ],
+      "transcription_ru": "кома(н) ву заплэ ву́?",
+      "first_session_id": "PRE_A1-U05-L01"
+    },
+    {
+      "id": "prenom",
+      "lexeme_key": "fr:prenom:given-name",
+      "fr": "le prénom",
+      "ru": [
+        "личное имя (не фамилия)"
+      ],
+      "transcription_ru": "лё прэно́(н)",
+      "first_session_id": "PRE_A1-U05-L01"
+    },
+    {
+      "id": "age-question",
+      "lexeme_key": "fr:quel-age-avez-vous:formal-age-question",
+      "fr": "quel âge avez-vous ?",
+      "ru": [
+        "Сколько вам лет?"
+      ],
+      "transcription_ru": "кэль аж авэ ву́?",
+      "first_session_id": "PRE_A1-U05-L02"
+    },
+    {
+      "id": "jai-possession",
+      "lexeme_key": "fr:jai:possession",
+      "fr": "j’ai",
+      "ru": [
+        "у меня есть (о наличии вещи)"
+      ],
+      "transcription_ru": "жэ",
+      "first_session_id": "PRE_A1-U05-L02"
+    },
+    {
+      "id": "origin-question",
+      "lexeme_key": "fr:dou-venez-vous:city-origin-question",
+      "fr": "d’où venez-vous ?",
+      "ru": [
+        "Откуда вы? (при знакомстве)"
+      ],
+      "transcription_ru": "ду вёнэ ву́?",
+      "first_session_id": "PRE_A1-U05-L03"
+    },
+    {
+      "id": "je-suis-de",
+      "lexeme_key": "fr:je-suis-de:city-origin",
+      "fr": "je suis de",
+      "ru": [
+        "Я из (перед названием города)"
+      ],
+      "transcription_ru": "жё сюи дё",
+      "first_session_id": "PRE_A1-U05-L03"
+    },
+    {
+      "id": "residence-question",
+      "lexeme_key": "fr:ou-habitez-vous:city-residence-question",
+      "fr": "où habitez-vous ?",
+      "ru": [
+        "Где вы живёте?"
+      ],
+      "transcription_ru": "у абитэ ву́?",
+      "first_session_id": "PRE_A1-U05-L04"
+    },
+    {
+      "id": "jhabite-a",
+      "lexeme_key": "fr:jhabite-a:city-residence",
+      "fr": "j’habite à",
+      "ru": [
+        "Я живу в (перед названием города)"
+      ],
+      "transcription_ru": "жабит а",
+      "first_session_id": "PRE_A1-U05-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:a:letter-name",
+    "fr:ans:age-years",
+    "fr:bonjour:greeting",
+    "fr:ce-sont:identify-objects",
+    "fr:cest:identify-object",
+    "fr:dans-le-sac:in-bag",
+    "fr:des:indefinite-plural",
+    "fr:deux:cardinal-number",
+    "fr:dix-huit:cardinal-number",
+    "fr:dix-neuf:cardinal-number",
+    "fr:epelez-sil-vous-plait:request-spelling",
+    "fr:i:letter-name",
+    "fr:jai:age-frame",
+    "fr:je-mappelle:self_introduction",
+    "fr:l:letter-name",
+    "fr:livre:book",
+    "fr:m:letter-name",
+    "fr:merci:thanks",
+    "fr:neuf:cardinal-number",
+    "fr:nom:family-name",
+    "fr:non:negative-answer",
+    "fr:numero:identifier",
+    "fr:o:letter-name",
+    "fr:oui:affirmative-answer",
+    "fr:plus-lentement-sil-vous-plait:request-slower",
+    "fr:repetez-sil-vous-plait:request-repeat",
+    "fr:sac:bag",
+    "fr:stylo:pen",
+    "fr:sur-la-table:on-table",
+    "fr:table:table",
+    "fr:un:cardinal-number",
+    "fr:un:indefinite-masculine",
+    "fr:une:indefinite-feminine",
+    "fr:vingt:cardinal-number"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "PRE_A1.U05.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U05-L01",
+          "task_id": "Q02",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U05-L01",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L01",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U05-L01",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L01",
+          "task_id": "Q07",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U05-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U05-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L02",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L02",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U05.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U05-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U05-L03",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U05-L03",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U05-L03",
+          "task_id": "Q06",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U05-L03",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U05-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U05-L04",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U05-L04",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U05-L04",
+          "task_id": "Q06",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q03",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U04.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U05-L01",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.NAME.INTRODUCE",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U05-L01",
+          "task_id": "Q06",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U03.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U05-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U02.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U05-L03",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q02",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.POLITE.USE",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U05-L04",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U04.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.CLARIFY.REQUEST",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:cest:identify-object",
+      "reason": "Вернуть знакомый образец указания перед представлением родственника; новые слова семьи сначала объяснить."
+    },
+    {
+      "lexeme_key": "fr:je-mappelle:self_introduction",
+      "reason": "Использовать представление по имени в понятной ситуации знакомства с семьёй."
+    },
+    {
+      "lexeme_key": "fr:jai:age-frame",
+      "reason": "Повторить возраст на уже знакомых числах, не смешивая с наличием вещи."
+    },
+    {
+      "lexeme_key": "fr:je-suis-de:city-origin",
+      "reason": "Сохранить различие происхождения и проживания при кратком рассказе о себе."
+    },
+    {
+      "lexeme_key": "fr:jhabite-a:city-residence",
+      "reason": "Вернуть образец места жительства без новых предлогов для стран."
+    },
+    {
+      "lexeme_key": "fr:comment-vous-appelez-vous:formal-name-question",
+      "reason": "Вернуться к вежливому вопросу при знакомстве с новым человеком."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "local_database_references_checked": true,
+    "pronunciation_coverage_warnings_absent": true,
+    "all_new_lexemes_have_task_evidence": true,
+    "checkpoint_kind_checked": true,
+    "checkpoint_skill_distribution_checked": true,
+    "checkpoint_u01_u05_coverage_checked": true,
+    "checkpoint_introduction_contains_no_answer_examples": true,
+    "age_and_possession_keys_distinct": true,
+    "level_load_checked": true
+  },
+  "open_issues": [
+    "Проверка зависимостей штатным валидатором в локальной базе пройдена. Для импорта в другую базу сначала требуется PRE_A1-U04-L05.",
+    "Человеку нужно выполнить языковую редактуру, прослушать французскую браузерную озвучку вопросов, имён, городов и полных фраз.",
+    "Выполнить предпросмотр и пробное прохождение, замерить время; 6 минут на занятие — авторский ориентир."
+  ],
+  "progress": {
+    "current_unit": "PRE_A1-U05",
+    "prepared_session_ids": [
+      "PRE_A1-U05-L01",
+      "PRE_A1-U05-L02",
+      "PRE_A1-U05-L03",
+      "PRE_A1-U05-L04",
+      "PRE_A1-U05-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "PRE_A1-U06",
+    "previous_unit": "PRE_A1-U04",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку U05; отдельного подтверждения языкового принятия или импорта U04 нет.",
+    "Значение наличия вещи получает fr:jai:possession; прежний fr:jai:age-frame сохранён для образца возраста.",
+    "Происхождение и проживание вводятся отдельно. Из происхождения не выводятся место жительства, рождения или гражданство.",
+    "Париж и Лион объяснены как конкретные названия в образцах, не как новый географический словарь. В контрольном тексте нет новых городов.",
+    "В L01–L04 по два новых значения. Цель APPLY включена по плану, её содержательные проверки начинаются в L03.",
+    "Checkpoint выборочно охватывает U01–U05. Полное освоение всех прежних целей одним набором из восьми заданий не утверждается.",
+    "Public_page контроля содержит порядок работы и описание охвата без таблицы готовых ответов.",
+    "Сборка использует целые изученные рамки; её assessed_vocabulary_ids пуст, поскольку подписанная фраза не проверяет все слова.",
+    "Основной LEXEME_REGISTRY.json и предыдущие пакеты не изменены. Новые значения предложены в отдельном delta."
+  ],
+  "session_material": [
+    {
+      "session_id": "PRE_A1-U05-L01",
+      "new_lexeme_keys": [
+        "fr:comment-vous-appelez-vous:formal-name-question",
+        "fr:prenom:given-name"
+      ],
+      "reused_lexeme_keys": [
+        "fr:ans:age-years",
+        "fr:ce-sont:identify-objects",
+        "fr:cest:identify-object",
+        "fr:des:indefinite-plural",
+        "fr:dix-huit:cardinal-number",
+        "fr:jai:age-frame",
+        "fr:je-mappelle:self_introduction",
+        "fr:livre:book",
+        "fr:nom:family-name",
+        "fr:numero:identifier",
+        "fr:sac:bag",
+        "fr:un:indefinite-masculine"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U05-L02",
+      "new_lexeme_keys": [
+        "fr:quel-age-avez-vous:formal-age-question",
+        "fr:jai:possession"
+      ],
+      "reused_lexeme_keys": [
+        "fr:ans:age-years",
+        "fr:comment-vous-appelez-vous:formal-name-question",
+        "fr:dix-huit:cardinal-number",
+        "fr:dix-neuf:cardinal-number",
+        "fr:jai:age-frame",
+        "fr:je-mappelle:self_introduction",
+        "fr:nom:family-name",
+        "fr:prenom:given-name",
+        "fr:repetez-sil-vous-plait:request-repeat",
+        "fr:sac:bag",
+        "fr:un:cardinal-number",
+        "fr:vingt:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U05-L03",
+      "new_lexeme_keys": [
+        "fr:dou-venez-vous:city-origin-question",
+        "fr:je-suis-de:city-origin"
+      ],
+      "reused_lexeme_keys": [
+        "fr:ans:age-years",
+        "fr:bonjour:greeting",
+        "fr:comment-vous-appelez-vous:formal-name-question",
+        "fr:des:indefinite-plural",
+        "fr:dix-huit:cardinal-number",
+        "fr:epelez-sil-vous-plait:request-spelling",
+        "fr:jai:age-frame",
+        "fr:jai:possession",
+        "fr:je-mappelle:self_introduction",
+        "fr:plus-lentement-sil-vous-plait:request-slower",
+        "fr:quel-age-avez-vous:formal-age-question",
+        "fr:repetez-sil-vous-plait:request-repeat",
+        "fr:sac:bag",
+        "fr:un:indefinite-masculine"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U05-L04",
+      "new_lexeme_keys": [
+        "fr:ou-habitez-vous:city-residence-question",
+        "fr:jhabite-a:city-residence"
+      ],
+      "reused_lexeme_keys": [
+        "fr:bonjour:greeting",
+        "fr:des:indefinite-plural",
+        "fr:dou-venez-vous:city-origin-question",
+        "fr:je-suis-de:city-origin",
+        "fr:merci:thanks",
+        "fr:non:negative-answer",
+        "fr:oui:affirmative-answer",
+        "fr:quel-age-avez-vous:formal-age-question",
+        "fr:repetez-sil-vous-plait:request-repeat"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U05-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a:letter-name",
+        "fr:ans:age-years",
+        "fr:bonjour:greeting",
+        "fr:ce-sont:identify-objects",
+        "fr:cest:identify-object",
+        "fr:comment-vous-appelez-vous:formal-name-question",
+        "fr:dans-le-sac:in-bag",
+        "fr:des:indefinite-plural",
+        "fr:deux:cardinal-number",
+        "fr:dix-neuf:cardinal-number",
+        "fr:epelez-sil-vous-plait:request-spelling",
+        "fr:i:letter-name",
+        "fr:jai:age-frame",
+        "fr:je-mappelle:self_introduction",
+        "fr:je-suis-de:city-origin",
+        "fr:jhabite-a:city-residence",
+        "fr:l:letter-name",
+        "fr:livre:book",
+        "fr:m:letter-name",
+        "fr:neuf:cardinal-number",
+        "fr:o:letter-name",
+        "fr:ou-habitez-vous:city-residence-question",
+        "fr:plus-lentement-sil-vous-plait:request-slower",
+        "fr:quel-age-avez-vous:formal-age-question",
+        "fr:repetez-sil-vous-plait:request-repeat",
+        "fr:stylo:pen",
+        "fr:sur-la-table:on-table",
+        "fr:table:table",
+        "fr:un:cardinal-number",
+        "fr:un:indefinite-masculine",
+        "fr:une:indefinite-feminine"
+      ],
+      "task_count": 8
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:comment-vous-appelez-vous:formal-name-question",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U05-L01",
+          "task_id": "Q02",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U05-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:prenom:given-name",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U05-L01",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U05-L01",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:quel-age-avez-vous:formal-age-question",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U05-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:jai:possession",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U05-L02",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:dou-venez-vous:city-origin-question",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U05-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:je-suis-de:city-origin",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U05-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U05-L03",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U05-L03",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U05-L03",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q03",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:ou-habitez-vous:city-residence-question",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U05-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:jhabite-a:city-residence",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U05-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U05-L04",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U05-L04",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q03",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "checkpoint_scope": {
+    "session_id": "PRE_A1-U05-L05",
+    "kind": "checkpoint",
+    "source_units": [
+      "PRE_A1-U01",
+      "PRE_A1-U02",
+      "PRE_A1-U03",
+      "PRE_A1-U04",
+      "PRE_A1-U05"
+    ],
+    "skill_evidence": {
+      "listening": [
+        "Q01",
+        "Q02"
+      ],
+      "reading": [
+        "Q03",
+        "Q04"
+      ],
+      "vocabulary": [
+        "Q05",
+        "Q06"
+      ],
+      "grammar": [
+        "Q07"
+      ],
+      "sentence_building": [
+        "Q08"
+      ]
+    },
+    "new_material": false,
+    "coverage_limit": "Representative sample; not exhaustive assessment of every earlier word or objective.",
+    "unit_evidence": {
+      "PRE_A1-U01": [
+        {
+          "task_id": "Q05",
+          "skill": "vocabulary",
+          "objective_ids": [
+            "PRE_A1.CLARIFY.REQUEST"
+          ]
+        }
+      ],
+      "PRE_A1-U02": [
+        {
+          "task_id": "Q02",
+          "skill": "listening",
+          "objective_ids": [
+            "PRE_A1.U02.APPLY"
+          ]
+        }
+      ],
+      "PRE_A1-U03": [
+        {
+          "task_id": "Q01",
+          "skill": "listening",
+          "objective_ids": [
+            "PRE_A1.U03.APPLY"
+          ]
+        }
+      ],
+      "PRE_A1-U04": [
+        {
+          "task_id": "Q04",
+          "skill": "reading",
+          "objective_ids": [
+            "PRE_A1.U04.UNDERSTAND"
+          ]
+        },
+        {
+          "task_id": "Q07",
+          "skill": "grammar",
+          "objective_ids": [
+            "PRE_A1.U04.APPLY"
+          ]
+        },
+        {
+          "task_id": "Q08",
+          "skill": "sentence_building",
+          "objective_ids": [
+            "PRE_A1.U04.APPLY"
+          ]
+        }
+      ],
+      "PRE_A1-U05": [
+        {
+          "task_id": "Q01",
+          "skill": "listening",
+          "objective_ids": [
+            "PRE_A1.U05.UNDERSTAND"
+          ]
+        },
+        {
+          "task_id": "Q03",
+          "skill": "reading",
+          "objective_ids": [
+            "PRE_A1.U05.APPLY"
+          ]
+        },
+        {
+          "task_id": "Q06",
+          "skill": "vocabulary",
+          "objective_ids": [
+            "PRE_A1.U05.UNDERSTAND"
+          ]
+        }
+      ]
+    }
+  },
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 8,
+    "external_prerequisites": [
+      "PRE_A1-U04-L05"
+    ],
+    "external_reference_status": "Prepared U04 dependency exists; full project validator including local database references returned no errors. Target database must contain U04 before U05 import.",
+    "new_lexemes_per_session": [
+      2,
+      2,
+      2,
+      2,
+      0
+    ],
+    "project_validator": {
+      "valid": true,
+      "errors": [],
+      "file_hash": "b668b60d6ec39af49475f0fa56ec99c15091745ad646dba2dcc23ff4ea283be5",
+      "warning_counts": {
+        "editorial_review_required": 5,
+        "browser_tts": 12
+      },
+      "requires_editorial_review": true,
+      "report_file": "PRE_A1-U05.validation.json"
+    }
+  }
+}

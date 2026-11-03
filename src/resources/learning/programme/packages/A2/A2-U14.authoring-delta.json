@@ -1,0 +1,785 @@
+{
+  "unit_id": "A2-U14",
+  "package_file": "A2-U14.v1.json",
+  "package_id": "programme-a2-u14-v1",
+  "session_ids": [
+    "A2-U14-L01",
+    "A2-U14-L02",
+    "A2-U14-L03",
+    "A2-U14-L04",
+    "A2-U14-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "tache-travail",
+      "lexeme_key": "fr:tache:work-task",
+      "fr": "une tâche",
+      "ru": [
+        "рабочая задача"
+      ],
+      "transcription_ru": "юн та́ш",
+      "first_session_id": "A2-U14-L01"
+    },
+    {
+      "id": "s-occuper-de",
+      "lexeme_key": "fr:s-occuper-de:handle-task",
+      "fr": "s’occuper de",
+      "ru": [
+        "заниматься задачей, брать её на себя"
+      ],
+      "transcription_ru": "сокюпэ дё",
+      "first_session_id": "A2-U14-L01"
+    },
+    {
+      "id": "terminer",
+      "lexeme_key": "fr:terminer:finish-task",
+      "fr": "terminer",
+      "ru": [
+        "заканчивать задачу или работу"
+      ],
+      "transcription_ru": "тэрминэ́",
+      "first_session_id": "A2-U14-L01"
+    },
+    {
+      "id": "delai",
+      "lexeme_key": "fr:delai:task-completion-deadline",
+      "fr": "un délai",
+      "ru": [
+        "срок выполнения задачи"
+      ],
+      "transcription_ru": "э(н) дэлэ́",
+      "first_session_id": "A2-U14-L02"
+    },
+    {
+      "id": "etre-en-train-de",
+      "lexeme_key": "fr:etre-en-train-de:action-in-progress",
+      "fr": "être en train de",
+      "ru": [
+        "быть в процессе выполнения действия"
+      ],
+      "transcription_ru": "этр а(н) трэ(н) дё",
+      "first_session_id": "A2-U14-L03"
+    },
+    {
+      "id": "venir-de",
+      "lexeme_key": "fr:venir-de:recently-completed-action",
+      "fr": "venir de",
+      "ru": [
+        "только что выполнить действие"
+      ],
+      "transcription_ru": "вёнир дё",
+      "first_session_id": "A2-U14-L03"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:aide:assistance",
+    "fr:aidez-moi:help-request",
+    "fr:aller:near-future-auxiliary",
+    "fr:anniversaire:birthday",
+    "fr:apporter:bring-object",
+    "fr:apprendre:study-subject",
+    "fr:autre:other",
+    "fr:avoir:compound-past-auxiliary",
+    "fr:bon-anniversaire:birthday-wish",
+    "fr:bureau:office-workplace",
+    "fr:cadeau:gift",
+    "fr:cours:class-session",
+    "fr:d-ici:by-deadline",
+    "fr:diner:evening-meal",
+    "fr:disponible:available-in-schedule",
+    "fr:dix:cardinal-number",
+    "fr:ecrire:write",
+    "fr:envoyer:send-message",
+    "fr:famille:family",
+    "fr:feliciter:congratulate-achievement",
+    "fr:fete:celebration-gathering",
+    "fr:feter:celebrate-occasion",
+    "fr:formation:training-programme",
+    "fr:francais:french-language",
+    "fr:frere:brother",
+    "fr:heure:clock-hour",
+    "fr:hier:yesterday",
+    "fr:horaire:work-schedule",
+    "fr:huit:cardinal-number",
+    "fr:invitation:written-invitation",
+    "fr:je-voudrais:polite-request",
+    "fr:maison:house-home",
+    "fr:mardi:weekday",
+    "fr:matin:morning",
+    "fr:merci:thanks",
+    "fr:message:short-written-message",
+    "fr:midi:noon",
+    "fr:pendant-que:simultaneous-time-clause",
+    "fr:pendant:duration-preposition",
+    "fr:pourriez-vous:polite-action-request",
+    "fr:preciser:clarify-service-details",
+    "fr:preparer:prepare-food",
+    "fr:reussite:successful-result",
+    "fr:s-inscrire:enrol-on-course",
+    "fr:sil-vous-plait:polite-request",
+    "fr:soir:evening",
+    "fr:soiree:social-evening",
+    "fr:tarif:service-price",
+    "fr:travailler:work",
+    "fr:vendredi:weekday"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A2.U14.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U14-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U14-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U14-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U14.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U14-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U14-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U14-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U14-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U14-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U14-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U14-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U14-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U14-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U14-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U14-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U14-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U13.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U11.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U14-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U04.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U14-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:terminer:finish-task",
+      "reason": "Отличать завершение работы от отправки сообщения."
+    },
+    {
+      "lexeme_key": "fr:s-occuper-de:handle-task",
+      "reason": "Повторить работу над задачей."
+    },
+    {
+      "lexeme_key": "fr:delai:task-completion-deadline",
+      "reason": "Сохранять срок отдельно от доступного времени."
+    },
+    {
+      "lexeme_key": "fr:d-ici:by-deadline",
+      "reason": "Повторить не позднее, допускающее более раннее завершение."
+    },
+    {
+      "lexeme_key": "fr:etre-en-train-de:action-in-progress",
+      "reason": "Сохранять текущий процесс отдельно от результата."
+    },
+    {
+      "lexeme_key": "fr:venir-de:recently-completed-action",
+      "reason": "Повторить недавнее завершение."
+    },
+    {
+      "lexeme_key": "fr:aidez-moi:help-request",
+      "reason": "Вернуть просьбу о помощи."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "plan_metadata_checked": true,
+    "lesson_content_and_versions_unchanged": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "complete_unit_objective_coverage_checked": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "project_validator_passed": true,
+    "final_package_hash_verified": true,
+    "no_new_material_in_l05": true
+  },
+  "open_issues": [
+    "Редактору проверить французский, объяснения процесса и недавнего результата, просьбы и крайний срок.",
+    "Прослушать браузерную озвучку, пройти занятия на сайте и измерить время."
+  ],
+  "progress": {
+    "current_unit": "A2-U14",
+    "prepared_session_ids": [
+      "A2-U14-L01",
+      "A2-U14-L02",
+      "A2-U14-L03",
+      "A2-U14-L04",
+      "A2-U14-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A2-U15",
+    "next_unit_title": "Сообщения и объявления"
+  },
+  "scope_notes": [
+    "Две подготовленные части объединены по прямой команде пользователя. Содержимое занятий, их ID, версии, порядок и зависимости сохранены без изменений. Новый package_id относится к объединённому файлу, версии занятий не увеличены, поскольку их содержание не менялось.",
+    "Файл содержит все пять занятий темы. Для импорта не нужен отдельный пакет L01–L02. Внешняя зависимость — A2-U13-L05.",
+    "Все ситуации вымышлены. Завершение написания не подтверждает отправку сообщения; желание, процесс и недавний результат различаются.",
+    "Новые рамки объяснены до проверки, L05 нового обязательного материала не вводит. Повторение прежних тем и полные карточки сохранены.",
+    "Импорт, прослушивание, предпросмотр и измерение времени не выполнялись. Принятие пользователем не подтверждено."
+  ],
+  "session_material": [
+    {
+      "session_id": "A2-U14-L01",
+      "new_lexeme_keys": [
+        "fr:tache:work-task",
+        "fr:s-occuper-de:handle-task",
+        "fr:terminer:finish-task"
+      ],
+      "reused_lexeme_keys": [
+        "fr:apprendre:study-subject",
+        "fr:autre:other",
+        "fr:bureau:office-workplace",
+        "fr:cours:class-session",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:ecrire:write",
+        "fr:envoyer:send-message",
+        "fr:formation:training-programme",
+        "fr:francais:french-language",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:je-voudrais:polite-request",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:s-inscrire:enrol-on-course",
+        "fr:soir:evening",
+        "fr:travailler:work",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U14-L02",
+      "new_lexeme_keys": [
+        "fr:delai:task-completion-deadline"
+      ],
+      "reused_lexeme_keys": [
+        "fr:bureau:office-workplace",
+        "fr:d-ici:by-deadline",
+        "fr:ecrire:write",
+        "fr:envoyer:send-message",
+        "fr:horaire:work-schedule",
+        "fr:je-voudrais:polite-request",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:pendant:duration-preposition",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:s-occuper-de:handle-task",
+        "fr:tache:work-task",
+        "fr:tarif:service-price",
+        "fr:terminer:finish-task",
+        "fr:travailler:work",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U14-L03",
+      "new_lexeme_keys": [
+        "fr:etre-en-train-de:action-in-progress",
+        "fr:venir-de:recently-completed-action"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:near-future-auxiliary",
+        "fr:anniversaire:birthday",
+        "fr:apporter:bring-object",
+        "fr:bon-anniversaire:birthday-wish",
+        "fr:cadeau:gift",
+        "fr:delai:task-completion-deadline",
+        "fr:ecrire:write",
+        "fr:envoyer:send-message",
+        "fr:feliciter:congratulate-achievement",
+        "fr:fete:celebration-gathering",
+        "fr:feter:celebrate-occasion",
+        "fr:invitation:written-invitation",
+        "fr:je-voudrais:polite-request",
+        "fr:merci:thanks",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:reussite:successful-result",
+        "fr:s-occuper-de:handle-task",
+        "fr:soir:evening",
+        "fr:tache:work-task",
+        "fr:terminer:finish-task",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U14-L04",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:aidez-moi:help-request",
+        "fr:anniversaire:birthday",
+        "fr:apporter:bring-object",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:cadeau:gift",
+        "fr:d-ici:by-deadline",
+        "fr:delai:task-completion-deadline",
+        "fr:diner:evening-meal",
+        "fr:disponible:available-in-schedule",
+        "fr:ecrire:write",
+        "fr:famille:family",
+        "fr:feter:celebrate-occasion",
+        "fr:frere:brother",
+        "fr:hier:yesterday",
+        "fr:horaire:work-schedule",
+        "fr:je-voudrais:polite-request",
+        "fr:maison:house-home",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:merci:thanks",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:pendant-que:simultaneous-time-clause",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:preparer:prepare-food",
+        "fr:s-occuper-de:handle-task",
+        "fr:sil-vous-plait:polite-request",
+        "fr:soiree:social-evening",
+        "fr:tache:work-task",
+        "fr:tarif:service-price",
+        "fr:terminer:finish-task",
+        "fr:vendredi:weekday",
+        "fr:venir-de:recently-completed-action"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U14-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:aide:assistance",
+        "fr:aidez-moi:help-request",
+        "fr:d-ici:by-deadline",
+        "fr:delai:task-completion-deadline",
+        "fr:disponible:available-in-schedule",
+        "fr:ecrire:write",
+        "fr:envoyer:send-message",
+        "fr:etre-en-train-de:action-in-progress",
+        "fr:horaire:work-schedule",
+        "fr:je-voudrais:polite-request",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:merci:thanks",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:s-occuper-de:handle-task",
+        "fr:sil-vous-plait:polite-request",
+        "fr:tache:work-task",
+        "fr:tarif:service-price",
+        "fr:terminer:finish-task",
+        "fr:vendredi:weekday",
+        "fr:venir-de:recently-completed-action"
+      ],
+      "task_count": 8
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:tache:work-task",
+      "evidence": [
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:s-occuper-de:handle-task",
+      "evidence": [
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:terminer:finish-task",
+      "evidence": [
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:delai:task-completion-deadline",
+      "evidence": [
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:etre-en-train-de:action-in-progress",
+      "evidence": [
+        {
+          "session_id": "A2-U14-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U14-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:venir-de:recently-completed-action",
+      "evidence": [
+        {
+          "session_id": "A2-U14-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U14-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U14-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U14-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U14-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U14-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        }
+      ]
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A2-U14-L01",
+      "material": "Ma tâche est d’écrire; Je m’occupe de cette tâche; Je voudrais terminer как желание, не результат."
+    },
+    {
+      "session_id": "A2-U14-L02",
+      "material": "Le délai est vendredi à midi; d’ici vendredi à midi как крайний срок."
+    },
+    {
+      "session_id": "A2-U14-L03",
+      "material": "Je suis en train d’écrire / Je viens de terminer; процесс и недавний результат."
+    },
+    {
+      "session_id": "A2-U14-L04",
+      "material": "Повторение Aidez-moi, s’il vous plaît и вопроса о сроке."
+    }
+  ],
+  "verification_summary": {
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 6,
+    "external_prerequisites": [
+      "A2-U13-L05"
+    ],
+    "schema": "Draft 2020-12; python jsonschema",
+    "external_reference_status": "A2-U13-L05_found_by_project_validator; acceptance_and_publication_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 9
+      },
+      "file_hash": "bd802584d492b897698e2f448412e828af4af73fb5d95600e695755c07170218"
+    }
+  }
+}

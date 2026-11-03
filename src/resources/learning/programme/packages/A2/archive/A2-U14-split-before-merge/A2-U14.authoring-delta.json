@@ -1,0 +1,435 @@
+{
+  "unit_id": "A2-U14",
+  "package_file": "A2-U14.v1.json",
+  "package_id": "programme-a2-u14-part1-v1",
+  "session_ids": [
+    "A2-U14-L01",
+    "A2-U14-L02"
+  ],
+  "new_lexemes": [
+    {
+      "id": "tache-travail",
+      "lexeme_key": "fr:tache:work-task",
+      "fr": "une tâche",
+      "ru": [
+        "рабочая задача"
+      ],
+      "transcription_ru": "юн та́ш",
+      "first_session_id": "A2-U14-L01"
+    },
+    {
+      "id": "s-occuper-de",
+      "lexeme_key": "fr:s-occuper-de:handle-task",
+      "fr": "s’occuper de",
+      "ru": [
+        "заниматься задачей, брать её на себя"
+      ],
+      "transcription_ru": "сокюпэ дё",
+      "first_session_id": "A2-U14-L01"
+    },
+    {
+      "id": "terminer",
+      "lexeme_key": "fr:terminer:finish-task",
+      "fr": "terminer",
+      "ru": [
+        "заканчивать задачу или работу"
+      ],
+      "transcription_ru": "тэрминэ́",
+      "first_session_id": "A2-U14-L01"
+    },
+    {
+      "id": "delai",
+      "lexeme_key": "fr:delai:task-completion-deadline",
+      "fr": "un délai",
+      "ru": [
+        "срок выполнения задачи"
+      ],
+      "transcription_ru": "э(н) дэлэ́",
+      "first_session_id": "A2-U14-L02"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:apprendre:study-subject",
+    "fr:autre:other",
+    "fr:bureau:office-workplace",
+    "fr:cours:class-session",
+    "fr:d-ici:by-deadline",
+    "fr:disponible:available-in-schedule",
+    "fr:dix:cardinal-number",
+    "fr:ecrire:write",
+    "fr:envoyer:send-message",
+    "fr:formation:training-programme",
+    "fr:francais:french-language",
+    "fr:heure:clock-hour",
+    "fr:horaire:work-schedule",
+    "fr:huit:cardinal-number",
+    "fr:je-voudrais:polite-request",
+    "fr:mardi:weekday",
+    "fr:matin:morning",
+    "fr:message:short-written-message",
+    "fr:midi:noon",
+    "fr:pendant:duration-preposition",
+    "fr:pourriez-vous:polite-action-request",
+    "fr:preciser:clarify-service-details",
+    "fr:s-inscrire:enrol-on-course",
+    "fr:soir:evening",
+    "fr:tarif:service-price",
+    "fr:travailler:work",
+    "fr:vendredi:weekday"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A2.U14.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U14.APPLY",
+      "evidence": []
+    },
+    {
+      "objective_id": "A2.U13.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:terminer:finish-task",
+      "reason": "Вернуть завершение отдельно от текущей работы."
+    },
+    {
+      "lexeme_key": "fr:s-occuper-de:handle-task",
+      "reason": "Повторить работу над задачей."
+    },
+    {
+      "lexeme_key": "fr:delai:task-completion-deadline",
+      "reason": "Сохранить крайний срок отдельно от результата."
+    },
+    {
+      "lexeme_key": "fr:d-ici:by-deadline",
+      "reason": "Повторить не позднее, допускающее более раннее завершение."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_ids_and_keys_checked": true,
+    "reading_lengths_checked": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Зависимость A2-U13-L05 найдена проектным валидатором; публикация и принятие пользователем не выводятся из этого факта.",
+    "Редактору проверить естественность описания задачи, рамку s’occuper de и объяснение срока; прослушать браузерную озвучку.",
+    "Пройти занятия на сайте и измерить время; фактически это не выполнялось.",
+    "Подготовить L03–L05: ход выполнения, помощь и итог; итоговое покрытие APPLY пока не заявлено."
+  ],
+  "progress": {
+    "current_unit": "A2-U14",
+    "prepared_session_ids": [
+      "A2-U14-L01",
+      "A2-U14-L02"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [
+      "A2-U14-L03",
+      "A2-U14-L04",
+      "A2-U14-L05"
+    ],
+    "next_unit_not_started": "A2-U15",
+    "next_unit_title": "Сообщения и объявления",
+    "previous_unit": "A2-U13",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Полная первая часть этапа, два занятия с отдельным package_id. Следующая часть должна включать L03–L05 с зависимостью от L02; текущие ID и версии сохраняются.",
+    "Tâche как рабочая задача не заменяет прежнее tâche ménagère как домашнюю обязанность. S’occuper de не подменяется прежним occupé по расписанию.",
+    "D’ici, écrire, envoyer и travail используют прежние ключи. Упоминание желания закончить не подтверждает выполнение или отправку.",
+    "Délai показано как крайний срок конкретной задачи, не как длительность. Можно завершить раньше. Все задачи и сроки вымышлены.",
+    "В L01 повторён выбор программы из A2-U13. Повторение A2-U11 в L03/L04 и рамки venir de / être en train de остаются для продолжения текущего этапа.",
+    "Новые значения распределены как три и одно. Форма m’occupe объяснена до проверки.",
+    "Озвучка только браузером: fr-FR, asset_id=null. Сообщения не отправлялись, задания в реальной рабочей системе не создавались.",
+    "Принятие и импорт пакетов пользователем не подтверждены. Основной реестр и база не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A2-U14-L01",
+      "new_lexeme_keys": [
+        "fr:tache:work-task",
+        "fr:s-occuper-de:handle-task",
+        "fr:terminer:finish-task"
+      ],
+      "reused_lexeme_keys": [
+        "fr:apprendre:study-subject",
+        "fr:autre:other",
+        "fr:bureau:office-workplace",
+        "fr:cours:class-session",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:ecrire:write",
+        "fr:envoyer:send-message",
+        "fr:formation:training-programme",
+        "fr:francais:french-language",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:je-voudrais:polite-request",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:s-inscrire:enrol-on-course",
+        "fr:soir:evening",
+        "fr:travailler:work",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U14-L02",
+      "new_lexeme_keys": [
+        "fr:delai:task-completion-deadline"
+      ],
+      "reused_lexeme_keys": [
+        "fr:bureau:office-workplace",
+        "fr:d-ici:by-deadline",
+        "fr:ecrire:write",
+        "fr:envoyer:send-message",
+        "fr:horaire:work-schedule",
+        "fr:je-voudrais:polite-request",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:pendant:duration-preposition",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:s-occuper-de:handle-task",
+        "fr:tache:work-task",
+        "fr:tarif:service-price",
+        "fr:terminer:finish-task",
+        "fr:travailler:work",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:tache:work-task",
+      "evidence": [
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:s-occuper-de:handle-task",
+      "evidence": [
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:terminer:finish-task",
+      "evidence": [
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:delai:task-completion-deadline",
+      "evidence": [
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U14-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A2-U14-L01",
+      "material": "Ma tâche est d’écrire; Je m’occupe de cette tâche; Je voudrais terminer как желание, не результат."
+    },
+    {
+      "session_id": "A2-U14-L02",
+      "material": "Le délai est vendredi à midi; d’ici vendredi à midi как крайний срок."
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 2,
+    "tasks": 14,
+    "tasks_per_session": [
+      7,
+      7
+    ],
+    "new_lexemes": 4,
+    "external_prerequisites": [
+      "A2-U13-L05"
+    ],
+    "external_reference_status": "A2-U13-L05_found_by_project_validator; publication_and_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 2,
+        "browser_tts": 4
+      },
+      "file_hash": "3f3c2a522a0475eae525fe7074cdbef30b3701ddb05d46f2bf8bcfe65a9cce35"
+    },
+    "existing_lexeme_objects_preserved": 27,
+    "text_lengths": [
+      {
+        "session_id": "A2-U14-L01",
+        "reading_word_counts": [
+          38,
+          34
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U14-L02",
+        "reading_word_counts": [
+          34,
+          34
+        ],
+        "duration_measured": false
+      }
+    ],
+    "partial_unit": true
+  }
+}

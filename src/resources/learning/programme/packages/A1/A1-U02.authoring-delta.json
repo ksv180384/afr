@@ -1,0 +1,1118 @@
+{
+  "unit_id": "A1-U02",
+  "package_file": "A1-U02.v1.json",
+  "session_ids": [
+    "A1-U02-L01",
+    "A1-U02-L02",
+    "A1-U02-L03",
+    "A1-U02-L04",
+    "A1-U02-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "piece",
+      "lexeme_key": "fr:piece:room",
+      "fr": "une pièce",
+      "ru": [
+        "комната (в жилье)"
+      ],
+      "transcription_ru": "юн пьэ́с",
+      "first_session_id": "A1-U02-L01"
+    },
+    {
+      "id": "chambre",
+      "lexeme_key": "fr:chambre:bedroom",
+      "fr": "une chambre",
+      "ru": [
+        "спальня (в описании жилья)"
+      ],
+      "transcription_ru": "юн ша́(н)бр",
+      "first_session_id": "A1-U02-L01"
+    },
+    {
+      "id": "cuisine",
+      "lexeme_key": "fr:cuisine:kitchen",
+      "fr": "une cuisine",
+      "ru": [
+        "кухня (комната)"
+      ],
+      "transcription_ru": "юн кюизи́н",
+      "first_session_id": "A1-U02-L01"
+    },
+    {
+      "id": "salon",
+      "lexeme_key": "fr:salon:living-room",
+      "fr": "un salon",
+      "ru": [
+        "гостиная (в жилье)"
+      ],
+      "transcription_ru": "э(н) сало́(н)",
+      "first_session_id": "A1-U02-L01"
+    },
+    {
+      "id": "meuble",
+      "lexeme_key": "fr:meuble:furniture-item",
+      "fr": "un meuble",
+      "ru": [
+        "предмет мебели"
+      ],
+      "transcription_ru": "э(н) мё́бль",
+      "first_session_id": "A1-U02-L01"
+    },
+    {
+      "id": "lit",
+      "lexeme_key": "fr:lit:bed",
+      "fr": "un lit",
+      "ru": [
+        "кровать"
+      ],
+      "transcription_ru": "э(н) ли́",
+      "first_session_id": "A1-U02-L02"
+    },
+    {
+      "id": "canape",
+      "lexeme_key": "fr:canape:sofa",
+      "fr": "un canapé",
+      "ru": [
+        "диван"
+      ],
+      "transcription_ru": "э(н) канапэ́",
+      "first_session_id": "A1-U02-L02"
+    },
+    {
+      "id": "armoire",
+      "lexeme_key": "fr:armoire:wardrobe",
+      "fr": "une armoire",
+      "ru": [
+        "шкаф для одежды"
+      ],
+      "transcription_ru": "юн армуа́р",
+      "first_session_id": "A1-U02-L02"
+    },
+    {
+      "id": "etagere",
+      "lexeme_key": "fr:etagere:shelving-unit",
+      "fr": "une étagère",
+      "ru": [
+        "стеллаж (полки для хранения)"
+      ],
+      "transcription_ru": "юн этажэ́р",
+      "first_session_id": "A1-U02-L02"
+    },
+    {
+      "id": "appartement",
+      "lexeme_key": "fr:appartement:apartment",
+      "fr": "un appartement",
+      "ru": [
+        "квартира"
+      ],
+      "transcription_ru": "э(н) напартёма́(н)",
+      "first_session_id": "A1-U02-L03"
+    },
+    {
+      "id": "lumineux",
+      "lexeme_key": "fr:lumineux:well-lit",
+      "fr": "lumineux",
+      "ru": [
+        "светлый, хорошо освещённый (о жилье)"
+      ],
+      "transcription_ru": "люминё́",
+      "first_session_id": "A1-U02-L03"
+    },
+    {
+      "id": "calme",
+      "lexeme_key": "fr:calme:quiet-place",
+      "fr": "calme",
+      "ru": [
+        "тихий (о месте, без шума)"
+      ],
+      "transcription_ru": "ка́льм",
+      "first_session_id": "A1-U02-L03"
+    },
+    {
+      "id": "confortable",
+      "lexeme_key": "fr:confortable:comfortable",
+      "fr": "confortable",
+      "ru": [
+        "комфортный, удобный"
+      ],
+      "transcription_ru": "ко(н)форта́бль",
+      "first_session_id": "A1-U02-L03"
+    },
+    {
+      "id": "balcon",
+      "lexeme_key": "fr:balcon:balcony",
+      "fr": "un balcon",
+      "ru": [
+        "балкон"
+      ],
+      "transcription_ru": "э(н) балко́(н)",
+      "first_session_id": "A1-U02-L04"
+    },
+    {
+      "id": "ascenseur",
+      "lexeme_key": "fr:ascenseur:lift",
+      "fr": "un ascenseur",
+      "ru": [
+        "лифт"
+      ],
+      "transcription_ru": "э(н) наса(н)сё́р",
+      "first_session_id": "A1-U02-L04"
+    },
+    {
+      "id": "garage",
+      "lexeme_key": "fr:garage:garage",
+      "fr": "un garage",
+      "ru": [
+        "гараж"
+      ],
+      "transcription_ru": "э(н) гара́ж",
+      "first_session_id": "A1-U02-L04"
+    },
+    {
+      "id": "jardin",
+      "lexeme_key": "fr:jardin:garden",
+      "fr": "un jardin",
+      "ru": [
+        "сад"
+      ],
+      "transcription_ru": "э(н) жардэ́(н)",
+      "first_session_id": "A1-U02-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:a-cote-de:next-to",
+    "fr:chaise:chair",
+    "fr:dans:inside",
+    "fr:deux:cardinal-number",
+    "fr:diner:evening-meal",
+    "fr:et:and",
+    "fr:fenetre:window",
+    "fr:je:first-person-subject",
+    "fr:maison:house-home",
+    "fr:matin:morning",
+    "fr:petit-dejeuner:breakfast",
+    "fr:prendre-le-petit-dejeuner:have-breakfast",
+    "fr:preparer:prepare-food",
+    "fr:puis:then-sequence",
+    "fr:rentrer:return-home",
+    "fr:se-coucher:go-to-bed",
+    "fr:soir:evening",
+    "fr:souvent:often",
+    "fr:table:table",
+    "fr:toujours:always",
+    "fr:travailler:work",
+    "fr:un:cardinal-number",
+    "fr:un:indefinite-masculine",
+    "fr:une:indefinite-feminine"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A1.U02.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U02-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U02-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U02-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U02-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U02-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U02-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U02-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U02-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U02-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U02-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U02.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U02-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U02-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U02-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U02-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U02-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U02-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U02-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U02-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U02-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U02-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U02-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U02-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U01.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U02-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U02-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:piece:room",
+      "reason": "Сохранить значение комнаты в жилье, не смешивая его с другими значениями слова."
+    },
+    {
+      "lexeme_key": "fr:cuisine:kitchen",
+      "reason": "Повторять кухню как комнату; значение кулинарии не считать автоматически изученным."
+    },
+    {
+      "lexeme_key": "fr:table:table",
+      "reason": "Вернуть знакомый стол в понятной ситуации кафе без изменения ключа."
+    },
+    {
+      "lexeme_key": "fr:chaise:chair",
+      "reason": "Повторять знакомый стул и положение мебели."
+    },
+    {
+      "lexeme_key": "fr:appartement:apartment",
+      "reason": "Вернуть название квартиры в отложенном повторении."
+    },
+    {
+      "lexeme_key": "fr:calme:quiet-place",
+      "reason": "Сохранить значение тихого места; спокойствие человека при необходимости объяснять отдельно."
+    },
+    {
+      "lexeme_key": "fr:balcon:balcony",
+      "reason": "Повторить положительную и отрицательную рамки с известным словом."
+    },
+    {
+      "lexeme_key": "fr:ascenseur:lift",
+      "reason": "Сохранить показанное отрицательное сочетание с апострофом перед гласным."
+    },
+    {
+      "lexeme_key": "fr:a-cote-de:next-to",
+      "reason": "Вернуть отношение к явно названному ориентиру."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "local_database_references_checked": true,
+    "registry_collisions_checked": true,
+    "package_hash_verified": true,
+    "pronunciation_coverage_warnings_absent": true,
+    "new_lexeme_evidence_checked": true,
+    "practice_kind_checked": true,
+    "existing_keys_and_full_cards_preserved": true,
+    "no_cross_level_objective_tags": true,
+    "level_metadata_not_duplicated": true,
+    "curricula_not_created": true,
+    "main_reading_load_checked": true,
+    "audio_word_counts_recorded": true,
+    "housing_choice_conditions_checked": true,
+    "spatial_answers_checked": true,
+    "negative_samples_explained_before_testing": true,
+    "apostrophe_and_spatial_chunks_preserved": true,
+    "shuffled_choice_feedback_checked": true,
+    "no_unused_local_vocabulary": true
+  },
+  "open_issues": [
+    "До импорта целевая база должна содержать A1-U01-L05; пакет не создаёт отсутствующую внешнюю зависимость.",
+    "Человеку нужно проверить естественность описаний, выбранные значения мебели и признаков, а также условные русские транскрипции.",
+    "Прослушать браузерную озвучку, особенно отрицательную рамку и слово лифт. Длительность основных аудио 8–20 секунд и занятий 5–7 минут пока не измерена.",
+    "Выполнить предпросмотр и пробное прохождение, включая выбор по двум требованиям и различие прямого отрицания и отсутствия упоминания."
+  ],
+  "progress": {
+    "current_unit": "A1-U02",
+    "prepared_session_ids": [
+      "A1-U02-L01",
+      "A1-U02-L02",
+      "A1-U02-L03",
+      "A1-U02-L04",
+      "A1-U02-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A1-U03",
+    "next_unit_title": "В кафе",
+    "previous_unit": "A1-U01",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A1-U02. Принятие и импорт предыдущего пакета не подтверждены. Следующая тема не начата.",
+    "Знакомые ключи стола, стула, окна и пространственных отношений сохранены с полными карточками. Слова распорядка повторяются из подготовленной A1-U01.",
+    "Комната, кухня, гостиная и предмет мебели даны в конкретных значениях жилья; другие значения многозначных слов не объявляются изученными.",
+    "Положительная рамка наличия уже встречалась и здесь явно повторяется с новыми комнатами. Отдельный дубликат ранее использованного грамматического образца в лексике не создаётся.",
+    "Названия мебели сначала даны с артиклями; выбранные определённые формы для уже названного предмета показаны до проверки. Общая система всех артиклей не выводится.",
+    "Расположение мебели прямо задано текстом; типичность расстановки, изображение и мысленный поворот не нужны.",
+    "Признаки квартиры показаны с одним названием мужского рода. Комфорт, тишина и освещение не подменяют друг друга; полной таблицы согласования нет.",
+    "Отрицательная рамка наличия с de и d’ вводится на конкретных примерах. Это не утверждение о форме артикля после любого отрицания во французском.",
+    "Лифт, гараж и сад перечисляются как доступные удобства жилья; текст не помещает все удобства физически внутрь квартиры.",
+    "Номера двух учебных описаний используют знакомые числа и являются ярлыками объявлений. Все сведения вымышленные и заданы внутри задания.",
+    "Отсутствие упоминания не приравнивается к прямому отрицанию. При выборе нужны именно заданные обязательные требования; необязательный гараж не заменяет требуемый сад.",
+    "В первых четырёх занятиях соответственно 5, 4, 4 и 4 новых значения. В пятом занятии нового обязательного материала нет.",
+    "Апострофы и целые пространственные сочетания сохраняются в сборке. Подписанная сборка и грамматическое восстановление не объявляются независимой проверкой всех слов.",
+    "Метаданные уровня уже подготовлены в A1-U01. Текущий пакет содержит только новую тему; levels и curricula не добавляются. Основной реестр и предыдущие пакеты не изменены."
+  ],
+  "session_material": [
+    {
+      "session_id": "A1-U02-L01",
+      "new_lexeme_keys": [
+        "fr:piece:room",
+        "fr:chambre:bedroom",
+        "fr:cuisine:kitchen",
+        "fr:salon:living-room",
+        "fr:meuble:furniture-item"
+      ],
+      "reused_lexeme_keys": [
+        "fr:chaise:chair",
+        "fr:dans:inside",
+        "fr:diner:evening-meal",
+        "fr:et:and",
+        "fr:je:first-person-subject",
+        "fr:maison:house-home",
+        "fr:preparer:prepare-food",
+        "fr:puis:then-sequence",
+        "fr:rentrer:return-home",
+        "fr:se-coucher:go-to-bed",
+        "fr:soir:evening",
+        "fr:table:table",
+        "fr:un:indefinite-masculine",
+        "fr:une:indefinite-feminine"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U02-L02",
+      "new_lexeme_keys": [
+        "fr:lit:bed",
+        "fr:canape:sofa",
+        "fr:armoire:wardrobe",
+        "fr:etagere:shelving-unit"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-cote-de:next-to",
+        "fr:chaise:chair",
+        "fr:chambre:bedroom",
+        "fr:dans:inside",
+        "fr:et:and",
+        "fr:fenetre:window",
+        "fr:salon:living-room",
+        "fr:table:table"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U02-L03",
+      "new_lexeme_keys": [
+        "fr:appartement:apartment",
+        "fr:lumineux:well-lit",
+        "fr:calme:quiet-place",
+        "fr:confortable:comfortable"
+      ],
+      "reused_lexeme_keys": [
+        "fr:chambre:bedroom",
+        "fr:cuisine:kitchen",
+        "fr:dans:inside",
+        "fr:deux:cardinal-number",
+        "fr:diner:evening-meal",
+        "fr:et:and",
+        "fr:je:first-person-subject",
+        "fr:maison:house-home",
+        "fr:preparer:prepare-food",
+        "fr:puis:then-sequence",
+        "fr:rentrer:return-home",
+        "fr:salon:living-room",
+        "fr:se-coucher:go-to-bed",
+        "fr:soir:evening",
+        "fr:table:table",
+        "fr:un:cardinal-number",
+        "fr:un:indefinite-masculine",
+        "fr:une:indefinite-feminine"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U02-L04",
+      "new_lexeme_keys": [
+        "fr:balcon:balcony",
+        "fr:ascenseur:lift",
+        "fr:garage:garage",
+        "fr:jardin:garden"
+      ],
+      "reused_lexeme_keys": [
+        "fr:appartement:apartment",
+        "fr:calme:quiet-place",
+        "fr:chambre:bedroom",
+        "fr:et:and",
+        "fr:je:first-person-subject",
+        "fr:lumineux:well-lit",
+        "fr:matin:morning",
+        "fr:petit-dejeuner:breakfast",
+        "fr:prendre-le-petit-dejeuner:have-breakfast",
+        "fr:salon:living-room",
+        "fr:souvent:often",
+        "fr:toujours:always",
+        "fr:travailler:work"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U02-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-cote-de:next-to",
+        "fr:appartement:apartment",
+        "fr:armoire:wardrobe",
+        "fr:ascenseur:lift",
+        "fr:balcon:balcony",
+        "fr:calme:quiet-place",
+        "fr:chambre:bedroom",
+        "fr:confortable:comfortable",
+        "fr:dans:inside",
+        "fr:deux:cardinal-number",
+        "fr:et:and",
+        "fr:etagere:shelving-unit",
+        "fr:fenetre:window",
+        "fr:garage:garage",
+        "fr:jardin:garden",
+        "fr:lit:bed",
+        "fr:lumineux:well-lit",
+        "fr:meuble:furniture-item",
+        "fr:piece:room",
+        "fr:salon:living-room",
+        "fr:table:table",
+        "fr:un:cardinal-number"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A1-U02-L01",
+      "material": "Повтор положительной рамки наличия с показанными артиклями названий комнат; перечисление и указание комнаты перед рамкой."
+    },
+    {
+      "session_id": "A1-U02-L02",
+      "material": "Показанные определённые формы названий уже известной мебели и их отличие от первого упоминания; известные пространственные отношения."
+    },
+    {
+      "session_id": "A1-U02-L03",
+      "material": "Выбранные признаки с названием квартиры мужского рода и короткое описание с двумя признаками; без общей таблицы согласования."
+    },
+    {
+      "session_id": "A1-U02-L04",
+      "material": "Отрицательная рамка наличия с de перед согласным и d’ перед гласным на конкретных названиях удобств."
+    }
+  ],
+  "text_conventions": {
+    "housing_descriptions": "Вымышленные самостоятельные учебные описания.",
+    "numbered_labels": "Appartement 1 и Appartement 2 — номера описаний, не число комнат.",
+    "location_source": "Прямое текстовое указание мебели, комнаты и ориентира.",
+    "missing_information": "Отсутствие упоминания не означает отсутствие объекта или признака.",
+    "external_images_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "level_description_source": "A1-U01.v1.json",
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:piece:room",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:chambre:bedroom",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:cuisine:kitchen",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:salon:living-room",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:meuble:furniture-item",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:lit:bed",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U02-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:canape:sofa",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:armoire:wardrobe",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U02-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:etagere:shelving-unit",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:appartement:apartment",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:lumineux:well-lit",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:calme:quiet-place",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U02-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U02-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:confortable:comfortable",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:balcon:balcony",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U02-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:ascenseur:lift",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U02-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:garage:garage",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:jardin:garden",
+      "evidence": [
+        {
+          "session_id": "A1-U02-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U02-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U02-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 17,
+    "external_prerequisites": [
+      "A1-U01-L05"
+    ],
+    "external_reference_status": "prepared_A1_U01_and_local_project_validator_passed; other_target_databases_unverified",
+    "project_validator": {
+      "valid": true,
+      "errors": [],
+      "file_hash": "b1b5426bc18db538f9dd1e39003d04f85331a4528ae39d21fa7700ab30f4fff1",
+      "warning_counts": {
+        "editorial_review_required": 5,
+        "browser_tts": 14
+      },
+      "requires_editorial_review": true,
+      "report_file": "A1-U02.validation.json"
+    },
+    "main_reading_texts": [
+      {
+        "session_id": "A1-U02-L01",
+        "texts": [
+          {
+            "task_id": "Q01",
+            "words": 15
+          },
+          {
+            "task_id": "Q05",
+            "words": 21
+          }
+        ]
+      },
+      {
+        "session_id": "A1-U02-L02",
+        "texts": [
+          {
+            "task_id": "Q01",
+            "words": 16
+          },
+          {
+            "task_id": "Q05",
+            "words": 26
+          }
+        ]
+      },
+      {
+        "session_id": "A1-U02-L03",
+        "texts": [
+          {
+            "task_id": "Q01",
+            "words": 15
+          },
+          {
+            "task_id": "Q05",
+            "words": 23
+          }
+        ]
+      },
+      {
+        "session_id": "A1-U02-L04",
+        "texts": [
+          {
+            "task_id": "Q05",
+            "words": 22
+          }
+        ]
+      },
+      {
+        "session_id": "A1-U02-L05",
+        "texts": [
+          {
+            "task_id": "Q02",
+            "words": 31
+          },
+          {
+            "task_id": "Q08",
+            "words": 30
+          }
+        ]
+      }
+    ],
+    "reading_word_range_including_short_warmups": [
+      11,
+      31
+    ],
+    "listening_texts": [
+      {
+        "session_id": "A1-U02-L01",
+        "task_id": "Q03",
+        "words": 26,
+        "duration_seconds_measured": null
+      },
+      {
+        "session_id": "A1-U02-L02",
+        "task_id": "Q03",
+        "words": 20,
+        "duration_seconds_measured": null
+      },
+      {
+        "session_id": "A1-U02-L03",
+        "task_id": "Q03",
+        "words": 26,
+        "duration_seconds_measured": null
+      },
+      {
+        "session_id": "A1-U02-L04",
+        "task_id": "Q03",
+        "words": 21,
+        "duration_seconds_measured": null
+      },
+      {
+        "session_id": "A1-U02-L05",
+        "task_id": "Q01",
+        "words": 22,
+        "duration_seconds_measured": null
+      },
+      {
+        "session_id": "A1-U02-L05",
+        "task_id": "Q04",
+        "words": 22,
+        "duration_seconds_measured": null
+      }
+    ],
+    "audio_duration_status": "not_measured_or_listened",
+    "new_lexical_meanings": 17
+  }
+}

@@ -1,0 +1,1035 @@
+{
+  "unit_id": "A1-U11",
+  "package_file": "A1-U11.v1.json",
+  "session_ids": [
+    "A1-U11-L01",
+    "A1-U11-L02",
+    "A1-U11-L03",
+    "A1-U11-L04",
+    "A1-U11-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "bureau",
+      "lexeme_key": "fr:bureau:office-workplace",
+      "fr": "un bureau",
+      "ru": [
+        "офис или рабочий кабинет (место работы)"
+      ],
+      "transcription_ru": "э(н) бюро́",
+      "first_session_id": "A1-U11-L01"
+    },
+    {
+      "id": "hopital",
+      "lexeme_key": "fr:hopital:hospital",
+      "fr": "un hôpital",
+      "ru": [
+        "больница"
+      ],
+      "transcription_ru": "э(н) нопита́ль",
+      "first_session_id": "A1-U11-L01"
+    },
+    {
+      "id": "entreprise",
+      "lexeme_key": "fr:entreprise:company",
+      "fr": "une entreprise",
+      "ru": [
+        "компания (организация-работодатель)"
+      ],
+      "transcription_ru": "юн а(н)трёпри́з",
+      "first_session_id": "A1-U11-L01"
+    },
+    {
+      "id": "metier",
+      "lexeme_key": "fr:metier:occupation",
+      "fr": "un métier",
+      "ru": [
+        "профессия"
+      ],
+      "transcription_ru": "э(н) мэтье́",
+      "first_session_id": "A1-U11-L02"
+    },
+    {
+      "id": "enseigner",
+      "lexeme_key": "fr:enseigner:teach",
+      "fr": "enseigner",
+      "ru": [
+        "преподавать"
+      ],
+      "transcription_ru": "а(н)сэньэ́",
+      "first_session_id": "A1-U11-L02"
+    },
+    {
+      "id": "vendre",
+      "lexeme_key": "fr:vendre:sell",
+      "fr": "vendre",
+      "ru": [
+        "продавать"
+      ],
+      "transcription_ru": "ва́(н)др",
+      "first_session_id": "A1-U11-L02"
+    },
+    {
+      "id": "soigner",
+      "lexeme_key": "fr:soigner:treat-patients",
+      "fr": "soigner",
+      "ru": [
+        "лечить пациентов (обязанность врача)"
+      ],
+      "transcription_ru": "суаньэ́",
+      "first_session_id": "A1-U11-L02"
+    },
+    {
+      "id": "patient",
+      "lexeme_key": "fr:patient:medical-patient",
+      "fr": "un patient",
+      "ru": [
+        "пациент (человек, которого лечат)"
+      ],
+      "transcription_ru": "э(н) пасья́(н)",
+      "first_session_id": "A1-U11-L02"
+    },
+    {
+      "id": "horaire",
+      "lexeme_key": "fr:horaire:work-schedule",
+      "fr": "un horaire",
+      "ru": [
+        "рабочее расписание"
+      ],
+      "transcription_ru": "э(н) норэ́р",
+      "first_session_id": "A1-U11-L03"
+    },
+    {
+      "id": "collegue",
+      "lexeme_key": "fr:collegue:work-colleague",
+      "fr": "un collègue",
+      "ru": [
+        "коллега по работе"
+      ],
+      "transcription_ru": "э(н) колэ́г",
+      "first_session_id": "A1-U11-L04"
+    },
+    {
+      "id": "equipe",
+      "lexeme_key": "fr:equipe:work-team",
+      "fr": "une équipe",
+      "ru": [
+        "команда коллег"
+      ],
+      "transcription_ru": "юн эки́п",
+      "first_session_id": "A1-U11-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:aller:go",
+    "fr:calme:quiet-place",
+    "fr:chambre:hotel-room",
+    "fr:cinema:cinema-venue",
+    "fr:commencer:start",
+    "fr:desole:polite-refusal-apology",
+    "fr:deux:cardinal-number",
+    "fr:dix:cardinal-number",
+    "fr:douche:shower-facility",
+    "fr:ecole:school",
+    "fr:et:and",
+    "fr:faire-une-pause:take-break",
+    "fr:finir:finish",
+    "fr:heure:clock-hour",
+    "fr:huit:cardinal-number",
+    "fr:je-ne-peux-pas:unavailable-refusal",
+    "fr:livre:book",
+    "fr:lundi:weekday",
+    "fr:magasin:shop",
+    "fr:mai:month-may",
+    "fr:mardi:weekday",
+    "fr:medecin:doctor",
+    "fr:midi:noon",
+    "fr:neuf:cardinal-number",
+    "fr:nuit:night",
+    "fr:occupe:busy-in-schedule",
+    "fr:professeur:teacher",
+    "fr:reservation:hotel-booking",
+    "fr:salle-de-bains:bathroom",
+    "fr:sejour:hotel-stay",
+    "fr:travailler:work",
+    "fr:un:indefinite-masculine",
+    "fr:une:indefinite-feminine",
+    "fr:vendeur:salesperson",
+    "fr:vendredi:weekday",
+    "fr:vous-voulez:invitation-question",
+    "fr:wifi:wireless-internet-access"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A1.U11.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U11-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U11-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U11-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U11-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U11-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U11-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U11-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U11-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U11-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U11-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U11-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U11-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U11-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U11.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U11-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U11-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U11-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U11-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U11-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U11-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U11-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U11-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U11-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U11-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U11-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U10.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U11-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U08.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U11-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U08.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U11-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:enseigner:teach",
+      "reason": "Перенести преподавание как действие преподавателя в следующую тему учёбы."
+    },
+    {
+      "lexeme_key": "fr:professeur:teacher",
+      "reason": "Сохранить прежнее название преподавателя и его ключ."
+    },
+    {
+      "lexeme_key": "fr:ecole:school",
+      "reason": "Вернуть знакомое место учёбы."
+    },
+    {
+      "lexeme_key": "fr:horaire:work-schedule",
+      "reason": "Повторить промежуток времени в учебном расписании."
+    },
+    {
+      "lexeme_key": "fr:commencer:start",
+      "reason": "Сохранить известную форму начала в новом конкретном контексте."
+    },
+    {
+      "lexeme_key": "fr:finir:finish",
+      "reason": "Повторить окончание и не смешивать его со временем перерыва."
+    },
+    {
+      "lexeme_key": "fr:equipe:work-team",
+      "reason": "Вернуть команду коллег коротким повторением, не переименовывая в группу учащихся автоматически."
+    },
+    {
+      "lexeme_key": "fr:metier:occupation",
+      "reason": "Повторить понятие профессии отдельно от места и времени работы."
+    },
+    {
+      "lexeme_key": "fr:collegue:work-colleague",
+      "reason": "Сохранить отношение коллеги по работе отдельно от пациента или друга."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "known_profession_and_work_verb_keys_reused": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "workplace_and_visit_distinction_reviewed": true,
+    "schedule_start_finish_and_break_distinctions_reviewed": true,
+    "narrator_and_colleague_references_reviewed": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A1-U10-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Человеку проверить естественность французских сообщений о работе, выбранных обязанностей, форм профессии и приблизительные русские транскрипции.",
+    "Прослушать браузерную озвучку, особенно преподавание, продажу, пациента, вымышленное имя работодателя и границы рабочего времени. Время аудио и занятий пока не измерено.",
+    "Выполнить предпросмотр и пробное прохождение: работодатель и место работы, посещение другого места, расписание рассказчика и коллеги, начало и перерыв."
+  ],
+  "progress": {
+    "current_unit": "A1-U11",
+    "prepared_session_ids": [
+      "A1-U11-L01",
+      "A1-U11-L02",
+      "A1-U11-L03",
+      "A1-U11-L04",
+      "A1-U11-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A1-U12",
+    "next_unit_title": "Учёба",
+    "previous_unit": "A1-U10",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A1-U11. Принятие и импорт предыдущих пакетов не подтверждены; повторение использует полные объекты подготовленных пакетов.",
+    "Новые значения распределены как три, пять, одно, два и ноль. В занятиях с меньшим числом новых слов нагрузка приходится на применение известных рамок.",
+    "Врач, продавец и преподаватель повторяются с прежними полными объектами и ключами. Привязка профессии к месту не угадывается: профессия и обязанность названы прямо.",
+    "Bureau в этой теме обозначает офис или рабочий кабинет, а не стол. Entreprise обозначает организацию-работодателя. Nova — вымышленное название без реальных корпоративных сведений.",
+    "Показаны короткие сочетания au bureau, à l’hôpital, dans une entreprise, chez Nova; полная таблица предлогов не вводится. Посещение места не означает работу там.",
+    "В нейтральных образцах профессия после être дана без артикля. Не утверждается, что артикль невозможен во всех иных контекстах.",
+    "Показаны личные формы enseigne, vends, soigne без полных таблиц. Медицинское действие является общим описанием обязанности, без советов по лечению или медицинских фактов.",
+    "Пациент — человек, которого лечат, коллега — отношение по работе. Эти роли не объявляются взаимоисключающими в жизни; задания выбирают прямо названное значение.",
+    "Глаголы работать, начинать и заканчивать и целые часы повторяются с прежними ключами. Рабочий промежуток с de/à и дни с du/au показаны готовыми рамками.",
+    "Начало, конец и перерыв различаются; длительность рабочего дня не вычисляется. Дни и часы вымышленные и не являются нормами трудового права.",
+    "Коллега и команда имеют рабочий контекст. Название коллеги само по себе не определяет профессию, а данные рассказчика не переносятся на коллегу.",
+    "В L01 повторён отказ от приглашения A1-U10; в L03 и L04 — даты проживания и отсутствие удобства из A1-U08.",
+    "Пятое занятие имеет kind=practice и не вводит нового обязательного материала. Короткое представление работы реализовано выбором и сборкой, без свободного ввода.",
+    "Все сведения о работе, учреждениях, расписаниях и работодателе вымышленные. Реальные учреждения и внешние сервисы не нужны для ответа.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A1-U11-L01",
+      "new_lexeme_keys": [
+        "fr:bureau:office-workplace",
+        "fr:hopital:hospital",
+        "fr:entreprise:company"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:go",
+        "fr:cinema:cinema-venue",
+        "fr:desole:polite-refusal-apology",
+        "fr:je-ne-peux-pas:unavailable-refusal",
+        "fr:midi:noon",
+        "fr:occupe:busy-in-schedule",
+        "fr:travailler:work",
+        "fr:un:indefinite-masculine",
+        "fr:une:indefinite-feminine",
+        "fr:vous-voulez:invitation-question"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U11-L02",
+      "new_lexeme_keys": [
+        "fr:metier:occupation",
+        "fr:enseigner:teach",
+        "fr:vendre:sell",
+        "fr:soigner:treat-patients",
+        "fr:patient:medical-patient"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:go",
+        "fr:bureau:office-workplace",
+        "fr:commencer:start",
+        "fr:dix:cardinal-number",
+        "fr:ecole:school",
+        "fr:entreprise:company",
+        "fr:finir:finish",
+        "fr:heure:clock-hour",
+        "fr:hopital:hospital",
+        "fr:huit:cardinal-number",
+        "fr:livre:book",
+        "fr:medecin:doctor",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:professeur:teacher",
+        "fr:travailler:work"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U11-L03",
+      "new_lexeme_keys": [
+        "fr:horaire:work-schedule"
+      ],
+      "reused_lexeme_keys": [
+        "fr:chambre:hotel-room",
+        "fr:commencer:start",
+        "fr:deux:cardinal-number",
+        "fr:dix:cardinal-number",
+        "fr:entreprise:company",
+        "fr:et:and",
+        "fr:faire-une-pause:take-break",
+        "fr:finir:finish",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:lundi:weekday",
+        "fr:mai:month-may",
+        "fr:mardi:weekday",
+        "fr:metier:occupation",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:nuit:night",
+        "fr:reservation:hotel-booking",
+        "fr:sejour:hotel-stay",
+        "fr:travailler:work",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U11-L04",
+      "new_lexeme_keys": [
+        "fr:collegue:work-colleague",
+        "fr:equipe:work-team"
+      ],
+      "reused_lexeme_keys": [
+        "fr:bureau:office-workplace",
+        "fr:calme:quiet-place",
+        "fr:chambre:hotel-room",
+        "fr:commencer:start",
+        "fr:douche:shower-facility",
+        "fr:entreprise:company",
+        "fr:et:and",
+        "fr:heure:clock-hour",
+        "fr:hopital:hospital",
+        "fr:huit:cardinal-number",
+        "fr:medecin:doctor",
+        "fr:metier:occupation",
+        "fr:neuf:cardinal-number",
+        "fr:salle-de-bains:bathroom",
+        "fr:travailler:work",
+        "fr:vendeur:salesperson",
+        "fr:wifi:wireless-internet-access"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U11-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:aller:go",
+        "fr:bureau:office-workplace",
+        "fr:collegue:work-colleague",
+        "fr:commencer:start",
+        "fr:dix:cardinal-number",
+        "fr:ecole:school",
+        "fr:enseigner:teach",
+        "fr:entreprise:company",
+        "fr:faire-une-pause:take-break",
+        "fr:finir:finish",
+        "fr:heure:clock-hour",
+        "fr:hopital:hospital",
+        "fr:huit:cardinal-number",
+        "fr:livre:book",
+        "fr:lundi:weekday",
+        "fr:magasin:shop",
+        "fr:metier:occupation",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:patient:medical-patient",
+        "fr:professeur:teacher",
+        "fr:soigner:treat-patients",
+        "fr:travailler:work",
+        "fr:vendeur:salesperson",
+        "fr:vendre:sell",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A1-U11-L01",
+      "material": "Présent знакомого travailler; выбранные сочетания au bureau, à l’hôpital, dans une entreprise, chez Nova."
+    },
+    {
+      "session_id": "A1-U11-L02",
+      "material": "Нейтральное сообщение Je suis professeur/vendeur/médecin без артикля; выбранные формы J’enseigne, Je vends, Je soigne."
+    },
+    {
+      "session_id": "A1-U11-L03",
+      "material": "Знакомые Je commence / Je finis; de huit heures à dix heures и du lundi au vendredi; перерыв как отдельное событие."
+    },
+    {
+      "session_id": "A1-U11-L04",
+      "material": "Сочетания avec un collègue и dans une équipe; выбранные формы Mon collègue travaille / commence и профессия после est."
+    }
+  ],
+  "text_conventions": {
+    "workplace_status": "Вымышленные работа, работодатель Nova, учреждения и расписания.",
+    "profession_scope": "Профессия и обязанность названы прямо, не выводятся из здания.",
+    "schedule_scope": "Дни, начало, окончание и перерыв различаются; длительность не вычисляется.",
+    "colleague_scope": "Рассказчик и коллега имеют свои прямо заданные сведения.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:bureau:office-workplace",
+      "evidence": [
+        {
+          "session_id": "A1-U11-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U11-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U11-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U11-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:hopital:hospital",
+      "evidence": [
+        {
+          "session_id": "A1-U11-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U11-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U11-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:entreprise:company",
+      "evidence": [
+        {
+          "session_id": "A1-U11-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:metier:occupation",
+      "evidence": [
+        {
+          "session_id": "A1-U11-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:enseigner:teach",
+      "evidence": [
+        {
+          "session_id": "A1-U11-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U11-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:vendre:sell",
+      "evidence": [
+        {
+          "session_id": "A1-U11-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U11-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:soigner:treat-patients",
+      "evidence": [
+        {
+          "session_id": "A1-U11-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U11-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:patient:medical-patient",
+      "evidence": [
+        {
+          "session_id": "A1-U11-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:horaire:work-schedule",
+      "evidence": [
+        {
+          "session_id": "A1-U11-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:collegue:work-colleague",
+      "evidence": [
+        {
+          "session_id": "A1-U11-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U11-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U11-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U11-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:equipe:work-team",
+      "evidence": [
+        {
+          "session_id": "A1-U11-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U11-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 11,
+    "external_prerequisites": [
+      "A1-U10-L05"
+    ],
+    "external_reference_status": "A1-U10-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 11
+      },
+      "file_hash": "69d8cadcc3c695ecc4c3124c5f52fad8b3d77240d9b9b85ddc1c3e001f83d13a",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 37,
+    "text_lengths": [
+      {
+        "session_id": "A1-U11-L01",
+        "reading_word_counts": [
+          20,
+          18
+        ],
+        "listening_word_counts": [
+          19
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U11-L02",
+        "reading_word_counts": [
+          19,
+          21
+        ],
+        "listening_word_counts": [
+          19
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U11-L03",
+        "reading_word_counts": [
+          24,
+          24
+        ],
+        "listening_word_counts": [
+          23
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U11-L04",
+        "reading_word_counts": [
+          22,
+          20
+        ],
+        "listening_word_counts": [
+          18
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U11-L05",
+        "reading_word_counts": [
+          23,
+          20
+        ],
+        "listening_word_counts": [
+          22,
+          20
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "au bureau",
+        "session_id": "A1-U11-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "à l’hôpital",
+        "session_id": "A1-U11-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "dans une entreprise",
+        "session_id": "A1-U11-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "chez Nova",
+        "session_id": "A1-U11-L01",
+        "task_id": "Q05"
+      },
+      {
+        "frame": "Je suis professeur",
+        "session_id": "A1-U11-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "J’enseigne",
+        "session_id": "A1-U11-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Je soigne des patients",
+        "session_id": "A1-U11-L02",
+        "task_id": "Q05"
+      },
+      {
+        "frame": "Je vends des livres",
+        "session_id": "A1-U11-L02",
+        "task_id": "Q06"
+      },
+      {
+        "frame": "du lundi au vendredi",
+        "session_id": "A1-U11-L03",
+        "task_id": "Q05"
+      },
+      {
+        "frame": "de huit heures à dix heures",
+        "session_id": "A1-U11-L03",
+        "task_id": "Q06"
+      },
+      {
+        "frame": "dans une équipe",
+        "session_id": "A1-U11-L04",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Mon collègue travaille",
+        "session_id": "A1-U11-L04",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Mon collègue commence",
+        "session_id": "A1-U11-L04",
+        "task_id": "Q05"
+      },
+      {
+        "frame": "avec un collègue",
+        "session_id": "A1-U11-L04",
+        "task_id": "Q06"
+      },
+      {
+        "frame": "Je suis vendeur",
+        "session_id": "A1-U11-L05",
+        "task_id": "Q01"
+      }
+    ]
+  }
+}

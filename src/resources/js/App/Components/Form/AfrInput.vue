@@ -1,5 +1,9 @@
 <script setup>
-import { ref, computed, nextTick } from 'vue';
+import { ref, computed, nextTick, useAttrs } from 'vue';
+
+defineOptions({ inheritAttrs: false });
+const attrs = useAttrs();
+const inputAttrs = () => Object.fromEntries(Object.entries(attrs).filter(([key]) => !['class', 'style'].includes(key)));
 
 const props = defineProps({
   modelValue: { type: String, default: '' },
@@ -20,6 +24,7 @@ const props = defineProps({
   label: { type: String, default: null },
   placeholder: { type: String, default: '' },
   readonly: { type: Boolean, default: false },
+  disabled: { type: Boolean, default: false },
 });
 const emits = defineEmits(['update:modelValue']);
 
@@ -41,21 +46,24 @@ const focus = (position = null) => {
 
 defineExpose({
   focus,
+  input: refInput,
 });
 </script>
 
 <template>
-  <div class="afr-input-component">
+  <div class="afr-input-component" :class="attrs.class" :style="attrs.style">
     <template v-if="label">
-      <label>{{ label }}</label>
+      <label :for="attrs.id">{{ label }}</label>
     </template>
     <div class="afr-input" :class="[classSize]">
       <input
+        v-bind="inputAttrs()"
         ref="refInput"
         :type="nativeType"
         :placeholder="placeholder"
         :value="modelValue"
         :readonly="readonly"
+        :disabled="disabled"
         @input="onInput"
       />
     </div>

@@ -6,12 +6,14 @@ const props = defineProps({
   name: { type: String, default: '' },
   value: { type: String, default: '' },
   label: { type: String, default: '' },
+  disabled: { type: Boolean, default: false },
 });
 const emits = defineEmits(['update:modelValue', 'change']);
 
 // const checked = ref(props.modelValue);
 
 const onChange = () => {
+  if (props.disabled) return;
   const newVal = !props.modelValue;
   emits('update:modelValue', newVal);
   emits('change', newVal);
@@ -19,13 +21,14 @@ const onChange = () => {
 </script>
 
 <template>
-  <div class="afr-checkbox" @click="onChange">
+  <div class="afr-checkbox" :class="{ 'is-disabled': disabled }" role="checkbox" :aria-checked="modelValue" :aria-disabled="disabled" :tabindex="disabled ? -1 : 0" @click="onChange" @keydown.space.prevent="onChange" @keydown.enter.prevent="onChange">
     <div>
       <input
         :checked="modelValue"
         :id="id"
         type="checkbox"
         :name="name"
+        :disabled="disabled"
         hidden="hidden"
       />
       <span class="afr-checkbox-icon"></span>
@@ -45,6 +48,9 @@ const onChange = () => {
 .afr-checkbox{
   @apply flex gap-2 items-center select-none cursor-pointer;
 }
+.afr-checkbox.is-disabled { @apply cursor-not-allowed opacity-70; }
+.afr-checkbox.is-disabled label { cursor: not-allowed; }
+.afr-checkbox:focus-visible { @apply outline outline-2 outline-offset-2 outline-blue-400 rounded-sm; }
 
 .afr-checkbox label{
   @apply text-sm cursor-pointer;

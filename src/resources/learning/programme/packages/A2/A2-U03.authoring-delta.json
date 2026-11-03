@@ -1,0 +1,1047 @@
+{
+  "unit_id": "A2-U03",
+  "package_file": "A2-U03.v1.json",
+  "session_ids": [
+    "A2-U03-L01",
+    "A2-U03-L02",
+    "A2-U03-L03",
+    "A2-U03-L04",
+    "A2-U03-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "visiter",
+      "lexeme_key": "fr:visiter:visit-place",
+      "fr": "visiter",
+      "ru": [
+        "посещать место, осматривать его"
+      ],
+      "transcription_ru": "визитэ́",
+      "first_session_id": "A2-U03-L01"
+    },
+    {
+      "id": "musee",
+      "lexeme_key": "fr:musee:museum",
+      "fr": "un musée",
+      "ru": [
+        "музей"
+      ],
+      "transcription_ru": "э(н) мюзэ́",
+      "first_session_id": "A2-U03-L01"
+    },
+    {
+      "id": "avoir-pc",
+      "lexeme_key": "fr:avoir:compound-past-auxiliary",
+      "fr": "avoir",
+      "ru": [
+        "вспомогательный глагол в показанном завершённом действии"
+      ],
+      "transcription_ru": "авуа́р",
+      "first_session_id": "A2-U03-L01"
+    },
+    {
+      "id": "le-week-end-dernier",
+      "lexeme_key": "fr:le-week-end-dernier:last-weekend",
+      "fr": "le week-end dernier",
+      "ru": [
+        "в прошлые выходные"
+      ],
+      "transcription_ru": "лё уикэнд дэрнье́",
+      "first_session_id": "A2-U03-L02"
+    },
+    {
+      "id": "finalement",
+      "lexeme_key": "fr:finalement:final-outcome",
+      "fr": "finalement",
+      "ru": [
+        "в итоге, окончательный результат рассказа"
+      ],
+      "transcription_ru": "финальма́(н)",
+      "first_session_id": "A2-U03-L02"
+    },
+    {
+      "id": "etre-pc",
+      "lexeme_key": "fr:etre:compound-past-auxiliary",
+      "fr": "être",
+      "ru": [
+        "вспомогательный глагол в показанном завершённом перемещении"
+      ],
+      "transcription_ru": "э́тр",
+      "first_session_id": "A2-U03-L02"
+    },
+    {
+      "id": "question-jour-passe",
+      "lexeme_key": "fr:qu-est-ce-que-vous-avez-fait:past-activities-question",
+      "fr": "qu’est-ce que vous avez fait ?",
+      "ru": [
+        "что вы делали или сделали в прошлом?"
+      ],
+      "transcription_ru": "кэскё ву завэ фэ́",
+      "first_session_id": "A2-U03-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:adorer:love-activity",
+    "fr:aimer:enjoy-activity",
+    "fr:aller:go",
+    "fr:aller:near-future-auxiliary",
+    "fr:apporter:bring-object",
+    "fr:aujourdhui:today",
+    "fr:bagage:luggage-item",
+    "fr:billet:transport-ticket",
+    "fr:ce-soir:this-evening",
+    "fr:chambre:hotel-room",
+    "fr:choisir:choose-option",
+    "fr:cinema:cinema-venue",
+    "fr:cinq:cardinal-number",
+    "fr:dabord:first-step",
+    "fr:dans-le-sac:in-bag",
+    "fr:depart:transport-departure",
+    "fr:deux:cardinal-number",
+    "fr:dimanche:weekday",
+    "fr:douche:shower-facility",
+    "fr:et:and",
+    "fr:fermer:close-object",
+    "fr:film:film",
+    "fr:frere:brother",
+    "fr:heure:clock-hour",
+    "fr:hier:yesterday",
+    "fr:hotel:hotel",
+    "fr:je-voudrais:polite-request",
+    "fr:juin:month-june",
+    "fr:la:direct-object-pronoun-feminine",
+    "fr:le:direct-object-pronoun-masculine",
+    "fr:les:direct-object-pronoun-plural",
+    "fr:mais:contrast-conjunction",
+    "fr:maison:house-home",
+    "fr:midi:noon",
+    "fr:minute:time-duration-unit",
+    "fr:neuf:cardinal-number",
+    "fr:oui:affirmative-answer",
+    "fr:partir:transport-leave",
+    "fr:passeport:passport",
+    "fr:prendre:use-transport",
+    "fr:prevoir:plan-in-advance",
+    "fr:puis:then-sequence",
+    "fr:quai:railway-platform",
+    "fr:regarder:look-watch",
+    "fr:rentrer:return-home",
+    "fr:reserver:book-hotel-room",
+    "fr:retard:transport-delay",
+    "fr:sac:bag",
+    "fr:samedi:weekday",
+    "fr:sejour:hotel-stay",
+    "fr:train:train",
+    "fr:trois:cardinal-number",
+    "fr:valise:suitcase",
+    "fr:vingt:cardinal-number",
+    "fr:vous-voulez:invitation-question",
+    "fr:voyage:trip",
+    "fr:wifi:wireless-internet-access",
+    "fr:y:place-pronoun"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A2.U03.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U03-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U03-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U03-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U03-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U03-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U03-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U03-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U03-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U03-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U03.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U03-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U03-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U03-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U03-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U03-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U03-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U03-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U03-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U02.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U03-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U01.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U03-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U03-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:avoir:compound-past-auxiliary",
+      "reason": "Сохранить выбранную рамку завершённого события для сопоставления с фоном в следующей теме."
+    },
+    {
+      "lexeme_key": "fr:etre:compound-past-auxiliary",
+      "reason": "Вернуть две изученные формы завершённого перемещения, без расширения на все глаголы."
+    },
+    {
+      "lexeme_key": "fr:visiter:visit-place",
+      "reason": "Повторить посещение места с прежним значением."
+    },
+    {
+      "lexeme_key": "fr:musee:museum",
+      "reason": "Вернуть знакомое место события."
+    },
+    {
+      "lexeme_key": "fr:puis:then-sequence",
+      "reason": "Сохранить прежний ключ затем для последовательности."
+    },
+    {
+      "lexeme_key": "fr:finalement:final-outcome",
+      "reason": "Повторить явно обозначенный итог рассказа."
+    },
+    {
+      "lexeme_key": "fr:le-week-end-dernier:last-weekend",
+      "reason": "Вернуть период прошлых выходных."
+    },
+    {
+      "lexeme_key": "fr:qu-est-ce-que-vous-avez-fait:past-activities-question",
+      "reason": "Повторить готовый вопрос о прошедших действиях."
+    },
+    {
+      "lexeme_key": "fr:aimer:enjoy-activity",
+      "reason": "Сохранить различие события и оценки занятия."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "new_local_ids_do_not_overwrite_existing_meanings": true,
+    "puis_key_and_known_action_meanings_preserved": true,
+    "past_auxiliary_meanings_separated_from_existing_frames": true,
+    "place_visiter_distinguished_from_person_rendre_visite": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "selected_etre_models_not_generalized_to_all_motion": true,
+    "feminine_written_forms_explained_before_testing": true,
+    "negative_impression_distinguished_from_negated_event": true,
+    "past_activity_question_distinguished_from_impression_and_desire": true,
+    "story_order_and_opinions_read_per_situation": true,
+    "transcriptions_structurally_checked_without_claim_of_listening": true,
+    "apostrophes_kept_in_whole_tokens": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A2-U02-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Редактору проверить естественность коротких рассказов и вопросов, точность русских переводов завершённости и впечатления, дозировку вспомогательных форм и согласования.",
+    "Прослушать браузерную озвучку J’ai visité / Je vais visiter, форм allé/allée и rentré/rentrée, отрицательного впечатления и готового вопроса. Время аудио и занятий не измерено.",
+    "Выполнить предпросмотр и пробное прохождение: завершённое действие и план, порядок событий, факт просмотра и отношение к нему, письменная женская форма, вопрос о действии и впечатлении."
+  ],
+  "progress": {
+    "current_unit": "A2-U03",
+    "prepared_session_ids": [
+      "A2-U03-L01",
+      "A2-U03-L02",
+      "A2-U03-L03",
+      "A2-U03-L04",
+      "A2-U03-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A2-U04",
+    "next_unit_title": "Воспоминания",
+    "previous_unit": "A2-U02",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A2-U03. Принятие и импорт предыдущих пакетов не подтверждены; повторение использует полные объекты подготовленного материала.",
+    "Новые лексические значения распределены как три, три, ноль, одно и ноль. В L03 нулевое число новых слов не означает отсутствие новой грамматики: вводится отрицательное впечатление в том же прошедшем времени. L05 нового обязательного материала не вводит.",
+    "Visiter обозначает посещение места. Прежнее rendre visite относится к визиту к человеку и не переписывается. Musée — новое место посещения.",
+    "Вспомогательные avoir и être в passé composé получают самостоятельные ключи грамматических значений. Прежние рамки наличия вещи, возраста, самоописания и вспомогательного ближайшего будущего не объединяются с ними и не переписываются.",
+    "В L01 показаны J’ai visité и J’ai regardé, без полной таблицы всех лиц и исключений. Будущее Je vais + инфинитив повторяется как контраст завершённому событию.",
+    "В L02 для aller и rentrer показаны Je suis allé / allée и Je suis rentré / rentrée. Выбор être не обобщается на любые перемещения. Женский вариант с дополнительной буквой представлен до его проверки; пол не угадывается по синтетическому голосу.",
+    "Puis сохраняет fr:puis:then-sequence. Le week-end dernier отличается от существующего ce week-end, а finalement вводит итог рассказа. Enfin и finalement не предлагаются как взаимоисключающие синонимы без контекста.",
+    "В L03 повторяются значения aimer и adorer для занятий. J’ai aimé / adoré и Je n’ai pas aimé выражают оценку состоявшегося занятия. Новое прошедшее время для впечатлений не вводится.",
+    "Отрицательная оценка просмотра не отменяет отдельно сообщённый факт просмотра. В заданиях противопоставляются событие и отношение к нему, а не делается ложный вывод не понравилось — не посмотрел.",
+    "В L04 готовый вопрос Qu’est-ce que vous avez fait… изучается целиком с hier или le week-end dernier. Fait не становится поводом вводить всю таблицу faire. Вопрос о действиях отличается от вопроса Vous avez aimé… и знакомого вопроса о желании.",
+    "В L01 повторено объявление о задержке из A2-U02, в L03/L04 — проживание и багаж A2-U01. Повторение подготовленного материала не подтверждает его принятие пользователем или освоение учеником.",
+    "Каждое задание — отдельный оригинальный рассказ. Порядок музея и фильма и оценки этих занятий меняются между заданиями; условия не переносятся автоматически.",
+    "Для сборки заданы конкретные смысловые блоки и порядок. Апострофы и устойчивые вопросительные части не разрываются, обязательного ввода текста и записи голоса нет.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A2-U03-L01",
+      "new_lexeme_keys": [
+        "fr:visiter:visit-place",
+        "fr:musee:museum",
+        "fr:avoir:compound-past-auxiliary"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aimer:enjoy-activity",
+        "fr:aller:go",
+        "fr:aller:near-future-auxiliary",
+        "fr:aujourdhui:today",
+        "fr:ce-soir:this-evening",
+        "fr:depart:transport-departure",
+        "fr:film:film",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:hier:yesterday",
+        "fr:maison:house-home",
+        "fr:midi:noon",
+        "fr:minute:time-duration-unit",
+        "fr:neuf:cardinal-number",
+        "fr:partir:transport-leave",
+        "fr:prendre:use-transport",
+        "fr:puis:then-sequence",
+        "fr:quai:railway-platform",
+        "fr:regarder:look-watch",
+        "fr:retard:transport-delay",
+        "fr:train:train",
+        "fr:trois:cardinal-number",
+        "fr:vingt:cardinal-number",
+        "fr:y:place-pronoun"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U03-L02",
+      "new_lexeme_keys": [
+        "fr:le-week-end-dernier:last-weekend",
+        "fr:finalement:final-outcome",
+        "fr:etre:compound-past-auxiliary"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:go",
+        "fr:aller:near-future-auxiliary",
+        "fr:aujourdhui:today",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:ce-soir:this-evening",
+        "fr:cinema:cinema-venue",
+        "fr:dabord:first-step",
+        "fr:dimanche:weekday",
+        "fr:film:film",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:hier:yesterday",
+        "fr:maison:house-home",
+        "fr:midi:noon",
+        "fr:musee:museum",
+        "fr:neuf:cardinal-number",
+        "fr:puis:then-sequence",
+        "fr:regarder:look-watch",
+        "fr:rentrer:return-home",
+        "fr:samedi:weekday",
+        "fr:visiter:visit-place"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U03-L03",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:adorer:love-activity",
+        "fr:aimer:enjoy-activity",
+        "fr:aller:go",
+        "fr:aller:near-future-auxiliary",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:billet:transport-ticket",
+        "fr:chambre:hotel-room",
+        "fr:choisir:choose-option",
+        "fr:cinema:cinema-venue",
+        "fr:cinq:cardinal-number",
+        "fr:deux:cardinal-number",
+        "fr:douche:shower-facility",
+        "fr:et:and",
+        "fr:etre:compound-past-auxiliary",
+        "fr:film:film",
+        "fr:finalement:final-outcome",
+        "fr:hotel:hotel",
+        "fr:je-voudrais:polite-request",
+        "fr:juin:month-june",
+        "fr:la:direct-object-pronoun-feminine",
+        "fr:le-week-end-dernier:last-weekend",
+        "fr:le:direct-object-pronoun-masculine",
+        "fr:mais:contrast-conjunction",
+        "fr:maison:house-home",
+        "fr:musee:museum",
+        "fr:prevoir:plan-in-advance",
+        "fr:puis:then-sequence",
+        "fr:regarder:look-watch",
+        "fr:rentrer:return-home",
+        "fr:reserver:book-hotel-room",
+        "fr:sejour:hotel-stay",
+        "fr:visiter:visit-place",
+        "fr:wifi:wireless-internet-access"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U03-L04",
+      "new_lexeme_keys": [
+        "fr:qu-est-ce-que-vous-avez-fait:past-activities-question"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aimer:enjoy-activity",
+        "fr:aller:near-future-auxiliary",
+        "fr:apporter:bring-object",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:bagage:luggage-item",
+        "fr:cinema:cinema-venue",
+        "fr:cinq:cardinal-number",
+        "fr:dans-le-sac:in-bag",
+        "fr:deux:cardinal-number",
+        "fr:etre:compound-past-auxiliary",
+        "fr:fermer:close-object",
+        "fr:film:film",
+        "fr:finalement:final-outcome",
+        "fr:heure:clock-hour",
+        "fr:hier:yesterday",
+        "fr:juin:month-june",
+        "fr:la:direct-object-pronoun-feminine",
+        "fr:les:direct-object-pronoun-plural",
+        "fr:maison:house-home",
+        "fr:midi:noon",
+        "fr:musee:museum",
+        "fr:neuf:cardinal-number",
+        "fr:oui:affirmative-answer",
+        "fr:passeport:passport",
+        "fr:prevoir:plan-in-advance",
+        "fr:puis:then-sequence",
+        "fr:regarder:look-watch",
+        "fr:rentrer:return-home",
+        "fr:sac:bag",
+        "fr:valise:suitcase",
+        "fr:visiter:visit-place",
+        "fr:vous-voulez:invitation-question",
+        "fr:voyage:trip"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U03-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:adorer:love-activity",
+        "fr:aimer:enjoy-activity",
+        "fr:aller:go",
+        "fr:aller:near-future-auxiliary",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:cinema:cinema-venue",
+        "fr:dabord:first-step",
+        "fr:dimanche:weekday",
+        "fr:etre:compound-past-auxiliary",
+        "fr:film:film",
+        "fr:finalement:final-outcome",
+        "fr:heure:clock-hour",
+        "fr:hier:yesterday",
+        "fr:le-week-end-dernier:last-weekend",
+        "fr:mais:contrast-conjunction",
+        "fr:maison:house-home",
+        "fr:midi:noon",
+        "fr:musee:museum",
+        "fr:neuf:cardinal-number",
+        "fr:puis:then-sequence",
+        "fr:qu-est-ce-que-vous-avez-fait:past-activities-question",
+        "fr:regarder:look-watch",
+        "fr:rentrer:return-home",
+        "fr:samedi:weekday",
+        "fr:visiter:visit-place",
+        "fr:vous-voulez:invitation-question"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A2-U03-L01",
+      "material": "Passé composé с avoir в выбранных формах J’ai visité / regardé; контраст с настоящим и ближайшим будущим."
+    },
+    {
+      "session_id": "A2-U03-L02",
+      "material": "Два знакомых перемещения с être: allé/allée и rentré/rentrée; письменный род и явная последовательность событий."
+    },
+    {
+      "session_id": "A2-U03-L03",
+      "material": "Завершённое впечатление J’ai aimé / adoré; отрицание Je n’ai pas aimé; событие отдельно от оценки."
+    },
+    {
+      "session_id": "A2-U03-L04",
+      "material": "Готовый вежливый вопрос Qu’est-ce que vous avez fait…; вопрос о впечатлении Vous avez aimé…; выбранная форма vous avez."
+    }
+  ],
+  "text_conventions": {
+    "situation_status": "Оригинальные вымышленные рассказы о выходных.",
+    "time_scope": "Прошлые выходные и вчера относятся к конкретному рассказу, не к текущему календарю сайта.",
+    "gender_scope": "Род письменной формы указан в условии или дан в тексте; по голосу пол не оценивается.",
+    "sequence_scope": "Последовательность дана маркерами и днями конкретного рассказа.",
+    "impression_scope": "Оценка занятия не заменяет факт совершения действия.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:visiter:visit-place",
+      "evidence": [
+        {
+          "session_id": "A2-U03-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U03-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U03-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U03-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:musee:museum",
+      "evidence": [
+        {
+          "session_id": "A2-U03-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U03-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:avoir:compound-past-auxiliary",
+      "evidence": [
+        {
+          "session_id": "A2-U03-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U03-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U03-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U03-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U03-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U03-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:le-week-end-dernier:last-weekend",
+      "evidence": [
+        {
+          "session_id": "A2-U03-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:finalement:final-outcome",
+      "evidence": [
+        {
+          "session_id": "A2-U03-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:etre:compound-past-auxiliary",
+      "evidence": [
+        {
+          "session_id": "A2-U03-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U03-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:qu-est-ce-que-vous-avez-fait:past-activities-question",
+      "evidence": [
+        {
+          "session_id": "A2-U03-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U03-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U03-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 7,
+    "external_prerequisites": [
+      "A2-U02-L05"
+    ],
+    "external_reference_status": "A2-U02-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 10
+      },
+      "file_hash": "c1b5b3df027ba408ec3d1a2d82b32f665804113aa5c2d0a979d0ac0465dad4f4",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 58,
+    "text_lengths": [
+      {
+        "session_id": "A2-U03-L01",
+        "reading_word_counts": [
+          31,
+          34
+        ],
+        "listening_word_counts": [
+          32
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U03-L02",
+        "reading_word_counts": [
+          34,
+          32
+        ],
+        "listening_word_counts": [
+          32
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U03-L03",
+        "reading_word_counts": [
+          36,
+          34
+        ],
+        "listening_word_counts": [
+          34
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U03-L04",
+        "reading_word_counts": [
+          39,
+          42
+        ],
+        "listening_word_counts": [
+          32
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U03-L05",
+        "reading_word_counts": [
+          30,
+          41
+        ],
+        "listening_word_counts": [
+          33,
+          33
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "J’ai visité",
+        "session_id": "A2-U03-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "J’ai regardé",
+        "session_id": "A2-U03-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Le week-end dernier",
+        "session_id": "A2-U03-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je suis rentré",
+        "session_id": "A2-U03-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Finalement",
+        "session_id": "A2-U03-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je suis allé",
+        "session_id": "A2-U03-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Je suis allée",
+        "session_id": "A2-U03-L02",
+        "task_id": "Q05"
+      },
+      {
+        "frame": "Je suis rentrée",
+        "session_id": "A2-U03-L02",
+        "task_id": "Q05"
+      },
+      {
+        "frame": "J’ai aimé",
+        "session_id": "A2-U03-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "J’ai adoré",
+        "session_id": "A2-U03-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je n’ai pas aimé",
+        "session_id": "A2-U03-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Qu’est-ce que vous avez fait",
+        "session_id": "A2-U03-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Vous avez aimé visiter",
+        "session_id": "A2-U03-L04",
+        "task_id": "Q02"
+      }
+    ],
+    "level_description_included": false,
+    "curricula_included": false
+  }
+}

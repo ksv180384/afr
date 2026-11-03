@@ -1,0 +1,1061 @@
+{
+  "unit_id": "A1-U05",
+  "package_file": "A1-U05.v1.json",
+  "session_ids": [
+    "A1-U05-L01",
+    "A1-U05-L02",
+    "A1-U05-L03",
+    "A1-U05-L04",
+    "A1-U05-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "chemise",
+      "lexeme_key": "fr:chemise:shirt",
+      "fr": "une chemise",
+      "ru": [
+        "рубашка"
+      ],
+      "transcription_ru": "юн шёми́з",
+      "first_session_id": "A1-U05-L01"
+    },
+    {
+      "id": "pantalon",
+      "lexeme_key": "fr:pantalon:trousers",
+      "fr": "un pantalon",
+      "ru": [
+        "брюки"
+      ],
+      "transcription_ru": "э(н) па(н)тало́(н)",
+      "first_session_id": "A1-U05-L01"
+    },
+    {
+      "id": "robe",
+      "lexeme_key": "fr:robe:dress",
+      "fr": "une robe",
+      "ru": [
+        "платье"
+      ],
+      "transcription_ru": "юн ро́б",
+      "first_session_id": "A1-U05-L01"
+    },
+    {
+      "id": "pull",
+      "lexeme_key": "fr:pull:sweater",
+      "fr": "un pull",
+      "ru": [
+        "свитер"
+      ],
+      "transcription_ru": "э(н) пю́ль",
+      "first_session_id": "A1-U05-L01"
+    },
+    {
+      "id": "taille",
+      "lexeme_key": "fr:taille:clothing-size",
+      "fr": "une taille",
+      "ru": [
+        "размер одежды"
+      ],
+      "transcription_ru": "юн та́й",
+      "first_session_id": "A1-U05-L02"
+    },
+    {
+      "id": "essayer",
+      "lexeme_key": "fr:essayer:try-on-clothing",
+      "fr": "essayer",
+      "ru": [
+        "примерять одежду"
+      ],
+      "transcription_ru": "эсэйе́",
+      "first_session_id": "A1-U05-L03"
+    },
+    {
+      "id": "cabine",
+      "lexeme_key": "fr:cabine:fitting-room",
+      "fr": "une cabine",
+      "ru": [
+        "примерочная в магазине одежды"
+      ],
+      "transcription_ru": "юн каби́н",
+      "first_session_id": "A1-U05-L03"
+    },
+    {
+      "id": "je-peux",
+      "lexeme_key": "fr:je-peux:permission-request",
+      "fr": "je peux",
+      "ru": [
+        "можно мне (в вопросе о разрешении)"
+      ],
+      "transcription_ru": "жё пё́",
+      "first_session_id": "A1-U05-L03"
+    },
+    {
+      "id": "trop",
+      "lexeme_key": "fr:trop:excessive-degree",
+      "fr": "trop",
+      "ru": [
+        "слишком (о неподходящем размере)"
+      ],
+      "transcription_ru": "тро́",
+      "first_session_id": "A1-U05-L03"
+    },
+    {
+      "id": "cher",
+      "lexeme_key": "fr:cher:expensive",
+      "fr": "cher",
+      "ru": [
+        "дорогой (о цене)"
+      ],
+      "transcription_ru": "шэ́р",
+      "first_session_id": "A1-U05-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:addition:restaurant-bill",
+    "fr:appartement:apartment",
+    "fr:armoire:wardrobe",
+    "fr:bleu:blue",
+    "fr:bouteille:bottle",
+    "fr:cafe:coffee",
+    "fr:canape:sofa",
+    "fr:carafe:carafe",
+    "fr:chambre:bedroom",
+    "fr:chercher:look-for",
+    "fr:combien:how-much-many",
+    "fr:couter:cost",
+    "fr:cuisine:kitchen",
+    "fr:dans:inside",
+    "fr:deux:cardinal-number",
+    "fr:diner:evening-meal",
+    "fr:eau:water",
+    "fr:en-especes:cash-payment",
+    "fr:et:and",
+    "fr:euro:currency-unit",
+    "fr:grand:large-object",
+    "fr:je-voudrais:polite-request",
+    "fr:kilo:kilogram",
+    "fr:lait:milk",
+    "fr:lit:bed",
+    "fr:matin:morning",
+    "fr:merci:thanks",
+    "fr:paquet:food-packet",
+    "fr:par-carte:card-payment",
+    "fr:pates:pasta",
+    "fr:payer:pay",
+    "fr:petit-dejeuner:breakfast",
+    "fr:petit:small-object",
+    "fr:prendre-le-petit-dejeuner:have-breakfast",
+    "fr:preparer:prepare-food",
+    "fr:quatre:cardinal-number",
+    "fr:salon:living-room",
+    "fr:sil-vous-plait:polite-request",
+    "fr:soir:evening",
+    "fr:souvent:often",
+    "fr:table:table",
+    "fr:tasse:cup",
+    "fr:toujours:always",
+    "fr:travailler:work",
+    "fr:trois:cardinal-number",
+    "fr:un:indefinite-masculine",
+    "fr:une:indefinite-feminine"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A1.U05.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U05-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U05-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U05-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U05-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U05-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U05-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U05-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U05-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U05-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U05-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U05.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U05-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U05-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U05-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U05-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U05-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U05-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U05-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U05-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U05-L05",
+          "task_id": "Q02",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U05-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U04.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U05-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U02.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U05-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U05-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U05-L05",
+          "task_id": "Q03",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U01.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U05-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U03.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U05-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U04.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U05-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:magasin:shop",
+      "reason": "Вернуть магазин как ориентир в следующей теме городского маршрута."
+    },
+    {
+      "lexeme_key": "fr:cabine:fitting-room",
+      "reason": "Повторить вопрос о месте в знакомой ситуации, различая примерочную и другие помещения."
+    },
+    {
+      "lexeme_key": "fr:chercher:look-for",
+      "reason": "Сохранить значение поиска товара, не переносить автоматически на поиск дороги."
+    },
+    {
+      "lexeme_key": "fr:je-peux:permission-request",
+      "reason": "Вернуть готовый вопрос о разрешении в уже понятном контексте."
+    },
+    {
+      "lexeme_key": "fr:taille:clothing-size",
+      "reason": "Повторить размер одежды отдельным коротким возвратом."
+    },
+    {
+      "lexeme_key": "fr:essayer:try-on-clothing",
+      "reason": "Повторить примерку отдельно от покупки и оплаты."
+    },
+    {
+      "lexeme_key": "fr:cher:expensive",
+      "reason": "Повторить оценку цены отдельно от цвета и размера."
+    },
+    {
+      "lexeme_key": "fr:par-carte:card-payment",
+      "reason": "Сохранить целое выражение оплаты картой без смешения с меню или картой города."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "reading_lengths_checked": true,
+    "checkpoint_skill_balance_checked": true,
+    "checkpoint_u01_u05_sample_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "answer_meanings_reviewed_by_author": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "До импорта целевая база должна содержать A1-U04-L05; внешний prerequisite не создаётся пакетом.",
+    "Проверить редактором французские просьбы, приблизительные русские транскрипции и посильность выбранных сочетаний согласования.",
+    "Прослушать браузерную озвучку, особенно одинаковое звучание bleu/bleue и cher/chère, различие petit/petite и grand/grande. Время аудио и прохождения пока не измерено.",
+    "Выполнить предпросмотр и пробное прохождение, включая контроль, выбор нескольких признаков и формы ce/cette/ces."
+  ],
+  "progress": {
+    "current_unit": "A1-U05",
+    "prepared_session_ids": [
+      "A1-U05-L01",
+      "A1-U05-L02",
+      "A1-U05-L03",
+      "A1-U05-L04",
+      "A1-U05-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A1-U06",
+    "next_unit_title": "Город и маршрут",
+    "previous_unit": "A1-U04",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A1-U05. Принятие и импорт предыдущих пакетов не подтверждены. Повторение использует реально подготовленные полные объекты, а не только планируемые слова.",
+    "Новые значения распределены как четыре, одно, четыре, одно и ноль. Лимит уровня не заполняется искусственно; в занятиях с меньшим числом слов нагрузку создаёт применение известных форм.",
+    "Название брюк во французском употреблено как одно существительное мужского рода. Все предметы одежды имеют разные ключи.",
+    "Прежние ключи цветов и размеров сохранены. Формы женского и множественного числа не объявляются новыми значениями.",
+    "Согласование вводится на выбранных сочетаниях одежды; ce/cette/ces показаны без полной системы указательных слов.",
+    "Примерять, спрашивать разрешение, искать, покупать и платить различаются. Je peux вводится целой рамкой вопроса о разрешении без общей таблицы pouvoir.",
+    "Примерочная имеет отдельный ключ и не заменяет спальню из темы жилья.",
+    "Оценка слишком маленький или большой отличается от нейтрального размера. Дорогой обозначает оценку цены, а не величину вещи.",
+    "Все цены вымышленные и действуют только внутри данного текста. Сравнение сумм не отменяет прямо выраженную личную оценку дорого.",
+    "Контроль имеет kind=checkpoint и восемь заданий: два listening, два reading, два vocabulary, один grammar и один sentence_building. Он выборочно охватывает все пять тем A1-U01–U05, но не претендует на проверку всех целей блока.",
+    "В пятом занятии нет нового обязательного материала. Его вводная и public_page не раскрывают готовую таблицу ответов.",
+    "Ответы не требуют печати; апострофы и готовые сочетания сохраняются целыми. Подписанная сборка не объявляется независимым тестом каждого слова.",
+    "Пакет содержит только текущую тему. Основной реестр, прежние пакеты и база сайта не изменялись; levels и curricula не добавлены."
+  ],
+  "session_material": [
+    {
+      "session_id": "A1-U05-L01",
+      "new_lexeme_keys": [
+        "fr:chemise:shirt",
+        "fr:pantalon:trousers",
+        "fr:robe:dress",
+        "fr:pull:sweater"
+      ],
+      "reused_lexeme_keys": [
+        "fr:bouteille:bottle",
+        "fr:chercher:look-for",
+        "fr:deux:cardinal-number",
+        "fr:et:and",
+        "fr:euro:currency-unit",
+        "fr:je-voudrais:polite-request",
+        "fr:lait:milk",
+        "fr:merci:thanks",
+        "fr:paquet:food-packet",
+        "fr:pates:pasta",
+        "fr:sil-vous-plait:polite-request",
+        "fr:trois:cardinal-number",
+        "fr:un:indefinite-masculine",
+        "fr:une:indefinite-feminine"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U05-L02",
+      "new_lexeme_keys": [
+        "fr:taille:clothing-size"
+      ],
+      "reused_lexeme_keys": [
+        "fr:bleu:blue",
+        "fr:chemise:shirt",
+        "fr:chercher:look-for",
+        "fr:et:and",
+        "fr:grand:large-object",
+        "fr:je-voudrais:polite-request",
+        "fr:merci:thanks",
+        "fr:pantalon:trousers",
+        "fr:petit:small-object",
+        "fr:pull:sweater",
+        "fr:robe:dress",
+        "fr:sil-vous-plait:polite-request"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U05-L03",
+      "new_lexeme_keys": [
+        "fr:essayer:try-on-clothing",
+        "fr:cabine:fitting-room",
+        "fr:je-peux:permission-request",
+        "fr:trop:excessive-degree"
+      ],
+      "reused_lexeme_keys": [
+        "fr:appartement:apartment",
+        "fr:bleu:blue",
+        "fr:chambre:bedroom",
+        "fr:chemise:shirt",
+        "fr:cuisine:kitchen",
+        "fr:et:and",
+        "fr:grand:large-object",
+        "fr:je-voudrais:polite-request",
+        "fr:merci:thanks",
+        "fr:petit:small-object",
+        "fr:pull:sweater",
+        "fr:robe:dress",
+        "fr:salon:living-room",
+        "fr:sil-vous-plait:polite-request",
+        "fr:taille:clothing-size"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U05-L04",
+      "new_lexeme_keys": [
+        "fr:cher:expensive"
+      ],
+      "reused_lexeme_keys": [
+        "fr:appartement:apartment",
+        "fr:bleu:blue",
+        "fr:chambre:bedroom",
+        "fr:combien:how-much-many",
+        "fr:couter:cost",
+        "fr:cuisine:kitchen",
+        "fr:en-especes:cash-payment",
+        "fr:et:and",
+        "fr:euro:currency-unit",
+        "fr:grand:large-object",
+        "fr:je-voudrais:polite-request",
+        "fr:merci:thanks",
+        "fr:par-carte:card-payment",
+        "fr:payer:pay",
+        "fr:pull:sweater",
+        "fr:quatre:cardinal-number",
+        "fr:robe:dress",
+        "fr:salon:living-room",
+        "fr:trois:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U05-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:addition:restaurant-bill",
+        "fr:armoire:wardrobe",
+        "fr:bleu:blue",
+        "fr:bouteille:bottle",
+        "fr:cafe:coffee",
+        "fr:canape:sofa",
+        "fr:carafe:carafe",
+        "fr:chambre:bedroom",
+        "fr:chemise:shirt",
+        "fr:dans:inside",
+        "fr:diner:evening-meal",
+        "fr:eau:water",
+        "fr:en-especes:cash-payment",
+        "fr:essayer:try-on-clothing",
+        "fr:et:and",
+        "fr:grand:large-object",
+        "fr:je-peux:permission-request",
+        "fr:je-voudrais:polite-request",
+        "fr:kilo:kilogram",
+        "fr:lit:bed",
+        "fr:matin:morning",
+        "fr:paquet:food-packet",
+        "fr:par-carte:card-payment",
+        "fr:payer:pay",
+        "fr:petit-dejeuner:breakfast",
+        "fr:petit:small-object",
+        "fr:prendre-le-petit-dejeuner:have-breakfast",
+        "fr:preparer:prepare-food",
+        "fr:pull:sweater",
+        "fr:robe:dress",
+        "fr:salon:living-room",
+        "fr:sil-vous-plait:polite-request",
+        "fr:soir:evening",
+        "fr:souvent:often",
+        "fr:table:table",
+        "fr:taille:clothing-size",
+        "fr:tasse:cup",
+        "fr:toujours:always",
+        "fr:travailler:work",
+        "fr:trop:excessive-degree"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A1-U05-L01",
+      "material": "Названия одежды с артиклем; название брюк как форма мужского рода единственного числа; готовые рамки поиска и просьбы."
+    },
+    {
+      "session_id": "A1-U05-L02",
+      "material": "Выбранное согласование petit/petite, grand/grande, bleu/bleue; формы ce/cette/ces, пример множественного числа ces petits pulls bleus."
+    },
+    {
+      "session_id": "A1-U05-L03",
+      "material": "Готовые просьбы Je voudrais essayer и Je peux essayer; вопрос Où est la cabine; trop перед согласованным признаком."
+    },
+    {
+      "session_id": "A1-U05-L04",
+      "material": "Выбранное согласование cher/chère; повтор вопроса стоимости и готовой формы оплаты двумя способами."
+    }
+  ],
+  "text_conventions": {
+    "price_status": "Вымышленные независимые цены в евро; дорого является прямой оценкой говорящего.",
+    "size_status": "Описания маленький/большой и маленький/большой размер без выдуманных соответствий международных маркировок.",
+    "audio_basis": "Ответ определяется словами, без зависимости от тембра или эмоциональной интонации.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:chemise:shirt",
+      "evidence": [
+        {
+          "session_id": "A1-U05-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:pantalon:trousers",
+      "evidence": [
+        {
+          "session_id": "A1-U05-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U05-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:robe:dress",
+      "evidence": [
+        {
+          "session_id": "A1-U05-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U05-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U05-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U05-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:pull:sweater",
+      "evidence": [
+        {
+          "session_id": "A1-U05-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U05-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:taille:clothing-size",
+      "evidence": [
+        {
+          "session_id": "A1-U05-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:essayer:try-on-clothing",
+      "evidence": [
+        {
+          "session_id": "A1-U05-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:cabine:fitting-room",
+      "evidence": [
+        {
+          "session_id": "A1-U05-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:je-peux:permission-request",
+      "evidence": [
+        {
+          "session_id": "A1-U05-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:trop:excessive-degree",
+      "evidence": [
+        {
+          "session_id": "A1-U05-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U05-L05",
+          "task_id": "Q02",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:cher:expensive",
+      "evidence": [
+        {
+          "session_id": "A1-U05-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U05-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 10,
+    "external_prerequisites": [
+      "A1-U04-L05"
+    ],
+    "external_reference_status": "exists_in_prepared_A1_U04; target_database_status_unverified",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 13
+      },
+      "file_hash": "88554cad8ff143845c7ecfd27c82b179413b3eff14de933dd805de97c056adc7",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 47,
+    "text_lengths": [
+      {
+        "session_id": "A1-U05-L01",
+        "reading_word_counts": [
+          21,
+          19
+        ],
+        "listening_word_counts": [
+          19
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U05-L02",
+        "reading_word_counts": [
+          19,
+          23
+        ],
+        "listening_word_counts": [
+          23
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U05-L03",
+        "reading_word_counts": [
+          19,
+          20
+        ],
+        "listening_word_counts": [
+          24
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U05-L04",
+        "reading_word_counts": [
+          19,
+          22
+        ],
+        "listening_word_counts": [
+          19
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U05-L05",
+        "reading_word_counts": [
+          22,
+          21
+        ],
+        "listening_word_counts": [
+          19,
+          20
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "petite robe bleue",
+        "session_id": "A1-U05-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "ce pull",
+        "session_id": "A1-U05-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "cette robe",
+        "session_id": "A1-U05-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je peux essayer",
+        "session_id": "A1-U05-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "trop petit",
+        "session_id": "A1-U05-L03",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "trop grand",
+        "session_id": "A1-U05-L03",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "Ce pull est cher.",
+        "session_id": "A1-U05-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Cette robe est chère.",
+        "session_id": "A1-U05-L04",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "ces pulls",
+        "session_id": "A1-U05-L05",
+        "task_id": "Q07"
+      }
+    ]
+  },
+  "checkpoint_coverage": {
+    "session_id": "A1-U05-L05",
+    "skills": {
+      "listening": 2,
+      "reading": 2,
+      "vocabulary": 2,
+      "grammar": 1,
+      "sentence_building": 1
+    },
+    "units_sampled": [
+      "U01",
+      "U02",
+      "U03",
+      "U04",
+      "U05"
+    ],
+    "evidence": [
+      {
+        "task_id": "Q01",
+        "skill": "listening",
+        "objective_ids": [
+          "A1.U01.APPLY"
+        ]
+      },
+      {
+        "task_id": "Q02",
+        "skill": "listening",
+        "objective_ids": [
+          "A1.U05.APPLY"
+        ]
+      },
+      {
+        "task_id": "Q03",
+        "skill": "reading",
+        "objective_ids": [
+          "A1.U02.UNDERSTAND"
+        ]
+      },
+      {
+        "task_id": "Q04",
+        "skill": "reading",
+        "objective_ids": [
+          "A1.U03.APPLY"
+        ]
+      },
+      {
+        "task_id": "Q05",
+        "skill": "vocabulary",
+        "objective_ids": [
+          "A1.U04.UNDERSTAND"
+        ]
+      },
+      {
+        "task_id": "Q06",
+        "skill": "vocabulary",
+        "objective_ids": [
+          "A1.U05.UNDERSTAND"
+        ]
+      },
+      {
+        "task_id": "Q07",
+        "skill": "grammar",
+        "objective_ids": [
+          "A1.U05.UNDERSTAND"
+        ]
+      },
+      {
+        "task_id": "Q08",
+        "skill": "sentence_building",
+        "objective_ids": [
+          "A1.U05.APPLY"
+        ]
+      }
+    ],
+    "limitation": "Выборка пяти тем, не полная проверка всех целей блока."
+  }
+}

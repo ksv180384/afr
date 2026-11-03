@@ -1,0 +1,948 @@
+{
+  "unit_id": "B1-U02",
+  "package_id": "programme-b1-u02-v1",
+  "package_file": "B1-U02.v1.json",
+  "session_ids": [
+    "B1-U02-L01",
+    "B1-U02-L02",
+    "B1-U02-L03",
+    "B1-U02-L04",
+    "B1-U02-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "convenir-de",
+      "lexeme_key": "fr:convenir-de:agree-action",
+      "fr": "convenir de",
+      "ru": [
+        "договариваться о действии"
+      ],
+      "transcription_ru": "ко(н)вэни́р дё",
+      "first_session_id": "B1-U02-L01"
+    },
+    {
+      "id": "disponibilite",
+      "lexeme_key": "fr:disponibilite:person-time-availability",
+      "fr": "la disponibilité",
+      "ru": [
+        "наличие свободного времени у человека"
+      ],
+      "transcription_ru": "ла диспонибилитэ́",
+      "first_session_id": "B1-U02-L01"
+    },
+    {
+      "id": "sous-reserve-de",
+      "lexeme_key": "fr:sous-reserve-de:conditional-arrangement",
+      "fr": "sous réserve de",
+      "ru": [
+        "при условии: оговорка к договорённости"
+      ],
+      "transcription_ru": "су рэзэрв дё",
+      "first_session_id": "B1-U02-L01"
+    },
+    {
+      "id": "echeance",
+      "lexeme_key": "fr:echeance:agreed-deadline",
+      "fr": "une échéance",
+      "ru": [
+        "крайний срок выполнения"
+      ],
+      "transcription_ru": "юн эшэа́(н)с",
+      "first_session_id": "B1-U02-L02"
+    },
+    {
+      "id": "prolonger",
+      "lexeme_key": "fr:prolonger:extend-time-allowance",
+      "fr": "prolonger",
+      "ru": [
+        "продлевать отведённый срок"
+      ],
+      "transcription_ru": "проло(н)жэ́",
+      "first_session_id": "B1-U02-L03"
+    },
+    {
+      "id": "confirmer",
+      "lexeme_key": "fr:confirmer:confirm-arrangement",
+      "fr": "confirmer",
+      "ru": [
+        "подтверждать договорённость"
+      ],
+      "transcription_ru": "ко(н)фирмэ́",
+      "first_session_id": "B1-U02-L04"
+    },
+    {
+      "id": "jusqu-a",
+      "lexeme_key": "fr:jusqu-a:time-endpoint",
+      "fr": "jusqu’à",
+      "ru": [
+        "до: конечная граница периода"
+      ],
+      "transcription_ru": "жюска́",
+      "first_session_id": "B1-U02-L03"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:auparavant:earlier-relative-time",
+    "fr:avec-elle:with-her",
+    "fr:changer:change-travel-ticket",
+    "fr:daccord:agreement",
+    "fr:date:calendar-date",
+    "fr:delai:task-completion-deadline",
+    "fr:dimanche:weekday",
+    "fr:diner:evening-meal",
+    "fr:disponible:available-in-schedule",
+    "fr:dix:cardinal-number",
+    "fr:ecrire:write",
+    "fr:ensemble:together",
+    "fr:envoyer:send-message",
+    "fr:frere:brother",
+    "fr:grace-a:beneficial-cause",
+    "fr:heure:clock-hour",
+    "fr:horaire:work-schedule",
+    "fr:huit:cardinal-number",
+    "fr:je-voudrais:polite-request",
+    "fr:jeudi:weekday",
+    "fr:lui:indirect-object-singular",
+    "fr:mais:contrast-conjunction",
+    "fr:maison:house-home",
+    "fr:matin:morning",
+    "fr:merci:thanks",
+    "fr:message:short-written-message",
+    "fr:midi:noon",
+    "fr:non:negative-answer",
+    "fr:pourriez-vous:polite-action-request",
+    "fr:preciser:clarify-service-details",
+    "fr:preparer:prepare-food",
+    "fr:rendez-vous:appointment",
+    "fr:rendre-visite:visit-person",
+    "fr:reporter:postpone-appointment",
+    "fr:rester:stay-at-place",
+    "fr:retrouver:meet-by-arrangement",
+    "fr:samedi:weekday",
+    "fr:se-rendre-compte:realise-fact",
+    "fr:si:real-condition",
+    "fr:soeur:sister",
+    "fr:soir:evening",
+    "fr:travailler:work",
+    "fr:vendredi:weekday"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "B1.U02.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "B1-U02-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U02-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U02-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U02-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U02-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U02-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U02-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U02-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U02-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U02.APPLY",
+      "evidence": [
+        {
+          "session_id": "B1-U02-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U02-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U02-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U02-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U02-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U02-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U02-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U01.APPLY",
+      "evidence": [
+        {
+          "session_id": "B1-U02-L01",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L03",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L04",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:sous-reserve-de:conditional-arrangement",
+      "reason": "Сохранять явно названную оговорку при обсуждении позиции."
+    },
+    {
+      "lexeme_key": "fr:convenir-de:agree-action",
+      "reason": "Отличать согласованное действие от личного мнения или желания."
+    },
+    {
+      "lexeme_key": "fr:confirmer:confirm-arrangement",
+      "reason": "Повторить подтверждение факта отдельно от объяснения позиции."
+    },
+    {
+      "lexeme_key": "fr:echeance:agreed-deadline",
+      "reason": "Сохранять точные границы при приведении примера в поддержку."
+    },
+    {
+      "lexeme_key": "fr:parce-que:because-reason",
+      "reason": "Вернуть знакомую причинную связку в теме мнения и причин."
+    },
+    {
+      "lexeme_key": "fr:grace-a:beneficial-cause",
+      "reason": "Отличать полезную причину от условия и последовательности."
+    },
+    {
+      "lexeme_key": "fr:prolonger:extend-time-allowance",
+      "reason": "Повторить просьбу о продлении при объяснении причины изменения плана."
+    },
+    {
+      "lexeme_key": "fr:jusqu-a:time-endpoint",
+      "reason": "Сохранять конечную временную границу в конкретном примере."
+    },
+    {
+      "lexeme_key": "fr:disponibilite:person-time-availability",
+      "reason": "Повторить доступность как конкретное обстоятельство, а не мнение."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "duration_measured": false,
+    "import_performed": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "transcriptions_structurally_checked": true,
+    "application_validator_passed": true,
+    "full_reused_objects_preserved": true,
+    "new_lexeme_collisions_checked": true,
+    "reading_load_checked": true,
+    "L05_no_new_mandatory_material": true
+  },
+  "open_issues": [
+    "Проверить наличие B1-U01-L05 в целевой базе: зависимость существует в подготовленном файле, импорт не подтверждён.",
+    "Редактору проверить естественность официальной рамки договорённости, условной оговорки, различия срока и промежутка времени и всех приблизительных транскрипций.",
+    "Прослушать браузерную озвучку новых слов и выбранных форм будущего времени. Длительность аудио и занятий не измерена.",
+    "Выполнить предпросмотр и пробное прохождение пяти занятий на сайте. Принятие пользователем, импорт и публикация не подтверждены."
+  ],
+  "progress": {
+    "current_unit": "B1-U02",
+    "prepared_session_ids": [
+      "B1-U02-L01",
+      "B1-U02-L02",
+      "B1-U02-L03",
+      "B1-U02-L04",
+      "B1-U02-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "B1-U03",
+    "next_unit_title": "Мнение и причины",
+    "previous_unit": "B1-U01",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Полная текущая тема из пяти занятий. Следующая тема не начата.",
+    "Вводится семь новых значений по занятиям: три, одно, два, одно, ноль. Полная квота новых слов не заполняется ради количества; в L05 нового обязательного материала нет.",
+    "Переход разрешён командой пользователя. Прежний пакет используется как подготовленный источник повторения, без утверждения о его импорте, публикации или освоении учеником.",
+    "В L01 повторяется полезная причина из B1-U01, в L03 осознание факта, в L04 снова полезная причина. Все прежние карточки и ключи сохранены целиком.",
+    "Convenir de показан выбранными рамками nous convenons de nous retrouver и nous convenons d’envoyer. Совместная договорённость отличается от личного желания.",
+    "Sous réserve de обозначает более официальную оговорку, а не безусловное подтверждение. Disponibilité относится к свободному времени человека.",
+    "Выбранные формы простого будущего préparerai, enverrai и confirmerai объяснены до проверки. Знакомые voudrais и pourriez-vous используются для желания и вежливой просьбы. Полная система спряжения не вводится.",
+    "В выбранной модели si mon frère est disponible настоящее после условия не заменяется будущим. Сообщение о будущем действии не доказывает выполнения условия.",
+    "Échéance — конечная дата выполнения; délai — отведённое время; rendez-vous — отдельная встреча. Прежний délai и reporter сохраняют свои ключи при переносе на срок сообщения.",
+    "Prolonger le délai и reporter l’échéance описывают просьбу дать больше времени и изменение конечной границы. Просьба без ответа не объявляется принятым переносом.",
+    "Подтверждение даты может сохранять оговорку о доступности другого человека. День будущего подтверждения не подменяет день встречи.",
+    "Все тексты оригинальные, ситуации и даты вымышлены. Реальные сообщения не отправляются, договорённости не заключаются.",
+    "Все ответы выбираются или собираются из готовых блоков. Апострофы в сборках не разрываются; нет свободного ввода или обязательного устного ответа.",
+    "Озвучка только браузером: fr-FR, asset_id=null. Нет аудиофайлов или внешних сервисов. База сайта, прежние пакеты, основной реестр, levels и curricula не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "B1-U02-L01",
+      "new_lexeme_keys": [
+        "fr:convenir-de:agree-action",
+        "fr:disponibilite:person-time-availability",
+        "fr:sous-reserve-de:conditional-arrangement"
+      ],
+      "reused_lexeme_keys": [
+        "fr:auparavant:earlier-relative-time",
+        "fr:date:calendar-date",
+        "fr:diner:evening-meal",
+        "fr:disponible:available-in-schedule",
+        "fr:ecrire:write",
+        "fr:frere:brother",
+        "fr:grace-a:beneficial-cause",
+        "fr:heure:clock-hour",
+        "fr:horaire:work-schedule",
+        "fr:huit:cardinal-number",
+        "fr:je-voudrais:polite-request",
+        "fr:lui:indirect-object-singular",
+        "fr:maison:house-home",
+        "fr:matin:morning",
+        "fr:preciser:clarify-service-details",
+        "fr:preparer:prepare-food",
+        "fr:rendez-vous:appointment",
+        "fr:retrouver:meet-by-arrangement",
+        "fr:si:real-condition",
+        "fr:soeur:sister",
+        "fr:soir:evening",
+        "fr:travailler:work",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U02-L02",
+      "new_lexeme_keys": [
+        "fr:echeance:agreed-deadline"
+      ],
+      "reused_lexeme_keys": [
+        "fr:convenir-de:agree-action",
+        "fr:date:calendar-date",
+        "fr:delai:task-completion-deadline",
+        "fr:disponibilite:person-time-availability",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:envoyer:send-message",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:je-voudrais:polite-request",
+        "fr:jeudi:weekday",
+        "fr:lui:indirect-object-singular",
+        "fr:mais:contrast-conjunction",
+        "fr:maison:house-home",
+        "fr:matin:morning",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:non:negative-answer",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:preparer:prepare-food",
+        "fr:rendez-vous:appointment",
+        "fr:samedi:weekday",
+        "fr:soeur:sister",
+        "fr:soir:evening",
+        "fr:sous-reserve-de:conditional-arrangement",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U02-L03",
+      "new_lexeme_keys": [
+        "fr:prolonger:extend-time-allowance",
+        "fr:jusqu-a:time-endpoint"
+      ],
+      "reused_lexeme_keys": [
+        "fr:changer:change-travel-ticket",
+        "fr:daccord:agreement",
+        "fr:delai:task-completion-deadline",
+        "fr:dimanche:weekday",
+        "fr:disponibilite:person-time-availability",
+        "fr:echeance:agreed-deadline",
+        "fr:envoyer:send-message",
+        "fr:je-voudrais:polite-request",
+        "fr:maison:house-home",
+        "fr:matin:morning",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:preparer:prepare-food",
+        "fr:rendez-vous:appointment",
+        "fr:rendre-visite:visit-person",
+        "fr:reporter:postpone-appointment",
+        "fr:samedi:weekday",
+        "fr:se-rendre-compte:realise-fact",
+        "fr:si:real-condition",
+        "fr:soeur:sister",
+        "fr:travailler:work",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U02-L04",
+      "new_lexeme_keys": [
+        "fr:confirmer:confirm-arrangement"
+      ],
+      "reused_lexeme_keys": [
+        "fr:auparavant:earlier-relative-time",
+        "fr:avec-elle:with-her",
+        "fr:convenir-de:agree-action",
+        "fr:delai:task-completion-deadline",
+        "fr:diner:evening-meal",
+        "fr:disponibilite:person-time-availability",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:echeance:agreed-deadline",
+        "fr:ensemble:together",
+        "fr:envoyer:send-message",
+        "fr:frere:brother",
+        "fr:grace-a:beneficial-cause",
+        "fr:heure:clock-hour",
+        "fr:horaire:work-schedule",
+        "fr:je-voudrais:polite-request",
+        "fr:maison:house-home",
+        "fr:matin:morning",
+        "fr:merci:thanks",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:preparer:prepare-food",
+        "fr:prolonger:extend-time-allowance",
+        "fr:rendez-vous:appointment",
+        "fr:reporter:postpone-appointment",
+        "fr:samedi:weekday",
+        "fr:soeur:sister",
+        "fr:soir:evening",
+        "fr:sous-reserve-de:conditional-arrangement",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U02-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:changer:change-travel-ticket",
+        "fr:confirmer:confirm-arrangement",
+        "fr:convenir-de:agree-action",
+        "fr:daccord:agreement",
+        "fr:delai:task-completion-deadline",
+        "fr:dimanche:weekday",
+        "fr:diner:evening-meal",
+        "fr:disponibilite:person-time-availability",
+        "fr:dix:cardinal-number",
+        "fr:echeance:agreed-deadline",
+        "fr:envoyer:send-message",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:je-voudrais:polite-request",
+        "fr:jusqu-a:time-endpoint",
+        "fr:maison:house-home",
+        "fr:matin:morning",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preparer:prepare-food",
+        "fr:prolonger:extend-time-allowance",
+        "fr:rendez-vous:appointment",
+        "fr:reporter:postpone-appointment",
+        "fr:rester:stay-at-place",
+        "fr:retrouver:meet-by-arrangement",
+        "fr:samedi:weekday",
+        "fr:soeur:sister",
+        "fr:soir:evening",
+        "fr:sous-reserve-de:conditional-arrangement",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "B1-U02-L01",
+      "material": "Nous convenons de; sous réserve de; je préparerai / je voudrais préparer; si + настоящее."
+    },
+    {
+      "session_id": "B1-U02-L02",
+      "material": "Quelle est l’échéance; nous convenons d’envoyer; крайний срок отдельно от встречи."
+    },
+    {
+      "session_id": "B1-U02-L03",
+      "material": "Pourriez-vous prolonger le délai jusqu’à; reporter l’échéance à; j’enverrai; просьба отдельно от согласия."
+    },
+    {
+      "session_id": "B1-U02-L04",
+      "material": "Je confirme / je confirmerai; подтверждение с сохранением оговорки."
+    },
+    {
+      "session_id": "B1-U02-L05",
+      "material": "Интеграция прежнего материала, без нового обязательного содержания."
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:convenir-de:agree-action",
+      "evidence": [
+        {
+          "session_id": "B1-U02-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:disponibilite:person-time-availability",
+      "evidence": [
+        {
+          "session_id": "B1-U02-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U02-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U02-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U02-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:sous-reserve-de:conditional-arrangement",
+      "evidence": [
+        {
+          "session_id": "B1-U02-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U02-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U02-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:echeance:agreed-deadline",
+      "evidence": [
+        {
+          "session_id": "B1-U02-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U02-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U02-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U02-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U02-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:prolonger:extend-time-allowance",
+      "evidence": [
+        {
+          "session_id": "B1-U02-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U02-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:confirmer:confirm-arrangement",
+      "evidence": [
+        {
+          "session_id": "B1-U02-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U02-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U02-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U02-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:jusqu-a:time-endpoint",
+      "evidence": [
+        {
+          "session_id": "B1-U02-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U02-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U02-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "text_conventions": {
+    "situation_status": "Оригинальные вымышленные договорённости. Факты и ответы из разных рассказов не переносятся друг в друга.",
+    "external_services_required": false,
+    "free_speaking_assessed": false
+  },
+  "reading_word_counts": [
+    63,
+    63,
+    64,
+    65,
+    77
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 35,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      7
+    ],
+    "new_lexemes": 7,
+    "external_prerequisites": [
+      "B1-U01-L05"
+    ],
+    "external_reference_status": "exists in prepared previous package; target database/import unverified",
+    "reused_lexeme_keys": 43,
+    "reading_word_counts": [
+      63,
+      63,
+      64,
+      65,
+      77
+    ],
+    "unit_complete": true
+  },
+  "application_validation": {
+    "report_file": "B1-U02.validation.json",
+    "valid": true,
+    "file_hash": "a772d9f2ee0ef1963b43fe51625fef205f583fe8fb57143cd7174e19a1bdc4a7",
+    "errors": 0,
+    "warning_counts": {
+      "browser_tts": 5,
+      "editorial_review_required": 5
+    },
+    "requires_editorial_review": true,
+    "database_modified": false
+  }
+}

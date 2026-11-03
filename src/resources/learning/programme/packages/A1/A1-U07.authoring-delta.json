@@ -1,0 +1,1133 @@
+{
+  "unit_id": "A1-U07",
+  "package_file": "A1-U07.v1.json",
+  "session_ids": [
+    "A1-U07-L01",
+    "A1-U07-L02",
+    "A1-U07-L03",
+    "A1-U07-L04",
+    "A1-U07-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "bus",
+      "lexeme_key": "fr:bus:bus",
+      "fr": "un bus",
+      "ru": [
+        "автобус"
+      ],
+      "transcription_ru": "э(н) бю́с",
+      "first_session_id": "A1-U07-L01"
+    },
+    {
+      "id": "train",
+      "lexeme_key": "fr:train:train",
+      "fr": "un train",
+      "ru": [
+        "поезд"
+      ],
+      "transcription_ru": "э(н) трэ́(н)",
+      "first_session_id": "A1-U07-L01"
+    },
+    {
+      "id": "metro",
+      "lexeme_key": "fr:metro:metro",
+      "fr": "le métro",
+      "ru": [
+        "метро"
+      ],
+      "transcription_ru": "лё мэтро́",
+      "first_session_id": "A1-U07-L01"
+    },
+    {
+      "id": "a-pied",
+      "lexeme_key": "fr:a-pied:on-foot",
+      "fr": "à pied",
+      "ru": [
+        "пешком"
+      ],
+      "transcription_ru": "а пьэ́",
+      "first_session_id": "A1-U07-L01"
+    },
+    {
+      "id": "billet",
+      "lexeme_key": "fr:billet:transport-ticket",
+      "fr": "un billet",
+      "ru": [
+        "билет на транспорт"
+      ],
+      "transcription_ru": "э(н) бийэ́",
+      "first_session_id": "A1-U07-L02"
+    },
+    {
+      "id": "arret",
+      "lexeme_key": "fr:arret:bus-stop",
+      "fr": "un arrêt",
+      "ru": [
+        "автобусная остановка"
+      ],
+      "transcription_ru": "э(н) нарэ́",
+      "first_session_id": "A1-U07-L02"
+    },
+    {
+      "id": "station",
+      "lexeme_key": "fr:station:metro-station",
+      "fr": "une station",
+      "ru": [
+        "станция метро в данном сочетании"
+      ],
+      "transcription_ru": "юн стасьо́(н)",
+      "first_session_id": "A1-U07-L02"
+    },
+    {
+      "id": "depart",
+      "lexeme_key": "fr:depart:transport-departure",
+      "fr": "le départ",
+      "ru": [
+        "отправление транспорта"
+      ],
+      "transcription_ru": "лё дэпа́р",
+      "first_session_id": "A1-U07-L03"
+    },
+    {
+      "id": "arrivee",
+      "lexeme_key": "fr:arrivee:transport-arrival",
+      "fr": "l’arrivée",
+      "ru": [
+        "прибытие транспорта"
+      ],
+      "transcription_ru": "ларивэ́",
+      "first_session_id": "A1-U07-L03"
+    },
+    {
+      "id": "partir",
+      "lexeme_key": "fr:partir:transport-leave",
+      "fr": "partir",
+      "ru": [
+        "отправляться (о транспорте)"
+      ],
+      "transcription_ru": "парти́р",
+      "first_session_id": "A1-U07-L03"
+    },
+    {
+      "id": "arriver",
+      "lexeme_key": "fr:arriver:transport-arrive",
+      "fr": "arriver",
+      "ru": [
+        "прибывать (о транспорте)"
+      ],
+      "transcription_ru": "аривэ́",
+      "first_session_id": "A1-U07-L03"
+    },
+    {
+      "id": "heure",
+      "lexeme_key": "fr:heure:clock-hour",
+      "fr": "une heure",
+      "ru": [
+        "час (в обозначении времени)"
+      ],
+      "transcription_ru": "юн ё́р",
+      "first_session_id": "A1-U07-L03"
+    },
+    {
+      "id": "aller-simple",
+      "lexeme_key": "fr:aller-simple:one-way-ticket",
+      "fr": "un aller simple",
+      "ru": [
+        "билет в одну сторону"
+      ],
+      "transcription_ru": "э(н) налэ сэ́(н)пль",
+      "first_session_id": "A1-U07-L04"
+    },
+    {
+      "id": "aller-retour",
+      "lexeme_key": "fr:aller-retour:return-ticket",
+      "fr": "un aller-retour",
+      "ru": [
+        "билет туда-обратно"
+      ],
+      "transcription_ru": "э(н) налэ рёту́р",
+      "first_session_id": "A1-U07-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:a-cote-de:next-to",
+    "fr:a-gauche:turn-left",
+    "fr:aller:go",
+    "fr:autre:other",
+    "fr:bonjour:greeting",
+    "fr:bouteille:bottle",
+    "fr:carrefour:crossroads",
+    "fr:couter:cost",
+    "fr:deux:cardinal-number",
+    "fr:dix:cardinal-number",
+    "fr:en-especes:cash-payment",
+    "fr:et:and",
+    "fr:euro:currency-unit",
+    "fr:gare:railway-station",
+    "fr:huit:cardinal-number",
+    "fr:je-voudrais:polite-request",
+    "fr:lait:milk",
+    "fr:magasin:shop",
+    "fr:merci:thanks",
+    "fr:neuf:cardinal-number",
+    "fr:paquet:food-packet",
+    "fr:par-carte:card-payment",
+    "fr:parc:park",
+    "fr:pates:pasta",
+    "fr:payer:pay",
+    "fr:pharmacie:pharmacy",
+    "fr:pour-aller-a:route-question",
+    "fr:pres-de:near-place",
+    "fr:quatre:cardinal-number",
+    "fr:riz:rice",
+    "fr:seulement:only",
+    "fr:sil-vous-plait:polite-request",
+    "fr:tourner:turn-in-route",
+    "fr:tout-droit:straight-ahead",
+    "fr:trois:cardinal-number",
+    "fr:un:indefinite-masculine",
+    "fr:une:indefinite-feminine"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A1.U07.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U07-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U07-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U07-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U07-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U07-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U07-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U07-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U07-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U07-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U07.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U07-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U07-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U07-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U07-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U07-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U07-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U07-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U07-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U06.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U07-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U04.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U07-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U07-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:gare:railway-station",
+      "reason": "Вернуть вокзал как ориентир по пути к гостинице."
+    },
+    {
+      "lexeme_key": "fr:bus:bus",
+      "reason": "Повторить знакомый транспорт при описании пути."
+    },
+    {
+      "lexeme_key": "fr:train:train",
+      "reason": "Вернуть поездку на поезде в коротком контексте прибытия."
+    },
+    {
+      "lexeme_key": "fr:arriver:transport-arrive",
+      "reason": "Сохранить введённое значение о прибытии транспорта; для прибытия человека проверить контекст отдельно."
+    },
+    {
+      "lexeme_key": "fr:heure:clock-hour",
+      "reason": "Повторить обозначение целых часов до новых временных условий."
+    },
+    {
+      "lexeme_key": "fr:billet:transport-ticket",
+      "reason": "Повторить билет как транспортный документ отдельно от других значений."
+    },
+    {
+      "lexeme_key": "fr:je-voudrais:polite-request",
+      "reason": "Перенести знакомую вежливую просьбу в гостиницу."
+    },
+    {
+      "lexeme_key": "fr:par-carte:card-payment",
+      "reason": "Сохранить целое выражение способа оплаты."
+    },
+    {
+      "lexeme_key": "fr:en-especes:cash-payment",
+      "reason": "Вернуть оплату наличными как отдельную деталь."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": false,
+    "project_validator_with_prepared_dependencies_passed": true,
+    "target_database_dependency_available": false,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "departure_arrival_ticket_and_payment_answers_reviewed": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Валидатор целевой базы фактически не нашёл A1-U06-L05. Перед импортом U07 нужно импортировать предыдущую тему U06. В проверке с подготовленными U06 и U07 вместе ошибок нет; база не изменялась.",
+    "Человеку проверить естественность французских сочетаний транспорта, просьб о билете, обозначений времени и условные русские транскрипции.",
+    "Прослушать браузерную озвучку, особенно часы со связками, отправление и прибытие и два типа билета. Длительность аудио и занятий пока не измерена.",
+    "Выполнить предпросмотр и пробное прохождение: два события расписания, выбор по двум условиям, место посадки и сочетание типа билета со способом оплаты."
+  ],
+  "progress": {
+    "current_unit": "A1-U07",
+    "prepared_session_ids": [
+      "A1-U07-L01",
+      "A1-U07-L02",
+      "A1-U07-L03",
+      "A1-U07-L04",
+      "A1-U07-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A1-U08",
+    "next_unit_title": "В гостинице",
+    "previous_unit": "A1-U06",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A1-U07. Принятие и импорт предыдущих пакетов не подтверждены. Для повторения взяты полные объекты подготовленных пакетов, а не плановые семена.",
+    "Новые значения распределены как четыре, три, пять, два и ноль. Меньшее число новых слов компенсируется применением уже показанных форм, а не искусственным расширением словаря.",
+    "В выбранных сочетаниях поездка на автобусе, поезде и метро использует en, движение пешком — à pied. Полная таблица транспортных предлогов не вводится.",
+    "Прежний ключ aller сохранён; личная форма движения не объявляется новым значением.",
+    "Билет на транспорт, автобусная остановка, станция метро и вокзал различаются. Станция имеет контекстное значение метро, остановка — автобуса.",
+    "Время показано целыми часами с уже известными числами восемь, девять и десять. Минуты, задержки, пересадки и длительность поездки не оцениваются.",
+    "Отправление и прибытие различаются как названия событий и выбранные формы действий part/arrive. Полная таблица спряжения не вводится.",
+    "Все расписания и цены вымышленные и действуют только внутри своего текста. Настоящие маршруты и тарифы не проверялись и не нужны для ответа.",
+    "Paris — только название пункта назначения в учебной просьбе. Знание географии не требуется, название имеет транскрипцию.",
+    "В одну сторону и туда-обратно являются целыми названиями типов билета. Их ключи не заменяют прежний глагол движения aller.",
+    "В L01 повторён маршрут A1-U06; в L03 и L04 — цена единицы товара, количество и уточнение просьбы из A1-U04.",
+    "Пятое занятие имеет kind=practice и не вводит нового обязательного материала. Выбор по расписанию сохраняет транспорт, событие и время.",
+    "Ответы не требуют печати. Апострофы и готовые сочетания сохраняются целыми; подписанная сборка не объявляется независимым тестом каждого слова.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A1-U07-L01",
+      "new_lexeme_keys": [
+        "fr:bus:bus",
+        "fr:train:train",
+        "fr:metro:metro",
+        "fr:a-pied:on-foot"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-cote-de:next-to",
+        "fr:a-gauche:turn-left",
+        "fr:aller:go",
+        "fr:carrefour:crossroads",
+        "fr:et:and",
+        "fr:gare:railway-station",
+        "fr:magasin:shop",
+        "fr:parc:park",
+        "fr:pharmacie:pharmacy",
+        "fr:tourner:turn-in-route",
+        "fr:tout-droit:straight-ahead"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U07-L02",
+      "new_lexeme_keys": [
+        "fr:billet:transport-ticket",
+        "fr:arret:bus-stop",
+        "fr:station:metro-station"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-cote-de:next-to",
+        "fr:a-pied:on-foot",
+        "fr:aller:go",
+        "fr:bonjour:greeting",
+        "fr:bus:bus",
+        "fr:gare:railway-station",
+        "fr:je-voudrais:polite-request",
+        "fr:merci:thanks",
+        "fr:metro:metro",
+        "fr:parc:park",
+        "fr:pres-de:near-place",
+        "fr:sil-vous-plait:polite-request",
+        "fr:train:train"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U07-L03",
+      "new_lexeme_keys": [
+        "fr:depart:transport-departure",
+        "fr:arrivee:transport-arrival",
+        "fr:partir:transport-leave",
+        "fr:arriver:transport-arrive",
+        "fr:heure:clock-hour"
+      ],
+      "reused_lexeme_keys": [
+        "fr:bouteille:bottle",
+        "fr:bus:bus",
+        "fr:couter:cost",
+        "fr:deux:cardinal-number",
+        "fr:dix:cardinal-number",
+        "fr:et:and",
+        "fr:euro:currency-unit",
+        "fr:huit:cardinal-number",
+        "fr:je-voudrais:polite-request",
+        "fr:lait:milk",
+        "fr:neuf:cardinal-number",
+        "fr:paquet:food-packet",
+        "fr:pates:pasta",
+        "fr:train:train",
+        "fr:trois:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U07-L04",
+      "new_lexeme_keys": [
+        "fr:aller-simple:one-way-ticket",
+        "fr:aller-retour:return-ticket"
+      ],
+      "reused_lexeme_keys": [
+        "fr:autre:other",
+        "fr:billet:transport-ticket",
+        "fr:bouteille:bottle",
+        "fr:couter:cost",
+        "fr:en-especes:cash-payment",
+        "fr:et:and",
+        "fr:euro:currency-unit",
+        "fr:gare:railway-station",
+        "fr:je-voudrais:polite-request",
+        "fr:lait:milk",
+        "fr:merci:thanks",
+        "fr:paquet:food-packet",
+        "fr:par-carte:card-payment",
+        "fr:payer:pay",
+        "fr:pour-aller-a:route-question",
+        "fr:quatre:cardinal-number",
+        "fr:riz:rice",
+        "fr:seulement:only",
+        "fr:sil-vous-plait:polite-request",
+        "fr:trois:cardinal-number",
+        "fr:un:indefinite-masculine",
+        "fr:une:indefinite-feminine"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U07-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-cote-de:next-to",
+        "fr:a-pied:on-foot",
+        "fr:aller-retour:return-ticket",
+        "fr:aller-simple:one-way-ticket",
+        "fr:aller:go",
+        "fr:arret:bus-stop",
+        "fr:arrivee:transport-arrival",
+        "fr:arriver:transport-arrive",
+        "fr:billet:transport-ticket",
+        "fr:bus:bus",
+        "fr:depart:transport-departure",
+        "fr:dix:cardinal-number",
+        "fr:en-especes:cash-payment",
+        "fr:et:and",
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:je-voudrais:polite-request",
+        "fr:merci:thanks",
+        "fr:metro:metro",
+        "fr:neuf:cardinal-number",
+        "fr:parc:park",
+        "fr:partir:transport-leave",
+        "fr:payer:pay",
+        "fr:pres-de:near-place",
+        "fr:sil-vous-plait:polite-request",
+        "fr:station:metro-station",
+        "fr:train:train"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A1-U07-L01",
+      "material": "Частотные сочетания en bus, en train, en métro и à pied со знакомой формой Je vais."
+    },
+    {
+      "session_id": "A1-U07-L02",
+      "material": "Сочетания billet de train, arrêt de bus, station de métro; повтор вопроса о месте и артикль l’arrêt."
+    },
+    {
+      "session_id": "A1-U07-L03",
+      "material": "Обозначение целых часов; выбранные формы part/arrive и à перед временем события; соотнесение с départ/arrivée."
+    },
+    {
+      "session_id": "A1-U07-L04",
+      "material": "Готовая просьба о типе билета с pour и названием назначения; повтор мужского рода, цены и двух способов оплаты."
+    }
+  ],
+  "text_conventions": {
+    "schedule_status": "Вымышленные независимые расписания с целыми часами, без расчёта длительности.",
+    "price_status": "Учебные независимые цены в евро, не реальные тарифы.",
+    "destination_status": "Paris — название назначения, без проверки географических фактов.",
+    "audio_basis": "Ответ зависит от слов и явно названных событий, не от тембра.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:bus:bus",
+      "evidence": [
+        {
+          "session_id": "A1-U07-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U07-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U07-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:train:train",
+      "evidence": [
+        {
+          "session_id": "A1-U07-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:metro:metro",
+      "evidence": [
+        {
+          "session_id": "A1-U07-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:a-pied:on-foot",
+      "evidence": [
+        {
+          "session_id": "A1-U07-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:billet:transport-ticket",
+      "evidence": [
+        {
+          "session_id": "A1-U07-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:arret:bus-stop",
+      "evidence": [
+        {
+          "session_id": "A1-U07-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:station:metro-station",
+      "evidence": [
+        {
+          "session_id": "A1-U07-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:depart:transport-departure",
+      "evidence": [
+        {
+          "session_id": "A1-U07-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:arrivee:transport-arrival",
+      "evidence": [
+        {
+          "session_id": "A1-U07-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:partir:transport-leave",
+      "evidence": [
+        {
+          "session_id": "A1-U07-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:arriver:transport-arrive",
+      "evidence": [
+        {
+          "session_id": "A1-U07-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:heure:clock-hour",
+      "evidence": [
+        {
+          "session_id": "A1-U07-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:aller-simple:one-way-ticket",
+      "evidence": [
+        {
+          "session_id": "A1-U07-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U07-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:aller-retour:return-ticket",
+      "evidence": [
+        {
+          "session_id": "A1-U07-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U07-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 14,
+    "external_prerequisites": [
+      "A1-U06-L05"
+    ],
+    "external_reference_status": "A1-U06-L05_not_found_in_target_database_by_project_validator; present_in_prepared_package_A1-U06",
+    "project_validator": {
+      "valid": false,
+      "errors": [
+        {
+          "code": "reference_not_found",
+          "path": "/sessions/0/prerequisite_ids/0",
+          "message": "Сессия не найдена в пакете или базе данных.",
+          "session_id": "A1-U07-L01",
+          "task_id": null,
+          "blocks_publication": true
+        }
+      ],
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 12
+      },
+      "file_hash": "1aefc02d874b31c6e1552fd60692d1bcf3cc6fca636551396a39e608da13ce01",
+      "requires_editorial_review": true
+    },
+    "prepared_dependency_validation": {
+      "valid": true,
+      "errors": 0,
+      "context": "Read-only validation of U06 and U07 units and sessions combined in memory. Does not imply U06 was imported.",
+      "report_file": "A1-U07.prepared-dependencies.validation.json",
+      "warnings_by_code": {
+        "editorial_review_required": 10,
+        "browser_tts": 24
+      }
+    },
+    "existing_lexeme_objects_preserved": 37,
+    "text_lengths": [
+      {
+        "session_id": "A1-U07-L01",
+        "reading_word_counts": [
+          16,
+          19
+        ],
+        "listening_word_counts": [
+          20
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U07-L02",
+        "reading_word_counts": [
+          20,
+          17
+        ],
+        "listening_word_counts": [
+          23
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U07-L03",
+        "reading_word_counts": [
+          18,
+          22
+        ],
+        "listening_word_counts": [
+          20
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U07-L04",
+        "reading_word_counts": [
+          20,
+          24
+        ],
+        "listening_word_counts": [
+          16
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U07-L05",
+        "reading_word_counts": [
+          22,
+          23
+        ],
+        "listening_word_counts": [
+          20,
+          18
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "en bus",
+        "session_id": "A1-U07-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "en métro",
+        "session_id": "A1-U07-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "en train",
+        "session_id": "A1-U07-L01",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "à pied",
+        "session_id": "A1-U07-L01",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "l’arrêt de bus",
+        "session_id": "A1-U07-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "station de métro",
+        "session_id": "A1-U07-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "billet de train",
+        "session_id": "A1-U07-L02",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "huit heures",
+        "session_id": "A1-U07-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "neuf heures",
+        "session_id": "A1-U07-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "dix heures",
+        "session_id": "A1-U07-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "part à",
+        "session_id": "A1-U07-L03",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "arrive à",
+        "session_id": "A1-U07-L03",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "aller simple",
+        "session_id": "A1-U07-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "aller-retour",
+        "session_id": "A1-U07-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "pour Paris",
+        "session_id": "A1-U07-L04",
+        "task_id": "Q03"
+      }
+    ]
+  }
+}

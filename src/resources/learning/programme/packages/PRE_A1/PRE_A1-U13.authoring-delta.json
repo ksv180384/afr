@@ -1,0 +1,932 @@
+{
+  "unit_id": "PRE_A1-U13",
+  "package_file": "PRE_A1-U13.v1.json",
+  "session_ids": [
+    "PRE_A1-U13-L01",
+    "PRE_A1-U13-L02",
+    "PRE_A1-U13-L03",
+    "PRE_A1-U13-L04",
+    "PRE_A1-U13-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "lundi",
+      "lexeme_key": "fr:lundi:weekday",
+      "fr": "lundi",
+      "ru": [
+        "понедельник"
+      ],
+      "transcription_ru": "лё(н)ди́",
+      "first_session_id": "PRE_A1-U13-L01"
+    },
+    {
+      "id": "mardi",
+      "lexeme_key": "fr:mardi:weekday",
+      "fr": "mardi",
+      "ru": [
+        "вторник"
+      ],
+      "transcription_ru": "марди́",
+      "first_session_id": "PRE_A1-U13-L01"
+    },
+    {
+      "id": "mercredi",
+      "lexeme_key": "fr:mercredi:weekday",
+      "fr": "mercredi",
+      "ru": [
+        "среда"
+      ],
+      "transcription_ru": "мэркрёди́",
+      "first_session_id": "PRE_A1-U13-L01"
+    },
+    {
+      "id": "jeudi",
+      "lexeme_key": "fr:jeudi:weekday",
+      "fr": "jeudi",
+      "ru": [
+        "четверг"
+      ],
+      "transcription_ru": "жёди́",
+      "first_session_id": "PRE_A1-U13-L02"
+    },
+    {
+      "id": "vendredi",
+      "lexeme_key": "fr:vendredi:weekday",
+      "fr": "vendredi",
+      "ru": [
+        "пятница"
+      ],
+      "transcription_ru": "ва(н)дрэди́",
+      "first_session_id": "PRE_A1-U13-L02"
+    },
+    {
+      "id": "samedi",
+      "lexeme_key": "fr:samedi:weekday",
+      "fr": "samedi",
+      "ru": [
+        "суббота"
+      ],
+      "transcription_ru": "самди́",
+      "first_session_id": "PRE_A1-U13-L02"
+    },
+    {
+      "id": "dimanche",
+      "lexeme_key": "fr:dimanche:weekday",
+      "fr": "dimanche",
+      "ru": [
+        "воскресенье"
+      ],
+      "transcription_ru": "дима́(н)ш",
+      "first_session_id": "PRE_A1-U13-L02"
+    },
+    {
+      "id": "aujourdhui",
+      "lexeme_key": "fr:aujourdhui:today",
+      "fr": "aujourd’hui",
+      "ru": [
+        "сегодня"
+      ],
+      "transcription_ru": "ожурдюи́",
+      "first_session_id": "PRE_A1-U13-L03"
+    },
+    {
+      "id": "demain",
+      "lexeme_key": "fr:demain:tomorrow",
+      "fr": "demain",
+      "ru": [
+        "завтра"
+      ],
+      "transcription_ru": "дёмэ́(н)",
+      "first_session_id": "PRE_A1-U13-L03"
+    },
+    {
+      "id": "rendez-vous",
+      "lexeme_key": "fr:rendez-vous:appointment",
+      "fr": "un rendez-vous",
+      "ru": [
+        "назначенная встреча"
+      ],
+      "transcription_ru": "э(н) ра(н)дэ-ву́",
+      "first_session_id": "PRE_A1-U13-L03"
+    },
+    {
+      "id": "hier",
+      "lexeme_key": "fr:hier:yesterday",
+      "fr": "hier",
+      "ru": [
+        "вчера"
+      ],
+      "transcription_ru": "йэ́р",
+      "first_session_id": "PRE_A1-U13-L04"
+    },
+    {
+      "id": "quand",
+      "lexeme_key": "fr:quand:when-question",
+      "fr": "quand",
+      "ru": [
+        "когда (вопрос о времени)"
+      ],
+      "transcription_ru": "ка́(н)",
+      "first_session_id": "PRE_A1-U13-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:elle:feminine-subject",
+    "fr:fromage:cheese",
+    "fr:jaime:food-liking",
+    "fr:je-naime-pas:food-dislike",
+    "fr:lire:read",
+    "fr:livre:book",
+    "fr:pain:bread"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "PRE_A1.U13.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U13.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U12.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U10.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:aujourdhui:today",
+      "reason": "Соединять знакомую метку сегодняшнего дня с новой рамкой времени суток только после её объяснения."
+    },
+    {
+      "lexeme_key": "fr:demain:tomorrow",
+      "reason": "Вернуть метку завтрашнего дня без введения будущего времени глагола."
+    },
+    {
+      "lexeme_key": "fr:hier:yesterday",
+      "reason": "Повторять как календарную подпись без рассказа о действиях в прошлом."
+    },
+    {
+      "lexeme_key": "fr:rendez-vous:appointment",
+      "reason": "Сохранить готовую краткую запись о встрече, не вводя новые формы глагола встречи."
+    },
+    {
+      "lexeme_key": "fr:quand:when-question",
+      "reason": "Повторить короткий вопрос о времени в контексте встречи."
+    },
+    {
+      "lexeme_key": "fr:mercredi:weekday",
+      "reason": "Отложенно различить название среды и пятницы."
+    },
+    {
+      "lexeme_key": "fr:vendredi:weekday",
+      "reason": "Отложенно различить название пятницы и среды."
+    },
+    {
+      "lexeme_key": "fr:dimanche:weekday",
+      "reason": "Повторить переход от воскресенья к понедельнику в недельном цикле."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "local_database_references_checked": true,
+    "registry_collisions_checked": true,
+    "package_hash_verified": true,
+    "pronunciation_coverage_warnings_absent": true,
+    "new_lexeme_evidence_checked": true,
+    "practice_kind_checked": true,
+    "apostrophe_and_hyphen_tokens_preserved": true,
+    "shuffled_choice_feedback_checked": true,
+    "calendar_conditions_self_contained": true,
+    "no_past_tense_introduced": true
+  },
+  "open_issues": [
+    "До импорта целевая база должна содержать PRE_A1-U12-L05; наличие на другом сервере пакетом не обеспечивается.",
+    "Человеку нужно проверить французские краткие записи, переводы и условные русские транскрипции; прослушать браузерную озвучку, особенно названия среды, пятницы, понедельника и метки времени.",
+    "Выполнить предпросмотр, пробное прохождение и замер длительности. Ориентир 6 минут на занятие не измерен."
+  ],
+  "progress": {
+    "current_unit": "PRE_A1-U13",
+    "prepared_session_ids": [
+      "PRE_A1-U13-L01",
+      "PRE_A1-U13-L02",
+      "PRE_A1-U13-L03",
+      "PRE_A1-U13-L04",
+      "PRE_A1-U13-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "PRE_A1-U14",
+    "previous_unit": "PRE_A1-U12",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку текущей темы. Отдельное подтверждение принятия или импорта предыдущих пакетов не получено.",
+    "Дни даны как самостоятельные названия и краткие ответы о конкретном дне. Артикль для регулярного повторения по дням не вводится.",
+    "Сегодня, завтра и вчера отнесены к данным конкретного задания, а не к настоящей дате на устройстве.",
+    "Вчера дано только в календарных подписях без глагола. Прошедшее время и конструкции рассказа о прошлом не вводятся.",
+    "Назначенная встреча вводится с артиклем в словарной карточке и явно показана без артикля в готовой краткой записи о времени. Это существительное, а не новая форма глагола встречаться.",
+    "Короткий разговорный вопрос о времени вводится до вопросов о нём. В интеграционном занятии новых рамок нет.",
+    "В первых четырёх занятиях соответственно 3, 4, 3 и 2 новых значения. Две карточки четвёртого занятия нужны для метки вчера и вопроса о времени, без расширения словаря ради количества.",
+    "Повторены действия предыдущей темы и предпочтения еды из более ранней темы. Основной реестр и предыдущие пакеты не изменены.",
+    "Слово с апострофом и название встречи с дефисом сохраняются целыми в сборке. Подписанная сборка не объявляется независимой проверкой каждого слова."
+  ],
+  "session_material": [
+    {
+      "session_id": "PRE_A1-U13-L01",
+      "new_lexeme_keys": [
+        "fr:lundi:weekday",
+        "fr:mardi:weekday",
+        "fr:mercredi:weekday"
+      ],
+      "reused_lexeme_keys": [
+        "fr:elle:feminine-subject",
+        "fr:lire:read",
+        "fr:livre:book"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U13-L02",
+      "new_lexeme_keys": [
+        "fr:jeudi:weekday",
+        "fr:vendredi:weekday",
+        "fr:samedi:weekday",
+        "fr:dimanche:weekday"
+      ],
+      "reused_lexeme_keys": [
+        "fr:lundi:weekday",
+        "fr:mardi:weekday",
+        "fr:mercredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U13-L03",
+      "new_lexeme_keys": [
+        "fr:aujourdhui:today",
+        "fr:demain:tomorrow",
+        "fr:rendez-vous:appointment"
+      ],
+      "reused_lexeme_keys": [
+        "fr:fromage:cheese",
+        "fr:jaime:food-liking",
+        "fr:jeudi:weekday",
+        "fr:lundi:weekday",
+        "fr:mardi:weekday",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U13-L04",
+      "new_lexeme_keys": [
+        "fr:hier:yesterday",
+        "fr:quand:when-question"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aujourdhui:today",
+        "fr:demain:tomorrow",
+        "fr:dimanche:weekday",
+        "fr:je-naime-pas:food-dislike",
+        "fr:jeudi:weekday",
+        "fr:lundi:weekday",
+        "fr:mardi:weekday",
+        "fr:mercredi:weekday",
+        "fr:pain:bread",
+        "fr:rendez-vous:appointment",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U13-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:aujourdhui:today",
+        "fr:demain:tomorrow",
+        "fr:dimanche:weekday",
+        "fr:hier:yesterday",
+        "fr:jeudi:weekday",
+        "fr:lundi:weekday",
+        "fr:mardi:weekday",
+        "fr:mercredi:weekday",
+        "fr:quand:when-question",
+        "fr:rendez-vous:appointment",
+        "fr:samedi:weekday",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "PRE_A1-U13-L01",
+      "material": "Первые три названия дней и краткий ответ о конкретном дне; строчная буква в списке."
+    },
+    {
+      "session_id": "PRE_A1-U13-L02",
+      "material": "Остальные четыре названия и полный недельный цикл, включая переход к понедельнику."
+    },
+    {
+      "session_id": "PRE_A1-U13-L03",
+      "material": "Краткие подписи с метками сегодня и завтра; готовая запись о встрече с относительной меткой и уточнением дня."
+    },
+    {
+      "session_id": "PRE_A1-U13-L04",
+      "material": "Вчера как подпись без глагола; короткий разговорный вопрос о времени встречи и ответ с меткой и днём."
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:lundi:weekday",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:mardi:weekday",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:mercredi:weekday",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:jeudi:weekday",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:vendredi:weekday",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:samedi:weekday",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:dimanche:weekday",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:aujourdhui:today",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:demain:tomorrow",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:rendez-vous:appointment",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:hier:yesterday",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:quand:when-question",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 12,
+    "external_prerequisites": [
+      "PRE_A1-U12-L05"
+    ],
+    "external_reference_status": "reference_package_and_local_project_validator_passed; other_target_databases_unverified",
+    "project_validator": {
+      "valid": true,
+      "errors": [],
+      "file_hash": "230cfbc2688a45e21a5fb8dcf589feff917967705bb6c1781dfa64929873f84b",
+      "warning_counts": {
+        "editorial_review_required": 5,
+        "browser_tts": 13
+      },
+      "requires_editorial_review": true,
+      "report_file": "PRE_A1-U13.validation.json"
+    }
+  }
+}

@@ -1,0 +1,1020 @@
+{
+  "unit_id": "A1-U09",
+  "package_file": "A1-U09.v1.json",
+  "session_ids": [
+    "A1-U09-L01",
+    "A1-U09-L02",
+    "A1-U09-L03",
+    "A1-U09-L04",
+    "A1-U09-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "mois",
+      "lexeme_key": "fr:mois:calendar-month",
+      "fr": "un mois",
+      "ru": [
+        "месяц календаря"
+      ],
+      "transcription_ru": "э(н) муа́",
+      "first_session_id": "A1-U09-L01"
+    },
+    {
+      "id": "juin",
+      "lexeme_key": "fr:juin:month-june",
+      "fr": "juin",
+      "ru": [
+        "июнь"
+      ],
+      "transcription_ru": "жюэ́(н)",
+      "first_session_id": "A1-U09-L01"
+    },
+    {
+      "id": "juillet",
+      "lexeme_key": "fr:juillet:month-july",
+      "fr": "juillet",
+      "ru": [
+        "июль"
+      ],
+      "transcription_ru": "жюийэ́",
+      "first_session_id": "A1-U09-L01"
+    },
+    {
+      "id": "midi",
+      "lexeme_key": "fr:midi:noon",
+      "fr": "midi",
+      "ru": [
+        "полдень (двенадцать часов дня)"
+      ],
+      "transcription_ru": "миди́",
+      "first_session_id": "A1-U09-L02"
+    },
+    {
+      "id": "et-quart",
+      "lexeme_key": "fr:et-quart:quarter-past-time",
+      "fr": "et quart",
+      "ru": [
+        "пятнадцать минут после названного часа"
+      ],
+      "transcription_ru": "э ка́р",
+      "first_session_id": "A1-U09-L02"
+    },
+    {
+      "id": "et-demie",
+      "lexeme_key": "fr:et-demie:half-past-hour",
+      "fr": "et demie",
+      "ru": [
+        "тридцать минут после названного часа"
+      ],
+      "transcription_ru": "э дёми́",
+      "first_session_id": "A1-U09-L02"
+    },
+    {
+      "id": "disponible",
+      "lexeme_key": "fr:disponible:available-in-schedule",
+      "fr": "disponible",
+      "ru": [
+        "свободен по расписанию"
+      ],
+      "transcription_ru": "диспони́бль",
+      "first_session_id": "A1-U09-L03"
+    },
+    {
+      "id": "occupe",
+      "lexeme_key": "fr:occupe:busy-in-schedule",
+      "fr": "occupé",
+      "ru": [
+        "занят по расписанию"
+      ],
+      "transcription_ru": "окюпэ́",
+      "first_session_id": "A1-U09-L03"
+    },
+    {
+      "id": "on-peut-se-retrouver",
+      "lexeme_key": "fr:on-peut-se-retrouver:meeting-proposal",
+      "fr": "on peut se retrouver",
+      "ru": [
+        "можем встретиться (рамка предложения)"
+      ],
+      "transcription_ru": "о(н) пё сё рётрувэ́",
+      "first_session_id": "A1-U09-L04"
+    },
+    {
+      "id": "daccord",
+      "lexeme_key": "fr:daccord:agreement",
+      "fr": "d’accord",
+      "ru": [
+        "согласен (принятие предложения)"
+      ],
+      "transcription_ru": "дако́р",
+      "first_session_id": "A1-U09-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:a-cote-de:next-to",
+    "fr:cafe:venue",
+    "fr:chambre:hotel-room",
+    "fr:date:calendar-date",
+    "fr:deux:cardinal-number",
+    "fr:dix:cardinal-number",
+    "fr:et:and",
+    "fr:gare:railway-station",
+    "fr:heure:clock-hour",
+    "fr:huit:cardinal-number",
+    "fr:loin-de:far-from-place",
+    "fr:magasin:shop",
+    "fr:mai:month-may",
+    "fr:mardi:weekday",
+    "fr:mercredi:weekday",
+    "fr:neuf:cardinal-number",
+    "fr:non:negative-answer",
+    "fr:nuit:night",
+    "fr:parc:park",
+    "fr:partir:transport-leave",
+    "fr:pharmacie:pharmacy",
+    "fr:pres-de:near-place",
+    "fr:rendez-vous:appointment",
+    "fr:reservation:hotel-booking",
+    "fr:sejour:hotel-stay",
+    "fr:train:train"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A1.U09.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U09-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U09-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U09-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U09-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U09-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U09-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U09-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U09-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U09-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U09.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U09-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U09-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U09-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U09-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U09-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U09-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U09-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U09-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U08.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U09-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U06.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U09-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U06.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U09-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:rendez-vous:appointment",
+      "reason": "Сохранить прежний ключ назначенной встречи в следующей теме друзей и досуга."
+    },
+    {
+      "lexeme_key": "fr:disponible:available-in-schedule",
+      "reason": "Вернуть свободное время при согласовании совместного занятия."
+    },
+    {
+      "lexeme_key": "fr:occupe:busy-in-schedule",
+      "reason": "Повторить занятость в конкретный момент без вывода о всём дне."
+    },
+    {
+      "lexeme_key": "fr:on-peut-se-retrouver:meeting-proposal",
+      "reason": "Повторить готовое предложение встречи до расширения досуга."
+    },
+    {
+      "lexeme_key": "fr:daccord:agreement",
+      "reason": "Повторить принятие предложения отдельно от вопроса о доступности."
+    },
+    {
+      "lexeme_key": "fr:midi:noon",
+      "reason": "Вернуть полдень как удобную точку времени."
+    },
+    {
+      "lexeme_key": "fr:et-quart:quarter-past-time",
+      "reason": "Повторить пятнадцать минут после часа."
+    },
+    {
+      "lexeme_key": "fr:et-demie:half-past-hour",
+      "reason": "Повторить тридцать минут после часа, не смешивая с четвертью."
+    },
+    {
+      "lexeme_key": "fr:juin:month-june",
+      "reason": "Вернуть новый месяц в короткой календарной записи."
+    },
+    {
+      "lexeme_key": "fr:juillet:month-july",
+      "reason": "Сохранить различие июня и июля."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "appointment_date_and_may_keys_reused": true,
+    "proposal_meaning_separated_from_permission": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "availability_day_and_time_scope_reviewed": true,
+    "final_agreement_distinguished_from_rejected_proposal": true,
+    "apostrophe_kept_in_whole_token": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A1-U08-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Человеку проверить естественность французских предложений встречи, выбранных вопросов о доступности и условные русские транскрипции.",
+    "Прослушать браузерную озвучку, особенно июнь и июль, четверть и половину часа и начало вопроса с апострофом. Время аудио и занятий пока не измерено.",
+    "Выполнить предпросмотр и пробное прохождение: календарная дата и время, день и час доступности, отказ от первого предложения и принятие второго."
+  ],
+  "progress": {
+    "current_unit": "A1-U09",
+    "prepared_session_ids": [
+      "A1-U09-L01",
+      "A1-U09-L02",
+      "A1-U09-L03",
+      "A1-U09-L04",
+      "A1-U09-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A1-U10",
+    "next_unit_title": "Друзья и досуг",
+    "previous_unit": "A1-U08",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A1-U09. Принятие и импорт предыдущих пакетов не подтверждены; повторение использует полные объекты подготовленных пакетов.",
+    "Новые значения распределены как три, три, два, два и ноль. Не вводится весь календарь или все способы называния времени сразу.",
+    "Назначенная встреча сохраняет прежний ключ fr:rendez-vous:appointment; она не объявляется новым словом из-за повторного появления в плане A1.",
+    "Май и календарная дата повторяются; июнь, июль и название месяца добавлены постепенно. Год и соответствие даты дню недели не требуются.",
+    "Полдень означает двенадцать часов дня. В выбранных сочетаниях et quart и et demie добавляют пятнадцать и тридцать минут к названному часу; нет минут до следующего часа и полуночи.",
+    "Перед календарной датой используется показанное le, перед временем à. Числа из даты и времени не смешиваются.",
+    "Дни недели, целые часы, городские места и формы о себе повторяются с прежними ключами. Свободное время относится к названному дню и часу, не ко всему дню.",
+    "Введены готовый вопрос Est-ce que vous êtes disponible и выбранные формы ответа о себе, без полной таблицы лиц и всех вопросов.",
+    "Готовая рамка On peut se retrouver выражает предложение совместной встречи. Она имеет отдельный ключ от прежней Je peux как вопроса о разрешении; прежний ключ не переименовывается.",
+    "Вопросительное начало Est-ce qu’on в сборке сохраняется целым с апострофом. Спряжение pouvoir не расширяется до полной таблицы.",
+    "Согласие D’accord принимает конкретное предложение. При отказе от первого и принятии второго окончательная договорённость относится ко второму, а не к первым упомянутым условиям.",
+    "Роли говорящих указаны порядком реплик; ответ не зависит от тембра, возраста, пола или эмоциональной интонации браузерного голоса.",
+    "В L01 повторены даты проживания из A1-U08, в L03 и L04 — расстояния и ориентиры A1-U06. Пятое занятие имеет kind=practice и не вводит нового обязательного материала.",
+    "Все записи и переговоры вымышленные. Настоящие календари, события и внешние сервисы для решения не нужны.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A1-U09-L01",
+      "new_lexeme_keys": [
+        "fr:mois:calendar-month",
+        "fr:juin:month-june",
+        "fr:juillet:month-july"
+      ],
+      "reused_lexeme_keys": [
+        "fr:cafe:venue",
+        "fr:chambre:hotel-room",
+        "fr:date:calendar-date",
+        "fr:deux:cardinal-number",
+        "fr:dix:cardinal-number",
+        "fr:huit:cardinal-number",
+        "fr:mai:month-may",
+        "fr:neuf:cardinal-number",
+        "fr:nuit:night",
+        "fr:parc:park",
+        "fr:rendez-vous:appointment",
+        "fr:reservation:hotel-booking",
+        "fr:sejour:hotel-stay"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U09-L02",
+      "new_lexeme_keys": [
+        "fr:midi:noon",
+        "fr:et-quart:quarter-past-time",
+        "fr:et-demie:half-past-hour"
+      ],
+      "reused_lexeme_keys": [
+        "fr:cafe:venue",
+        "fr:dix:cardinal-number",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:juillet:month-july",
+        "fr:juin:month-june",
+        "fr:neuf:cardinal-number",
+        "fr:parc:park",
+        "fr:partir:transport-leave",
+        "fr:rendez-vous:appointment",
+        "fr:sejour:hotel-stay",
+        "fr:train:train"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U09-L03",
+      "new_lexeme_keys": [
+        "fr:disponible:available-in-schedule",
+        "fr:occupe:busy-in-schedule"
+      ],
+      "reused_lexeme_keys": [
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:loin-de:far-from-place",
+        "fr:magasin:shop",
+        "fr:mardi:weekday",
+        "fr:mercredi:weekday",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:pharmacie:pharmacy",
+        "fr:pres-de:near-place"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U09-L04",
+      "new_lexeme_keys": [
+        "fr:on-peut-se-retrouver:meeting-proposal",
+        "fr:daccord:agreement"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-cote-de:next-to",
+        "fr:cafe:venue",
+        "fr:disponible:available-in-schedule",
+        "fr:et-quart:quarter-past-time",
+        "fr:et:and",
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:magasin:shop",
+        "fr:mardi:weekday",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:non:negative-answer",
+        "fr:occupe:busy-in-schedule",
+        "fr:parc:park",
+        "fr:pharmacie:pharmacy",
+        "fr:rendez-vous:appointment"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U09-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:cafe:venue",
+        "fr:daccord:agreement",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:et-demie:half-past-hour",
+        "fr:et-quart:quarter-past-time",
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:juillet:month-july",
+        "fr:juin:month-june",
+        "fr:mardi:weekday",
+        "fr:mercredi:weekday",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:non:negative-answer",
+        "fr:occupe:busy-in-schedule",
+        "fr:on-peut-se-retrouver:meeting-proposal",
+        "fr:parc:park",
+        "fr:partir:transport-leave",
+        "fr:rendez-vous:appointment",
+        "fr:train:train"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A1-U09-L01",
+      "material": "Дата с числом и выбранными месяцами, le перед календарной датой встречи; повтор названия rendez-vous."
+    },
+    {
+      "session_id": "A1-U09-L02",
+      "material": "À перед временем, midi, neuf heures et quart / et demie как целые образцы."
+    },
+    {
+      "session_id": "A1-U09-L03",
+      "material": "Je suis disponible / occupé с конкретными днём и временем; готовый вопрос Est-ce que vous êtes disponible."
+    },
+    {
+      "session_id": "A1-U09-L04",
+      "material": "Готовая рамка On peut se retrouver, согласие D’accord; вопрос Est-ce qu’on peut с целым апострофом, выбранная форма peut после on."
+    }
+  ],
+  "text_conventions": {
+    "calendar_status": "Вымышленные даты без года; день недели не вычисляется.",
+    "time_scope": "Полдень, целые часы, пятнадцать и тридцать минут после названного часа.",
+    "availability_scope": "Доступность задаётся для конкретного дня и времени, без вывода о всём дне.",
+    "speaker_roles": "Порядок говорящих задан явно; итог определяется согласием на конкретное предложение.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:mois:calendar-month",
+      "evidence": [
+        {
+          "session_id": "A1-U09-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:juin:month-june",
+      "evidence": [
+        {
+          "session_id": "A1-U09-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:juillet:month-july",
+      "evidence": [
+        {
+          "session_id": "A1-U09-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U09-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:midi:noon",
+      "evidence": [
+        {
+          "session_id": "A1-U09-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U09-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U09-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U09-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:et-quart:quarter-past-time",
+      "evidence": [
+        {
+          "session_id": "A1-U09-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U09-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:et-demie:half-past-hour",
+      "evidence": [
+        {
+          "session_id": "A1-U09-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:disponible:available-in-schedule",
+      "evidence": [
+        {
+          "session_id": "A1-U09-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U09-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U09-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:occupe:busy-in-schedule",
+      "evidence": [
+        {
+          "session_id": "A1-U09-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:on-peut-se-retrouver:meeting-proposal",
+      "evidence": [
+        {
+          "session_id": "A1-U09-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:daccord:agreement",
+      "evidence": [
+        {
+          "session_id": "A1-U09-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U09-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U09-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 10,
+    "external_prerequisites": [
+      "A1-U08-L05"
+    ],
+    "external_reference_status": "A1-U08-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 12
+      },
+      "file_hash": "bf6066efb54de3088ff534fb545e9f754180e2a937a432333a696b9fb750540c",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 26,
+    "text_lengths": [
+      {
+        "session_id": "A1-U09-L01",
+        "reading_word_counts": [
+          24,
+          22
+        ],
+        "listening_word_counts": [
+          20
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U09-L02",
+        "reading_word_counts": [
+          22,
+          23
+        ],
+        "listening_word_counts": [
+          21
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U09-L03",
+        "reading_word_counts": [
+          22,
+          20
+        ],
+        "listening_word_counts": [
+          20
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U09-L04",
+        "reading_word_counts": [
+          21,
+          36
+        ],
+        "listening_word_counts": [
+          19
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U09-L05",
+        "reading_word_counts": [
+          20,
+          23
+        ],
+        "listening_word_counts": [
+          21,
+          32
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "le neuf juin",
+        "session_id": "A1-U09-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "le neuf juillet",
+        "session_id": "A1-U09-L02",
+        "task_id": "Q01"
+      },
+      {
+        "frame": "heures et quart",
+        "session_id": "A1-U09-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "heures et demie",
+        "session_id": "A1-U09-L02",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "à midi",
+        "session_id": "A1-U09-L02",
+        "task_id": "Q06"
+      },
+      {
+        "frame": "Je suis disponible",
+        "session_id": "A1-U09-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Je suis occupé",
+        "session_id": "A1-U09-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Est-ce que vous êtes disponible",
+        "session_id": "A1-U09-L03",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "On peut se retrouver",
+        "session_id": "A1-U09-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "D’accord",
+        "session_id": "A1-U09-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Est-ce qu’on peut se retrouver",
+        "session_id": "A1-U09-L04",
+        "task_id": "Q07"
+      }
+    ]
+  }
+}

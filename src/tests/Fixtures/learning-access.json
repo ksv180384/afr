@@ -1,0 +1,151 @@
+{
+  "outline": [
+    {
+      "id": "PRE_A1",
+      "title": "С нуля",
+      "path": "/practice/pre-a1",
+      "published": true,
+      "units": [
+        {
+          "id": "U1",
+          "title": "Первая тема",
+          "path": "/practice/pre-a1/u1",
+          "sessions": [
+            {
+              "id": "S1",
+              "title": "Первое",
+              "path": "/practice/pre-a1/u1/s1",
+              "prerequisite_ids": []
+            },
+            {
+              "id": "S2",
+              "title": "Второе",
+              "path": "/practice/pre-a1/u1/s2",
+              "prerequisite_ids": []
+            }
+          ]
+        },
+        {
+          "id": "U2",
+          "title": "Вторая тема",
+          "path": "/practice/pre-a1/u2",
+          "sessions": [
+            {
+              "id": "S3",
+              "title": "Третье",
+              "path": "/practice/pre-a1/u2/s3",
+              "prerequisite_ids": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A1",
+      "title": "Начальный",
+      "path": "/practice/a1",
+      "published": true,
+      "units": [
+        {
+          "id": "AU1",
+          "title": "Тема A1",
+          "path": "/practice/a1/u1",
+          "sessions": [
+            {
+              "id": "S4",
+              "title": "Четвёртое",
+              "path": "/practice/a1/u1/s4",
+              "prerequisite_ids": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "completed": [],
+      "levels": [
+        "PRE_A1"
+      ],
+      "units": [
+        "U1"
+      ],
+      "sessions": [
+        "S1"
+      ]
+    },
+    {
+      "completed": [
+        "S1"
+      ],
+      "levels": [
+        "PRE_A1"
+      ],
+      "units": [
+        "U1"
+      ],
+      "sessions": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "completed": [
+        "S1",
+        "S2"
+      ],
+      "levels": [
+        "PRE_A1"
+      ],
+      "units": [
+        "U1",
+        "U2"
+      ],
+      "sessions": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "completed": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "levels": [
+        "PRE_A1",
+        "A1"
+      ],
+      "units": [
+        "U1",
+        "U2",
+        "AU1"
+      ],
+      "sessions": [
+        "S1",
+        "S2",
+        "S3",
+        "S4"
+      ]
+    },
+    {
+      "completed": [
+        "S4"
+      ],
+      "levels": [
+        "PRE_A1",
+        "A1"
+      ],
+      "units": [
+        "U1",
+        "AU1"
+      ],
+      "sessions": [
+        "S1",
+        "S4"
+      ]
+    }
+  ]
+}

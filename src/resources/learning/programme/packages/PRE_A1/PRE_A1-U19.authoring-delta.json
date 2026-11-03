@@ -1,0 +1,860 @@
+{
+  "unit_id": "PRE_A1-U19",
+  "package_file": "PRE_A1-U19.v1.json",
+  "session_ids": [
+    "PRE_A1-U19-L01",
+    "PRE_A1-U19-L02",
+    "PRE_A1-U19-L03",
+    "PRE_A1-U19-L04",
+    "PRE_A1-U19-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "entrez",
+      "lexeme_key": "fr:entrez:enter-request",
+      "fr": "entrez",
+      "ru": [
+        "войдите (короткая инструкция)"
+      ],
+      "transcription_ru": "а(н)трэ́",
+      "first_session_id": "PRE_A1-U19-L01"
+    },
+    {
+      "id": "sortez",
+      "lexeme_key": "fr:sortez:exit-request",
+      "fr": "sortez",
+      "ru": [
+        "выйдите (короткая инструкция)"
+      ],
+      "transcription_ru": "сортэ́",
+      "first_session_id": "PRE_A1-U19-L01"
+    },
+    {
+      "id": "ouvrez",
+      "lexeme_key": "fr:ouvrez:open-request",
+      "fr": "ouvrez",
+      "ru": [
+        "откройте (указанный предмет)"
+      ],
+      "transcription_ru": "уврэ́",
+      "first_session_id": "PRE_A1-U19-L02"
+    },
+    {
+      "id": "porte",
+      "lexeme_key": "fr:porte:door",
+      "fr": "une porte",
+      "ru": [
+        "дверь"
+      ],
+      "transcription_ru": "юн по́рт",
+      "first_session_id": "PRE_A1-U19-L02"
+    },
+    {
+      "id": "fermez",
+      "lexeme_key": "fr:fermez:close-request",
+      "fr": "fermez",
+      "ru": [
+        "закройте (указанный предмет)"
+      ],
+      "transcription_ru": "фэрмэ́",
+      "first_session_id": "PRE_A1-U19-L02"
+    },
+    {
+      "id": "fenetre",
+      "lexeme_key": "fr:fenetre:window",
+      "fr": "une fenêtre",
+      "ru": [
+        "окно"
+      ],
+      "transcription_ru": "юн фёнэ́тр",
+      "first_session_id": "PRE_A1-U19-L02"
+    },
+    {
+      "id": "asseyez-vous",
+      "lexeme_key": "fr:asseyez-vous:sit-request",
+      "fr": "asseyez-vous",
+      "ru": [
+        "садитесь (короткая инструкция)"
+      ],
+      "transcription_ru": "асэйе ву́",
+      "first_session_id": "PRE_A1-U19-L03"
+    },
+    {
+      "id": "levez-vous",
+      "lexeme_key": "fr:levez-vous:stand-request",
+      "fr": "levez-vous",
+      "ru": [
+        "встаньте (короткая инструкция)"
+      ],
+      "transcription_ru": "лёвэ ву́",
+      "first_session_id": "PRE_A1-U19-L03"
+    },
+    {
+      "id": "puis",
+      "lexeme_key": "fr:puis:then-sequence",
+      "fr": "puis",
+      "ru": [
+        "затем (следующее действие)"
+      ],
+      "transcription_ru": "пюи́",
+      "first_session_id": "PRE_A1-U19-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:bonjour:greeting",
+    "fr:cest-ou:place-location-question",
+    "fr:chaise:chair",
+    "fr:ecole:school",
+    "fr:et:and",
+    "fr:il:masculine-subject",
+    "fr:magasin:shop",
+    "fr:maison:house-home",
+    "fr:medecin:doctor",
+    "fr:rendez-vous:appointment",
+    "fr:sil-vous-plait:polite-request",
+    "fr:sur:on-surface",
+    "fr:vendeur:salesperson"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "PRE_A1.U19.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U19.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U18.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U16.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:entrez:enter-request",
+      "reason": "Повторить готовую просьбу войти в понятной бытовой ситуации."
+    },
+    {
+      "lexeme_key": "fr:sortez:exit-request",
+      "reason": "Отличать просьбу выйти от просьбы войти без вывода по интонации."
+    },
+    {
+      "lexeme_key": "fr:ouvrez:open-request",
+      "reason": "При повторении сохранять действие и названный предмет."
+    },
+    {
+      "lexeme_key": "fr:fermez:close-request",
+      "reason": "При повторении сохранять действие и названный предмет."
+    },
+    {
+      "lexeme_key": "fr:asseyez-vous:sit-request",
+      "reason": "Повторять целую форму с дефисом без расширения таблицы императива."
+    },
+    {
+      "lexeme_key": "fr:levez-vous:stand-request",
+      "reason": "Отличать вставание от посадки и сохранять целую форму с дефисом."
+    },
+    {
+      "lexeme_key": "fr:puis:then-sequence",
+      "reason": "В итоговом повторении сохранять прямо заданный порядок двух действий."
+    },
+    {
+      "lexeme_key": "fr:sil-vous-plait:polite-request",
+      "reason": "Сохранить прежний ключ знакомой формулы вежливости."
+    },
+    {
+      "lexeme_key": "fr:porte:door",
+      "reason": "Вернуть дверь как известный предмет простой просьбы."
+    },
+    {
+      "lexeme_key": "fr:fenetre:window",
+      "reason": "Вернуть окно как известный предмет простой просьбы."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "local_database_references_checked": true,
+    "registry_collisions_checked": true,
+    "package_hash_verified": true,
+    "pronunciation_coverage_warnings_absent": true,
+    "new_lexeme_evidence_checked": true,
+    "practice_kind_checked": true,
+    "polite_formula_key_and_full_card_preserved": true,
+    "instruction_and_noun_frames_explained_before_testing": true,
+    "sequence_answers_checked": true,
+    "hyphen_and_polite_formula_tokens_preserved": true,
+    "shuffled_choice_feedback_checked": true,
+    "reading_length_checked": true,
+    "no_unused_local_vocabulary": true
+  },
+  "open_issues": [
+    "До импорта целевая база должна содержать PRE_A1-U18-L05; пакет не создаёт отсутствующую внешнюю зависимость.",
+    "Человеку нужно проверить естественность выбранных инструкций и условные русские транскрипции; прослушать браузерную озвучку, особенно формы с дефисом, слово затем и название окна.",
+    "Выполнить предпросмотр, пробное прохождение и замер длительности. Ориентир 6 минут на занятие не измерен."
+  ],
+  "progress": {
+    "current_unit": "PRE_A1-U19",
+    "prepared_session_ids": [
+      "PRE_A1-U19-L01",
+      "PRE_A1-U19-L02",
+      "PRE_A1-U19-L03",
+      "PRE_A1-U19-L04",
+      "PRE_A1-U19-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "PRE_A1-U20",
+    "previous_unit": "PRE_A1-U18",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку текущей темы. Отдельное подтверждение принятия или импорта предыдущих пакетов не получено.",
+    "Шесть инструкций учатся как готовые формы обращения на вы. Общая таблица повелительного наклонения, дополнительные лица и новые времена не вводятся.",
+    "Новый предмет дверь или окно сначала показывается с артиклем, затем в полном образце просьбы с показанной определённой формой. Общая таблица артиклей не требуется.",
+    "Формы с дефисом и знакомая формула пожалуйста сохраняются целыми в сборке. Вежливая формула использует прежний ключ и полный объект.",
+    "Затем обозначает следующий шаг в прямо заданной последовательности. В вопросах на точную формулировку оно отличается от знакомого и, без универсального утверждения, что и никогда не выражает порядок.",
+    "В каждом задании свои явно заданные сведения; действие, предмет и порядок нельзя заменять типичным бытовым сценарием.",
+    "Все ответы — выбор, сопоставление или сборка. Физическое выполнение команд, ввод текста и запись голоса не требуются и не оцениваются.",
+    "В первых четырёх занятиях соответственно 2, 4, 2 и 1 новое значение. В пятом занятии нового обязательного материала нет; новая комбинация знакомых действий служит переносу.",
+    "Повторены занятие человека из предыдущей темы и готовые вопросы или записи о городских местах. Подписанная сборка не объявляется независимой проверкой всех участвующих слов.",
+    "Основной реестр и предыдущие пакеты не изменены. Новые ключи предложены отдельно до принятия."
+  ],
+  "session_material": [
+    {
+      "session_id": "PRE_A1-U19-L01",
+      "new_lexeme_keys": [
+        "fr:entrez:enter-request",
+        "fr:sortez:exit-request"
+      ],
+      "reused_lexeme_keys": [
+        "fr:bonjour:greeting",
+        "fr:il:masculine-subject",
+        "fr:medecin:doctor",
+        "fr:sil-vous-plait:polite-request",
+        "fr:vendeur:salesperson"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U19-L02",
+      "new_lexeme_keys": [
+        "fr:ouvrez:open-request",
+        "fr:porte:door",
+        "fr:fermez:close-request",
+        "fr:fenetre:window"
+      ],
+      "reused_lexeme_keys": [
+        "fr:entrez:enter-request",
+        "fr:sil-vous-plait:polite-request",
+        "fr:sortez:exit-request"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U19-L03",
+      "new_lexeme_keys": [
+        "fr:asseyez-vous:sit-request",
+        "fr:levez-vous:stand-request"
+      ],
+      "reused_lexeme_keys": [
+        "fr:chaise:chair",
+        "fr:ecole:school",
+        "fr:entrez:enter-request",
+        "fr:maison:house-home",
+        "fr:rendez-vous:appointment",
+        "fr:sil-vous-plait:polite-request",
+        "fr:sortez:exit-request",
+        "fr:sur:on-surface"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U19-L04",
+      "new_lexeme_keys": [
+        "fr:puis:then-sequence"
+      ],
+      "reused_lexeme_keys": [
+        "fr:asseyez-vous:sit-request",
+        "fr:bonjour:greeting",
+        "fr:cest-ou:place-location-question",
+        "fr:entrez:enter-request",
+        "fr:et:and",
+        "fr:fenetre:window",
+        "fr:fermez:close-request",
+        "fr:magasin:shop",
+        "fr:ouvrez:open-request",
+        "fr:porte:door",
+        "fr:sil-vous-plait:polite-request",
+        "fr:sortez:exit-request"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U19-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:asseyez-vous:sit-request",
+        "fr:entrez:enter-request",
+        "fr:fenetre:window",
+        "fr:fermez:close-request",
+        "fr:levez-vous:stand-request",
+        "fr:ouvrez:open-request",
+        "fr:porte:door",
+        "fr:puis:then-sequence",
+        "fr:sil-vous-plait:polite-request",
+        "fr:sortez:exit-request"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "PRE_A1-U19-L01",
+      "material": "Две целые инструкции обращения на вы; соединение со знакомой формулой вежливости и приветствием."
+    },
+    {
+      "session_id": "PRE_A1-U19-L02",
+      "material": "Готовые инструкции открыть и закрыть с показанными формами названий двери и окна."
+    },
+    {
+      "session_id": "PRE_A1-U19-L03",
+      "material": "Две целые инструкции с дефисом; полная просьба сесть на знакомый стул."
+    },
+    {
+      "session_id": "PRE_A1-U19-L04",
+      "material": "Два известных действия в последовательности со словом затем; точное отличие выбранной формулировки от знакомого и."
+    }
+  ],
+  "instruction_policy": {
+    "address_form": "Готовые формы обращения на вы; без общей таблицы императива.",
+    "physical_performance_required": false,
+    "voice_recording_required": false,
+    "each_task_self_contained": true,
+    "sequence_connector": "puis"
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:entrez:enter-request",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:sortez:exit-request",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:ouvrez:open-request",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:porte:door",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:fermez:close-request",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:fenetre:window",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:asseyez-vous:sit-request",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:levez-vous:stand-request",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:puis:then-sequence",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 9,
+    "external_prerequisites": [
+      "PRE_A1-U18-L05"
+    ],
+    "external_reference_status": "reference_package_and_local_project_validator_passed; other_target_databases_unverified",
+    "project_validator": {
+      "valid": true,
+      "errors": [],
+      "file_hash": "f26d17c695e2972fdce3cdfb85fb5ff08edbd0d79969239158da520f65ce6a61",
+      "warning_counts": {
+        "editorial_review_required": 5,
+        "browser_tts": 11
+      },
+      "requires_editorial_review": true,
+      "report_file": "PRE_A1-U19.validation.json"
+    },
+    "max_french_reading_prompt_words": 6,
+    "new_lexical_meanings": 9,
+    "sequence_choice_answers_verified": 6
+  }
+}

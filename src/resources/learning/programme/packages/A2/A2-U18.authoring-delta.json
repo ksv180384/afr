@@ -1,0 +1,823 @@
+{
+  "unit_id": "A2-U18",
+  "package_file": "A2-U18.v1.json",
+  "package_id": "programme-a2-u18-v1",
+  "session_ids": [
+    "A2-U18-L01",
+    "A2-U18-L02",
+    "A2-U18-L03",
+    "A2-U18-L04",
+    "A2-U18-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "lettre-personnelle",
+      "lexeme_key": "fr:lettre:personal-letter",
+      "fr": "une lettre",
+      "ru": [
+        "личное письмо"
+      ],
+      "transcription_ru": "юн лэ́тр",
+      "first_session_id": "A2-U18-L01"
+    },
+    {
+      "id": "j-espere-que",
+      "lexeme_key": "fr:j-espere-que:hope-statement",
+      "fr": "j’espère que",
+      "ru": [
+        "надеюсь, что"
+      ],
+      "transcription_ru": "жэспэр кё",
+      "first_session_id": "A2-U18-L01"
+    },
+    {
+      "id": "donner-des-nouvelles",
+      "lexeme_key": "fr:donner-des-nouvelles:share-personal-news",
+      "fr": "donner des nouvelles",
+      "ru": [
+        "рассказывать о личных новостях"
+      ],
+      "transcription_ru": "донэ дэ нувэ́ль",
+      "first_session_id": "A2-U18-L02"
+    },
+    {
+      "id": "question-disponibilite-tu",
+      "lexeme_key": "fr:est-ce-que-tu-es-disponible:ask-availability",
+      "fr": "est-ce que tu es disponible ?",
+      "ru": [
+        "ты свободен или свободна? вопрос о времени адресата"
+      ],
+      "transcription_ru": "эс кё тю э диспони́бль",
+      "first_session_id": "A2-U18-L03"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:a-bientot:see-you-soon",
+    "fr:a-ta-place:advice-perspective",
+    "fr:aller:go",
+    "fr:amicalement:friendly-signoff",
+    "fr:anniversaire:birthday",
+    "fr:annoncer:announce-event",
+    "fr:apporter:bring-object",
+    "fr:autre:other",
+    "fr:avoir-lieu:event-occurrence",
+    "fr:avoir:compound-past-auxiliary",
+    "fr:bruyant:noisy-place",
+    "fr:cadeau:gift",
+    "fr:calme:quiet-place",
+    "fr:choisir:choose-option",
+    "fr:dabord:first-step",
+    "fr:delai:task-completion-deadline",
+    "fr:disponible:available-in-schedule",
+    "fr:en-raison-de:stated-cause",
+    "fr:ensuite:next-step",
+    "fr:famille:family",
+    "fr:fete:celebration-gathering",
+    "fr:feter:celebrate-occasion",
+    "fr:foret:forest",
+    "fr:frere:brother",
+    "fr:heure:clock-hour",
+    "fr:huit:cardinal-number",
+    "fr:je-voudrais:polite-request",
+    "fr:lac:lake",
+    "fr:mairie:municipal-office",
+    "fr:mais:contrast-conjunction",
+    "fr:maison:house-home",
+    "fr:mardi:weekday",
+    "fr:musee:museum",
+    "fr:par-carte:card-payment",
+    "fr:parc:park",
+    "fr:parce-que:because-reason",
+    "fr:payer:pay",
+    "fr:preciser:clarify-service-details",
+    "fr:pres-de:near-place",
+    "fr:randonnee:recreational-hike",
+    "fr:salut:informal_greeting",
+    "fr:sentier:walking-path",
+    "fr:soir:evening",
+    "fr:titre:message-headline",
+    "fr:travaux:construction-works",
+    "fr:trop:excessive-degree",
+    "fr:tu-devrais:advice-action",
+    "fr:vendredi:weekday"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A2.U18.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U18-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U18-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U18-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U18-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U18-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U18-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U18-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U18-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U18-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U18-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U18-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U18-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U18-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U18.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U18-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U18-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U18-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U18-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U18-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U18-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U18-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U18-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U18-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U18-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U18-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U17.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U18-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U15.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U18-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U18-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:j-espere-que:hope-statement",
+      "reason": "Отличать надежду от ответа адресата."
+    },
+    {
+      "lexeme_key": "fr:donner-des-nouvelles:share-personal-news",
+      "reason": "Сохранять личную новость отдельно от общественного объявления."
+    },
+    {
+      "lexeme_key": "fr:est-ce-que-tu-es-disponible:ask-availability",
+      "reason": "Повторить вопрос о свободном времени адресата."
+    },
+    {
+      "lexeme_key": "fr:amicalement:friendly-signoff",
+      "reason": "Сохранять дружескую формулу завершения без нового ключа."
+    },
+    {
+      "lexeme_key": "fr:dabord:first-step",
+      "reason": "Вернуть порядок событий."
+    },
+    {
+      "lexeme_key": "fr:ensuite:next-step",
+      "reason": "Сохранять следующий шаг отдельно от причины."
+    },
+    {
+      "lexeme_key": "fr:mais:contrast-conjunction",
+      "reason": "Отличать противопоставление от последовательности."
+    },
+    {
+      "lexeme_key": "fr:parce-que:because-reason",
+      "reason": "Сохранять прямо данную причину."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_ids_keys_and_french_forms_checked": true,
+    "existing_signoff_and_linking_word_keys_preserved": true,
+    "letter_noun_repeated_in_next_and_final_sessions": true,
+    "whole_letter_assembly_checked": true,
+    "reading_lengths_checked": true,
+    "selected_models_explained_before_testing": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Зависимость A2-U17-L05 найдена проектным валидатором. Это не подтверждает публикацию или принятие пользователем.",
+    "Редактору проверить естественность личных писем, формулу надежды, личные новости, вопрос адресату и дружеское завершение.",
+    "Прослушать браузерную озвучку; пройти занятия на сайте и измерить время. Эти действия фактически не выполнялись."
+  ],
+  "progress": {
+    "current_unit": "A2-U18",
+    "prepared_session_ids": [
+      "A2-U18-L01",
+      "A2-U18-L02",
+      "A2-U18-L03",
+      "A2-U18-L04",
+      "A2-U18-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A2-U19",
+    "next_unit_title": "Проблемы в поездке"
+  },
+  "scope_notes": [
+    "Один полный пакет пяти занятий. Четыре новых выражения распределены как два, одно, одно, ноль, ноль; в L05 нового обязательного материала нет.",
+    "Amicalement, Salut, À bientôt, d’abord, ensuite, mais и parce que сохраняют прежние ключи и полные карточки. Знакомое завершение не дублируется как новое слово.",
+    "J’espère que выражает надежду, а не установленный ответ адресата. Tu es относится к адресату, je suis — к автору.",
+    "Donner des nouvelles ограничено личными или семейными новостями, не подменяется объявлением мэрии. Форма Je voudrais donner des nouvelles de ma famille пояснена до проверки.",
+    "Прямой вопрос Est-ce que tu es disponible не равен сообщению автора о себе или надежде об адресате. Согласие и отказ не выводятся без ответа.",
+    "D’abord / ensuite задают последовательность названных событий. Принести подарок не означает прямо указанную покупку. Mais задаёт противопоставление, parce que — причину.",
+    "В L04 свободное время адресата прямо утверждено внутри отдельной вымышленной ситуации и служит названной причиной выбора дня праздника. Оно не переносится в другие письма с надеждой и вопросом.",
+    "В L01 повторена причина рекомендации из A2-U17. В L03 — время и место события из A2-U15, в L04 — причина изменения места оттуда же. Прежние карточки не меняются.",
+    "Личные письма вымышленные, без реальных имён или персональных данных. Письмо собирается из семи смысловых блоков в заданном порядке, без свободного ввода.",
+    "Приветствие, сообщение о новости, вопрос и завершение расположены отдельно. Формулы дружеского письма не объявляются универсальными для любого официального адресата.",
+    "Озвучка только браузером: fr-FR, asset_id=null. Нет аудиофайлов, внешних сервисов, обязательного микрофона. Письма никому не отправлялись.",
+    "Импорт, публикация, прослушивание и сайт-прохождение не выполнялись; принятие пользователем не подтверждено."
+  ],
+  "session_material": [
+    {
+      "session_id": "A2-U18-L01",
+      "new_lexeme_keys": [
+        "fr:lettre:personal-letter",
+        "fr:j-espere-que:hope-statement"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-bientot:see-you-soon",
+        "fr:a-ta-place:advice-perspective",
+        "fr:aller:go",
+        "fr:amicalement:friendly-signoff",
+        "fr:anniversaire:birthday",
+        "fr:autre:other",
+        "fr:bruyant:noisy-place",
+        "fr:calme:quiet-place",
+        "fr:choisir:choose-option",
+        "fr:disponible:available-in-schedule",
+        "fr:famille:family",
+        "fr:feter:celebrate-occasion",
+        "fr:foret:forest",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:je-voudrais:polite-request",
+        "fr:lac:lake",
+        "fr:mais:contrast-conjunction",
+        "fr:maison:house-home",
+        "fr:parce-que:because-reason",
+        "fr:randonnee:recreational-hike",
+        "fr:salut:informal_greeting",
+        "fr:sentier:walking-path",
+        "fr:soir:evening",
+        "fr:trop:excessive-degree",
+        "fr:tu-devrais:advice-action",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U18-L02",
+      "new_lexeme_keys": [
+        "fr:donner-des-nouvelles:share-personal-news"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-bientot:see-you-soon",
+        "fr:amicalement:friendly-signoff",
+        "fr:anniversaire:birthday",
+        "fr:apporter:bring-object",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:cadeau:gift",
+        "fr:dabord:first-step",
+        "fr:delai:task-completion-deadline",
+        "fr:disponible:available-in-schedule",
+        "fr:ensuite:next-step",
+        "fr:famille:family",
+        "fr:feter:celebrate-occasion",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:j-espere-que:hope-statement",
+        "fr:je-voudrais:polite-request",
+        "fr:lettre:personal-letter",
+        "fr:mais:contrast-conjunction",
+        "fr:maison:house-home",
+        "fr:par-carte:card-payment",
+        "fr:parce-que:because-reason",
+        "fr:payer:pay",
+        "fr:preciser:clarify-service-details",
+        "fr:salut:informal_greeting",
+        "fr:soir:evening",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U18-L03",
+      "new_lexeme_keys": [
+        "fr:est-ce-que-tu-es-disponible:ask-availability"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-bientot:see-you-soon",
+        "fr:amicalement:friendly-signoff",
+        "fr:anniversaire:birthday",
+        "fr:annoncer:announce-event",
+        "fr:avoir-lieu:event-occurrence",
+        "fr:disponible:available-in-schedule",
+        "fr:famille:family",
+        "fr:fete:celebration-gathering",
+        "fr:feter:celebrate-occasion",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:j-espere-que:hope-statement",
+        "fr:je-voudrais:polite-request",
+        "fr:mairie:municipal-office",
+        "fr:mais:contrast-conjunction",
+        "fr:maison:house-home",
+        "fr:mardi:weekday",
+        "fr:musee:museum",
+        "fr:parc:park",
+        "fr:parce-que:because-reason",
+        "fr:preciser:clarify-service-details",
+        "fr:pres-de:near-place",
+        "fr:salut:informal_greeting",
+        "fr:soir:evening",
+        "fr:titre:message-headline",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U18-L04",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-bientot:see-you-soon",
+        "fr:amicalement:friendly-signoff",
+        "fr:anniversaire:birthday",
+        "fr:annoncer:announce-event",
+        "fr:avoir-lieu:event-occurrence",
+        "fr:disponible:available-in-schedule",
+        "fr:donner-des-nouvelles:share-personal-news",
+        "fr:en-raison-de:stated-cause",
+        "fr:est-ce-que-tu-es-disponible:ask-availability",
+        "fr:famille:family",
+        "fr:fete:celebration-gathering",
+        "fr:feter:celebrate-occasion",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:je-voudrais:polite-request",
+        "fr:mairie:municipal-office",
+        "fr:mais:contrast-conjunction",
+        "fr:musee:museum",
+        "fr:parc:park",
+        "fr:parce-que:because-reason",
+        "fr:salut:informal_greeting",
+        "fr:soir:evening",
+        "fr:titre:message-headline",
+        "fr:travaux:construction-works",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U18-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-bientot:see-you-soon",
+        "fr:amicalement:friendly-signoff",
+        "fr:anniversaire:birthday",
+        "fr:apporter:bring-object",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:cadeau:gift",
+        "fr:dabord:first-step",
+        "fr:disponible:available-in-schedule",
+        "fr:donner-des-nouvelles:share-personal-news",
+        "fr:ensuite:next-step",
+        "fr:est-ce-que-tu-es-disponible:ask-availability",
+        "fr:famille:family",
+        "fr:feter:celebrate-occasion",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:j-espere-que:hope-statement",
+        "fr:je-voudrais:polite-request",
+        "fr:lettre:personal-letter",
+        "fr:mais:contrast-conjunction",
+        "fr:preciser:clarify-service-details",
+        "fr:salut:informal_greeting",
+        "fr:soir:evening",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 8
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:lettre:personal-letter",
+      "evidence": [
+        {
+          "session_id": "A2-U18-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:j-espere-que:hope-statement",
+      "evidence": [
+        {
+          "session_id": "A2-U18-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U18-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U18-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U18-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:donner-des-nouvelles:share-personal-news",
+      "evidence": [
+        {
+          "session_id": "A2-U18-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U18-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:est-ce-que-tu-es-disponible:ask-availability",
+      "evidence": [
+        {
+          "session_id": "A2-U18-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U18-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U18-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U18-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U18-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A2-U18-L01",
+      "material": "J’espère que tu es disponible; надежда и лица автора/адресата."
+    },
+    {
+      "session_id": "A2-U18-L02",
+      "material": "Donner des nouvelles; повторение d’abord / ensuite с известными формами прошлого."
+    },
+    {
+      "session_id": "A2-U18-L03",
+      "material": "Est-ce que tu es disponible; вопрос отдельно от надежды и факта."
+    },
+    {
+      "session_id": "A2-U18-L04",
+      "material": "Повторение mais / parce que, À bientôt и Amicalement; порядок завершения."
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 4,
+    "external_prerequisites": [
+      "A2-U17-L05"
+    ],
+    "external_reference_status": "A2-U17-L05_found_by_project_validator; publication_and_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 6
+      },
+      "file_hash": "b10155ee1a05656bb2c7b8e13a64efdfe1be5e6db1cd67db5e4c5b0893efa2cc"
+    },
+    "existing_lexeme_objects_preserved": 48,
+    "text_lengths": [
+      {
+        "session_id": "A2-U18-L01",
+        "reading_word_counts": [
+          34,
+          33
+        ],
+        "listening_word_counts": [
+          33
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U18-L02",
+        "reading_word_counts": [
+          33,
+          36
+        ],
+        "listening_word_counts": [
+          36
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U18-L03",
+        "reading_word_counts": [
+          37,
+          39
+        ],
+        "listening_word_counts": [
+          39
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U18-L04",
+        "reading_word_counts": [
+          40,
+          39
+        ],
+        "listening_word_counts": [
+          39
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U18-L05",
+        "reading_word_counts": [
+          41,
+          42
+        ],
+        "listening_word_counts": [
+          42,
+          41
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_model_first_tasks": [
+      {
+        "frame": "J’espère que tu es disponible vendredi soir",
+        "session_id": "A2-U18-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Donner des nouvelles",
+        "session_id": "A2-U18-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Est-ce que tu es disponible vendredi soir",
+        "session_id": "A2-U18-L03",
+        "task_id": "Q04"
+      }
+    ]
+  }
+}

@@ -1,0 +1,4908 @@
+{
+  "level": "PRE_A1",
+  "status": "prepared_inventory_and_formal_coverage_passed",
+  "publication_status": "not_checked",
+  "user_acceptance": "not_confirmed",
+  "units": 20,
+  "sessions": 100,
+  "tasks": 723,
+  "mandatory_objectives": 48,
+  "checkpoint_session_ids": [
+    "PRE_A1-U05-L05",
+    "PRE_A1-U10-L05",
+    "PRE_A1-U15-L05",
+    "PRE_A1-U20-L05"
+  ],
+  "packages": [
+    {
+      "unit_id": "PRE_A1-U01",
+      "file": "plans/daily-practice-authoring/examples/PRE_A1-U01.v2.json",
+      "sha256": "f985f78bb16ff6836a258cf6d51a460bfdf5936b1833066a6077af74acdbf437",
+      "sessions": 5,
+      "tasks": 35,
+      "source_status": "supplied_prepared_baseline"
+    },
+    {
+      "unit_id": "PRE_A1-U02",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U02.v1.json",
+      "sha256": "7acb28ca2500f0d05e6888ef82a7be66021a22466fc4884624e4518a194225db",
+      "sessions": 5,
+      "tasks": 36,
+      "source_status": "prepared_authoring_package"
+    },
+    {
+      "unit_id": "PRE_A1-U03",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U03.v1.json",
+      "sha256": "322555fec04e759527d014d1ea42dbb90d64fd11816f9f407b1936e28e24a1f5",
+      "sessions": 5,
+      "tasks": 40,
+      "source_status": "prepared_authoring_package"
+    },
+    {
+      "unit_id": "PRE_A1-U04",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U04.v1.json",
+      "sha256": "3163c1e4270dc0cfcf5a11eecbcabd9686c2c6b341f3c5d494e212a3df2c1401",
+      "sessions": 5,
+      "tasks": 36,
+      "source_status": "prepared_authoring_package"
+    },
+    {
+      "unit_id": "PRE_A1-U05",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U05.v1.json",
+      "sha256": "b668b60d6ec39af49475f0fa56ec99c15091745ad646dba2dcc23ff4ea283be5",
+      "sessions": 5,
+      "tasks": 36,
+      "source_status": "prepared_authoring_package"
+    },
+    {
+      "unit_id": "PRE_A1-U06",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U06.v1.json",
+      "sha256": "81a1c28dad824f6590bd70a10e2b1dc0266b0fe26a983139ae2f2be649cb66cd",
+      "sessions": 5,
+      "tasks": 36,
+      "source_status": "prepared_authoring_package"
+    },
+    {
+      "unit_id": "PRE_A1-U07",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U07.v1.json",
+      "sha256": "503681f912cead8dd3c81c73337d4cc708b4ef644b160a84528c152123458d94",
+      "sessions": 5,
+      "tasks": 36,
+      "source_status": "prepared_authoring_package"
+    },
+    {
+      "unit_id": "PRE_A1-U08",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U08.v1.json",
+      "sha256": "51c4fa3de580bd4c9a7400476b2fccb80a386a54f943a0d46d3280ab21d5f5f9",
+      "sessions": 5,
+      "tasks": 36,
+      "source_status": "prepared_authoring_package"
+    },
+    {
+      "unit_id": "PRE_A1-U09",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U09.v1.json",
+      "sha256": "51eb8c7bcadedfdb61446c54fceadc393a2560b0038e8e6b2d27807fd386ff39",
+      "sessions": 5,
+      "tasks": 36,
+      "source_status": "prepared_authoring_package"
+    },
+    {
+      "unit_id": "PRE_A1-U10",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U10.v1.json",
+      "sha256": "a3c11a6ae4048a298699e08145a5def4bd4a76ed4a79f0334816ac0c1efa11be",
+      "sessions": 5,
+      "tasks": 36,
+      "source_status": "prepared_authoring_package"
+    },
+    {
+      "unit_id": "PRE_A1-U11",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U11.v1.json",
+      "sha256": "74071f77f76c8d57b5fc6ef70529ce380ba2d88607f8eef1eed9f2157fb6335c",
+      "sessions": 5,
+      "tasks": 36,
+      "source_status": "prepared_authoring_package"
+    },
+    {
+      "unit_id": "PRE_A1-U12",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U12.v1.json",
+      "sha256": "dd713ef7ff2a5ee3da0faf60d74fef7e47202fd0b72cc1eea4dbee34a3c2c4c2",
+      "sessions": 5,
+      "tasks": 36,
+      "source_status": "prepared_authoring_package"
+    },
+    {
+      "unit_id": "PRE_A1-U13",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U13.v1.json",
+      "sha256": "230cfbc2688a45e21a5fb8dcf589feff917967705bb6c1781dfa64929873f84b",
+      "sessions": 5,
+      "tasks": 36,
+      "source_status": "prepared_authoring_package"
+    },
+    {
+      "unit_id": "PRE_A1-U14",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U14.v1.json",
+      "sha256": "9208478680a582483108c81ccd1af461c76feda7e128ad037e8280ee31998261",
+      "sessions": 5,
+      "tasks": 36,
+      "source_status": "prepared_authoring_package"
+    },
+    {
+      "unit_id": "PRE_A1-U15",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U15.v1.json",
+      "sha256": "9018be8701dc8b4fa92870ad5a99ccda330b1ec7d84824bd81338225d9ed5ba7",
+      "sessions": 5,
+      "tasks": 36,
+      "source_status": "prepared_authoring_package"
+    },
+    {
+      "unit_id": "PRE_A1-U16",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U16.v1.json",
+      "sha256": "82867e04b77385b5db729b52c894aae40bfa2ec519dba2c9c5d4d1a300081575",
+      "sessions": 5,
+      "tasks": 36,
+      "source_status": "prepared_authoring_package"
+    },
+    {
+      "unit_id": "PRE_A1-U17",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U17.v1.json",
+      "sha256": "92fb94270379918d5ae7339b0fdae42491925dc534a8efd85d29d214fef47603",
+      "sessions": 5,
+      "tasks": 36,
+      "source_status": "prepared_authoring_package"
+    },
+    {
+      "unit_id": "PRE_A1-U18",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U18.v1.json",
+      "sha256": "f9745b834cc895ae47aef45b522d5ed7c72e890055afca90e3d123d6b61f9e18",
+      "sessions": 5,
+      "tasks": 36,
+      "source_status": "prepared_authoring_package"
+    },
+    {
+      "unit_id": "PRE_A1-U19",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U19.v1.json",
+      "sha256": "f26d17c695e2972fdce3cdfb85fb5ff08edbd0d79969239158da520f65ce6a61",
+      "sessions": 5,
+      "tasks": 36,
+      "source_status": "prepared_authoring_package"
+    },
+    {
+      "unit_id": "PRE_A1-U20",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U20.v1.json",
+      "sha256": "46996c054e798deaf24b13dcbd247f7fed5a4e0e434c85cede8780a909b217a6",
+      "sessions": 5,
+      "tasks": 36,
+      "source_status": "prepared_authoring_package"
+    }
+  ],
+  "authoring_deltas_checked": [
+    {
+      "unit_id": "PRE_A1-U02",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U02.authoring-delta.json",
+      "evidence_entries_checked": 36
+    },
+    {
+      "unit_id": "PRE_A1-U03",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U03.authoring-delta.json",
+      "evidence_entries_checked": 41
+    },
+    {
+      "unit_id": "PRE_A1-U04",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U04.authoring-delta.json",
+      "evidence_entries_checked": 36
+    },
+    {
+      "unit_id": "PRE_A1-U05",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U05.authoring-delta.json",
+      "evidence_entries_checked": 37
+    },
+    {
+      "unit_id": "PRE_A1-U06",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U06.authoring-delta.json",
+      "evidence_entries_checked": 36
+    },
+    {
+      "unit_id": "PRE_A1-U07",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U07.authoring-delta.json",
+      "evidence_entries_checked": 36
+    },
+    {
+      "unit_id": "PRE_A1-U08",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U08.authoring-delta.json",
+      "evidence_entries_checked": 37
+    },
+    {
+      "unit_id": "PRE_A1-U09",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U09.authoring-delta.json",
+      "evidence_entries_checked": 36
+    },
+    {
+      "unit_id": "PRE_A1-U10",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U10.authoring-delta.json",
+      "evidence_entries_checked": 38
+    },
+    {
+      "unit_id": "PRE_A1-U11",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U11.authoring-delta.json",
+      "evidence_entries_checked": 36
+    },
+    {
+      "unit_id": "PRE_A1-U12",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U12.authoring-delta.json",
+      "evidence_entries_checked": 38
+    },
+    {
+      "unit_id": "PRE_A1-U13",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U13.authoring-delta.json",
+      "evidence_entries_checked": 45
+    },
+    {
+      "unit_id": "PRE_A1-U14",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U14.authoring-delta.json",
+      "evidence_entries_checked": 38
+    },
+    {
+      "unit_id": "PRE_A1-U15",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U15.authoring-delta.json",
+      "evidence_entries_checked": 43
+    },
+    {
+      "unit_id": "PRE_A1-U16",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U16.authoring-delta.json",
+      "evidence_entries_checked": 41
+    },
+    {
+      "unit_id": "PRE_A1-U17",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U17.authoring-delta.json",
+      "evidence_entries_checked": 37
+    },
+    {
+      "unit_id": "PRE_A1-U18",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U18.authoring-delta.json",
+      "evidence_entries_checked": 41
+    },
+    {
+      "unit_id": "PRE_A1-U19",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U19.authoring-delta.json",
+      "evidence_entries_checked": 40
+    },
+    {
+      "unit_id": "PRE_A1-U20",
+      "file": "src/resources/learning/programme/packages/PRE_A1/PRE_A1-U20.authoring-delta.json",
+      "evidence_entries_checked": 45
+    }
+  ],
+  "baseline_delta_note": "The supplied U01 v2 package has no authoring-delta in the kit; its coverage was checked directly from session tasks.",
+  "objective_coverage": [
+    {
+      "objective_id": "PRE_A1.GREET.RECOGNIZE",
+      "title": "Распознавать приветствия и прощание",
+      "task_count": 7,
+      "session_count": 5,
+      "skills": [
+        "listening",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U01-L01",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U01-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U01-L01",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U01-L03",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U01-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U02-L01",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U02-L03",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.NAME.INTRODUCE",
+      "title": "Представляться по имени",
+      "task_count": 5,
+      "session_count": 4,
+      "skills": [
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U01-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U01-L01",
+          "task_id": "Q06",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U01-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U01-L05",
+          "task_id": "Q02",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U05-L01",
+          "task_id": "Q06",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.NAME.UNDERSTAND",
+      "title": "Понимать неформальный вопрос об имени",
+      "task_count": 3,
+      "session_count": 3,
+      "skills": [
+        "listening",
+        "reading",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U01-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U01-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U01-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.WELLBEING.ASK",
+      "title": "Понимать вопрос о самочувствии",
+      "task_count": 3,
+      "session_count": 2,
+      "skills": [
+        "listening",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U01-L02",
+          "task_id": "Q02",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U01-L02",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U01-L05",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.WELLBEING.UNDERSTAND",
+      "title": "Различать простые ответы о самочувствии",
+      "task_count": 4,
+      "session_count": 2,
+      "skills": [
+        "listening",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U01-L02",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U01-L02",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U01-L02",
+          "task_id": "Q06",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U01-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.WELLBEING.REPLY",
+      "title": "Поддерживать диалог ответным вопросом",
+      "task_count": 3,
+      "session_count": 2,
+      "skills": [
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U01-L02",
+          "task_id": "Q05",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U01-L02",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U01-L05",
+          "task_id": "Q05",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.POLITE.RECOGNIZE",
+      "title": "Различать вежливую просьбу, извинение и ответ на благодарность",
+      "task_count": 6,
+      "session_count": 3,
+      "skills": [
+        "listening",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U01-L03",
+          "task_id": "Q02",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U01-L03",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U01-L03",
+          "task_id": "Q06",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U01-L03",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U01-L04",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U01-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.POLITE.USE",
+      "title": "Выбирать вежливую реплику по ситуации",
+      "task_count": 6,
+      "session_count": 4,
+      "skills": [
+        "listening",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U01-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U01-L03",
+          "task_id": "Q05",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U01-L03",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U01-L04",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U01-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L04",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.CLARIFY.UNDERSTAND",
+      "title": "Понимать просьбу повторить или говорить медленнее",
+      "task_count": 4,
+      "session_count": 2,
+      "skills": [
+        "listening",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U01-L04",
+          "task_id": "Q02",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U01-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U01-L04",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U01-L05",
+          "task_id": "Q07",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.CLARIFY.REQUEST",
+      "title": "Просить повторить и сообщать о непонимании",
+      "task_count": 10,
+      "session_count": 7,
+      "skills": [
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U01-L04",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U01-L04",
+          "task_id": "Q05",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U01-L04",
+          "task_id": "Q06",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U01-L04",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U01-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U02-L04",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q08",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U02.UNDERSTAND",
+      "title": "Понимать: гласные и названия букв; согласные в знакомых словах",
+      "task_count": 16,
+      "session_count": 3,
+      "skills": [
+        "listening",
+        "reading",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U02-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U02-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U02-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U02-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U02-L01",
+          "task_id": "Q06",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U02-L01",
+          "task_id": "Q07",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U02-L02",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U02-L02",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U02-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U02-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U02-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U02-L02",
+          "task_id": "Q06",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U02-L02",
+          "task_id": "Q07",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U02-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U02-L05",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U02-L05",
+          "task_id": "Q03",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U02.APPLY",
+      "title": "Выбирать и строить реплику: носовые гласные; французское имя по буквам",
+      "task_count": 20,
+      "session_count": 6,
+      "skills": [
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U02-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U02-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U02-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U02-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U02-L03",
+          "task_id": "Q06",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U02-L03",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U02-L04",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U02-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U02-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U02-L04",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U02-L04",
+          "task_id": "Q05",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U02-L04",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U02-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U02-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U02-L05",
+          "task_id": "Q06",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U02-L05",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U02-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L03",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q02",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U03.UNDERSTAND",
+      "title": "Понимать: от нуля до пяти; от шести до десяти",
+      "task_count": 21,
+      "session_count": 7,
+      "skills": [
+        "listening",
+        "reading",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q05",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L01",
+          "task_id": "Q08",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q05",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U03-L02",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q08",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U03.APPLY",
+      "title": "Выбирать и строить реплику: от одиннадцати до шестнадцати; от семнадцати до двадцати",
+      "task_count": 23,
+      "session_count": 5,
+      "skills": [
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q06",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L03",
+          "task_id": "Q08",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U03-L04",
+          "task_id": "Q08",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q05",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U03-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U05-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U04.UNDERSTAND",
+      "title": "Понимать: предметы на столе; предметы в комнате",
+      "task_count": 18,
+      "session_count": 7,
+      "skills": [
+        "listening",
+        "reading",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q07",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U07-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U04.APPLY",
+      "title": "Выбирать и строить реплику: указание на предмет; один предмет и несколько",
+      "task_count": 21,
+      "session_count": 7,
+      "skills": [
+        "grammar",
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q04",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q04",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q04",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q06",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q04",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q05",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U05-L01",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U05.UNDERSTAND",
+      "title": "Понимать: как меня зовут; сколько мне лет",
+      "task_count": 15,
+      "session_count": 5,
+      "skills": [
+        "listening",
+        "reading",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U05-L01",
+          "task_id": "Q02",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U05-L01",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L01",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U05-L01",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L01",
+          "task_id": "Q07",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U05-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U05-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L02",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L02",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U08-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U05.APPLY",
+      "title": "Выбирать и строить реплику: откуда я; где я живу",
+      "task_count": 15,
+      "session_count": 5,
+      "skills": [
+        "grammar",
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U05-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U05-L03",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U05-L03",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U05-L03",
+          "task_id": "Q06",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U05-L03",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U05-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U05-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U05-L04",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U05-L04",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U05-L04",
+          "task_id": "Q06",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U05-L05",
+          "task_id": "Q03",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U08-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U06.UNDERSTAND",
+      "title": "Понимать: родители; братья и сёстры",
+      "task_count": 17,
+      "session_count": 8,
+      "skills": [
+        "listening",
+        "reading",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U07-L01",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U06.APPLY",
+      "title": "Выбирать и строить реплику: дети и родственники; моя семья",
+      "task_count": 23,
+      "session_count": 7,
+      "skills": [
+        "grammar",
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q07",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q05",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U07.UNDERSTAND",
+      "title": "Понимать: основные цвета; светлый и тёмный",
+      "task_count": 15,
+      "session_count": 7,
+      "skills": [
+        "listening",
+        "reading",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U07-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U07-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U07-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U07-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U07-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U07-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U07-L02",
+          "task_id": "Q07",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U07-L03",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U07-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U07-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U07-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U07-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U08-L01",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U10-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U07.APPLY",
+      "title": "Выбирать и строить реплику: цвет предмета; выбор нужной вещи",
+      "task_count": 24,
+      "session_count": 7,
+      "skills": [
+        "grammar",
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U07-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U07-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U07-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U07-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U07-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U07-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U07-L03",
+          "task_id": "Q03",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U07-L03",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U07-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U07-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U07-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U07-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U07-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U07-L04",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U07-L04",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U07-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U07-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U07-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U07-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U07-L05",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U07-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U07-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q03",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U08.UNDERSTAND",
+      "title": "Понимать: большой и маленький; длинный и короткий",
+      "task_count": 15,
+      "session_count": 8,
+      "skills": [
+        "listening",
+        "reading",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U08-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U08-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U08-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U08-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U08-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U08-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U08-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U08-L04",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U08-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U08-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U08-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U11-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U11-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U08.APPLY",
+      "title": "Выбирать и строить реплику: новый и старый; вещь с признаком",
+      "task_count": 24,
+      "session_count": 6,
+      "skills": [
+        "grammar",
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U08-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U08-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U08-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U08-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U08-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U08-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U08-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U08-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U08-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U08-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U08-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U08-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U08-L04",
+          "task_id": "Q02",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U08-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U08-L04",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U08-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U08-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U08-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U08-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U08-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U08-L05",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U08-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U08-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q03",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U09.UNDERSTAND",
+      "title": "Понимать: вода и сок; чай и кофе",
+      "task_count": 8,
+      "session_count": 4,
+      "skills": [
+        "listening",
+        "reading",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U09.APPLY",
+      "title": "Выбирать и строить реплику: холодное и горячее; что вы хотите пить",
+      "task_count": 30,
+      "session_count": 10,
+      "skills": [
+        "grammar",
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q05",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q02",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U10.UNDERSTAND",
+      "title": "Понимать: хлеб и сыр; фрукты",
+      "task_count": 8,
+      "session_count": 3,
+      "skills": [
+        "listening",
+        "reading",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U10.APPLY",
+      "title": "Выбирать и строить реплику: завтрак; нравится и не нравится",
+      "task_count": 24,
+      "session_count": 9,
+      "skills": [
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U10-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U10-L03",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L03",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U11-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U11.UNDERSTAND",
+      "title": "Понимать: я хочу; пожалуйста дайте",
+      "task_count": 20,
+      "session_count": 7,
+      "skills": [
+        "grammar",
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U11-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U11-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U11-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U11-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U11-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U11-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U11-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U11-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U11-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U11-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U11-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U11-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U11-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U11-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U11-L05",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U11-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U11.APPLY",
+      "title": "Выбирать и строить реплику: выбор из двух; больше и ещё",
+      "task_count": 17,
+      "session_count": 3,
+      "skills": [
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U11-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U11-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U11-L03",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U11-L03",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U11-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U11-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U11-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U11-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U11-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U11-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U11-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U11-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U11-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U11-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U11-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U11-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U11-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U12.UNDERSTAND",
+      "title": "Понимать: есть и пить; читать и писать",
+      "task_count": 22,
+      "session_count": 8,
+      "skills": [
+        "grammar",
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U12.APPLY",
+      "title": "Выбирать и строить реплику: идти и ждать; слушать и смотреть",
+      "task_count": 18,
+      "session_count": 4,
+      "skills": [
+        "grammar",
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U13.UNDERSTAND",
+      "title": "Понимать: первые дни недели; остальные дни",
+      "task_count": 25,
+      "session_count": 7,
+      "skills": [
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q05",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U13.APPLY",
+      "title": "Выбирать и строить реплику: сегодня и завтра; вчера без рассказа о прошлом",
+      "task_count": 29,
+      "session_count": 11,
+      "skills": [
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U13-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q04",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q05",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U16-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U16-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U16-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U16-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U20-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U14.UNDERSTAND",
+      "title": "Понимать: утро и день; вечер и ночь",
+      "task_count": 20,
+      "session_count": 6,
+      "skills": [
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U14.APPLY",
+      "title": "Выбирать и строить реплику: сейчас и потом; приветствие по времени",
+      "task_count": 18,
+      "session_count": 5,
+      "skills": [
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U14-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U14-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U14-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U14-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U15.UNDERSTAND",
+      "title": "Понимать: солнце и дождь; тепло и холодно",
+      "task_count": 23,
+      "session_count": 9,
+      "skills": [
+        "grammar",
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U15-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U15-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U15-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q08",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U16-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U16-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U15.APPLY",
+      "title": "Выбирать и строить реплику: ветер и снег; погода сегодня",
+      "task_count": 16,
+      "session_count": 5,
+      "skills": [
+        "grammar",
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U16-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U16.UNDERSTAND",
+      "title": "Понимать: дом и школа; кафе и магазин",
+      "task_count": 16,
+      "session_count": 4,
+      "skills": [
+        "grammar",
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U16-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U16-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U16-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U16-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U16-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U16-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U16-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U16-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U16-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U16-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U16-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U16-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U16-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U16-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U16-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U16-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U16.APPLY",
+      "title": "Выбирать и строить реплику: парк и улица; где находится знакомое место",
+      "task_count": 23,
+      "session_count": 8,
+      "skills": [
+        "grammar",
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U16-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U16-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U16-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U16-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U16-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U16-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U16-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U16-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U16-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U16-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U16-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U16-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U16-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U16-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U16-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U16-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U16-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U16-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U17.UNDERSTAND",
+      "title": "Понимать: здесь и там; на и под",
+      "task_count": 20,
+      "session_count": 6,
+      "skills": [
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U17.APPLY",
+      "title": "Выбирать и строить реплику: в и рядом; слева и справа",
+      "task_count": 18,
+      "session_count": 5,
+      "skills": [
+        "grammar",
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U18.UNDERSTAND",
+      "title": "Понимать: друг и сосед; учитель и ученик",
+      "task_count": 20,
+      "session_count": 4,
+      "skills": [
+        "grammar",
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U18.APPLY",
+      "title": "Выбирать и строить реплику: врач и продавец; кто этот человек",
+      "task_count": 18,
+      "session_count": 5,
+      "skills": [
+        "grammar",
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U18-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U18-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U18-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U19.UNDERSTAND",
+      "title": "Понимать: войти и выйти; открыть и закрыть",
+      "task_count": 20,
+      "session_count": 5,
+      "skills": [
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U19.APPLY",
+      "title": "Выбирать и строить реплику: сесть и встать; понять короткую просьбу",
+      "task_count": 19,
+      "session_count": 5,
+      "skills": [
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U19-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U20.UNDERSTAND",
+      "title": "Понимать: знакомство без образца; покупка одной вещи",
+      "task_count": 15,
+      "session_count": 3,
+      "skills": [
+        "grammar",
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U20-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U20-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U20-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U20-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U20-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U20-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q04",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U20.APPLY",
+      "title": "Выбирать и строить реплику: короткий вопрос на улице; просьба о помощи",
+      "task_count": 14,
+      "session_count": 3,
+      "skills": [
+        "listening",
+        "reading",
+        "sentence_building",
+        "vocabulary"
+      ],
+      "formal_policy_passed": true,
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U20-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U20-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U20-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U20-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U20-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U20-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q05",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U20-L05",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "lexeme_key_to_id_binding_stable": true,
+  "local_id_to_lexeme_key_binding_stable": true,
+  "unique_lexeme_keys": 202,
+  "checks": {
+    "all_packages_schema_valid": true,
+    "plan_session_inventory_checked": true,
+    "all_dependencies_resolve_in_prepared_inventory": true,
+    "task_counts_and_choice_input_checked": true,
+    "review_items_single_choice_checked": true,
+    "checkpoint_skill_balance_checked": true,
+    "formal_objective_coverage_checked": true,
+    "authoring_delta_evidence_crosschecked": true
+  },
+  "not_performed": {
+    "semantic_editorial_review": true,
+    "browser_audio_listening": true,
+    "site_preview": true,
+    "duration_measurement": true,
+    "import_or_publication": true
+  },
+  "limitations": [
+    "Formal coverage checks verify references, counts and skills; a human must assess the substantive quality of the evidence.",
+    "Prepared packages are not proof of publication or learner mastery.",
+    "Old dictionary qualifiers noted in authoring deltas remain for separate editorial review."
+  ]
+}

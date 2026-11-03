@@ -1,5 +1,7 @@
 <script setup>
-import { ref } from 'vue';
+import CurrentLevelSetting from '@/App/Components/Learning/CurrentLevelSetting.vue';
+import { computed, onMounted, ref } from 'vue';
+import { browserTimezone, timezoneLabel } from '@/App/Learning/practiceTime.js';
 import { Head, useForm, usePage } from '@inertiajs/vue3';
 import { Icon } from '@iconify/vue';
 import api from '@/App/Services/Api';
@@ -26,6 +28,8 @@ const props = defineProps({
   genders: { type: Array, },
   userConfigsView: { type: Array, },
   status: { type: String, },
+  practiceTimezone: { type: String, default: null },
+  timezones: { type: Array, default: () => [] },
 });
 
 const page = usePage();
@@ -36,6 +40,7 @@ const form = useForm({
   residence: props.user.residence,
   birthday: props.user.birthday,
   info: props.user.info,
+  timezone: props.practiceTimezone || 'Europe/Moscow',
   day_birthday: props.user.config.day_birthday,
   yar_birthday: props.user.config.yar_birthday,
   view_email: props.user.config.email.id,
@@ -58,6 +63,8 @@ const form = useForm({
 const avatarLink = ref(props.user.avatar ? props.user.avatar_link : '');
 const tabActive = ref('profile');
 const isUploadingAvatar = ref(false);
+const timezoneOptions = computed(() => [...new Set([form.timezone, ...props.timezones])].map(value => ({ value, label: timezoneLabel(value) })));
+onMounted(() => { if (!props.practiceTimezone) form.timezone = browserTimezone(); });
 
 const submitForm = () => {
   form.patch(route('profile.update'));
@@ -114,8 +121,9 @@ const removeAvatar = async () => {
     :proverb="proverb"
   >
 
-    <div class="bg-blue-50 p-4 rounded min-h-full">
-      <afr-tabs v-model="tabActive">
+    <div class="profile-content bg-blue-50 p-4 rounded flex-1">
+      <current-level-setting v-if="page.props.daily_practice_enabled" :auth-user="authUser" />
+      <afr-tabs v-model="tabActive" class="profile-tabs">
         <afr-tab-plane label="Профиль" name="profile" class="py-4">
 
           <form @submit.prevent="submitForm">
@@ -207,6 +215,13 @@ const removeAvatar = async () => {
                   </div>
                 </div>
 
+                <div class="mt-4">
+                  <label for="profile-timezone" class="block text-sm mb-1">Часовой пояс</label>
+                  <afr-select id="profile-timezone" v-model="form.timezone" searchable search-placeholder="Город, часовой пояс или UTC+3…" :disabled="form.processing">
+                    <afr-option v-for="item in timezoneOptions" :key="item.value" :value="item.value" :label="item.label" />
+                  </afr-select>
+                  <InputError class="mt-2" :message="form.errors.timezone" />
+                </div>
                 <div class="mt-4">
                   <afr-textarea v-model="form.info" label="О себе" placeholder="О себе" rows="4"></afr-textarea>
                 </div>
@@ -489,6 +504,15 @@ const removeAvatar = async () => {
 </template>
 
 <style scoped>
+.profile-content .profile-tabs,
+.profile-tabs :deep(.afr-tab-plane) {
+  height: auto;
+}
+
+.profile-tabs :deep(.afr-tab-plane) {
+  overflow: visible;
+}
+
 .form-user-params-container{
   @apply flex flex-wrap gap-2;
 }

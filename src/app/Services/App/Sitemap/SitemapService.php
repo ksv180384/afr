@@ -28,6 +28,10 @@ class SitemapService
 
         $this->addStaticPages($sitemap);
         $this->addPosts($sitemap);
+        foreach (app(\App\Services\Learning\PublicPracticeCatalog::class)->sitemapEntries() as $entry) {
+            $sitemap->add($this->makeUrlTag(\App\Services\Learning\PracticeUrls::absolute($entry['path']),
+                $entry['modified'] ? new \DateTimeImmutable($entry['modified']) : null, Url::CHANGE_FREQUENCY_WEEKLY, 0.7));
+        }
         //        $this->addLessons($sitemap);
         //        $this->addDictionaryWords($sitemap);
 

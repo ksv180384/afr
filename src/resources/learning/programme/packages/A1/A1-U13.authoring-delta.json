@@ -1,0 +1,1054 @@
+{
+  "unit_id": "A1-U13",
+  "package_file": "A1-U13.v1.json",
+  "session_ids": [
+    "A1-U13-L01",
+    "A1-U13-L02",
+    "A1-U13-L03",
+    "A1-U13-L04",
+    "A1-U13-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "age",
+      "lexeme_key": "fr:age:age",
+      "fr": "l’âge",
+      "ru": [
+        "возраст"
+      ],
+      "transcription_ru": "ла́ж",
+      "first_session_id": "A1-U13-L01"
+    },
+    {
+      "id": "cousin",
+      "lexeme_key": "fr:cousin:male-cousin",
+      "fr": "un cousin",
+      "ru": [
+        "двоюродный брат"
+      ],
+      "transcription_ru": "э(н) кузэ́(н)",
+      "first_session_id": "A1-U13-L01"
+    },
+    {
+      "id": "cousine",
+      "lexeme_key": "fr:cousine:female-cousin",
+      "fr": "une cousine",
+      "ru": [
+        "двоюродная сестра"
+      ],
+      "transcription_ru": "юн кузи́н",
+      "first_session_id": "A1-U13-L01"
+    },
+    {
+      "id": "cheveux",
+      "lexeme_key": "fr:cheveux:head-hair",
+      "fr": "les cheveux",
+      "ru": [
+        "волосы на голове"
+      ],
+      "transcription_ru": "ле шёвё́",
+      "first_session_id": "A1-U13-L02"
+    },
+    {
+      "id": "blond",
+      "lexeme_key": "fr:blond:blond-hair",
+      "fr": "blond",
+      "ru": [
+        "светловолосый / светлый о волосах"
+      ],
+      "transcription_ru": "бло́(н)",
+      "first_session_id": "A1-U13-L02"
+    },
+    {
+      "id": "brun",
+      "lexeme_key": "fr:brun:brown-hair",
+      "fr": "brun",
+      "ru": [
+        "темноволосый / тёмно-каштановый о волосах"
+      ],
+      "transcription_ru": "брэ́(н)",
+      "first_session_id": "A1-U13-L02"
+    },
+    {
+      "id": "sympathique",
+      "lexeme_key": "fr:sympathique:pleasant-person",
+      "fr": "sympathique",
+      "ru": [
+        "приятный в общении"
+      ],
+      "transcription_ru": "сэ(н)пати́к",
+      "first_session_id": "A1-U13-L03"
+    },
+    {
+      "id": "timide",
+      "lexeme_key": "fr:timide:shy-person",
+      "fr": "timide",
+      "ru": [
+        "застенчивый"
+      ],
+      "transcription_ru": "тими́д",
+      "first_session_id": "A1-U13-L03"
+    },
+    {
+      "id": "patient-caractere",
+      "lexeme_key": "fr:patient:patient-personality",
+      "fr": "patient",
+      "ru": [
+        "терпеливый (черта характера)"
+      ],
+      "transcription_ru": "пасья́(н)",
+      "first_session_id": "A1-U13-L03"
+    },
+    {
+      "id": "avec-lui",
+      "lexeme_key": "fr:avec-lui:with-him",
+      "fr": "avec lui",
+      "ru": [
+        "с ним"
+      ],
+      "transcription_ru": "авэк люи́",
+      "first_session_id": "A1-U13-L04"
+    },
+    {
+      "id": "avec-elle",
+      "lexeme_key": "fr:avec-elle:with-her",
+      "fr": "avec elle",
+      "ru": [
+        "с ней"
+      ],
+      "transcription_ru": "авэк э́ль",
+      "first_session_id": "A1-U13-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:aller:go",
+    "fr:ans:age-years",
+    "fr:avec-plaisir:willing-acceptance",
+    "fr:cinema:cinema-venue",
+    "fr:cours:class-session",
+    "fr:desole:polite-refusal-apology",
+    "fr:deux:cardinal-number",
+    "fr:dix:cardinal-number",
+    "fr:ensemble:together",
+    "fr:et:and",
+    "fr:faire-du-sport:do-sport",
+    "fr:francais:french-language",
+    "fr:frere:brother",
+    "fr:heure:clock-hour",
+    "fr:je-ne-peux-pas:unavailable-refusal",
+    "fr:lundi:weekday",
+    "fr:mardi:weekday",
+    "fr:mathematiques:maths-subject",
+    "fr:mercredi:weekday",
+    "fr:midi:noon",
+    "fr:neuf:cardinal-number",
+    "fr:occupe:busy-in-schedule",
+    "fr:parc:park",
+    "fr:pere:father",
+    "fr:quinze:cardinal-number",
+    "fr:salle:classroom",
+    "fr:se-promener:take-walk",
+    "fr:seize:cardinal-number",
+    "fr:soeur:sister",
+    "fr:trois:cardinal-number",
+    "fr:vous-voulez:invitation-question"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A1.U13.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U13-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U13-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U13-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U13-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U13-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U13-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U13-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U13-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U13-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U13.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U13-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U13-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U13-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U13-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U13-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U13-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U13-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U13-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U12.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U13-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U10.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U13-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U13-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:frere:brother",
+      "reason": "Сохранить прежнее родство как знакомый контекст для сообщения о другом человеке."
+    },
+    {
+      "lexeme_key": "fr:soeur:sister",
+      "reason": "Повторить женскую форму родства и описания."
+    },
+    {
+      "lexeme_key": "fr:age:age",
+      "reason": "Вернуть возраст отдельно от времени и даты."
+    },
+    {
+      "lexeme_key": "fr:cousin:male-cousin",
+      "reason": "Повторить отличие двоюродного брата от брата."
+    },
+    {
+      "lexeme_key": "fr:cousine:female-cousin",
+      "reason": "Повторить отличие двоюродной сестры от сестры."
+    },
+    {
+      "lexeme_key": "fr:sympathique:pleasant-person",
+      "reason": "Вернуть приятность в общении как прямо названную черту."
+    },
+    {
+      "lexeme_key": "fr:patient:patient-personality",
+      "reason": "Сохранить отдельный ключ терпеливого характера и не смешивать с пациентом."
+    },
+    {
+      "lexeme_key": "fr:avec-lui:with-him",
+      "reason": "Повторить однозначную ссылку на ранее названного человека."
+    },
+    {
+      "lexeme_key": "fr:avec-elle:with-her",
+      "reason": "Вернуть совместное действие с явно названной участницей."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "known_family_age_and_leisure_keys_reused": true,
+    "patient_personality_meaning_separated_from_medical_patient": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "possessive_and_description_agreement_reviewed": true,
+    "traits_based_on_explicit_text_reviewed": true,
+    "with_him_her_references_reviewed": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A1-U12-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Человеку проверить естественность французских представлений людей, выбранные притяжательные формы, согласование и приблизительные русские транскрипции.",
+    "Прослушать браузерную озвучку, особенно возраст, двоюродное родство, пары blond/blonde и brun/brune, patient/patiente и ссылки на спутника. Время аудио и занятий пока не измерено.",
+    "Выполнить предпросмотр и пробное прохождение: родство и возраст, описание человека и волос, прямо названная черта характера и однозначный спутник."
+  ],
+  "progress": {
+    "current_unit": "A1-U13",
+    "prepared_session_ids": [
+      "A1-U13-L01",
+      "A1-U13-L02",
+      "A1-U13-L03",
+      "A1-U13-L04",
+      "A1-U13-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A1-U14",
+    "next_unit_title": "Здоровье и самочувствие",
+    "previous_unit": "A1-U12",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A1-U13. Принятие и импорт предыдущих пакетов не подтверждены; повторение использует полные объекты подготовленных пакетов.",
+    "Новые значения распределены как три, три, три, два и ноль. В пятом занятии нового обязательного материала нет.",
+    "Брат и сестра, другие известные отношения родства, друг и обозначение лет сохраняют прежние ключи. Брат из плана A1 не объявляется новым словом.",
+    "Расширение родства ограничено двоюродными братом и сестрой. Названия людей и возраст в заданиях вымышленные; реальных личных данных нет.",
+    "Выбранные mon/ma/mes зависят от названия родственника, а не пола рассказчика. Возраст сообщается формой a и знакомым числом лет.",
+    "Внешность ограничена волосами и выбранными blond/brun. Описание волос согласуется со словом cheveux, а не с человеком, которому они принадлежат.",
+    "Формы blonde/brune и patiente вводятся до проверки. Длинные списки внешних и характерологических признаков не даются.",
+    "Sympathique означает приятный в общении, не оценку внешней привлекательности. Застенчивый и терпеливый — другие прямо названные черты.",
+    "Patient как терпеливый характер имеет отдельный ключ от прежнего patient, человека у врача. Прежний медицинский ключ не изменён.",
+    "Характер не выводится из внешности, возраста, пола или родства. Задания опираются на явно названное описание.",
+    "Avec lui и avec elle указывают на одного человека, явно названного в данной части текста. Голос не используется для определения участника.",
+    "Je fais du sport и Je me promène вводятся как выбранные формы знакомых занятий. Полная таблица спряжения или местоимений не требуется.",
+    "В L01 повторено расписание учёбы A1-U12; в L03 и L04 — отказ и принятие приглашения A1-U10.",
+    "Все сведения и совместные действия вымышленные. Стереотипы о родственниках и внешние сведения о людях не нужны для ответа.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A1-U13-L01",
+      "new_lexeme_keys": [
+        "fr:age:age",
+        "fr:cousin:male-cousin",
+        "fr:cousine:female-cousin"
+      ],
+      "reused_lexeme_keys": [
+        "fr:ans:age-years",
+        "fr:cours:class-session",
+        "fr:deux:cardinal-number",
+        "fr:dix:cardinal-number",
+        "fr:francais:french-language",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:lundi:weekday",
+        "fr:mardi:weekday",
+        "fr:mathematiques:maths-subject",
+        "fr:neuf:cardinal-number",
+        "fr:pere:father",
+        "fr:quinze:cardinal-number",
+        "fr:salle:classroom",
+        "fr:seize:cardinal-number",
+        "fr:soeur:sister",
+        "fr:trois:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U13-L02",
+      "new_lexeme_keys": [
+        "fr:cheveux:head-hair",
+        "fr:blond:blond-hair",
+        "fr:brun:brown-hair"
+      ],
+      "reused_lexeme_keys": [
+        "fr:ans:age-years",
+        "fr:cousin:male-cousin",
+        "fr:cousine:female-cousin",
+        "fr:frere:brother",
+        "fr:quinze:cardinal-number",
+        "fr:seize:cardinal-number",
+        "fr:soeur:sister"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U13-L03",
+      "new_lexeme_keys": [
+        "fr:sympathique:pleasant-person",
+        "fr:timide:shy-person",
+        "fr:patient:patient-personality"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:go",
+        "fr:ans:age-years",
+        "fr:blond:blond-hair",
+        "fr:cinema:cinema-venue",
+        "fr:cousin:male-cousin",
+        "fr:cousine:female-cousin",
+        "fr:desole:polite-refusal-apology",
+        "fr:et:and",
+        "fr:frere:brother",
+        "fr:je-ne-peux-pas:unavailable-refusal",
+        "fr:midi:noon",
+        "fr:occupe:busy-in-schedule",
+        "fr:quinze:cardinal-number",
+        "fr:seize:cardinal-number",
+        "fr:soeur:sister",
+        "fr:vous-voulez:invitation-question"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U13-L04",
+      "new_lexeme_keys": [
+        "fr:avec-lui:with-him",
+        "fr:avec-elle:with-her"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:go",
+        "fr:avec-plaisir:willing-acceptance",
+        "fr:cinema:cinema-venue",
+        "fr:ensemble:together",
+        "fr:faire-du-sport:do-sport",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:mardi:weekday",
+        "fr:mercredi:weekday",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:parc:park",
+        "fr:se-promener:take-walk",
+        "fr:soeur:sister",
+        "fr:vous-voulez:invitation-question"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U13-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:age:age",
+        "fr:aller:go",
+        "fr:ans:age-years",
+        "fr:avec-elle:with-her",
+        "fr:avec-lui:with-him",
+        "fr:blond:blond-hair",
+        "fr:brun:brown-hair",
+        "fr:cheveux:head-hair",
+        "fr:cinema:cinema-venue",
+        "fr:cousin:male-cousin",
+        "fr:cousine:female-cousin",
+        "fr:et:and",
+        "fr:faire-du-sport:do-sport",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:parc:park",
+        "fr:patient:patient-personality",
+        "fr:quinze:cardinal-number",
+        "fr:se-promener:take-walk",
+        "fr:seize:cardinal-number",
+        "fr:soeur:sister",
+        "fr:sympathique:pleasant-person",
+        "fr:timide:shy-person"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A1-U13-L01",
+      "material": "Выбранные притяжательные mon/ma/mes с родством; возраст с a и знакомыми числами лет."
+    },
+    {
+      "session_id": "A1-U13-L02",
+      "material": "A les cheveux blonds/bruns; выбранные описания человека est blond/blonde и brun/brune, различие согласования с владельцем и волосами."
+    },
+    {
+      "session_id": "A1-U13-L03",
+      "material": "Описание est sympathique/timide/patient; выбранная женская форма patiente и неизменные формы sympathique/timide."
+    },
+    {
+      "session_id": "A1-U13-L04",
+      "material": "Avec lui/avec elle с явным предшествующим участником; выбранные личные формы Je fais du sport и Je me promène."
+    }
+  ],
+  "text_conventions": {
+    "person_status": "Вымышленные родственники, возраст, черты и совместные занятия.",
+    "description_scope": "Характер прямо назван и не выводится из внешности или родства.",
+    "reference_scope": "Один явно названный участник в каждой части текста с avec lui/elle.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:age:age",
+      "evidence": [
+        {
+          "session_id": "A1-U13-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:cousin:male-cousin",
+      "evidence": [
+        {
+          "session_id": "A1-U13-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U13-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U13-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:cousine:female-cousin",
+      "evidence": [
+        {
+          "session_id": "A1-U13-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U13-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:cheveux:head-hair",
+      "evidence": [
+        {
+          "session_id": "A1-U13-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:blond:blond-hair",
+      "evidence": [
+        {
+          "session_id": "A1-U13-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:brun:brown-hair",
+      "evidence": [
+        {
+          "session_id": "A1-U13-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U13-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:sympathique:pleasant-person",
+      "evidence": [
+        {
+          "session_id": "A1-U13-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:timide:shy-person",
+      "evidence": [
+        {
+          "session_id": "A1-U13-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U13-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:patient:patient-personality",
+      "evidence": [
+        {
+          "session_id": "A1-U13-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:avec-lui:with-him",
+      "evidence": [
+        {
+          "session_id": "A1-U13-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U13-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:avec-elle:with-her",
+      "evidence": [
+        {
+          "session_id": "A1-U13-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U13-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 11,
+    "external_prerequisites": [
+      "A1-U12-L05"
+    ],
+    "external_reference_status": "A1-U12-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 11
+      },
+      "file_hash": "67f94da2bc256ee08a3cf40f2adfa78e286245b3565bf1eae69ea3c8dec2789d",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 31,
+    "text_lengths": [
+      {
+        "session_id": "A1-U13-L01",
+        "reading_word_counts": [
+          26,
+          20
+        ],
+        "listening_word_counts": [
+          20
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U13-L02",
+        "reading_word_counts": [
+          20,
+          21
+        ],
+        "listening_word_counts": [
+          23
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U13-L03",
+        "reading_word_counts": [
+          20,
+          17
+        ],
+        "listening_word_counts": [
+          21
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U13-L04",
+        "reading_word_counts": [
+          20,
+          24
+        ],
+        "listening_word_counts": [
+          21
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U13-L05",
+        "reading_word_counts": [
+          19,
+          22
+        ],
+        "listening_word_counts": [
+          21,
+          22
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "mon cousin",
+        "session_id": "A1-U13-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "quinze ans",
+        "session_id": "A1-U13-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "seize ans",
+        "session_id": "A1-U13-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "ma cousine",
+        "session_id": "A1-U13-L01",
+        "task_id": "Q05"
+      },
+      {
+        "frame": "les cheveux blonds",
+        "session_id": "A1-U13-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "les cheveux bruns",
+        "session_id": "A1-U13-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Ma sœur est blonde",
+        "session_id": "A1-U13-L02",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "Ma cousine est brune",
+        "session_id": "A1-U13-L02",
+        "task_id": "Q05"
+      },
+      {
+        "frame": "est sympathique",
+        "session_id": "A1-U13-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "est timide",
+        "session_id": "A1-U13-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "est patient",
+        "session_id": "A1-U13-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "est patiente",
+        "session_id": "A1-U13-L03",
+        "task_id": "Q05"
+      },
+      {
+        "frame": "avec lui",
+        "session_id": "A1-U13-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "avec elle",
+        "session_id": "A1-U13-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je fais du sport",
+        "session_id": "A1-U13-L04",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Je me promène",
+        "session_id": "A1-U13-L04",
+        "task_id": "Q04"
+      }
+    ]
+  }
+}

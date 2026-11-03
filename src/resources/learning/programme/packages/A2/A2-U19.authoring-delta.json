@@ -1,0 +1,995 @@
+{
+  "unit_id": "A2-U19",
+  "package_file": "A2-U19.v1.json",
+  "package_id": "programme-a2-u19-v1",
+  "session_ids": [
+    "A2-U19-L01",
+    "A2-U19-L02",
+    "A2-U19-L03",
+    "A2-U19-L04",
+    "A2-U19-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "perdre",
+      "lexeme_key": "fr:perdre:lose-possession",
+      "fr": "perdre",
+      "ru": [
+        "терять вещь"
+      ],
+      "transcription_ru": "пэ́рдр",
+      "first_session_id": "A2-U19-L01"
+    },
+    {
+      "id": "ne-plus",
+      "lexeme_key": "fr:ne-plus:no-longer-state",
+      "fr": "ne … plus",
+      "ru": [
+        "больше не: изменение состояния"
+      ],
+      "transcription_ru": "нё … плю",
+      "first_session_id": "A2-U19-L01"
+    },
+    {
+      "id": "signaler",
+      "lexeme_key": "fr:signaler:report-problem",
+      "fr": "signaler",
+      "ru": [
+        "сообщать о проблеме"
+      ],
+      "transcription_ru": "синьялэ́",
+      "first_session_id": "A2-U19-L02"
+    },
+    {
+      "id": "erreur",
+      "lexeme_key": "fr:erreur:mistake",
+      "fr": "une erreur",
+      "ru": [
+        "ошибка"
+      ],
+      "transcription_ru": "юн эрё́р",
+      "first_session_id": "A2-U19-L02"
+    },
+    {
+      "id": "vol-avion",
+      "lexeme_key": "fr:vol:flight",
+      "fr": "un vol",
+      "ru": [
+        "авиарейс"
+      ],
+      "transcription_ru": "э(н) воль",
+      "first_session_id": "A2-U19-L03"
+    },
+    {
+      "id": "annulation",
+      "lexeme_key": "fr:annulation:cancellation",
+      "fr": "une annulation",
+      "ru": [
+        "отмена события или рейса"
+      ],
+      "transcription_ru": "юн анюласьо́(н)",
+      "first_session_id": "A2-U19-L03"
+    },
+    {
+      "id": "annuler",
+      "lexeme_key": "fr:annuler:cancel-event",
+      "fr": "annuler",
+      "ru": [
+        "отменять событие или рейс"
+      ],
+      "transcription_ru": "анюлэ́",
+      "first_session_id": "A2-U19-L03"
+    },
+    {
+      "id": "corriger",
+      "lexeme_key": "fr:corriger:correct-mistake",
+      "fr": "corriger",
+      "ru": [
+        "исправлять ошибку"
+      ],
+      "transcription_ru": "корижэ́",
+      "first_session_id": "A2-U19-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:aide:assistance",
+    "fr:aller:go",
+    "fr:aller:near-future-auxiliary",
+    "fr:amicalement:friendly-signoff",
+    "fr:anniversaire:birthday",
+    "fr:apporter:bring-object",
+    "fr:autre:other",
+    "fr:avoir-lieu:event-occurrence",
+    "fr:avoir:compound-past-auxiliary",
+    "fr:bruyant:noisy-place",
+    "fr:cadeau:gift",
+    "fr:calme:quiet-place",
+    "fr:chambre:hotel-room",
+    "fr:choisir:choose-option",
+    "fr:dabord:first-step",
+    "fr:deja:prior-learning-experience",
+    "fr:demander:ask-for",
+    "fr:deux:cardinal-number",
+    "fr:disponible:available-in-schedule",
+    "fr:dix:cardinal-number",
+    "fr:donner-des-nouvelles:share-personal-news",
+    "fr:ensuite:next-step",
+    "fr:faire-du-bruit:make-noise",
+    "fr:famille:family",
+    "fr:feter:celebrate-occasion",
+    "fr:foret:forest",
+    "fr:frere:brother",
+    "fr:gare:railway-station",
+    "fr:heure:clock-hour",
+    "fr:il-est-interdit-de:prohibition",
+    "fr:il-faut:necessary-action",
+    "fr:j-espere-que:hope-statement",
+    "fr:jai:possession",
+    "fr:jamais:never-in-experience-negation",
+    "fr:je-voudrais:polite-request",
+    "fr:lac:lake",
+    "fr:maison:house-home",
+    "fr:mardi:weekday",
+    "fr:matin:morning",
+    "fr:merci:thanks",
+    "fr:numero:identifier",
+    "fr:par-carte:card-payment",
+    "fr:parc:park",
+    "fr:payer:pay",
+    "fr:petit:small-object",
+    "fr:plus:greater-degree-comparison",
+    "fr:pourriez-vous:polite-action-request",
+    "fr:preciser:clarify-service-details",
+    "fr:pres-de:near-place",
+    "fr:proteger:protect-place",
+    "fr:que:relative-direct-object",
+    "fr:qui:relative-subject",
+    "fr:randonnee:recreational-hike",
+    "fr:reservation:hotel-booking",
+    "fr:rester:stay-at-place",
+    "fr:sac:bag",
+    "fr:salut:informal_greeting",
+    "fr:sentier:walking-path",
+    "fr:soeur:sister",
+    "fr:soir:evening",
+    "fr:tarif:service-price",
+    "fr:trois:cardinal-number",
+    "fr:vendredi:weekday",
+    "fr:venir-de:recently-completed-action"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A2.U19.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U19-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U19-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U19-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U19-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U19-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U19-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U19-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U19-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U19-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U19-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U19.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U19-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U19-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U19-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U19-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U19-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U19-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U19-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U19-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U19-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U18.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U19-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U16.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U19-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U19-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:perdre:lose-possession",
+      "reason": "Сохранять событие потери отдельно от текущего состояния."
+    },
+    {
+      "lexeme_key": "fr:ne-plus:no-longer-state",
+      "reason": "Отличать больше не от никогда и от сравнения."
+    },
+    {
+      "lexeme_key": "fr:jamais:never-in-experience-negation",
+      "reason": "Повторить отрицание опыта с прежним ключом."
+    },
+    {
+      "lexeme_key": "fr:signaler:report-problem",
+      "reason": "Отличать сообщение о проблеме от исправления."
+    },
+    {
+      "lexeme_key": "fr:annulation:cancellation",
+      "reason": "Сохранять отмену отдельно от замены и возмещения."
+    },
+    {
+      "lexeme_key": "fr:corriger:correct-mistake",
+      "reason": "Отличать просьбу, будущий план и недавний результат."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_ids_keys_and_french_forms_checked": true,
+    "existing_experience_hotel_identifier_and_result_keys_preserved": true,
+    "reading_lengths_checked": true,
+    "selected_models_explained_before_testing": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Зависимость A2-U18-L05 найдена проектным валидатором. Это не подтверждает публикацию или принятие пользователем.",
+    "Редактору проверить естественность объяснения потери, гостиничной ошибки, отмены и исправления, выбранные формы perdu / annulé.",
+    "Прослушать браузерную озвучку; выполнить предпросмотр и прохождение, измерить время. Эти действия фактически не выполнялись."
+  ],
+  "progress": {
+    "current_unit": "A2-U19",
+    "prepared_session_ids": [
+      "A2-U19-L01",
+      "A2-U19-L02",
+      "A2-U19-L03",
+      "A2-U19-L04",
+      "A2-U19-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A2-U20",
+    "next_unit_title": "Опыт и будущее"
+  },
+  "scope_notes": [
+    "Один полный пакет пяти занятий. Восемь новых значений распределены как два, два, три, одно, ноль. Ни одно введение не содержит более трёх карточек; в L05 нового обязательного материала нет.",
+    "Perdu — выбранная форма изучаемого в этом занятии perdre в составном прошлом. Модель объяснена до проверки, не вводится полный список неправильных причастий.",
+    "Ne … plus означает больше не, не подменяется прежним plus в сравнении. Jamais сохраняет fr:jamais:never-in-experience-negation и полный объект: отрицание опыта переносится с обучения на потерю вещи, без нового ключа ради смены действия.",
+    "Chambre-hotel сохраняет значение гостиничного номера, не подменяется chambre как спальня. Numéro — прежний идентификатор; два и три — разные указанные номера, не оценки качества.",
+    "Annulation — существительное отмены, annuler — действие; выбранная готовая форма Le vol est annulé показана до проверки. Vol здесь только авиарейс, не другие значения слова.",
+    "Просьба сообщить о проблеме отличается от просьбы исправить. Je vais corriger — будущий план, Je viens de corriger — недавний результат. Обе рамки показаны до итогового задания.",
+    "Отмена не подтверждает автоматически предоставленную замену, бронь или возврат денег. Доступность в пятницу не становится новым рейсом.",
+    "В L01 повторены личные новости и порядок событий из A2-U18. В L03 — правила вымышленного парка из A2-U16; в L04 — основание выбора тропы оттуда же. Прежние карточки не изменяются.",
+    "Все потери, гостиницы, рейсы, ошибки и исправления вымышлены для языковой практики. Не сообщаются действующие права пассажиров, правила перевозчика, реальные рейсы, гарантии размещения или выплаты.",
+    "Нет реальных бронирований, платежей, обращений или отправленных сообщений. Ответы только выбираются или собираются; микрофон и набор текста не требуются.",
+    "Озвучка только браузером: fr-FR, asset_id=null. Аудиофайлы и внешние сервисы не используются. Импорт, публикация и прослушивание не выполнялись; принятие пользователем не подтверждено."
+  ],
+  "session_material": [
+    {
+      "session_id": "A2-U19-L01",
+      "new_lexeme_keys": [
+        "fr:perdre:lose-possession",
+        "fr:ne-plus:no-longer-state"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aide:assistance",
+        "fr:amicalement:friendly-signoff",
+        "fr:anniversaire:birthday",
+        "fr:apporter:bring-object",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:cadeau:gift",
+        "fr:dabord:first-step",
+        "fr:deja:prior-learning-experience",
+        "fr:demander:ask-for",
+        "fr:disponible:available-in-schedule",
+        "fr:donner-des-nouvelles:share-personal-news",
+        "fr:ensuite:next-step",
+        "fr:famille:family",
+        "fr:feter:celebrate-occasion",
+        "fr:frere:brother",
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:j-espere-que:hope-statement",
+        "fr:jai:possession",
+        "fr:jamais:never-in-experience-negation",
+        "fr:je-voudrais:polite-request",
+        "fr:maison:house-home",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:petit:small-object",
+        "fr:preciser:clarify-service-details",
+        "fr:sac:bag",
+        "fr:salut:informal_greeting",
+        "fr:soir:evening",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U19-L02",
+      "new_lexeme_keys": [
+        "fr:signaler:report-problem",
+        "fr:erreur:mistake"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aide:assistance",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:chambre:hotel-room",
+        "fr:demander:ask-for",
+        "fr:deux:cardinal-number",
+        "fr:disponible:available-in-schedule",
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:j-espere-que:hope-statement",
+        "fr:jai:possession",
+        "fr:je-voudrais:polite-request",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:ne-plus:no-longer-state",
+        "fr:numero:identifier",
+        "fr:par-carte:card-payment",
+        "fr:payer:pay",
+        "fr:perdre:lose-possession",
+        "fr:petit:small-object",
+        "fr:preciser:clarify-service-details",
+        "fr:reservation:hotel-booking",
+        "fr:sac:bag",
+        "fr:trois:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U19-L03",
+      "new_lexeme_keys": [
+        "fr:vol:flight",
+        "fr:annulation:cancellation",
+        "fr:annuler:cancel-event"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aide:assistance",
+        "fr:aller:go",
+        "fr:avoir-lieu:event-occurrence",
+        "fr:demander:ask-for",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:faire-du-bruit:make-noise",
+        "fr:foret:forest",
+        "fr:heure:clock-hour",
+        "fr:il-est-interdit-de:prohibition",
+        "fr:il-faut:necessary-action",
+        "fr:je-voudrais:polite-request",
+        "fr:lac:lake",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:parc:park",
+        "fr:preciser:clarify-service-details",
+        "fr:proteger:protect-place",
+        "fr:randonnee:recreational-hike",
+        "fr:rester:stay-at-place",
+        "fr:sentier:walking-path",
+        "fr:signaler:report-problem",
+        "fr:soeur:sister",
+        "fr:tarif:service-price",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U19-L04",
+      "new_lexeme_keys": [
+        "fr:corriger:correct-mistake"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:go",
+        "fr:aller:near-future-auxiliary",
+        "fr:autre:other",
+        "fr:bruyant:noisy-place",
+        "fr:calme:quiet-place",
+        "fr:chambre:hotel-room",
+        "fr:choisir:choose-option",
+        "fr:deux:cardinal-number",
+        "fr:disponible:available-in-schedule",
+        "fr:erreur:mistake",
+        "fr:foret:forest",
+        "fr:je-voudrais:polite-request",
+        "fr:lac:lake",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:numero:identifier",
+        "fr:parc:park",
+        "fr:payer:pay",
+        "fr:plus:greater-degree-comparison",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:pres-de:near-place",
+        "fr:que:relative-direct-object",
+        "fr:qui:relative-subject",
+        "fr:randonnee:recreational-hike",
+        "fr:reservation:hotel-booking",
+        "fr:sentier:walking-path",
+        "fr:signaler:report-problem",
+        "fr:trois:cardinal-number",
+        "fr:venir-de:recently-completed-action"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U19-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:aide:assistance",
+        "fr:annulation:cancellation",
+        "fr:annuler:cancel-event",
+        "fr:avoir-lieu:event-occurrence",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:chambre:hotel-room",
+        "fr:corriger:correct-mistake",
+        "fr:demander:ask-for",
+        "fr:deux:cardinal-number",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:erreur:mistake",
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:jai:possession",
+        "fr:jamais:never-in-experience-negation",
+        "fr:je-voudrais:polite-request",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:merci:thanks",
+        "fr:ne-plus:no-longer-state",
+        "fr:numero:identifier",
+        "fr:perdre:lose-possession",
+        "fr:petit:small-object",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:reservation:hotel-booking",
+        "fr:sac:bag",
+        "fr:signaler:report-problem",
+        "fr:tarif:service-price",
+        "fr:trois:cardinal-number",
+        "fr:vendredi:weekday",
+        "fr:venir-de:recently-completed-action",
+        "fr:vol:flight"
+      ],
+      "task_count": 8
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:perdre:lose-possession",
+      "evidence": [
+        {
+          "session_id": "A2-U19-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U19-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U19-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:ne-plus:no-longer-state",
+      "evidence": [
+        {
+          "session_id": "A2-U19-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U19-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U19-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U19-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:signaler:report-problem",
+      "evidence": [
+        {
+          "session_id": "A2-U19-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U19-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:erreur:mistake",
+      "evidence": [
+        {
+          "session_id": "A2-U19-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U19-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:vol:flight",
+      "evidence": [
+        {
+          "session_id": "A2-U19-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U19-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:annulation:cancellation",
+      "evidence": [
+        {
+          "session_id": "A2-U19-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U19-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:annuler:cancel-event",
+      "evidence": [
+        {
+          "session_id": "A2-U19-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U19-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U19-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:corriger:correct-mistake",
+      "evidence": [
+        {
+          "session_id": "A2-U19-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U19-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U19-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U19-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U19-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A2-U19-L01",
+      "material": "J’ai perdu / Je n’ai plus mon sac / Je n’ai jamais perdu mon sac; событие, состояние и опыт."
+    },
+    {
+      "session_id": "A2-U19-L02",
+      "material": "Je voudrais signaler une erreur; бронирование и номер предоставленной комнаты."
+    },
+    {
+      "session_id": "A2-U19-L03",
+      "material": "Le vol est annulé; существительное annulation; Le vol n’a pas lieu."
+    },
+    {
+      "session_id": "A2-U19-L04",
+      "material": "Pourriez-vous corriger; Je vais corriger / Je viens de corriger."
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 8,
+    "external_prerequisites": [
+      "A2-U18-L05"
+    ],
+    "external_reference_status": "A2-U18-L05_found_by_project_validator; publication_and_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 6
+      },
+      "file_hash": "15579d4cc68d904a250332ad1d69ac300d18f067ece1deebe9c8286cfbea8013"
+    },
+    "existing_lexeme_objects_preserved": 64,
+    "text_lengths": [
+      {
+        "session_id": "A2-U19-L01",
+        "reading_word_counts": [
+          36,
+          32
+        ],
+        "listening_word_counts": [
+          32
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U19-L02",
+        "reading_word_counts": [
+          32,
+          32
+        ],
+        "listening_word_counts": [
+          32
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U19-L03",
+        "reading_word_counts": [
+          37,
+          31
+        ],
+        "listening_word_counts": [
+          31
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U19-L04",
+        "reading_word_counts": [
+          39,
+          36
+        ],
+        "listening_word_counts": [
+          36
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U19-L05",
+        "reading_word_counts": [
+          32,
+          36
+        ],
+        "listening_word_counts": [
+          32,
+          31
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_model_first_tasks": [
+      {
+        "frame": "J’ai perdu mon sac",
+        "session_id": "A2-U19-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Je n’ai plus mon sac",
+        "session_id": "A2-U19-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Je n’ai jamais perdu mon sac",
+        "session_id": "A2-U19-L01",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "Je voudrais signaler une erreur",
+        "session_id": "A2-U19-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Le vol est annulé",
+        "session_id": "A2-U19-L03",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "Pourriez-vous corriger cette erreur",
+        "session_id": "A2-U19-L04",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Je viens de corriger cette erreur",
+        "session_id": "A2-U19-L05",
+        "task_id": "Q05"
+      }
+    ]
+  }
+}

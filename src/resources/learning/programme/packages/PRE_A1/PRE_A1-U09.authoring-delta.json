@@ -1,0 +1,789 @@
+{
+  "unit_id": "PRE_A1-U09",
+  "package_file": "PRE_A1-U09.v1.json",
+  "session_ids": [
+    "PRE_A1-U09-L01",
+    "PRE_A1-U09-L02",
+    "PRE_A1-U09-L03",
+    "PRE_A1-U09-L04",
+    "PRE_A1-U09-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "eau",
+      "lexeme_key": "fr:eau:water",
+      "fr": "de l’eau",
+      "ru": [
+        "вода (в просьбе: воды)"
+      ],
+      "transcription_ru": "дё ло́",
+      "first_session_id": "PRE_A1-U09-L01"
+    },
+    {
+      "id": "jus",
+      "lexeme_key": "fr:jus:juice",
+      "fr": "un jus",
+      "ru": [
+        "сок (порция в заказе)"
+      ],
+      "transcription_ru": "э(н) жю́",
+      "first_session_id": "PRE_A1-U09-L01"
+    },
+    {
+      "id": "je-voudrais",
+      "lexeme_key": "fr:je-voudrais:polite-request",
+      "fr": "je voudrais",
+      "ru": [
+        "Мне бы хотелось (вежливая просьба)"
+      ],
+      "transcription_ru": "жё вудрэ́",
+      "first_session_id": "PRE_A1-U09-L01"
+    },
+    {
+      "id": "the",
+      "lexeme_key": "fr:the:tea",
+      "fr": "un thé",
+      "ru": [
+        "чай (порция в заказе)"
+      ],
+      "transcription_ru": "э(н) тэ́",
+      "first_session_id": "PRE_A1-U09-L02"
+    },
+    {
+      "id": "cafe",
+      "lexeme_key": "fr:cafe:coffee",
+      "fr": "un café",
+      "ru": [
+        "кофе (порция в заказе)"
+      ],
+      "transcription_ru": "э(н) кафэ́",
+      "first_session_id": "PRE_A1-U09-L02"
+    },
+    {
+      "id": "froid",
+      "lexeme_key": "fr:froid:cold-temperature",
+      "fr": "froid",
+      "ru": [
+        "холодный (о температуре)"
+      ],
+      "transcription_ru": "фруа́",
+      "first_session_id": "PRE_A1-U09-L03"
+    },
+    {
+      "id": "chaud",
+      "lexeme_key": "fr:chaud:hot-temperature",
+      "fr": "chaud",
+      "ru": [
+        "горячий (о температуре)"
+      ],
+      "transcription_ru": "шо́",
+      "first_session_id": "PRE_A1-U09-L03"
+    },
+    {
+      "id": "drink-question",
+      "lexeme_key": "fr:que-voulez-vous-boire:drink-question",
+      "fr": "que voulez-vous boire ?",
+      "ru": [
+        "Что вы хотите пить?"
+      ],
+      "transcription_ru": "кё вулэ ву буа́р?",
+      "first_session_id": "PRE_A1-U09-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:cest:identify-object",
+    "fr:de-rien:reply-to-thanks",
+    "fr:deux:cardinal-number",
+    "fr:fille:daughter",
+    "fr:grand:large-object",
+    "fr:ma:first-person-feminine-possessive",
+    "fr:merci:thanks",
+    "fr:mere:mother",
+    "fr:numero:identifier",
+    "fr:petit:small-object",
+    "fr:qui-est-ce:identity-question",
+    "fr:sac:bag",
+    "fr:sil-vous-plait:polite-request",
+    "fr:soeur:sister",
+    "fr:un:cardinal-number"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "PRE_A1.U09.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U09.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q05",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U08.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U06.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U06.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:je-voudrais:polite-request",
+      "reason": "Вернуть готовую вежливую просьбу в знакомой ситуации с едой без новой таблицы форм глагола."
+    },
+    {
+      "lexeme_key": "fr:eau:water",
+      "reason": "Повторить знакомое сочетание с водой и не строить полную систему артиклей по одному примеру."
+    },
+    {
+      "lexeme_key": "fr:the:tea",
+      "reason": "Вернуть чай в короткий контекст завтрака, когда новые слова еды уже объяснены."
+    },
+    {
+      "lexeme_key": "fr:cafe:coffee",
+      "reason": "Вернуть кофе как напиток в контекст завтрака, сохранив смысловой ключ."
+    },
+    {
+      "lexeme_key": "fr:chaud:hot-temperature",
+      "reason": "При уместном возврате повторить температуру и показанные формы без новых исключений."
+    },
+    {
+      "lexeme_key": "fr:que-voulez-vous-boire:drink-question",
+      "reason": "В контрольном занятии U10 использовать знакомый вопрос о напитке как повторение U09, не как новый материал."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "local_database_references_checked": true,
+    "pronunciation_coverage_warnings_absent": true,
+    "all_new_lexemes_have_task_evidence": true,
+    "kind_practice_checked": true,
+    "level_load_checked": true,
+    "temperature_forms_reuse_keys_checked": true,
+    "water_chunk_preserved_checked": true
+  },
+  "open_issues": [
+    "Проверка зависимостей штатным валидатором в локальной базе пройдена. При импорте в другую базу сначала требуется PRE_A1-U08-L05.",
+    "Человеку нужно проверить язык и браузерную озвучку названий напитков, вопроса и полных просьб; особенно формы температуры с водой.",
+    "Выполнить предпросмотр, пробное прохождение и замер длительности. Ориентир 6 минут на занятие не измерен."
+  ],
+  "progress": {
+    "current_unit": "PRE_A1-U09",
+    "prepared_session_ids": [
+      "PRE_A1-U09-L01",
+      "PRE_A1-U09-L02",
+      "PRE_A1-U09-L03",
+      "PRE_A1-U09-L04",
+      "PRE_A1-U09-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "PRE_A1-U10",
+    "previous_unit": "PRE_A1-U08",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку U09; отдельного подтверждения языкового принятия или импорта U08 нет.",
+    "Названия напитков учатся показанными целыми сочетаниями; системная таблица частичных и неопределённых артиклей не вводится.",
+    "Café дано в значении напитка. Значение заведения и отдельный ключ для него в этой теме не создаются.",
+    "Просьба je voudrais вводится как готовая рамка без полной таблицы условного наклонения.",
+    "Формы froide/chaude сохраняют ключи холодной и горячей температуры. Для формы рода новые смысловые значения не создаются.",
+    "Из общего названия напитка температура не выводится. В заданиях выбираются напиток и явно указанная температура.",
+    "В L01–L04 соответственно 3, 2, 2 и 1 новое словарное значение. Формы с водой объяснены в L03, вопрос — в L04. В L05 нового обязательного материала нет.",
+    "Существующие ключи просьбы «пожалуйста», благодарности, семейных слов и признака размера сохранены.",
+    "Подписанная сборка не оценивает знание всех слов: assessed_vocabulary_ids в word_order пуст.",
+    "Основной LEXEME_REGISTRY.json и предыдущие пакеты не изменены. Новые ключи предложены отдельно до принятия."
+  ],
+  "session_material": [
+    {
+      "session_id": "PRE_A1-U09-L01",
+      "new_lexeme_keys": [
+        "fr:eau:water",
+        "fr:jus:juice",
+        "fr:je-voudrais:polite-request"
+      ],
+      "reused_lexeme_keys": [
+        "fr:grand:large-object",
+        "fr:merci:thanks",
+        "fr:petit:small-object",
+        "fr:sac:bag",
+        "fr:sil-vous-plait:polite-request"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U09-L02",
+      "new_lexeme_keys": [
+        "fr:the:tea",
+        "fr:cafe:coffee"
+      ],
+      "reused_lexeme_keys": [
+        "fr:eau:water",
+        "fr:je-voudrais:polite-request",
+        "fr:jus:juice",
+        "fr:sil-vous-plait:polite-request"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U09-L03",
+      "new_lexeme_keys": [
+        "fr:froid:cold-temperature",
+        "fr:chaud:hot-temperature"
+      ],
+      "reused_lexeme_keys": [
+        "fr:cafe:coffee",
+        "fr:cest:identify-object",
+        "fr:eau:water",
+        "fr:fille:daughter",
+        "fr:je-voudrais:polite-request",
+        "fr:jus:juice",
+        "fr:ma:first-person-feminine-possessive",
+        "fr:mere:mother",
+        "fr:soeur:sister",
+        "fr:the:tea"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U09-L04",
+      "new_lexeme_keys": [
+        "fr:que-voulez-vous-boire:drink-question"
+      ],
+      "reused_lexeme_keys": [
+        "fr:cafe:coffee",
+        "fr:chaud:hot-temperature",
+        "fr:de-rien:reply-to-thanks",
+        "fr:eau:water",
+        "fr:froid:cold-temperature",
+        "fr:je-voudrais:polite-request",
+        "fr:jus:juice",
+        "fr:merci:thanks",
+        "fr:qui-est-ce:identity-question",
+        "fr:the:tea"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U09-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:cafe:coffee",
+        "fr:chaud:hot-temperature",
+        "fr:deux:cardinal-number",
+        "fr:eau:water",
+        "fr:froid:cold-temperature",
+        "fr:je-voudrais:polite-request",
+        "fr:jus:juice",
+        "fr:numero:identifier",
+        "fr:que-voulez-vous-boire:drink-question",
+        "fr:sil-vous-plait:polite-request",
+        "fr:the:tea",
+        "fr:un:cardinal-number"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "PRE_A1-U09-L01",
+      "material": "Вежливая рамка просьбы; целые сочетания de l’eau/un jus."
+    },
+    {
+      "session_id": "PRE_A1-U09-L02",
+      "material": "Целые сочетания un thé/un café в заказе одной порции."
+    },
+    {
+      "session_id": "PRE_A1-U09-L03",
+      "material": "Температура после напитка; показанные формы froide/chaude с водой."
+    },
+    {
+      "session_id": "PRE_A1-U09-L04",
+      "material": "Готовый вопрос Que voulez-vous boire ? и ответы изученной просьбой."
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:eau:water",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:jus:juice",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:je-voudrais:polite-request",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U09-L01",
+          "task_id": "Q05",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:the:tea",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:cafe:coffee",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U09-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:froid:cold-temperature",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q05",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:chaud:hot-temperature",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:que-voulez-vous-boire:drink-question",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U09-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U09-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 8,
+    "external_prerequisites": [
+      "PRE_A1-U08-L05"
+    ],
+    "external_reference_status": "Exists in prepared U08 package; full project validator including local database references returned no errors. Target database must contain U08 before U09 import.",
+    "new_lexemes_per_session": [
+      3,
+      2,
+      2,
+      1,
+      0
+    ],
+    "project_validator": {
+      "valid": true,
+      "errors": [],
+      "file_hash": "51eb8c7bcadedfdb61446c54fceadc393a2560b0038e8e6b2d27807fd386ff39",
+      "warning_counts": {
+        "editorial_review_required": 5,
+        "browser_tts": 13
+      },
+      "requires_editorial_review": true,
+      "report_file": "PRE_A1-U09.validation.json"
+    }
+  }
+}

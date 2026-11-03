@@ -1,6 +1,9 @@
 <script setup>
-import { Link, usePage } from '@inertiajs/vue3';
+import { Link, router, usePage } from '@inertiajs/vue3';
 
+import { ref } from 'vue';
+import { prepareGuestAuthentication } from '@/App/Learning/guestSyncState.js';
+import { isMenuItemActive } from '@/App/Store/menu.js';
 import AfrSidebarAvatar from '@/App/Components/Header/Sidebar/AfrSidebarAvatar.vue';
 
 const props = defineProps({
@@ -9,6 +12,12 @@ const props = defineProps({
 });
 
 const page = usePage();
+const error = ref('');
+const authenticate = async (path) => {
+  error.value = '';
+  try { router.visit(path + (await prepareGuestAuthentication() ? '?practice=1' : '')); }
+  catch (failure) { error.value = failure.message; }
+};
 
 const goToProfile = () => {
   router.visit(route('profile.edit'));
@@ -31,21 +40,22 @@ const goToProfile = () => {
     <template v-else>
       <div class="flex">
         <div class="flex-1 text-center">
-          <Link :href="route('login')" class="link">Вход</Link>
+          <a :href="route('login')" class="link" @click.prevent="authenticate('/login')">Вход</a>
         </div>
         <div class="flex-1 text-center">
-          <Link :href="route('register')" class="link">Регистрация</Link>
+          <a :href="route('register')" class="link" @click.prevent="authenticate('/register')">Регистрация</a>
         </div>
       </div>
     </template>
   </div>
 
+  <p v-if="error" role="alert">{{ error }}</p>
   <div class="p-4">
     <nav class="sidebar-nav">
       <ul>
         <template v-for="menuItem in menu">
-          <li :class="{ 'active': page.url.split('/')[1] === menuItem.path.split('/')[1] }">
-            <Link :href="route(menuItem.name)">{{ menuItem.title }}</Link>
+          <li :class="{ 'active': isMenuItemActive(page.url, menuItem) }">
+            <Link :href="route(menuItem.name)" :aria-current="isMenuItemActive(page.url, menuItem) ? 'page' : null">{{ menuItem.title }}</Link>
           </li>
         </template>
       </ul>

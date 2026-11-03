@@ -5,7 +5,10 @@ import songComment from '@/Admin/Services/Api/song_comment.js';
 import dictionary from '@/Admin/Services/Api/dictionary.js';
 import user from '@/Admin/Services/Api/user.js';
 
+import dailyPractice from './daily_practice.js';
+
 export default {
+  dailyPractice,
   transcription,
   post,
   postComment,

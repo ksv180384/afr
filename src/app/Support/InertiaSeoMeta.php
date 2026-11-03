@@ -19,7 +19,7 @@ class InertiaSeoMeta
             'description' => 'Изучайте французский язык: грамматика, уроки и словарь с переводом и транскрипцией.',
             'canonicalUrl' => $canonicalUrl,
             'imageUrl' => asset('img/og-default.jpg'),
-            'noIndex' => false,
+            'noIndex' => $request->is('daily', 'daily/*', 'profile', 'profile/*', 'admin', 'admin/*', 'search', 'song/search*', 'word/search'),
             'jsonLd' => null,
             'pageType' => $component,
         ];

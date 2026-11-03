@@ -1,0 +1,16 @@
+html { scrollbar-gutter:stable; }
+@supports not (scrollbar-gutter:stable) { html { overflow-y:scroll; } }
+.practice-shell { width:100%; max-width:1100px; margin:0 auto; padding:1.5rem 1rem; color:#17364d; overflow-wrap:anywhere; }
+.practice-heading { font-size:1.6rem; line-height:1.35; font-weight:700; margin:0 0 1rem; }
+.practice-nav { display:grid; grid-template-columns:repeat(4,max-content); gap:.4rem; margin:0 0 1rem; }
+.practice-nav a { display:flex; align-items:center; justify-content:center; min-height:36px; padding:.3rem .55rem; border:1px solid transparent; border-radius:4px; font-size:.875rem; line-height:1.4; font-weight:600; text-align:center; color:#155e91; text-decoration:none; }
+.practice-nav a:hover { background:#e4f0ff; }
+.practice-nav a[aria-current="page"] { background:#dbeafe; border-color:#bfdbfe; color:#084b91; }
+.practice-nav a:focus-visible { outline:2px solid #2563eb; outline-offset:2px; }
+.practice-static { min-height:100vh; max-width:1440px; margin:0 auto; padding-top:57px; background:#f0f9ff; }
+.practice-server-header { position:fixed; top:0; left:0; width:100%; height:57px; display:flex; align-items:center; flex-wrap:wrap; gap:.5rem 1rem; padding:0 1rem; color:#17364d; background:#dbeafe; z-index:2; }
+@media(max-width:600px) {
+  .practice-shell { padding:1rem .65rem; }
+  .practice-heading { font-size:1.45rem; }
+  .practice-nav { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}

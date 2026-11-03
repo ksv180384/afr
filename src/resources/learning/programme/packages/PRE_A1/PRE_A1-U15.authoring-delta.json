@@ -1,0 +1,796 @@
+{
+  "unit_id": "PRE_A1-U15",
+  "package_file": "PRE_A1-U15.v1.json",
+  "session_ids": [
+    "PRE_A1-U15-L01",
+    "PRE_A1-U15-L02",
+    "PRE_A1-U15-L03",
+    "PRE_A1-U15-L04",
+    "PRE_A1-U15-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "soleil",
+      "lexeme_key": "fr:soleil:sun",
+      "fr": "le soleil",
+      "ru": [
+        "солнце"
+      ],
+      "transcription_ru": "лё солэ́й",
+      "first_session_id": "PRE_A1-U15-L01"
+    },
+    {
+      "id": "il-pleut",
+      "lexeme_key": "fr:il-pleut:raining",
+      "fr": "il pleut",
+      "ru": [
+        "идёт дождь"
+      ],
+      "transcription_ru": "иль плё́",
+      "first_session_id": "PRE_A1-U15-L01"
+    },
+    {
+      "id": "vent",
+      "lexeme_key": "fr:vent:wind",
+      "fr": "le vent",
+      "ru": [
+        "ветер"
+      ],
+      "transcription_ru": "лё ва́(н)",
+      "first_session_id": "PRE_A1-U15-L03"
+    },
+    {
+      "id": "il-neige",
+      "lexeme_key": "fr:il-neige:snowing",
+      "fr": "il neige",
+      "ru": [
+        "идёт снег"
+      ],
+      "transcription_ru": "иль нэ́ж",
+      "first_session_id": "PRE_A1-U15-L03"
+    },
+    {
+      "id": "quel-temps",
+      "lexeme_key": "fr:quel-temps-fait-il:weather-question",
+      "fr": "quel temps fait-il ?",
+      "ru": [
+        "какая погода? (готовый вопрос)"
+      ],
+      "transcription_ru": "кэль та(н) фэ ти́ль",
+      "first_session_id": "PRE_A1-U15-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:attendre:wait",
+    "fr:aujourdhui:today",
+    "fr:chaud:hot-temperature",
+    "fr:demain:tomorrow",
+    "fr:donnez-moi:give-request",
+    "fr:ecouter:listen",
+    "fr:ecrire:write",
+    "fr:elle:feminine-subject",
+    "fr:froid:cold-temperature",
+    "fr:il:masculine-subject",
+    "fr:jaime:food-liking",
+    "fr:je-veux:want",
+    "fr:je:first-person-subject",
+    "fr:lire:read",
+    "fr:livre:book",
+    "fr:mardi:weekday",
+    "fr:matin:morning",
+    "fr:mot:word",
+    "fr:plus-tard:later",
+    "fr:quand:when-question",
+    "fr:radio:radio",
+    "fr:rendez-vous:appointment",
+    "fr:soir:evening",
+    "fr:vendredi:weekday"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "PRE_A1.U15.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U15-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U15-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U15-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q08",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U15.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U14.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U12.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U12.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U11.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U10.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U13.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q04",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q05",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U13.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q05",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U14.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:soleil:sun",
+      "reason": "Повторить полную погодную фразу; применение конструкции существования к городским местам сначала объяснить отдельно."
+    },
+    {
+      "lexeme_key": "fr:il-pleut:raining",
+      "reason": "Вернуть дождь как целую известную фразу в коротком контексте."
+    },
+    {
+      "lexeme_key": "fr:froid:cold-temperature",
+      "reason": "Сохранить общий ключ температуры; отличать погодный образец от описания температуры предмета."
+    },
+    {
+      "lexeme_key": "fr:chaud:hot-temperature",
+      "reason": "Сохранить общий ключ температуры, не создавать повторный ключ для погодного образца."
+    },
+    {
+      "lexeme_key": "fr:vent:wind",
+      "reason": "Вернуть полную фразу о ветре без автоматического вывода о холоде."
+    },
+    {
+      "lexeme_key": "fr:il-neige:snowing",
+      "reason": "Сохранять значение снегопада и не подменять его наличием снега."
+    },
+    {
+      "lexeme_key": "fr:aujourdhui:today",
+      "reason": "Сохранить метку сегодняшнего дня в понятном контексте."
+    },
+    {
+      "lexeme_key": "fr:je-voudrais:polite-request",
+      "reason": "Повторить мягкую просьбу только со знакомыми объектами до введения новых городских мест."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "local_database_references_checked": true,
+    "registry_collisions_checked": true,
+    "package_hash_verified": true,
+    "pronunciation_coverage_warnings_absent": true,
+    "new_lexeme_evidence_checked": true,
+    "checkpoint_kind_and_skill_balance_checked": true,
+    "checkpoint_source_objectives_checked": true,
+    "checkpoint_public_page_without_answer_examples": true,
+    "temperature_keys_and_full_cards_preserved": true,
+    "new_weather_grammar_explained_before_testing": true,
+    "shuffled_choice_feedback_checked": true,
+    "reading_length_checked": true,
+    "no_unused_local_vocabulary": true
+  },
+  "open_issues": [
+    "До импорта целевая база должна содержать PRE_A1-U14-L05; пакет не создаёт отсутствующую внешнюю зависимость.",
+    "Человеку нужно проверить погодные переводы, полные образцы и условные русские транскрипции; прослушать браузерную озвучку, особенно названия солнца и ветра, дождь, снег и готовый вопрос.",
+    "Выполнить предпросмотр, пробное прохождение и замер длительности. Ориентир 6 минут на занятие не измерен."
+  ],
+  "progress": {
+    "current_unit": "PRE_A1-U15",
+    "prepared_session_ids": [
+      "PRE_A1-U15-L01",
+      "PRE_A1-U15-L02",
+      "PRE_A1-U15-L03",
+      "PRE_A1-U15-L04",
+      "PRE_A1-U15-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "PRE_A1-U16",
+    "previous_unit": "PRE_A1-U14",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку текущей темы. Отдельное подтверждение принятия или импорта предыдущих пакетов не получено.",
+    "Солнце и ветер имеют ключи названий явлений с артиклем в карточке. Полные погодные образцы объясняются до их проверки и отражены отдельно в грамматическом материале.",
+    "Общие ключи температуры fr:froid:cold-temperature и fr:chaud:hot-temperature сохранены вместе с полными существующими карточками. Во втором занятии нет новых лексических значений, но есть два новых обязательных погодных образца; они объяснены перед вторым заданием.",
+    "Форма о тёплой или жаркой погоде не устанавливает точных градусов и не противопоставляет два русских синонима как разные правильные ответы.",
+    "Погодное начало не оценивается как известное личное местоимение. Конструкция существования здесь ограничена двумя погодными образцами; общий перенос к другим объектам в следующей теме требует объяснения.",
+    "Сообщение о холоде не означает автоматически снег или дождь. Выбираются только прямо названные свойства погоды.",
+    "Вопрос о погоде учится целиком, без общего правила инверсии и новых времён. Слово с апострофом и форма с дефисом не разбиваются.",
+    "В первых четырёх занятиях соответственно 2, 0, 2 и 1 новое лексическое значение; дополнительный новый материал второго занятия — грамматика в знакомых словах. В контрольном занятии нового обязательного материала нет.",
+    "Контроль выборочно охватывает темы просьб, действий, дней недели, частей суток и погоды и возвращает предпочтение о еде. Исчерпывающая проверка всех слов и целей не заявляется.",
+    "В контроле по два задания на аудирование, чтение, лексику и грамматику или сборку. Вводная карточка и public_page не содержат таблицы готовых ответов.",
+    "Подписанная сборка и выбор структурного фрагмента не объявляются независимой проверкой всех участвующих слов: assessed_vocabulary_ids оставлен пустым там, где проверяется образец.",
+    "Основной реестр и предыдущие пакеты не изменены. Новые ключи предложены отдельно до принятия."
+  ],
+  "session_material": [
+    {
+      "session_id": "PRE_A1-U15-L01",
+      "new_lexeme_keys": [
+        "fr:soleil:sun",
+        "fr:il-pleut:raining"
+      ],
+      "reused_lexeme_keys": [
+        "fr:je:first-person-subject",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:matin:morning"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U15-L02",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:chaud:hot-temperature",
+        "fr:froid:cold-temperature",
+        "fr:il-pleut:raining",
+        "fr:soleil:sun"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U15-L03",
+      "new_lexeme_keys": [
+        "fr:vent:wind",
+        "fr:il-neige:snowing"
+      ],
+      "reused_lexeme_keys": [
+        "fr:ecrire:write",
+        "fr:elle:feminine-subject",
+        "fr:froid:cold-temperature",
+        "fr:il-pleut:raining",
+        "fr:mot:word",
+        "fr:soleil:sun"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U15-L04",
+      "new_lexeme_keys": [
+        "fr:quel-temps-fait-il:weather-question"
+      ],
+      "reused_lexeme_keys": [
+        "fr:attendre:wait",
+        "fr:aujourdhui:today",
+        "fr:demain:tomorrow",
+        "fr:froid:cold-temperature",
+        "fr:il-neige:snowing",
+        "fr:il-pleut:raining",
+        "fr:il:masculine-subject",
+        "fr:quand:when-question",
+        "fr:rendez-vous:appointment",
+        "fr:soleil:sun",
+        "fr:vent:wind"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U15-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:aujourdhui:today",
+        "fr:chaud:hot-temperature",
+        "fr:demain:tomorrow",
+        "fr:donnez-moi:give-request",
+        "fr:ecouter:listen",
+        "fr:elle:feminine-subject",
+        "fr:froid:cold-temperature",
+        "fr:il-neige:snowing",
+        "fr:il-pleut:raining",
+        "fr:il:masculine-subject",
+        "fr:jaime:food-liking",
+        "fr:je-veux:want",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:plus-tard:later",
+        "fr:radio:radio",
+        "fr:rendez-vous:appointment",
+        "fr:soir:evening",
+        "fr:soleil:sun",
+        "fr:vendredi:weekday",
+        "fr:vent:wind"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "PRE_A1-U15-L01",
+      "material": "Полные погодные образцы о солнце и дожде; неперсональное начало; показанное сочетание с артиклем внутри фразы о солнце."
+    },
+    {
+      "session_id": "PRE_A1-U15-L02",
+      "material": "Два новых погодных образца о температуре с уже известными словами холодный и горячий; начало для температуры сопоставлено с ранее показанным началом фразы о солнце."
+    },
+    {
+      "session_id": "PRE_A1-U15-L03",
+      "material": "Полные погодные образцы о ветре и снегопаде; несколько прямо названных свойств в двух коротких фразах."
+    },
+    {
+      "session_id": "PRE_A1-U15-L04",
+      "material": "Готовый вопрос о погоде с меткой сегодня и короткий ответ с той же меткой; без общего правила инверсии."
+    }
+  ],
+  "checkpoint_scope": {
+    "session_id": "PRE_A1-U15-L05",
+    "kind": "checkpoint",
+    "source_units": [
+      "PRE_A1-U11",
+      "PRE_A1-U12",
+      "PRE_A1-U13",
+      "PRE_A1-U14",
+      "PRE_A1-U15"
+    ],
+    "earlier_return_units": [
+      "PRE_A1-U10"
+    ],
+    "skill_evidence": {
+      "listening": [
+        "Q01",
+        "Q05"
+      ],
+      "reading": [
+        "Q02",
+        "Q06"
+      ],
+      "vocabulary": [
+        "Q03",
+        "Q07"
+      ],
+      "sentence_building": [
+        "Q04"
+      ],
+      "grammar": [
+        "Q08"
+      ]
+    },
+    "new_material": false,
+    "coverage_limit": "Representative sample; not exhaustive assessment of every earlier word or objective."
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:soleil:sun",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:il-pleut:raining",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U15-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q06",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:vent:wind",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:il-neige:snowing",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U15-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U15-L05",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:quel-temps-fait-il:weather-question",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U15-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 5,
+    "external_prerequisites": [
+      "PRE_A1-U14-L05"
+    ],
+    "external_reference_status": "reference_package_and_local_project_validator_passed; other_target_databases_unverified",
+    "project_validator": {
+      "valid": true,
+      "errors": [],
+      "file_hash": "9018be8701dc8b4fa92870ad5a99ccda330b1ec7d84824bd81338225d9ed5ba7",
+      "warning_counts": {
+        "editorial_review_required": 5,
+        "browser_tts": 10
+      },
+      "requires_editorial_review": true,
+      "report_file": "PRE_A1-U15.validation.json"
+    },
+    "max_french_reading_prompt_words": 12,
+    "checkpoint_skill_counts": {
+      "listening": 2,
+      "reading": 2,
+      "vocabulary": 2,
+      "sentence_building": 1,
+      "grammar": 1
+    },
+    "new_lexical_meanings": 5,
+    "new_grammar_with_reused_temperature_words_in_l02": true
+  }
+}

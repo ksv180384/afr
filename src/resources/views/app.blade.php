@@ -7,11 +7,11 @@
     @php($seo = \App\Support\InertiaSeoMeta::make($page))
 
     <title inertia>{{ $seo['title'] }}</title>
-    <meta name="description" content="{{ $seo['description'] }}" />
+    <meta inertia="description" name="description" content="{{ $seo['description'] }}" />
     @if ($seo['noIndex'])
-        <meta name="robots" content="noindex, follow" />
+        <meta inertia="robots" name="robots" content="noindex, follow" />
     @endif
-    <link rel="canonical" href="{{ $seo['canonicalUrl'] }}" />
+    <link inertia="canonical" rel="canonical" href="{{ $seo['canonicalUrl'] }}" />
 
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -20,18 +20,18 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="{{ config('app.name', 'ApprendreFr') }}" />
     <meta property="og:locale" content="ru_RU" />
-    <meta property="og:url" content="{{ $seo['canonicalUrl'] }}" />
-    <meta property="og:title" content="{{ $seo['title'] }}" />
-    <meta property="og:description" content="{{ $seo['description'] }}" />
+    <meta inertia="og:url" property="og:url" content="{{ $seo['canonicalUrl'] }}" />
+    <meta inertia="og:title" property="og:title" content="{{ $seo['title'] }}" />
+    <meta inertia="og:description" property="og:description" content="{{ $seo['description'] }}" />
     <meta property="og:image" content="{{ $seo['imageUrl'] }}" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="{{ $seo['title'] }}" />
-    <meta name="twitter:description" content="{{ $seo['description'] }}" />
+    <meta inertia="twitter:title" name="twitter:title" content="{{ $seo['title'] }}" />
+    <meta inertia="twitter:description" name="twitter:description" content="{{ $seo['description'] }}" />
     @if ($seo['jsonLd'])
-        <script type="application/ld+json">{!! json_encode($seo['jsonLd'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}</script>
+        <script inertia="jsonld" type="application/ld+json">{!! json_encode($seo['jsonLd'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}</script>
     @endif
 
     <!-- Fonts -->

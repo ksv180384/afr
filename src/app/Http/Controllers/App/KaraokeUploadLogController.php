@@ -50,7 +50,7 @@ class KaraokeUploadLogController extends Controller
             'db_duration_seconds' => $validated['db_duration_seconds'] ?? null,
             'duration_matched' => $durationMatched,
             'upload_token' => $uploadToken,
-            'user_id' => $durationMatched ? Auth::id() : null,
+            'user_id' => Auth::id(),
         ]);
 
         return response()->json([
@@ -64,6 +64,7 @@ class KaraokeUploadLogController extends Controller
 
     public function upload(KaraokeUploadLog $log, Request $request): JsonResponse
     {
+        abort_unless((int) $log->user_id === (int) $request->user()->id, 404);
         $validated = $request->validate([
             'upload_token' => ['required', 'string', 'size:64'],
             'audio' => ['required', 'file', 'max:46080'],

@@ -1,0 +1,1447 @@
+{
+  "description": "Общий корпус PHP/JS правил v1; ожидаемые результаты заданы вручную.",
+  "version": 1,
+  "tasks": {
+    "choice": {
+      "id": "choice",
+      "type": "single_choice",
+      "feedback": {
+        "correct": "Верно.",
+        "incorrect": "Сверьте правильный ответ.",
+        "pronunciation_notes": []
+      },
+      "skill": "vocabulary",
+      "objective_ids": [
+        "OBJ.1"
+      ],
+      "assessed_vocabulary_ids": [
+        "w1"
+      ],
+      "choices": [
+        {
+          "id": "a",
+          "text": "Bonjour"
+        },
+        {
+          "id": "b",
+          "text": "Au revoir"
+        }
+      ],
+      "correct_choice_id": "a"
+    },
+    "numeric_choice": {
+      "id": "numeric",
+      "type": "single_choice",
+      "feedback": {
+        "correct": "Верно.",
+        "incorrect": "Сверьте правильный ответ.",
+        "pronunciation_notes": []
+      },
+      "skill": "vocabulary",
+      "objective_ids": [
+        "OBJ.1"
+      ],
+      "assessed_vocabulary_ids": [
+        "w1"
+      ],
+      "choices": [
+        {
+          "id": "0",
+          "text": "Bonjour"
+        },
+        {
+          "id": "1",
+          "text": "Salut"
+        }
+      ],
+      "correct_choice_id": "0"
+    },
+    "pairs": {
+      "id": "pairs",
+      "type": "matching_pairs",
+      "feedback": {
+        "correct": "Верно.",
+        "incorrect": "Сверьте правильный ответ.",
+        "pronunciation_notes": []
+      },
+      "skill": "vocabulary",
+      "objective_ids": [
+        "OBJ.1"
+      ],
+      "assessed_vocabulary_ids": [
+        "w1",
+        "w2",
+        "w3"
+      ],
+      "left_items": [
+        {
+          "id": "l1"
+        },
+        {
+          "id": "l2"
+        },
+        {
+          "id": "l3"
+        }
+      ],
+      "right_items": [
+        {
+          "id": "r1"
+        },
+        {
+          "id": "r2"
+        },
+        {
+          "id": "r3"
+        }
+      ],
+      "correct_pairs": [
+        {
+          "left_id": "l1",
+          "right_id": "r1",
+          "assessed_vocabulary_ids": [
+            "w1"
+          ]
+        },
+        {
+          "left_id": "l2",
+          "right_id": "r2",
+          "assessed_vocabulary_ids": [
+            "w2"
+          ]
+        },
+        {
+          "left_id": "l3",
+          "right_id": "r3",
+          "assessed_vocabulary_ids": [
+            "w3"
+          ]
+        }
+      ]
+    },
+    "fill_choice": {
+      "id": "fill-choice",
+      "type": "fill_blank",
+      "feedback": {
+        "correct": "Верно.",
+        "incorrect": "Сверьте правильный ответ.",
+        "pronunciation_notes": []
+      },
+      "skill": "grammar",
+      "objective_ids": [
+        "OBJ.1"
+      ],
+      "assessed_vocabulary_ids": [
+        "w1"
+      ],
+      "input_mode": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "text": "appelle"
+        },
+        {
+          "id": "b",
+          "text": "appelez"
+        }
+      ],
+      "correct_choice_id": "a",
+      "completed_phrases": [
+        {
+          "fr": "Je m’appelle Léa.",
+          "transcription_ru": "жё мапэль леа́"
+        }
+      ]
+    },
+    "fill_text": {
+      "id": "fill-text",
+      "type": "fill_blank",
+      "feedback": {
+        "correct": "Верно.",
+        "incorrect": "Сверьте правильный ответ.",
+        "pronunciation_notes": []
+      },
+      "skill": "grammar",
+      "objective_ids": [
+        "OBJ.1"
+      ],
+      "assessed_vocabulary_ids": [
+        "w1"
+      ],
+      "input_mode": "text",
+      "accepted_answers": [
+        "bien"
+      ],
+      "answer_lang": "fr",
+      "completed_phrases": [
+        {
+          "fr": "Ça va bien.",
+          "transcription_ru": "са ва бье́н"
+        }
+      ],
+      "pronunciation_notes": [
+        {
+          "fr": "bien",
+          "transcription_ru": "бье́н"
+        }
+      ]
+    },
+    "short": {
+      "id": "short",
+      "type": "short_answer",
+      "feedback": {
+        "correct": "Верно.",
+        "incorrect": "Сверьте правильный ответ.",
+        "pronunciation_notes": []
+      },
+      "skill": "vocabulary",
+      "objective_ids": [
+        "OBJ.1"
+      ],
+      "assessed_vocabulary_ids": [
+        "w1"
+      ],
+      "accepted_answers": [
+        "C’est très bien.",
+        "Tout va bien."
+      ],
+      "answer_lang": "fr",
+      "pronunciation_notes": [
+        {
+          "fr": "C’est très bien.",
+          "transcription_ru": "сэ трэ бье́н"
+        },
+        {
+          "fr": "Tout va bien.",
+          "transcription_ru": "ту ва бье́н"
+        }
+      ]
+    },
+    "order": {
+      "id": "order",
+      "type": "word_order",
+      "feedback": {
+        "correct": "Верно.",
+        "incorrect": "Сверьте правильный ответ.",
+        "pronunciation_notes": []
+      },
+      "skill": "sentence_building",
+      "objective_ids": [
+        "OBJ.1"
+      ],
+      "assessed_vocabulary_ids": [],
+      "tokens": [
+        {
+          "id": "a",
+          "text": "très"
+        },
+        {
+          "id": "b",
+          "text": "très"
+        },
+        {
+          "id": "c",
+          "text": "bien"
+        }
+      ],
+      "accepted_orders": [
+        [
+          "a",
+          "b",
+          "c"
+        ]
+      ],
+      "completed_phrases": [
+        {
+          "fr": "Très très bien.",
+          "transcription_ru": "трэ трэ бье́н"
+        }
+      ]
+    },
+    "alternative_order": {
+      "id": "alt-order",
+      "type": "word_order",
+      "feedback": {
+        "correct": "Верно.",
+        "incorrect": "Сверьте правильный ответ.",
+        "pronunciation_notes": []
+      },
+      "skill": "sentence_building",
+      "objective_ids": [
+        "OBJ.1"
+      ],
+      "assessed_vocabulary_ids": [],
+      "tokens": [
+        {
+          "id": "a",
+          "text": "je"
+        },
+        {
+          "id": "b",
+          "text": "viens"
+        },
+        {
+          "id": "c",
+          "text": "demain"
+        }
+      ],
+      "accepted_orders": [
+        [
+          "a",
+          "b",
+          "c"
+        ],
+        [
+          "c",
+          "a",
+          "b"
+        ]
+      ]
+    },
+    "punct_order": {
+      "id": "punct-order",
+      "type": "word_order",
+      "feedback": {
+        "correct": "Верно.",
+        "incorrect": "Сверьте правильный ответ.",
+        "pronunciation_notes": []
+      },
+      "skill": "sentence_building",
+      "objective_ids": [
+        "OBJ.1"
+      ],
+      "assessed_vocabulary_ids": [],
+      "tokens": [
+        {
+          "id": "a",
+          "text": "!"
+        },
+        {
+          "id": "b",
+          "text": "?"
+        }
+      ],
+      "accepted_orders": [
+        [
+          "a",
+          "b"
+        ]
+      ]
+    },
+    "listening": {
+      "id": "listening",
+      "type": "single_choice",
+      "feedback": {
+        "correct": "Верно.",
+        "incorrect": "Сверьте правильный ответ.",
+        "pronunciation_notes": []
+      },
+      "skill": "listening",
+      "objective_ids": [
+        "OBJ.1"
+      ],
+      "assessed_vocabulary_ids": [
+        "w1"
+      ],
+      "choices": [
+        {
+          "id": "a",
+          "text": "Bonjour"
+        },
+        {
+          "id": "b",
+          "text": "Au revoir"
+        }
+      ],
+      "correct_choice_id": "a",
+      "prompt": {
+        "audio": {
+          "text": "Bonjour",
+          "transcription_ru": "бонжу́р",
+          "lang": "fr-FR",
+          "asset_id": null
+        }
+      }
+    }
+  },
+  "lexemes": [
+    {
+      "id": "w1",
+      "lexeme_key": "fr:un"
+    },
+    {
+      "id": "w2",
+      "lexeme_key": "fr:deux"
+    },
+    {
+      "id": "w3",
+      "lexeme_key": "fr:trois"
+    }
+  ],
+  "normalization": [
+    {
+      "input": " « BONJOUR ! » ",
+      "expected": "bonjour"
+    },
+    {
+      "input": " École  FRANÇAISE… ",
+      "expected": "école française"
+    },
+    {
+      "input": "C’est  très\tbien.",
+      "expected": "c'est très bien"
+    },
+    {
+      "input": "porte-monnaie",
+      "expected": "porte-monnaie"
+    },
+    {
+      "input": "l'ami",
+      "expected": "l'ami"
+    },
+    {
+      "input": "﻿Bonjourmonde",
+      "expected": "bonjour monde"
+    },
+    {
+      "input": "Ça va ?",
+      "expected": "ça va"
+    },
+    {
+      "input": "cote",
+      "expected": "cote"
+    },
+    {
+      "input": "côté",
+      "expected": "côté"
+    },
+    {
+      "input": "İ",
+      "expected": "i̇"
+    },
+    {
+      "input": "ΟΣ",
+      "expected": "ος"
+    },
+    {
+      "input": "+1",
+      "expected": "+1"
+    },
+    {
+      "input": "lʼami",
+      "expected": "lʼami"
+    }
+  ],
+  "checks": [
+    {
+      "name": "choice correct",
+      "task": "choice",
+      "answer": {
+        "choice_id": "a"
+      },
+      "expected": {
+        "correct": true
+      }
+    },
+    {
+      "name": "choice wrong",
+      "task": "choice",
+      "answer": {
+        "choice_id": "b"
+      },
+      "expected": {
+        "correct": false
+      }
+    },
+    {
+      "name": "numeric string ID",
+      "task": "numeric_choice",
+      "answer": {
+        "choice_id": "0"
+      },
+      "expected": {
+        "correct": true
+      }
+    },
+    {
+      "name": "numeric IDs are not numbers",
+      "task": "numeric_choice",
+      "answer": {
+        "choice_id": 0
+      },
+      "error": "validation_failed"
+    },
+    {
+      "name": "foreign choice",
+      "task": "choice",
+      "answer": {
+        "choice_id": "foreign"
+      },
+      "error": "validation_failed"
+    },
+    {
+      "name": "score injection",
+      "task": "choice",
+      "answer": {
+        "choice_id": "a",
+        "score": 1
+      },
+      "error": "validation_failed"
+    },
+    {
+      "name": "client correct key injection",
+      "task": "choice",
+      "answer": {
+        "choice_id": "b",
+        "correct_choice_id": "b"
+      },
+      "error": "validation_failed"
+    },
+    {
+      "name": "missing choice",
+      "task": "choice",
+      "answer": {},
+      "error": "validation_failed"
+    },
+    {
+      "name": "scalar answer",
+      "task": "choice",
+      "answer": "a",
+      "error": "validation_failed"
+    },
+    {
+      "name": "list answer",
+      "task": "choice",
+      "answer": [
+        "a"
+      ],
+      "error": "validation_failed"
+    },
+    {
+      "name": "fill choice",
+      "task": "fill_choice",
+      "answer": {
+        "choice_id": "a"
+      },
+      "expected": {
+        "correct": true
+      }
+    },
+    {
+      "name": "fill choice wrong",
+      "task": "fill_choice",
+      "answer": {
+        "choice_id": "b"
+      },
+      "expected": {
+        "correct": false
+      }
+    },
+    {
+      "name": "fill text normalization",
+      "task": "fill_text",
+      "answer": {
+        "value": " « BIEN ! » "
+      },
+      "expected": {
+        "correct": true
+      }
+    },
+    {
+      "name": "fill no accent guessing",
+      "task": "fill_text",
+      "answer": {
+        "value": "bién"
+      },
+      "expected": {
+        "correct": false
+      }
+    },
+    {
+      "name": "short NFC case apostrophe",
+      "task": "short",
+      "answer": {
+        "value": "  C'EST très\tBIEN! "
+      },
+      "expected": {
+        "correct": true
+      }
+    },
+    {
+      "name": "explicit alternative",
+      "task": "short",
+      "answer": {
+        "value": "TOUT VA BIEN"
+      },
+      "expected": {
+        "correct": true
+      }
+    },
+    {
+      "name": "accents remain significant",
+      "task": "short",
+      "answer": {
+        "value": "c'est tres bien"
+      },
+      "expected": {
+        "correct": false
+      }
+    },
+    {
+      "name": "unknown synonym",
+      "task": "short",
+      "answer": {
+        "value": "Ça roule"
+      },
+      "expected": {
+        "correct": false
+      }
+    },
+    {
+      "name": "internal punctuation stays",
+      "task": "short",
+      "answer": {
+        "value": "c est très bien"
+      },
+      "expected": {
+        "correct": false
+      }
+    },
+    {
+      "name": "empty input",
+      "task": "short",
+      "answer": {
+        "value": " \t "
+      },
+      "error": "validation_failed"
+    },
+    {
+      "name": "punctuation only",
+      "task": "short",
+      "answer": {
+        "value": "!!!"
+      },
+      "error": "validation_failed"
+    },
+    {
+      "name": "numeric input",
+      "task": "short",
+      "answer": {
+        "value": 1
+      },
+      "error": "validation_failed"
+    },
+    {
+      "name": "same-text tokens interchangeable",
+      "task": "order",
+      "answer": {
+        "token_ids": [
+          "b",
+          "a",
+          "c"
+        ]
+      },
+      "expected": {
+        "correct": true
+      }
+    },
+    {
+      "name": "wrong token position",
+      "task": "order",
+      "answer": {
+        "token_ids": [
+          "a",
+          "c",
+          "b"
+        ]
+      },
+      "expected": {
+        "correct": false
+      }
+    },
+    {
+      "name": "author second order",
+      "task": "alternative_order",
+      "answer": {
+        "token_ids": [
+          "c",
+          "a",
+          "b"
+        ]
+      },
+      "expected": {
+        "correct": true
+      }
+    },
+    {
+      "name": "preserve punctuation on tokens",
+      "task": "punct_order",
+      "answer": {
+        "token_ids": [
+          "b",
+          "a"
+        ]
+      },
+      "expected": {
+        "correct": false
+      }
+    },
+    {
+      "name": "duplicate token",
+      "task": "order",
+      "answer": {
+        "token_ids": [
+          "a",
+          "a",
+          "c"
+        ]
+      },
+      "error": "validation_failed"
+    },
+    {
+      "name": "missing token",
+      "task": "order",
+      "answer": {
+        "token_ids": [
+          "a",
+          "b"
+        ]
+      },
+      "error": "validation_failed"
+    },
+    {
+      "name": "unknown token",
+      "task": "order",
+      "answer": {
+        "token_ids": [
+          "a",
+          "b",
+          "x"
+        ]
+      },
+      "error": "validation_failed"
+    },
+    {
+      "name": "object tokens",
+      "task": "order",
+      "answer": {
+        "token_ids": {
+          "a": "a"
+        }
+      },
+      "error": "validation_failed"
+    },
+    {
+      "name": "wrong token type",
+      "task": "order",
+      "answer": {
+        "token_ids": [
+          "a",
+          "b",
+          3
+        ]
+      },
+      "error": "validation_failed"
+    },
+    {
+      "name": "matching full correct",
+      "task": "pairs",
+      "answer": {
+        "pairs": [
+          {
+            "left_id": "l3",
+            "right_id": "r3"
+          },
+          {
+            "left_id": "l2",
+            "right_id": "r2"
+          },
+          {
+            "left_id": "l1",
+            "right_id": "r1"
+          }
+        ]
+      },
+      "expected": {
+        "correct": true,
+        "pair_correct": [
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "matching partial",
+      "task": "pairs",
+      "answer": {
+        "pairs": [
+          {
+            "left_id": "l1",
+            "right_id": "r1"
+          },
+          {
+            "left_id": "l2",
+            "right_id": "r3"
+          },
+          {
+            "left_id": "l3",
+            "right_id": "r2"
+          }
+        ]
+      },
+      "expected": {
+        "correct": false,
+        "pair_correct": [
+          true,
+          false,
+          false
+        ]
+      }
+    },
+    {
+      "name": "matching incomplete",
+      "task": "pairs",
+      "answer": {
+        "pairs": [
+          {
+            "left_id": "l1",
+            "right_id": "r1"
+          },
+          {
+            "left_id": "l2",
+            "right_id": "r2"
+          }
+        ]
+      },
+      "error": "validation_failed"
+    },
+    {
+      "name": "matching repeated left",
+      "task": "pairs",
+      "answer": {
+        "pairs": [
+          {
+            "left_id": "l1",
+            "right_id": "r1"
+          },
+          {
+            "left_id": "l1",
+            "right_id": "r1"
+          },
+          {
+            "left_id": "l3",
+            "right_id": "r3"
+          }
+        ]
+      },
+      "error": "validation_failed"
+    },
+    {
+      "name": "matching repeated right",
+      "task": "pairs",
+      "answer": {
+        "pairs": [
+          {
+            "left_id": "l1",
+            "right_id": "r1"
+          },
+          {
+            "left_id": "l2",
+            "right_id": "r1"
+          },
+          {
+            "left_id": "l3",
+            "right_id": "r3"
+          }
+        ]
+      },
+      "error": "validation_failed"
+    },
+    {
+      "name": "matching extra fields",
+      "task": "pairs",
+      "answer": {
+        "pairs": [
+          {
+            "left_id": "l1",
+            "right_id": "r1",
+            "correct": true
+          },
+          {
+            "left_id": "l2",
+            "right_id": "r2"
+          },
+          {
+            "left_id": "l3",
+            "right_id": "r3"
+          }
+        ]
+      },
+      "error": "validation_failed"
+    }
+  ],
+  "sequences": [
+    {
+      "name": "wrong explanation correction",
+      "task": "choice",
+      "events": [
+        {
+          "event_type": "answer",
+          "answer": {
+            "choice_id": "b"
+          }
+        },
+        {
+          "event_type": "help",
+          "help_kind": "reference"
+        },
+        {
+          "event_type": "answer",
+          "answer": {
+            "choice_id": "a"
+          }
+        }
+      ],
+      "expected": {
+        "score": 0,
+        "correct": true,
+        "first_correct": false,
+        "first_independent_success": false,
+        "objective_evidence_eligible": false,
+        "help_used": false,
+        "effects": [
+          "none"
+        ]
+      }
+    },
+    {
+      "name": "hint then correct",
+      "task": "choice",
+      "events": [
+        {
+          "event_type": "help",
+          "help_kind": "hint"
+        },
+        {
+          "event_type": "answer",
+          "answer": {
+            "choice_id": "a"
+          }
+        }
+      ],
+      "expected": {
+        "score": 0,
+        "correct": true,
+        "first_correct": true,
+        "first_independent_success": false,
+        "objective_evidence_eligible": false,
+        "help_used": true,
+        "effects": [
+          "none"
+        ]
+      }
+    },
+    {
+      "name": "hint alone is not language error",
+      "task": "choice",
+      "events": [
+        {
+          "event_type": "help",
+          "help_kind": "hint"
+        }
+      ],
+      "expected": {
+        "score": 0,
+        "correct": null,
+        "first_correct": null,
+        "first_independent_success": false,
+        "objective_evidence_eligible": false,
+        "help_used": true,
+        "effects": [],
+        "status": "pending"
+      }
+    },
+    {
+      "name": "wrong after help",
+      "task": "choice",
+      "events": [
+        {
+          "event_type": "help",
+          "help_kind": "reference"
+        },
+        {
+          "event_type": "answer",
+          "answer": {
+            "choice_id": "b"
+          }
+        }
+      ],
+      "expected": {
+        "score": 0,
+        "correct": false,
+        "first_correct": false,
+        "first_independent_success": false,
+        "objective_evidence_eligible": false,
+        "help_used": true,
+        "effects": [
+          "error"
+        ]
+      }
+    },
+    {
+      "name": "unknown closes independence",
+      "task": "choice",
+      "events": [
+        {
+          "event_type": "unknown"
+        },
+        {
+          "event_type": "answer",
+          "answer": {
+            "choice_id": "a"
+          }
+        }
+      ],
+      "expected": {
+        "score": 0,
+        "correct": true,
+        "first_correct": false,
+        "first_independent_success": false,
+        "objective_evidence_eligible": false,
+        "help_used": false,
+        "effects": [
+          "none"
+        ]
+      }
+    },
+    {
+      "name": "unknown causes error",
+      "task": "choice",
+      "events": [
+        {
+          "event_type": "unknown"
+        }
+      ],
+      "expected": {
+        "score": 0,
+        "correct": false,
+        "first_correct": false,
+        "first_independent_success": false,
+        "objective_evidence_eligible": false,
+        "help_used": false,
+        "effects": [
+          "error"
+        ]
+      }
+    },
+    {
+      "name": "first correct",
+      "task": "choice",
+      "events": [
+        {
+          "event_type": "answer",
+          "answer": {
+            "choice_id": "a"
+          }
+        }
+      ],
+      "expected": {
+        "score": 1,
+        "correct": true,
+        "first_correct": true,
+        "first_independent_success": true,
+        "objective_evidence_eligible": true,
+        "help_used": false,
+        "effects": [
+          "success"
+        ]
+      }
+    },
+    {
+      "name": "post-answer help does not change score",
+      "task": "choice",
+      "events": [
+        {
+          "event_type": "answer",
+          "answer": {
+            "choice_id": "a"
+          }
+        },
+        {
+          "event_type": "help",
+          "help_kind": "hint"
+        }
+      ],
+      "expected": {
+        "score": 1,
+        "correct": null,
+        "first_correct": true,
+        "first_independent_success": false,
+        "objective_evidence_eligible": false,
+        "help_used": false,
+        "effects": []
+      }
+    },
+    {
+      "name": "repeated answer does not award twice",
+      "task": "choice",
+      "events": [
+        {
+          "event_type": "answer",
+          "answer": {
+            "choice_id": "a"
+          }
+        },
+        {
+          "event_type": "answer",
+          "answer": {
+            "choice_id": "a"
+          }
+        }
+      ],
+      "expected": {
+        "score": 1,
+        "correct": true,
+        "first_correct": true,
+        "first_independent_success": false,
+        "objective_evidence_eligible": false,
+        "help_used": false,
+        "effects": [
+          "none"
+        ]
+      }
+    },
+    {
+      "name": "wrong correction does not rescore",
+      "task": "choice",
+      "events": [
+        {
+          "event_type": "answer",
+          "answer": {
+            "choice_id": "a"
+          }
+        },
+        {
+          "event_type": "answer",
+          "answer": {
+            "choice_id": "b"
+          }
+        }
+      ],
+      "expected": {
+        "score": 1,
+        "correct": false,
+        "first_correct": true,
+        "first_independent_success": false,
+        "objective_evidence_eligible": false,
+        "help_used": false,
+        "effects": [
+          "error"
+        ]
+      }
+    },
+    {
+      "name": "audio transcript counts as help",
+      "task": "listening",
+      "events": [
+        {
+          "event_type": "help",
+          "help_kind": "audio_transcript"
+        },
+        {
+          "event_type": "answer",
+          "answer": {
+            "choice_id": "a"
+          }
+        }
+      ],
+      "expected": {
+        "score": 0,
+        "correct": true,
+        "first_correct": true,
+        "first_independent_success": false,
+        "objective_evidence_eligible": false,
+        "help_used": true,
+        "effects": [
+          "none"
+        ]
+      }
+    },
+    {
+      "name": "technical skip not language error",
+      "task": "listening",
+      "events": [
+        {
+          "event_type": "technical_skip",
+          "reason": "audio_unavailable"
+        }
+      ],
+      "expected": {
+        "score": 0,
+        "correct": null,
+        "first_correct": null,
+        "first_independent_success": false,
+        "objective_evidence_eligible": false,
+        "help_used": false,
+        "effects": [
+          "none"
+        ],
+        "status": "skipped",
+        "first_technical_skip": true
+      }
+    },
+    {
+      "name": "correction after technical skip",
+      "task": "listening",
+      "events": [
+        {
+          "event_type": "technical_skip",
+          "reason": "audio_unavailable"
+        },
+        {
+          "event_type": "answer",
+          "answer": {
+            "choice_id": "a"
+          }
+        }
+      ],
+      "expected": {
+        "score": 0,
+        "correct": true,
+        "first_correct": null,
+        "first_independent_success": false,
+        "objective_evidence_eligible": false,
+        "help_used": false,
+        "effects": [
+          "none"
+        ],
+        "status": "skipped",
+        "first_technical_skip": true
+      }
+    },
+    {
+      "name": "matching partial lexical successes",
+      "task": "pairs",
+      "events": [
+        {
+          "event_type": "answer",
+          "answer": {
+            "pairs": [
+              {
+                "left_id": "l1",
+                "right_id": "r1"
+              },
+              {
+                "left_id": "l2",
+                "right_id": "r3"
+              },
+              {
+                "left_id": "l3",
+                "right_id": "r2"
+              }
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "score": 0,
+        "correct": false,
+        "first_correct": false,
+        "first_independent_success": false,
+        "objective_evidence_eligible": false,
+        "help_used": false,
+        "effects": [
+          "success",
+          "error",
+          "error"
+        ]
+      }
+    },
+    {
+      "name": "same lexeme error dominates success",
+      "task": "pairs",
+      "events": [
+        {
+          "event_type": "answer",
+          "answer": {
+            "pairs": [
+              {
+                "left_id": "l1",
+                "right_id": "r1"
+              },
+              {
+                "left_id": "l2",
+                "right_id": "r3"
+              },
+              {
+                "left_id": "l3",
+                "right_id": "r2"
+              }
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "score": 0,
+        "correct": false,
+        "first_correct": false,
+        "first_independent_success": false,
+        "objective_evidence_eligible": false,
+        "help_used": false,
+        "effects": [
+          "error",
+          "error"
+        ]
+      },
+      "lexeme_overrides": {
+        "w2": "fr:un"
+      }
+    },
+    {
+      "name": "review uses pinned lexeme",
+      "task": "choice",
+      "events": [
+        {
+          "event_type": "answer",
+          "answer": {
+            "choice_id": "a"
+          }
+        }
+      ],
+      "expected": {
+        "score": 1,
+        "correct": true,
+        "first_correct": true,
+        "first_independent_success": true,
+        "objective_evidence_eligible": false,
+        "help_used": false,
+        "effects": [
+          "success"
+        ]
+      },
+      "review_lexeme_key": "fr:pinned-review"
+    }
+  ],
+  "invalid_events": [
+    {
+      "name": "help is not full reveal",
+      "task": "choice",
+      "event": {
+        "event_type": "help",
+        "help_kind": "reveal"
+      }
+    },
+    {
+      "name": "unknown has no answer",
+      "task": "choice",
+      "event": {
+        "event_type": "unknown",
+        "answer": {
+          "choice_id": "a"
+        }
+      }
+    },
+    {
+      "name": "hint no score",
+      "task": "choice",
+      "event": {
+        "event_type": "help",
+        "help_kind": "hint",
+        "score": 1
+      }
+    },
+    {
+      "name": "non-audio task cannot skip",
+      "task": "choice",
+      "event": {
+        "event_type": "technical_skip",
+        "reason": "audio_unavailable"
+      }
+    },
+    {
+      "name": "wrong skip reason",
+      "task": "listening",
+      "event": {
+        "event_type": "technical_skip",
+        "reason": "too_hard"
+      }
+    },
+    {
+      "name": "non-audio transcript",
+      "task": "choice",
+      "event": {
+        "event_type": "help",
+        "help_kind": "audio_transcript"
+      }
+    },
+    {
+      "name": "foreign presentation",
+      "task": "choice",
+      "event": {
+        "event_type": "answer",
+        "answer": {
+          "choice_id": "a"
+        },
+        "presentation_id": "other"
+      }
+    },
+    {
+      "name": "unknown event",
+      "task": "choice",
+      "event": {
+        "event_type": "reveal"
+      }
+    }
+  ],
+  "summaries": [
+    {
+      "earned": 4,
+      "total": 5,
+      "processed": 5,
+      "skips": 0,
+      "threshold": 80,
+      "eligible": true
+    },
+    {
+      "earned": 199,
+      "total": 250,
+      "processed": 250,
+      "skips": 0,
+      "threshold": 80,
+      "eligible": false
+    },
+    {
+      "earned": 4,
+      "total": 5,
+      "processed": 5,
+      "skips": 1,
+      "threshold": 80,
+      "eligible": false
+    },
+    {
+      "earned": 0,
+      "total": 6,
+      "processed": 6,
+      "skips": 0,
+      "threshold": 80,
+      "eligible": false
+    },
+    {
+      "earned": 2,
+      "total": 6,
+      "processed": 2,
+      "skips": 0,
+      "threshold": 30,
+      "eligible": false
+    },
+    {
+      "earned": 0,
+      "total": 0,
+      "processed": 0,
+      "skips": 0,
+      "threshold": 0,
+      "eligible": false
+    }
+  ]
+}

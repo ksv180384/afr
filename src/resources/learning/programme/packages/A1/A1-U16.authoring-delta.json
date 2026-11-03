@@ -1,0 +1,933 @@
+{
+  "unit_id": "A1-U16",
+  "package_file": "A1-U16.v1.json",
+  "session_ids": [
+    "A1-U16-L01",
+    "A1-U16-L02",
+    "A1-U16-L03",
+    "A1-U16-L04",
+    "A1-U16-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "adorer",
+      "lexeme_key": "fr:adorer:love-activity",
+      "fr": "adorer",
+      "ru": [
+        "обожать занятие"
+      ],
+      "transcription_ru": "адорэ́",
+      "first_session_id": "A1-U16-L01"
+    },
+    {
+      "id": "detester",
+      "lexeme_key": "fr:detester:strongly-dislike-activity",
+      "fr": "détester",
+      "ru": [
+        "очень не любить занятие"
+      ],
+      "transcription_ru": "дэтэстэ́",
+      "first_session_id": "A1-U16-L01"
+    },
+    {
+      "id": "preferer",
+      "lexeme_key": "fr:preferer:prefer-choice",
+      "fr": "préférer",
+      "ru": [
+        "предпочитать (выбирать из вариантов)"
+      ],
+      "transcription_ru": "прэфэрэ́",
+      "first_session_id": "A1-U16-L02"
+    },
+    {
+      "id": "bruyant",
+      "lexeme_key": "fr:bruyant:noisy-place",
+      "fr": "bruyant",
+      "ru": [
+        "шумный (о месте)"
+      ],
+      "transcription_ru": "брюийа́(н)",
+      "first_session_id": "A1-U16-L03"
+    },
+    {
+      "id": "moins",
+      "lexeme_key": "fr:moins:less-comparison",
+      "fr": "moins",
+      "ru": [
+        "менее (в сравнении)"
+      ],
+      "transcription_ru": "муэ́(н)",
+      "first_session_id": "A1-U16-L03"
+    },
+    {
+      "id": "parce-que",
+      "lexeme_key": "fr:parce-que:because-reason",
+      "fr": "parce que",
+      "ru": [
+        "потому что (введение причины)"
+      ],
+      "transcription_ru": "парс кё́",
+      "first_session_id": "A1-U16-L04"
+    },
+    {
+      "id": "choisir",
+      "lexeme_key": "fr:choisir:choose-option",
+      "fr": "choisir",
+      "ru": [
+        "выбирать вариант"
+      ],
+      "transcription_ru": "шуази́р",
+      "first_session_id": "A1-U16-L04"
+    },
+    {
+      "id": "facile",
+      "lexeme_key": "fr:facile:easy-activity",
+      "fr": "facile",
+      "ru": [
+        "лёгкий, нетрудный (о задании)"
+      ],
+      "transcription_ru": "фаси́ль",
+      "first_session_id": "A1-U16-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:aimer:enjoy-activity",
+    "fr:aller:go",
+    "fr:ans:age-years",
+    "fr:aujourdhui:today",
+    "fr:blond:blond-hair",
+    "fr:brun:brown-hair",
+    "fr:cafe:venue",
+    "fr:calme:quiet-place",
+    "fr:cher:expensive",
+    "fr:cinema:cinema-venue",
+    "fr:cousine:female-cousin",
+    "fr:daccord:agreement",
+    "fr:dehors:outdoors",
+    "fr:demain:tomorrow",
+    "fr:deux:cardinal-number",
+    "fr:ecouter:listen",
+    "fr:et:and",
+    "fr:exercice:study-exercise",
+    "fr:faire-du-sport:do-sport",
+    "fr:film:film",
+    "fr:frere:brother",
+    "fr:il-fait-beau:fine-weather",
+    "fr:il-pleut:raining",
+    "fr:lire:read",
+    "fr:midi:noon",
+    "fr:musique:music",
+    "fr:parc:park",
+    "fr:patient:patient-personality",
+    "fr:quinze:cardinal-number",
+    "fr:regarder:look-watch",
+    "fr:se-promener:take-walk",
+    "fr:seize:cardinal-number",
+    "fr:soeur:sister",
+    "fr:soir:evening",
+    "fr:sympathique:pleasant-person",
+    "fr:timide:shy-person"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A1.U16.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U16-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U16-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U16-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U16-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U16-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U16-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U16-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U16-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U16-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U16-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U16-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U16.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U16-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U16-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U16-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U16-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U16-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U16-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U16-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U16-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U16-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U16-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U16-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U16-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U16-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U15.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U16-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U13.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U16-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U13.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U16-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:preferer:prefer-choice",
+      "reason": "Вернуть предпочтение отдельно от намерения в следующей теме планов."
+    },
+    {
+      "lexeme_key": "fr:choisir:choose-option",
+      "reason": "Повторить конкретный выбор до рассказа о будущем действии."
+    },
+    {
+      "lexeme_key": "fr:parce-que:because-reason",
+      "reason": "Сохранить прямо названную причину простого решения."
+    },
+    {
+      "lexeme_key": "fr:aimer:enjoy-activity",
+      "reason": "Повторить знакомое отношение к занятиям с прежним ключом."
+    },
+    {
+      "lexeme_key": "fr:adorer:love-activity",
+      "reason": "Вернуть сильное положительное отношение коротким повторением."
+    },
+    {
+      "lexeme_key": "fr:detester:strongly-dislike-activity",
+      "reason": "Повторить отрицательное отношение отдельно от отказа на конкретное время."
+    },
+    {
+      "lexeme_key": "fr:moins:less-comparison",
+      "reason": "Сохранить направление менее при сравнении двух вариантов."
+    },
+    {
+      "lexeme_key": "fr:bruyant:noisy-place",
+      "reason": "Вернуть признак места, не приписывая его всем кафе."
+    },
+    {
+      "lexeme_key": "fr:facile:easy-activity",
+      "reason": "Повторить нетрудное задание в понятной учебной ситуации."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "known_activity_liking_and_price_keys_reused": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "liking_intensity_and_explicit_preference_distinctions_reviewed": true,
+    "comparison_direction_and_single_property_scope_reviewed": true,
+    "explicit_reason_distinguished_from_neighbouring_fact": true,
+    "final_shared_choice_and_speaker_references_reviewed": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A1-U15-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Редактору проверить естественность французских выражений отношения, выбранных сравнений, причин и приблизительные русские транскрипции.",
+    "Прослушать браузерную озвучку, особенно adorer/détester/préférer, шум, менее и связку причины. Время аудио и занятий пока не измерено.",
+    "Выполнить предпросмотр и пробное прохождение: сильное отношение и явное предпочтение, направление сравнения, явно названная причина и итоговый общий выбор."
+  ],
+  "progress": {
+    "current_unit": "A1-U16",
+    "prepared_session_ids": [
+      "A1-U16-L01",
+      "A1-U16-L02",
+      "A1-U16-L03",
+      "A1-U16-L04",
+      "A1-U16-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A1-U17",
+    "next_unit_title": "Планы на завтра",
+    "previous_unit": "A1-U15",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A1-U16. Принятие и импорт предыдущих пакетов не подтверждены; повторение использует полные объекты подготовленных пакетов.",
+    "Новые значения распределены как два, одно, два, три и ноль. В пятом занятии нового обязательного материала нет.",
+    "Aimer с занятием сохраняет прежний ключ fr:aimer:enjoy-activity. Карточки отношения к еде с отдельными узкими значениями не переписываются.",
+    "Adorer усиливает положительное отношение, détester выражает сильное отрицательное. Описываются вымышленные предпочтения занятий, не оценка людей.",
+    "Préférer выделяет один вариант из уже названных. Человек может любить оба занятия; порядок упоминания и одно слово обожаю не заменяют явное предпочтение.",
+    "Plus/moins с que показаны на сравнении двух вариантов по одному признаку. Прежний ключ дорогой сохранён; шум и цена не смешиваются.",
+    "Свойства парка, кафе и кинотеатра вымышленные. Они не объявляются общими фактами о таких местах, реальных ценах или доступности.",
+    "Parce que прямо вводит причину выбора. Соседнее положительное сообщение не становится причиной автоматически. Выбирать и предпочитать различаются по функции в тексте.",
+    "Facile введено как нетрудное учебное упражнение; реальная оценка способностей учащегося не делается. Номера упражнений обозначают задания, а не порядок карточек ответа.",
+    "В L01 повторён план на хорошую погоду A1-U15; в L03 и L04 — волосы и прямо названные черты близких людей A1-U13.",
+    "Роли в диалогах заданы порядком реплик. Общая договорённость определяется согласием на конкретный вариант, а не первым предложением или личным любимым занятием.",
+    "Новые сложные причинные конструкции, инверсия и полное спряжение не вводятся; используются короткие показанные личные формы и повтор известных рамок предложения.",
+    "Все записи, сравнения и переговоры вымышленные. Реальные заведения, цены и внешние сервисы не нужны для ответа.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A1-U16-L01",
+      "new_lexeme_keys": [
+        "fr:adorer:love-activity",
+        "fr:detester:strongly-dislike-activity"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aimer:enjoy-activity",
+        "fr:aujourdhui:today",
+        "fr:dehors:outdoors",
+        "fr:demain:tomorrow",
+        "fr:ecouter:listen",
+        "fr:et:and",
+        "fr:faire-du-sport:do-sport",
+        "fr:film:film",
+        "fr:il-fait-beau:fine-weather",
+        "fr:il-pleut:raining",
+        "fr:lire:read",
+        "fr:midi:noon",
+        "fr:musique:music",
+        "fr:parc:park",
+        "fr:regarder:look-watch",
+        "fr:se-promener:take-walk",
+        "fr:soir:evening"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U16-L02",
+      "new_lexeme_keys": [
+        "fr:preferer:prefer-choice"
+      ],
+      "reused_lexeme_keys": [
+        "fr:adorer:love-activity",
+        "fr:aimer:enjoy-activity",
+        "fr:aller:go",
+        "fr:cinema:cinema-venue",
+        "fr:detester:strongly-dislike-activity",
+        "fr:ecouter:listen",
+        "fr:faire-du-sport:do-sport",
+        "fr:lire:read",
+        "fr:midi:noon",
+        "fr:musique:music",
+        "fr:parc:park",
+        "fr:se-promener:take-walk",
+        "fr:soir:evening"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U16-L03",
+      "new_lexeme_keys": [
+        "fr:bruyant:noisy-place",
+        "fr:moins:less-comparison"
+      ],
+      "reused_lexeme_keys": [
+        "fr:ans:age-years",
+        "fr:blond:blond-hair",
+        "fr:brun:brown-hair",
+        "fr:cafe:venue",
+        "fr:cher:expensive",
+        "fr:cinema:cinema-venue",
+        "fr:cousine:female-cousin",
+        "fr:frere:brother",
+        "fr:parc:park",
+        "fr:preferer:prefer-choice",
+        "fr:quinze:cardinal-number",
+        "fr:soeur:sister"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U16-L04",
+      "new_lexeme_keys": [
+        "fr:parce-que:because-reason",
+        "fr:choisir:choose-option",
+        "fr:facile:easy-activity"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aimer:enjoy-activity",
+        "fr:ans:age-years",
+        "fr:bruyant:noisy-place",
+        "fr:cafe:venue",
+        "fr:calme:quiet-place",
+        "fr:cher:expensive",
+        "fr:cinema:cinema-venue",
+        "fr:cousine:female-cousin",
+        "fr:deux:cardinal-number",
+        "fr:exercice:study-exercise",
+        "fr:frere:brother",
+        "fr:lire:read",
+        "fr:parc:park",
+        "fr:patient:patient-personality",
+        "fr:preferer:prefer-choice",
+        "fr:seize:cardinal-number",
+        "fr:soeur:sister",
+        "fr:sympathique:pleasant-person",
+        "fr:timide:shy-person"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U16-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:adorer:love-activity",
+        "fr:aimer:enjoy-activity",
+        "fr:aller:go",
+        "fr:bruyant:noisy-place",
+        "fr:cafe:venue",
+        "fr:calme:quiet-place",
+        "fr:cher:expensive",
+        "fr:choisir:choose-option",
+        "fr:cinema:cinema-venue",
+        "fr:daccord:agreement",
+        "fr:detester:strongly-dislike-activity",
+        "fr:ecouter:listen",
+        "fr:lire:read",
+        "fr:midi:noon",
+        "fr:moins:less-comparison",
+        "fr:musique:music",
+        "fr:parc:park",
+        "fr:parce-que:because-reason",
+        "fr:preferer:prefer-choice",
+        "fr:se-promener:take-walk",
+        "fr:soir:evening"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A1-U16-L01",
+      "material": "Повтор J’aime с названием действия; J’adore и Je déteste с тем же типом дополнения."
+    },
+    {
+      "session_id": "A1-U16-L02",
+      "material": "Личная форма Je préfère с названием занятия и выбранным местом; явное предпочтение отдельно от любви к занятию."
+    },
+    {
+      "session_id": "A1-U16-L03",
+      "material": "Plus/moins + признак + que + второй вариант; выбранные сравнения шума и цены."
+    },
+    {
+      "session_id": "A1-U16-L04",
+      "material": "Parce que с прямо названной причиной; личная форма Je choisis, выбранный признак facile."
+    }
+  ],
+  "text_conventions": {
+    "preference_status": "Вымышленные личные предпочтения занятий.",
+    "comparison_scope": "Два названных варианта и один признак в каждом сравнении.",
+    "reason_scope": "Причина прямо связана с выбором, не выводится из соседних сведений.",
+    "speaker_roles": "Роли заданы порядком реплик; итог определяется согласием.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:adorer:love-activity",
+      "evidence": [
+        {
+          "session_id": "A1-U16-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U16-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U16-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:detester:strongly-dislike-activity",
+      "evidence": [
+        {
+          "session_id": "A1-U16-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U16-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:preferer:prefer-choice",
+      "evidence": [
+        {
+          "session_id": "A1-U16-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U16-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U16-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U16-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:bruyant:noisy-place",
+      "evidence": [
+        {
+          "session_id": "A1-U16-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U16-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:moins:less-comparison",
+      "evidence": [
+        {
+          "session_id": "A1-U16-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U16-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:parce-que:because-reason",
+      "evidence": [
+        {
+          "session_id": "A1-U16-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U16-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U16-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:choisir:choose-option",
+      "evidence": [
+        {
+          "session_id": "A1-U16-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:facile:easy-activity",
+      "evidence": [
+        {
+          "session_id": "A1-U16-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U16-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 8,
+    "external_prerequisites": [
+      "A1-U15-L05"
+    ],
+    "external_reference_status": "A1-U15-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 11
+      },
+      "file_hash": "0990416d3494f63cf77cd6a93229165732017bd72b425ea17a9abeb640824056",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 36,
+    "text_lengths": [
+      {
+        "session_id": "A1-U16-L01",
+        "reading_word_counts": [
+          20,
+          19
+        ],
+        "listening_word_counts": [
+          15
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U16-L02",
+        "reading_word_counts": [
+          17,
+          18
+        ],
+        "listening_word_counts": [
+          17
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U16-L03",
+        "reading_word_counts": [
+          21,
+          24
+        ],
+        "listening_word_counts": [
+          20
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U16-L04",
+        "reading_word_counts": [
+          17,
+          16
+        ],
+        "listening_word_counts": [
+          20
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U16-L05",
+        "reading_word_counts": [
+          20,
+          35
+        ],
+        "listening_word_counts": [
+          19,
+          28
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "J’adore",
+        "session_id": "A1-U16-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Je déteste",
+        "session_id": "A1-U16-L01",
+        "task_id": "Q05"
+      },
+      {
+        "frame": "Je préfère",
+        "session_id": "A1-U16-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "plus bruyant que",
+        "session_id": "A1-U16-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "moins cher que",
+        "session_id": "A1-U16-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "moins bruyant que",
+        "session_id": "A1-U16-L03",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "plus cher que",
+        "session_id": "A1-U16-L03",
+        "task_id": "Q05"
+      },
+      {
+        "frame": "parce que",
+        "session_id": "A1-U16-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "est facile",
+        "session_id": "A1-U16-L04",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "Je choisis",
+        "session_id": "A1-U16-L04",
+        "task_id": "Q05"
+      }
+    ]
+  }
+}

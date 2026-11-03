@@ -1,0 +1,943 @@
+{
+  "unit_id": "A2-U04",
+  "package_file": "A2-U04.v1.json",
+  "session_ids": [
+    "A2-U04-L01",
+    "A2-U04-L02",
+    "A2-U04-L03",
+    "A2-U04-L04",
+    "A2-U04-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "souvenir",
+      "lexeme_key": "fr:souvenir:memory-of-past",
+      "fr": "un souvenir",
+      "ru": [
+        "воспоминание о прошлом"
+      ],
+      "transcription_ru": "э(н) сувни́р",
+      "first_session_id": "A2-U04-L01"
+    },
+    {
+      "id": "un-jour",
+      "lexeme_key": "fr:un-jour:one-day-past-narrative",
+      "fr": "un jour",
+      "ru": [
+        "однажды: отдельный случай в рассказе о прошлом"
+      ],
+      "transcription_ru": "э(н) жу́р",
+      "first_session_id": "A2-U04-L01"
+    },
+    {
+      "id": "autrefois",
+      "lexeme_key": "fr:autrefois:formerly",
+      "fr": "autrefois",
+      "ru": [
+        "раньше, в прошлом"
+      ],
+      "transcription_ru": "отрёфуа́",
+      "first_session_id": "A2-U04-L02"
+    },
+    {
+      "id": "quand-jetais-enfant",
+      "lexeme_key": "fr:quand-jetais-enfant:childhood-background-frame",
+      "fr": "quand j’étais enfant",
+      "ru": [
+        "когда я был или была ребёнком"
+      ],
+      "transcription_ru": "ка(н) жэтэ а(н)фа́(н)",
+      "first_session_id": "A2-U04-L02"
+    },
+    {
+      "id": "pendant-que",
+      "lexeme_key": "fr:pendant-que:simultaneous-time-clause",
+      "fr": "pendant que",
+      "ru": [
+        "в то время как, пока: одновременность"
+      ],
+      "transcription_ru": "па(н)да(н) кё́",
+      "first_session_id": "A2-U04-L03"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:aller:go",
+    "fr:aller:near-future-auxiliary",
+    "fr:ans:age-years",
+    "fr:apporter:bring-object",
+    "fr:avoir:compound-past-auxiliary",
+    "fr:bagage:luggage-item",
+    "fr:billet:transport-ticket",
+    "fr:chambre:hotel-room",
+    "fr:choisir:choose-option",
+    "fr:cinema:cinema-venue",
+    "fr:cinq:cardinal-number",
+    "fr:dans-le-sac:in-bag",
+    "fr:demain:tomorrow",
+    "fr:deux:cardinal-number",
+    "fr:dix:cardinal-number",
+    "fr:douche:shower-facility",
+    "fr:douze:cardinal-number",
+    "fr:enfant:child",
+    "fr:etre:compound-past-auxiliary",
+    "fr:fermer:close-object",
+    "fr:film:film",
+    "fr:finalement:final-outcome",
+    "fr:frere:brother",
+    "fr:heure:clock-hour",
+    "fr:hier:yesterday",
+    "fr:hotel:hotel",
+    "fr:jai:age-frame",
+    "fr:jai:possession",
+    "fr:je-voudrais:polite-request",
+    "fr:juin:month-june",
+    "fr:la:direct-object-pronoun-feminine",
+    "fr:le-week-end-dernier:last-weekend",
+    "fr:le:direct-object-pronoun-masculine",
+    "fr:les:direct-object-pronoun-plural",
+    "fr:livre:book",
+    "fr:maintenant:now",
+    "fr:maison:house-home",
+    "fr:midi:noon",
+    "fr:musee:museum",
+    "fr:neuf:cardinal-number",
+    "fr:passeport:passport",
+    "fr:prevoir:plan-in-advance",
+    "fr:puis:then-sequence",
+    "fr:regarder:look-watch",
+    "fr:rentrer:return-home",
+    "fr:reserver:book-hotel-room",
+    "fr:sac:bag",
+    "fr:samedi:weekday",
+    "fr:sejour:hotel-stay",
+    "fr:soeur:sister",
+    "fr:souvent:often",
+    "fr:valise:suitcase",
+    "fr:vingt:cardinal-number",
+    "fr:visiter:visit-place",
+    "fr:voyage:trip",
+    "fr:wifi:wireless-internet-access"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A2.U04.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U04-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U04-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U04-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U04-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U04-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U04-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U04-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U04-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U04-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U04-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U04-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U04.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U04-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U04-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U04-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U04-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U04-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U04-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U04-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U04-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U04-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U04-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U04-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U04-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U03.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U04-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U01.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U04-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U04-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:autrefois:formerly",
+      "reason": "Повторить явное отнесение обстоятельств к прошлому."
+    },
+    {
+      "lexeme_key": "fr:pendant-que:simultaneous-time-clause",
+      "reason": "Сохранить отношение одновременности отдельно от условия или причины."
+    },
+    {
+      "lexeme_key": "fr:souvenir:memory-of-past",
+      "reason": "Вернуть короткое воспоминание как тип рассказа."
+    },
+    {
+      "lexeme_key": "fr:un-jour:one-day-past-narrative",
+      "reason": "Повторить отдельный случай прошлого."
+    },
+    {
+      "lexeme_key": "fr:quand-jetais-enfant:childhood-background-frame",
+      "reason": "Вернуть изученную рамку детского периода без расширения до всех форм."
+    },
+    {
+      "lexeme_key": "fr:jai:age-frame",
+      "reason": "Сохранить старый ключ возраста при смене грамматической формы."
+    },
+    {
+      "lexeme_key": "fr:jai:possession",
+      "reason": "Сохранить старый ключ наличия вещи при смене формы."
+    },
+    {
+      "lexeme_key": "fr:regarder:look-watch",
+      "reason": "Повторить знакомое действие в изученных временных моделях."
+    },
+    {
+      "lexeme_key": "fr:maintenant:now",
+      "reason": "Сохранить явно названное настоящее отдельно от прежнего периода."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "new_local_ids_do_not_overwrite_existing_meanings": true,
+    "age_possession_and_action_keys_preserved_for_new_inflections": true,
+    "past_state_not_assigned_compound_past_auxiliary_meaning": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "background_habit_and_discrete_event_distinguished": true,
+    "simultaneity_not_equated_with_sequence_cause_or_forced_interruption": true,
+    "past_present_comparison_uses_explicit_current_statements": true,
+    "per_story_age_and_place_variation_reviewed": true,
+    "selected_brother_return_model_explained_before_testing": true,
+    "transcriptions_structurally_checked_without_claim_of_listening": true,
+    "apostrophes_kept_in_whole_tokens": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A2-U03-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Редактору проверить естественность воспоминаний, смысловое противопоставление фона, привычки и события, уместность дозировки выбранных форм.",
+    "Прослушать браузерную озвучку J’avais / J’ai, J’étais, regardais / regarde, временной связки и выбранного возвращения брата. Длительность аудио и занятий не измерена.",
+    "Выполнить предпросмотр и пробное прохождение: разные возраста и места в разных текстах, одновременность и последовательность, сравнение прошлого и настоящего без лишних выводов."
+  ],
+  "progress": {
+    "current_unit": "A2-U04",
+    "prepared_session_ids": [
+      "A2-U04-L01",
+      "A2-U04-L02",
+      "A2-U04-L03",
+      "A2-U04-L04",
+      "A2-U04-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A2-U05",
+    "next_unit_title": "Планы и намерения",
+    "previous_unit": "A2-U03",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A2-U04. Принятие и импорт предыдущих пакетов не подтверждены; повторение использует полные объекты подготовленного материала.",
+    "Новые лексические значения распределены как два, два, одно, ноль и ноль. Небольшой словарь оставляет нагрузку для новой грамматики и смыслового контраста. L05 нового обязательного материала не вводит.",
+    "J’avais как прежний возраст использует fr:jai:age-frame, а как наличие вещи — fr:jai:possession. Новая временная форма не создаёт дублирующих лексических значений. Полные прежние объекты слов не переписываются.",
+    "Souvenir учится как воспоминание, не как сувенир-предмет. Un jour здесь вводит отдельный случай в рассказе о прошлом, не все возможные употребления этого сочетания.",
+    "Autrefois задаёт прежний период. Новая готовая рамка quand j’étais enfant вводит детство; существующее quand как вопрос о времени сохраняет свой смысл и не переписывается.",
+    "В рамке детства j’étais выражает состояние, а не вспомогательную часть passé composé. Старый être-pc используется только в завершённом возвращении, не присваивается фоновому состоянию.",
+    "Вводятся выбранные формы j’avais, j’étais и je regardais без полной таблицы imparfait. Новое прошедшее время сопоставляется с уже введёнными завершёнными событиями.",
+    "Фон, привычка и отдельное событие распознаются по смыслу контекста. Не вводится ложное правило любое долгое действие — imparfait или любое короткое — passé composé. Не утверждается, что фоновое действие обязательно осталось незавершённым навсегда.",
+    "Souvent и описание периода помогают распознать прежнюю привычку. Та же форма je regardais в отдельном эпизоде описывает происходивший просмотр. Это разные функции в конкретных текстах.",
+    "Pendant que выражает одновременность. Просмотр не объявляется причиной возвращения и не считается автоматически прерванным. Puis отдельно сохраняет прежний смысл последовательности.",
+    "Mon frère est rentré — выбранная форма знакомого завершённого возвращения с названным братом; весь ряд новых лиц и глаголов не вводится одновременно.",
+    "В L04 и L05 прежние и нынешние привычки сопоставлены явно. Из одного прошлого описания не выводится, что привычка обязательно исчезла или что предмета теперь нет.",
+    "В L01 повторена последовательность завершённых действий A2-U03. В L03/L04 возвращаются проживание и багаж A2-U01. Это не подтверждает принятие прошлых пакетов или освоение материала учеником.",
+    "Каждый текст — отдельное оригинальное воспоминание. Возраст, место просмотра и состав обстоятельств меняются между заданиями. Относительные периоды не привязаны к текущему календарю сайта.",
+    "Все ответы выбираются или собираются из целых блоков. Нет обязательного свободного письма или записи голоса; озвучка только браузером.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A2-U04-L01",
+      "new_lexeme_keys": [
+        "fr:souvenir:memory-of-past",
+        "fr:un-jour:one-day-past-narrative"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:go",
+        "fr:aller:near-future-auxiliary",
+        "fr:ans:age-years",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:cinema:cinema-venue",
+        "fr:dans-le-sac:in-bag",
+        "fr:dix:cardinal-number",
+        "fr:douze:cardinal-number",
+        "fr:etre:compound-past-auxiliary",
+        "fr:film:film",
+        "fr:finalement:final-outcome",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:jai:age-frame",
+        "fr:jai:possession",
+        "fr:le-week-end-dernier:last-weekend",
+        "fr:livre:book",
+        "fr:maison:house-home",
+        "fr:midi:noon",
+        "fr:musee:museum",
+        "fr:neuf:cardinal-number",
+        "fr:puis:then-sequence",
+        "fr:regarder:look-watch",
+        "fr:rentrer:return-home",
+        "fr:samedi:weekday",
+        "fr:visiter:visit-place"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U04-L02",
+      "new_lexeme_keys": [
+        "fr:autrefois:formerly",
+        "fr:quand-jetais-enfant:childhood-background-frame"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:near-future-auxiliary",
+        "fr:ans:age-years",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:cinema:cinema-venue",
+        "fr:dans-le-sac:in-bag",
+        "fr:demain:tomorrow",
+        "fr:douze:cardinal-number",
+        "fr:enfant:child",
+        "fr:etre:compound-past-auxiliary",
+        "fr:film:film",
+        "fr:frere:brother",
+        "fr:hier:yesterday",
+        "fr:jai:age-frame",
+        "fr:jai:possession",
+        "fr:livre:book",
+        "fr:maison:house-home",
+        "fr:midi:noon",
+        "fr:musee:museum",
+        "fr:puis:then-sequence",
+        "fr:regarder:look-watch",
+        "fr:rentrer:return-home",
+        "fr:soeur:sister",
+        "fr:souvenir:memory-of-past",
+        "fr:souvent:often",
+        "fr:un-jour:one-day-past-narrative",
+        "fr:visiter:visit-place"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U04-L03",
+      "new_lexeme_keys": [
+        "fr:pendant-que:simultaneous-time-clause"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:near-future-auxiliary",
+        "fr:ans:age-years",
+        "fr:billet:transport-ticket",
+        "fr:chambre:hotel-room",
+        "fr:choisir:choose-option",
+        "fr:cinq:cardinal-number",
+        "fr:dans-le-sac:in-bag",
+        "fr:deux:cardinal-number",
+        "fr:dix:cardinal-number",
+        "fr:douche:shower-facility",
+        "fr:etre:compound-past-auxiliary",
+        "fr:film:film",
+        "fr:frere:brother",
+        "fr:hotel:hotel",
+        "fr:jai:age-frame",
+        "fr:jai:possession",
+        "fr:je-voudrais:polite-request",
+        "fr:juin:month-june",
+        "fr:la:direct-object-pronoun-feminine",
+        "fr:le:direct-object-pronoun-masculine",
+        "fr:livre:book",
+        "fr:maison:house-home",
+        "fr:midi:noon",
+        "fr:prevoir:plan-in-advance",
+        "fr:puis:then-sequence",
+        "fr:quand-jetais-enfant:childhood-background-frame",
+        "fr:regarder:look-watch",
+        "fr:rentrer:return-home",
+        "fr:reserver:book-hotel-room",
+        "fr:sejour:hotel-stay",
+        "fr:soeur:sister",
+        "fr:souvent:often",
+        "fr:un-jour:one-day-past-narrative",
+        "fr:wifi:wireless-internet-access"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U04-L04",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:aller:near-future-auxiliary",
+        "fr:ans:age-years",
+        "fr:apporter:bring-object",
+        "fr:autrefois:formerly",
+        "fr:bagage:luggage-item",
+        "fr:cinema:cinema-venue",
+        "fr:cinq:cardinal-number",
+        "fr:dans-le-sac:in-bag",
+        "fr:demain:tomorrow",
+        "fr:deux:cardinal-number",
+        "fr:dix:cardinal-number",
+        "fr:fermer:close-object",
+        "fr:film:film",
+        "fr:frere:brother",
+        "fr:jai:age-frame",
+        "fr:jai:possession",
+        "fr:juin:month-june",
+        "fr:la:direct-object-pronoun-feminine",
+        "fr:les:direct-object-pronoun-plural",
+        "fr:livre:book",
+        "fr:maintenant:now",
+        "fr:maison:house-home",
+        "fr:passeport:passport",
+        "fr:prevoir:plan-in-advance",
+        "fr:regarder:look-watch",
+        "fr:sac:bag",
+        "fr:soeur:sister",
+        "fr:souvent:often",
+        "fr:valise:suitcase",
+        "fr:vingt:cardinal-number",
+        "fr:voyage:trip"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U04-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:aller:near-future-auxiliary",
+        "fr:ans:age-years",
+        "fr:autrefois:formerly",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:cinema:cinema-venue",
+        "fr:dans-le-sac:in-bag",
+        "fr:dix:cardinal-number",
+        "fr:douze:cardinal-number",
+        "fr:etre:compound-past-auxiliary",
+        "fr:film:film",
+        "fr:frere:brother",
+        "fr:jai:age-frame",
+        "fr:jai:possession",
+        "fr:livre:book",
+        "fr:maintenant:now",
+        "fr:maison:house-home",
+        "fr:midi:noon",
+        "fr:musee:museum",
+        "fr:pendant-que:simultaneous-time-clause",
+        "fr:puis:then-sequence",
+        "fr:quand-jetais-enfant:childhood-background-frame",
+        "fr:regarder:look-watch",
+        "fr:rentrer:return-home",
+        "fr:soeur:sister",
+        "fr:souvenir:memory-of-past",
+        "fr:souvent:often",
+        "fr:un-jour:one-day-past-narrative",
+        "fr:vingt:cardinal-number",
+        "fr:visiter:visit-place"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A2-U04-L01",
+      "material": "J’avais для прежнего возраста и наличия вещи; обстоятельства рядом с отдельным событием passé composé."
+    },
+    {
+      "session_id": "A2-U04-L02",
+      "material": "Готовая рамка Quand j’étais enfant; Je regardais souvent как прежняя привычка в контексте."
+    },
+    {
+      "session_id": "A2-U04-L03",
+      "material": "Pendant que je regardais… mon frère est rentré; фон одного эпизода и завершённое возвращение с выбранной третьей формой."
+    },
+    {
+      "session_id": "A2-U04-L04",
+      "material": "Прямое сравнение Autrefois / Maintenant; regardais / regarde, J’avais / J’ai в прежних значениях возраста и наличия."
+    }
+  ],
+  "planned_material_mapping": [
+    {
+      "planned_fr": "autrefois",
+      "lexeme_key": "fr:autrefois:formerly",
+      "status": "new_lexeme"
+    },
+    {
+      "planned_fr": "j’avais",
+      "lexeme_keys": [
+        "fr:jai:age-frame",
+        "fr:jai:possession"
+      ],
+      "status": "new_grammar_form_of_existing_meanings"
+    },
+    {
+      "planned_fr": "pendant que",
+      "lexeme_key": "fr:pendant-que:simultaneous-time-clause",
+      "status": "new_lexeme"
+    }
+  ],
+  "text_conventions": {
+    "situation_status": "Оригинальные вымышленные детские воспоминания.",
+    "time_scope": "Временной фон и отдельный случай читаются по конкретному тексту.",
+    "background_scope": "Фон не равен универсальному утверждению о незавершённости или постоянстве.",
+    "simultaneity_scope": "Pendant que не задаёт автоматически причину или прерывание.",
+    "comparison_scope": "Настоящее берётся только из прямо названного сравнения.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:souvenir:memory-of-past",
+      "evidence": [
+        {
+          "session_id": "A2-U04-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:un-jour:one-day-past-narrative",
+      "evidence": [
+        {
+          "session_id": "A2-U04-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:autrefois:formerly",
+      "evidence": [
+        {
+          "session_id": "A2-U04-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U04-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:quand-jetais-enfant:childhood-background-frame",
+      "evidence": [
+        {
+          "session_id": "A2-U04-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:pendant-que:simultaneous-time-clause",
+      "evidence": [
+        {
+          "session_id": "A2-U04-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U04-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U04-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U04-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 5,
+    "external_prerequisites": [
+      "A2-U03-L05"
+    ],
+    "external_reference_status": "A2-U03-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 10
+      },
+      "file_hash": "099851a312994d9499b8a193695bca6c4b4188b777d701f7eeb2028dc375f92b",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 56,
+    "text_lengths": [
+      {
+        "session_id": "A2-U04-L01",
+        "reading_word_counts": [
+          32,
+          30
+        ],
+        "listening_word_counts": [
+          30
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U04-L02",
+        "reading_word_counts": [
+          30,
+          32
+        ],
+        "listening_word_counts": [
+          32
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U04-L03",
+        "reading_word_counts": [
+          36,
+          34
+        ],
+        "listening_word_counts": [
+          31
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U04-L04",
+        "reading_word_counts": [
+          39,
+          32
+        ],
+        "listening_word_counts": [
+          30
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U04-L05",
+        "reading_word_counts": [
+          37,
+          32
+        ],
+        "listening_word_counts": [
+          32,
+          30
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "J’avais dix ans",
+        "session_id": "A2-U04-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "J’avais un livre",
+        "session_id": "A2-U04-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "un souvenir",
+        "session_id": "A2-U04-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Un jour",
+        "session_id": "A2-U04-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Autrefois",
+        "session_id": "A2-U04-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Quand j’étais enfant",
+        "session_id": "A2-U04-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "je regardais souvent",
+        "session_id": "A2-U04-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "pendant que je regardais",
+        "session_id": "A2-U04-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "mon frère est rentré",
+        "session_id": "A2-U04-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "maintenant, je regarde",
+        "session_id": "A2-U04-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "maintenant, j’ai",
+        "session_id": "A2-U04-L04",
+        "task_id": "Q02"
+      }
+    ],
+    "level_description_included": false,
+    "curricula_included": false
+  }
+}

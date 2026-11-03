@@ -1,5 +1,6 @@
 <script setup>
-import { ref, computed, nextTick, onBeforeUnmount, watch } from 'vue';
+import { Link, usePage } from '@inertiajs/vue3';
+import { ref, computed, nextTick, onBeforeUnmount, onMounted, watch } from 'vue';
 import { Icon } from '@iconify/vue';
 import axios from 'axios';
 import Modal from '@/App/Components/Modal.vue';
@@ -48,7 +49,8 @@ const savedVolume = () => {
   const n = parseFloat(v);
   return Number.isFinite(n) && n >= 0 && n <= 1 ? n : 1;
 };
-const volume = ref(savedVolume());
+const volume = ref(1);
+onMounted(() => { try { volume.value=savedVolume(); } catch {} });
 const setVolume = (v) => {
   const val = Math.max(0, Math.min(1, v));
   volume.value = val;
@@ -326,6 +328,7 @@ const onLoadedMetadata = () => {
 };
 
 const uploadKaraokeFile = (logId, uploadToken, file) => {
+  if (!canSaveToServer.value) return;
   const data = new FormData();
   data.append('upload_token', uploadToken);
   data.append('audio', file, file.name);
@@ -341,7 +344,7 @@ const uploadKaraokeFile = (logId, uploadToken, file) => {
 };
 
 const logKaraokeUpload = () => {
-  if (props.songId == null || uploadStarted) return;
+  if (!canSaveToServer.value || props.songId == null || uploadStarted) return;
   uploadStarted = true;
   const fileForUpload = audioFile.value;
 
@@ -405,6 +408,8 @@ onBeforeUnmount(() => {
   if (rafId) cancelAnimationFrame(rafId);
   if (audioUrl.value) URL.revokeObjectURL(audioUrl.value);
 });
+const page=usePage();
+const canSaveToServer=computed(()=>!!page.props?.auth?.user?.id);
 </script>
 
 <template>
@@ -460,6 +465,9 @@ onBeforeUnmount(() => {
         Вам нужна версия песни продолжительностью <strong>{{ songDurationFormatted ?? (songDurationSeconds != null ? formatTime(songDurationSeconds) : '') }}</strong>.
         Загружено: <strong>{{ formatTime(duration) }}</strong>.
       </div>
+      <p v-if="durationMismatch && fileName && !canSaveToServer" class="mt-2 text-sm text-sky-800">
+        Чтобы отправить аудиофайл администратору, <Link href="/login" class="underline">войдите в аккаунт</Link>.
+      </p>
       <div v-if="durationMismatch && uploadState === 'uploading'" class="afr-karaoke-upload-status text-sky-700">
         <Icon icon="mdi:loading" class="text-xl animate-spin" />
         <span>Аудиофайл загружается, чтобы администратор мог добавить синхронизированный текст для этой версии песни…</span>

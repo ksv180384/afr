@@ -1,0 +1,1027 @@
+{
+  "unit_id": "A1-U06",
+  "package_file": "A1-U06.v1.json",
+  "session_ids": [
+    "A1-U06-L01",
+    "A1-U06-L02",
+    "A1-U06-L03",
+    "A1-U06-L04",
+    "A1-U06-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "gare",
+      "lexeme_key": "fr:gare:railway-station",
+      "fr": "une gare",
+      "ru": [
+        "железнодорожный вокзал"
+      ],
+      "transcription_ru": "юн га́р",
+      "first_session_id": "A1-U06-L01"
+    },
+    {
+      "id": "pharmacie",
+      "lexeme_key": "fr:pharmacie:pharmacy",
+      "fr": "une pharmacie",
+      "ru": [
+        "аптека"
+      ],
+      "transcription_ru": "юн фармаси́",
+      "first_session_id": "A1-U06-L01"
+    },
+    {
+      "id": "carrefour",
+      "lexeme_key": "fr:carrefour:crossroads",
+      "fr": "un carrefour",
+      "ru": [
+        "перекрёсток"
+      ],
+      "transcription_ru": "э(н) карфу́р",
+      "first_session_id": "A1-U06-L01"
+    },
+    {
+      "id": "pour-aller-a",
+      "lexeme_key": "fr:pour-aller-a:route-question",
+      "fr": "pour aller à",
+      "ru": [
+        "как пройти к… (рамка вопроса о маршруте)"
+      ],
+      "transcription_ru": "пур алэ а́",
+      "first_session_id": "A1-U06-L02"
+    },
+    {
+      "id": "tourner",
+      "lexeme_key": "fr:tourner:turn-in-route",
+      "fr": "tourner",
+      "ru": [
+        "поворачивать при движении"
+      ],
+      "transcription_ru": "турнэ́",
+      "first_session_id": "A1-U06-L03"
+    },
+    {
+      "id": "tout-droit",
+      "lexeme_key": "fr:tout-droit:straight-ahead",
+      "fr": "tout droit",
+      "ru": [
+        "прямо (направление движения)"
+      ],
+      "transcription_ru": "ту друа́",
+      "first_session_id": "A1-U06-L03"
+    },
+    {
+      "id": "a-gauche",
+      "lexeme_key": "fr:a-gauche:turn-left",
+      "fr": "à gauche",
+      "ru": [
+        "налево (направление поворота)"
+      ],
+      "transcription_ru": "а го́ш",
+      "first_session_id": "A1-U06-L03"
+    },
+    {
+      "id": "a-droite",
+      "lexeme_key": "fr:a-droite:turn-right",
+      "fr": "à droite",
+      "ru": [
+        "направо (направление поворота)"
+      ],
+      "transcription_ru": "а друа́т",
+      "first_session_id": "A1-U06-L03"
+    },
+    {
+      "id": "pres-de",
+      "lexeme_key": "fr:pres-de:near-place",
+      "fr": "près de",
+      "ru": [
+        "близко к (названному месту)"
+      ],
+      "transcription_ru": "прэ дё́",
+      "first_session_id": "A1-U06-L04"
+    },
+    {
+      "id": "loin-de",
+      "lexeme_key": "fr:loin-de:far-from-place",
+      "fr": "loin de",
+      "ru": [
+        "далеко от (названного места)"
+      ],
+      "transcription_ru": "луэ́(н) дё",
+      "first_session_id": "A1-U06-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:a-cote-de:next-to",
+    "fr:a-droite-de:right-of",
+    "fr:a-gauche-de:left-of",
+    "fr:aller:go",
+    "fr:bleu:blue",
+    "fr:bonjour:greeting",
+    "fr:cafe:coffee",
+    "fr:cafe:venue",
+    "fr:carafe:carafe",
+    "fr:eau:water",
+    "fr:et:and",
+    "fr:je-voudrais:polite-request",
+    "fr:lait:milk",
+    "fr:magasin:shop",
+    "fr:merci:thanks",
+    "fr:par-carte:card-payment",
+    "fr:parc:park",
+    "fr:payer:pay",
+    "fr:petit:small-object",
+    "fr:puis:then-sequence",
+    "fr:robe:dress",
+    "fr:rue:street",
+    "fr:sil-vous-plait:polite-request",
+    "fr:tasse:cup",
+    "fr:un:indefinite-masculine",
+    "fr:une:indefinite-feminine",
+    "fr:verre:drinking-glass"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A1.U06.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U06-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U06-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U06-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U06-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U06-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U06-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U06-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U06-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U06-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U06.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U06-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U06-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U06-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U06-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U06-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U06-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U06-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U06-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U05.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U06-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U03.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U06-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U06-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:gare:railway-station",
+      "reason": "Вернуть вокзал как место в следующей теме транспорта."
+    },
+    {
+      "lexeme_key": "fr:pour-aller-a:route-question",
+      "reason": "Повторить вопрос о пути к месту до выбора транспорта."
+    },
+    {
+      "lexeme_key": "fr:aller:go",
+      "reason": "Сохранить значение движения, не создавать новый ключ для личной формы."
+    },
+    {
+      "lexeme_key": "fr:tout-droit:straight-ahead",
+      "reason": "Вернуть короткое указание прямого движения."
+    },
+    {
+      "lexeme_key": "fr:tourner:turn-in-route",
+      "reason": "Повторить действие поворота отдельно от стороны."
+    },
+    {
+      "lexeme_key": "fr:a-gauche:turn-left",
+      "reason": "Сохранить направление налево отдельно от расположения слева от ориентира."
+    },
+    {
+      "lexeme_key": "fr:a-droite:turn-right",
+      "reason": "Сохранить направление направо отдельно от расположения справа от ориентира."
+    },
+    {
+      "lexeme_key": "fr:pres-de:near-place",
+      "reason": "Повторить близость к названному месту."
+    },
+    {
+      "lexeme_key": "fr:loin-de:far-from-place",
+      "reason": "Повторить далёкость и сравнение до одного ориентира."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "position_direction_and_distance_distinctions_reviewed": true,
+    "answer_meanings_reviewed_by_author": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "До импорта целевая база должна содержать A1-U05-L05; пакет не создаёт внешний prerequisite.",
+    "Человеку проверить естественность французских вопросов о пути, выбранных указаний и условные русские транскрипции.",
+    "Прослушать браузерную озвучку, особенно различие прямо и направо, формы указаний, слитные сочетания с парком и сравнительные образцы. Время аудио и занятий пока не измерено.",
+    "Выполнить предпросмотр и пробное прохождение: порядок шагов, ориентир поворота, различие стороны и расстояния, пределы вывода о третьем месте."
+  ],
+  "progress": {
+    "current_unit": "A1-U06",
+    "prepared_session_ids": [
+      "A1-U06-L01",
+      "A1-U06-L02",
+      "A1-U06-L03",
+      "A1-U06-L04",
+      "A1-U06-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A1-U07",
+    "next_unit_title": "Транспорт",
+    "previous_unit": "A1-U05",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A1-U06. Принятие и импорт предыдущих пакетов не подтверждены. Для повторения взяты полные объекты реально подготовленных пакетов, а не словарные семена плана.",
+    "Новые значения распределены как три, одно, четыре, два и ноль. Лимит новых слов не заполняется искусственно; дополнительная нагрузка приходится на применение коротких форм.",
+    "Вокзал, аптека и перекрёсток имеют отдельные ключи. Кафе как заведение и кофе как напиток сохраняют разные прежние значения.",
+    "Вопрос где находится место повторяет знакомую рамку. Новый вопрос о пути оформлен целой продуктивной рамкой pour aller à; прежний ключ aller сохранён.",
+    "Перед парком показаны выбранные объединённые формы au и du, без полной таблицы предлогов и артиклей.",
+    "Allez и tournez вводятся как готовые короткие указания; общая таблица повелительного наклонения не требуется.",
+    "Старые значения слева от и справа от описывают положение относительно ориентира. Новые налево и направо задают направление движения; старые ключи не переименованы.",
+    "Прямое движение, действие поворота, сторона и место поворота различаются. По словесному описанию положения не угадывается форма улиц.",
+    "Все описания и маршруты вымышленные. Настоящие карты, адреса, расписания и внешние сервисы не нужны для ответа.",
+    "Близко и далеко отличаются от сторон. В выбранных сравнениях ближе и дальше оба расстояния соотносятся с одним вокзалом; расстояние третьего места не выводится из одной стороны.",
+    "В первых четырёх занятиях есть объяснение до первого вопроса о новом. Пятое занятие имеет kind=practice и не вводит нового обязательного материала.",
+    "Апострофы и готовые формулы сохраняются целыми. Подписанная сборка и грамматические образцы не объявляются независимым тестом всех слов.",
+    "В L01 повторена одежда A1-U05; в L03 и L04 — порции напитков A1-U03. Повторение не заявляет, что предыдущие пакеты приняты или импортированы.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A1-U06-L01",
+      "new_lexeme_keys": [
+        "fr:gare:railway-station",
+        "fr:pharmacie:pharmacy",
+        "fr:carrefour:crossroads"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-cote-de:next-to",
+        "fr:a-droite-de:right-of",
+        "fr:a-gauche-de:left-of",
+        "fr:bleu:blue",
+        "fr:cafe:venue",
+        "fr:et:and",
+        "fr:je-voudrais:polite-request",
+        "fr:magasin:shop",
+        "fr:merci:thanks",
+        "fr:par-carte:card-payment",
+        "fr:parc:park",
+        "fr:payer:pay",
+        "fr:petit:small-object",
+        "fr:robe:dress",
+        "fr:rue:street",
+        "fr:sil-vous-plait:polite-request",
+        "fr:un:indefinite-masculine",
+        "fr:une:indefinite-feminine"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U06-L02",
+      "new_lexeme_keys": [
+        "fr:pour-aller-a:route-question"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-cote-de:next-to",
+        "fr:aller:go",
+        "fr:bonjour:greeting",
+        "fr:et:and",
+        "fr:gare:railway-station",
+        "fr:magasin:shop",
+        "fr:merci:thanks",
+        "fr:par-carte:card-payment",
+        "fr:parc:park",
+        "fr:payer:pay",
+        "fr:pharmacie:pharmacy",
+        "fr:sil-vous-plait:polite-request"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U06-L03",
+      "new_lexeme_keys": [
+        "fr:tourner:turn-in-route",
+        "fr:tout-droit:straight-ahead",
+        "fr:a-gauche:turn-left",
+        "fr:a-droite:turn-right"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-cote-de:next-to",
+        "fr:aller:go",
+        "fr:cafe:coffee",
+        "fr:carrefour:crossroads",
+        "fr:et:and",
+        "fr:gare:railway-station",
+        "fr:je-voudrais:polite-request",
+        "fr:lait:milk",
+        "fr:merci:thanks",
+        "fr:pharmacie:pharmacy",
+        "fr:pour-aller-a:route-question",
+        "fr:sil-vous-plait:polite-request",
+        "fr:tasse:cup",
+        "fr:verre:drinking-glass"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U06-L04",
+      "new_lexeme_keys": [
+        "fr:pres-de:near-place",
+        "fr:loin-de:far-from-place"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-droite-de:right-of",
+        "fr:a-droite:turn-right",
+        "fr:a-gauche-de:left-of",
+        "fr:cafe:coffee",
+        "fr:carafe:carafe",
+        "fr:carrefour:crossroads",
+        "fr:eau:water",
+        "fr:et:and",
+        "fr:gare:railway-station",
+        "fr:je-voudrais:polite-request",
+        "fr:magasin:shop",
+        "fr:merci:thanks",
+        "fr:parc:park",
+        "fr:pharmacie:pharmacy",
+        "fr:sil-vous-plait:polite-request",
+        "fr:tasse:cup",
+        "fr:tourner:turn-in-route"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U06-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-cote-de:next-to",
+        "fr:a-droite-de:right-of",
+        "fr:a-droite:turn-right",
+        "fr:a-gauche-de:left-of",
+        "fr:a-gauche:turn-left",
+        "fr:aller:go",
+        "fr:bonjour:greeting",
+        "fr:cafe:coffee",
+        "fr:carrefour:crossroads",
+        "fr:gare:railway-station",
+        "fr:je-voudrais:polite-request",
+        "fr:loin-de:far-from-place",
+        "fr:magasin:shop",
+        "fr:merci:thanks",
+        "fr:parc:park",
+        "fr:pharmacie:pharmacy",
+        "fr:pour-aller-a:route-question",
+        "fr:pres-de:near-place",
+        "fr:puis:then-sequence",
+        "fr:sil-vous-plait:polite-request",
+        "fr:tourner:turn-in-route",
+        "fr:tout-droit:straight-ahead"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A1-U06-L01",
+      "material": "Названия ориентиров с артиклем; повтор описания наличия, соседства и положения слева или справа от места."
+    },
+    {
+      "session_id": "A1-U06-L02",
+      "material": "Повтор Où est; вопрос Pour aller à с нужным местом, отличие от Je vais; выбранная форма au parc."
+    },
+    {
+      "session_id": "A1-U06-L03",
+      "material": "Готовые указания Allez tout droit и Tournez; à gauche и à droite как направления; Au carrefour и последовательность с puis."
+    },
+    {
+      "session_id": "A1-U06-L04",
+      "material": "Près de и loin de; выбранная форма du parc; готовые сравнения plus près/plus loin с общим ориентиром и que."
+    }
+  ],
+  "text_conventions": {
+    "route_status": "Вымышленные маршруты; все нужные сведения прямо даны в тексте.",
+    "distance_scope": "Сравниваются расстояния до одного названного ориентира; сторона не задаёт расстояния.",
+    "audio_basis": "Ответ определяется словами и порядком указаний, без зависимости от тембра.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:gare:railway-station",
+      "evidence": [
+        {
+          "session_id": "A1-U06-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U06-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U06-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:pharmacie:pharmacy",
+      "evidence": [
+        {
+          "session_id": "A1-U06-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U06-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U06-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U06-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:carrefour:crossroads",
+      "evidence": [
+        {
+          "session_id": "A1-U06-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:pour-aller-a:route-question",
+      "evidence": [
+        {
+          "session_id": "A1-U06-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:tourner:turn-in-route",
+      "evidence": [
+        {
+          "session_id": "A1-U06-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U06-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:tout-droit:straight-ahead",
+      "evidence": [
+        {
+          "session_id": "A1-U06-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:a-gauche:turn-left",
+      "evidence": [
+        {
+          "session_id": "A1-U06-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:a-droite:turn-right",
+      "evidence": [
+        {
+          "session_id": "A1-U06-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U06-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:pres-de:near-place",
+      "evidence": [
+        {
+          "session_id": "A1-U06-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U06-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:loin-de:far-from-place",
+      "evidence": [
+        {
+          "session_id": "A1-U06-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U06-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U06-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 10,
+    "external_prerequisites": [
+      "A1-U05-L05"
+    ],
+    "external_reference_status": "exists_in_prepared_A1_U05; target_database_status_unverified",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 12
+      },
+      "file_hash": "8b6a116f0c9dca88c813e659db21b755e13f64812d443d327ac1457b44c05629",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 27,
+    "text_lengths": [
+      {
+        "session_id": "A1-U06-L01",
+        "reading_word_counts": [
+          18,
+          24
+        ],
+        "listening_word_counts": [
+          21
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U06-L02",
+        "reading_word_counts": [
+          21,
+          20
+        ],
+        "listening_word_counts": [
+          24
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U06-L03",
+        "reading_word_counts": [
+          21,
+          21
+        ],
+        "listening_word_counts": [
+          21
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U06-L04",
+        "reading_word_counts": [
+          19,
+          27
+        ],
+        "listening_word_counts": [
+          22
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U06-L05",
+        "reading_word_counts": [
+          20,
+          19
+        ],
+        "listening_word_counts": [
+          21,
+          19
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "Pour aller",
+        "session_id": "A1-U06-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "au parc",
+        "session_id": "A1-U06-L02",
+        "task_id": "Q05"
+      },
+      {
+        "frame": "Allez tout droit",
+        "session_id": "A1-U06-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Tournez à gauche",
+        "session_id": "A1-U06-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Au carrefour",
+        "session_id": "A1-U06-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Tournez à droite",
+        "session_id": "A1-U06-L03",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "près de",
+        "session_id": "A1-U06-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "loin de",
+        "session_id": "A1-U06-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "plus près",
+        "session_id": "A1-U06-L04",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "plus loin",
+        "session_id": "A1-U06-L04",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "près du parc",
+        "session_id": "A1-U06-L04",
+        "task_id": "Q06"
+      }
+    ]
+  }
+}

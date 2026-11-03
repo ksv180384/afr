@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'default' => env('QUEUE_CONNECTION', 'database'),
+    // File-only hosting: jobs must execute in this PHP request, without a worker.
+    'default' => 'sync',
 
     /*
     |--------------------------------------------------------------------------

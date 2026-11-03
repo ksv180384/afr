@@ -22,7 +22,7 @@ const jsonLd = {
 </script>
 
 <template>
-<default-layout
+<default-layout :show-daily-practice="true"
   :auth-user="authUser"
   :words="words"
   :proverb="proverb"

@@ -1,0 +1,929 @@
+{
+  "unit_id": "A1-U18",
+  "package_file": "A1-U18.v1.json",
+  "session_ids": [
+    "A1-U18-L01",
+    "A1-U18-L02",
+    "A1-U18-L03",
+    "A1-U18-L04",
+    "A1-U18-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "message",
+      "lexeme_key": "fr:message:short-written-message",
+      "fr": "un message",
+      "ru": [
+        "короткое письменное сообщение"
+      ],
+      "transcription_ru": "э(н) мэса́ж",
+      "first_session_id": "A1-U18-L01"
+    },
+    {
+      "id": "invitation",
+      "lexeme_key": "fr:invitation:written-invitation",
+      "fr": "une invitation",
+      "ru": [
+        "приглашение (в сообщении)"
+      ],
+      "transcription_ru": "юн э(н)витасьо́(н)",
+      "first_session_id": "A1-U18-L01"
+    },
+    {
+      "id": "envoyer",
+      "lexeme_key": "fr:envoyer:send-message",
+      "fr": "envoyer",
+      "ru": [
+        "отправлять сообщение"
+      ],
+      "transcription_ru": "а(н)вуайе́",
+      "first_session_id": "A1-U18-L02"
+    },
+    {
+      "id": "repondre",
+      "lexeme_key": "fr:repondre:reply-to-message",
+      "fr": "répondre",
+      "ru": [
+        "отвечать на сообщение"
+      ],
+      "transcription_ru": "рэпо́(н)др",
+      "first_session_id": "A1-U18-L02"
+    },
+    {
+      "id": "mais",
+      "lexeme_key": "fr:mais:contrast-conjunction",
+      "fr": "mais",
+      "ru": [
+        "но (противопоставление)"
+      ],
+      "transcription_ru": "мэ́",
+      "first_session_id": "A1-U18-L03"
+    },
+    {
+      "id": "a-bientot",
+      "lexeme_key": "fr:a-bientot:see-you-soon",
+      "fr": "à bientôt",
+      "ru": [
+        "до скорого (прощание)"
+      ],
+      "transcription_ru": "а бьэ(н)то́",
+      "first_session_id": "A1-U18-L04"
+    },
+    {
+      "id": "amicalement",
+      "lexeme_key": "fr:amicalement:friendly-signoff",
+      "fr": "amicalement",
+      "ru": [
+        "с дружеским приветом (завершение)"
+      ],
+      "transcription_ru": "амикальма́(н)",
+      "first_session_id": "A1-U18-L04"
+    },
+    {
+      "id": "signature",
+      "lexeme_key": "fr:signature:message-author-name",
+      "fr": "la signature",
+      "ru": [
+        "подпись-имя автора в конце сообщения"
+      ],
+      "transcription_ru": "ла синьатю́р",
+      "first_session_id": "A1-U18-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:aimer:enjoy-activity",
+    "fr:aller:go",
+    "fr:aller:near-future-auxiliary",
+    "fr:apporter:bring-object",
+    "fr:aujourdhui:today",
+    "fr:bonjour:greeting",
+    "fr:cafe:venue",
+    "fr:cahier:notebook",
+    "fr:ce-soir:this-evening",
+    "fr:cours:class-session",
+    "fr:degre:air-temperature-degree",
+    "fr:dehors:outdoors",
+    "fr:demain:tomorrow",
+    "fr:disponible:available-in-schedule",
+    "fr:et:and",
+    "fr:film:film",
+    "fr:heure:clock-hour",
+    "fr:il-fait-beau:fine-weather",
+    "fr:il-pleut:raining",
+    "fr:je-promets:explicit-promise",
+    "fr:lire:read",
+    "fr:livre:book",
+    "fr:maison:house-home",
+    "fr:merci:thanks",
+    "fr:midi:noon",
+    "fr:neuf:cardinal-number",
+    "fr:occupe:busy-in-schedule",
+    "fr:parc:park",
+    "fr:parce-que:because-reason",
+    "fr:quinze:cardinal-number",
+    "fr:regarder:look-watch",
+    "fr:rendez-vous:appointment",
+    "fr:rester:stay-at-place",
+    "fr:salut:informal_greeting",
+    "fr:se-promener:take-walk",
+    "fr:sil-vous-plait:polite-request",
+    "fr:soleil:sun",
+    "fr:vent:wind",
+    "fr:vingt:cardinal-number",
+    "fr:vous-voulez:invitation-question"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A1.U18.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U18-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U18-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U18-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U18-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U18-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U18-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U18-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U18-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U18-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U18-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U18-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U18-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U18-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U18-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U18-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U18-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U18-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U18.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U18-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U18-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U18-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U18-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U18-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U18-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U18-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U18-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U18-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U18-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U18-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U18-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U18-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U18-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U18-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U18-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U18-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U18-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U17.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U18-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U15.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U18-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U15.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U18-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:message:short-written-message",
+      "reason": "Повторить короткое сообщение как носитель просьбы."
+    },
+    {
+      "lexeme_key": "fr:envoyer:send-message",
+      "reason": "Повторить просьбу отправить, отдельно от ответа."
+    },
+    {
+      "lexeme_key": "fr:repondre:reply-to-message",
+      "reason": "Повторить просьбу ответить и её временное условие."
+    },
+    {
+      "lexeme_key": "fr:mais:contrast-conjunction",
+      "reason": "Сохранить противопоставление отдельно от причины и соединения."
+    },
+    {
+      "lexeme_key": "fr:invitation:written-invitation",
+      "reason": "Повторить приглашение и условия встречи."
+    },
+    {
+      "lexeme_key": "fr:a-bientot:see-you-soon",
+      "reason": "Повторить дружеское прощание."
+    },
+    {
+      "lexeme_key": "fr:signature:message-author-name",
+      "reason": "Сохранить роль подписи-имени автора."
+    },
+    {
+      "lexeme_key": "fr:sil-vous-plait:polite-request",
+      "reason": "Повторить знакомую вежливую просьбу."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "known_greeting_politeness_time_and_action_keys_reused": true,
+    "farewell_a_bientot_separated_from_adverb_bientot": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "send_and_reply_time_distinctions_reviewed": true,
+    "recipient_and_author_distinctions_reviewed": true,
+    "meeting_time_separated_from_busy_time": true,
+    "et_mais_parce_que_functions_reviewed": true,
+    "apostrophes_kept_in_whole_tokens": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A1-U17-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Редактору проверить естественность французских сообщений, просьб и завершений, русские транскрипции и соответствие нагрузки уровню.",
+    "Прослушать браузерную озвучку просьб, времени, имён и формул завершения. Длительность аудио и занятий не измерена.",
+    "Выполнить предпросмотр и пробное прохождение: отправка и ответ, время занятости и встречи, адресат и подпись автора."
+  ],
+  "progress": {
+    "current_unit": "A1-U18",
+    "prepared_session_ids": [
+      "A1-U18-L01",
+      "A1-U18-L02",
+      "A1-U18-L03",
+      "A1-U18-L04",
+      "A1-U18-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A1-U19",
+    "next_unit_title": "Повседневные инструкции",
+    "previous_unit": "A1-U17",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A1-U18. Принятие и импорт предыдущих пакетов не подтверждены; повторение использует полные объекты подготовленных пакетов.",
+    "Новые значения распределены как два, два, одно, три и ноль. В пятом занятии нового обязательного материала нет.",
+    "Известные приветствия, благодарность, пожалуйста, встреча, время, место, ближайшее намерение и действия сохраняют прежние ключи.",
+    "Новое à bientôt обозначает формулу прощания. Прежнее bientôt как наречие скоро не переписывается.",
+    "Envoyez le message и Répondez au message показаны как выбранные готовые просьбы, без полной таблицы повелительного наклонения. Они отличаются от собственного плана Je vais envoyer.",
+    "Merci pour le message и Merci pour l’invitation благодарят за сообщение и приглашение; благодарность не объявляется подтверждением участия.",
+    "Et соединяет, mais противопоставляет, parce que объясняет причину. Проверяются явно заданные отношения, без требования стилистически единственного союза в свободном тексте.",
+    "Время занятости не переносится на встречу, время отправки не переносится на ответ. Действие и условия читаются вместе.",
+    "В заданных учебных образцах имя после приветствия — адресат; имя после завершения в конце сообщения — автор. Это правило расположения относится к показанному шаблону.",
+    "À bientôt и amicalement показаны для дружеской переписки. Их уместность не распространяется автоматически на любые официальные сообщения.",
+    "Signature в этой теме — подпись-имя автора, а не юридическая или рукописная подпись документа.",
+    "В L01 повторён материал A1-U17; в L03 и L04 — материал A1-U15. Все имена, сообщения и встречи вымышленные, относительное время относится к тексту.",
+    "Ответы выбираются или собираются из готовых карточек; реальные сообщения никому не отправляются.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A1-U18-L01",
+      "new_lexeme_keys": [
+        "fr:message:short-written-message",
+        "fr:invitation:written-invitation"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:near-future-auxiliary",
+        "fr:apporter:bring-object",
+        "fr:bonjour:greeting",
+        "fr:cahier:notebook",
+        "fr:ce-soir:this-evening",
+        "fr:cours:class-session",
+        "fr:demain:tomorrow",
+        "fr:et:and",
+        "fr:heure:clock-hour",
+        "fr:je-promets:explicit-promise",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:maison:house-home",
+        "fr:merci:thanks",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:rester:stay-at-place"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U18-L02",
+      "new_lexeme_keys": [
+        "fr:envoyer:send-message",
+        "fr:repondre:reply-to-message"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:near-future-auxiliary",
+        "fr:apporter:bring-object",
+        "fr:bonjour:greeting",
+        "fr:cahier:notebook",
+        "fr:demain:tomorrow",
+        "fr:et:and",
+        "fr:heure:clock-hour",
+        "fr:livre:book",
+        "fr:merci:thanks",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:occupe:busy-in-schedule",
+        "fr:parce-que:because-reason",
+        "fr:sil-vous-plait:polite-request"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U18-L03",
+      "new_lexeme_keys": [
+        "fr:mais:contrast-conjunction"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:near-future-auxiliary",
+        "fr:apporter:bring-object",
+        "fr:aujourdhui:today",
+        "fr:bonjour:greeting",
+        "fr:cafe:venue",
+        "fr:degre:air-temperature-degree",
+        "fr:demain:tomorrow",
+        "fr:disponible:available-in-schedule",
+        "fr:envoyer:send-message",
+        "fr:et:and",
+        "fr:heure:clock-hour",
+        "fr:livre:book",
+        "fr:merci:thanks",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:occupe:busy-in-schedule",
+        "fr:parc:park",
+        "fr:quinze:cardinal-number",
+        "fr:rendez-vous:appointment",
+        "fr:soleil:sun",
+        "fr:vent:wind",
+        "fr:vingt:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U18-L04",
+      "new_lexeme_keys": [
+        "fr:a-bientot:see-you-soon",
+        "fr:amicalement:friendly-signoff",
+        "fr:signature:message-author-name"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aimer:enjoy-activity",
+        "fr:aller:near-future-auxiliary",
+        "fr:apporter:bring-object",
+        "fr:aujourdhui:today",
+        "fr:bonjour:greeting",
+        "fr:dehors:outdoors",
+        "fr:demain:tomorrow",
+        "fr:film:film",
+        "fr:heure:clock-hour",
+        "fr:il-fait-beau:fine-weather",
+        "fr:il-pleut:raining",
+        "fr:invitation:written-invitation",
+        "fr:livre:book",
+        "fr:merci:thanks",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:parc:park",
+        "fr:regarder:look-watch",
+        "fr:repondre:reply-to-message",
+        "fr:salut:informal_greeting",
+        "fr:se-promener:take-walk",
+        "fr:sil-vous-plait:polite-request"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U18-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-bientot:see-you-soon",
+        "fr:aller:go",
+        "fr:aller:near-future-auxiliary",
+        "fr:amicalement:friendly-signoff",
+        "fr:apporter:bring-object",
+        "fr:bonjour:greeting",
+        "fr:cafe:venue",
+        "fr:cahier:notebook",
+        "fr:demain:tomorrow",
+        "fr:disponible:available-in-schedule",
+        "fr:envoyer:send-message",
+        "fr:et:and",
+        "fr:heure:clock-hour",
+        "fr:invitation:written-invitation",
+        "fr:livre:book",
+        "fr:mais:contrast-conjunction",
+        "fr:merci:thanks",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:occupe:busy-in-schedule",
+        "fr:parc:park",
+        "fr:rendez-vous:appointment",
+        "fr:repondre:reply-to-message",
+        "fr:salut:informal_greeting",
+        "fr:signature:message-author-name",
+        "fr:sil-vous-plait:polite-request",
+        "fr:vous-voulez:invitation-question"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A1-U18-L01",
+      "material": "Начало сообщения, благодарность Merci pour le message / l’invitation; повторение et."
+    },
+    {
+      "session_id": "A1-U18-L02",
+      "material": "Выбранные готовые просьбы Envoyez le message и Répondez au message; отличие от Je vais envoyer; повторение причины parce que."
+    },
+    {
+      "session_id": "A1-U18-L03",
+      "material": "Mais как противопоставление; место и время встречи отдельно от ограничения расписания."
+    },
+    {
+      "session_id": "A1-U18-L04",
+      "material": "Дружеские завершения À bientôt / Amicalement; адресат в начале и подпись-имя автора в конце заданного образца."
+    }
+  ],
+  "text_conventions": {
+    "message_status": "Учебные вымышленные сообщения, без реальной отправки.",
+    "time_scope": "Относительное время относится к ситуации текста.",
+    "name_roles": "В показанном шаблоне имя после приветствия — адресат, имя после завершения в конце — автор.",
+    "names": "Marie и Luc — вымышленные имена, показанные с транскрипциями.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:message:short-written-message",
+      "evidence": [
+        {
+          "session_id": "A1-U18-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U18-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:invitation:written-invitation",
+      "evidence": [
+        {
+          "session_id": "A1-U18-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U18-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U18-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U18-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:envoyer:send-message",
+      "evidence": [
+        {
+          "session_id": "A1-U18-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U18-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U18-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:repondre:reply-to-message",
+      "evidence": [
+        {
+          "session_id": "A1-U18-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U18-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U18-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U18-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U18-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:mais:contrast-conjunction",
+      "evidence": [
+        {
+          "session_id": "A1-U18-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:a-bientot:see-you-soon",
+      "evidence": [
+        {
+          "session_id": "A1-U18-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U18-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U18-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:amicalement:friendly-signoff",
+      "evidence": [
+        {
+          "session_id": "A1-U18-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:signature:message-author-name",
+      "evidence": [
+        {
+          "session_id": "A1-U18-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U18-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U18-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U18-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U18-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 8,
+    "external_prerequisites": [
+      "A1-U17-L05"
+    ],
+    "external_reference_status": "A1-U17-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 10
+      },
+      "file_hash": "d6a6730090cc2eda71e94abc047969e07be78e647552cf36df6a9a6b9f9fe595",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 40,
+    "text_lengths": [
+      {
+        "session_id": "A1-U18-L01",
+        "reading_word_counts": [
+          23,
+          19
+        ],
+        "listening_word_counts": [
+          17
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U18-L02",
+        "reading_word_counts": [
+          19,
+          18
+        ],
+        "listening_word_counts": [
+          19
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U18-L03",
+        "reading_word_counts": [
+          21,
+          25
+        ],
+        "listening_word_counts": [
+          21
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U18-L04",
+        "reading_word_counts": [
+          20,
+          16
+        ],
+        "listening_word_counts": [
+          12
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U18-L05",
+        "reading_word_counts": [
+          22,
+          19
+        ],
+        "listening_word_counts": [
+          19,
+          23
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "Merci pour l’invitation",
+        "session_id": "A1-U18-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Merci pour le message",
+        "session_id": "A1-U18-L01",
+        "task_id": "Q05"
+      },
+      {
+        "frame": "Envoyez le message",
+        "session_id": "A1-U18-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Répondez au message",
+        "session_id": "A1-U18-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je vais envoyer",
+        "session_id": "A1-U18-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "mais",
+        "session_id": "A1-U18-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "À bientôt",
+        "session_id": "A1-U18-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Amicalement",
+        "session_id": "A1-U18-L04",
+        "task_id": "Q02"
+      }
+    ]
+  }
+}

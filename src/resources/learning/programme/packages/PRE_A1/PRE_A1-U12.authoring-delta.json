@@ -1,0 +1,961 @@
+{
+  "unit_id": "PRE_A1-U12",
+  "package_file": "PRE_A1-U12.v1.json",
+  "session_ids": [
+    "PRE_A1-U12-L01",
+    "PRE_A1-U12-L02",
+    "PRE_A1-U12-L03",
+    "PRE_A1-U12-L04",
+    "PRE_A1-U12-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "je",
+      "lexeme_key": "fr:je:first-person-subject",
+      "fr": "je",
+      "ru": [
+        "я (кто выполняет действие)"
+      ],
+      "transcription_ru": "жё",
+      "first_session_id": "PRE_A1-U12-L01"
+    },
+    {
+      "id": "il",
+      "lexeme_key": "fr:il:masculine-subject",
+      "fr": "il",
+      "ru": [
+        "он (кто выполняет действие)"
+      ],
+      "transcription_ru": "и́ль",
+      "first_session_id": "PRE_A1-U12-L01"
+    },
+    {
+      "id": "elle",
+      "lexeme_key": "fr:elle:feminine-subject",
+      "fr": "elle",
+      "ru": [
+        "она (кто выполняет действие)"
+      ],
+      "transcription_ru": "э́ль",
+      "first_session_id": "PRE_A1-U12-L01"
+    },
+    {
+      "id": "manger",
+      "lexeme_key": "fr:manger:eat",
+      "fr": "manger",
+      "ru": [
+        "есть (принимать пищу)"
+      ],
+      "transcription_ru": "ма(н)жэ́",
+      "first_session_id": "PRE_A1-U12-L01"
+    },
+    {
+      "id": "boire",
+      "lexeme_key": "fr:boire:drink",
+      "fr": "boire",
+      "ru": [
+        "пить"
+      ],
+      "transcription_ru": "буа́р",
+      "first_session_id": "PRE_A1-U12-L01"
+    },
+    {
+      "id": "lire",
+      "lexeme_key": "fr:lire:read",
+      "fr": "lire",
+      "ru": [
+        "читать"
+      ],
+      "transcription_ru": "ли́р",
+      "first_session_id": "PRE_A1-U12-L02"
+    },
+    {
+      "id": "ecrire",
+      "lexeme_key": "fr:ecrire:write",
+      "fr": "écrire",
+      "ru": [
+        "писать"
+      ],
+      "transcription_ru": "экри́р",
+      "first_session_id": "PRE_A1-U12-L02"
+    },
+    {
+      "id": "mot",
+      "lexeme_key": "fr:mot:word",
+      "fr": "un mot",
+      "ru": [
+        "слово (в тексте)"
+      ],
+      "transcription_ru": "э(н) мо́",
+      "first_session_id": "PRE_A1-U12-L02"
+    },
+    {
+      "id": "aller",
+      "lexeme_key": "fr:aller:go",
+      "fr": "aller",
+      "ru": [
+        "идти, направляться (в образце движения)"
+      ],
+      "transcription_ru": "алэ́",
+      "first_session_id": "PRE_A1-U12-L03"
+    },
+    {
+      "id": "attendre",
+      "lexeme_key": "fr:attendre:wait",
+      "fr": "attendre",
+      "ru": [
+        "ждать"
+      ],
+      "transcription_ru": "ата́(н)др",
+      "first_session_id": "PRE_A1-U12-L03"
+    },
+    {
+      "id": "ecouter",
+      "lexeme_key": "fr:ecouter:listen",
+      "fr": "écouter",
+      "ru": [
+        "слушать"
+      ],
+      "transcription_ru": "экутэ́",
+      "first_session_id": "PRE_A1-U12-L04"
+    },
+    {
+      "id": "regarder",
+      "lexeme_key": "fr:regarder:look-watch",
+      "fr": "regarder",
+      "ru": [
+        "смотреть"
+      ],
+      "transcription_ru": "рёгардэ́",
+      "first_session_id": "PRE_A1-U12-L04"
+    },
+    {
+      "id": "radio",
+      "lexeme_key": "fr:radio:radio",
+      "fr": "la radio",
+      "ru": [
+        "радио"
+      ],
+      "transcription_ru": "ла радьо́",
+      "first_session_id": "PRE_A1-U12-L04"
+    },
+    {
+      "id": "tele",
+      "lexeme_key": "fr:tele:television",
+      "fr": "la télé",
+      "ru": [
+        "телевизор (в выражении «смотреть телевизор»)"
+      ],
+      "transcription_ru": "ла тэле́",
+      "first_session_id": "PRE_A1-U12-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:cafe:coffee",
+    "fr:chaud:hot-temperature",
+    "fr:eau:water",
+    "fr:froid:cold-temperature",
+    "fr:je-veux:want",
+    "fr:je-voudrais:polite-request",
+    "fr:livre:book",
+    "fr:pain:bread",
+    "fr:table:table",
+    "fr:the:tea"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "PRE_A1.U12.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U12.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U11.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U09.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:je:first-person-subject",
+      "reason": "Вернуть самостоятельное указание на себя в изученных репликах."
+    },
+    {
+      "lexeme_key": "fr:il:masculine-subject",
+      "reason": "Повторить определение действующего лица по словам."
+    },
+    {
+      "lexeme_key": "fr:elle:feminine-subject",
+      "reason": "Повторить определение действующего лица по словам."
+    },
+    {
+      "lexeme_key": "fr:lire:read",
+      "reason": "Вернуть изученную реплику о чтении без полной таблицы спряжения."
+    },
+    {
+      "lexeme_key": "fr:ecrire:write",
+      "reason": "Сохранить целую форму с апострофом в сообщении о себе."
+    },
+    {
+      "lexeme_key": "fr:attendre:wait",
+      "reason": "Повторить выбранные формы ожидания, не добавляя новые лица."
+    },
+    {
+      "lexeme_key": "fr:ecouter:listen",
+      "reason": "Повторить полную реплику о слушании радио."
+    },
+    {
+      "lexeme_key": "fr:regarder:look-watch",
+      "reason": "Повторить полную реплику о просмотре телевизора."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "local_database_references_checked": true,
+    "registry_collisions_checked": true,
+    "package_hash_verified": true,
+    "pronunciation_coverage_warnings_absent": true,
+    "new_lexeme_evidence_checked": true,
+    "practice_kind_checked": true,
+    "apostrophe_tokens_preserved": true,
+    "shuffled_choice_feedback_checked": true
+  },
+  "open_issues": [
+    "До импорта целевая база должна содержать PRE_A1-U11-L05. Пакет не создаёт внешнюю зависимость.",
+    "Человеку нужно проверить французские формы, переводы и условные русские транскрипции, затем прослушать браузерную озвучку, особенно одинаково звучащие формы чтения и ожидания и формы с апострофом.",
+    "Выполнить предпросмотр, пробное прохождение и замер длительности. Ориентир 6 минут на занятие не измерен."
+  ],
+  "progress": {
+    "current_unit": "PRE_A1-U12",
+    "prepared_session_ids": [
+      "PRE_A1-U12-L01",
+      "PRE_A1-U12-L02",
+      "PRE_A1-U12-L03",
+      "PRE_A1-U12-L04",
+      "PRE_A1-U12-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "PRE_A1-U13",
+    "previous_unit": "PRE_A1-U11",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку текущей темы. Отдельное подтверждение принятия и импорта предыдущих занятий не получено.",
+    "Восемь глаголов даны с выбранными формами сообщения о себе, о нём и о ней; полная таблица спряжения не вводится. Формы одного глагола используют один lexeme_key.",
+    "Новые самостоятельные местоимения не заменяют существующие ключи целых выражений желания и просьбы. Старые значения сохраняют ключи и объекты из предыдущих пакетов.",
+    "Действующее лицо определяется по словам фразы, а не по полу синтетического голоса.",
+    "Действия есть и пить явно отличаются от желания получить еду или напиток.",
+    "Писать — изучаемое действие персонажа. Вводить текст в ответах учащемуся не нужно.",
+    "Формы с апострофом при сборке сохраняются целиком. Подписанная сборка не объявляется независимой проверкой всех слов: assessed_vocabulary_ids пуст.",
+    "Движение показано в конкретной сцене к знакомому столу. Общий вывод о способе передвижения из любого употребления глагола не вводится.",
+    "В первых четырёх занятиях соответственно 5, 3, 2 и 4 новых значения. В пятом занятии нового обязательного материала нет.",
+    "Основной LEXEME_REGISTRY.json и предыдущие пакеты не изменены. Новые ключи предложены отдельно до принятия."
+  ],
+  "session_material": [
+    {
+      "session_id": "PRE_A1-U12-L01",
+      "new_lexeme_keys": [
+        "fr:je:first-person-subject",
+        "fr:il:masculine-subject",
+        "fr:elle:feminine-subject",
+        "fr:manger:eat",
+        "fr:boire:drink"
+      ],
+      "reused_lexeme_keys": [
+        "fr:eau:water",
+        "fr:je-veux:want",
+        "fr:pain:bread"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U12-L02",
+      "new_lexeme_keys": [
+        "fr:lire:read",
+        "fr:ecrire:write",
+        "fr:mot:word"
+      ],
+      "reused_lexeme_keys": [
+        "fr:boire:drink",
+        "fr:eau:water",
+        "fr:elle:feminine-subject",
+        "fr:il:masculine-subject",
+        "fr:je:first-person-subject",
+        "fr:livre:book",
+        "fr:manger:eat",
+        "fr:pain:bread"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U12-L03",
+      "new_lexeme_keys": [
+        "fr:aller:go",
+        "fr:attendre:wait"
+      ],
+      "reused_lexeme_keys": [
+        "fr:elle:feminine-subject",
+        "fr:il:masculine-subject",
+        "fr:je-voudrais:polite-request",
+        "fr:je:first-person-subject",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:table:table",
+        "fr:the:tea"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U12-L04",
+      "new_lexeme_keys": [
+        "fr:ecouter:listen",
+        "fr:regarder:look-watch",
+        "fr:radio:radio",
+        "fr:tele:television"
+      ],
+      "reused_lexeme_keys": [
+        "fr:attendre:wait",
+        "fr:cafe:coffee",
+        "fr:chaud:hot-temperature",
+        "fr:elle:feminine-subject",
+        "fr:froid:cold-temperature",
+        "fr:il:masculine-subject",
+        "fr:je:first-person-subject",
+        "fr:lire:read"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U12-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:aller:go",
+        "fr:attendre:wait",
+        "fr:boire:drink",
+        "fr:eau:water",
+        "fr:ecouter:listen",
+        "fr:ecrire:write",
+        "fr:elle:feminine-subject",
+        "fr:il:masculine-subject",
+        "fr:je:first-person-subject",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:manger:eat",
+        "fr:mot:word",
+        "fr:pain:bread",
+        "fr:radio:radio",
+        "fr:regarder:look-watch",
+        "fr:table:table",
+        "fr:tele:television"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "PRE_A1-U12-L01",
+      "material": "Самостоятельные указания я/он/она; выбранные формы еды и питья в полных образцах."
+    },
+    {
+      "session_id": "PRE_A1-U12-L02",
+      "material": "Выбранные формы чтения и письма; целая форма о себе с апострофом."
+    },
+    {
+      "session_id": "PRE_A1-U12-L03",
+      "material": "Движение к столу и ожидание в трёх изученных образцах; сопоставление показанного написания форм ожидания."
+    },
+    {
+      "session_id": "PRE_A1-U12-L04",
+      "material": "Выбранные формы слушания радио и просмотра телевизора; целая форма слушания о себе с апострофом."
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:je:first-person-subject",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:il:masculine-subject",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:elle:feminine-subject",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:manger:eat",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:boire:drink",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:lire:read",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:ecrire:write",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:mot:word",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:aller:go",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:attendre:wait",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q05",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:ecouter:listen",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:regarder:look-watch",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U12-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:radio:radio",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:tele:television",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U12-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 14,
+    "external_prerequisites": [
+      "PRE_A1-U11-L05"
+    ],
+    "external_reference_status": "reference_package_and_local_project_validator_passed; other_target_databases_unverified",
+    "project_validator": {
+      "valid": true,
+      "errors": [],
+      "file_hash": "dd713ef7ff2a5ee3da0faf60d74fef7e47202fd0b72cc1eea4dbee34a3c2c4c2",
+      "warning_counts": {
+        "editorial_review_required": 5,
+        "browser_tts": 14
+      },
+      "requires_editorial_review": true,
+      "report_file": "PRE_A1-U12.validation.json"
+    }
+  }
+}

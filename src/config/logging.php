@@ -123,6 +123,14 @@ return [
             'handler' => NullHandler::class,
         ],
 
+        'daily_practice' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/daily-practice.log'),
+            'level' => 'info',
+            'days' => 14,
+            'permission' => 0600,
+        ],
+
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
@@ -133,6 +141,6 @@ return [
             'level' => env('LOG_LEVEL', 'debug'),
             'chat_id' => env('TELEGRAM_LOGGER_CHAT_ID', ''),
             'token' => env('TELEGRAM_LOGGER_TOKEN', ''),
-        ]
+        ],
     ],
 ];

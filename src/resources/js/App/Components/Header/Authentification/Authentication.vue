@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from 'vue';
+import { router } from '@inertiajs/vue3';
+import { prepareGuestAuthentication } from '@/App/Learning/guestSyncState.js';
 
 import AfrButton from '@/App/Components/Form/AfrButton.vue';
 import ModalAuth from '@/App/Components/Header/Authentification/ModalAuth.vue';
@@ -11,9 +13,14 @@ const props = defineProps({
 
 const isShowDialogAuth = ref(false);
 
-const click = () => {
-  isShowDialogAuth.value = true;
-}
+const error = ref('');
+const click = async () => {
+  error.value = '';
+  try {
+    if (await prepareGuestAuthentication()) { router.visit('/login?practice=1'); return; }
+    isShowDialogAuth.value = true;
+  } catch (failure) { error.value = failure.message; }
+};
 </script>
 
 <template>
@@ -28,6 +35,7 @@ const click = () => {
         Войти
       </afr-button>
 
+      <p v-if="error" role="alert">{{ error }}</p>
       <ModalAuth v-model="isShowDialogAuth"/>
     </template>
     <template v-else>

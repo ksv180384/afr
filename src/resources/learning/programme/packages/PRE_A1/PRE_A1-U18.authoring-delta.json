@@ -1,0 +1,771 @@
+{
+  "unit_id": "PRE_A1-U18",
+  "package_file": "PRE_A1-U18.v1.json",
+  "session_ids": [
+    "PRE_A1-U18-L01",
+    "PRE_A1-U18-L02",
+    "PRE_A1-U18-L03",
+    "PRE_A1-U18-L04",
+    "PRE_A1-U18-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "ami",
+      "lexeme_key": "fr:ami:friend",
+      "fr": "un ami",
+      "ru": [
+        "друг (мужской род в показанном образце)"
+      ],
+      "transcription_ru": "э(н) нами́",
+      "first_session_id": "PRE_A1-U18-L01"
+    },
+    {
+      "id": "voisin",
+      "lexeme_key": "fr:voisin:neighbor",
+      "fr": "un voisin",
+      "ru": [
+        "сосед (мужской род в показанном образце)"
+      ],
+      "transcription_ru": "э(н) вуазэ́(н)",
+      "first_session_id": "PRE_A1-U18-L01"
+    },
+    {
+      "id": "professeur",
+      "lexeme_key": "fr:professeur:teacher",
+      "fr": "un professeur",
+      "ru": [
+        "учитель, преподаватель (в показанном образце)"
+      ],
+      "transcription_ru": "э(н) профэсё́р",
+      "first_session_id": "PRE_A1-U18-L02"
+    },
+    {
+      "id": "eleve",
+      "lexeme_key": "fr:eleve:pupil",
+      "fr": "un élève",
+      "ru": [
+        "ученик; ученица при показанном женском артикле"
+      ],
+      "transcription_ru": "э(н) нэлэ́в",
+      "first_session_id": "PRE_A1-U18-L02"
+    },
+    {
+      "id": "medecin",
+      "lexeme_key": "fr:medecin:doctor",
+      "fr": "un médecin",
+      "ru": [
+        "врач"
+      ],
+      "transcription_ru": "э(н) мэдсэ́(н)",
+      "first_session_id": "PRE_A1-U18-L03"
+    },
+    {
+      "id": "vendeur",
+      "lexeme_key": "fr:vendeur:salesperson",
+      "fr": "un vendeur",
+      "ru": [
+        "продавец (мужской род в показанном образце)"
+      ],
+      "transcription_ru": "э(н) ва(н)дё́р",
+      "first_session_id": "PRE_A1-U18-L03"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:cest-ou:place-location-question",
+    "fr:cest:identify-object",
+    "fr:chaise:chair",
+    "fr:elle:feminine-subject",
+    "fr:froid:cold-temperature",
+    "fr:il-pleut:raining",
+    "fr:il:masculine-subject",
+    "fr:livre:book",
+    "fr:mon:first-person-masculine-possessive",
+    "fr:pere:father",
+    "fr:quel-temps-fait-il:weather-question",
+    "fr:qui-est-ce:identity-question",
+    "fr:soleil:sun",
+    "fr:sous:under"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "PRE_A1.U18.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U18.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U18-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U18-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U18-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U17.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U15.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U16.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U18-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U15.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U18-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:ami:friend",
+      "reason": "Вернуть знакомое отношение друг без вывода о профессии."
+    },
+    {
+      "lexeme_key": "fr:voisin:neighbor",
+      "reason": "Повторить соседа в короткой бытовой ситуации, сохраняя выбранную форму."
+    },
+    {
+      "lexeme_key": "fr:professeur:teacher",
+      "reason": "Использовать только уже показанный образец о профессии до расширения грамматики."
+    },
+    {
+      "lexeme_key": "fr:eleve:pupil",
+      "reason": "Повторить изученные формы ученика и ученицы; указание на человека берётся из слов."
+    },
+    {
+      "lexeme_key": "fr:medecin:doctor",
+      "reason": "Сохранить одинаковую показанную форму названия врача после начала о нём или о ней."
+    },
+    {
+      "lexeme_key": "fr:vendeur:salesperson",
+      "reason": "Сохранять показанную мужскую форму до отдельного объяснения других форм."
+    },
+    {
+      "lexeme_key": "fr:qui-est-ce:identity-question",
+      "reason": "Вернуть прежний вопрос о человеке без нового ключа."
+    },
+    {
+      "lexeme_key": "fr:cest:identify-object",
+      "reason": "Сохранить ключ представления, уже использованный в семейной теме."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "local_database_references_checked": true,
+    "registry_collisions_checked": true,
+    "package_hash_verified": true,
+    "pronunciation_coverage_warnings_absent": true,
+    "new_lexeme_evidence_checked": true,
+    "practice_kind_checked": true,
+    "existing_identity_and_possessive_keys_and_cards_preserved": true,
+    "legacy_identity_card_note_flagged_for_editor": true,
+    "profile_answers_checked": true,
+    "names_introduced_before_use": true,
+    "apostrophe_tokens_preserved": true,
+    "shuffled_choice_feedback_checked": true,
+    "reading_length_checked": true,
+    "no_unused_local_vocabulary": true
+  },
+  "open_issues": [
+    "До импорта целевая база должна содержать PRE_A1-U17-L05; пакет не создаёт отсутствующую внешнюю зависимость.",
+    "У существующей карточки c’est русская помета ограничена указанием на предмет, хотя ранее подготовленная семейная тема уже использует тот же ключ для людей. Ключ и полный объект сохранены. Редактору следует отдельно уточнить помету с соблюдением правил версий; текущий пакет её не переписывает.",
+    "Человеку нужно проверить выбранные формы обозначения людей, показанные грамматические образцы и условные русские транскрипции; прослушать браузерную озвучку, особенно связи в сочетаниях с другом и учеником.",
+    "Выполнить предпросмотр, пробное прохождение и замер длительности. Ориентир 6 минут на занятие не измерен."
+  ],
+  "progress": {
+    "current_unit": "PRE_A1-U18",
+    "prepared_session_ids": [
+      "PRE_A1-U18-L01",
+      "PRE_A1-U18-L02",
+      "PRE_A1-U18-L03",
+      "PRE_A1-U18-L04",
+      "PRE_A1-U18-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "PRE_A1-U19",
+    "previous_unit": "PRE_A1-U17",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку текущей темы. Отдельное подтверждение принятия или импорта предыдущих пакетов не получено.",
+    "Вопрос кто это и форма представления уже встречались в семейной теме. Существующие ключи и полные объекты сохранены, новые дубликаты этих выражений не создаются.",
+    "Друг и сосед обозначают отношения к человеку, а не его профессию. Профессия не выводится автоматически из дружбы, соседства или имени.",
+    "Показаны выбранные формы названий людей, включая образец о женщине-враче и ученице. Пол, роль и возраст не угадываются по синтетическому голосу. Все сведения определяются словами и условиями.",
+    "Артикли после формы представления и отсутствие артикля в нескольких коротких сообщениях о занятии вводятся на конкретных образцах. Универсальное правило для всех употреблений не формулируется.",
+    "Два учебных имени вводятся в четвёртом занятии с транскрипцией. Постоянная биография персонажей не предполагается; каждое задание содержит самостоятельные сведения.",
+    "В первых четырёх занятиях соответственно 2, 2, 2 и 0 новых лексических значений. Четвёртое занятие соединяет знакомые образцы в представление по имени. В пятом занятии нового обязательного материала нет.",
+    "Имена не оцениваются как новые словарные значения. Оцениваются смысл вопроса, прямо названные отношения и роли и показанные способы построения реплики.",
+    "Апострофы сохраняются целыми в сборке. Подписанная сборка и восстановление грамматического образца не объявляются независимой проверкой каждого слова: assessed_vocabulary_ids пуст.",
+    "Основной реестр и предыдущие пакеты не изменены. Новые ключи предложены отдельно до принятия."
+  ],
+  "session_material": [
+    {
+      "session_id": "PRE_A1-U18-L01",
+      "new_lexeme_keys": [
+        "fr:ami:friend",
+        "fr:voisin:neighbor"
+      ],
+      "reused_lexeme_keys": [
+        "fr:cest:identify-object",
+        "fr:chaise:chair",
+        "fr:livre:book",
+        "fr:mon:first-person-masculine-possessive",
+        "fr:pere:father",
+        "fr:sous:under"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U18-L02",
+      "new_lexeme_keys": [
+        "fr:professeur:teacher",
+        "fr:eleve:pupil"
+      ],
+      "reused_lexeme_keys": [
+        "fr:ami:friend",
+        "fr:cest:identify-object",
+        "fr:elle:feminine-subject",
+        "fr:il:masculine-subject",
+        "fr:mon:first-person-masculine-possessive",
+        "fr:voisin:neighbor"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U18-L03",
+      "new_lexeme_keys": [
+        "fr:medecin:doctor",
+        "fr:vendeur:salesperson"
+      ],
+      "reused_lexeme_keys": [
+        "fr:elle:feminine-subject",
+        "fr:il-pleut:raining",
+        "fr:il:masculine-subject",
+        "fr:professeur:teacher",
+        "fr:soleil:sun"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U18-L04",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:cest-ou:place-location-question",
+        "fr:cest:identify-object",
+        "fr:elle:feminine-subject",
+        "fr:froid:cold-temperature",
+        "fr:il-pleut:raining",
+        "fr:il:masculine-subject",
+        "fr:medecin:doctor",
+        "fr:quel-temps-fait-il:weather-question",
+        "fr:qui-est-ce:identity-question",
+        "fr:vendeur:salesperson"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U18-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:ami:friend",
+        "fr:cest-ou:place-location-question",
+        "fr:cest:identify-object",
+        "fr:eleve:pupil",
+        "fr:elle:feminine-subject",
+        "fr:il:masculine-subject",
+        "fr:medecin:doctor",
+        "fr:mon:first-person-masculine-possessive",
+        "fr:pere:father",
+        "fr:professeur:teacher",
+        "fr:quel-temps-fait-il:weather-question",
+        "fr:qui-est-ce:identity-question",
+        "fr:vendeur:salesperson",
+        "fr:voisin:neighbor"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "PRE_A1-U18-L01",
+      "material": "Существующий семейный образец представления и слово мой с двумя новыми отношениями друг и сосед."
+    },
+    {
+      "session_id": "PRE_A1-U18-L02",
+      "material": "Конкретные образцы представления учителя и ученика с артиклем; короткие сообщения о роли после указания на человека без артикля; показанное представление ученицы."
+    },
+    {
+      "session_id": "PRE_A1-U18-L03",
+      "material": "Короткие сообщения о враче и продавце; показанный образец о женщине-враче с той же формой названия профессии."
+    },
+    {
+      "session_id": "PRE_A1-U18-L04",
+      "material": "Знакомый вопрос о человеке; представление по имени, соединённое с уже показанным сообщением о занятии."
+    }
+  ],
+  "introduced_named_labels": [
+    {
+      "first_session_id": "PRE_A1-U18-L04",
+      "before_task_id": "Q02",
+      "fr": "Paul",
+      "ru": "Поль",
+      "transcription_ru": "по́ль",
+      "status": "fictional_person_label_not_a_new_lexeme"
+    },
+    {
+      "first_session_id": "PRE_A1-U18-L04",
+      "before_task_id": "Q02",
+      "fr": "Lila",
+      "ru": "Лила",
+      "transcription_ru": "лила́",
+      "status": "person_label_not_a_new_lexeme"
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:ami:friend",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:voisin:neighbor",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:professeur:teacher",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:eleve:pupil",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U18-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:medecin:doctor",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:vendeur:salesperson",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U18-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 6,
+    "external_prerequisites": [
+      "PRE_A1-U17-L05"
+    ],
+    "external_reference_status": "reference_package_and_local_project_validator_passed; other_target_databases_unverified",
+    "project_validator": {
+      "valid": true,
+      "errors": [],
+      "file_hash": "f9745b834cc895ae47aef45b522d5ed7c72e890055afca90e3d123d6b61f9e18",
+      "warning_counts": {
+        "editorial_review_required": 5,
+        "browser_tts": 12
+      },
+      "requires_editorial_review": true,
+      "report_file": "PRE_A1-U18.validation.json"
+    },
+    "max_french_reading_prompt_words": 10,
+    "new_lexical_meanings": 6,
+    "named_labels": 2,
+    "legacy_editorial_issue": "Existing c’est card has a narrower Russian qualifier than its already established family/person use; object preserved pending separate editorial versioned correction."
+  }
+}

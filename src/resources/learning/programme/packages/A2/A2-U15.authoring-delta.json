@@ -1,0 +1,1921 @@
+{
+  "unit_id": "A2-U15",
+  "package_file": "A2-U15.v1.json",
+  "package_id": "programme-a2-u15-v1",
+  "session_ids": [
+    "A2-U15-L01",
+    "A2-U15-L02",
+    "A2-U15-L03",
+    "A2-U15-L04",
+    "A2-U15-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "titre",
+      "lexeme_key": "fr:titre:message-headline",
+      "fr": "un titre",
+      "ru": [
+        "заголовок сообщения"
+      ],
+      "transcription_ru": "э(н) ти́тр",
+      "first_session_id": "A2-U15-L01"
+    },
+    {
+      "id": "mairie",
+      "lexeme_key": "fr:mairie:municipal-office",
+      "fr": "la mairie",
+      "ru": [
+        "мэрия, муниципальная администрация"
+      ],
+      "transcription_ru": "ла мэри́",
+      "first_session_id": "A2-U15-L01"
+    },
+    {
+      "id": "annoncer",
+      "lexeme_key": "fr:annoncer:announce-event",
+      "fr": "annoncer",
+      "ru": [
+        "объявлять о событии"
+      ],
+      "transcription_ru": "ано(н)сэ́",
+      "first_session_id": "A2-U15-L01"
+    },
+    {
+      "id": "avoir-lieu",
+      "lexeme_key": "fr:avoir-lieu:event-occurrence",
+      "fr": "avoir lieu",
+      "ru": [
+        "происходить, состояться о событии"
+      ],
+      "transcription_ru": "авуар льё",
+      "first_session_id": "A2-U15-L02"
+    },
+    {
+      "id": "travaux",
+      "lexeme_key": "fr:travaux:construction-works",
+      "fr": "des travaux",
+      "ru": [
+        "строительные или ремонтные работы"
+      ],
+      "transcription_ru": "дэ траво́",
+      "first_session_id": "A2-U15-L04"
+    },
+    {
+      "id": "en-raison-de",
+      "lexeme_key": "fr:en-raison-de:stated-cause",
+      "fr": "en raison de",
+      "ru": [
+        "по причине, из-за указанного обстоятельства"
+      ],
+      "transcription_ru": "а(н) рэзо(н) дё",
+      "first_session_id": "A2-U15-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:aidez-moi:help-request",
+    "fr:aller:near-future-auxiliary",
+    "fr:anniversaire:birthday",
+    "fr:apporter:bring-object",
+    "fr:article:merchandise-item",
+    "fr:avoir:compound-past-auxiliary",
+    "fr:billet:transport-ticket",
+    "fr:bonjour:greeting",
+    "fr:cadeau:gift",
+    "fr:colis:parcel",
+    "fr:commande:merchandise-order",
+    "fr:comment-payer:ask-payment-method",
+    "fr:cours:class-session",
+    "fr:d-ici:by-deadline",
+    "fr:delai:task-completion-deadline",
+    "fr:demain:tomorrow",
+    "fr:depuis:ongoing-since-duration",
+    "fr:diner:evening-meal",
+    "fr:disponible:available-in-schedule",
+    "fr:dix:cardinal-number",
+    "fr:ecrire:write",
+    "fr:en-especes:cash-payment",
+    "fr:envoyer:send-message",
+    "fr:etre-en-train-de:action-in-progress",
+    "fr:euro:currency-unit",
+    "fr:famille:family",
+    "fr:fete:celebration-gathering",
+    "fr:feter:celebrate-occasion",
+    "fr:formation:training-programme",
+    "fr:frere:brother",
+    "fr:gateau:cake",
+    "fr:heure:clock-hour",
+    "fr:hier:yesterday",
+    "fr:huit:cardinal-number",
+    "fr:il-faut:necessary-action",
+    "fr:jai:possession",
+    "fr:je-voudrais:polite-request",
+    "fr:livraison:goods-delivery",
+    "fr:livre:book",
+    "fr:lui:indirect-object-singular",
+    "fr:maison:house-home",
+    "fr:mardi:weekday",
+    "fr:matin:morning",
+    "fr:merci:thanks",
+    "fr:message:short-written-message",
+    "fr:midi:noon",
+    "fr:mois:calendar-month",
+    "fr:musee:museum",
+    "fr:paiement:payment",
+    "fr:par-mois:per-month",
+    "fr:parc:park",
+    "fr:pendant-que:simultaneous-time-clause",
+    "fr:pendant:duration-preposition",
+    "fr:petit:small-object",
+    "fr:pourriez-vous:polite-action-request",
+    "fr:preciser:clarify-service-details",
+    "fr:prendre:use-transport",
+    "fr:preparer:prepare-food",
+    "fr:pres-de:near-place",
+    "fr:quinze:cardinal-number",
+    "fr:rembourser:refund-payment",
+    "fr:retourner:return-purchased-item",
+    "fr:s-inscrire:enrol-on-course",
+    "fr:si:real-condition",
+    "fr:sil-vous-plait:polite-request",
+    "fr:soeur:sister",
+    "fr:soir:evening",
+    "fr:soiree:social-evening",
+    "fr:tache:work-task",
+    "fr:tarif:service-price",
+    "fr:terminer:finish-task",
+    "fr:train:train",
+    "fr:trop:excessive-degree",
+    "fr:un:cardinal-number",
+    "fr:vendeur:salesperson",
+    "fr:vendredi:weekday",
+    "fr:venir-de:recently-completed-action"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A2.U15.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U15-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U15-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U15-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U15-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U15-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U15-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U15-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U15-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U15.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U15-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U15-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U15-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U15-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U15-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U15-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U15-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U14.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U15-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U12.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U15-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U15-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U15-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U11.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U15-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U13.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U15-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U14.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U15-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U05.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U15-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:annoncer:announce-event",
+      "reason": "Отличать объявление от самого события."
+    },
+    {
+      "lexeme_key": "fr:avoir-lieu:event-occurrence",
+      "reason": "Сохранять место и время проведения."
+    },
+    {
+      "lexeme_key": "fr:en-raison-de:stated-cause",
+      "reason": "Вернуть явно названную причину."
+    },
+    {
+      "lexeme_key": "fr:travaux:construction-works",
+      "reason": "Не подменять ремонтные работы обычной рабочей задачей."
+    },
+    {
+      "lexeme_key": "fr:titre:message-headline",
+      "reason": "Отличать заголовок от источника."
+    },
+    {
+      "lexeme_key": "fr:mairie:municipal-office",
+      "reason": "Сохранять источник отдельно от места события."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_ids_keys_and_french_forms_checked": true,
+    "reading_lengths_checked": true,
+    "checkpoint_structure_checked": true,
+    "block_objective_coverage_checked": true,
+    "apostrophes_kept_in_whole_tokens": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Зависимость A2-U14-L05 найдена проектным валидатором. Это не подтверждает публикацию или принятие пользователем.",
+    "Редактору проверить естественность заголовков, объявлений и объяснений причин; прослушать французскую озвучку.",
+    "Выполнить предпросмотр и пробное прохождение; измерить время аудио и занятий. Фактически это не выполнялось."
+  ],
+  "progress": {
+    "current_unit": "A2-U15",
+    "prepared_session_ids": [
+      "A2-U15-L01",
+      "A2-U15-L02",
+      "A2-U15-L03",
+      "A2-U15-L04",
+      "A2-U15-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A2-U16",
+    "next_unit_title": "Природа и отдых"
+  },
+  "scope_notes": [
+    "Один полный пакет пяти занятий. Первая тема после объединённого A2-U14; его файл и версии не менялись.",
+    "Новые значения распределены как три, одно, ноль, два, ноль. В L05 нет новых обязательных слов и моделей; вид checkpoint сохранён по плану.",
+    "Annoncer и avoir lieu различаются как объявление и проведение; выбранные формы annonce / a lieu объяснены до проверки.",
+    "Источник, заголовок, событие, время, место и причина читаются раздельно. Место работ не равно месту праздника, источник не обязан быть местом проведения.",
+    "Travaux означает строительные или ремонтные работы, не прежнее travail как работа в распорядке.",
+    "В L01 повторён срок задачи из A2-U14. В L03 повторена доставка из A2-U12, в L04 — возврат и будущий план возмещения из той же темы. Прежние объекты карточек сохраняются.",
+    "Контроль содержит два listening, два reading, два vocabulary, grammar и sentence_building. Представлены U11–U15 и условие поездки U05. Это выборка, не исчерпывающая оценка каждого умения.",
+    "Все новости, источники, работы и изменения места вымышлены. Они не описывают действующие события, муниципальные распоряжения или реальные ограничения посещения.",
+    "Озвучка только браузером: fr-FR, asset_id=null. Нет внешних аудиосервисов, файлов, обязательного текста или микрофона.",
+    "Импорт, публикация, отправка сообщений, прослушивание и сайт-прохождение не выполнялись. Принятие пользователем не подтверждено."
+  ],
+  "session_material": [
+    {
+      "session_id": "A2-U15-L01",
+      "new_lexeme_keys": [
+        "fr:titre:message-headline",
+        "fr:mairie:municipal-office",
+        "fr:annoncer:announce-event"
+      ],
+      "reused_lexeme_keys": [
+        "fr:delai:task-completion-deadline",
+        "fr:disponible:available-in-schedule",
+        "fr:ecrire:write",
+        "fr:envoyer:send-message",
+        "fr:famille:family",
+        "fr:fete:celebration-gathering",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:je-voudrais:polite-request",
+        "fr:matin:morning",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:musee:museum",
+        "fr:parc:park",
+        "fr:pres-de:near-place",
+        "fr:soir:evening",
+        "fr:tache:work-task",
+        "fr:terminer:finish-task",
+        "fr:vendredi:weekday",
+        "fr:venir-de:recently-completed-action"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U15-L02",
+      "new_lexeme_keys": [
+        "fr:avoir-lieu:event-occurrence"
+      ],
+      "reused_lexeme_keys": [
+        "fr:annoncer:announce-event",
+        "fr:famille:family",
+        "fr:fete:celebration-gathering",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:mairie:municipal-office",
+        "fr:musee:museum",
+        "fr:parc:park",
+        "fr:pres-de:near-place",
+        "fr:soir:evening",
+        "fr:titre:message-headline",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U15-L03",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:annoncer:announce-event",
+        "fr:avoir-lieu:event-occurrence",
+        "fr:colis:parcel",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:ecrire:write",
+        "fr:fete:celebration-gathering",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:livraison:goods-delivery",
+        "fr:lui:indirect-object-singular",
+        "fr:mairie:municipal-office",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:midi:noon",
+        "fr:musee:museum",
+        "fr:parc:park",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:pres-de:near-place",
+        "fr:soir:evening",
+        "fr:titre:message-headline",
+        "fr:vendeur:salesperson",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U15-L04",
+      "new_lexeme_keys": [
+        "fr:travaux:construction-works",
+        "fr:en-raison-de:stated-cause"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:near-future-auxiliary",
+        "fr:annoncer:announce-event",
+        "fr:article:merchandise-item",
+        "fr:avoir-lieu:event-occurrence",
+        "fr:bonjour:greeting",
+        "fr:commande:merchandise-order",
+        "fr:d-ici:by-deadline",
+        "fr:depuis:ongoing-since-duration",
+        "fr:ecrire:write",
+        "fr:euro:currency-unit",
+        "fr:fete:celebration-gathering",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:je-voudrais:polite-request",
+        "fr:mairie:municipal-office",
+        "fr:mois:calendar-month",
+        "fr:musee:museum",
+        "fr:paiement:payment",
+        "fr:parc:park",
+        "fr:petit:small-object",
+        "fr:preciser:clarify-service-details",
+        "fr:quinze:cardinal-number",
+        "fr:rembourser:refund-payment",
+        "fr:retourner:return-purchased-item",
+        "fr:soir:evening",
+        "fr:titre:message-headline",
+        "fr:trop:excessive-degree",
+        "fr:un:cardinal-number",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U15-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:aidez-moi:help-request",
+        "fr:anniversaire:birthday",
+        "fr:annoncer:announce-event",
+        "fr:apporter:bring-object",
+        "fr:avoir-lieu:event-occurrence",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:billet:transport-ticket",
+        "fr:cadeau:gift",
+        "fr:colis:parcel",
+        "fr:comment-payer:ask-payment-method",
+        "fr:cours:class-session",
+        "fr:demain:tomorrow",
+        "fr:diner:evening-meal",
+        "fr:disponible:available-in-schedule",
+        "fr:ecrire:write",
+        "fr:en-especes:cash-payment",
+        "fr:en-raison-de:stated-cause",
+        "fr:etre-en-train-de:action-in-progress",
+        "fr:euro:currency-unit",
+        "fr:famille:family",
+        "fr:fete:celebration-gathering",
+        "fr:feter:celebrate-occasion",
+        "fr:formation:training-programme",
+        "fr:frere:brother",
+        "fr:gateau:cake",
+        "fr:heure:clock-hour",
+        "fr:hier:yesterday",
+        "fr:huit:cardinal-number",
+        "fr:il-faut:necessary-action",
+        "fr:jai:possession",
+        "fr:je-voudrais:polite-request",
+        "fr:livraison:goods-delivery",
+        "fr:livre:book",
+        "fr:lui:indirect-object-singular",
+        "fr:mairie:municipal-office",
+        "fr:maison:house-home",
+        "fr:matin:morning",
+        "fr:merci:thanks",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:musee:museum",
+        "fr:paiement:payment",
+        "fr:par-mois:per-month",
+        "fr:parc:park",
+        "fr:pendant-que:simultaneous-time-clause",
+        "fr:pendant:duration-preposition",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:prendre:use-transport",
+        "fr:preparer:prepare-food",
+        "fr:quinze:cardinal-number",
+        "fr:s-inscrire:enrol-on-course",
+        "fr:si:real-condition",
+        "fr:sil-vous-plait:polite-request",
+        "fr:soeur:sister",
+        "fr:soir:evening",
+        "fr:soiree:social-evening",
+        "fr:tache:work-task",
+        "fr:tarif:service-price",
+        "fr:terminer:finish-task",
+        "fr:titre:message-headline",
+        "fr:train:train",
+        "fr:travaux:construction-works",
+        "fr:vendeur:salesperson",
+        "fr:vendredi:weekday",
+        "fr:venir-de:recently-completed-action"
+      ],
+      "task_count": 8
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:titre:message-headline",
+      "evidence": [
+        {
+          "session_id": "A2-U15-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U15-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U15-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:mairie:municipal-office",
+      "evidence": [
+        {
+          "session_id": "A2-U15-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U15-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U15-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:annoncer:announce-event",
+      "evidence": [
+        {
+          "session_id": "A2-U15-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U15-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:avoir-lieu:event-occurrence",
+      "evidence": [
+        {
+          "session_id": "A2-U15-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U15-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U15-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:travaux:construction-works",
+      "evidence": [
+        {
+          "session_id": "A2-U15-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U15-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U15-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:en-raison-de:stated-cause",
+      "evidence": [
+        {
+          "session_id": "A2-U15-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U15-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U15-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A2-U15-L01",
+      "material": "La mairie annonce; источник и заголовок."
+    },
+    {
+      "session_id": "A2-U15-L02",
+      "material": "La fête a lieu; проведение события."
+    },
+    {
+      "session_id": "A2-U15-L03",
+      "material": "Повторение дня, часа и места отдельно от источника."
+    },
+    {
+      "session_id": "A2-U15-L04",
+      "material": "En raison de travaux; причина и два разных места."
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 6,
+    "external_prerequisites": [
+      "A2-U14-L05"
+    ],
+    "external_reference_status": "A2-U14-L05_found_by_project_validator; publication_and_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 6
+      },
+      "file_hash": "42cf15f883747f18fa455b83e58e6996e26a4ed9fffa714ed40b9958a3f67ae7"
+    },
+    "existing_lexeme_objects_preserved": 77,
+    "text_lengths": [
+      {
+        "session_id": "A2-U15-L01",
+        "reading_word_counts": [
+          31,
+          37
+        ],
+        "listening_word_counts": [
+          37
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U15-L02",
+        "reading_word_counts": [
+          37,
+          39
+        ],
+        "listening_word_counts": [
+          39
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U15-L03",
+        "reading_word_counts": [
+          33,
+          37
+        ],
+        "listening_word_counts": [
+          37
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U15-L04",
+        "reading_word_counts": [
+          32,
+          40
+        ],
+        "listening_word_counts": [
+          40
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U15-L05",
+        "reading_word_counts": [
+          32,
+          40
+        ],
+        "listening_word_counts": [
+          33,
+          39
+        ],
+        "duration_measured": false
+      }
+    ]
+  },
+  "block_coverage_audit": {
+    "unit_ids": [
+      "A2-U11",
+      "A2-U12",
+      "A2-U13",
+      "A2-U14",
+      "A2-U15"
+    ],
+    "sessions": 25,
+    "tasks": 180,
+    "mandatory_objectives": 10,
+    "objective_evidence": [
+      {
+        "objective_id": "A2.U11.UNDERSTAND",
+        "block_evidence": [
+          {
+            "session_id": "A2-U11-L01",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U11-L01",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U11-L01",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U11-L01",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U11-L01",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U11-L01",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U11-L02",
+            "task_id": "Q01",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U11-L02",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U11-L02",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U11-L02",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U11-L02",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U11-L02",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U11-L02",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U11-L05",
+            "task_id": "Q01",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U11-L05",
+            "task_id": "Q02",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U11-L05",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U12-L01",
+            "task_id": "Q01",
+            "skill": "reading"
+          }
+        ],
+        "checkpoint_evidence": []
+      },
+      {
+        "objective_id": "A2.U11.APPLY",
+        "block_evidence": [
+          {
+            "session_id": "A2-U11-L03",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U11-L03",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U11-L03",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U11-L03",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U11-L03",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U11-L03",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U11-L04",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U11-L04",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U11-L04",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U11-L04",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U11-L04",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U11-L05",
+            "task_id": "Q03",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U11-L05",
+            "task_id": "Q04",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U11-L05",
+            "task_id": "Q08",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U14-L03",
+            "task_id": "Q01",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U15-L05",
+            "task_id": "Q01",
+            "skill": "listening"
+          }
+        ],
+        "checkpoint_evidence": [
+          {
+            "session_id": "A2-U15-L05",
+            "task_id": "Q01",
+            "skill": "listening"
+          }
+        ]
+      },
+      {
+        "objective_id": "A2.U12.UNDERSTAND",
+        "block_evidence": [
+          {
+            "session_id": "A2-U12-L01",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U12-L01",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U12-L01",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U12-L01",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U12-L01",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U12-L01",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U12-L02",
+            "task_id": "Q01",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U12-L02",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U12-L02",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U12-L02",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U12-L02",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U12-L02",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U12-L02",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U12-L05",
+            "task_id": "Q01",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U12-L05",
+            "task_id": "Q03",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U12-L05",
+            "task_id": "Q07",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U13-L01",
+            "task_id": "Q01",
+            "skill": "reading"
+          }
+        ],
+        "checkpoint_evidence": []
+      },
+      {
+        "objective_id": "A2.U12.APPLY",
+        "block_evidence": [
+          {
+            "session_id": "A2-U12-L03",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U12-L03",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U12-L03",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U12-L03",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U12-L03",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U12-L03",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U12-L04",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U12-L04",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U12-L04",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U12-L04",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U12-L04",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U12-L04",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U12-L05",
+            "task_id": "Q02",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U12-L05",
+            "task_id": "Q03",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U12-L05",
+            "task_id": "Q04",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U12-L05",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U12-L05",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U12-L05",
+            "task_id": "Q08",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U15-L03",
+            "task_id": "Q01",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U15-L04",
+            "task_id": "Q01",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U15-L05",
+            "task_id": "Q02",
+            "skill": "reading"
+          }
+        ],
+        "checkpoint_evidence": [
+          {
+            "session_id": "A2-U15-L05",
+            "task_id": "Q02",
+            "skill": "reading"
+          }
+        ]
+      },
+      {
+        "objective_id": "A2.U13.UNDERSTAND",
+        "block_evidence": [
+          {
+            "session_id": "A2-U13-L01",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U13-L01",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U13-L01",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U13-L01",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U13-L01",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U13-L01",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U13-L02",
+            "task_id": "Q01",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U13-L02",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U13-L02",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U13-L02",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U13-L02",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U13-L02",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U13-L02",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U13-L03",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U13-L03",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U13-L05",
+            "task_id": "Q01",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U13-L05",
+            "task_id": "Q02",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U13-L05",
+            "task_id": "Q03",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U13-L05",
+            "task_id": "Q07",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U14-L01",
+            "task_id": "Q01",
+            "skill": "reading"
+          }
+        ],
+        "checkpoint_evidence": []
+      },
+      {
+        "objective_id": "A2.U13.APPLY",
+        "block_evidence": [
+          {
+            "session_id": "A2-U13-L03",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U13-L03",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U13-L03",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U13-L03",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U13-L03",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U13-L04",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U13-L04",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U13-L04",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U13-L04",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U13-L04",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U13-L04",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U13-L05",
+            "task_id": "Q04",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U13-L05",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U13-L05",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U13-L05",
+            "task_id": "Q08",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U15-L05",
+            "task_id": "Q03",
+            "skill": "listening"
+          }
+        ],
+        "checkpoint_evidence": [
+          {
+            "session_id": "A2-U15-L05",
+            "task_id": "Q03",
+            "skill": "listening"
+          }
+        ]
+      },
+      {
+        "objective_id": "A2.U14.UNDERSTAND",
+        "block_evidence": [
+          {
+            "session_id": "A2-U14-L01",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U14-L01",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U14-L01",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U14-L01",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U14-L01",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U14-L01",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U14-L02",
+            "task_id": "Q01",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U14-L02",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U14-L02",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U14-L02",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U14-L02",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U14-L02",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U14-L02",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U14-L04",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U14-L04",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U14-L04",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U14-L05",
+            "task_id": "Q02",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U14-L05",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U15-L01",
+            "task_id": "Q01",
+            "skill": "reading"
+          }
+        ],
+        "checkpoint_evidence": []
+      },
+      {
+        "objective_id": "A2.U14.APPLY",
+        "block_evidence": [
+          {
+            "session_id": "A2-U14-L03",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U14-L03",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U14-L03",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U14-L03",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U14-L03",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U14-L03",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U14-L04",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U14-L04",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U14-L04",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U14-L04",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U14-L04",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U14-L05",
+            "task_id": "Q01",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U14-L05",
+            "task_id": "Q03",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U14-L05",
+            "task_id": "Q04",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U14-L05",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U14-L05",
+            "task_id": "Q07",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U14-L05",
+            "task_id": "Q08",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U15-L05",
+            "task_id": "Q05",
+            "skill": "vocabulary"
+          }
+        ],
+        "checkpoint_evidence": [
+          {
+            "session_id": "A2-U15-L05",
+            "task_id": "Q05",
+            "skill": "vocabulary"
+          }
+        ]
+      },
+      {
+        "objective_id": "A2.U15.UNDERSTAND",
+        "block_evidence": [
+          {
+            "session_id": "A2-U15-L01",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U15-L01",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U15-L01",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U15-L01",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U15-L01",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U15-L01",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U15-L02",
+            "task_id": "Q01",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U15-L02",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U15-L02",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U15-L02",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U15-L02",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U15-L02",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U15-L02",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U15-L05",
+            "task_id": "Q04",
+            "skill": "reading"
+          }
+        ],
+        "checkpoint_evidence": [
+          {
+            "session_id": "A2-U15-L05",
+            "task_id": "Q04",
+            "skill": "reading"
+          }
+        ]
+      },
+      {
+        "objective_id": "A2.U15.APPLY",
+        "block_evidence": [
+          {
+            "session_id": "A2-U15-L03",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U15-L03",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U15-L03",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U15-L03",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U15-L03",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U15-L03",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U15-L04",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U15-L04",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U15-L04",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U15-L04",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U15-L04",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U15-L04",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U15-L05",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U15-L05",
+            "task_id": "Q08",
+            "skill": "sentence_building"
+          }
+        ],
+        "checkpoint_evidence": [
+          {
+            "session_id": "A2-U15-L05",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U15-L05",
+            "task_id": "Q08",
+            "skill": "sentence_building"
+          }
+        ]
+      }
+    ],
+    "interpretation": "Аудит созданного материала, не освоение учеником. Контроль содержит выборку, не каждую цель блока.",
+    "objectives_not_separately_sampled_in_checkpoint": [
+      "A2.U11.UNDERSTAND",
+      "A2.U12.UNDERSTAND",
+      "A2.U13.UNDERSTAND",
+      "A2.U14.UNDERSTAND"
+    ]
+  }
+}

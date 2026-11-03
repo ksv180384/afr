@@ -1,0 +1,887 @@
+{
+  "unit_id": "PRE_A1-U04",
+  "package_file": "PRE_A1-U04.v1.json",
+  "session_ids": [
+    "PRE_A1-U04-L01",
+    "PRE_A1-U04-L02",
+    "PRE_A1-U04-L03",
+    "PRE_A1-U04-L04",
+    "PRE_A1-U04-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "livre",
+      "lexeme_key": "fr:livre:book",
+      "fr": "un livre",
+      "ru": [
+        "книга"
+      ],
+      "transcription_ru": "э(н) ли́вр",
+      "first_session_id": "PRE_A1-U04-L01"
+    },
+    {
+      "id": "stylo",
+      "lexeme_key": "fr:stylo:pen",
+      "fr": "un stylo",
+      "ru": [
+        "ручка для письма"
+      ],
+      "transcription_ru": "э(н) стило́",
+      "first_session_id": "PRE_A1-U04-L01"
+    },
+    {
+      "id": "sac",
+      "lexeme_key": "fr:sac:bag",
+      "fr": "un sac",
+      "ru": [
+        "сумка"
+      ],
+      "transcription_ru": "э(н) са́к",
+      "first_session_id": "PRE_A1-U04-L01"
+    },
+    {
+      "id": "table",
+      "lexeme_key": "fr:table:table",
+      "fr": "une table",
+      "ru": [
+        "стол"
+      ],
+      "transcription_ru": "юн та́бль",
+      "first_session_id": "PRE_A1-U04-L02"
+    },
+    {
+      "id": "chaise",
+      "lexeme_key": "fr:chaise:chair",
+      "fr": "une chaise",
+      "ru": [
+        "стул"
+      ],
+      "transcription_ru": "юн шэ́з",
+      "first_session_id": "PRE_A1-U04-L02"
+    },
+    {
+      "id": "lampe",
+      "lexeme_key": "fr:lampe:lamp",
+      "fr": "une lampe",
+      "ru": [
+        "лампа"
+      ],
+      "transcription_ru": "юн ла́(н)п",
+      "first_session_id": "PRE_A1-U04-L02"
+    },
+    {
+      "id": "un-article",
+      "lexeme_key": "fr:un:indefinite-masculine",
+      "fr": "un",
+      "ru": [
+        "неопределённый артикль мужского рода перед одним предметом"
+      ],
+      "transcription_ru": "э́(н)",
+      "first_session_id": "PRE_A1-U04-L01"
+    },
+    {
+      "id": "une-article",
+      "lexeme_key": "fr:une:indefinite-feminine",
+      "fr": "une",
+      "ru": [
+        "неопределённый артикль женского рода перед одним предметом"
+      ],
+      "transcription_ru": "юн",
+      "first_session_id": "PRE_A1-U04-L02"
+    },
+    {
+      "id": "cest-identify",
+      "lexeme_key": "fr:cest:identify-object",
+      "fr": "c’est",
+      "ru": [
+        "это (при указании на один предмет)"
+      ],
+      "transcription_ru": "сэ",
+      "first_session_id": "PRE_A1-U04-L03"
+    },
+    {
+      "id": "sur-la-table",
+      "lexeme_key": "fr:sur-la-table:on-table",
+      "fr": "sur la table",
+      "ru": [
+        "на столе"
+      ],
+      "transcription_ru": "сюр ла та́бль",
+      "first_session_id": "PRE_A1-U04-L03"
+    },
+    {
+      "id": "dans-le-sac",
+      "lexeme_key": "fr:dans-le-sac:in-bag",
+      "fr": "dans le sac",
+      "ru": [
+        "в сумке"
+      ],
+      "transcription_ru": "да(н) лё са́к",
+      "first_session_id": "PRE_A1-U04-L03"
+    },
+    {
+      "id": "des-article",
+      "lexeme_key": "fr:des:indefinite-plural",
+      "fr": "des",
+      "ru": [
+        "неопределённый артикль перед несколькими предметами"
+      ],
+      "transcription_ru": "дэ",
+      "first_session_id": "PRE_A1-U04-L04"
+    },
+    {
+      "id": "ce-sont-identify",
+      "lexeme_key": "fr:ce-sont:identify-objects",
+      "fr": "ce sont",
+      "ru": [
+        "это (при указании на несколько предметов)"
+      ],
+      "transcription_ru": "сё со́(н)",
+      "first_session_id": "PRE_A1-U04-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:cinq:cardinal-number",
+    "fr:deux:cardinal-number",
+    "fr:epelez-sil-vous-plait:request-spelling",
+    "fr:non:negative-answer",
+    "fr:plus-lentement-sil-vous-plait:request-slower",
+    "fr:repetez-sil-vous-plait:request-repeat",
+    "fr:sil-vous-plait:polite-request",
+    "fr:trois:cardinal-number",
+    "fr:un:cardinal-number"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "PRE_A1.U04.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q07",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U04.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q04",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q04",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q04",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q06",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q04",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q05",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U03.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.CLARIFY.REQUEST",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:livre:book",
+      "reason": "Повторить название и мужской род в выборочном повторении U01–U04."
+    },
+    {
+      "lexeme_key": "fr:table:table",
+      "reason": "Повторить французский женский род вопреки мужскому роду русского перевода."
+    },
+    {
+      "lexeme_key": "fr:sac:bag",
+      "reason": "Вернуть знакомый предмет в короткую ситуацию о вещах ученика."
+    },
+    {
+      "lexeme_key": "fr:cest:identify-object",
+      "reason": "Повторить указание на один предмет в интеграции U05."
+    },
+    {
+      "lexeme_key": "fr:ce-sont:identify-objects",
+      "reason": "Сопоставить один и несколько предметов без нового материала в контрольном занятии."
+    },
+    {
+      "lexeme_key": "fr:des:indefinite-plural",
+      "reason": "Проверить, что множественное число не интерпретируется как точное количество два."
+    },
+    {
+      "lexeme_key": "fr:un:cardinal-number",
+      "reason": "Сохранять значение числа один отдельно от нового ключа артикля."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "local_database_references_checked": true,
+    "pronunciation_coverage_warnings_absent": true,
+    "all_new_lexemes_have_task_evidence": true,
+    "level_load_checked": true,
+    "cardinal_and_article_keys_distinct": true
+  },
+  "open_issues": [
+    "Проверка зависимостей штатным валидатором в локальной базе пройдена. При импорте в другую базу сначала требуется PRE_A1-U03-L05; её наличие не создаётся файлом U04.",
+    "Человеку нужно проверить язык, озвучку носовых гласных и связующего звука в полных образцах указания, а также пробное прохождение.",
+    "Оценка времени 6 минут на занятие не измерена; проверить на телефоне объём объяснений об артиклях и числе."
+  ],
+  "progress": {
+    "current_unit": "PRE_A1-U04",
+    "prepared_session_ids": [
+      "PRE_A1-U04-L01",
+      "PRE_A1-U04-L02",
+      "PRE_A1-U04-L03",
+      "PRE_A1-U04-L04",
+      "PRE_A1-U04-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "PRE_A1-U05",
+    "previous_unit": "PRE_A1-U03",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку U04; отдельное подтверждение языкового принятия или импорта U03 не получено.",
+    "Число un сохраняет ключ fr:un:cardinal-number. Для другого значения, артикля, используется fr:un:indefinite-masculine.",
+    "Множественные формы существительных сохраняют ключи соответствующих значений единственного числа.",
+    "Два выражения места учатся целиком; отдельная таблица определённых артиклей не вводится.",
+    "В L01–L04 соответственно 4, 4, 3 и 2 новых значения. В L05 нового материала нет.",
+    "В заданиях word_order assessed_vocabulary_ids пуст: подписанная сборка не оценивает знание всех слов.",
+    "Основной LEXEME_REGISTRY.json и ранее созданные пакеты не изменены. Новые ключи переданы отдельным delta до принятия."
+  ],
+  "session_material": [
+    {
+      "session_id": "PRE_A1-U04-L01",
+      "new_lexeme_keys": [
+        "fr:livre:book",
+        "fr:stylo:pen",
+        "fr:sac:bag",
+        "fr:un:indefinite-masculine"
+      ],
+      "reused_lexeme_keys": [
+        "fr:cinq:cardinal-number",
+        "fr:deux:cardinal-number",
+        "fr:sil-vous-plait:polite-request",
+        "fr:un:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U04-L02",
+      "new_lexeme_keys": [
+        "fr:table:table",
+        "fr:chaise:chair",
+        "fr:lampe:lamp",
+        "fr:une:indefinite-feminine"
+      ],
+      "reused_lexeme_keys": [
+        "fr:livre:book",
+        "fr:sac:bag",
+        "fr:sil-vous-plait:polite-request",
+        "fr:stylo:pen",
+        "fr:un:indefinite-masculine"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U04-L03",
+      "new_lexeme_keys": [
+        "fr:cest:identify-object",
+        "fr:sur-la-table:on-table",
+        "fr:dans-le-sac:in-bag"
+      ],
+      "reused_lexeme_keys": [
+        "fr:chaise:chair",
+        "fr:epelez-sil-vous-plait:request-spelling",
+        "fr:lampe:lamp",
+        "fr:livre:book",
+        "fr:plus-lentement-sil-vous-plait:request-slower",
+        "fr:repetez-sil-vous-plait:request-repeat",
+        "fr:sac:bag",
+        "fr:stylo:pen",
+        "fr:table:table",
+        "fr:un:indefinite-masculine",
+        "fr:une:indefinite-feminine"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U04-L04",
+      "new_lexeme_keys": [
+        "fr:des:indefinite-plural",
+        "fr:ce-sont:identify-objects"
+      ],
+      "reused_lexeme_keys": [
+        "fr:cest:identify-object",
+        "fr:chaise:chair",
+        "fr:deux:cardinal-number",
+        "fr:lampe:lamp",
+        "fr:livre:book",
+        "fr:sac:bag",
+        "fr:stylo:pen",
+        "fr:table:table",
+        "fr:trois:cardinal-number",
+        "fr:un:cardinal-number",
+        "fr:un:indefinite-masculine",
+        "fr:une:indefinite-feminine"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U04-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:ce-sont:identify-objects",
+        "fr:cest:identify-object",
+        "fr:chaise:chair",
+        "fr:dans-le-sac:in-bag",
+        "fr:des:indefinite-plural",
+        "fr:deux:cardinal-number",
+        "fr:lampe:lamp",
+        "fr:livre:book",
+        "fr:non:negative-answer",
+        "fr:sac:bag",
+        "fr:stylo:pen",
+        "fr:sur-la-table:on-table",
+        "fr:table:table",
+        "fr:trois:cardinal-number",
+        "fr:un:cardinal-number",
+        "fr:un:indefinite-masculine",
+        "fr:une:indefinite-feminine"
+      ],
+      "task_count": 8
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:livre:book",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q07",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q05",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:stylo:pen",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q07",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:sac:bag",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:table:table",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q06",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:chaise:chair",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:lampe:lamp",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:un:indefinite-masculine",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U04-L01",
+          "task_id": "Q04",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:une:indefinite-feminine",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U04-L02",
+          "task_id": "Q04",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q04",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:cest:identify-object",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:sur-la-table:on-table",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:dans-le-sac:in-bag",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:des:indefinite-plural",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q04",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:ce-sont:identify-objects",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U04-L04",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U04-L05",
+          "task_id": "Q05",
+          "skill": "listening"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 13,
+    "external_prerequisites": [
+      "PRE_A1-U03-L05"
+    ],
+    "external_reference_status": "Exists in prepared U03 package; full project validator including local database references returned no errors. Target database must contain U03 before importing U04.",
+    "new_lexemes_per_session": [
+      4,
+      4,
+      3,
+      2,
+      0
+    ],
+    "project_validator": {
+      "valid": true,
+      "errors": [],
+      "file_hash": "3163c1e4270dc0cfcf5a11eecbcabd9686c2c6b341f3c5d494e212a3df2c1401",
+      "warning_counts": {
+        "editorial_review_required": 5,
+        "browser_tts": 15
+      },
+      "requires_editorial_review": true,
+      "report_file": "PRE_A1-U04.validation.json"
+    }
+  }
+}

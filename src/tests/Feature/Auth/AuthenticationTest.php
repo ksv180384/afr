@@ -50,3 +50,19 @@ test('users can logout', function () {
     $this->assertGuest();
     $response->assertRedirect('/');
 });
+
+test('guests cannot submit forms that persist data on the server', function () {
+    foreach (['/post-comment/store', '/profile/avatar-upload', '/post/store'] as $path) {
+        $this->postJson($path, ['text' => 'bonjour'])->assertUnauthorized();
+    }
+});
+
+test('guests can use the text search without signing in', function () {
+    $this->postJson('/search', ['text' => 'bonjour', 'type' => 'word', 'lang' => 'Fr'])
+        ->assertOk()->assertJsonStructure(['search']);
+    $this->assertGuest();
+});
+test('authenticated users can use the text search', function () {
+    $this->actingAs(User::factory()->create())->postJson('/search', ['text' => 'bonjour', 'type' => 'word', 'lang' => 'Fr'])
+        ->assertOk()->assertJsonStructure(['search']);
+});

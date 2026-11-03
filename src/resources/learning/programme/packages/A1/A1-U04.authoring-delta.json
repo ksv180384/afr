@@ -1,0 +1,998 @@
+{
+  "unit_id": "A1-U04",
+  "package_file": "A1-U04.v1.json",
+  "session_ids": [
+    "A1-U04-L01",
+    "A1-U04-L02",
+    "A1-U04-L03",
+    "A1-U04-L04",
+    "A1-U04-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "liste",
+      "lexeme_key": "fr:liste:list",
+      "fr": "une liste",
+      "ru": [
+        "список"
+      ],
+      "transcription_ru": "юн ли́ст",
+      "first_session_id": "A1-U04-L01"
+    },
+    {
+      "id": "tomate",
+      "lexeme_key": "fr:tomate:tomato",
+      "fr": "une tomate",
+      "ru": [
+        "помидор"
+      ],
+      "transcription_ru": "юн тома́т",
+      "first_session_id": "A1-U04-L01"
+    },
+    {
+      "id": "pates",
+      "lexeme_key": "fr:pates:pasta",
+      "fr": "des pâtes",
+      "ru": [
+        "макароны"
+      ],
+      "transcription_ru": "дэ па́т",
+      "first_session_id": "A1-U04-L01"
+    },
+    {
+      "id": "riz",
+      "lexeme_key": "fr:riz:rice",
+      "fr": "le riz",
+      "ru": [
+        "рис"
+      ],
+      "transcription_ru": "лё ри́",
+      "first_session_id": "A1-U04-L01"
+    },
+    {
+      "id": "bouteille",
+      "lexeme_key": "fr:bouteille:bottle",
+      "fr": "une bouteille",
+      "ru": [
+        "бутылка"
+      ],
+      "transcription_ru": "юн бутэ́й",
+      "first_session_id": "A1-U04-L02"
+    },
+    {
+      "id": "kilo",
+      "lexeme_key": "fr:kilo:kilogram",
+      "fr": "un kilo",
+      "ru": [
+        "килограмм"
+      ],
+      "transcription_ru": "э(н) кило́",
+      "first_session_id": "A1-U04-L02"
+    },
+    {
+      "id": "paquet",
+      "lexeme_key": "fr:paquet:food-packet",
+      "fr": "un paquet",
+      "ru": [
+        "пачка продукта"
+      ],
+      "transcription_ru": "э(н) пакэ́",
+      "first_session_id": "A1-U04-L02"
+    },
+    {
+      "id": "barquette",
+      "lexeme_key": "fr:barquette:food-tray",
+      "fr": "une barquette",
+      "ru": [
+        "лоток с продуктом"
+      ],
+      "transcription_ru": "юн баркэ́т",
+      "first_session_id": "A1-U04-L02"
+    },
+    {
+      "id": "combien",
+      "lexeme_key": "fr:combien:how-much-many",
+      "fr": "combien",
+      "ru": [
+        "сколько (в вопросе о цене или количестве)"
+      ],
+      "transcription_ru": "ко(н)бьэ́(н)",
+      "first_session_id": "A1-U04-L03"
+    },
+    {
+      "id": "couter",
+      "lexeme_key": "fr:couter:cost",
+      "fr": "coûter",
+      "ru": [
+        "стоить"
+      ],
+      "transcription_ru": "кутэ́",
+      "first_session_id": "A1-U04-L03"
+    },
+    {
+      "id": "euro",
+      "lexeme_key": "fr:euro:currency-unit",
+      "fr": "un euro",
+      "ru": [
+        "один евро (денежная единица)"
+      ],
+      "transcription_ru": "э(н) нёро́",
+      "first_session_id": "A1-U04-L03"
+    },
+    {
+      "id": "prix",
+      "lexeme_key": "fr:prix:price",
+      "fr": "le prix",
+      "ru": [
+        "цена товара"
+      ],
+      "transcription_ru": "лё при́",
+      "first_session_id": "A1-U04-L03"
+    },
+    {
+      "id": "acheter",
+      "lexeme_key": "fr:acheter:buy",
+      "fr": "acheter",
+      "ru": [
+        "покупать"
+      ],
+      "transcription_ru": "ашётэ́",
+      "first_session_id": "A1-U04-L04"
+    },
+    {
+      "id": "chercher",
+      "lexeme_key": "fr:chercher:look-for",
+      "fr": "chercher",
+      "ru": [
+        "искать (товар в данной ситуации)"
+      ],
+      "transcription_ru": "шэршэ́",
+      "first_session_id": "A1-U04-L04"
+    },
+    {
+      "id": "autre",
+      "lexeme_key": "fr:autre:other",
+      "fr": "autre",
+      "ru": [
+        "другой"
+      ],
+      "transcription_ru": "о́тр",
+      "first_session_id": "A1-U04-L04"
+    },
+    {
+      "id": "seulement",
+      "lexeme_key": "fr:seulement:only",
+      "fr": "seulement",
+      "ru": [
+        "только (ограничение в просьбе)"
+      ],
+      "transcription_ru": "сёльма́(н)",
+      "first_session_id": "A1-U04-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:bonjour:greeting",
+    "fr:cafe:coffee",
+    "fr:deux:cardinal-number",
+    "fr:diner:evening-meal",
+    "fr:eau:water",
+    "fr:et:and",
+    "fr:je-voudrais:polite-request",
+    "fr:je:first-person-subject",
+    "fr:lait:milk",
+    "fr:maison:house-home",
+    "fr:matin:morning",
+    "fr:merci:thanks",
+    "fr:petit-dejeuner:breakfast",
+    "fr:prendre-le-petit-dejeuner:have-breakfast",
+    "fr:preparer:prepare-food",
+    "fr:quatre:cardinal-number",
+    "fr:rentrer:return-home",
+    "fr:se-coucher:go-to-bed",
+    "fr:sil-vous-plait:polite-request",
+    "fr:soir:evening",
+    "fr:souvent:often",
+    "fr:tasse:cup",
+    "fr:toujours:always",
+    "fr:travailler:work",
+    "fr:trois:cardinal-number",
+    "fr:verre:drinking-glass"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A1.U04.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U04-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U04-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U04-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U04-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U04-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U04-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U04-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U04-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U04-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U04-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U04-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U04-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U04-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U04-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U04.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U04-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U04-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U04-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U04-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U04-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U04-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U04-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U04-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U04-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U04-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U04-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U04-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U04-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U04-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U04-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U04-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U04-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U03.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U01.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U04-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:je-voudrais:polite-request",
+      "reason": "Перенести готовую вежливую просьбу в магазин одежды."
+    },
+    {
+      "lexeme_key": "fr:chercher:look-for",
+      "reason": "Повторить поиск нужного товара."
+    },
+    {
+      "lexeme_key": "fr:acheter:buy",
+      "reason": "Повторить действие покупки."
+    },
+    {
+      "lexeme_key": "fr:combien:how-much-many",
+      "reason": "Повторить вопрос о цене отдельно от количества."
+    },
+    {
+      "lexeme_key": "fr:couter:cost",
+      "reason": "Вернуть выбранную форму сообщения стоимости."
+    },
+    {
+      "lexeme_key": "fr:euro:currency-unit",
+      "reason": "Сохранить учебные суммы в евро."
+    },
+    {
+      "lexeme_key": "fr:prix:price",
+      "reason": "Повторить название цены товара."
+    },
+    {
+      "lexeme_key": "fr:autre:other",
+      "reason": "Повторить уточнение другого товара в показанной форме."
+    },
+    {
+      "lexeme_key": "fr:seulement:only",
+      "reason": "Вернуть ограничение количества без усложнения порядка слов."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "reading_lengths_checked": true,
+    "price_and_quantity_answers_reviewed": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "До импорта целевая база должна содержать A1-U03-L05; внешний prerequisite не создаётся пакетом.",
+    "Человеку нужно проверить естественность французских просьб, выбранные значения и условные русские транскрипции.",
+    "Прослушать браузерную озвучку, особенно цены, количества, апострофы и связки. Ориентиры 8–20 секунд основных аудио и 5–7 минут на занятие пока не измерены.",
+    "Выполнить предпросмотр и пробное прохождение, включая выбор цены одной единицы отдельно от числа упаковок и порядок ролей в диалоге."
+  ],
+  "progress": {
+    "current_unit": "A1-U04",
+    "prepared_session_ids": [
+      "A1-U04-L01",
+      "A1-U04-L02",
+      "A1-U04-L03",
+      "A1-U04-L04",
+      "A1-U04-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A1-U05",
+    "next_unit_title": "Магазин одежды",
+    "previous_unit": "A1-U03",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A1-U04. Принятие и импорт предыдущего пакета не подтверждены. Следующая тема не начата.",
+    "Списки и ценники вымышленные, цена действует только внутри конкретного текста. Общая стоимость не требуется для ответа.",
+    "Названия упаковок сами по себе не устанавливают вес. Килограмм различается с бутылкой, пачкой и лотком.",
+    "Существующие значения продуктов, чисел, вежливой просьбы и распорядка сохраняют прежние ключи и объекты. Основной реестр и предыдущие пакеты не изменены.",
+    "Формы du riz, des tomates и des pâtes вводятся на выбранных продуктах. После мер показаны de и d’eau без всех исключений артиклей.",
+    "Цена одной единицы не подменяется количеством единиц в заказе; число при цене не переносится на упаковку.",
+    "Вопрос о цене и вопрос о количестве показаны готовыми формами; полная таблица спряжения и инверсия не вводятся.",
+    "Поиск товара, просьба и покупка различаются. Начало J’achète изучается целиком с апострофом.",
+    "Другой и только вводятся в выбранных сочетаниях. Полная таблица согласования и перестановки наречия не требуются.",
+    "В первых четырёх занятиях по четыре новых значения. В пятом нового обязательного материала нет.",
+    "Роли в диалоге явно заданы порядком реплик; тембр синтетического голоса не является основанием ответа.",
+    "Апострофы и вежливые формулы сохраняются целыми в сборке. Подписанная сборка не объявляется независимой проверкой слов.",
+    "Пакет содержит только текущую тему; levels и curricula не добавляются."
+  ],
+  "session_material": [
+    {
+      "session_id": "A1-U04-L01",
+      "new_lexeme_keys": [
+        "fr:liste:list",
+        "fr:tomate:tomato",
+        "fr:pates:pasta",
+        "fr:riz:rice"
+      ],
+      "reused_lexeme_keys": [
+        "fr:cafe:coffee",
+        "fr:et:and",
+        "fr:je-voudrais:polite-request",
+        "fr:lait:milk",
+        "fr:merci:thanks",
+        "fr:sil-vous-plait:polite-request",
+        "fr:tasse:cup",
+        "fr:verre:drinking-glass"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U04-L02",
+      "new_lexeme_keys": [
+        "fr:bouteille:bottle",
+        "fr:kilo:kilogram",
+        "fr:paquet:food-packet",
+        "fr:barquette:food-tray"
+      ],
+      "reused_lexeme_keys": [
+        "fr:deux:cardinal-number",
+        "fr:eau:water",
+        "fr:et:and",
+        "fr:je-voudrais:polite-request",
+        "fr:lait:milk",
+        "fr:liste:list",
+        "fr:merci:thanks",
+        "fr:pates:pasta",
+        "fr:sil-vous-plait:polite-request",
+        "fr:tomate:tomato"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U04-L03",
+      "new_lexeme_keys": [
+        "fr:combien:how-much-many",
+        "fr:couter:cost",
+        "fr:euro:currency-unit",
+        "fr:prix:price"
+      ],
+      "reused_lexeme_keys": [
+        "fr:bouteille:bottle",
+        "fr:deux:cardinal-number",
+        "fr:diner:evening-meal",
+        "fr:et:and",
+        "fr:je-voudrais:polite-request",
+        "fr:je:first-person-subject",
+        "fr:lait:milk",
+        "fr:liste:list",
+        "fr:matin:morning",
+        "fr:merci:thanks",
+        "fr:paquet:food-packet",
+        "fr:pates:pasta",
+        "fr:petit-dejeuner:breakfast",
+        "fr:prendre-le-petit-dejeuner:have-breakfast",
+        "fr:preparer:prepare-food",
+        "fr:quatre:cardinal-number",
+        "fr:soir:evening",
+        "fr:souvent:often",
+        "fr:toujours:always",
+        "fr:travailler:work",
+        "fr:trois:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U04-L04",
+      "new_lexeme_keys": [
+        "fr:acheter:buy",
+        "fr:chercher:look-for",
+        "fr:autre:other",
+        "fr:seulement:only"
+      ],
+      "reused_lexeme_keys": [
+        "fr:bonjour:greeting",
+        "fr:bouteille:bottle",
+        "fr:deux:cardinal-number",
+        "fr:diner:evening-meal",
+        "fr:et:and",
+        "fr:je-voudrais:polite-request",
+        "fr:je:first-person-subject",
+        "fr:lait:milk",
+        "fr:maison:house-home",
+        "fr:merci:thanks",
+        "fr:paquet:food-packet",
+        "fr:pates:pasta",
+        "fr:preparer:prepare-food",
+        "fr:rentrer:return-home",
+        "fr:riz:rice",
+        "fr:se-coucher:go-to-bed",
+        "fr:sil-vous-plait:polite-request",
+        "fr:soir:evening",
+        "fr:toujours:always"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U04-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:autre:other",
+        "fr:barquette:food-tray",
+        "fr:bouteille:bottle",
+        "fr:chercher:look-for",
+        "fr:combien:how-much-many",
+        "fr:couter:cost",
+        "fr:deux:cardinal-number",
+        "fr:et:and",
+        "fr:euro:currency-unit",
+        "fr:je-voudrais:polite-request",
+        "fr:kilo:kilogram",
+        "fr:lait:milk",
+        "fr:liste:list",
+        "fr:paquet:food-packet",
+        "fr:pates:pasta",
+        "fr:quatre:cardinal-number",
+        "fr:riz:rice",
+        "fr:seulement:only",
+        "fr:sil-vous-plait:polite-request",
+        "fr:tomate:tomato",
+        "fr:trois:cardinal-number"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A1-U04-L01",
+      "material": "Выбранные сочетания продуктов du riz, des tomates, des pâtes в готовой просьбе."
+    },
+    {
+      "session_id": "A1-U04-L02",
+      "material": "Мера или упаковка плюс de; d’eau перед водой; известное число с множественным числом упаковок."
+    },
+    {
+      "session_id": "A1-U04-L03",
+      "material": "Выбранная форма coûte и готовые вопросы о цене и количестве с combien; количество плюс de."
+    },
+    {
+      "session_id": "A1-U04-L04",
+      "material": "Готовые формы J’achète и Je cherche; выбранные сочетания un autre и seulement без полной таблицы."
+    }
+  ],
+  "text_conventions": {
+    "price_status": "Вымышленные цены в евро, независимые для каждого текста.",
+    "quantity_scope": "Цена одной единицы отделена от числа единиц в просьбе; общая стоимость не вычисляется.",
+    "speaker_roles": "Порядок реплик задан в условии; один нейтральный голос допустим.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:liste:list",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:tomate:tomato",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U04-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U04-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U04-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:pates:pasta",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U04-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:riz:rice",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U04-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U04-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:bouteille:bottle",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U04-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U04-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U04-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U04-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:kilo:kilogram",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U04-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:paquet:food-packet",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U04-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:barquette:food-tray",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U04-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:combien:how-much-many",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:couter:cost",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U04-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:euro:currency-unit",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:prix:price",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:acheter:buy",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:chercher:look-for",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U04-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:autre:other",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U04-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:seulement:only",
+      "evidence": [
+        {
+          "session_id": "A1-U04-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U04-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 16,
+    "external_prerequisites": [
+      "A1-U03-L05"
+    ],
+    "external_reference_status": "exists_in_prepared_A1_U03; target_database_status_unverified",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 14
+      },
+      "file_hash": "21debda802a58639969758568010492973bd3dd9505c485a88fac79386d21067",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 26,
+    "text_lengths": [
+      {
+        "session_id": "A1-U04-L01",
+        "reading_word_counts": [
+          15,
+          20
+        ],
+        "listening_word_counts": [
+          21
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U04-L02",
+        "reading_word_counts": [
+          18,
+          25
+        ],
+        "listening_word_counts": [
+          21
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U04-L03",
+        "reading_word_counts": [
+          17,
+          25
+        ],
+        "listening_word_counts": [
+          20
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U04-L04",
+        "reading_word_counts": [
+          15,
+          21
+        ],
+        "listening_word_counts": [
+          20
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U04-L05",
+        "reading_word_counts": [
+          25,
+          26
+        ],
+        "listening_word_counts": [
+          24,
+          21
+        ],
+        "duration_measured": false
+      }
+    ]
+  }
+}

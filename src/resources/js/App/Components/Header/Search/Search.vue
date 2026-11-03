@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue';
-import { router } from '@inertiajs/vue3';
+import { router, usePage } from '@inertiajs/vue3';
 import { vOnClickOutside } from '@vueuse/components';
 import api from '@/App/Services/Api';
 
@@ -8,7 +8,7 @@ import { Icon } from '@iconify/vue';
 import WordItem from '@/App/Components/Header/Search/WordItem.vue';
 import AfrWordDialog from '@/App/Components/Words/AfrWordDialog.vue';
 
-const searchText = ref(router.page.props?.searchText || '');
+const searchText = ref(usePage().props?.searchText || '');
 const hints = ref([]);
 const isShow = ref(false);
 const isSearchLoading = ref(false);

@@ -15,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Keep file-only hosting synchronous even with an older cached queue configuration.
+        config(['queue.default' => 'sync']);
+        $this->app->scoped(\App\Services\Learning\GuestImportContext::class);
     }
 
     /**

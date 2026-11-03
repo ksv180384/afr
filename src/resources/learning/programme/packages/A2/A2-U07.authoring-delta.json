@@ -1,0 +1,1029 @@
+{
+  "unit_id": "A2-U07",
+  "package_file": "A2-U07.v1.json",
+  "session_ids": [
+    "A2-U07-L01",
+    "A2-U07-L02",
+    "A2-U07-L03",
+    "A2-U07-L04",
+    "A2-U07-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "depuis",
+      "lexeme_key": "fr:depuis:ongoing-since-duration",
+      "fr": "depuis",
+      "ru": [
+        "с указанного момента до настоящего"
+      ],
+      "transcription_ru": "дёпюи́",
+      "first_session_id": "A2-U07-L01"
+    },
+    {
+      "id": "symptome",
+      "lexeme_key": "fr:symptome:self-reported-symptom",
+      "fr": "un symptôme",
+      "ru": [
+        "симптом в учебном самоописании"
+      ],
+      "transcription_ru": "э(н) сэ(н)пто́м",
+      "first_session_id": "A2-U07-L01"
+    },
+    {
+      "id": "cabinet-medical",
+      "lexeme_key": "fr:cabinet-medical:doctor-office",
+      "fr": "un cabinet médical",
+      "ru": [
+        "кабинет врача"
+      ],
+      "transcription_ru": "э(н) кабинэ мэдика́ль",
+      "first_session_id": "A2-U07-L02"
+    },
+    {
+      "id": "douleur",
+      "lexeme_key": "fr:douleur:self-reported-pain",
+      "fr": "la douleur",
+      "ru": [
+        "боль в самоописании"
+      ],
+      "transcription_ru": "ла дулё́р",
+      "first_session_id": "A2-U07-L03"
+    },
+    {
+      "id": "il-y-a-ago",
+      "lexeme_key": "fr:il-y-a:ago-time-marker",
+      "fr": "il y a",
+      "ru": [
+        "тому назад: время события в прошлом"
+      ],
+      "transcription_ru": "иль я́",
+      "first_session_id": "A2-U07-L03"
+    },
+    {
+      "id": "ordonnance",
+      "lexeme_key": "fr:ordonnance:medical-prescription-document",
+      "fr": "une ordonnance",
+      "ru": [
+        "врачебный рецепт как документ"
+      ],
+      "transcription_ru": "юн ордона́(н)с",
+      "first_session_id": "A2-U07-L04"
+    },
+    {
+      "id": "consigne",
+      "lexeme_key": "fr:consigne:spoken-or-written-instruction",
+      "fr": "une consigne",
+      "ru": [
+        "указание, инструкция собеседника"
+      ],
+      "transcription_ru": "юн ко(н)си́нь",
+      "first_session_id": "A2-U07-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:ans:age-years",
+    "fr:apporter:bring-object",
+    "fr:autrefois:formerly",
+    "fr:avoir:compound-past-auxiliary",
+    "fr:bonjour:greeting",
+    "fr:cinema:cinema-venue",
+    "fr:coiffeur:hairdresser",
+    "fr:coupe:haircut-service",
+    "fr:dans-le-sac:in-bag",
+    "fr:date:calendar-date",
+    "fr:disponible:available-in-schedule",
+    "fr:dix:cardinal-number",
+    "fr:dos:back-body-part",
+    "fr:douze:cardinal-number",
+    "fr:etre:compound-past-auxiliary",
+    "fr:euro:currency-unit",
+    "fr:film:film",
+    "fr:frere:brother",
+    "fr:heure:clock-hour",
+    "fr:hier:yesterday",
+    "fr:inclus:included-in-service-price",
+    "fr:jai-mal:pain-report",
+    "fr:jai:age-frame",
+    "fr:jai:possession",
+    "fr:je-voudrais:polite-request",
+    "fr:jeudi:weekday",
+    "fr:lire:read",
+    "fr:livre:book",
+    "fr:lundi:weekday",
+    "fr:maintenant:now",
+    "fr:maison:house-home",
+    "fr:mardi:weekday",
+    "fr:matin:morning",
+    "fr:medecin:doctor",
+    "fr:merci:thanks",
+    "fr:midi:noon",
+    "fr:minute:time-duration-unit",
+    "fr:musee:museum",
+    "fr:neuf:cardinal-number",
+    "fr:par-carte:card-payment",
+    "fr:payer:pay",
+    "fr:pendant-que:simultaneous-time-clause",
+    "fr:pendant:duration-preposition",
+    "fr:pourriez-vous:polite-action-request",
+    "fr:preciser:clarify-service-details",
+    "fr:prendre-rendez-vous:book-appointment",
+    "fr:quand-jetais-enfant:childhood-background-frame",
+    "fr:quinze:cardinal-number",
+    "fr:regarder:look-watch",
+    "fr:rendez-vous:appointment",
+    "fr:rentrer:return-home",
+    "fr:repetez-sil-vous-plait:request-repeat",
+    "fr:reporter:postpone-appointment",
+    "fr:shampooing:hair-wash-service",
+    "fr:sil-vous-plait:polite-request",
+    "fr:soeur:sister",
+    "fr:souvent:often",
+    "fr:sur:on-surface",
+    "fr:tarif:service-price",
+    "fr:tete:head",
+    "fr:travailler:work",
+    "fr:un-jour:one-day-past-narrative",
+    "fr:vendredi:weekday",
+    "fr:vingt:cardinal-number",
+    "fr:visiter:visit-place"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A2.U07.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U07-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U07-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U07-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U07-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U07-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U07-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U07-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U07-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U07-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U07-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U07-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U07-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U07.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U07-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U07-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U07-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U07-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U07-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U07-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U07-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U07-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U07-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U07-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U07-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U07-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U06.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U07-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U04.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U07-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U07-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:depuis:ongoing-since-duration",
+      "reason": "Сохранить начало продолжающегося периода отдельно от длительности и времени эпизода."
+    },
+    {
+      "lexeme_key": "fr:pendant:duration-preposition",
+      "reason": "Повторить длительность с прежним ключом."
+    },
+    {
+      "lexeme_key": "fr:il-y-a:ago-time-marker",
+      "reason": "Вернуть значение тому назад, не смешивая с другими функциями тех же слов."
+    },
+    {
+      "lexeme_key": "fr:prendre-rendez-vous:book-appointment",
+      "reason": "Повторить действие записи в новом бытовом контексте без смены ключа."
+    },
+    {
+      "lexeme_key": "fr:consigne:spoken-or-written-instruction",
+      "reason": "Повторить указание как слово, отличая от документа."
+    },
+    {
+      "lexeme_key": "fr:repetez-sil-vous-plait:request-repeat",
+      "reason": "Вернуть знакомую просьбу повторить реплику."
+    },
+    {
+      "lexeme_key": "fr:cabinet-medical:doctor-office",
+      "reason": "Сохранить конкретное место приёма отдельно от других типов помещений."
+    },
+    {
+      "lexeme_key": "fr:ordonnance:medical-prescription-document",
+      "reason": "Повторить рецепт как медицинский документ, не расширять до других смыслов."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "new_local_ids_do_not_overwrite_existing_meanings": true,
+    "known_pain_doctor_and_appointment_keys_preserved": true,
+    "known_duration_key_preserved": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "ongoing_state_duration_and_past_time_distinguished": true,
+    "current_state_read_from_explicit_statement": true,
+    "pain_location_not_confused_with_appointment_time": true,
+    "prescription_document_instruction_and_action_distinguished": true,
+    "selected_apportez_form_explained_before_testing": true,
+    "repeat_request_preserves_existing_key": true,
+    "language_tasks_do_not_select_diagnosis_urgency_or_treatment": true,
+    "no_medicine_or_dosage_tasks_present": true,
+    "transcriptions_structurally_checked_without_claim_of_listening": true,
+    "apostrophes_kept_in_whole_tokens": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A2-U06-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Редактору проверить естественность самоописаний и временных форм, понимание разницы между местом боли и временем записи, ясность организационных реплик врача.",
+    "Прослушать браузерную озвучку depuis / pendant / il y a, J’ai eu mal, médecin, cabinet médical, ordonnance и consigne, дат и часов. Длительность аудио и занятий не измерена.",
+    "Выполнить предпросмотр и пробное прохождение: два отдельных сообщения, продолжающееся состояние и прошлый эпизод, начало и длительность, день приёма, документ и указание."
+  ],
+  "progress": {
+    "current_unit": "A2-U07",
+    "prepared_session_ids": [
+      "A2-U07-L01",
+      "A2-U07-L02",
+      "A2-U07-L03",
+      "A2-U07-L04",
+      "A2-U07-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A2-U08",
+    "next_unit_title": "Поиск жилья",
+    "previous_unit": "A2-U06",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A2-U07. Принятие и импорт предыдущих пакетов не подтверждены; повторение использует полные объекты подготовленного материала.",
+    "Новые лексические значения распределены как два, одно, два, два и ноль. L05 нового обязательного материала не вводит. В каждом введении не более трёх карточек.",
+    "Все самоописания, записи и реплики врача вымышленные. Проверяется французский текст, а не клиническая оценка реального человека. Сведения не используются для выбора диагноза, срочности, препарата или дозировки.",
+    "В L04 предписание ограничено пониманием слов документ, указание, прочитайте и принесите, с указанными местом и временем. Лечебные назначения автором не сочиняются.",
+    "Depuis с настоящим состоянием показано с точкой начала hier и периодом vingt minutes: состояние продолжается до настоящего в конкретной реплике.",
+    "Pendant повторяет прежний fr:pendant:duration-preposition и задаёт длительность. Выбранная форма J’ai eu mal использует прежнее значение сообщения о боли и знакомую вспомогательную рамку passé composé; отдельного ключа ради формы не создаётся.",
+    "Временное il y a получает ключ fr:il-y-a:ago-time-marker и означает тому назад. Не вводится правило, по которому все употребления il y a означают прошлое время.",
+    "Время эпизода и его длительность не меняются местами. Нынешнее отсутствие или продолжение боли в нужных заданиях названо отдельно; один прошлый маркер не превращается в медицинский вывод.",
+    "Médecin, tête, dos, j’ai mal и prendre rendez-vous сохраняют прежние ключи и полные объекты. Кабинет врача — новое конкретное место; не подменяется общим офисом.",
+    "Douleur учится как слово боль в самоописании; symptôme как симптом в учебной реплике. Из этих слов не выводится причина или заболевание.",
+    "Ordonnance учится только как врачебный рецепт-документ. Consigne — само указание, не сам документ и не время записи. Другие значения многозначных слов не присоединяются к этим карточкам.",
+    "Apportez — выбранная форма знакомого apporter, принести предмет. Lisez повторяет знакомое lire. Апостроф в l’ordonnance и готовые формы просьб в сборке не разрываются.",
+    "Время самоописания не является временем записи. Вопросы о дате и месте приёма не оценивают допустимость ожидания или срочность состояния.",
+    "В L01 повторены цена и условие услуги A2-U06. В L03 возвращаются фон и событие A2-U04, в L04 — сравнение прошлого и настоящего из той же темы. Это не подтверждает принятие прошлых пакетов или освоение учеником.",
+    "Роли врача, пациента и сотрудника заданы словами и порядком реплик. Пол, диагноз и срочность по синтетическому голосу не определяются.",
+    "Все ответы выбираются или собираются из готовых блоков, без обязательного свободного текста и записи голоса. Реальная запись или медицинская консультация не выполняются; озвучка только браузером.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A2-U07-L01",
+      "new_lexeme_keys": [
+        "fr:depuis:ongoing-since-duration",
+        "fr:symptome:self-reported-symptom"
+      ],
+      "reused_lexeme_keys": [
+        "fr:avoir:compound-past-auxiliary",
+        "fr:coupe:haircut-service",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:dos:back-body-part",
+        "fr:euro:currency-unit",
+        "fr:heure:clock-hour",
+        "fr:hier:yesterday",
+        "fr:inclus:included-in-service-price",
+        "fr:jai-mal:pain-report",
+        "fr:je-voudrais:polite-request",
+        "fr:maintenant:now",
+        "fr:matin:morning",
+        "fr:medecin:doctor",
+        "fr:minute:time-duration-unit",
+        "fr:neuf:cardinal-number",
+        "fr:par-carte:card-payment",
+        "fr:payer:pay",
+        "fr:pendant:duration-preposition",
+        "fr:prendre-rendez-vous:book-appointment",
+        "fr:quinze:cardinal-number",
+        "fr:rendez-vous:appointment",
+        "fr:shampooing:hair-wash-service",
+        "fr:tarif:service-price",
+        "fr:tete:head",
+        "fr:vendredi:weekday",
+        "fr:vingt:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U07-L02",
+      "new_lexeme_keys": [
+        "fr:cabinet-medical:doctor-office"
+      ],
+      "reused_lexeme_keys": [
+        "fr:avoir:compound-past-auxiliary",
+        "fr:bonjour:greeting",
+        "fr:coiffeur:hairdresser",
+        "fr:depuis:ongoing-since-duration",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:dos:back-body-part",
+        "fr:heure:clock-hour",
+        "fr:hier:yesterday",
+        "fr:jai-mal:pain-report",
+        "fr:je-voudrais:polite-request",
+        "fr:lundi:weekday",
+        "fr:maintenant:now",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:medecin:doctor",
+        "fr:merci:thanks",
+        "fr:midi:noon",
+        "fr:minute:time-duration-unit",
+        "fr:neuf:cardinal-number",
+        "fr:pendant:duration-preposition",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:prendre-rendez-vous:book-appointment",
+        "fr:rendez-vous:appointment",
+        "fr:tarif:service-price",
+        "fr:tete:head",
+        "fr:travailler:work",
+        "fr:vingt:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U07-L03",
+      "new_lexeme_keys": [
+        "fr:douleur:self-reported-pain",
+        "fr:il-y-a:ago-time-marker"
+      ],
+      "reused_lexeme_keys": [
+        "fr:ans:age-years",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:dans-le-sac:in-bag",
+        "fr:depuis:ongoing-since-duration",
+        "fr:dix:cardinal-number",
+        "fr:dos:back-body-part",
+        "fr:etre:compound-past-auxiliary",
+        "fr:film:film",
+        "fr:frere:brother",
+        "fr:hier:yesterday",
+        "fr:jai-mal:pain-report",
+        "fr:jai:age-frame",
+        "fr:jai:possession",
+        "fr:je-voudrais:polite-request",
+        "fr:livre:book",
+        "fr:maintenant:now",
+        "fr:maison:house-home",
+        "fr:medecin:doctor",
+        "fr:midi:noon",
+        "fr:minute:time-duration-unit",
+        "fr:pendant-que:simultaneous-time-clause",
+        "fr:pendant:duration-preposition",
+        "fr:prendre-rendez-vous:book-appointment",
+        "fr:quand-jetais-enfant:childhood-background-frame",
+        "fr:regarder:look-watch",
+        "fr:rendez-vous:appointment",
+        "fr:rentrer:return-home",
+        "fr:soeur:sister",
+        "fr:souvent:often",
+        "fr:tete:head",
+        "fr:un-jour:one-day-past-narrative",
+        "fr:vingt:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U07-L04",
+      "new_lexeme_keys": [
+        "fr:ordonnance:medical-prescription-document",
+        "fr:consigne:spoken-or-written-instruction"
+      ],
+      "reused_lexeme_keys": [
+        "fr:ans:age-years",
+        "fr:apporter:bring-object",
+        "fr:autrefois:formerly",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:cabinet-medical:doctor-office",
+        "fr:cinema:cinema-venue",
+        "fr:date:calendar-date",
+        "fr:disponible:available-in-schedule",
+        "fr:douze:cardinal-number",
+        "fr:film:film",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:jai:age-frame",
+        "fr:je-voudrais:polite-request",
+        "fr:jeudi:weekday",
+        "fr:lire:read",
+        "fr:maintenant:now",
+        "fr:maison:house-home",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:merci:thanks",
+        "fr:midi:noon",
+        "fr:musee:museum",
+        "fr:neuf:cardinal-number",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:regarder:look-watch",
+        "fr:rendez-vous:appointment",
+        "fr:repetez-sil-vous-plait:request-repeat",
+        "fr:reporter:postpone-appointment",
+        "fr:sil-vous-plait:polite-request",
+        "fr:souvent:often",
+        "fr:sur:on-surface",
+        "fr:tarif:service-price",
+        "fr:un-jour:one-day-past-narrative",
+        "fr:vingt:cardinal-number",
+        "fr:visiter:visit-place"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U07-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:apporter:bring-object",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:cabinet-medical:doctor-office",
+        "fr:consigne:spoken-or-written-instruction",
+        "fr:date:calendar-date",
+        "fr:depuis:ongoing-since-duration",
+        "fr:dix:cardinal-number",
+        "fr:dos:back-body-part",
+        "fr:douleur:self-reported-pain",
+        "fr:heure:clock-hour",
+        "fr:hier:yesterday",
+        "fr:il-y-a:ago-time-marker",
+        "fr:jai-mal:pain-report",
+        "fr:je-voudrais:polite-request",
+        "fr:lire:read",
+        "fr:lundi:weekday",
+        "fr:maintenant:now",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:medecin:doctor",
+        "fr:midi:noon",
+        "fr:minute:time-duration-unit",
+        "fr:neuf:cardinal-number",
+        "fr:ordonnance:medical-prescription-document",
+        "fr:pendant:duration-preposition",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:prendre-rendez-vous:book-appointment",
+        "fr:rendez-vous:appointment",
+        "fr:sil-vous-plait:polite-request",
+        "fr:sur:on-surface",
+        "fr:symptome:self-reported-symptom",
+        "fr:tete:head",
+        "fr:travailler:work",
+        "fr:vendredi:weekday",
+        "fr:vingt:cardinal-number"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A2-U07-L01",
+      "material": "Depuis с настоящим самоописанием; pendant с длительностью; выбранная прошедшая форма J’ai eu mal и отдельное нынешнее состояние."
+    },
+    {
+      "session_id": "A2-U07-L02",
+      "material": "Повторение Je voudrais prendre rendez-vous avec le médecin; день, час и место приёма отдельно от времени самоописания."
+    },
+    {
+      "session_id": "A2-U07-L03",
+      "material": "Il y a как временное тому назад; место боли и сравнение начала, длительности и времени эпизода."
+    },
+    {
+      "session_id": "A2-U07-L04",
+      "material": "Выбранная форма Apportez от знакомого apporter; повторение Lisez и просьбы Répétez, s’il vous plaît; документ, действие и время."
+    }
+  ],
+  "medical_language_scope": {
+    "fictional_self_reports": true,
+    "clinical_diagnosis_tasks": false,
+    "urgency_classification_tasks": false,
+    "medicine_selection_tasks": false,
+    "dosage_tasks": false,
+    "instruction_content": "Reading or bringing a named document at a stated time; requesting repetition.",
+    "real_consultation_performed": false
+  },
+  "text_conventions": {
+    "situation_status": "Оригинальные вымышленные языковые ситуации.",
+    "time_scope": "Начало, длительность, время эпизода и дата приёма читаются раздельно.",
+    "state_scope": "Нынешнее состояние определяется по отдельным явно данным словам, без медицинского вывода.",
+    "instruction_scope": "Понимание названного документа и организационного действия, без подбора лечения.",
+    "speaker_roles": "Роли заданы условием и репликами, не свойствами голоса.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:depuis:ongoing-since-duration",
+      "evidence": [
+        {
+          "session_id": "A2-U07-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U07-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U07-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U07-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U07-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U07-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:symptome:self-reported-symptom",
+      "evidence": [
+        {
+          "session_id": "A2-U07-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:cabinet-medical:doctor-office",
+      "evidence": [
+        {
+          "session_id": "A2-U07-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U07-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U07-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:douleur:self-reported-pain",
+      "evidence": [
+        {
+          "session_id": "A2-U07-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U07-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:il-y-a:ago-time-marker",
+      "evidence": [
+        {
+          "session_id": "A2-U07-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:ordonnance:medical-prescription-document",
+      "evidence": [
+        {
+          "session_id": "A2-U07-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U07-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U07-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U07-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:consigne:spoken-or-written-instruction",
+      "evidence": [
+        {
+          "session_id": "A2-U07-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 7,
+    "external_prerequisites": [
+      "A2-U06-L05"
+    ],
+    "external_reference_status": "A2-U06-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 10
+      },
+      "file_hash": "b1354e33d61d3b02942fdd55e6ef14e5c60d77777706db0fa56123644b7baef6",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 65,
+    "text_lengths": [
+      {
+        "session_id": "A2-U07-L01",
+        "reading_word_counts": [
+          34,
+          31
+        ],
+        "listening_word_counts": [
+          31
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U07-L02",
+        "reading_word_counts": [
+          31,
+          31
+        ],
+        "listening_word_counts": [
+          37
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U07-L03",
+        "reading_word_counts": [
+          37,
+          36
+        ],
+        "listening_word_counts": [
+          33
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U07-L04",
+        "reading_word_counts": [
+          32,
+          35
+        ],
+        "listening_word_counts": [
+          30
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U07-L05",
+        "reading_word_counts": [
+          31,
+          36
+        ],
+        "listening_word_counts": [
+          31,
+          32
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "J’ai mal à la tête depuis hier",
+        "session_id": "A2-U07-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "depuis vingt minutes",
+        "session_id": "A2-U07-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "J’ai eu mal",
+        "session_id": "A2-U07-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "un cabinet médical",
+        "session_id": "A2-U07-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "J’ai une douleur au dos",
+        "session_id": "A2-U07-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Il y a vingt minutes",
+        "session_id": "A2-U07-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Apportez l’ordonnance",
+        "session_id": "A2-U07-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Lisez la consigne",
+        "session_id": "A2-U07-L04",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Répétez, s’il vous plaît",
+        "session_id": "A2-U07-L04",
+        "task_id": "Q03"
+      }
+    ],
+    "level_description_included": false,
+    "curricula_included": false
+  }
+}

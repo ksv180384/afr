@@ -1,0 +1,129 @@
+{
+    "valid": true,
+    "file_hash": "9018be8701dc8b4fa92870ad5a99ccda330b1ec7d84824bd81338225d9ed5ba7",
+    "errors": [],
+    "warnings": [
+        {
+            "code": "editorial_review_required",
+            "path": "\/sessions\/0",
+            "message": "Французский, смысл ответов, произношение и соответствие уровню должен проверить редактор.",
+            "session_id": "PRE_A1-U15-L01",
+            "task_id": null,
+            "blocks_publication": true
+        },
+        {
+            "code": "editorial_review_required",
+            "path": "\/sessions\/1",
+            "message": "Французский, смысл ответов, произношение и соответствие уровню должен проверить редактор.",
+            "session_id": "PRE_A1-U15-L02",
+            "task_id": null,
+            "blocks_publication": true
+        },
+        {
+            "code": "editorial_review_required",
+            "path": "\/sessions\/2",
+            "message": "Французский, смысл ответов, произношение и соответствие уровню должен проверить редактор.",
+            "session_id": "PRE_A1-U15-L03",
+            "task_id": null,
+            "blocks_publication": true
+        },
+        {
+            "code": "editorial_review_required",
+            "path": "\/sessions\/3",
+            "message": "Французский, смысл ответов, произношение и соответствие уровню должен проверить редактор.",
+            "session_id": "PRE_A1-U15-L04",
+            "task_id": null,
+            "blocks_publication": true
+        },
+        {
+            "code": "editorial_review_required",
+            "path": "\/sessions\/4",
+            "message": "Французский, смысл ответов, произношение и соответствие уровню должен проверить редактор.",
+            "session_id": "PRE_A1-U15-L05",
+            "task_id": null,
+            "blocks_publication": true
+        },
+        {
+            "code": "browser_tts",
+            "path": "\/sessions\/0\/tasks\/2\/prompt\/audio",
+            "message": "Озвучка зависит от доступного французского голоса браузера; предусмотрите текстовую помощь и технический пропуск.",
+            "session_id": "PRE_A1-U15-L01",
+            "task_id": "Q03",
+            "blocks_publication": false
+        },
+        {
+            "code": "browser_tts",
+            "path": "\/sessions\/0\/introductions\/0\/audio",
+            "message": "Озвучка зависит от доступного французского голоса браузера; предусмотрите текстовую помощь и технический пропуск.",
+            "session_id": "PRE_A1-U15-L01",
+            "task_id": null,
+            "blocks_publication": false
+        },
+        {
+            "code": "browser_tts",
+            "path": "\/sessions\/1\/tasks\/2\/prompt\/audio",
+            "message": "Озвучка зависит от доступного французского голоса браузера; предусмотрите текстовую помощь и технический пропуск.",
+            "session_id": "PRE_A1-U15-L02",
+            "task_id": "Q03",
+            "blocks_publication": false
+        },
+        {
+            "code": "browser_tts",
+            "path": "\/sessions\/1\/introductions\/0\/audio",
+            "message": "Озвучка зависит от доступного французского голоса браузера; предусмотрите текстовую помощь и технический пропуск.",
+            "session_id": "PRE_A1-U15-L02",
+            "task_id": null,
+            "blocks_publication": false
+        },
+        {
+            "code": "browser_tts",
+            "path": "\/sessions\/2\/tasks\/2\/prompt\/audio",
+            "message": "Озвучка зависит от доступного французского голоса браузера; предусмотрите текстовую помощь и технический пропуск.",
+            "session_id": "PRE_A1-U15-L03",
+            "task_id": "Q03",
+            "blocks_publication": false
+        },
+        {
+            "code": "browser_tts",
+            "path": "\/sessions\/2\/introductions\/0\/audio",
+            "message": "Озвучка зависит от доступного французского голоса браузера; предусмотрите текстовую помощь и технический пропуск.",
+            "session_id": "PRE_A1-U15-L03",
+            "task_id": null,
+            "blocks_publication": false
+        },
+        {
+            "code": "browser_tts",
+            "path": "\/sessions\/3\/tasks\/2\/prompt\/audio",
+            "message": "Озвучка зависит от доступного французского голоса браузера; предусмотрите текстовую помощь и технический пропуск.",
+            "session_id": "PRE_A1-U15-L04",
+            "task_id": "Q03",
+            "blocks_publication": false
+        },
+        {
+            "code": "browser_tts",
+            "path": "\/sessions\/3\/introductions\/0\/audio",
+            "message": "Озвучка зависит от доступного французского голоса браузера; предусмотрите текстовую помощь и технический пропуск.",
+            "session_id": "PRE_A1-U15-L04",
+            "task_id": null,
+            "blocks_publication": false
+        },
+        {
+            "code": "browser_tts",
+            "path": "\/sessions\/4\/tasks\/0\/prompt\/audio",
+            "message": "Озвучка зависит от доступного французского голоса браузера; предусмотрите текстовую помощь и технический пропуск.",
+            "session_id": "PRE_A1-U15-L05",
+            "task_id": "Q01",
+            "blocks_publication": false
+        },
+        {
+            "code": "browser_tts",
+            "path": "\/sessions\/4\/tasks\/4\/prompt\/audio",
+            "message": "Озвучка зависит от доступного французского голоса браузера; предусмотрите текстовую помощь и технический пропуск.",
+            "session_id": "PRE_A1-U15-L05",
+            "task_id": "Q05",
+            "blocks_publication": false
+        }
+    ],
+    "truncated": false,
+    "requires_editorial_review": true
+}

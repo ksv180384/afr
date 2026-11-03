@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "levels": [
+    {
+      "code": "PRE_A1",
+      "title": "С нуля"
+    },
+    {
+      "code": "A1",
+      "title": "A1"
+    },
+    {
+      "code": "A2",
+      "title": "A2"
+    },
+    {
+      "code": "B1",
+      "title": "B1"
+    },
+    {
+      "code": "B2",
+      "title": "B2"
+    },
+    {
+      "code": "C1",
+      "title": "C1"
+    },
+    {
+      "code": "C2",
+      "title": "C2"
+    }
+  ],
+  "default_profile": {
+    "current_level": "PRE_A1"
+  },
+  "version_statuses": [
+    "draft",
+    "reviewed",
+    "published",
+    "archived"
+  ],
+  "run_statuses": [
+    "in_progress",
+    "paused",
+    "completed"
+  ],
+  "task_types": [
+    "single_choice",
+    "matching_pairs",
+    "fill_blank",
+    "word_order",
+    "short_answer"
+  ],
+  "skills": [
+    "vocabulary",
+    "listening",
+    "reading",
+    "grammar",
+    "sentence_building"
+  ],
+  "session_kinds": [
+    "practice",
+    "checkpoint"
+  ],
+  "errors": {
+    "unauthenticated": 401,
+    "forbidden": 403,
+    "not_found": 404,
+    "revision_conflict": 409,
+    "version_conflict": 409,
+    "idempotency_conflict": 409,
+    "session_expired": 419,
+    "validation_failed": 422,
+    "unsupported_schema_version": 422,
+    "unsupported_checking_policy": 503,
+    "rate_limited": 429,
+    "unavailable": 503,
+    "disabled": 503
+  },
+  "checking": {
+    "current_version": 1,
+    "policies": {
+      "1": {
+        "normalization": "unicode_nfc_v1",
+        "scoring": "first_independent_success_v1",
+        "preserve_diacritics": true,
+        "preserve_internal_punctuation": true,
+        "help_counts_as_independent_success": false,
+        "correction_changes_first_score": false,
+        "technical_skip_counts_as_language_error": false,
+        "completed_results_immutable": true
+      }
+    }
+  },
+  "time": {
+    "server_timezone": "UTC",
+    "guest_fallback_timezone": "Europe/Moscow",
+    "guest_fallback_message": "Не удалось определить часовой пояс браузера. Используется Europe/Moscow."
+  }
+}

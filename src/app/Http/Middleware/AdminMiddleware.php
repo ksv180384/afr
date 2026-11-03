@@ -16,6 +16,15 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if ($request->is('admin/daily-practice', 'admin/daily-practice/*')) {
+            app(\App\Services\Learning\ContentAccess::class)->check($request->user());
+            $response = $next($request);
+            $response->headers->set('X-Robots-Tag', 'noindex, nofollow');
+            $response->headers->set('Cache-Control', 'private, no-store');
+
+            return $response;
+        }
+
         // Проверяем, авторизован ли пользователь и является ли он администратором
         if (Auth::check() && Auth::user()->is_admin) {
             return $next($request); // Если да, продолжаем выполнение запроса

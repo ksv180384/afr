@@ -1,0 +1,1097 @@
+{
+  "unit_id": "B1-U05",
+  "package_id": "programme-b1-u05-v1",
+  "package_file": "B1-U05.v1.json",
+  "session_ids": [
+    "B1-U05-L01",
+    "B1-U05-L02",
+    "B1-U05-L03",
+    "B1-U05-L04",
+    "B1-U05-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "madame-monsieur",
+      "lexeme_key": "fr:madame-monsieur:unknown-recipient-salutation",
+      "fr": "Madame, Monsieur,",
+      "ru": [
+        "формальное обращение, когда конкретный адресат неизвестен"
+      ],
+      "transcription_ru": "мада́м, мёсьё́",
+      "first_session_id": "B1-U05-L01"
+    },
+    {
+      "id": "destinataire",
+      "lexeme_key": "fr:destinataire:message-recipient",
+      "fr": "le destinataire",
+      "ru": [
+        "адресат, получатель сообщения"
+      ],
+      "transcription_ru": "лё дэстинатэ́р",
+      "first_session_id": "B1-U05-L01"
+    },
+    {
+      "id": "je-vous-ecris-au-sujet-de",
+      "lexeme_key": "fr:je-vous-ecris-au-sujet-de:state-letter-topic",
+      "fr": "je vous écris au sujet de",
+      "ru": [
+        "пишу вам по поводу: обозначение темы письма"
+      ],
+      "transcription_ru": "жё ву зэкри о сюжэ́ дё",
+      "first_session_id": "B1-U05-L02"
+    },
+    {
+      "id": "objet-message",
+      "lexeme_key": "fr:objet:email-subject",
+      "fr": "l’objet",
+      "ru": [
+        "тема письма в строке темы"
+      ],
+      "transcription_ru": "лобжэ́",
+      "first_session_id": "B1-U05-L02"
+    },
+    {
+      "id": "je-vous-prie-de",
+      "lexeme_key": "fr:je-vous-prie-de:formal-request",
+      "fr": "je vous prie de",
+      "ru": [
+        "прошу вас: формальная просьба перед действием"
+      ],
+      "transcription_ru": "жё ву при́ дё",
+      "first_session_id": "B1-U05-L03"
+    },
+    {
+      "id": "cordialement",
+      "lexeme_key": "fr:cordialement:neutral-email-closing",
+      "fr": "cordialement",
+      "ru": [
+        "с уважением: нейтральное завершение делового письма"
+      ],
+      "transcription_ru": "кордьялёма́(н)",
+      "first_session_id": "B1-U05-L04"
+    },
+    {
+      "id": "reponse",
+      "lexeme_key": "fr:reponse:reply-to-message",
+      "fr": "une réponse",
+      "ru": [
+        "ответ на сообщение"
+      ],
+      "transcription_ru": "юн рэпо́(н)с",
+      "first_session_id": "B1-U05-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:a-bientot:see-you-soon",
+    "fr:a-mon-avis:personal-opinion",
+    "fr:appartement:apartment",
+    "fr:arriver:transport-arrive",
+    "fr:attendre:wait",
+    "fr:auparavant:earlier-relative-time",
+    "fr:avoir:compound-past-auxiliary",
+    "fr:bureau:office-workplace",
+    "fr:cadeau:gift",
+    "fr:cafe:venue",
+    "fr:calme:quiet-place",
+    "fr:cependant:contrast-reservation",
+    "fr:chambre:bedroom",
+    "fr:chauffage:home-heating",
+    "fr:cher:expensive",
+    "fr:concerner:relate-to-problem-object",
+    "fr:confirmer:confirm-arrangement",
+    "fr:constater:observe-problem",
+    "fr:daccord:agreement",
+    "fr:date:calendar-date",
+    "fr:delai:task-completion-deadline",
+    "fr:dimanche:weekday",
+    "fr:diner:evening-meal",
+    "fr:disponibilite:person-time-availability",
+    "fr:disponible:available-in-schedule",
+    "fr:dix:cardinal-number",
+    "fr:dont:relative-de-complement",
+    "fr:echeance:agreed-deadline",
+    "fr:encore:additional-quantity",
+    "fr:envoyer:send-message",
+    "fr:eprouver:experience-emotion",
+    "fr:famille:family",
+    "fr:fonctionner:equipment-operate",
+    "fr:frere:brother",
+    "fr:grace-a:beneficial-cause",
+    "fr:heure:clock-hour",
+    "fr:hier:yesterday",
+    "fr:intervenir:attend-for-repair",
+    "fr:je-dois:study-obligation",
+    "fr:je-ne-peux-pas:unavailable-refusal",
+    "fr:je-voudrais:polite-request",
+    "fr:jeudi:weekday",
+    "fr:joie:joy-emotion",
+    "fr:jusqu-a:time-endpoint",
+    "fr:lundi:weekday",
+    "fr:mais:contrast-conjunction",
+    "fr:maison:house-home",
+    "fr:mardi:weekday",
+    "fr:matin:morning",
+    "fr:merci:thanks",
+    "fr:mercredi:weekday",
+    "fr:message:short-written-message",
+    "fr:midi:noon",
+    "fr:ou:relative-place",
+    "fr:panne:equipment-malfunction",
+    "fr:par-exemple:illustrating-example",
+    "fr:pendant-que:simultaneous-time-clause",
+    "fr:pourriez-vous:polite-action-request",
+    "fr:preciser:clarify-service-details",
+    "fr:preparer:prepare-food",
+    "fr:prolonger:extend-time-allowance",
+    "fr:proprietaire:property-owner",
+    "fr:que:relative-direct-object",
+    "fr:qui:relative-subject",
+    "fr:rendez-vous:appointment",
+    "fr:reparer:repair-equipment",
+    "fr:reporter:postpone-appointment",
+    "fr:rester:stay-at-place",
+    "fr:salut:informal_greeting",
+    "fr:samedi:weekday",
+    "fr:se-rendre-compte:realise-fact",
+    "fr:signaler:report-problem",
+    "fr:signature:message-author-name",
+    "fr:soeur:sister",
+    "fr:soir:evening",
+    "fr:sous-reserve-de:conditional-arrangement",
+    "fr:tarif:service-price",
+    "fr:technicien:repair-technician",
+    "fr:travailler:work",
+    "fr:vendredi:weekday",
+    "fr:y:place-pronoun"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "B1.U05.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "B1-U05-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U05-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U05-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U05-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U05-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U05-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U05-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U05.APPLY",
+      "evidence": [
+        {
+          "session_id": "B1-U05-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U05-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U05-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "B1-U05-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U05-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U05-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U05-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "B1-U05-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U05-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U04.APPLY",
+      "evidence": [
+        {
+          "session_id": "B1-U05-L01",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L05",
+          "task_id": "Q02",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U02.APPLY",
+      "evidence": [
+        {
+          "session_id": "B1-U05-L03",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L04",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L05",
+          "task_id": "Q03",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U01.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "B1-U05-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U01.APPLY",
+      "evidence": [
+        {
+          "session_id": "B1-U05-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U04.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "B1-U05-L05",
+          "task_id": "Q02",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U05-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U02.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "B1-U05-L05",
+          "task_id": "Q03",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U03.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "B1-U05-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "B1.U03.APPLY",
+      "evidence": [
+        {
+          "session_id": "B1-U05-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:je-vous-ecris-au-sujet-de:state-letter-topic",
+      "reason": "Вернуть точное обозначение темы перед профессиональным обсуждением."
+    },
+    {
+      "lexeme_key": "fr:je-vous-prie-de:formal-request",
+      "reason": "Сравнить формальную просьбу с вопросом в условном наклонении."
+    },
+    {
+      "lexeme_key": "fr:reponse:reply-to-message",
+      "reason": "Отличить полученный ответ от согласия или готового результата."
+    },
+    {
+      "lexeme_key": "fr:cordialement:neutral-email-closing",
+      "reason": "Сохранить нейтральное завершение в сопутствующей деловой переписке."
+    },
+    {
+      "lexeme_key": "fr:experience:personal-experience",
+      "reason": "Повторить личный опыт перед описанием опыта работы."
+    },
+    {
+      "lexeme_key": "fr:depuis:ongoing-since-duration",
+      "reason": "Отличать продолжающееся состояние от завершённого периода."
+    },
+    {
+      "lexeme_key": "fr:pendant:duration-preposition",
+      "reason": "Повторить ограниченную длительность при рассказе о работе."
+    },
+    {
+      "lexeme_key": "fr:constater:observe-problem",
+      "reason": "Отделять установленный факт от предположения."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "duration_measured": false,
+    "import_performed": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "transcriptions_structurally_checked": true,
+    "application_validator_passed": true,
+    "full_reused_objects_preserved": true,
+    "new_lexeme_collisions_checked": true,
+    "reading_load_checked": true,
+    "L05_no_new_mandatory_material": true,
+    "checkpoint_distribution_checked": true,
+    "checkpoint_objective_references_checked": true
+  },
+  "open_issues": [
+    "Проверить наличие B1-U04-L05 в целевой базе: зависимость существует в подготовленном пакете, импорт не подтверждён.",
+    "Редактору проверить естественность формальных рамок, контекстность выбранного завершения, соотношение просьбы и подтверждения и приблизительные транскрипции.",
+    "Прослушать браузерную озвучку новых выражений, писем и двух контрольных рассказов. Время аудио и прохождения не измерено.",
+    "Выполнить предпросмотр и пробное прохождение пяти занятий на сайте. Принятие пользователем, импорт и публикация не подтверждены."
+  ],
+  "progress": {
+    "current_unit": "B1-U05",
+    "prepared_session_ids": [
+      "B1-U05-L01",
+      "B1-U05-L02",
+      "B1-U05-L03",
+      "B1-U05-L04",
+      "B1-U05-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "B1-U06",
+    "next_unit_title": "Работа и собеседование",
+    "previous_unit": "B1-U04",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Полная текущая тема из пяти занятий. Следующая тема не начата.",
+    "Семь новых значений по занятиям: два, два, одно, два, ноль. Квота новых слов не заполняется ради числа; нагрузка учитывает формальные рамки письма.",
+    "В L01 возвращается просьба о ремонте из B1-U04. В L03 повторяется продление срока из B1-U02, в L04 подтверждение с условием из B1-U02. Источники реально подготовлены; принятие и освоение не предполагаются.",
+    "Madame, Monsieur показано как формальное обращение при неизвестном конкретном получателе. Destinataire — получатель, signature — подпись автора. Строка À с офисом объяснена до проверки.",
+    "Objet обозначает строку темы. Je vous écris au sujet de обозначает предмет обращения в тексте. Сочетание au sujet du rendez-vous объяснено как выбранная форма слияния предлога и артикля.",
+    "Je vous prie de — формальная прямая просьба, а не сама по себе условное наклонение. Знакомое pourriez-vous возвращает условную форму для вежливого вопроса. Ни одна рамка не гарантирует исполнения.",
+    "Факты наблюдения отделены от точного начала поломки и выполненного ремонта. Просьба о дате отличается от подтверждения даты.",
+    "Cordialement используется как нейтральное завершение обычной деловой электронной переписки, без утверждения об универсальной формуле всех официальных документов.",
+    "Merci pour votre réponse благодарит за полученный ответ, а не за ремонт. Имя Marie в подписи вымышленное; его звучание дано, но знание имени не оценивается.",
+    "L05 — checkpoint, восемь новых заданий на уже введённом материале. Нет вводных с готовыми ответами и нового обязательного материала.",
+    "Распределение контроля: два listening, два reading, два vocabulary, один grammar, один sentence_building. Реально затронуты все пять тем, но восемь вопросов не заявляются исчерпывающей проверкой всего блока.",
+    "Контрольные вопросы про последовательность и реакцию, срок и оговорку, релевантный пример, наблюдение неисправности и нужное решение используют прежние неизменные объекты целей соответствующего уровня.",
+    "Полные прежние карточки, ключи и review_items сохраняются целиком. Выбранные формы глаголов и сокращения не создают новых ключей.",
+    "Все письма и ситуации оригинальные и вымышленные. Нет реальных отправленных сообщений, фактических записей в службу или утверждений о текущих требованиях учреждений.",
+    "Ответы только выбором и сборкой готовых блоков. Нет свободного ввода, обязательного голоса или заявления о проверенном свободном письме. Апострофы в сборках не разрываются.",
+    "Озвучка только браузером: fr-FR, asset_id=null; нет аудиофайлов или внешних сервисов. База, прежние пакеты, основной реестр, levels и curricula не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "B1-U05-L01",
+      "new_lexeme_keys": [
+        "fr:madame-monsieur:unknown-recipient-salutation",
+        "fr:destinataire:message-recipient"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-bientot:see-you-soon",
+        "fr:appartement:apartment",
+        "fr:bureau:office-workplace",
+        "fr:chambre:bedroom",
+        "fr:chauffage:home-heating",
+        "fr:confirmer:confirm-arrangement",
+        "fr:constater:observe-problem",
+        "fr:disponibilite:person-time-availability",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:fonctionner:equipment-operate",
+        "fr:heure:clock-hour",
+        "fr:je-voudrais:polite-request",
+        "fr:jeudi:weekday",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:merci:thanks",
+        "fr:ou:relative-place",
+        "fr:panne:equipment-malfunction",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:preparer:prepare-food",
+        "fr:qui:relative-subject",
+        "fr:rendez-vous:appointment",
+        "fr:reparer:repair-equipment",
+        "fr:salut:informal_greeting",
+        "fr:signaler:report-problem",
+        "fr:signature:message-author-name",
+        "fr:tarif:service-price",
+        "fr:technicien:repair-technician",
+        "fr:travailler:work"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U05-L02",
+      "new_lexeme_keys": [
+        "fr:je-vous-ecris-au-sujet-de:state-letter-topic",
+        "fr:objet:email-subject"
+      ],
+      "reused_lexeme_keys": [
+        "fr:chambre:bedroom",
+        "fr:chauffage:home-heating",
+        "fr:confirmer:confirm-arrangement",
+        "fr:constater:observe-problem",
+        "fr:date:calendar-date",
+        "fr:destinataire:message-recipient",
+        "fr:disponibilite:person-time-availability",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:fonctionner:equipment-operate",
+        "fr:heure:clock-hour",
+        "fr:je-voudrais:polite-request",
+        "fr:jeudi:weekday",
+        "fr:madame-monsieur:unknown-recipient-salutation",
+        "fr:mais:contrast-conjunction",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:merci:thanks",
+        "fr:ou:relative-place",
+        "fr:panne:equipment-malfunction",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:rendez-vous:appointment",
+        "fr:signature:message-author-name",
+        "fr:tarif:service-price",
+        "fr:technicien:repair-technician",
+        "fr:travailler:work",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U05-L03",
+      "new_lexeme_keys": [
+        "fr:je-vous-prie-de:formal-request"
+      ],
+      "reused_lexeme_keys": [
+        "fr:chambre:bedroom",
+        "fr:chauffage:home-heating",
+        "fr:confirmer:confirm-arrangement",
+        "fr:constater:observe-problem",
+        "fr:date:calendar-date",
+        "fr:delai:task-completion-deadline",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:echeance:agreed-deadline",
+        "fr:fonctionner:equipment-operate",
+        "fr:heure:clock-hour",
+        "fr:intervenir:attend-for-repair",
+        "fr:je-ne-peux-pas:unavailable-refusal",
+        "fr:je-vous-ecris-au-sujet-de:state-letter-topic",
+        "fr:jeudi:weekday",
+        "fr:jusqu-a:time-endpoint",
+        "fr:madame-monsieur:unknown-recipient-salutation",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:merci:thanks",
+        "fr:midi:noon",
+        "fr:ou:relative-place",
+        "fr:panne:equipment-malfunction",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:prolonger:extend-time-allowance",
+        "fr:rendez-vous:appointment",
+        "fr:samedi:weekday",
+        "fr:technicien:repair-technician",
+        "fr:travailler:work"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U05-L04",
+      "new_lexeme_keys": [
+        "fr:cordialement:neutral-email-closing",
+        "fr:reponse:reply-to-message"
+      ],
+      "reused_lexeme_keys": [
+        "fr:appartement:apartment",
+        "fr:chambre:bedroom",
+        "fr:chauffage:home-heating",
+        "fr:confirmer:confirm-arrangement",
+        "fr:constater:observe-problem",
+        "fr:disponibilite:person-time-availability",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:encore:additional-quantity",
+        "fr:fonctionner:equipment-operate",
+        "fr:heure:clock-hour",
+        "fr:je-dois:study-obligation",
+        "fr:je-voudrais:polite-request",
+        "fr:je-vous-prie-de:formal-request",
+        "fr:jeudi:weekday",
+        "fr:jusqu-a:time-endpoint",
+        "fr:madame-monsieur:unknown-recipient-salutation",
+        "fr:merci:thanks",
+        "fr:midi:noon",
+        "fr:objet:email-subject",
+        "fr:ou:relative-place",
+        "fr:panne:equipment-malfunction",
+        "fr:preciser:clarify-service-details",
+        "fr:preparer:prepare-food",
+        "fr:proprietaire:property-owner",
+        "fr:rendez-vous:appointment",
+        "fr:reparer:repair-equipment",
+        "fr:reporter:postpone-appointment",
+        "fr:salut:informal_greeting",
+        "fr:signature:message-author-name",
+        "fr:sous-reserve-de:conditional-arrangement",
+        "fr:tarif:service-price",
+        "fr:technicien:repair-technician",
+        "fr:travailler:work"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "B1-U05-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-mon-avis:personal-opinion",
+        "fr:arriver:transport-arrive",
+        "fr:attendre:wait",
+        "fr:auparavant:earlier-relative-time",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:cadeau:gift",
+        "fr:cafe:venue",
+        "fr:calme:quiet-place",
+        "fr:cependant:contrast-reservation",
+        "fr:chambre:bedroom",
+        "fr:chauffage:home-heating",
+        "fr:cher:expensive",
+        "fr:concerner:relate-to-problem-object",
+        "fr:confirmer:confirm-arrangement",
+        "fr:constater:observe-problem",
+        "fr:cordialement:neutral-email-closing",
+        "fr:daccord:agreement",
+        "fr:delai:task-completion-deadline",
+        "fr:dimanche:weekday",
+        "fr:diner:evening-meal",
+        "fr:disponibilite:person-time-availability",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:dont:relative-de-complement",
+        "fr:echeance:agreed-deadline",
+        "fr:encore:additional-quantity",
+        "fr:envoyer:send-message",
+        "fr:eprouver:experience-emotion",
+        "fr:famille:family",
+        "fr:fonctionner:equipment-operate",
+        "fr:frere:brother",
+        "fr:grace-a:beneficial-cause",
+        "fr:heure:clock-hour",
+        "fr:hier:yesterday",
+        "fr:je-ne-peux-pas:unavailable-refusal",
+        "fr:je-voudrais:polite-request",
+        "fr:je-vous-ecris-au-sujet-de:state-letter-topic",
+        "fr:je-vous-prie-de:formal-request",
+        "fr:jeudi:weekday",
+        "fr:joie:joy-emotion",
+        "fr:jusqu-a:time-endpoint",
+        "fr:lundi:weekday",
+        "fr:madame-monsieur:unknown-recipient-salutation",
+        "fr:maison:house-home",
+        "fr:matin:morning",
+        "fr:merci:thanks",
+        "fr:mercredi:weekday",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:objet:email-subject",
+        "fr:ou:relative-place",
+        "fr:panne:equipment-malfunction",
+        "fr:par-exemple:illustrating-example",
+        "fr:pendant-que:simultaneous-time-clause",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:preparer:prepare-food",
+        "fr:prolonger:extend-time-allowance",
+        "fr:que:relative-direct-object",
+        "fr:rendez-vous:appointment",
+        "fr:reparer:repair-equipment",
+        "fr:reponse:reply-to-message",
+        "fr:rester:stay-at-place",
+        "fr:se-rendre-compte:realise-fact",
+        "fr:soeur:sister",
+        "fr:soir:evening",
+        "fr:sous-reserve-de:conditional-arrangement",
+        "fr:tarif:service-price",
+        "fr:technicien:repair-technician",
+        "fr:travailler:work",
+        "fr:vendredi:weekday",
+        "fr:y:place-pronoun"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "B1-U05-L01",
+      "material": "Madame, Monsieur; адресат и подпись; строка получателя À."
+    },
+    {
+      "session_id": "B1-U05-L02",
+      "material": "Je vous écris au sujet de; au sujet du rendez-vous; тема отдельно от цели действия."
+    },
+    {
+      "session_id": "B1-U05-L03",
+      "material": "Je vous prie de + действие; возврат conditionnel pourriez-vous; факты отдельно от просьбы."
+    },
+    {
+      "session_id": "B1-U05-L04",
+      "material": "Merci pour votre réponse; cordialement и подпись; завершение не меняет фактов."
+    },
+    {
+      "session_id": "B1-U05-L05",
+      "material": "Контроль U01–U05 без нового обязательного содержания."
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:madame-monsieur:unknown-recipient-salutation",
+      "evidence": [
+        {
+          "session_id": "B1-U05-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U05-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U05-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:destinataire:message-recipient",
+      "evidence": [
+        {
+          "session_id": "B1-U05-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L02",
+          "task_id": "Q01",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:je-vous-ecris-au-sujet-de:state-letter-topic",
+      "evidence": [
+        {
+          "session_id": "B1-U05-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U05-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U05-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:objet:email-subject",
+      "evidence": [
+        {
+          "session_id": "B1-U05-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:je-vous-prie-de:formal-request",
+      "evidence": [
+        {
+          "session_id": "B1-U05-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U05-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U05-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:cordialement:neutral-email-closing",
+      "evidence": [
+        {
+          "session_id": "B1-U05-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U05-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:reponse:reply-to-message",
+      "evidence": [
+        {
+          "session_id": "B1-U05-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "B1-U05-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "B1-U05-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "B1-U05-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "checkpoint_coverage": [
+    {
+      "task_id": "Q01",
+      "skill": "listening",
+      "objective_ids": [
+        "B1.U01.UNDERSTAND",
+        "B1.U01.APPLY"
+      ]
+    },
+    {
+      "task_id": "Q02",
+      "skill": "listening",
+      "objective_ids": [
+        "B1.U04.UNDERSTAND",
+        "B1.U04.APPLY"
+      ]
+    },
+    {
+      "task_id": "Q03",
+      "skill": "reading",
+      "objective_ids": [
+        "B1.U02.UNDERSTAND",
+        "B1.U02.APPLY"
+      ]
+    },
+    {
+      "task_id": "Q04",
+      "skill": "reading",
+      "objective_ids": [
+        "B1.U05.UNDERSTAND",
+        "B1.U05.APPLY"
+      ]
+    },
+    {
+      "task_id": "Q05",
+      "skill": "vocabulary",
+      "objective_ids": [
+        "B1.U03.UNDERSTAND",
+        "B1.U03.APPLY"
+      ]
+    },
+    {
+      "task_id": "Q06",
+      "skill": "vocabulary",
+      "objective_ids": [
+        "B1.U05.APPLY"
+      ]
+    },
+    {
+      "task_id": "Q07",
+      "skill": "grammar",
+      "objective_ids": [
+        "B1.U04.UNDERSTAND"
+      ]
+    },
+    {
+      "task_id": "Q08",
+      "skill": "sentence_building",
+      "objective_ids": [
+        "B1.U05.APPLY"
+      ]
+    }
+  ],
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "text_conventions": {
+    "situation_status": "Оригинальные вымышленные письма о визитах, неисправности и согласовании срока; личный опыт и обсуждение кафе в контроле.",
+    "external_services_required": false,
+    "free_speaking_assessed": false
+  },
+  "reading_word_counts": [
+    61,
+    62,
+    62,
+    66,
+    64,
+    62
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 7,
+    "external_prerequisites": [
+      "B1-U04-L05"
+    ],
+    "external_reference_status": "exists in prepared previous package; target database/import unverified",
+    "reused_lexeme_keys": 81,
+    "reading_word_counts": [
+      61,
+      62,
+      62,
+      66,
+      64,
+      62
+    ],
+    "unit_complete": true,
+    "checkpoint_tasks": 8,
+    "checkpoint_topics": [
+      "B1-U01",
+      "B1-U02",
+      "B1-U03",
+      "B1-U04",
+      "B1-U05"
+    ]
+  },
+  "application_validation": {
+    "report_file": "B1-U05.validation.json",
+    "valid": true,
+    "file_hash": "e4a8b3c460108e877d326d4734c4f44df3f6049ed30dfe37dcb9ad16a3dd5094",
+    "errors": 0,
+    "warning_counts": {
+      "browser_tts": 6,
+      "editorial_review_required": 5
+    },
+    "requires_editorial_review": true,
+    "database_modified": false
+  }
+}

@@ -1,0 +1,879 @@
+{
+  "unit_id": "A1-U19",
+  "package_file": "A1-U19.v1.json",
+  "session_ids": [
+    "A1-U19-L01",
+    "A1-U19-L02",
+    "A1-U19-L03",
+    "A1-U19-L04",
+    "A1-U19-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "dabord",
+      "lexeme_key": "fr:dabord:first-step",
+      "fr": "d’abord",
+      "ru": [
+        "сначала, первым действием"
+      ],
+      "transcription_ru": "дабо́р",
+      "first_session_id": "A1-U19-L01"
+    },
+    {
+      "id": "ensuite",
+      "lexeme_key": "fr:ensuite:next-step",
+      "fr": "ensuite",
+      "ru": [
+        "затем, следующим действием"
+      ],
+      "transcription_ru": "а(н)сюи́т",
+      "first_session_id": "A1-U19-L01"
+    },
+    {
+      "id": "enfin",
+      "lexeme_key": "fr:enfin:final-step",
+      "fr": "enfin",
+      "ru": [
+        "в конце, последним действием"
+      ],
+      "transcription_ru": "а(н)фэ́(н)",
+      "first_session_id": "A1-U19-L03"
+    },
+    {
+      "id": "ouvrir",
+      "lexeme_key": "fr:ouvrir:open-object",
+      "fr": "ouvrir",
+      "ru": [
+        "открывать предмет: книгу или дверь"
+      ],
+      "transcription_ru": "уври́р",
+      "first_session_id": "A1-U19-L04"
+    },
+    {
+      "id": "fermer",
+      "lexeme_key": "fr:fermer:close-object",
+      "fr": "fermer",
+      "ru": [
+        "закрывать предмет: книгу или дверь"
+      ],
+      "transcription_ru": "фэрмэ́",
+      "first_session_id": "A1-U19-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:aimer:enjoy-activity",
+    "fr:aller:near-future-auxiliary",
+    "fr:attendre:wait",
+    "fr:aujourdhui:today",
+    "fr:bonjour:greeting",
+    "fr:demain:tomorrow",
+    "fr:ecouter:listen",
+    "fr:envoyer:send-message",
+    "fr:et:and",
+    "fr:fatigue:tired-person",
+    "fr:heure:clock-hour",
+    "fr:ici:here-location",
+    "fr:il-faut:necessary-action",
+    "fr:lire:read",
+    "fr:livre:book",
+    "fr:maison:house-home",
+    "fr:manger:eat",
+    "fr:merci:thanks",
+    "fr:message:short-written-message",
+    "fr:midi:noon",
+    "fr:musique:music",
+    "fr:neuf:cardinal-number",
+    "fr:parce-que:because-reason",
+    "fr:porte:door",
+    "fr:preferer:prefer-choice",
+    "fr:professeur:teacher",
+    "fr:puis:then-sequence",
+    "fr:regarder:look-watch",
+    "fr:repondre:reply-to-message",
+    "fr:sil-vous-plait:polite-request",
+    "fr:sur-la-table:on-table",
+    "fr:tele:television"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A1.U19.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U19-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U19-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U19-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U19-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U19-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U19-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U19-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U19-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U19-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U19-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U19-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U19-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U19-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U19-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U19-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U19-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U19-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U19.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U19-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U19-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U19-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U19-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U19-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U19-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U19-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U19-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U19-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U19-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U19-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U19-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U19-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U19-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U19-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U19-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U18.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U19-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U16.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U19-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U16.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U19-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:dabord:first-step",
+      "reason": "Перенести первый шаг в последовательность самостоятельного дня."
+    },
+    {
+      "lexeme_key": "fr:ensuite:next-step",
+      "reason": "Повторить переход к следующему бытовому действию."
+    },
+    {
+      "lexeme_key": "fr:puis:then-sequence",
+      "reason": "Повторить ещё один маркер следующего шага без противопоставления затем."
+    },
+    {
+      "lexeme_key": "fr:enfin:final-step",
+      "reason": "Сохранить явно обозначенный последний шаг."
+    },
+    {
+      "lexeme_key": "fr:il-faut:necessary-action",
+      "reason": "Повторить знакомую необходимость действия с прежним ключом."
+    },
+    {
+      "lexeme_key": "fr:ouvrir:open-object",
+      "reason": "Вернуть открытие знакомого предмета."
+    },
+    {
+      "lexeme_key": "fr:fermer:close-object",
+      "reason": "Различить закрытие и открытие предмета."
+    },
+    {
+      "lexeme_key": "fr:repondre:reply-to-message",
+      "reason": "Повторить ответ отдельно от чтения и отправки сообщения."
+    },
+    {
+      "lexeme_key": "fr:attendre:wait",
+      "reason": "Повторить ожидание в последовательности указаний."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "known_necessity_action_message_and_object_keys_reused": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "positive_commands_and_prohibitions_distinguished": true,
+    "prohibition_action_object_and_place_scope_reviewed": true,
+    "next_step_accounts_for_actions_already_completed": true,
+    "ensuite_and_puis_not_falsely_contrasted": true,
+    "opening_and_closing_distinguished": true,
+    "apostrophes_kept_in_whole_tokens": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A1-U18-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Редактору проверить естественность французских инструкций, выбранных повелительных форм и приблизительные русские транскрипции.",
+    "Прослушать браузерную озвучку маркеров последовательности, отрицания и форм открытия/закрытия. Время аудио и занятий не измерено.",
+    "Выполнить предпросмотр и пробное прохождение: выполненные шаги, положительная команда и запрет, действие с книгой и дверью."
+  ],
+  "progress": {
+    "current_unit": "A1-U19",
+    "prepared_session_ids": [
+      "A1-U19-L01",
+      "A1-U19-L02",
+      "A1-U19-L03",
+      "A1-U19-L04",
+      "A1-U19-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A1-U20",
+    "next_unit_title": "Самостоятельный день",
+    "previous_unit": "A1-U18",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A1-U19. Принятие и импорт предыдущих пакетов не подтверждены; повторение использует полные объекты подготовленных пакетов.",
+    "Новых значений два, ноль, одно, два и ноль. Небольшой объём новой лексики позволяет сосредоточиться на выбранных формах инструкций и запретов. L05 не вводит новый обязательный материал.",
+    "Puis, il faut, lire, attendre, écouter, manger, сообщение, ответ и знакомые предметы сохраняют прежние ключи и полные объекты. Не создаётся новое значение Il faut для того же смысла необходимости.",
+    "D’abord обозначает первый шаг, ensuite и puis могут обозначать следующий, enfin — последний. Ensuite и puis не противопоставляются как взаимоисключающие переводы. В однозначных заданиях нет выбора одного из этих синонимов без дополнительного ограничения.",
+    "Показаны выбранные готовые формы Lisez, Attendez, Écoutez, Ouvrez, Fermez. Ранее изученное Répondez повторяется. Полная таблица повелительного наклонения и все лица не вводятся.",
+    "Il faut + название действия отличается от отдельной прямой просьбы. В L03 сопоставлены Il faut attendre ici и Attendez ici.",
+    "Ne… pas в показанной прямой инструкции выражает запрет; Il ne faut pas + действие повторяет ту же функцию в отрицательной рамке необходимости. Не смешивается с необязательностью.",
+    "Запрет относится к названному действию, предмету и месту. Из учебного объявления не выводятся реальные универсальные правила поведения.",
+    "Ouvrir и fermer показаны с книгой и дверью в одном конкретном значении открытия/закрытия предмета, без нового дублирующего ключа для каждого предмета.",
+    "Каждое задание — отдельная ситуация. Запрет закрывать книгу в одной инструкции не переносится на другую с положительным последним шагом закрытия.",
+    "В L01 возвращается A1-U18, в L03/L04 — предпочтения и отношения к занятиям из A1-U16. Это повторение подготовленного материала, не подтверждение его принятия или освоения пользователем.",
+    "Все объявления и инструкции оригинальные учебные примеры. Время и выполнение действий заданы текстом, не свойствами голоса.",
+    "Ответы выбираются или собираются из целых карточек. Озвучка только браузером; внешних аудиофайлов и сервисов нет.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A1-U19-L01",
+      "new_lexeme_keys": [
+        "fr:dabord:first-step",
+        "fr:ensuite:next-step"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:near-future-auxiliary",
+        "fr:bonjour:greeting",
+        "fr:demain:tomorrow",
+        "fr:envoyer:send-message",
+        "fr:heure:clock-hour",
+        "fr:lire:read",
+        "fr:merci:thanks",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:repondre:reply-to-message",
+        "fr:sil-vous-plait:polite-request",
+        "fr:sur-la-table:on-table"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U19-L02",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:aller:near-future-auxiliary",
+        "fr:bonjour:greeting",
+        "fr:dabord:first-step",
+        "fr:ensuite:next-step",
+        "fr:et:and",
+        "fr:ici:here-location",
+        "fr:il-faut:necessary-action",
+        "fr:lire:read",
+        "fr:manger:eat",
+        "fr:merci:thanks",
+        "fr:message:short-written-message",
+        "fr:repondre:reply-to-message",
+        "fr:sil-vous-plait:polite-request"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U19-L03",
+      "new_lexeme_keys": [
+        "fr:enfin:final-step"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aimer:enjoy-activity",
+        "fr:attendre:wait",
+        "fr:aujourdhui:today",
+        "fr:bonjour:greeting",
+        "fr:dabord:first-step",
+        "fr:ecouter:listen",
+        "fr:fatigue:tired-person",
+        "fr:ici:here-location",
+        "fr:il-faut:necessary-action",
+        "fr:lire:read",
+        "fr:maison:house-home",
+        "fr:merci:thanks",
+        "fr:message:short-written-message",
+        "fr:musique:music",
+        "fr:parce-que:because-reason",
+        "fr:preferer:prefer-choice",
+        "fr:puis:then-sequence",
+        "fr:repondre:reply-to-message",
+        "fr:sil-vous-plait:polite-request"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U19-L04",
+      "new_lexeme_keys": [
+        "fr:ouvrir:open-object",
+        "fr:fermer:close-object"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aimer:enjoy-activity",
+        "fr:aujourdhui:today",
+        "fr:bonjour:greeting",
+        "fr:dabord:first-step",
+        "fr:ecouter:listen",
+        "fr:enfin:final-step",
+        "fr:ensuite:next-step",
+        "fr:et:and",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:maison:house-home",
+        "fr:merci:thanks",
+        "fr:musique:music",
+        "fr:porte:door",
+        "fr:preferer:prefer-choice",
+        "fr:regarder:look-watch",
+        "fr:sil-vous-plait:polite-request",
+        "fr:tele:television"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U19-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:attendre:wait",
+        "fr:bonjour:greeting",
+        "fr:dabord:first-step",
+        "fr:ecouter:listen",
+        "fr:enfin:final-step",
+        "fr:ensuite:next-step",
+        "fr:et:and",
+        "fr:fermer:close-object",
+        "fr:ici:here-location",
+        "fr:il-faut:necessary-action",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:manger:eat",
+        "fr:merci:thanks",
+        "fr:message:short-written-message",
+        "fr:ouvrir:open-object",
+        "fr:porte:door",
+        "fr:professeur:teacher",
+        "fr:puis:then-sequence",
+        "fr:repondre:reply-to-message",
+        "fr:sil-vous-plait:polite-request"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A1-U19-L01",
+      "material": "Порядок d’abord / ensuite; готовая просьба Lisez le message в отличие от личного плана."
+    },
+    {
+      "session_id": "A1-U19-L02",
+      "material": "Запрет Ne mangez pas / Ne lisez pas; отрицательная рамка Il ne faut pas + действие; отрицание охватывает форму действия."
+    },
+    {
+      "session_id": "A1-U19-L03",
+      "material": "Puis / enfin в трёх шагах; выбранные формы Attendez и Écoutez; Il faut attendre и Attendez в разных рамках."
+    },
+    {
+      "session_id": "A1-U19-L04",
+      "material": "Ouvrez / Fermez с книгой и дверью; Ne fermez pas; порядок открытия, чтения и закрытия."
+    }
+  ],
+  "text_conventions": {
+    "instruction_status": "Оригинальные вымышленные учебные инструкции.",
+    "step_scope": "Учитываются только шаги, заданные конкретным объявлением и условием.",
+    "prohibition_scope": "Запрет относится к названным действию, предмету и месту отдельного задания.",
+    "synonyms": "Ensuite и puis могут выражать переход к следующему шагу; не тестируются как взаимоисключающие без контекста.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:dabord:first-step",
+      "evidence": [
+        {
+          "session_id": "A1-U19-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U19-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U19-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U19-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U19-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:ensuite:next-step",
+      "evidence": [
+        {
+          "session_id": "A1-U19-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U19-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U19-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:enfin:final-step",
+      "evidence": [
+        {
+          "session_id": "A1-U19-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U19-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U19-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U19-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U19-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U19-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U19-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:ouvrir:open-object",
+      "evidence": [
+        {
+          "session_id": "A1-U19-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U19-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:fermer:close-object",
+      "evidence": [
+        {
+          "session_id": "A1-U19-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U19-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U19-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U19-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U19-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U19-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 5,
+    "external_prerequisites": [
+      "A1-U18-L05"
+    ],
+    "external_reference_status": "A1-U18-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 10
+      },
+      "file_hash": "6e048913e9ab81fd64caf2f02c42c0a6012c610a1aad731cdd7b07732d244aec",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 32,
+    "text_lengths": [
+      {
+        "session_id": "A1-U19-L01",
+        "reading_word_counts": [
+          18,
+          19
+        ],
+        "listening_word_counts": [
+          12
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U19-L02",
+        "reading_word_counts": [
+          17,
+          18
+        ],
+        "listening_word_counts": [
+          14
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U19-L03",
+        "reading_word_counts": [
+          19,
+          16
+        ],
+        "listening_word_counts": [
+          13
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U19-L04",
+        "reading_word_counts": [
+          20,
+          17
+        ],
+        "listening_word_counts": [
+          15
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U19-L05",
+        "reading_word_counts": [
+          18,
+          19
+        ],
+        "listening_word_counts": [
+          16,
+          15
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "d’abord",
+        "session_id": "A1-U19-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "ensuite",
+        "session_id": "A1-U19-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Lisez le message",
+        "session_id": "A1-U19-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Ne mangez pas ici",
+        "session_id": "A1-U19-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Ne lisez pas le message",
+        "session_id": "A1-U19-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Il ne faut pas manger ici",
+        "session_id": "A1-U19-L02",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "puis",
+        "session_id": "A1-U19-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "enfin",
+        "session_id": "A1-U19-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "attendez ici",
+        "session_id": "A1-U19-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Il faut attendre ici",
+        "session_id": "A1-U19-L03",
+        "task_id": "Q06"
+      },
+      {
+        "frame": "ouvrez le livre",
+        "session_id": "A1-U19-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "fermez le livre",
+        "session_id": "A1-U19-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Ne fermez pas le livre",
+        "session_id": "A1-U19-L04",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "ouvrez la porte",
+        "session_id": "A1-U19-L04",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "fermez la porte",
+        "session_id": "A1-U19-L04",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "écoutez le professeur",
+        "session_id": "A1-U19-L05",
+        "task_id": "Q08"
+      }
+    ]
+  }
+}

@@ -29,6 +29,12 @@ return [
     */
 
     'disks' => [
+        'learning_private' => [
+            'driver' => 'local',
+            'root' => storage_path('app/private/daily-practice'),
+            'visibility' => 'private',
+            'throw' => true,
+        ],
 
         'local' => [
             'driver' => 'local',

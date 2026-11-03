@@ -1,0 +1,1092 @@
+{
+  "unit_id": "A1-U14",
+  "package_file": "A1-U14.v1.json",
+  "session_ids": [
+    "A1-U14-L01",
+    "A1-U14-L02",
+    "A1-U14-L03",
+    "A1-U14-L04",
+    "A1-U14-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "tete",
+      "lexeme_key": "fr:tete:head",
+      "fr": "la tête",
+      "ru": [
+        "голова"
+      ],
+      "transcription_ru": "ла тэ́т",
+      "first_session_id": "A1-U14-L01"
+    },
+    {
+      "id": "dos",
+      "lexeme_key": "fr:dos:back-body-part",
+      "fr": "le dos",
+      "ru": [
+        "спина"
+      ],
+      "transcription_ru": "лё до́",
+      "first_session_id": "A1-U14-L01"
+    },
+    {
+      "id": "ventre",
+      "lexeme_key": "fr:ventre:abdomen-body-part",
+      "fr": "le ventre",
+      "ru": [
+        "живот (часть тела)"
+      ],
+      "transcription_ru": "лё ва́(н)тр",
+      "first_session_id": "A1-U14-L01"
+    },
+    {
+      "id": "gorge",
+      "lexeme_key": "fr:gorge:throat",
+      "fr": "la gorge",
+      "ru": [
+        "горло"
+      ],
+      "transcription_ru": "ла го́рж",
+      "first_session_id": "A1-U14-L01"
+    },
+    {
+      "id": "jai-mal",
+      "lexeme_key": "fr:jai-mal:pain-report",
+      "fr": "j’ai mal",
+      "ru": [
+        "у меня болит (сообщение о боли)"
+      ],
+      "transcription_ru": "жэ ма́ль",
+      "first_session_id": "A1-U14-L02"
+    },
+    {
+      "id": "fatigue",
+      "lexeme_key": "fr:fatigue:tired-person",
+      "fr": "fatigué",
+      "ru": [
+        "уставший"
+      ],
+      "transcription_ru": "фатигэ́",
+      "first_session_id": "A1-U14-L03"
+    },
+    {
+      "id": "malade",
+      "lexeme_key": "fr:malade:self-reported-illness",
+      "fr": "malade",
+      "ru": [
+        "болен (самоописание в диалоге)"
+      ],
+      "transcription_ru": "мала́д",
+      "first_session_id": "A1-U14-L03"
+    },
+    {
+      "id": "se-sentir",
+      "lexeme_key": "fr:se-sentir:describe-feeling",
+      "fr": "se sentir",
+      "ru": [
+        "чувствовать себя (самоописание)"
+      ],
+      "transcription_ru": "сё са(н)ти́р",
+      "first_session_id": "A1-U14-L03"
+    },
+    {
+      "id": "il-faut",
+      "lexeme_key": "fr:il-faut:necessary-action",
+      "fr": "il faut",
+      "ru": [
+        "нужно выполнить действие (учебная рамка)"
+      ],
+      "transcription_ru": "иль фо́",
+      "first_session_id": "A1-U14-L04"
+    },
+    {
+      "id": "demander",
+      "lexeme_key": "fr:demander:ask-for",
+      "fr": "demander",
+      "ru": [
+        "просить, спрашивать (в показанной рамке)"
+      ],
+      "transcription_ru": "дёма(н)дэ́",
+      "first_session_id": "A1-U14-L04"
+    },
+    {
+      "id": "aide",
+      "lexeme_key": "fr:aide:assistance",
+      "fr": "de l’aide",
+      "ru": [
+        "помощь (в просьбе о помощи)"
+      ],
+      "transcription_ru": "дё лэ́д",
+      "first_session_id": "A1-U14-L04"
+    },
+    {
+      "id": "pharmacien",
+      "lexeme_key": "fr:pharmacien:pharmacist",
+      "fr": "un pharmacien",
+      "ru": [
+        "фармацевт"
+      ],
+      "transcription_ru": "э(н) фармасьэ́(н)",
+      "first_session_id": "A1-U14-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:aidez-moi:help-request",
+    "fr:aller:go",
+    "fr:ans:age-years",
+    "fr:attendre:wait",
+    "fr:blond:blond-hair",
+    "fr:bonjour:greeting",
+    "fr:brun:brown-hair",
+    "fr:bureau:office-workplace",
+    "fr:ca-va-bien:positive_wellbeing",
+    "fr:cahier:notebook",
+    "fr:cinema:cinema-venue",
+    "fr:commencer:start",
+    "fr:cousin:male-cousin",
+    "fr:daccord:agreement",
+    "fr:dans:inside",
+    "fr:dix:cardinal-number",
+    "fr:entreprise:company",
+    "fr:et:and",
+    "fr:faire-une-pause:take-break",
+    "fr:finir:finish",
+    "fr:frere:brother",
+    "fr:gare:railway-station",
+    "fr:heure:clock-hour",
+    "fr:hopital:hospital",
+    "fr:huit:cardinal-number",
+    "fr:je-ne-peux-pas:unavailable-refusal",
+    "fr:je-voudrais:polite-request",
+    "fr:livre:book",
+    "fr:lundi:weekday",
+    "fr:medecin:doctor",
+    "fr:merci:thanks",
+    "fr:midi:noon",
+    "fr:neuf:cardinal-number",
+    "fr:non:negative-answer",
+    "fr:oui:affirmative-answer",
+    "fr:pas-tres-bien:unwell",
+    "fr:patient:patient-personality",
+    "fr:pharmacie:pharmacy",
+    "fr:pres-de:near-place",
+    "fr:quinze:cardinal-number",
+    "fr:seize:cardinal-number",
+    "fr:sil-vous-plait:polite-request",
+    "fr:timide:shy-person",
+    "fr:travailler:work",
+    "fr:vendredi:weekday"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A1.U14.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U14-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U14-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U14-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U14-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U14-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U14-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U14-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U14-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U14-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U14.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U14-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U14-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U14-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U14-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U14-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U14-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U14-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U14-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U13.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U14-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U11.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U14-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U11.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U14-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:fatigue:tired-person",
+      "reason": "Вернуть прямо названную усталость в понятной языковой ситуации, не выводя её из погоды."
+    },
+    {
+      "lexeme_key": "fr:se-sentir:describe-feeling",
+      "reason": "Повторить рамку личного ощущения."
+    },
+    {
+      "lexeme_key": "fr:jai-mal:pain-report",
+      "reason": "Вернуть сообщение о месте боли коротким повторением без медицинских выводов."
+    },
+    {
+      "lexeme_key": "fr:aide:assistance",
+      "reason": "Сохранить просьбу о помощи как коммуникативную функцию."
+    },
+    {
+      "lexeme_key": "fr:demander:ask-for",
+      "reason": "Повторить просьбу или вопрос в уже понятном контексте."
+    },
+    {
+      "lexeme_key": "fr:il-faut:necessary-action",
+      "reason": "Вернуть рамку необходимого действия в немедицинской ситуации."
+    },
+    {
+      "lexeme_key": "fr:pharmacie:pharmacy",
+      "reason": "Сохранить прежний ключ аптеки как места."
+    },
+    {
+      "lexeme_key": "fr:pharmacien:pharmacist",
+      "reason": "Повторить отличие человека от названия места."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "known_pharmacy_doctor_wellbeing_and_help_keys_reused": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "body_part_and_pain_location_answers_reviewed": true,
+    "self_report_and_trait_distinction_reviewed": true,
+    "procedural_recommendation_context_reviewed": true,
+    "no_treatment_or_dosage_content_reviewed": true,
+    "negated_clarification_and_speaker_references_reviewed": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A1-U13-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Редактору проверить естественность французских сообщений об ощущениях, процедурных просьб и приблизительные русские транскрипции.",
+    "Прослушать браузерную озвучку, особенно четыре части тела, формы сообщения о боли, усталость и фармацевта. Время аудио и занятий пока не измерено.",
+    "Выполнить предпросмотр и пробное прохождение: отрицание при уточнении, самоописание рассказчика и брата, просьба о помощи, человек и место."
+  ],
+  "progress": {
+    "current_unit": "A1-U14",
+    "prepared_session_ids": [
+      "A1-U14-L01",
+      "A1-U14-L02",
+      "A1-U14-L03",
+      "A1-U14-L04",
+      "A1-U14-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A1-U15",
+    "next_unit_title": "Погода и сезоны",
+    "previous_unit": "A1-U13",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A1-U14. Принятие и импорт предыдущих пакетов не подтверждены; повторение использует полные объекты подготовленных пакетов.",
+    "Новые значения распределены как четыре, одно, три, четыре и ноль. В пятом занятии нового обязательного материала нет.",
+    "Названия частей тела ограничены головой, спиной, животом и горлом. Сначала названия, затем сообщение о месте боли.",
+    "Рамка J’ai mal введена до проверки с выбранными сочетаниями à la tête/gorge и au dos/ventre. Причина боли и способы лечения не определяются.",
+    "Fatigué и malade распознаются как прямо названные самоописания. Усталость не используется для вывода о болезни, диагнозе или тяжести состояния.",
+    "Показаны готовые Je suis fatigué и Je me sens fatigué. Женская форма fatiguée не меняет звучание; голос не определяет пол или правильный ответ.",
+    "Прежние ключи аптеки, врача, общих ответов о самочувствии и просьбы о помощи сохранены. Аптека не объявляется новым словом из-за появления в плане темы.",
+    "Il faut с названием действия показано в процедурной очереди за информацией и просьбе о помощи. Ожидание не связывается с симптомами как рекомендация по лечению или срочности.",
+    "Фармацевт — человек, аптека — место. Медицинская квалификация, услуги и клинические правила не проверяются.",
+    "В материале нет названий лекарств, дозировок, лечебных действий, диагнозов или медицинских рекомендаций; цель — понять и собрать французскую реплику.",
+    "Пятое занятие не соединяет сообщение о боли с указанием ждать. Оно проверяет уточнение названной части тела и просьбу о помощи.",
+    "Роли в диалоге заданы явно. Последнее подтверждение или отрицание определяет, какое сообщение произнёс посетитель; голос, шум и эмоциональная интонация не являются основанием ответа.",
+    "В L01 повторено описание близкого человека A1-U13; в L03 и L04 — рабочее расписание и место работы A1-U11.",
+    "Все люди, ощущения, маршруты и процедурные сцены вымышленные. Внешние сервисы и реальные клинические данные не нужны для ответа.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A1-U14-L01",
+      "new_lexeme_keys": [
+        "fr:tete:head",
+        "fr:dos:back-body-part",
+        "fr:ventre:abdomen-body-part",
+        "fr:gorge:throat"
+      ],
+      "reused_lexeme_keys": [
+        "fr:ans:age-years",
+        "fr:blond:blond-hair",
+        "fr:brun:brown-hair",
+        "fr:cahier:notebook",
+        "fr:cousin:male-cousin",
+        "fr:dans:inside",
+        "fr:et:and",
+        "fr:frere:brother",
+        "fr:livre:book",
+        "fr:patient:patient-personality",
+        "fr:quinze:cardinal-number",
+        "fr:seize:cardinal-number",
+        "fr:timide:shy-person"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U14-L02",
+      "new_lexeme_keys": [
+        "fr:jai-mal:pain-report"
+      ],
+      "reused_lexeme_keys": [
+        "fr:bonjour:greeting",
+        "fr:cahier:notebook",
+        "fr:dans:inside",
+        "fr:dos:back-body-part",
+        "fr:et:and",
+        "fr:gare:railway-station",
+        "fr:gorge:throat",
+        "fr:livre:book",
+        "fr:merci:thanks",
+        "fr:oui:affirmative-answer",
+        "fr:pharmacie:pharmacy",
+        "fr:pres-de:near-place",
+        "fr:tete:head",
+        "fr:ventre:abdomen-body-part"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U14-L03",
+      "new_lexeme_keys": [
+        "fr:fatigue:tired-person",
+        "fr:malade:self-reported-illness",
+        "fr:se-sentir:describe-feeling"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:go",
+        "fr:ca-va-bien:positive_wellbeing",
+        "fr:cinema:cinema-venue",
+        "fr:commencer:start",
+        "fr:dix:cardinal-number",
+        "fr:faire-une-pause:take-break",
+        "fr:finir:finish",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:je-ne-peux-pas:unavailable-refusal",
+        "fr:lundi:weekday",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:oui:affirmative-answer",
+        "fr:pas-tres-bien:unwell",
+        "fr:travailler:work",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U14-L04",
+      "new_lexeme_keys": [
+        "fr:il-faut:necessary-action",
+        "fr:demander:ask-for",
+        "fr:aide:assistance",
+        "fr:pharmacien:pharmacist"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aidez-moi:help-request",
+        "fr:aller:go",
+        "fr:attendre:wait",
+        "fr:bureau:office-workplace",
+        "fr:daccord:agreement",
+        "fr:entreprise:company",
+        "fr:gare:railway-station",
+        "fr:hopital:hospital",
+        "fr:je-voudrais:polite-request",
+        "fr:medecin:doctor",
+        "fr:midi:noon",
+        "fr:pharmacie:pharmacy",
+        "fr:pres-de:near-place",
+        "fr:sil-vous-plait:polite-request",
+        "fr:travailler:work"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U14-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:aide:assistance",
+        "fr:aidez-moi:help-request",
+        "fr:bonjour:greeting",
+        "fr:demander:ask-for",
+        "fr:dos:back-body-part",
+        "fr:fatigue:tired-person",
+        "fr:frere:brother",
+        "fr:gare:railway-station",
+        "fr:gorge:throat",
+        "fr:jai-mal:pain-report",
+        "fr:je-voudrais:polite-request",
+        "fr:malade:self-reported-illness",
+        "fr:merci:thanks",
+        "fr:non:negative-answer",
+        "fr:pharmacie:pharmacy",
+        "fr:pharmacien:pharmacist",
+        "fr:pres-de:near-place",
+        "fr:se-sentir:describe-feeling",
+        "fr:sil-vous-plait:polite-request",
+        "fr:tete:head",
+        "fr:ventre:abdomen-body-part"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A1-U14-L01",
+      "material": "Названия частей тела с le/la, простые пары названий без сообщения о боли."
+    },
+    {
+      "session_id": "A1-U14-L02",
+      "material": "J’ai mal à la tête/gorge и au dos/ventre; отрицание при уточнении прямо названного места."
+    },
+    {
+      "session_id": "A1-U14-L03",
+      "material": "Je suis fatigué/malade и готовая личная форма Je me sens fatigué; различие ощущений и черт характера."
+    },
+    {
+      "session_id": "A1-U14-L04",
+      "material": "Il faut с названием действия в процедурной сценке; Je voudrais demander de l’aide и au pharmacien, повтор Aidez-moi."
+    }
+  ],
+  "text_conventions": {
+    "health_scope": "Только перевод и понимание вымышленных реплик, без клинических выводов и рекомендаций.",
+    "procedure_scope": "Очередь за информацией не связана с оценкой симптомов или срочности.",
+    "speaker_roles": "Порядок говорящих задан явно; уточнение подтверждается или отрицается словами.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:tete:head",
+      "evidence": [
+        {
+          "session_id": "A1-U14-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U14-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:dos:back-body-part",
+      "evidence": [
+        {
+          "session_id": "A1-U14-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U14-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U14-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:ventre:abdomen-body-part",
+      "evidence": [
+        {
+          "session_id": "A1-U14-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U14-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:gorge:throat",
+      "evidence": [
+        {
+          "session_id": "A1-U14-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U14-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:jai-mal:pain-report",
+      "evidence": [
+        {
+          "session_id": "A1-U14-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:fatigue:tired-person",
+      "evidence": [
+        {
+          "session_id": "A1-U14-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U14-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:malade:self-reported-illness",
+      "evidence": [
+        {
+          "session_id": "A1-U14-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:se-sentir:describe-feeling",
+      "evidence": [
+        {
+          "session_id": "A1-U14-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:il-faut:necessary-action",
+      "evidence": [
+        {
+          "session_id": "A1-U14-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:demander:ask-for",
+      "evidence": [
+        {
+          "session_id": "A1-U14-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:aide:assistance",
+      "evidence": [
+        {
+          "session_id": "A1-U14-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:pharmacien:pharmacist",
+      "evidence": [
+        {
+          "session_id": "A1-U14-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U14-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U14-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 12,
+    "external_prerequisites": [
+      "A1-U13-L05"
+    ],
+    "external_reference_status": "A1-U13-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 12
+      },
+      "file_hash": "2ed4cf059171aaa505111a4079d01ea2d14e35e760ead3d0cdd47a9d093b7f9d",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 45,
+    "text_lengths": [
+      {
+        "session_id": "A1-U14-L01",
+        "reading_word_counts": [
+          22,
+          18
+        ],
+        "listening_word_counts": [
+          20
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U14-L02",
+        "reading_word_counts": [
+          18,
+          18
+        ],
+        "listening_word_counts": [
+          19
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U14-L03",
+        "reading_word_counts": [
+          23,
+          20
+        ],
+        "listening_word_counts": [
+          22
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U14-L04",
+        "reading_word_counts": [
+          18,
+          22
+        ],
+        "listening_word_counts": [
+          17
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U14-L05",
+        "reading_word_counts": [
+          16,
+          23
+        ],
+        "listening_word_counts": [
+          22,
+          20
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "la tête",
+        "session_id": "A1-U14-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "le dos",
+        "session_id": "A1-U14-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "le ventre",
+        "session_id": "A1-U14-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "la gorge",
+        "session_id": "A1-U14-L01",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "J’ai mal à la tête",
+        "session_id": "A1-U14-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "J’ai mal au dos",
+        "session_id": "A1-U14-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "J’ai mal au ventre",
+        "session_id": "A1-U14-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "J’ai mal à la gorge",
+        "session_id": "A1-U14-L02",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "Je suis fatigué",
+        "session_id": "A1-U14-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Je me sens fatigué",
+        "session_id": "A1-U14-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Il faut attendre",
+        "session_id": "A1-U14-L04",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "demander de l’aide",
+        "session_id": "A1-U14-L04",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "au pharmacien",
+        "session_id": "A1-U14-L04",
+        "task_id": "Q05"
+      }
+    ]
+  }
+}

@@ -1,0 +1,817 @@
+{
+  "unit_id": "PRE_A1-U17",
+  "package_file": "PRE_A1-U17.v1.json",
+  "session_ids": [
+    "PRE_A1-U17-L01",
+    "PRE_A1-U17-L02",
+    "PRE_A1-U17-L03",
+    "PRE_A1-U17-L04",
+    "PRE_A1-U17-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "ici",
+      "lexeme_key": "fr:ici:here-location",
+      "fr": "ici",
+      "ru": [
+        "здесь"
+      ],
+      "transcription_ru": "иси́",
+      "first_session_id": "PRE_A1-U17-L01"
+    },
+    {
+      "id": "la-lieu",
+      "lexeme_key": "fr:la:there-location",
+      "fr": "là",
+      "ru": [
+        "там (другая указанная точка в наших сценах)"
+      ],
+      "transcription_ru": "ля́",
+      "first_session_id": "PRE_A1-U17-L01"
+    },
+    {
+      "id": "sur",
+      "lexeme_key": "fr:sur:on-surface",
+      "fr": "sur",
+      "ru": [
+        "на (на поверхности указанного предмета)"
+      ],
+      "transcription_ru": "сюр",
+      "first_session_id": "PRE_A1-U17-L02"
+    },
+    {
+      "id": "sous",
+      "lexeme_key": "fr:sous:under",
+      "fr": "sous",
+      "ru": [
+        "под (указанным предметом)"
+      ],
+      "transcription_ru": "су",
+      "first_session_id": "PRE_A1-U17-L02"
+    },
+    {
+      "id": "dans",
+      "lexeme_key": "fr:dans:inside",
+      "fr": "dans",
+      "ru": [
+        "в (внутри указанного предмета)"
+      ],
+      "transcription_ru": "да́(н)",
+      "first_session_id": "PRE_A1-U17-L03"
+    },
+    {
+      "id": "boite",
+      "lexeme_key": "fr:boite:box",
+      "fr": "une boîte",
+      "ru": [
+        "коробка"
+      ],
+      "transcription_ru": "юн буа́т",
+      "first_session_id": "PRE_A1-U17-L03"
+    },
+    {
+      "id": "a-cote-de",
+      "lexeme_key": "fr:a-cote-de:next-to",
+      "fr": "à côté de",
+      "ru": [
+        "рядом с (указанным предметом)"
+      ],
+      "transcription_ru": "а котэ́ дё",
+      "first_session_id": "PRE_A1-U17-L03"
+    },
+    {
+      "id": "a-gauche-de",
+      "lexeme_key": "fr:a-gauche-de:left-of",
+      "fr": "à gauche de",
+      "ru": [
+        "слева от (указанного ориентира)"
+      ],
+      "transcription_ru": "а го́ш дё",
+      "first_session_id": "PRE_A1-U17-L04"
+    },
+    {
+      "id": "a-droite-de",
+      "lexeme_key": "fr:a-droite-de:right-of",
+      "fr": "à droite de",
+      "ru": [
+        "справа от (указанного ориентира)"
+      ],
+      "transcription_ru": "а друа́т дё",
+      "first_session_id": "PRE_A1-U17-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:cafe:venue",
+    "fr:cest-ou:place-location-question",
+    "fr:chaise:chair",
+    "fr:dans-le-sac:in-bag",
+    "fr:je:first-person-subject",
+    "fr:lire:read",
+    "fr:livre:book",
+    "fr:maintenant:now",
+    "fr:regarder:look-watch",
+    "fr:sac:bag",
+    "fr:soir:evening",
+    "fr:stylo:pen",
+    "fr:sur-la-table:on-table",
+    "fr:table:table",
+    "fr:tele:television"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "PRE_A1.U17.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U17.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U16.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U14.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U14.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:ici:here-location",
+      "reason": "Вернуть здесь в явно заданном контексте; не выводить место по голосу или отсутствующему жесту."
+    },
+    {
+      "lexeme_key": "fr:la:there-location",
+      "reason": "Сохранять узкий изученный контекст другой указанной точки, не объявляя это единственным значением во всей речи."
+    },
+    {
+      "lexeme_key": "fr:sur-la-table:on-table",
+      "reason": "Сохранить прежний ключ целого сочетания при отложенном повторении."
+    },
+    {
+      "lexeme_key": "fr:dans-le-sac:in-bag",
+      "reason": "Сохранить прежний ключ целого сочетания при отложенном повторении."
+    },
+    {
+      "lexeme_key": "fr:a-cote-de:next-to",
+      "reason": "Вернуть отношение рядом с известным предметом; перенос к людям при необходимости сначала показать."
+    },
+    {
+      "lexeme_key": "fr:a-gauche-de:left-of",
+      "reason": "При повторении явно задавать опору и направление чтения схемы."
+    },
+    {
+      "lexeme_key": "fr:a-droite-de:right-of",
+      "reason": "При повторении явно задавать опору и направление чтения схемы."
+    },
+    {
+      "lexeme_key": "fr:boite:box",
+      "reason": "Вернуть знакомую коробку как опору в короткой текстовой ситуации."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "local_database_references_checked": true,
+    "registry_collisions_checked": true,
+    "package_hash_verified": true,
+    "pronunciation_coverage_warnings_absent": true,
+    "new_lexeme_evidence_checked": true,
+    "practice_kind_checked": true,
+    "existing_spatial_chunk_keys_and_cards_preserved": true,
+    "general_relations_distinct_from_existing_chunks": true,
+    "spatial_frames_explained_before_testing": true,
+    "left_right_row_answers_checked": true,
+    "spatial_expression_tokens_preserved": true,
+    "shuffled_choice_feedback_checked": true,
+    "reading_length_checked": true,
+    "no_unused_local_vocabulary": true
+  },
+  "open_issues": [
+    "До импорта целевая база должна содержать PRE_A1-U16-L05; пакет не создаёт отсутствующую внешнюю зависимость.",
+    "Человеку нужно проверить язык, формулировки пространственных ситуаций и условные русские транскрипции; прослушать браузерную озвучку, включая связывание в полных образцах с здесь и сочетаниями перед гласным.",
+    "Выполнить предпросмотр, пробное прохождение и замер длительности. Ориентир 6 минут на занятие не измерен."
+  ],
+  "progress": {
+    "current_unit": "PRE_A1-U17",
+    "prepared_session_ids": [
+      "PRE_A1-U17-L01",
+      "PRE_A1-U17-L02",
+      "PRE_A1-U17-L03",
+      "PRE_A1-U17-L04",
+      "PRE_A1-U17-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "PRE_A1-U18",
+    "previous_unit": "PRE_A1-U16",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку текущей темы. Отдельное подтверждение принятия или импорта предыдущих пакетов не получено.",
+    "Показан короткий образец названия предмета, связующей формы и положения. Это не общая таблица глагола и не новое время.",
+    "Метка там дана в узком контексте другой указанной точки наших сцен. Универсальное утверждение, что это слово всегда обозначает только далёкое место, не вводится. Отсутствующие жесты и характеристики голоса не используются.",
+    "Существующие fr:sur-la-table:on-table и fr:dans-le-sac:in-bag сохранены с полными объектами. Новые компоненты sur и dans обозначают обобщённые отношения к разным опорам, а не заменяют ключи уже известных целых сочетаний.",
+    "Коробка — единственное новое название предмета. Остальные предметы взяты из предыдущих пакетов с их прежними ключами.",
+    "Положение слева и справа всегда отнесено к названному ориентиру. Строки явно читаются слева направо для читающего; поворот персонажа и взгляд изнутри рисунка не нужны.",
+    "В каждом задании свои данные. Не переносим положение одной вещи на другую и не добавляем сведения, которых нет в записке.",
+    "Многословные отношения сохраняются целыми в сборке. Восстановление короткого структурного фрагмента отдельно отмечено как грамматика, без ложного независимого оценивания всей лексики.",
+    "В первых четырёх занятиях соответственно 2, 2, 3 и 2 новых значения. В пятом занятии нового обязательного материала нет.",
+    "Русские транскрипции полных фраз учитывают связывающий согласный в показанной связке перед гласным. Это структурная авторская проверка, а не выполненное прослушивание браузера.",
+    "Основной реестр и предыдущие пакеты не изменены. Новые ключи предложены отдельно до принятия."
+  ],
+  "session_material": [
+    {
+      "session_id": "PRE_A1-U17-L01",
+      "new_lexeme_keys": [
+        "fr:ici:here-location",
+        "fr:la:there-location"
+      ],
+      "reused_lexeme_keys": [
+        "fr:cafe:venue",
+        "fr:cest-ou:place-location-question",
+        "fr:livre:book",
+        "fr:stylo:pen"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U17-L02",
+      "new_lexeme_keys": [
+        "fr:sur:on-surface",
+        "fr:sous:under"
+      ],
+      "reused_lexeme_keys": [
+        "fr:chaise:chair",
+        "fr:ici:here-location",
+        "fr:la:there-location",
+        "fr:livre:book",
+        "fr:stylo:pen",
+        "fr:sur-la-table:on-table",
+        "fr:table:table"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U17-L03",
+      "new_lexeme_keys": [
+        "fr:dans:inside",
+        "fr:boite:box",
+        "fr:a-cote-de:next-to"
+      ],
+      "reused_lexeme_keys": [
+        "fr:dans-le-sac:in-bag",
+        "fr:je:first-person-subject",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:maintenant:now",
+        "fr:sac:bag",
+        "fr:sous:under",
+        "fr:stylo:pen",
+        "fr:table:table"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U17-L04",
+      "new_lexeme_keys": [
+        "fr:a-gauche-de:left-of",
+        "fr:a-droite-de:right-of"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-cote-de:next-to",
+        "fr:chaise:chair",
+        "fr:je:first-person-subject",
+        "fr:livre:book",
+        "fr:regarder:look-watch",
+        "fr:soir:evening",
+        "fr:stylo:pen",
+        "fr:table:table",
+        "fr:tele:television"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U17-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-cote-de:next-to",
+        "fr:a-droite-de:right-of",
+        "fr:a-gauche-de:left-of",
+        "fr:boite:box",
+        "fr:chaise:chair",
+        "fr:dans-le-sac:in-bag",
+        "fr:dans:inside",
+        "fr:ici:here-location",
+        "fr:la:there-location",
+        "fr:livre:book",
+        "fr:sac:bag",
+        "fr:sous:under",
+        "fr:stylo:pen",
+        "fr:sur-la-table:on-table",
+        "fr:sur:on-surface",
+        "fr:table:table"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "PRE_A1-U17-L01",
+      "material": "Короткая фраза о положении книги и ручки с показанной связующей формой; определённые формы названий предметов в этом образце."
+    },
+    {
+      "session_id": "PRE_A1-U17-L02",
+      "material": "Обобщение отношения на поверхности к новой опоре и противопоставление положению под опорой."
+    },
+    {
+      "session_id": "PRE_A1-U17-L03",
+      "material": "Обобщение отношения внутри от знакомой сумки к новой коробке; целое выражение рядом с перед показанными опорами женского рода."
+    },
+    {
+      "session_id": "PRE_A1-U17-L04",
+      "material": "Целые отношения слева от и справа от с названной опорой; явное направление чтения текстовой строки."
+    }
+  ],
+  "spatial_conventions": {
+    "left_right_reference": "Указанная в вопросе опора; строка слева направо для читающего.",
+    "here_there_reference": "Значение метки прямо задано репликой и учебным контекстом; жесты не требуются.",
+    "external_image_required": false,
+    "each_task_self_contained": true
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:ici:here-location",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:la:there-location",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:sur:on-surface",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:sous:under",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U17-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:dans:inside",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:boite:box",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:a-cote-de:next-to",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:a-gauche-de:left-of",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:a-droite-de:right-of",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U17-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U17-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 9,
+    "external_prerequisites": [
+      "PRE_A1-U16-L05"
+    ],
+    "external_reference_status": "reference_package_and_local_project_validator_passed; other_target_databases_unverified",
+    "project_validator": {
+      "valid": true,
+      "errors": [],
+      "file_hash": "92fb94270379918d5ae7339b0fdae42491925dc534a8efd85d29d214fef47603",
+      "warning_counts": {
+        "editorial_review_required": 5,
+        "browser_tts": 11
+      },
+      "requires_editorial_review": true,
+      "report_file": "PRE_A1-U17.validation.json"
+    },
+    "max_french_reading_prompt_words": 14,
+    "new_lexical_meanings": 9,
+    "row_based_answers_verified": 3
+  }
+}

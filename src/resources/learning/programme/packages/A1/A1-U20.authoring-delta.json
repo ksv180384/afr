@@ -1,0 +1,878 @@
+{
+  "unit_id": "A1-U20",
+  "package_file": "A1-U20.v1.json",
+  "session_ids": [
+    "A1-U20-L01",
+    "A1-U20-L02",
+    "A1-U20-L03",
+    "A1-U20-L04",
+    "A1-U20-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "prendre-transport",
+      "lexeme_key": "fr:prendre:use-transport",
+      "fr": "prendre",
+      "ru": [
+        "ехать на выбранном транспорте"
+      ],
+      "transcription_ru": "пра(н)др",
+      "first_session_id": "A1-U20-L01"
+    },
+    {
+      "id": "retrouver",
+      "lexeme_key": "fr:retrouver:meet-by-arrangement",
+      "fr": "retrouver",
+      "ru": [
+        "встретиться с человеком по договорённости"
+      ],
+      "transcription_ru": "рётрувэ́",
+      "first_session_id": "A1-U20-L03"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:a-bientot:see-you-soon",
+    "fr:acheter:buy",
+    "fr:aller:near-future-auxiliary",
+    "fr:apporter:bring-object",
+    "fr:aujourdhui:today",
+    "fr:beurre:butter",
+    "fr:bleu:blue",
+    "fr:bonjour:greeting",
+    "fr:bureau:office-workplace",
+    "fr:bus:bus",
+    "fr:cabine:fitting-room",
+    "fr:cafe:coffee",
+    "fr:cafe:venue",
+    "fr:ce-soir:this-evening",
+    "fr:ce-week-end:this-weekend",
+    "fr:chemise:shirt",
+    "fr:collegue:work-colleague",
+    "fr:commencer:start",
+    "fr:confiture:jam",
+    "fr:cours:class-session",
+    "fr:dabord:first-step",
+    "fr:demain:tomorrow",
+    "fr:deux:cardinal-number",
+    "fr:dimanche:weekday",
+    "fr:enfin:final-step",
+    "fr:ensuite:next-step",
+    "fr:envoyer:send-message",
+    "fr:et:and",
+    "fr:fermer:close-object",
+    "fr:finir:finish",
+    "fr:francais:french-language",
+    "fr:frere:brother",
+    "fr:gare:railway-station",
+    "fr:heure:clock-hour",
+    "fr:hotel:hotel",
+    "fr:huit:cardinal-number",
+    "fr:ici:here-location",
+    "fr:il-fait-beau:fine-weather",
+    "fr:il-pleut:raining",
+    "fr:je-prends:choosing-item",
+    "fr:je-promets:explicit-promise",
+    "fr:je-voudrais:polite-request",
+    "fr:kilo:kilogram",
+    "fr:lire:read",
+    "fr:livre:book",
+    "fr:maison:house-home",
+    "fr:manger:eat",
+    "fr:message:short-written-message",
+    "fr:metro:metro",
+    "fr:midi:noon",
+    "fr:neuf:cardinal-number",
+    "fr:non:negative-answer",
+    "fr:ouvrir:open-object",
+    "fr:pain:bread",
+    "fr:paquet:food-packet",
+    "fr:parc:park",
+    "fr:pates:pasta",
+    "fr:prendre-le-petit-dejeuner:have-breakfast",
+    "fr:pull:sweater",
+    "fr:quatorze:cardinal-number",
+    "fr:reception:hotel-front-desk",
+    "fr:rendre-visite:visit-person",
+    "fr:repondre:reply-to-message",
+    "fr:rester:stay-at-place",
+    "fr:rouge:red",
+    "fr:samedi:weekday",
+    "fr:signature:message-author-name",
+    "fr:sil-vous-plait:polite-request",
+    "fr:tartine:bread-with-spread",
+    "fr:tomate:tomato",
+    "fr:travail:work-noun",
+    "fr:travailler:work",
+    "fr:un:cardinal-number"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A1.U20.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U20-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U20-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U20-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U20-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U20-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U20-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U20-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U20-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U20-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U20-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U20-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U20-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U20-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U20-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U20-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U20.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U20-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U20-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U20-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U20-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U20-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U20-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U20-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U20-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U20-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U20-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U20-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U20-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U20-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U20-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U20-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U20-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U19.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U20-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U20-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U17.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U20-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U20-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U17.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U20-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U03.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U20-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U11.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U20-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U12.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U20-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U05.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U20-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U15.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U20-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U08.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U20-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U18.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U20-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:prendre:use-transport",
+      "reason": "Вернуть транспортное значение при подготовке поездки A2."
+    },
+    {
+      "lexeme_key": "fr:billet:transport-ticket",
+      "reason": "Повторить билет как отдельный предмет поездки."
+    },
+    {
+      "lexeme_key": "fr:gare:railway-station",
+      "reason": "Вернуть вокзал как транспортный ориентир."
+    },
+    {
+      "lexeme_key": "fr:reservation:hotel-booking",
+      "reason": "Повторить бронирование, сохранив контекст гостиницы."
+    },
+    {
+      "lexeme_key": "fr:demain:tomorrow",
+      "reason": "Сохранить день будущего действия."
+    },
+    {
+      "lexeme_key": "fr:envoyer:send-message",
+      "reason": "Повторить отправку короткого сообщения отдельно от ответа."
+    },
+    {
+      "lexeme_key": "fr:retrouver:meet-by-arrangement",
+      "reason": "Повторить назначенную встречу с человеком."
+    },
+    {
+      "lexeme_key": "fr:aller:near-future-auxiliary",
+      "reason": "Сохранить рамку ближайшего намерения."
+    },
+    {
+      "lexeme_key": "fr:je-voudrais:polite-request",
+      "reason": "Вернуть знакомую вежливую просьбу."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "new_local_ids_do_not_overwrite_existing_meanings": true,
+    "transport_meaning_separated_from_breakfast_and_item_choice": true,
+    "known_message_and_future_keys_preserved": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "action_day_time_and_object_distinctions_reviewed": true,
+    "recipient_and_author_distinctions_reviewed": true,
+    "checkpoint_skill_balance_checked": true,
+    "checkpoint_procedural_introduction_without_answer_examples": true,
+    "all_A1_packages_and_formal_objective_coverage_checked": true,
+    "apostrophes_kept_in_whole_tokens": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A1-U19-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Редактору проверить естественность французских бытовых реплик и двух новых контекстных значений, транскрипции и сложность итогового контроля.",
+    "Прослушать браузерную озвучку часов, числительных, транспортных сочетаний и имён. Время аудио и занятий не измерено.",
+    "Выполнить предпросмотр и пробное прохождение пяти занятий, включая контроль. Контроль не является подтверждением всего CEFR A1."
+  ],
+  "progress": {
+    "current_unit": "A1-U20",
+    "prepared_session_ids": [
+      "A1-U20-L01",
+      "A1-U20-L02",
+      "A1-U20-L03",
+      "A1-U20-L04",
+      "A1-U20-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A2-U01",
+    "next_unit_title": "Подготовка поездки",
+    "previous_unit": "A1-U19",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A1-U20. Принятие и импорт предыдущих пакетов не подтверждены; повторение использует полные объекты подготовленных пакетов.",
+    "Интегративная тема вводит только два новых значения: одно в L01 и одно в L03. Остальные слова и конструкции повторяются. L05 не вводит нового обязательного материала.",
+    "Prendre в транспортном сочетании получает fr:prendre:use-transport. Прежние значения завтрака и выбора товара не переписываются и не объединяются с транспортным.",
+    "Retrouver показано как встреча с человеком по договорённости, не поиск вещи. Новое значение используется в знакомой рамке Je vais, без новой полной таблицы спряжения.",
+    "Envoyer, répondre, завтрак, рабочие действия, занятие, покупка, количество, время, приветствие и подпись сохраняют прежние ключи.",
+    "В L01 повторена последовательность действий A1-U19, в L03 — явное обещание A1-U17, в L04 — планы выходных A1-U17. Повторение подготовленного материала не подтверждает его принятие или освоение.",
+    "Дни и часы относятся к отдельному действию: час завтрака не переносится на поездку, время работы — на занятие, время встречи — на ответ.",
+    "В образце личного сообщения имя после приветствия обозначает адресата, имя после завершения — автора. Имена вымышленные, реальные сообщения никому не отправляются.",
+    "L05 имеет kind=checkpoint и восемь вопросов: два listening, два reading, два vocabulary, один grammar, один sentence_building. Вводная карточка описывает процедуру без готовых ответов.",
+    "Контроль возвращает кафе U03, одежду U05, гостиницу U08, работу U11, учёбу U12, погоду U15, план U17, сообщение U18 и запрет U19. Теги назначены конкретным проверяемым действиям, а не всем целям уровня сразу.",
+    "Восемь вопросов — выборка бытовых ситуаций. Формальное покрытие сорока обязательных целей проверяется накопительно по всем ста занятиям; оно не доказывает смысловое качество без редактора и не подтверждает свободную речь.",
+    "После завершения темы проверяется подготовленный комплект A1. Публикация, принятие пользователем и достижения ученика не выводятся из наличия файлов.",
+    "Пакет содержит только текущую тему без levels и curricula. Сборка программы перехода между уровнями — отдельная задача, здесь не выполняется. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A1-U20-L01",
+      "new_lexeme_keys": [
+        "fr:prendre:use-transport"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:near-future-auxiliary",
+        "fr:aujourdhui:today",
+        "fr:bonjour:greeting",
+        "fr:bus:bus",
+        "fr:cafe:coffee",
+        "fr:dabord:first-step",
+        "fr:demain:tomorrow",
+        "fr:enfin:final-step",
+        "fr:ensuite:next-step",
+        "fr:fermer:close-object",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:je-prends:choosing-item",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:metro:metro",
+        "fr:neuf:cardinal-number",
+        "fr:ouvrir:open-object",
+        "fr:prendre-le-petit-dejeuner:have-breakfast",
+        "fr:sil-vous-plait:polite-request"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U20-L02",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:aller:near-future-auxiliary",
+        "fr:aujourdhui:today",
+        "fr:bureau:office-workplace",
+        "fr:bus:bus",
+        "fr:collegue:work-colleague",
+        "fr:commencer:start",
+        "fr:cours:class-session",
+        "fr:demain:tomorrow",
+        "fr:ensuite:next-step",
+        "fr:finir:finish",
+        "fr:francais:french-language",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:metro:metro",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:prendre-le-petit-dejeuner:have-breakfast",
+        "fr:prendre:use-transport",
+        "fr:quatorze:cardinal-number",
+        "fr:travail:work-noun",
+        "fr:travailler:work"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U20-L03",
+      "new_lexeme_keys": [
+        "fr:retrouver:meet-by-arrangement"
+      ],
+      "reused_lexeme_keys": [
+        "fr:acheter:buy",
+        "fr:aller:near-future-auxiliary",
+        "fr:apporter:bring-object",
+        "fr:aujourdhui:today",
+        "fr:cafe:venue",
+        "fr:ce-soir:this-evening",
+        "fr:demain:tomorrow",
+        "fr:deux:cardinal-number",
+        "fr:envoyer:send-message",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:je-promets:explicit-promise",
+        "fr:je-voudrais:polite-request",
+        "fr:kilo:kilogram",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:maison:house-home",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:pain:bread",
+        "fr:paquet:food-packet",
+        "fr:parc:park",
+        "fr:pates:pasta",
+        "fr:rester:stay-at-place",
+        "fr:tomate:tomato",
+        "fr:un:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U20-L04",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-bientot:see-you-soon",
+        "fr:aller:near-future-auxiliary",
+        "fr:aujourdhui:today",
+        "fr:bonjour:greeting",
+        "fr:cafe:venue",
+        "fr:ce-soir:this-evening",
+        "fr:ce-week-end:this-weekend",
+        "fr:demain:tomorrow",
+        "fr:dimanche:weekday",
+        "fr:envoyer:send-message",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:maison:house-home",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:parc:park",
+        "fr:rendre-visite:visit-person",
+        "fr:repondre:reply-to-message",
+        "fr:rester:stay-at-place",
+        "fr:retrouver:meet-by-arrangement",
+        "fr:samedi:weekday",
+        "fr:signature:message-author-name",
+        "fr:sil-vous-plait:polite-request"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U20-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-bientot:see-you-soon",
+        "fr:aller:near-future-auxiliary",
+        "fr:aujourdhui:today",
+        "fr:beurre:butter",
+        "fr:bleu:blue",
+        "fr:bonjour:greeting",
+        "fr:bureau:office-workplace",
+        "fr:cabine:fitting-room",
+        "fr:cafe:coffee",
+        "fr:cafe:venue",
+        "fr:ce-soir:this-evening",
+        "fr:chemise:shirt",
+        "fr:commencer:start",
+        "fr:confiture:jam",
+        "fr:cours:class-session",
+        "fr:demain:tomorrow",
+        "fr:envoyer:send-message",
+        "fr:et:and",
+        "fr:finir:finish",
+        "fr:francais:french-language",
+        "fr:frere:brother",
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:hotel:hotel",
+        "fr:ici:here-location",
+        "fr:il-fait-beau:fine-weather",
+        "fr:il-pleut:raining",
+        "fr:je-voudrais:polite-request",
+        "fr:maison:house-home",
+        "fr:manger:eat",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:non:negative-answer",
+        "fr:parc:park",
+        "fr:pull:sweater",
+        "fr:quatorze:cardinal-number",
+        "fr:reception:hotel-front-desk",
+        "fr:repondre:reply-to-message",
+        "fr:rester:stay-at-place",
+        "fr:retrouver:meet-by-arrangement",
+        "fr:rouge:red",
+        "fr:signature:message-author-name",
+        "fr:sil-vous-plait:polite-request",
+        "fr:tartine:bread-with-spread",
+        "fr:travailler:work"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A1-U20-L01",
+      "material": "Новое транспортное значение в знакомой форме Je prends; повторение D’abord / Ensuite и Je vais prendre."
+    },
+    {
+      "session_id": "A1-U20-L02",
+      "material": "Повторение настоящего рабочего расписания, времени занятия и Je vais travailler."
+    },
+    {
+      "session_id": "A1-U20-L03",
+      "material": "Новое действие retrouver с человеком в знакомой рамке Je vais; повторение количества и частичного артикля."
+    },
+    {
+      "session_id": "A1-U20-L04",
+      "material": "Повторение отправки и ответа, отрицательного ближайшего намерения и структуры личного сообщения."
+    }
+  ],
+  "text_conventions": {
+    "situation_status": "Вымышленные оригинальные бытовые ситуации.",
+    "time_scope": "Сегодня, завтра и часы относятся к отдельной ситуации и действию.",
+    "name_roles": "В учебном шаблоне имя после приветствия — адресат, имя после завершения — автор.",
+    "checkpoint_scope": "Выборка уровня, без заявления о полном подтверждении CEFR A1.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:prendre:use-transport",
+      "evidence": [
+        {
+          "session_id": "A1-U20-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U20-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:retrouver:meet-by-arrangement",
+      "evidence": [
+        {
+          "session_id": "A1-U20-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U20-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U20-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U20-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U20-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 2,
+    "external_prerequisites": [
+      "A1-U19-L05"
+    ],
+    "external_reference_status": "A1-U19-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 10
+      },
+      "file_hash": "f80f95ee154f59231e3ee4f3b0ba8000ec5dfba033b35209553372fd8c273738",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 73,
+    "text_lengths": [
+      {
+        "session_id": "A1-U20-L01",
+        "reading_word_counts": [
+          16,
+          22
+        ],
+        "listening_word_counts": [
+          17
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U20-L02",
+        "reading_word_counts": [
+          22,
+          26
+        ],
+        "listening_word_counts": [
+          23
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U20-L03",
+        "reading_word_counts": [
+          23,
+          26
+        ],
+        "listening_word_counts": [
+          16
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U20-L04",
+        "reading_word_counts": [
+          26,
+          24
+        ],
+        "listening_word_counts": [
+          18
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U20-L05",
+        "reading_word_counts": [
+          23,
+          21
+        ],
+        "listening_word_counts": [
+          22,
+          22
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "Je prends le bus",
+        "session_id": "A1-U20-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je prends le métro",
+        "session_id": "A1-U20-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "je vais prendre le bus",
+        "session_id": "A1-U20-L01",
+        "task_id": "Q05"
+      },
+      {
+        "frame": "Je vais travailler au bureau demain",
+        "session_id": "A1-U20-L02",
+        "task_id": "Q06"
+      },
+      {
+        "frame": "retrouver mon frère",
+        "session_id": "A1-U20-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je ne vais pas envoyer le message ce soir",
+        "session_id": "A1-U20-L04",
+        "task_id": "Q06"
+      }
+    ]
+  },
+  "level_audit": {
+    "file": "A1-U20.level-audit.json",
+    "units": 20,
+    "sessions": 100,
+    "tasks": 720,
+    "mandatory_objectives": 40,
+    "formal_coverage_passed": true,
+    "publication_status": "not_checked",
+    "human_editorial_review_completed": false
+  }
+}

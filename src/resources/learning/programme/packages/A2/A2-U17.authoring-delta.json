@@ -1,0 +1,832 @@
+{
+  "unit_id": "A2-U17",
+  "package_file": "A2-U17.v1.json",
+  "package_id": "programme-a2-u17-v1",
+  "session_ids": [
+    "A2-U17-L01",
+    "A2-U17-L02",
+    "A2-U17-L03",
+    "A2-U17-L04",
+    "A2-U17-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "tu-devrais",
+      "lexeme_key": "fr:tu-devrais:advice-action",
+      "fr": "tu devrais",
+      "ru": [
+        "тебе стоило бы: совет сделать действие"
+      ],
+      "transcription_ru": "тю дёврэ́",
+      "first_session_id": "A2-U17-L01"
+    },
+    {
+      "id": "a-ta-place",
+      "lexeme_key": "fr:a-ta-place:advice-perspective",
+      "fr": "à ta place",
+      "ru": [
+        "на твоём месте: позиция дающего совет"
+      ],
+      "transcription_ru": "а та пла́с",
+      "first_session_id": "A2-U17-L01"
+    },
+    {
+      "id": "il-vaut-mieux",
+      "lexeme_key": "fr:il-vaut-mieux:preferable-action",
+      "fr": "il vaut mieux",
+      "ru": [
+        "лучше сделать: рекомендация"
+      ],
+      "transcription_ru": "иль во мьё́",
+      "first_session_id": "A2-U17-L02"
+    },
+    {
+      "id": "eviter",
+      "lexeme_key": "fr:eviter:avoid-option",
+      "fr": "éviter",
+      "ru": [
+        "избегать указанного варианта"
+      ],
+      "transcription_ru": "эвитэ́",
+      "first_session_id": "A2-U17-L02"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:aller:go",
+    "fr:autre:other",
+    "fr:bruyant:noisy-place",
+    "fr:calme:quiet-place",
+    "fr:choisir:choose-option",
+    "fr:d-ici:by-deadline",
+    "fr:delai:task-completion-deadline",
+    "fr:ecrire:write",
+    "fr:envoyer:send-message",
+    "fr:etre-en-train-de:action-in-progress",
+    "fr:faire-du-bruit:make-noise",
+    "fr:foret:forest",
+    "fr:il-est-interdit-de:prohibition",
+    "fr:je-veux:want",
+    "fr:je-voudrais:polite-request",
+    "fr:lac:lake",
+    "fr:message:short-written-message",
+    "fr:midi:noon",
+    "fr:parc:park",
+    "fr:parce-que:because-reason",
+    "fr:plus:greater-degree-comparison",
+    "fr:pourriez-vous:polite-action-request",
+    "fr:preciser:clarify-service-details",
+    "fr:pres-de:near-place",
+    "fr:que:relative-direct-object",
+    "fr:qui:relative-subject",
+    "fr:randonnee:recreational-hike",
+    "fr:s-occuper-de:handle-task",
+    "fr:sentier:walking-path",
+    "fr:si:real-condition",
+    "fr:soeur:sister",
+    "fr:tache:work-task",
+    "fr:terminer:finish-task",
+    "fr:trop:excessive-degree",
+    "fr:vendredi:weekday",
+    "fr:venir-de:recently-completed-action"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A2.U17.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U17-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U17-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U17-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U17-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U17-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U17-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U17-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U17-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U17-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U17-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U17-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U17.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U17-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U17-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U17-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U17-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U17-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U17-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U17-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U17-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U17-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U17-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U17-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U17-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U16.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U17-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U14.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U17-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U14.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U17-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:tu-devrais:advice-action",
+      "reason": "Отличать совет от готового результата."
+    },
+    {
+      "lexeme_key": "fr:a-ta-place:advice-perspective",
+      "reason": "Сохранять позицию дающего совет."
+    },
+    {
+      "lexeme_key": "fr:il-vaut-mieux:preferable-action",
+      "reason": "Отличать рекомендацию от запрета."
+    },
+    {
+      "lexeme_key": "fr:eviter:avoid-option",
+      "reason": "Не подменять избегать действиями выбрать и следовать."
+    },
+    {
+      "lexeme_key": "fr:si:real-condition",
+      "reason": "Отличать условие от причины."
+    },
+    {
+      "lexeme_key": "fr:parce-que:because-reason",
+      "reason": "Сохранять прямо названное основание."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_ids_keys_and_french_forms_checked": true,
+    "existing_word_keys_preserved": true,
+    "reading_lengths_checked": true,
+    "selected_models_explained_before_testing": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Зависимость A2-U16-L05 найдена проектным валидатором. Это не подтверждает публикацию или принятие пользователем.",
+    "Редактору проверить естественность советов, условной формы choisirais и выбранной формы tu veux; прослушать французскую озвучку, в том числе mieux éviter.",
+    "Выполнить предпросмотр и пробное прохождение, измерить время. Эти действия фактически не выполнялись."
+  ],
+  "progress": {
+    "current_unit": "A2-U17",
+    "prepared_session_ids": [
+      "A2-U17-L01",
+      "A2-U17-L02",
+      "A2-U17-L03",
+      "A2-U17-L04",
+      "A2-U17-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A2-U18",
+    "next_unit_title": "Личные письма"
+  },
+  "scope_notes": [
+    "Один полный пакет пяти занятий. В каждом 6–8 заданий; L05 — практика, не контроль.",
+    "Четыре новых выражения распределены как два, два, ноль, ноль, ноль. Выбранные грамматические формы и новые конструкции объяснены до проверки; L05 нового обязательного материала не вводит.",
+    "Tu devrais и je choisirais показаны как конкретные формы, без полной таблицы условного наклонения. Choisir сохраняет прежний ключ и полный объект; новый ключ ради формы не создаётся.",
+    "Tu veux — выбранная форма того же значения желания, что прежнее je veux. Сохраняется fr:je-veux:want и полный объект; новая форма объяснена до проверки.",
+    "Si и parce que сохраняют прежние ключи. Условие не утверждается само по себе как установленный факт; причина не подменяется условием.",
+    "В L01 повторяется названное основание выбора прогулки из A2-U16. В L03 — ход выполнения из A2-U14, в L04 — крайний срок оттуда же. Прежние карточки не изменяются.",
+    "Совет в показанных ситуациях не равен запрету, обязанности или выполненному выбору. Il vaut mieux éviter не объявляет закрытие реального маршрута.",
+    "Все советы относятся к вымышленным языковым ситуациям. Реальные туристические маршруты, безопасность, медицина, финансы и выбор услуг не рекомендуются.",
+    "Цена, отсутствие других людей и реальная безопасность не выводятся из тишины. Основание выбора ограничено словами текста.",
+    "Для приблизительной транскрипции mieux éviter выбран связный вариант с з перед гласным. Справочник просмотрен, реальное аудио не прослушивалось.",
+    "Озвучка только браузером: fr-FR, asset_id=null. Нет аудиофайлов, внешних сервисов озвучки, свободного текста и обязательного микрофона. Импорт и публикация не выполнялись, принятие пользователем не подтверждено."
+  ],
+  "session_material": [
+    {
+      "session_id": "A2-U17-L01",
+      "new_lexeme_keys": [
+        "fr:tu-devrais:advice-action",
+        "fr:a-ta-place:advice-perspective"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:go",
+        "fr:autre:other",
+        "fr:bruyant:noisy-place",
+        "fr:calme:quiet-place",
+        "fr:choisir:choose-option",
+        "fr:faire-du-bruit:make-noise",
+        "fr:foret:forest",
+        "fr:il-est-interdit-de:prohibition",
+        "fr:je-voudrais:polite-request",
+        "fr:lac:lake",
+        "fr:parc:park",
+        "fr:plus:greater-degree-comparison",
+        "fr:pres-de:near-place",
+        "fr:que:relative-direct-object",
+        "fr:qui:relative-subject",
+        "fr:randonnee:recreational-hike",
+        "fr:sentier:walking-path",
+        "fr:soeur:sister",
+        "fr:tache:work-task",
+        "fr:terminer:finish-task",
+        "fr:venir-de:recently-completed-action"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U17-L02",
+      "new_lexeme_keys": [
+        "fr:il-vaut-mieux:preferable-action",
+        "fr:eviter:avoid-option"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-ta-place:advice-perspective",
+        "fr:aller:go",
+        "fr:autre:other",
+        "fr:bruyant:noisy-place",
+        "fr:calme:quiet-place",
+        "fr:choisir:choose-option",
+        "fr:faire-du-bruit:make-noise",
+        "fr:foret:forest",
+        "fr:il-est-interdit-de:prohibition",
+        "fr:je-voudrais:polite-request",
+        "fr:lac:lake",
+        "fr:plus:greater-degree-comparison",
+        "fr:qui:relative-subject",
+        "fr:randonnee:recreational-hike",
+        "fr:sentier:walking-path",
+        "fr:soeur:sister",
+        "fr:tache:work-task",
+        "fr:terminer:finish-task",
+        "fr:tu-devrais:advice-action",
+        "fr:venir-de:recently-completed-action"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U17-L03",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-ta-place:advice-perspective",
+        "fr:aller:go",
+        "fr:autre:other",
+        "fr:bruyant:noisy-place",
+        "fr:calme:quiet-place",
+        "fr:choisir:choose-option",
+        "fr:delai:task-completion-deadline",
+        "fr:ecrire:write",
+        "fr:envoyer:send-message",
+        "fr:etre-en-train-de:action-in-progress",
+        "fr:foret:forest",
+        "fr:je-veux:want",
+        "fr:je-voudrais:polite-request",
+        "fr:lac:lake",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:parce-que:because-reason",
+        "fr:plus:greater-degree-comparison",
+        "fr:randonnee:recreational-hike",
+        "fr:s-occuper-de:handle-task",
+        "fr:sentier:walking-path",
+        "fr:si:real-condition",
+        "fr:tache:work-task",
+        "fr:terminer:finish-task",
+        "fr:tu-devrais:advice-action",
+        "fr:vendredi:weekday",
+        "fr:venir-de:recently-completed-action"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U17-L04",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-ta-place:advice-perspective",
+        "fr:aller:go",
+        "fr:autre:other",
+        "fr:bruyant:noisy-place",
+        "fr:calme:quiet-place",
+        "fr:choisir:choose-option",
+        "fr:d-ici:by-deadline",
+        "fr:delai:task-completion-deadline",
+        "fr:ecrire:write",
+        "fr:eviter:avoid-option",
+        "fr:foret:forest",
+        "fr:je-veux:want",
+        "fr:je-voudrais:polite-request",
+        "fr:lac:lake",
+        "fr:message:short-written-message",
+        "fr:midi:noon",
+        "fr:parce-que:because-reason",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:randonnee:recreational-hike",
+        "fr:s-occuper-de:handle-task",
+        "fr:sentier:walking-path",
+        "fr:si:real-condition",
+        "fr:tache:work-task",
+        "fr:terminer:finish-task",
+        "fr:trop:excessive-degree",
+        "fr:tu-devrais:advice-action",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U17-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-ta-place:advice-perspective",
+        "fr:aller:go",
+        "fr:autre:other",
+        "fr:bruyant:noisy-place",
+        "fr:calme:quiet-place",
+        "fr:choisir:choose-option",
+        "fr:eviter:avoid-option",
+        "fr:foret:forest",
+        "fr:il-vaut-mieux:preferable-action",
+        "fr:je-veux:want",
+        "fr:je-voudrais:polite-request",
+        "fr:lac:lake",
+        "fr:parce-que:because-reason",
+        "fr:qui:relative-subject",
+        "fr:randonnee:recreational-hike",
+        "fr:sentier:walking-path",
+        "fr:si:real-condition",
+        "fr:trop:excessive-degree",
+        "fr:tu-devrais:advice-action"
+      ],
+      "task_count": 8
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:tu-devrais:advice-action",
+      "evidence": [
+        {
+          "session_id": "A2-U17-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U17-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U17-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U17-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U17-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:a-ta-place:advice-perspective",
+      "evidence": [
+        {
+          "session_id": "A2-U17-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U17-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U17-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:il-vaut-mieux:preferable-action",
+      "evidence": [
+        {
+          "session_id": "A2-U17-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U17-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U17-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:eviter:avoid-option",
+      "evidence": [
+        {
+          "session_id": "A2-U17-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U17-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U17-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U17-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A2-U17-L01",
+      "material": "Tu devrais; À ta place, je choisirais как выбранная форма."
+    },
+    {
+      "session_id": "A2-U17-L02",
+      "material": "Il vaut mieux éviter; рекомендация отдельно от запрета."
+    },
+    {
+      "session_id": "A2-U17-L03",
+      "material": "Si tu veux + действие; настоящее время в условии."
+    },
+    {
+      "session_id": "A2-U17-L04",
+      "material": "Рекомендация с parce que; причина отдельно от условия."
+    }
+  ],
+  "linguistic_sources": [
+    {
+      "title": "Académie française — Liaisons",
+      "url": "https://www.academie-francaise.fr/questions-de-langue",
+      "scope": "Общие правила связывания; раздел Liaisons просмотрен. Не является прослушиванием конкретной фразы."
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 4,
+    "external_prerequisites": [
+      "A2-U16-L05"
+    ],
+    "external_reference_status": "A2-U16-L05_found_by_project_validator; publication_and_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 6
+      },
+      "file_hash": "84a21d0f3d09b584b1698a32a63355a96f8ef6de62019a4cada770560a08079a"
+    },
+    "existing_lexeme_objects_preserved": 36,
+    "text_lengths": [
+      {
+        "session_id": "A2-U17-L01",
+        "reading_word_counts": [
+          39,
+          34
+        ],
+        "listening_word_counts": [
+          34
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U17-L02",
+        "reading_word_counts": [
+          34,
+          35
+        ],
+        "listening_word_counts": [
+          35
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U17-L03",
+        "reading_word_counts": [
+          34,
+          33
+        ],
+        "listening_word_counts": [
+          33
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U17-L04",
+        "reading_word_counts": [
+          34,
+          34
+        ],
+        "listening_word_counts": [
+          34
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U17-L05",
+        "reading_word_counts": [
+          34,
+          34
+        ],
+        "listening_word_counts": [
+          34,
+          35
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_model_first_tasks": [
+      {
+        "frame": "Tu devrais choisir le sentier calme",
+        "session_id": "A2-U17-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "À ta place, je choisirais ce sentier",
+        "session_id": "A2-U17-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Il vaut mieux éviter le sentier bruyant",
+        "session_id": "A2-U17-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Si tu veux faire une randonnée",
+        "session_id": "A2-U17-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "parce que l’autre sentier est trop bruyant",
+        "session_id": "A2-U17-L04",
+        "task_id": "Q03"
+      }
+    ]
+  }
+}

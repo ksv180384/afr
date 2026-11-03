@@ -1,4 +1,8 @@
 <script setup>
+import { useAttrs } from 'vue';
+defineOptions({ inheritAttrs: false });
+const attrs = useAttrs();
+const textareaAttrs = () => Object.fromEntries(Object.entries(attrs).filter(([key]) => !['class', 'style'].includes(key)));
 const model = defineModel();
 const props = defineProps({
   label: { type: String, default: '' },
@@ -11,10 +15,11 @@ const props = defineProps({
 </script>
 
 <template>
-<div class="afr-textarea">
-  <label v-if="label">{{ label }}</label>
+<div class="afr-textarea" :class="attrs.class" :style="attrs.style">
+  <label v-if="label" :for="attrs.id">{{ label }}</label>
   <div class="textarea-block">
     <textarea
+      v-bind="textareaAttrs()"
       v-model="model"
       autocomplete="off"
       :cols="cols"

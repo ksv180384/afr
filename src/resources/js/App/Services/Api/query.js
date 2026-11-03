@@ -48,3 +48,5 @@ export const page = async (path, params, conf = {}) => {
   return query.get(path, conf);
 }
 
+
+export const patch = (path, data, conf = {}) => query.patch(path, data, conf);

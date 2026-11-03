@@ -1,0 +1,955 @@
+{
+  "unit_id": "A2-U16",
+  "package_file": "A2-U16.v1.json",
+  "package_id": "programme-a2-u16-v1",
+  "session_ids": [
+    "A2-U16-L01",
+    "A2-U16-L02",
+    "A2-U16-L03",
+    "A2-U16-L04",
+    "A2-U16-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "foret",
+      "lexeme_key": "fr:foret:forest",
+      "fr": "une forêt",
+      "ru": [
+        "лес"
+      ],
+      "transcription_ru": "юн форэ́",
+      "first_session_id": "A2-U16-L01"
+    },
+    {
+      "id": "lac",
+      "lexeme_key": "fr:lac:lake",
+      "fr": "un lac",
+      "ru": [
+        "озеро"
+      ],
+      "transcription_ru": "э(н) лак",
+      "first_session_id": "A2-U16-L01"
+    },
+    {
+      "id": "sentier",
+      "lexeme_key": "fr:sentier:walking-path",
+      "fr": "un sentier",
+      "ru": [
+        "тропа для прогулки"
+      ],
+      "transcription_ru": "э(н) са(н)тье́",
+      "first_session_id": "A2-U16-L01"
+    },
+    {
+      "id": "randonnee",
+      "lexeme_key": "fr:randonnee:recreational-hike",
+      "fr": "une randonnée",
+      "ru": [
+        "пешая прогулка по маршруту"
+      ],
+      "transcription_ru": "юн ра(н)донэ́",
+      "first_session_id": "A2-U16-L01"
+    },
+    {
+      "id": "suivre-chemin",
+      "lexeme_key": "fr:suivre:follow-path",
+      "fr": "suivre",
+      "ru": [
+        "следовать по тропе или маршруту"
+      ],
+      "transcription_ru": "сюи́вр",
+      "first_session_id": "A2-U16-L02"
+    },
+    {
+      "id": "proteger",
+      "lexeme_key": "fr:proteger:protect-place",
+      "fr": "protéger",
+      "ru": [
+        "защищать, беречь место природы"
+      ],
+      "transcription_ru": "протэжэ́",
+      "first_session_id": "A2-U16-L03"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:aller:go",
+    "fr:annoncer:announce-event",
+    "fr:apporter:bring-object",
+    "fr:apprendre:study-subject",
+    "fr:autre:other",
+    "fr:avoir-lieu:event-occurrence",
+    "fr:bruyant:noisy-place",
+    "fr:calme:quiet-place",
+    "fr:choisir:choose-option",
+    "fr:cours:class-session",
+    "fr:depuis:ongoing-since-duration",
+    "fr:deux:cardinal-number",
+    "fr:disponible:available-in-schedule",
+    "fr:dix:cardinal-number",
+    "fr:faire-du-bruit:make-noise",
+    "fr:fete:celebration-gathering",
+    "fr:francais:french-language",
+    "fr:frere:brother",
+    "fr:gare:railway-station",
+    "fr:heure:clock-hour",
+    "fr:horaire:work-schedule",
+    "fr:huit:cardinal-number",
+    "fr:il-est-interdit-de:prohibition",
+    "fr:il-faut:necessary-action",
+    "fr:je-voudrais:polite-request",
+    "fr:livre:book",
+    "fr:loin-de:far-from-place",
+    "fr:mairie:municipal-office",
+    "fr:mardi:weekday",
+    "fr:matin:morning",
+    "fr:mois:calendar-month",
+    "fr:musee:museum",
+    "fr:obligatoire:required-in-course",
+    "fr:par-carte:card-payment",
+    "fr:parc:park",
+    "fr:payer:pay",
+    "fr:plus:greater-degree-comparison",
+    "fr:preciser:clarify-service-details",
+    "fr:pres-de:near-place",
+    "fr:que:relative-direct-object",
+    "fr:qui:relative-subject",
+    "fr:rester:stay-at-place",
+    "fr:soeur:sister",
+    "fr:soir:evening",
+    "fr:tarif:service-price",
+    "fr:titre:message-headline",
+    "fr:un:cardinal-number",
+    "fr:vendredi:weekday",
+    "fr:venir-de:recently-completed-action"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A2.U16.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U16-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U16-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U16-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U16-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U16-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U16-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U16-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U16-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U16-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U16-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U16-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U16.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U16-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U16-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U16-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U16-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U16-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U16-L04",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U16-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U16-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U15.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U16-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U13.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U16-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U16-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U13.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U16-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:sentier:walking-path",
+      "reason": "Сохранять путь отдельно от действия прогулки."
+    },
+    {
+      "lexeme_key": "fr:randonnee:recreational-hike",
+      "reason": "Вернуть выбранную активность."
+    },
+    {
+      "lexeme_key": "fr:suivre:follow-path",
+      "reason": "Различать начало и конец маршрута."
+    },
+    {
+      "lexeme_key": "fr:proteger:protect-place",
+      "reason": "Повторить беречь место природы в конкретной ситуации."
+    },
+    {
+      "lexeme_key": "fr:rester:stay-at-place",
+      "reason": "Сохранить прежний ключ оставаться в месте."
+    },
+    {
+      "lexeme_key": "fr:qui:relative-subject",
+      "reason": "Вернуть описание собственного свойства места."
+    },
+    {
+      "lexeme_key": "fr:que:relative-direct-object",
+      "reason": "Вернуть место как объект выбора."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_ids_keys_and_french_forms_checked": true,
+    "existing_rester_key_preserved": true,
+    "reading_lengths_checked": true,
+    "selected_models_explained_before_testing": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Зависимость A2-U15-L05 найдена проектным валидатором. Это не подтверждает публикацию или принятие пользователем.",
+    "Редактору проверить естественность описаний маршрутов, относительных конструкций и рассказа с venir de; прослушать французскую озвучку.",
+    "Выполнить предпросмотр и пробное прохождение, измерить время. Эти действия фактически не выполнялись."
+  ],
+  "progress": {
+    "current_unit": "A2-U16",
+    "prepared_session_ids": [
+      "A2-U16-L01",
+      "A2-U16-L02",
+      "A2-U16-L03",
+      "A2-U16-L04",
+      "A2-U16-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A2-U17",
+    "next_unit_title": "Советы и рекомендации"
+  },
+  "scope_notes": [
+    "Один полный пакет пяти занятий. Все ID, названия, зависимости и kind взяты из плана.",
+    "Новые значения распределены как четыре, одно, одно, ноль, ноль. В первом занятии четыре карточки разбиты на два введения по две; ни одно введение не содержит более трёх карточек. В L05 нового обязательного материала нет.",
+    "Rester сохраняет прежний fr:rester:stay-at-place и полный объект. Aller, местные предлоги, qui / que, сравнительные признаки и venir de также используют прежние ключи.",
+    "Forêt и lac — места, sentier — тропа, randonnée — прогулка как активность. Не создаются дубли одного слова ради смены учебной темы.",
+    "Suivez — выбранная форма suivre, объяснённая до проверки. Модели de la forêt au lac и du lac à la forêt поясняют противоположные направления.",
+    "В L03 повторены требования и расписание из A2-U13, в L04 — текущая длительность обучения оттуда же. В L01 возвращаются источник и место события из A2-U15.",
+    "Qui связывает тропу с собственным свойством, que — с действием выбирающего человека. Эти функции не подменяются вопросом кто или сравнительным чем.",
+    "В L04 до итоговой практики повторена Je viens de suivre le sentier; в L05 этот известный образец описывает только что пройденный участок. Это не подтверждает выполнение всех дальнейших планов.",
+    "Все места, направления, правила и прогулки вымышлены для языка. Пакет не предлагает реальный туристический маршрут, оценку безопасности или универсальное правило поведения во всех лесах.",
+    "Вымышленное требование не шуметь относится к конкретному парку сообщения. Беречь лес и оставаться на тропе — разные названные действия.",
+    "Неуказанные цена, сложность, отсутствие других людей и реальные расстояния не выводятся из тишины или наличия озера.",
+    "Ответы только выбор, пары, пропуск с вариантами и сборка. Нет свободного ввода, микрофона или реальных поездок.",
+    "Озвучка только браузером: fr-FR, asset_id=null. Нет аудиофайлов и внешних сервисов. Импорт и публикация не выполнялись, принятие пользователем не подтверждено."
+  ],
+  "session_material": [
+    {
+      "session_id": "A2-U16-L01",
+      "new_lexeme_keys": [
+        "fr:foret:forest",
+        "fr:lac:lake",
+        "fr:sentier:walking-path",
+        "fr:randonnee:recreational-hike"
+      ],
+      "reused_lexeme_keys": [
+        "fr:annoncer:announce-event",
+        "fr:avoir-lieu:event-occurrence",
+        "fr:calme:quiet-place",
+        "fr:fete:celebration-gathering",
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:je-voudrais:polite-request",
+        "fr:loin-de:far-from-place",
+        "fr:mairie:municipal-office",
+        "fr:mardi:weekday",
+        "fr:musee:museum",
+        "fr:parc:park",
+        "fr:pres-de:near-place",
+        "fr:soeur:sister",
+        "fr:soir:evening",
+        "fr:titre:message-headline",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U16-L02",
+      "new_lexeme_keys": [
+        "fr:suivre:follow-path"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:go",
+        "fr:calme:quiet-place",
+        "fr:foret:forest",
+        "fr:frere:brother",
+        "fr:gare:railway-station",
+        "fr:je-voudrais:polite-request",
+        "fr:lac:lake",
+        "fr:loin-de:far-from-place",
+        "fr:parc:park",
+        "fr:pres-de:near-place",
+        "fr:randonnee:recreational-hike",
+        "fr:sentier:walking-path",
+        "fr:soeur:sister"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U16-L03",
+      "new_lexeme_keys": [
+        "fr:proteger:protect-place"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:go",
+        "fr:apporter:bring-object",
+        "fr:apprendre:study-subject",
+        "fr:cours:class-session",
+        "fr:depuis:ongoing-since-duration",
+        "fr:deux:cardinal-number",
+        "fr:disponible:available-in-schedule",
+        "fr:faire-du-bruit:make-noise",
+        "fr:foret:forest",
+        "fr:francais:french-language",
+        "fr:heure:clock-hour",
+        "fr:horaire:work-schedule",
+        "fr:huit:cardinal-number",
+        "fr:il-est-interdit-de:prohibition",
+        "fr:il-faut:necessary-action",
+        "fr:je-voudrais:polite-request",
+        "fr:lac:lake",
+        "fr:livre:book",
+        "fr:mois:calendar-month",
+        "fr:obligatoire:required-in-course",
+        "fr:parc:park",
+        "fr:randonnee:recreational-hike",
+        "fr:rester:stay-at-place",
+        "fr:sentier:walking-path",
+        "fr:soeur:sister",
+        "fr:soir:evening",
+        "fr:vendredi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U16-L04",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:aller:go",
+        "fr:apporter:bring-object",
+        "fr:apprendre:study-subject",
+        "fr:autre:other",
+        "fr:bruyant:noisy-place",
+        "fr:calme:quiet-place",
+        "fr:choisir:choose-option",
+        "fr:cours:class-session",
+        "fr:depuis:ongoing-since-duration",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:foret:forest",
+        "fr:francais:french-language",
+        "fr:heure:clock-hour",
+        "fr:horaire:work-schedule",
+        "fr:il-faut:necessary-action",
+        "fr:je-voudrais:polite-request",
+        "fr:lac:lake",
+        "fr:livre:book",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:mois:calendar-month",
+        "fr:obligatoire:required-in-course",
+        "fr:par-carte:card-payment",
+        "fr:parc:park",
+        "fr:payer:pay",
+        "fr:plus:greater-degree-comparison",
+        "fr:preciser:clarify-service-details",
+        "fr:pres-de:near-place",
+        "fr:que:relative-direct-object",
+        "fr:qui:relative-subject",
+        "fr:randonnee:recreational-hike",
+        "fr:sentier:walking-path",
+        "fr:suivre:follow-path",
+        "fr:tarif:service-price",
+        "fr:un:cardinal-number",
+        "fr:venir-de:recently-completed-action"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U16-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:aller:go",
+        "fr:autre:other",
+        "fr:bruyant:noisy-place",
+        "fr:calme:quiet-place",
+        "fr:choisir:choose-option",
+        "fr:foret:forest",
+        "fr:gare:railway-station",
+        "fr:il-faut:necessary-action",
+        "fr:je-voudrais:polite-request",
+        "fr:lac:lake",
+        "fr:loin-de:far-from-place",
+        "fr:parc:park",
+        "fr:plus:greater-degree-comparison",
+        "fr:pres-de:near-place",
+        "fr:proteger:protect-place",
+        "fr:que:relative-direct-object",
+        "fr:qui:relative-subject",
+        "fr:randonnee:recreational-hike",
+        "fr:rester:stay-at-place",
+        "fr:sentier:walking-path",
+        "fr:soeur:sister",
+        "fr:suivre:follow-path",
+        "fr:venir-de:recently-completed-action"
+      ],
+      "task_count": 8
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:foret:forest",
+      "evidence": [
+        {
+          "session_id": "A2-U16-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U16-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U16-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U16-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U16-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U16-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:lac:lake",
+      "evidence": [
+        {
+          "session_id": "A2-U16-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U16-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U16-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U16-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U16-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U16-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:sentier:walking-path",
+      "evidence": [
+        {
+          "session_id": "A2-U16-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U16-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U16-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U16-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:randonnee:recreational-hike",
+      "evidence": [
+        {
+          "session_id": "A2-U16-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U16-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U16-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:suivre:follow-path",
+      "evidence": [
+        {
+          "session_id": "A2-U16-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U16-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U16-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U16-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:proteger:protect-place",
+      "evidence": [
+        {
+          "session_id": "A2-U16-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U16-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U16-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A2-U16-L01",
+      "material": "Место и активность; Je voudrais faire une randonnée."
+    },
+    {
+      "session_id": "A2-U16-L02",
+      "material": "Suivez le sentier; de la forêt au lac / du lac à la forêt."
+    },
+    {
+      "session_id": "A2-U16-L03",
+      "material": "Il faut protéger / rester; повторение запрета конкретной ситуации."
+    },
+    {
+      "session_id": "A2-U16-L04",
+      "material": "Le sentier qui est calme / que je choisis; повторение Je viens de suivre."
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 6,
+    "external_prerequisites": [
+      "A2-U15-L05"
+    ],
+    "external_reference_status": "A2-U15-L05_found_by_project_validator; publication_and_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 6
+      },
+      "file_hash": "6999f228072f70b72b54674fd80fc44609e552fce3bbc38085ff73697da9a956"
+    },
+    "existing_lexeme_objects_preserved": 49,
+    "text_lengths": [
+      {
+        "session_id": "A2-U16-L01",
+        "reading_word_counts": [
+          37,
+          38
+        ],
+        "listening_word_counts": [
+          38
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U16-L02",
+        "reading_word_counts": [
+          38,
+          36
+        ],
+        "listening_word_counts": [
+          36
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U16-L03",
+        "reading_word_counts": [
+          33,
+          37
+        ],
+        "listening_word_counts": [
+          37
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U16-L04",
+        "reading_word_counts": [
+          31,
+          39
+        ],
+        "listening_word_counts": [
+          39
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U16-L05",
+        "reading_word_counts": [
+          36,
+          32
+        ],
+        "listening_word_counts": [
+          32,
+          39
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_model_first_tasks": [
+      {
+        "frame": "Je voudrais faire une randonnée",
+        "session_id": "A2-U16-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Suivez le sentier",
+        "session_id": "A2-U16-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Il faut protéger la forêt",
+        "session_id": "A2-U16-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Je viens de suivre le sentier",
+        "session_id": "A2-U16-L05",
+        "task_id": "Q01"
+      },
+      {
+        "frame": "Le sentier va du lac à la forêt",
+        "session_id": "A2-U16-L05",
+        "task_id": "Q02"
+      }
+    ]
+  }
+}

@@ -1,0 +1,1021 @@
+{
+  "unit_id": "A2-U02",
+  "package_file": "A2-U02.v1.json",
+  "session_ids": [
+    "A2-U02-L01",
+    "A2-U02-L02",
+    "A2-U02-L03",
+    "A2-U02-L04",
+    "A2-U02-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "quai",
+      "lexeme_key": "fr:quai:railway-platform",
+      "fr": "un quai",
+      "ru": [
+        "платформа на вокзале"
+      ],
+      "transcription_ru": "э(н) кэ́",
+      "first_session_id": "A2-U02-L01"
+    },
+    {
+      "id": "y-lieu",
+      "lexeme_key": "fr:y:place-pronoun",
+      "fr": "y",
+      "ru": [
+        "туда или там: замена названного места"
+      ],
+      "transcription_ru": "и́",
+      "first_session_id": "A2-U02-L01"
+    },
+    {
+      "id": "correspondance",
+      "lexeme_key": "fr:correspondance:transport-connection",
+      "fr": "une correspondance",
+      "ru": [
+        "пересадка на другой транспорт"
+      ],
+      "transcription_ru": "юн корэспо(н)да́(н)с",
+      "first_session_id": "A2-U02-L02"
+    },
+    {
+      "id": "direct",
+      "lexeme_key": "fr:direct:no-transfer-service",
+      "fr": "direct",
+      "ru": [
+        "прямой, без пересадки в данной поездке"
+      ],
+      "transcription_ru": "дирэ́кт",
+      "first_session_id": "A2-U02-L02"
+    },
+    {
+      "id": "changer",
+      "lexeme_key": "fr:changer:change-travel-ticket",
+      "fr": "changer",
+      "ru": [
+        "менять билет на транспорт"
+      ],
+      "transcription_ru": "ша(н)жэ́",
+      "first_session_id": "A2-U02-L03"
+    },
+    {
+      "id": "retard",
+      "lexeme_key": "fr:retard:transport-delay",
+      "fr": "un retard",
+      "ru": [
+        "задержка транспорта"
+      ],
+      "transcription_ru": "э(н) рёта́р",
+      "first_session_id": "A2-U02-L04"
+    },
+    {
+      "id": "minute",
+      "lexeme_key": "fr:minute:time-duration-unit",
+      "fr": "une minute",
+      "ru": [
+        "минута как единица времени"
+      ],
+      "transcription_ru": "юн миню́т",
+      "first_session_id": "A2-U02-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:acheter:buy",
+    "fr:aller-retour:return-ticket",
+    "fr:aller:go",
+    "fr:aller:near-future-auxiliary",
+    "fr:apporter:bring-object",
+    "fr:arrivee:transport-arrival",
+    "fr:arriver:transport-arrive",
+    "fr:bagage:luggage-item",
+    "fr:billet:transport-ticket",
+    "fr:bonjour:greeting",
+    "fr:chambre:hotel-room",
+    "fr:choisir:choose-option",
+    "fr:cinq:cardinal-number",
+    "fr:dans-le-sac:in-bag",
+    "fr:depart:transport-departure",
+    "fr:deux:cardinal-number",
+    "fr:dix:cardinal-number",
+    "fr:douche:shower-facility",
+    "fr:fermer:close-object",
+    "fr:frere:brother",
+    "fr:heure:clock-hour",
+    "fr:hotel:hotel",
+    "fr:je-voudrais:polite-request",
+    "fr:juin:month-june",
+    "fr:la:direct-object-pronoun-feminine",
+    "fr:le:direct-object-pronoun-masculine",
+    "fr:les:direct-object-pronoun-plural",
+    "fr:maison:house-home",
+    "fr:midi:noon",
+    "fr:neuf:cardinal-number",
+    "fr:oui:affirmative-answer",
+    "fr:partir:transport-leave",
+    "fr:passeport:passport",
+    "fr:prendre:use-transport",
+    "fr:prevoir:plan-in-advance",
+    "fr:rendre-visite:visit-person",
+    "fr:rentrer:return-home",
+    "fr:reserver:book-hotel-room",
+    "fr:sac:bag",
+    "fr:sejour:hotel-stay",
+    "fr:sil-vous-plait:polite-request",
+    "fr:train:train",
+    "fr:trois:cardinal-number",
+    "fr:un:indefinite-masculine",
+    "fr:une:indefinite-feminine",
+    "fr:valise:suitcase",
+    "fr:vingt:cardinal-number",
+    "fr:voyage:trip",
+    "fr:wifi:wireless-internet-access"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A2.U02.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U02-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U02-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U02-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U02-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U02-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U02-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U02-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U02-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U02-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U02.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U02-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U02-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U02-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U02-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U02-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U02-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U02-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U02-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U01.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U02-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U01.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U02-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U02-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:quai:railway-platform",
+      "reason": "Вернуть платформу как место события поездки."
+    },
+    {
+      "lexeme_key": "fr:correspondance:transport-connection",
+      "reason": "Повторить пересадку как условие маршрута."
+    },
+    {
+      "lexeme_key": "fr:direct:no-transfer-service",
+      "reason": "Различить прямую поездку и пересадку."
+    },
+    {
+      "lexeme_key": "fr:changer:change-travel-ticket",
+      "reason": "Вернуть изменение билета как отдельное действие."
+    },
+    {
+      "lexeme_key": "fr:retard:transport-delay",
+      "reason": "Повторить задержку транспорта отдельно от времени на часах."
+    },
+    {
+      "lexeme_key": "fr:minute:time-duration-unit",
+      "reason": "Сохранить единицу длительности."
+    },
+    {
+      "lexeme_key": "fr:y:place-pronoun",
+      "reason": "Вернуть замену явно названного места в знакомой рамке."
+    },
+    {
+      "lexeme_key": "fr:partir:transport-leave",
+      "reason": "Повторить отправление транспорта с прежним ключом."
+    },
+    {
+      "lexeme_key": "fr:arriver:transport-arrive",
+      "reason": "Повторить прибытие отдельно от отправления."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "new_local_ids_do_not_overwrite_existing_meanings": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "place_y_distinguished_from_object_le": true,
+    "transfer_departure_distinguished_from_first_train_arrival": true,
+    "direct_service_distinguished_from_return_ticket": true,
+    "ticket_change_request_distinguished_from_purchase": true,
+    "revised_departure_read_from_explicit_announcement": true,
+    "delay_duration_clock_time_and_platform_distinguished": true,
+    "transcriptions_structurally_checked_without_claim_of_listening": true,
+    "apostrophes_kept_in_whole_tokens": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A2-U01-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Редактору проверить естественность вокзальных реплик, однозначность замены места, времени пересадки и просьбы об изменении билета.",
+    "Прослушать браузерную озвучку целой фразы Je vais y aller, часов и чисел, двадцати минут задержки. Изолированное чтение y голосом браузера требует отдельной проверки. Время аудио и занятий не измерено.",
+    "Выполнить предпросмотр и пробное прохождение пяти занятий: платформа и час, два поезда, прежнее и новое время, предмет и место."
+  ],
+  "progress": {
+    "current_unit": "A2-U02",
+    "prepared_session_ids": [
+      "A2-U02-L01",
+      "A2-U02-L02",
+      "A2-U02-L03",
+      "A2-U02-L04",
+      "A2-U02-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A2-U03",
+    "next_unit_title": "Прошлые выходные",
+    "previous_unit": "A2-U01",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A2-U02. Принятие и импорт предыдущих пакетов не подтверждены; повторение использует полные объекты подготовленного материала.",
+    "Новых значений два, два, одно, два и ноль. Небольшой словарь позволяет сосредоточиться на одном основном контрасте за занятие. L05 не вводит нового обязательного материала.",
+    "Quai, correspondance, direct, changer в контексте билета, retard, minute и y как замена места получают новые ключи. Старые карточки транспорта, отправления, прибытия, билетов и прямого дополнения не переписываются.",
+    "Y вводится только как замена явно названного места в рамке Je vais y aller. Буква как название не оценивается; местоимение показано и озвучено в целом контексте, без утверждения о фактическом прослушивании.",
+    "Le как замена билета и y как замена места различаются по функции. Позиция перед инфинитивом повторяет знакомую рамку ближайшего намерения; другие времена с y не вводятся.",
+    "Прямой поезд в этих моделях означает отсутствие пересадки в поездке, не отсутствие всех промежуточных остановок. Туда-обратно описывает направления, а не число пересадок.",
+    "У двух поездов разные отправления, прибытия и платформы. Время прибытия первого не переносится на отправление следующего. Реальная осуществимость маршрута по учебным данным не утверждается.",
+    "Changer используется как изменение имеющегося транспортного билета. Вежливая просьба или вопрос о возможности не объявляются завершённым изменением, гарантией обмена или условием тарифа.",
+    "Le train a vingt minutes de retard описывает длительность. Le départ est à neuf heures vingt прямо задаёт новое отправление. Новое прибытие без отдельного сообщения не вычисляется.",
+    "Русская транскрипция vingt minutes передаёт число без добавленного конечного согласного перед словом минуты; связка в vingt heures перед гласным показана отдельно. Транскрипции приблизительные и требуют человеческой проверки звучания.",
+    "В L01 повторён план билета A2-U01, в L03 — замена гостиничного номера, в L04 — замена группы багажных вещей из той же темы. Это повторение подготовленного материала, не подтверждение его принятия или освоения.",
+    "Все расписания, диалоги и задержки вымышленные. Отдельные задания и сообщения описывают отдельные ситуации; прежняя платформа не переносится в следующее задание.",
+    "Озвучка только браузером, без аудиофайлов и внешних сервисов. Нет обязательного ввода текста, записи голоса, реальной покупки или изменения билетов.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A2-U02-L01",
+      "new_lexeme_keys": [
+        "fr:quai:railway-platform",
+        "fr:y:place-pronoun"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller-retour:return-ticket",
+        "fr:aller:go",
+        "fr:aller:near-future-auxiliary",
+        "fr:arrivee:transport-arrival",
+        "fr:arriver:transport-arrive",
+        "fr:billet:transport-ticket",
+        "fr:bonjour:greeting",
+        "fr:chambre:hotel-room",
+        "fr:choisir:choose-option",
+        "fr:cinq:cardinal-number",
+        "fr:depart:transport-departure",
+        "fr:deux:cardinal-number",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:je-voudrais:polite-request",
+        "fr:juin:month-june",
+        "fr:la:direct-object-pronoun-feminine",
+        "fr:le:direct-object-pronoun-masculine",
+        "fr:maison:house-home",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:partir:transport-leave",
+        "fr:prendre:use-transport",
+        "fr:prevoir:plan-in-advance",
+        "fr:rendre-visite:visit-person",
+        "fr:rentrer:return-home",
+        "fr:reserver:book-hotel-room",
+        "fr:train:train",
+        "fr:voyage:trip"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U02-L02",
+      "new_lexeme_keys": [
+        "fr:correspondance:transport-connection",
+        "fr:direct:no-transfer-service"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller-retour:return-ticket",
+        "fr:aller:go",
+        "fr:aller:near-future-auxiliary",
+        "fr:arriver:transport-arrive",
+        "fr:billet:transport-ticket",
+        "fr:cinq:cardinal-number",
+        "fr:deux:cardinal-number",
+        "fr:dix:cardinal-number",
+        "fr:heure:clock-hour",
+        "fr:juin:month-june",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:partir:transport-leave",
+        "fr:prendre:use-transport",
+        "fr:quai:railway-platform",
+        "fr:train:train",
+        "fr:trois:cardinal-number",
+        "fr:un:indefinite-masculine",
+        "fr:une:indefinite-feminine",
+        "fr:voyage:trip",
+        "fr:y:place-pronoun"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U02-L03",
+      "new_lexeme_keys": [
+        "fr:changer:change-travel-ticket"
+      ],
+      "reused_lexeme_keys": [
+        "fr:acheter:buy",
+        "fr:aller:go",
+        "fr:aller:near-future-auxiliary",
+        "fr:billet:transport-ticket",
+        "fr:chambre:hotel-room",
+        "fr:choisir:choose-option",
+        "fr:cinq:cardinal-number",
+        "fr:deux:cardinal-number",
+        "fr:douche:shower-facility",
+        "fr:heure:clock-hour",
+        "fr:hotel:hotel",
+        "fr:je-voudrais:polite-request",
+        "fr:juin:month-june",
+        "fr:la:direct-object-pronoun-feminine",
+        "fr:le:direct-object-pronoun-masculine",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:oui:affirmative-answer",
+        "fr:partir:transport-leave",
+        "fr:prevoir:plan-in-advance",
+        "fr:quai:railway-platform",
+        "fr:reserver:book-hotel-room",
+        "fr:sejour:hotel-stay",
+        "fr:sil-vous-plait:polite-request",
+        "fr:train:train",
+        "fr:trois:cardinal-number",
+        "fr:wifi:wireless-internet-access",
+        "fr:y:place-pronoun"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U02-L04",
+      "new_lexeme_keys": [
+        "fr:retard:transport-delay",
+        "fr:minute:time-duration-unit"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller-retour:return-ticket",
+        "fr:aller:go",
+        "fr:aller:near-future-auxiliary",
+        "fr:apporter:bring-object",
+        "fr:bagage:luggage-item",
+        "fr:billet:transport-ticket",
+        "fr:cinq:cardinal-number",
+        "fr:dans-le-sac:in-bag",
+        "fr:depart:transport-departure",
+        "fr:deux:cardinal-number",
+        "fr:fermer:close-object",
+        "fr:heure:clock-hour",
+        "fr:juin:month-june",
+        "fr:la:direct-object-pronoun-feminine",
+        "fr:les:direct-object-pronoun-plural",
+        "fr:neuf:cardinal-number",
+        "fr:partir:transport-leave",
+        "fr:passeport:passport",
+        "fr:prendre:use-transport",
+        "fr:prevoir:plan-in-advance",
+        "fr:quai:railway-platform",
+        "fr:sac:bag",
+        "fr:train:train",
+        "fr:trois:cardinal-number",
+        "fr:valise:suitcase",
+        "fr:vingt:cardinal-number",
+        "fr:voyage:trip",
+        "fr:y:place-pronoun"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U02-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:acheter:buy",
+        "fr:aller:go",
+        "fr:aller:near-future-auxiliary",
+        "fr:arriver:transport-arrive",
+        "fr:billet:transport-ticket",
+        "fr:changer:change-travel-ticket",
+        "fr:correspondance:transport-connection",
+        "fr:depart:transport-departure",
+        "fr:deux:cardinal-number",
+        "fr:direct:no-transfer-service",
+        "fr:dix:cardinal-number",
+        "fr:heure:clock-hour",
+        "fr:je-voudrais:polite-request",
+        "fr:le:direct-object-pronoun-masculine",
+        "fr:midi:noon",
+        "fr:minute:time-duration-unit",
+        "fr:neuf:cardinal-number",
+        "fr:partir:transport-leave",
+        "fr:prendre:use-transport",
+        "fr:quai:railway-platform",
+        "fr:retard:transport-delay",
+        "fr:train:train",
+        "fr:trois:cardinal-number",
+        "fr:vingt:cardinal-number",
+        "fr:y:place-pronoun"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A2-U02-L01",
+      "material": "Y как замена названного места перед инфинитивом в Je vais y aller; различение платформы, отправления и прибытия."
+    },
+    {
+      "session_id": "A2-U02-L02",
+      "material": "J’ai une correspondance; un train direct; раздельные условия первого и следующего поезда."
+    },
+    {
+      "session_id": "A2-U02-L03",
+      "material": "Je voudrais changer mon billet pour le train de…; вопрос Je peux changer mon billet; повторение Le billet / Je vais le changer."
+    },
+    {
+      "session_id": "A2-U02-L04",
+      "material": "Avoir vingt minutes de retard; новое отправление Le départ est à neuf heures vingt; длительность и час различаются."
+    }
+  ],
+  "text_conventions": {
+    "situation_status": "Оригинальные вымышленные вокзальные ситуации.",
+    "schedule_scope": "Все платформы и часы заданы текстом, реальное расписание не используется.",
+    "pronoun_scope": "Y заменяет названное место, le заменяет названный билет в показанной рамке.",
+    "change_scope": "Просьба об изменении не является подтверждением выполненной операции.",
+    "delay_scope": "Новое отправление прямо названо; новое прибытие не выводится.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:quai:railway-platform",
+      "evidence": [
+        {
+          "session_id": "A2-U02-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U02-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U02-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U02-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U02-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U02-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U02-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U02-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:y:place-pronoun",
+      "evidence": [
+        {
+          "session_id": "A2-U02-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:correspondance:transport-connection",
+      "evidence": [
+        {
+          "session_id": "A2-U02-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U02-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:direct:no-transfer-service",
+      "evidence": [
+        {
+          "session_id": "A2-U02-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:changer:change-travel-ticket",
+      "evidence": [
+        {
+          "session_id": "A2-U02-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U02-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U02-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:retard:transport-delay",
+      "evidence": [
+        {
+          "session_id": "A2-U02-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:minute:time-duration-unit",
+      "evidence": [
+        {
+          "session_id": "A2-U02-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U02-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 7,
+    "external_prerequisites": [
+      "A2-U01-L05"
+    ],
+    "external_reference_status": "A2-U01-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 11
+      },
+      "file_hash": "d2a00d68321b3770cbc7d007a720bc9ebea1e06818f1c4db2da72b8e6338e9ad",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 49,
+    "text_lengths": [
+      {
+        "session_id": "A2-U02-L01",
+        "reading_word_counts": [
+          34,
+          34
+        ],
+        "listening_word_counts": [
+          33
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U02-L02",
+        "reading_word_counts": [
+          34,
+          38
+        ],
+        "listening_word_counts": [
+          33
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U02-L03",
+        "reading_word_counts": [
+          36,
+          31
+        ],
+        "listening_word_counts": [
+          37
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U02-L04",
+        "reading_word_counts": [
+          39,
+          31
+        ],
+        "listening_word_counts": [
+          33
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U02-L05",
+        "reading_word_counts": [
+          32,
+          37
+        ],
+        "listening_word_counts": [
+          32,
+          32
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "du quai deux",
+        "session_id": "A2-U02-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Je vais y aller",
+        "session_id": "A2-U02-L01",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "une correspondance",
+        "session_id": "A2-U02-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "un train direct",
+        "session_id": "A2-U02-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "changer mon billet",
+        "session_id": "A2-U02-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je vais le changer",
+        "session_id": "A2-U02-L03",
+        "task_id": "Q06"
+      },
+      {
+        "frame": "neuf heures vingt",
+        "session_id": "A2-U02-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "vingt minutes de retard",
+        "session_id": "A2-U02-L04",
+        "task_id": "Q03"
+      }
+    ],
+    "level_description_included": false,
+    "curricula_included": false
+  }
+}

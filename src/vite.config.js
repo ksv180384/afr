@@ -10,11 +10,18 @@ export default defineConfig(({ command, mode }) => {
   const isAdminBuild = process.argv.includes('admin.js');
 
   return {
+    base: command === 'serve' ? '/vite/' : undefined,
+    optimizeDeps: {
+      include: ['element-plus', 'element-plus/es/locale/lang/ru'],
+    },
     server: {
       host: '0.0.0.0',
       port: 5004,
+      strictPort: true,
+      origin: 'http://localhost:5000',
       hmr: {
         host: 'localhost',
+        clientPort: 5000,
       },
     },
     plugins: [

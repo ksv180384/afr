@@ -1,0 +1,1168 @@
+{
+  "unit_id": "A1-U10",
+  "package_file": "A1-U10.v1.json",
+  "session_ids": [
+    "A1-U10-L01",
+    "A1-U10-L02",
+    "A1-U10-L03",
+    "A1-U10-L04",
+    "A1-U10-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "aimer-activite",
+      "lexeme_key": "fr:aimer:enjoy-activity",
+      "fr": "aimer",
+      "ru": [
+        "любить заниматься чем-либо"
+      ],
+      "transcription_ru": "эмэ́",
+      "first_session_id": "A1-U10-L01"
+    },
+    {
+      "id": "musique",
+      "lexeme_key": "fr:musique:music",
+      "fr": "la musique",
+      "ru": [
+        "музыка"
+      ],
+      "transcription_ru": "ла мюзи́к",
+      "first_session_id": "A1-U10-L01"
+    },
+    {
+      "id": "film",
+      "lexeme_key": "fr:film:film",
+      "fr": "un film",
+      "ru": [
+        "фильм"
+      ],
+      "transcription_ru": "э(н) фи́льм",
+      "first_session_id": "A1-U10-L01"
+    },
+    {
+      "id": "cinema",
+      "lexeme_key": "fr:cinema:cinema-venue",
+      "fr": "le cinéma",
+      "ru": [
+        "кинотеатр (место для досуга)"
+      ],
+      "transcription_ru": "лё синэма́",
+      "first_session_id": "A1-U10-L01"
+    },
+    {
+      "id": "sortir",
+      "lexeme_key": "fr:sortir:go-out-for-leisure",
+      "fr": "sortir",
+      "ru": [
+        "выходить куда-либо для досуга"
+      ],
+      "transcription_ru": "сорти́р",
+      "first_session_id": "A1-U10-L02"
+    },
+    {
+      "id": "faire-du-sport",
+      "lexeme_key": "fr:faire-du-sport:do-sport",
+      "fr": "faire du sport",
+      "ru": [
+        "заниматься спортом"
+      ],
+      "transcription_ru": "фэр дю спо́р",
+      "first_session_id": "A1-U10-L02"
+    },
+    {
+      "id": "se-promener",
+      "lexeme_key": "fr:se-promener:take-walk",
+      "fr": "se promener",
+      "ru": [
+        "гулять (для отдыха)"
+      ],
+      "transcription_ru": "сё промнэ́",
+      "first_session_id": "A1-U10-L02"
+    },
+    {
+      "id": "inviter",
+      "lexeme_key": "fr:inviter:invite-to-leisure",
+      "fr": "inviter",
+      "ru": [
+        "приглашать на совместный досуг"
+      ],
+      "transcription_ru": "э(н)витэ́",
+      "first_session_id": "A1-U10-L03"
+    },
+    {
+      "id": "vous-voulez",
+      "lexeme_key": "fr:vous-voulez:invitation-question",
+      "fr": "vous voulez",
+      "ru": [
+        "хотите (в вопросе-приглашении)"
+      ],
+      "transcription_ru": "ву вулэ́",
+      "first_session_id": "A1-U10-L03"
+    },
+    {
+      "id": "ensemble",
+      "lexeme_key": "fr:ensemble:together",
+      "fr": "ensemble",
+      "ru": [
+        "вместе"
+      ],
+      "transcription_ru": "а(н)са́(н)бль",
+      "first_session_id": "A1-U10-L03"
+    },
+    {
+      "id": "avec-plaisir",
+      "lexeme_key": "fr:avec-plaisir:willing-acceptance",
+      "fr": "avec plaisir",
+      "ru": [
+        "с удовольствием (принятие приглашения)"
+      ],
+      "transcription_ru": "авэк плэзи́р",
+      "first_session_id": "A1-U10-L04"
+    },
+    {
+      "id": "desole",
+      "lexeme_key": "fr:desole:polite-refusal-apology",
+      "fr": "désolé",
+      "ru": [
+        "извините (при вежливом отказе)"
+      ],
+      "transcription_ru": "дэзолэ́",
+      "first_session_id": "A1-U10-L04"
+    },
+    {
+      "id": "je-ne-peux-pas",
+      "lexeme_key": "fr:je-ne-peux-pas:unavailable-refusal",
+      "fr": "je ne peux pas",
+      "ru": [
+        "я не могу (ответ на приглашение)"
+      ],
+      "transcription_ru": "жё нё пё па́",
+      "first_session_id": "A1-U10-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:a-cote-de:next-to",
+    "fr:a-gauche:turn-left",
+    "fr:a-pied:on-foot",
+    "fr:aller-retour:return-ticket",
+    "fr:aller-simple:one-way-ticket",
+    "fr:aller:go",
+    "fr:ami:friend",
+    "fr:arriver:transport-arrive",
+    "fr:bonjour:greeting",
+    "fr:bus:bus",
+    "fr:carafe:carafe",
+    "fr:carrefour:crossroads",
+    "fr:chambre:hotel-room",
+    "fr:cle:hotel-room-key",
+    "fr:daccord:agreement",
+    "fr:disponible:available-in-schedule",
+    "fr:dix:cardinal-number",
+    "fr:douche:shower-facility",
+    "fr:eau:water",
+    "fr:ecouter:listen",
+    "fr:en-especes:cash-payment",
+    "fr:et:and",
+    "fr:euro:currency-unit",
+    "fr:gare:railway-station",
+    "fr:heure:clock-hour",
+    "fr:huit:cardinal-number",
+    "fr:je-voudrais:polite-request",
+    "fr:juin:month-june",
+    "fr:lire:read",
+    "fr:livre:book",
+    "fr:mardi:weekday",
+    "fr:matin:morning",
+    "fr:merci:thanks",
+    "fr:mercredi:weekday",
+    "fr:midi:noon",
+    "fr:neuf:cardinal-number",
+    "fr:occupe:busy-in-schedule",
+    "fr:on-peut-se-retrouver:meeting-proposal",
+    "fr:oui:affirmative-answer",
+    "fr:par-carte:card-payment",
+    "fr:parc:park",
+    "fr:partir:transport-leave",
+    "fr:passeport:passport",
+    "fr:payer:pay",
+    "fr:pharmacie:pharmacy",
+    "fr:pour-aller-a:route-question",
+    "fr:quatre:cardinal-number",
+    "fr:regarder:look-watch",
+    "fr:rendez-vous:appointment",
+    "fr:sil-vous-plait:polite-request",
+    "fr:soir:evening",
+    "fr:tourner:turn-in-route",
+    "fr:tout-droit:straight-ahead",
+    "fr:train:train",
+    "fr:voila:presenting",
+    "fr:wifi:wireless-internet-access"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A1.U10.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U10-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U10-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U10-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U10-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U10-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U10-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U10-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U10-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U10-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U10.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U10-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U10-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U10-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U10-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U10-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U10-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U10-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U10-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U09.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U10-L05",
+          "task_id": "Q02",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U07.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U10-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U10-L05",
+          "task_id": "Q03",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U06.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U08.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U03.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:aimer:enjoy-activity",
+      "reason": "Вернуть любимые занятия перед обсуждением работы и свободного времени."
+    },
+    {
+      "lexeme_key": "fr:faire-du-sport:do-sport",
+      "reason": "Повторить знакомое занятие в коротком контексте распорядка."
+    },
+    {
+      "lexeme_key": "fr:se-promener:take-walk",
+      "reason": "Повторить прогулку для отдыха отдельно от движения пешком."
+    },
+    {
+      "lexeme_key": "fr:sortir:go-out-for-leisure",
+      "reason": "Вернуть выход для досуга в контрасте с рабочим временем."
+    },
+    {
+      "lexeme_key": "fr:inviter:invite-to-leisure",
+      "reason": "Сохранить приглашение как функцию реплики."
+    },
+    {
+      "lexeme_key": "fr:vous-voulez:invitation-question",
+      "reason": "Повторить готовую рамку вопроса-приглашения без расширения спряжения."
+    },
+    {
+      "lexeme_key": "fr:ensemble:together",
+      "reason": "Вернуть совместность действия отдельно от времени."
+    },
+    {
+      "lexeme_key": "fr:avec-plaisir:willing-acceptance",
+      "reason": "Повторить принятие приглашения с удовольствием."
+    },
+    {
+      "lexeme_key": "fr:je-ne-peux-pas:unavailable-refusal",
+      "reason": "Вернуть простой отказ, если занятость прямо названа."
+    },
+    {
+      "lexeme_key": "fr:disponible:available-in-schedule",
+      "reason": "Повторить свободное время в конкретный день и час."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "checkpoint_skill_balance_checked": true,
+    "checkpoint_u06_u10_and_earlier_sample_checked": true,
+    "invitation_preference_and_response_distinctions_reviewed": true,
+    "final_acceptance_distinguished_from_initial_refusal": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A1-U09-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Редактору проверить естественность французских приглашений, отказов, выбранных сочетаний досуга и приблизительные русские транскрипции.",
+    "Прослушать браузерную озвучку, особенно совместный выход с другом, вопрос-приглашение и простой отказ. Время аудио и занятий пока не измерено.",
+    "Выполнить предпросмотр и пробное прохождение, включая контроль: маршрут, два события расписания, документ и ключ, принятие последнего предложения.",
+    "Проверить редактором расширение словаря любимых занятий: новый инфинитив aimer в сочетании с действием не изменяет прежние узкие карточки j’aime/je n’aime pas о еде."
+  ],
+  "progress": {
+    "current_unit": "A1-U10",
+    "prepared_session_ids": [
+      "A1-U10-L01",
+      "A1-U10-L02",
+      "A1-U10-L03",
+      "A1-U10-L04",
+      "A1-U10-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A1-U11",
+    "next_unit_title": "Работа и профессии",
+    "previous_unit": "A1-U09",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A1-U10. Принятие и импорт предыдущих пакетов не подтверждены; повторение использует полные объекты подготовленных пакетов.",
+    "Новые значения распределены как четыре, три, три, три и ноль. В пятом занятии нового обязательного материала нет.",
+    "Любить заниматься выражено новым инфинитивом aimer с действием. Прежние карточки j’aime и je n’aime pas имеют узкое значение отношения к еде и не переписываются для досуга.",
+    "Читать, слушать, смотреть, идти, друг, дни недели и время сохраняют прежние ключи. Фильм обозначает произведение, кинотеатр в этой теме — место.",
+    "Прогулка для отдыха не отождествляется с любым движением пешком. Faire du sport и se promener учатся целыми сочетаниями; пример о себе использует me promener.",
+    "Sortir введён в контексте выхода для досуга с другом, не как команда выйти из помещения.",
+    "В приглашениях показаны Je vous invite, Vous voulez и On peut aller. Полные таблицы vouloir/pouvoir и личных местоимений не вводятся.",
+    "Ensemble указывает совместность, а не время. При двух приглашениях сохраняется соответствие занятия, дня и часа.",
+    "Avec plaisir принимает приглашение. Désolé и Je ne peux pas выражают простой вежливый отказ; причина занятости читается только там, где названа прямо.",
+    "Выбранные формы occupé и désolé не используются для определения пола говорящего. Дополнительная конечная буква женской формы не меняет звучание в показанных случаях.",
+    "Контроль имеет kind=checkpoint, восемь заданий: два listening, два reading, два vocabulary, один grammar и один sentence_building. Основная выборка охватывает U06–U10, одно задание возвращает U03. Все цели блока полностью не проверяются.",
+    "В L01 повторена договорённость о встрече A1-U09; в L03 и L04 — тип билета и оплата A1-U07.",
+    "Роли говорящих указаны порядком реплик. Ответ зависит от слов и согласия на конкретное предложение, не от свойств синтетического голоса.",
+    "Все маршруты, расписания, приглашения и обмены вымышленные. Реальные события и внешние сервисы не нужны для решения.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A1-U10-L01",
+      "new_lexeme_keys": [
+        "fr:aimer:enjoy-activity",
+        "fr:musique:music",
+        "fr:film:film",
+        "fr:cinema:cinema-venue"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller:go",
+        "fr:daccord:agreement",
+        "fr:ecouter:listen",
+        "fr:et:and",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:mardi:weekday",
+        "fr:midi:noon",
+        "fr:on-peut-se-retrouver:meeting-proposal",
+        "fr:parc:park",
+        "fr:regarder:look-watch",
+        "fr:rendez-vous:appointment",
+        "fr:soir:evening"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U10-L02",
+      "new_lexeme_keys": [
+        "fr:sortir:go-out-for-leisure",
+        "fr:faire-du-sport:do-sport",
+        "fr:se-promener:take-walk"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-pied:on-foot",
+        "fr:aimer:enjoy-activity",
+        "fr:aller:go",
+        "fr:ami:friend",
+        "fr:ecouter:listen",
+        "fr:et:and",
+        "fr:film:film",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:matin:morning",
+        "fr:musique:music",
+        "fr:parc:park",
+        "fr:regarder:look-watch",
+        "fr:soir:evening"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U10-L03",
+      "new_lexeme_keys": [
+        "fr:inviter:invite-to-leisure",
+        "fr:vous-voulez:invitation-question",
+        "fr:ensemble:together"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aimer:enjoy-activity",
+        "fr:aller-simple:one-way-ticket",
+        "fr:aller:go",
+        "fr:cinema:cinema-venue",
+        "fr:disponible:available-in-schedule",
+        "fr:en-especes:cash-payment",
+        "fr:faire-du-sport:do-sport",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:je-voudrais:polite-request",
+        "fr:mardi:weekday",
+        "fr:merci:thanks",
+        "fr:mercredi:weekday",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:occupe:busy-in-schedule",
+        "fr:parc:park",
+        "fr:partir:transport-leave",
+        "fr:payer:pay",
+        "fr:train:train"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U10-L04",
+      "new_lexeme_keys": [
+        "fr:avec-plaisir:willing-acceptance",
+        "fr:desole:polite-refusal-apology",
+        "fr:je-ne-peux-pas:unavailable-refusal"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aller-retour:return-ticket",
+        "fr:aller:go",
+        "fr:cinema:cinema-venue",
+        "fr:euro:currency-unit",
+        "fr:heure:clock-hour",
+        "fr:inviter:invite-to-leisure",
+        "fr:je-voudrais:polite-request",
+        "fr:mardi:weekday",
+        "fr:merci:thanks",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:occupe:busy-in-schedule",
+        "fr:oui:affirmative-answer",
+        "fr:par-carte:card-payment",
+        "fr:parc:park",
+        "fr:payer:pay",
+        "fr:quatre:cardinal-number",
+        "fr:vous-voulez:invitation-question"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U10-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-cote-de:next-to",
+        "fr:a-gauche:turn-left",
+        "fr:aller:go",
+        "fr:arriver:transport-arrive",
+        "fr:avec-plaisir:willing-acceptance",
+        "fr:bonjour:greeting",
+        "fr:bus:bus",
+        "fr:carafe:carafe",
+        "fr:carrefour:crossroads",
+        "fr:chambre:hotel-room",
+        "fr:cinema:cinema-venue",
+        "fr:cle:hotel-room-key",
+        "fr:daccord:agreement",
+        "fr:desole:polite-refusal-apology",
+        "fr:dix:cardinal-number",
+        "fr:douche:shower-facility",
+        "fr:eau:water",
+        "fr:ensemble:together",
+        "fr:et:and",
+        "fr:faire-du-sport:do-sport",
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:je-ne-peux-pas:unavailable-refusal",
+        "fr:je-voudrais:polite-request",
+        "fr:juin:month-june",
+        "fr:merci:thanks",
+        "fr:midi:noon",
+        "fr:musique:music",
+        "fr:neuf:cardinal-number",
+        "fr:on-peut-se-retrouver:meeting-proposal",
+        "fr:oui:affirmative-answer",
+        "fr:parc:park",
+        "fr:partir:transport-leave",
+        "fr:passeport:passport",
+        "fr:pharmacie:pharmacy",
+        "fr:pour-aller-a:route-question",
+        "fr:rendez-vous:appointment",
+        "fr:se-promener:take-walk",
+        "fr:sil-vous-plait:polite-request",
+        "fr:tourner:turn-in-route",
+        "fr:tout-droit:straight-ahead",
+        "fr:train:train",
+        "fr:voila:presenting",
+        "fr:vous-voulez:invitation-question",
+        "fr:wifi:wireless-internet-access"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A1-U10-L01",
+      "material": "J’aime с названием действия; выбранные сочетания écouter de la musique, regarder un film, aller au cinéma."
+    },
+    {
+      "session_id": "A1-U10-L02",
+      "material": "Faire du sport как целое занятие; J’aime me promener как образец о себе, sortir avec un ami."
+    },
+    {
+      "session_id": "A1-U10-L03",
+      "material": "Готовые приглашения Je vous invite и Vous voulez aller; выбранная форма voulez после vous, On peut aller и ensemble."
+    },
+    {
+      "session_id": "A1-U10-L04",
+      "material": "Готовое принятие Oui, avec plaisir и отказ Désolé, je ne peux pas; причина с Je suis occupé в названный момент."
+    }
+  ],
+  "text_conventions": {
+    "leisure_status": "Вымышленные сообщения о предпочтениях и приглашения, без реальных мероприятий.",
+    "scope": "Любимое занятие не равно приглашению, отказ от одного времени не означает отказ от всех встреч.",
+    "speaker_roles": "Порядок говорящих задан явно; итог определяется принятием конкретного предложения.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:aimer:enjoy-activity",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:musique:music",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U10-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:film:film",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U10-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:cinema:cinema-venue",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:sortir:go-out-for-leisure",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:faire-du-sport:do-sport",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U10-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:se-promener:take-walk",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U10-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:inviter:invite-to-leisure",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:vous-voulez:invitation-question",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:ensemble:together",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:avec-plaisir:willing-acceptance",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U10-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:desole:polite-refusal-apology",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:je-ne-peux-pas:unavailable-refusal",
+      "evidence": [
+        {
+          "session_id": "A1-U10-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U10-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 13,
+    "external_prerequisites": [
+      "A1-U09-L05"
+    ],
+    "external_reference_status": "A1-U09-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 11
+      },
+      "file_hash": "e03463445c2a5c9f7c9bcdbb187f0a1555449e8b2ede82d176244840b586a8c3",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 56,
+    "text_lengths": [
+      {
+        "session_id": "A1-U10-L01",
+        "reading_word_counts": [
+          19,
+          20
+        ],
+        "listening_word_counts": [
+          20
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U10-L02",
+        "reading_word_counts": [
+          19,
+          18
+        ],
+        "listening_word_counts": [
+          18
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U10-L03",
+        "reading_word_counts": [
+          18,
+          26
+        ],
+        "listening_word_counts": [
+          21
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U10-L04",
+        "reading_word_counts": [
+          18,
+          34
+        ],
+        "listening_word_counts": [
+          20
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U10-L05",
+        "reading_word_counts": [
+          22,
+          21
+        ],
+        "listening_word_counts": [
+          21,
+          23
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "J’aime lire",
+        "session_id": "A1-U10-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "écouter de la musique",
+        "session_id": "A1-U10-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "regarder un film",
+        "session_id": "A1-U10-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "aller au cinéma",
+        "session_id": "A1-U10-L01",
+        "task_id": "Q05"
+      },
+      {
+        "frame": "faire du sport",
+        "session_id": "A1-U10-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "me promener",
+        "session_id": "A1-U10-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "sortir avec un ami",
+        "session_id": "A1-U10-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Vous voulez",
+        "session_id": "A1-U10-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "ensemble",
+        "session_id": "A1-U10-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je vous invite",
+        "session_id": "A1-U10-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "On peut aller",
+        "session_id": "A1-U10-L03",
+        "task_id": "Q05"
+      },
+      {
+        "frame": "avec plaisir",
+        "session_id": "A1-U10-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Désolé",
+        "session_id": "A1-U10-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "je ne peux pas",
+        "session_id": "A1-U10-L04",
+        "task_id": "Q02"
+      }
+    ]
+  },
+  "checkpoint_coverage": {
+    "session_id": "A1-U10-L05",
+    "skills": {
+      "listening": 2,
+      "reading": 2,
+      "vocabulary": 2,
+      "grammar": 1,
+      "sentence_building": 1
+    },
+    "units_sampled": [
+      "U03",
+      "U06",
+      "U07",
+      "U08",
+      "U09",
+      "U10"
+    ],
+    "evidence": [
+      {
+        "task_id": "Q01",
+        "skill": "listening",
+        "objective_ids": [
+          "A1.U06.APPLY"
+        ]
+      },
+      {
+        "task_id": "Q02",
+        "skill": "listening",
+        "objective_ids": [
+          "A1.U09.APPLY"
+        ]
+      },
+      {
+        "task_id": "Q03",
+        "skill": "reading",
+        "objective_ids": [
+          "A1.U07.APPLY"
+        ]
+      },
+      {
+        "task_id": "Q04",
+        "skill": "reading",
+        "objective_ids": [
+          "A1.U08.APPLY"
+        ]
+      },
+      {
+        "task_id": "Q05",
+        "skill": "vocabulary",
+        "objective_ids": [
+          "A1.U10.UNDERSTAND"
+        ]
+      },
+      {
+        "task_id": "Q06",
+        "skill": "vocabulary",
+        "objective_ids": [
+          "A1.U10.APPLY"
+        ]
+      },
+      {
+        "task_id": "Q07",
+        "skill": "grammar",
+        "objective_ids": [
+          "A1.U03.APPLY"
+        ]
+      },
+      {
+        "task_id": "Q08",
+        "skill": "sentence_building",
+        "objective_ids": [
+          "A1.U10.APPLY"
+        ]
+      }
+    ],
+    "limitation": "Выборка U06–U10 с возвратом к U03, не полная проверка всех целей блока."
+  }
+}

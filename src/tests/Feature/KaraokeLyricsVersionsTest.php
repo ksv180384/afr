@@ -4,6 +4,7 @@ use App\Http\Resources\App\SongShowResource;
 use App\Models\KaraokeUploadLog;
 use App\Models\Player\PlayerArtistsSong;
 use App\Models\Player\PlayerSongs;
+use App\Models\User\User;
 use App\Services\Admin\Song\SongService;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -23,7 +24,8 @@ function karaokeSong(array $attributes = []): PlayerSongs
 }
 
 test('an unmatched karaoke recording saves its log before the audio upload', function () {
-    Storage::fake('local');
+    $this->actingAs(User::factory()->create());
+    Storage::fake(config('filesystems.default'));
     $song = karaokeSong();
 
     $logResponse = $this->post(route('karaoke-upload-log'), [
@@ -53,10 +55,11 @@ test('an unmatched karaoke recording saves its log before the audio upload', fun
     $log->refresh();
     expect($log->file_path)->not->toBeNull()
         ->and($log->upload_token)->toBeNull();
-    Storage::disk('local')->assertExists($log->file_path);
+    Storage::disk(config('filesystems.default'))->assertExists($log->file_path);
 });
 
 test('an interrupted audio upload still leaves the unmatched-version log', function () {
+    $this->actingAs(User::factory()->create());
     $song = karaokeSong();
 
     $this->post(route('karaoke-upload-log'), [
@@ -77,7 +80,8 @@ test('an interrupted audio upload still leaves the unmatched-version log', funct
 });
 
 test('an additional lyrics version does not request a matching recording upload', function () {
-    Storage::fake('local');
+    $this->actingAs(User::factory()->create());
+    Storage::fake(config('filesystems.default'));
     $song = karaokeSong();
     $song->lyricsVersions()->create([
         'duration' => 3.50,
@@ -104,12 +108,14 @@ test('an additional lyrics version does not request a matching recording upload'
 });
 
 test('an audio upload requires the one-time token for its log', function () {
+    $this->actingAs(User::factory()->create());
     $song = karaokeSong();
     $log = KaraokeUploadLog::create([
         'song_id' => $song->id,
         'song_title' => $song->title,
         'song_artist' => $song->artist_name,
         'file_name' => 'protected.mp3',
+        'user_id' => auth()->id(),
         'file_duration_seconds' => 240,
         'duration_matched' => false,
         'upload_token' => str_repeat('a', 64),
@@ -154,4 +160,33 @@ test('admin song update creates and removes additional lyrics versions', functio
     app(SongService::class)->update($song->id, Request::create('/', 'POST', $payload));
 
     expect($song->lyricsVersions()->count())->toBe(0);
+});
+
+test('guests cannot create karaoke upload requests or send files', function () {
+    Storage::fake(config('filesystems.default'));
+    $song = karaokeSong();
+    $this->postJson(route('karaoke-upload-log'), [
+        'song_id' => $song->id, 'song_title' => $song->title, 'song_artist' => $song->artist_name,
+        'file_name' => 'guest.mp3', 'file_duration_seconds' => 240,
+    ])->assertUnauthorized();
+    $this->postJson(route('karaoke-upload-log.file', ['log' => 999]), [
+        'upload_token' => str_repeat('a', 64), 'audio' => UploadedFile::fake()->create('guest.mp3', 10, 'audio/mpeg'),
+    ])->assertUnauthorized();
+    expect(KaraokeUploadLog::count())->toBe(0);
+    Storage::disk(config('filesystems.default'))->assertDirectoryEmpty('karaoke-uploads');
+});
+test('a logged in user cannot send a file to another users karaoke upload', function () {
+    Storage::fake(config('filesystems.default'));
+    $song = karaokeSong();
+    $owner = User::factory()->create();
+    $log = KaraokeUploadLog::create([
+        'song_id' => $song->id, 'song_title' => $song->title, 'song_artist' => $song->artist_name,
+        'file_name' => 'private.mp3', 'file_duration_seconds' => 240, 'duration_matched' => false,
+        'upload_token' => str_repeat('a', 64), 'user_id' => $owner->id,
+    ]);
+    $this->actingAs(User::factory()->create())->postJson(route('karaoke-upload-log.file', ['log' => $log->id]), [
+        'upload_token' => str_repeat('a', 64), 'audio' => UploadedFile::fake()->create('private.mp3', 10, 'audio/mpeg'),
+    ])->assertNotFound();
+    expect($log->fresh()->file_path)->toBeNull();
+    Storage::disk(config('filesystems.default'))->assertDirectoryEmpty('karaoke-uploads');
 });

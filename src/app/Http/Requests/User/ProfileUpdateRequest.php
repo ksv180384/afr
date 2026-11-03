@@ -18,6 +18,7 @@ class ProfileUpdateRequest extends FormRequest
             'birthday' => 'nullable|date|before_or_equal:today',
             'gender_id' => 'nullable|exists:genders,id',
             'info' => 'nullable|string',
+            'timezone' => 'sometimes|required|timezone:all',
             'odnoklassniki' => 'nullable|string',
             'residence' => 'nullable|string',
             'skype' => 'nullable|string',
@@ -51,6 +52,7 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'birthday' => 'Дата рождения',
+            'timezone' => 'Часовой пояс',
             'today' => 'текущей дате',
         ];
     }

@@ -1,6 +1,8 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
-import menu from "@/App/Store/menu.js";
+import { Link, usePage } from '@inertiajs/vue3';
+import { isMenuItemActive } from '@/App/Store/menu.js';
+
+const page = usePage();
 
 const props = defineProps({
   menu: { type: Array, default: [] }
@@ -12,7 +14,7 @@ const props = defineProps({
     <ul>
       <template v-for="menuItem in menu">
         <li>
-          <Link :href="route(menuItem.name)">{{ menuItem.title }}</Link>
+          <Link :href="route(menuItem.name)" :aria-current="isMenuItemActive(page.url, menuItem) ? 'page' : null">{{ menuItem.title }}</Link>
         </li>
       </template>
     </ul>
@@ -29,7 +31,15 @@ const props = defineProps({
 }
 
 .navigation-top ul>li a{
-  @apply inline-block px-3 py-5 hover:bg-gray-50 transition duration-300 whitespace-nowrap;
+  @apply inline-block my-2 px-3 py-3 rounded-md hover:bg-gray-50 transition-colors duration-200 whitespace-nowrap;
+}
+
+.navigation-top ul>li a[aria-current="page"]{
+  @apply bg-blue-200/70 text-blue-800;
+}
+
+.navigation-top ul>li a:focus-visible{
+  @apply outline outline-2 outline-offset-2 outline-blue-400;
 }
 /*
 nav{

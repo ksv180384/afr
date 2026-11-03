@@ -2,6 +2,9 @@
 // import { onMounted } from 'vue';
 // import { speak } from '@/Helpers/helper';
 
+import { computed } from 'vue';
+import { usePage } from '@inertiajs/vue3';
+import DailySessionCard from '@/App/Components/Learning/DailySessionCard.vue';
 import AfrHeader from '@/App/Components/Header/AfrHeader.vue';
 import AfrFooter from '@/App/Components/Footer/AfrFooter.vue';
 import AfrCard from '@/App/Components/Card/AfrCard.vue';
@@ -11,7 +14,9 @@ import AfrAnecdote from '@/App/Components/Anecdote/AfrAnecdote.vue';
 import AfrLearningWrite from '@/App/Components/AfrLearningWrite.vue';
 import AfrCheckYourself from '@/App/Components/CheckYourself/AfrCheckYourself.vue';
 
+const page=usePage();
 const props = defineProps({
+  showDailyPractice: {type:Boolean,default:false},
   words: { type: Array, default: [] },
   proverb: { type: Object, default: null },
   authUser: { type: Object, default: null },
@@ -22,30 +27,34 @@ const props = defineProps({
 // onMounted(() => {
 //   speak('');
 // });
+const dailyVisible=computed(()=>props.showDailyPractice && page.props?.daily_practice_enabled===true);
 </script>
 <template>
   <div class="layout-two">
 
     <afr-header :auth-user="authUser"/>
 
-    <div class="container-max layout-two-center">
-      <div class="left-container">
+    <div class="container-max layout-two-center" :class="{ 'with-daily': dailyVisible }">
+      <div class="sidebar-container">
+        <daily-session-card v-if="dailyVisible" :auth-user="authUser" />
+        <div class="left-container">
 
-        <afr-card header="Слова">
-          <afr-words :words="words"/>
-        </afr-card>
+          <afr-card header="Слова">
+            <afr-words :words="words"/>
+          </afr-card>
 
-        <afr-card>
-          <div class="flex gap-2">
-            <afr-learning-write/>
-            <afr-check-yourself/>
-          </div>
-        </afr-card>
+          <afr-card>
+            <div class="flex gap-2">
+              <afr-learning-write/>
+              <afr-check-yourself/>
+            </div>
+          </afr-card>
 
-        <afr-card header="Анекдот">
-          <afr-anecdote/>
-        </afr-card>
+          <afr-card header="Анекдот">
+            <afr-anecdote/>
+          </afr-card>
 
+        </div>
       </div>
       <div class="content-container">
 
@@ -85,5 +94,12 @@ const props = defineProps({
 
 .proverb-container{
   @apply hidden lg:block;
+}
+.content-container { min-width:0; }
+.sidebar-container { display:contents; }
+.with-daily { display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto 1fr; align-items:start; width:100%; }
+.with-daily .sidebar-container { display:flex; flex-direction:column; gap:2px; min-width:0; }
+@media(min-width:1024px) {
+  .with-daily { grid-template-columns:280px minmax(0,1fr); grid-template-rows:1fr; }
 }
 </style>

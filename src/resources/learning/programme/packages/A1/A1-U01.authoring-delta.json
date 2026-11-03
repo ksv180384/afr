@@ -1,0 +1,1026 @@
+{
+  "unit_id": "A1-U01",
+  "package_file": "A1-U01.v1.json",
+  "session_ids": [
+    "A1-U01-L01",
+    "A1-U01-L02",
+    "A1-U01-L03",
+    "A1-U01-L04",
+    "A1-U01-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "se-reveiller",
+      "lexeme_key": "fr:se-reveiller:wake-up",
+      "fr": "se réveiller",
+      "ru": [
+        "просыпаться"
+      ],
+      "transcription_ru": "сё рэвэйе́",
+      "first_session_id": "A1-U01-L01"
+    },
+    {
+      "id": "se-lever",
+      "lexeme_key": "fr:se-lever:get-up-bed",
+      "fr": "se lever",
+      "ru": [
+        "вставать с постели (в утреннем распорядке)"
+      ],
+      "transcription_ru": "сё лёвэ́",
+      "first_session_id": "A1-U01-L01"
+    },
+    {
+      "id": "se-laver",
+      "lexeme_key": "fr:se-laver:wash-self",
+      "fr": "se laver",
+      "ru": [
+        "мыться"
+      ],
+      "transcription_ru": "сё лавэ́",
+      "first_session_id": "A1-U01-L01"
+    },
+    {
+      "id": "prendre-petit-dejeuner",
+      "lexeme_key": "fr:prendre-le-petit-dejeuner:have-breakfast",
+      "fr": "prendre le petit déjeuner",
+      "ru": [
+        "завтракать"
+      ],
+      "transcription_ru": "пра(н)др лё пёти дэжёнэ́",
+      "first_session_id": "A1-U01-L01"
+    },
+    {
+      "id": "travailler",
+      "lexeme_key": "fr:travailler:work",
+      "fr": "travailler",
+      "ru": [
+        "работать"
+      ],
+      "transcription_ru": "травайе́",
+      "first_session_id": "A1-U01-L02"
+    },
+    {
+      "id": "travail",
+      "lexeme_key": "fr:travail:work-noun",
+      "fr": "le travail",
+      "ru": [
+        "работа (название дела в распорядке)"
+      ],
+      "transcription_ru": "лё трава́й",
+      "first_session_id": "A1-U01-L02"
+    },
+    {
+      "id": "commencer",
+      "lexeme_key": "fr:commencer:start",
+      "fr": "commencer",
+      "ru": [
+        "начинать (в образце о работе)"
+      ],
+      "transcription_ru": "кома(н)сэ́",
+      "first_session_id": "A1-U01-L02"
+    },
+    {
+      "id": "finir",
+      "lexeme_key": "fr:finir:finish",
+      "fr": "finir",
+      "ru": [
+        "заканчивать (в образце о работе)"
+      ],
+      "transcription_ru": "фини́р",
+      "first_session_id": "A1-U01-L02"
+    },
+    {
+      "id": "faire-une-pause",
+      "lexeme_key": "fr:faire-une-pause:take-break",
+      "fr": "faire une pause",
+      "ru": [
+        "делать перерыв"
+      ],
+      "transcription_ru": "фэр юн по́з",
+      "first_session_id": "A1-U01-L02"
+    },
+    {
+      "id": "rentrer",
+      "lexeme_key": "fr:rentrer:return-home",
+      "fr": "rentrer",
+      "ru": [
+        "возвращаться домой (в данном образце)"
+      ],
+      "transcription_ru": "ра(н)трэ́",
+      "first_session_id": "A1-U01-L03"
+    },
+    {
+      "id": "preparer",
+      "lexeme_key": "fr:preparer:prepare-food",
+      "fr": "préparer",
+      "ru": [
+        "готовить (еду в данном образце)"
+      ],
+      "transcription_ru": "прэпарэ́",
+      "first_session_id": "A1-U01-L03"
+    },
+    {
+      "id": "diner",
+      "lexeme_key": "fr:diner:evening-meal",
+      "fr": "le dîner",
+      "ru": [
+        "ужин"
+      ],
+      "transcription_ru": "лё динэ́",
+      "first_session_id": "A1-U01-L03"
+    },
+    {
+      "id": "se-coucher",
+      "lexeme_key": "fr:se-coucher:go-to-bed",
+      "fr": "se coucher",
+      "ru": [
+        "ложиться спать"
+      ],
+      "transcription_ru": "сё кушэ́",
+      "first_session_id": "A1-U01-L03"
+    },
+    {
+      "id": "souvent",
+      "lexeme_key": "fr:souvent:often",
+      "fr": "souvent",
+      "ru": [
+        "часто"
+      ],
+      "transcription_ru": "сува́(н)",
+      "first_session_id": "A1-U01-L04"
+    },
+    {
+      "id": "toujours",
+      "lexeme_key": "fr:toujours:always",
+      "fr": "toujours",
+      "ru": [
+        "всегда (в описываемом распорядке)"
+      ],
+      "transcription_ru": "тужу́р",
+      "first_session_id": "A1-U01-L04"
+    },
+    {
+      "id": "parfois",
+      "lexeme_key": "fr:parfois:sometimes",
+      "fr": "parfois",
+      "ru": [
+        "иногда"
+      ],
+      "transcription_ru": "парфуа́",
+      "first_session_id": "A1-U01-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:boire:drink",
+    "fr:dormir:sleep",
+    "fr:eau:water",
+    "fr:je:first-person-subject",
+    "fr:maison:house-home",
+    "fr:manger:eat",
+    "fr:matin:morning",
+    "fr:petit-dejeuner:breakfast",
+    "fr:puis:then-sequence",
+    "fr:regarder:look-watch",
+    "fr:soir:evening",
+    "fr:tele:television"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A1.U01.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U01-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U01-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U01-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U01-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U01-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U01-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U01-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U01-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U01-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U01-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U01-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U01-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U01-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U01-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U01.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U01-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U01-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U01-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U01-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U01-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U01-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U01-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U01-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U01-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U01-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U01-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U01-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:se-lever:get-up-bed",
+      "reason": "Вернуть выбранную форму утреннего вставания с постели в знакомом контексте."
+    },
+    {
+      "lexeme_key": "fr:se-laver:wash-self",
+      "reason": "Сохранить форму о себе при повторении распорядка."
+    },
+    {
+      "lexeme_key": "fr:rentrer:return-home",
+      "reason": "Вернуть готовое возвращение домой перед новой темой дома; не считать автоматически изученными новые комнаты."
+    },
+    {
+      "lexeme_key": "fr:se-coucher:go-to-bed",
+      "reason": "Отличать отход ко сну от самого сна."
+    },
+    {
+      "lexeme_key": "fr:travailler:work",
+      "reason": "Повторить выбранную форму о работе без новой таблицы спряжения."
+    },
+    {
+      "lexeme_key": "fr:souvent:often",
+      "reason": "Сохранять качественное значение часто без придуманного процента."
+    },
+    {
+      "lexeme_key": "fr:toujours:always",
+      "reason": "Сохранять область описанного распорядка."
+    },
+    {
+      "lexeme_key": "fr:parfois:sometimes",
+      "reason": "Вернуть иногда при выборе точной частоты."
+    },
+    {
+      "lexeme_key": "fr:maison:house-home",
+      "reason": "Повторить существующий ключ дома до введения новых названий комнат."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "local_catalog_read_only_checked": true,
+    "registry_collisions_checked": true,
+    "package_hash_verified": true,
+    "pronunciation_coverage_warnings_absent": true,
+    "new_lexeme_evidence_checked": true,
+    "practice_kind_checked": true,
+    "existing_baseline_keys_and_full_cards_preserved": true,
+    "breakfast_noun_and_action_keys_distinguished": true,
+    "no_cross_level_prerequisites": true,
+    "no_cross_level_objective_tags": true,
+    "level_metadata_included": true,
+    "curricula_not_created": true,
+    "main_reading_load_checked": true,
+    "audio_word_counts_recorded": true,
+    "sequence_and_frequency_answers_checked": true,
+    "apostrophe_and_fixed_chunk_tokens_preserved": true,
+    "shuffled_choice_feedback_checked": true,
+    "no_unused_local_vocabulary": true
+  },
+  "open_issues": [
+    "Человеку нужно проверить французские выбранные формы, переводы и условные русские транскрипции, особенно похожие формы вставать и мыться и различие отхода ко сну и сна.",
+    "Прослушать браузерную озвучку и измерить длительность. Ориентир 5–7 минут на занятие и 8–20 секунд основного аудирования не измерен; короткая входная опора и вводные аудио могут быть короче.",
+    "Выполнить предпросмотр и пробное прохождение с телефона. Проверить достаточность входной опоры для учащегося с эквивалентной базой без прохождения PRE_A1.",
+    "Перед импортом на другом сервере проверить состояние каталога A1. В локальном каталоге код уже есть, но summary и learning_outcomes пустые; их описание включено в пакет."
+  ],
+  "progress": {
+    "current_unit": "A1-U01",
+    "prepared_session_ids": [
+      "A1-U01-L01",
+      "A1-U01-L02",
+      "A1-U01-L03",
+      "A1-U01-L04",
+      "A1-U01-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A1-U02",
+    "next_unit_title": "Дом и комнаты",
+    "previous_unit": "PRE_A1-U20",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает только A1-U01. Предыдущий уровень подготовлен, но его принятие и импорт не подтверждены. Следующая тема не начата.",
+    "У первого занятия нет prerequisite_ids. Добавлены короткая входная опора и полные карточки повторяемых слов; обязательная межуровневая зависимость и цели другого уровня не создаются.",
+    "В локальном каталоге A1 существует, но описание пустое. В пакет включены только метаданные уровня A1 и текущая тема; curricula не создаётся до готовности всего уровня. База не изменялась.",
+    "Существующие значения утра, вечера, дома, названия завтрака, сна, еды и питья сохраняют прежние ключи и карточки.",
+    "Вставать с постели в утреннем распорядке имеет отдельное значение от прежней инструкции встать с сидячего положения. Это не переименование прежнего ключа инструкции.",
+    "Действие завтракать получает ключ целого сочетания. Ключ названия завтрака сохранён; прежнее сообщение я беру о выборе вещи не используется как значение завтрака.",
+    "Работа как существительное и работать как глагол имеют разные словарные формы. Готовое делать перерыв учится целиком и не объявляется окончанием дня.",
+    "Грамматика ограничена выбранными формами настоящего времени о себе, короткой частью возвратных форм и показанным местом частоты. Полные таблицы лиц, прошедшие времена и отрицательная частота не вводятся.",
+    "Часто, всегда и иногда не переводятся в точные проценты или число дней. Показанная позиция частоты не объявляется единственно возможной для всех наречий.",
+    "В первых четырёх занятиях соответственно 4, 5, 4 и 3 новых значения. В пятом занятии нового обязательного материала нет; рассказ проверяется выбором и сборкой.",
+    "Основные сообщения и описания соответствуют ориентиру чтения A1; входной пример и краткие возвраты намеренно короче. Время аудио зависит от браузера и не проверено прослушиванием.",
+    "Подписанная сборка и грамматическое восстановление не объявляются независимой проверкой всех участвующих слов. Основной реестр и предыдущие пакеты не изменены."
+  ],
+  "session_material": [
+    {
+      "session_id": "A1-U01-L01",
+      "new_lexeme_keys": [
+        "fr:se-reveiller:wake-up",
+        "fr:se-lever:get-up-bed",
+        "fr:se-laver:wash-self",
+        "fr:prendre-le-petit-dejeuner:have-breakfast"
+      ],
+      "reused_lexeme_keys": [
+        "fr:boire:drink",
+        "fr:eau:water",
+        "fr:je:first-person-subject",
+        "fr:matin:morning",
+        "fr:petit-dejeuner:breakfast",
+        "fr:puis:then-sequence"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U01-L02",
+      "new_lexeme_keys": [
+        "fr:travailler:work",
+        "fr:travail:work-noun",
+        "fr:commencer:start",
+        "fr:finir:finish",
+        "fr:faire-une-pause:take-break"
+      ],
+      "reused_lexeme_keys": [
+        "fr:boire:drink",
+        "fr:eau:water",
+        "fr:je:first-person-subject",
+        "fr:matin:morning",
+        "fr:petit-dejeuner:breakfast",
+        "fr:prendre-le-petit-dejeuner:have-breakfast",
+        "fr:puis:then-sequence",
+        "fr:se-laver:wash-self"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U01-L03",
+      "new_lexeme_keys": [
+        "fr:rentrer:return-home",
+        "fr:preparer:prepare-food",
+        "fr:diner:evening-meal",
+        "fr:se-coucher:go-to-bed"
+      ],
+      "reused_lexeme_keys": [
+        "fr:dormir:sleep",
+        "fr:faire-une-pause:take-break",
+        "fr:je:first-person-subject",
+        "fr:maison:house-home",
+        "fr:manger:eat",
+        "fr:puis:then-sequence",
+        "fr:regarder:look-watch",
+        "fr:se-reveiller:wake-up",
+        "fr:soir:evening",
+        "fr:tele:television",
+        "fr:travailler:work"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U01-L04",
+      "new_lexeme_keys": [
+        "fr:souvent:often",
+        "fr:toujours:always",
+        "fr:parfois:sometimes"
+      ],
+      "reused_lexeme_keys": [
+        "fr:diner:evening-meal",
+        "fr:je:first-person-subject",
+        "fr:maison:house-home",
+        "fr:matin:morning",
+        "fr:petit-dejeuner:breakfast",
+        "fr:prendre-le-petit-dejeuner:have-breakfast",
+        "fr:preparer:prepare-food",
+        "fr:puis:then-sequence",
+        "fr:regarder:look-watch",
+        "fr:rentrer:return-home",
+        "fr:se-coucher:go-to-bed",
+        "fr:soir:evening",
+        "fr:tele:television",
+        "fr:travailler:work"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U01-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:commencer:start",
+        "fr:diner:evening-meal",
+        "fr:dormir:sleep",
+        "fr:faire-une-pause:take-break",
+        "fr:finir:finish",
+        "fr:je:first-person-subject",
+        "fr:maison:house-home",
+        "fr:matin:morning",
+        "fr:parfois:sometimes",
+        "fr:petit-dejeuner:breakfast",
+        "fr:prendre-le-petit-dejeuner:have-breakfast",
+        "fr:preparer:prepare-food",
+        "fr:puis:then-sequence",
+        "fr:regarder:look-watch",
+        "fr:rentrer:return-home",
+        "fr:se-coucher:go-to-bed",
+        "fr:se-laver:wash-self",
+        "fr:se-lever:get-up-bed",
+        "fr:se-reveiller:wake-up",
+        "fr:soir:evening",
+        "fr:souvent:often",
+        "fr:tele:television",
+        "fr:toujours:always",
+        "fr:travail:work-noun",
+        "fr:travailler:work"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A1-U01-L01",
+      "material": "Выбранные формы о себе трёх возвратных глаголов: короткая часть после я в сопоставлении со словарной формой; готовое сочетание завтракать."
+    },
+    {
+      "session_id": "A1-U01-L02",
+      "material": "Словарные названия и выбранные формы настоящего времени о себе: работать, начинать и заканчивать работу, делать перерыв."
+    },
+    {
+      "session_id": "A1-U01-L03",
+      "material": "Выбранные вечерние формы о себе; возвратный образец ложиться спать, отличающийся от спать."
+    },
+    {
+      "session_id": "A1-U01-L04",
+      "material": "Показанное положение часто, всегда и иногда после формы действия в нескольких коротких репликах."
+    }
+  ],
+  "catalog_metadata": {
+    "level_code": "A1",
+    "local_catalog_exists": true,
+    "local_catalog_title": "A1",
+    "local_catalog_summary": null,
+    "local_catalog_learning_outcomes": null,
+    "levels_metadata_included": true,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "entry_support": {
+    "no_cross_level_prerequisite": true,
+    "first_session_prerequisite_ids": [],
+    "baseline_example_before_first_task": true,
+    "assumes_equivalent_basic_knowledge": true
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:se-reveiller:wake-up",
+      "evidence": [
+        {
+          "session_id": "A1-U01-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:se-lever:get-up-bed",
+      "evidence": [
+        {
+          "session_id": "A1-U01-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:se-laver:wash-self",
+      "evidence": [
+        {
+          "session_id": "A1-U01-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U01-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:prendre-le-petit-dejeuner:have-breakfast",
+      "evidence": [
+        {
+          "session_id": "A1-U01-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U01-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:travailler:work",
+      "evidence": [
+        {
+          "session_id": "A1-U01-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:travail:work-noun",
+      "evidence": [
+        {
+          "session_id": "A1-U01-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:commencer:start",
+      "evidence": [
+        {
+          "session_id": "A1-U01-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:finir:finish",
+      "evidence": [
+        {
+          "session_id": "A1-U01-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U01-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:faire-une-pause:take-break",
+      "evidence": [
+        {
+          "session_id": "A1-U01-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U01-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:rentrer:return-home",
+      "evidence": [
+        {
+          "session_id": "A1-U01-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:preparer:prepare-food",
+      "evidence": [
+        {
+          "session_id": "A1-U01-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:diner:evening-meal",
+      "evidence": [
+        {
+          "session_id": "A1-U01-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:se-coucher:go-to-bed",
+      "evidence": [
+        {
+          "session_id": "A1-U01-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U01-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U01-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:souvent:often",
+      "evidence": [
+        {
+          "session_id": "A1-U01-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:toujours:always",
+      "evidence": [
+        {
+          "session_id": "A1-U01-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U01-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:parfois:sometimes",
+      "evidence": [
+        {
+          "session_id": "A1-U01-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U01-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U01-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 16,
+    "external_prerequisites": [],
+    "external_reference_status": "no_external_session_prerequisites; local_catalog_A1_exists_with_empty_description; metadata_included",
+    "project_validator": {
+      "valid": true,
+      "errors": [],
+      "file_hash": "d7283515a8ef3fad46d276d5cac304934cac28a1b4c8bad43bc041dbeb6433cf",
+      "warning_counts": {
+        "editorial_review_required": 5,
+        "browser_tts": 14
+      },
+      "requires_editorial_review": true,
+      "report_file": "A1-U01.validation.json"
+    },
+    "main_reading_texts": [
+      {
+        "session_id": "A1-U01-L01",
+        "texts": [
+          {
+            "task_id": "Q05",
+            "words": 21
+          }
+        ]
+      },
+      {
+        "session_id": "A1-U01-L02",
+        "texts": [
+          {
+            "task_id": "Q05",
+            "words": 19
+          }
+        ]
+      },
+      {
+        "session_id": "A1-U01-L03",
+        "texts": [
+          {
+            "task_id": "Q05",
+            "words": 21
+          }
+        ]
+      },
+      {
+        "session_id": "A1-U01-L04",
+        "texts": [
+          {
+            "task_id": "Q05",
+            "words": 26
+          }
+        ]
+      },
+      {
+        "session_id": "A1-U01-L05",
+        "texts": [
+          {
+            "task_id": "Q02",
+            "words": 30
+          },
+          {
+            "task_id": "Q08",
+            "words": 21
+          }
+        ]
+      }
+    ],
+    "reading_word_range_including_short_warmups": [
+      5,
+      30
+    ],
+    "listening_texts": [
+      {
+        "session_id": "A1-U01-L01",
+        "task_id": "Q03",
+        "words": 16,
+        "duration_seconds_measured": null
+      },
+      {
+        "session_id": "A1-U01-L02",
+        "task_id": "Q03",
+        "words": 20,
+        "duration_seconds_measured": null
+      },
+      {
+        "session_id": "A1-U01-L03",
+        "task_id": "Q03",
+        "words": 18,
+        "duration_seconds_measured": null
+      },
+      {
+        "session_id": "A1-U01-L04",
+        "task_id": "Q03",
+        "words": 20,
+        "duration_seconds_measured": null
+      },
+      {
+        "session_id": "A1-U01-L05",
+        "task_id": "Q01",
+        "words": 22,
+        "duration_seconds_measured": null
+      },
+      {
+        "session_id": "A1-U01-L05",
+        "task_id": "Q04",
+        "words": 21,
+        "duration_seconds_measured": null
+      }
+    ],
+    "audio_duration_status": "not_measured_or_listened",
+    "new_lexical_meanings": 16
+  }
+}

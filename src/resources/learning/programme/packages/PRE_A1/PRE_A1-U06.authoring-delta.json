@@ -1,0 +1,932 @@
+{
+  "unit_id": "PRE_A1-U06",
+  "package_file": "PRE_A1-U06.v1.json",
+  "session_ids": [
+    "PRE_A1-U06-L01",
+    "PRE_A1-U06-L02",
+    "PRE_A1-U06-L03",
+    "PRE_A1-U06-L04",
+    "PRE_A1-U06-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "mere",
+      "lexeme_key": "fr:mere:mother",
+      "fr": "la mère",
+      "ru": [
+        "мать"
+      ],
+      "transcription_ru": "ла мэ́р",
+      "first_session_id": "PRE_A1-U06-L01"
+    },
+    {
+      "id": "pere",
+      "lexeme_key": "fr:pere:father",
+      "fr": "le père",
+      "ru": [
+        "отец"
+      ],
+      "transcription_ru": "лё пэ́р",
+      "first_session_id": "PRE_A1-U06-L01"
+    },
+    {
+      "id": "parents",
+      "lexeme_key": "fr:parents:parents",
+      "fr": "les parents",
+      "ru": [
+        "родители"
+      ],
+      "transcription_ru": "лэ пара́(н)",
+      "first_session_id": "PRE_A1-U06-L01"
+    },
+    {
+      "id": "frere",
+      "lexeme_key": "fr:frere:brother",
+      "fr": "le frère",
+      "ru": [
+        "брат"
+      ],
+      "transcription_ru": "лё фрэ́р",
+      "first_session_id": "PRE_A1-U06-L02"
+    },
+    {
+      "id": "soeur",
+      "lexeme_key": "fr:soeur:sister",
+      "fr": "la sœur",
+      "ru": [
+        "сестра"
+      ],
+      "transcription_ru": "ла сё́р",
+      "first_session_id": "PRE_A1-U06-L02"
+    },
+    {
+      "id": "fils",
+      "lexeme_key": "fr:fils:son",
+      "fr": "le fils",
+      "ru": [
+        "сын"
+      ],
+      "transcription_ru": "лё фи́с",
+      "first_session_id": "PRE_A1-U06-L03"
+    },
+    {
+      "id": "fille",
+      "lexeme_key": "fr:fille:daughter",
+      "fr": "la fille",
+      "ru": [
+        "дочь"
+      ],
+      "transcription_ru": "ла фи́й",
+      "first_session_id": "PRE_A1-U06-L03"
+    },
+    {
+      "id": "enfant",
+      "lexeme_key": "fr:enfant:child",
+      "fr": "un enfant",
+      "ru": [
+        "ребёнок"
+      ],
+      "transcription_ru": "э(н) на(н)фа́(н)",
+      "first_session_id": "PRE_A1-U06-L03"
+    },
+    {
+      "id": "famille",
+      "lexeme_key": "fr:famille:family",
+      "fr": "la famille",
+      "ru": [
+        "семья"
+      ],
+      "transcription_ru": "ла фами́й",
+      "first_session_id": "PRE_A1-U06-L04"
+    },
+    {
+      "id": "oncle",
+      "lexeme_key": "fr:oncle:uncle",
+      "fr": "un oncle",
+      "ru": [
+        "дядя"
+      ],
+      "transcription_ru": "э(н) но́(н)кль",
+      "first_session_id": "PRE_A1-U06-L04"
+    },
+    {
+      "id": "tante",
+      "lexeme_key": "fr:tante:aunt",
+      "fr": "une tante",
+      "ru": [
+        "тётя"
+      ],
+      "transcription_ru": "юн та́(н)т",
+      "first_session_id": "PRE_A1-U06-L04"
+    },
+    {
+      "id": "mon-possessive",
+      "lexeme_key": "fr:mon:first-person-masculine-possessive",
+      "fr": "mon",
+      "ru": [
+        "мой (перед изученным словом мужского рода)"
+      ],
+      "transcription_ru": "мо́(н)",
+      "first_session_id": "PRE_A1-U06-L01"
+    },
+    {
+      "id": "ma-possessive",
+      "lexeme_key": "fr:ma:first-person-feminine-possessive",
+      "fr": "ma",
+      "ru": [
+        "моя (перед изученным словом женского рода)"
+      ],
+      "transcription_ru": "ма",
+      "first_session_id": "PRE_A1-U06-L01"
+    },
+    {
+      "id": "mes-possessive",
+      "lexeme_key": "fr:mes:first-person-plural-possessive",
+      "fr": "mes",
+      "ru": [
+        "мои (перед несколькими родственниками)"
+      ],
+      "transcription_ru": "мэ",
+      "first_session_id": "PRE_A1-U06-L02"
+    },
+    {
+      "id": "children-question",
+      "lexeme_key": "fr:vous-avez-des-enfants:children-question",
+      "fr": "vous avez des enfants ?",
+      "ru": [
+        "У вас есть дети?"
+      ],
+      "transcription_ru": "ву завэ дэ за(н)фа́(н)?",
+      "first_session_id": "PRE_A1-U06-L03"
+    },
+    {
+      "id": "jai-des-enfants",
+      "lexeme_key": "fr:jai-des-enfants:have-children",
+      "fr": "j’ai des enfants",
+      "ru": [
+        "У меня есть дети"
+      ],
+      "transcription_ru": "жэ дэ за(н)фа́(н)",
+      "first_session_id": "PRE_A1-U06-L03"
+    },
+    {
+      "id": "qui-est-ce",
+      "lexeme_key": "fr:qui-est-ce:identity-question",
+      "fr": "qui est-ce ?",
+      "ru": [
+        "Кто это?"
+      ],
+      "transcription_ru": "ки э́с?",
+      "first_session_id": "PRE_A1-U06-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:ce-sont:identify-objects",
+    "fr:cest:identify-object",
+    "fr:comment-vous-appelez-vous:formal-name-question",
+    "fr:deux:cardinal-number",
+    "fr:je-suis-de:city-origin",
+    "fr:jhabite-a:city-residence",
+    "fr:oui:affirmative-answer",
+    "fr:quel-age-avez-vous:formal-age-question",
+    "fr:trois:cardinal-number",
+    "fr:un:cardinal-number"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "PRE_A1.U06.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U06.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q07",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q05",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U05.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U03.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:cest:identify-object",
+      "reason": "Вернуть знакомое указание на один предмет перед добавлением цвета."
+    },
+    {
+      "lexeme_key": "fr:ce-sont:identify-objects",
+      "reason": "При уместном возврате различить один предмет и несколько без нового материала о семье."
+    },
+    {
+      "lexeme_key": "fr:mon:first-person-masculine-possessive",
+      "reason": "Сохранить изученную форму перед словами мужского рода, не вводя все исключения."
+    },
+    {
+      "lexeme_key": "fr:ma:first-person-feminine-possessive",
+      "reason": "Вернуться к знакомой форме перед словом женского рода, если она нужна в контексте цветов."
+    },
+    {
+      "lexeme_key": "fr:famille:family",
+      "reason": "Сохранить семейный контекст для позднего повторения, не перегружая новую тему цветами и новыми родственниками."
+    },
+    {
+      "lexeme_key": "fr:deux:cardinal-number",
+      "reason": "Вернуть точное количество предметов и не смешивать его с множественным числом без количества."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "local_database_references_checked": true,
+    "pronunciation_coverage_warnings_absent": true,
+    "all_new_lexemes_have_task_evidence": true,
+    "kind_practice_checked": true,
+    "level_load_checked": true
+  },
+  "open_issues": [
+    "Проверка зависимостей штатным валидатором в локальной базе пройдена. При импорте в другую базу сначала требуется PRE_A1-U05-L05.",
+    "Человеку нужно прослушать родственные слова и целые фразы с носовыми гласными и связями перед гласным, особенно сочетания с детьми и дядей.",
+    "Выполнить языковую редактуру, предпросмотр и пробное прохождение. Оценка 6 минут на занятие не измерена."
+  ],
+  "progress": {
+    "current_unit": "PRE_A1-U06",
+    "prepared_session_ids": [
+      "PRE_A1-U06-L01",
+      "PRE_A1-U06-L02",
+      "PRE_A1-U06-L03",
+      "PRE_A1-U06-L04",
+      "PRE_A1-U06-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "PRE_A1-U07",
+    "previous_unit": "PRE_A1-U05",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку U06; отдельного подтверждения языкового принятия или импорта U05 нет.",
+    "Существующие ключи указания и числительных сохранены. Применение образца указания к людям не создаёт новый ключ для того же значения «это».",
+    "Родственные слова во множественном числе сохраняют свои смысловые ключи; новые значения для отдельных форм не создаются.",
+    "Дочь рассматривается как семейная роль. Для значения «девочка» новый ключ здесь не вводится.",
+    "Формы mon/ma/mes отрабатываются в показанных сочетаниях; исключения для всего класса не заявляются.",
+    "Полный образец j’ai des enfants имеет отдельный ключ как полезное выражение о детях. Прежние ключи j’ai для возраста и наличия вещи не меняются.",
+    "В L01–L04 соответственно 5, 3, 5 и 4 новых значения; в L05 новых обязательных слов или правил нет.",
+    "В заданиях сборки assessed_vocabulary_ids пуст: подписанное сообщение не оценивает знание всех слов.",
+    "Основной LEXEME_REGISTRY.json и ранее подготовленные пакеты не изменены. Новые ключи передаются отдельным delta до принятия."
+  ],
+  "session_material": [
+    {
+      "session_id": "PRE_A1-U06-L01",
+      "new_lexeme_keys": [
+        "fr:mere:mother",
+        "fr:pere:father",
+        "fr:parents:parents",
+        "fr:mon:first-person-masculine-possessive",
+        "fr:ma:first-person-feminine-possessive"
+      ],
+      "reused_lexeme_keys": [
+        "fr:ce-sont:identify-objects",
+        "fr:cest:identify-object",
+        "fr:je-suis-de:city-origin",
+        "fr:jhabite-a:city-residence"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U06-L02",
+      "new_lexeme_keys": [
+        "fr:frere:brother",
+        "fr:soeur:sister",
+        "fr:mes:first-person-plural-possessive"
+      ],
+      "reused_lexeme_keys": [
+        "fr:ce-sont:identify-objects",
+        "fr:cest:identify-object",
+        "fr:ma:first-person-feminine-possessive",
+        "fr:mere:mother",
+        "fr:mon:first-person-masculine-possessive",
+        "fr:parents:parents",
+        "fr:pere:father"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U06-L03",
+      "new_lexeme_keys": [
+        "fr:fils:son",
+        "fr:fille:daughter",
+        "fr:enfant:child",
+        "fr:vous-avez-des-enfants:children-question",
+        "fr:jai-des-enfants:have-children"
+      ],
+      "reused_lexeme_keys": [
+        "fr:cest:identify-object",
+        "fr:comment-vous-appelez-vous:formal-name-question",
+        "fr:deux:cardinal-number",
+        "fr:frere:brother",
+        "fr:ma:first-person-feminine-possessive",
+        "fr:mere:mother",
+        "fr:mes:first-person-plural-possessive",
+        "fr:mon:first-person-masculine-possessive",
+        "fr:oui:affirmative-answer",
+        "fr:pere:father",
+        "fr:quel-age-avez-vous:formal-age-question",
+        "fr:soeur:sister",
+        "fr:trois:cardinal-number",
+        "fr:un:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U06-L04",
+      "new_lexeme_keys": [
+        "fr:famille:family",
+        "fr:oncle:uncle",
+        "fr:tante:aunt",
+        "fr:qui-est-ce:identity-question"
+      ],
+      "reused_lexeme_keys": [
+        "fr:ce-sont:identify-objects",
+        "fr:cest:identify-object",
+        "fr:fille:daughter",
+        "fr:fils:son",
+        "fr:frere:brother",
+        "fr:ma:first-person-feminine-possessive",
+        "fr:mere:mother",
+        "fr:mes:first-person-plural-possessive",
+        "fr:mon:first-person-masculine-possessive",
+        "fr:parents:parents",
+        "fr:pere:father",
+        "fr:quel-age-avez-vous:formal-age-question",
+        "fr:soeur:sister",
+        "fr:vous-avez-des-enfants:children-question"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U06-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:ce-sont:identify-objects",
+        "fr:cest:identify-object",
+        "fr:deux:cardinal-number",
+        "fr:enfant:child",
+        "fr:famille:family",
+        "fr:fille:daughter",
+        "fr:fils:son",
+        "fr:frere:brother",
+        "fr:jai-des-enfants:have-children",
+        "fr:ma:first-person-feminine-possessive",
+        "fr:mere:mother",
+        "fr:mes:first-person-plural-possessive",
+        "fr:mon:first-person-masculine-possessive",
+        "fr:oncle:uncle",
+        "fr:parents:parents",
+        "fr:pere:father",
+        "fr:quel-age-avez-vous:formal-age-question",
+        "fr:qui-est-ce:identity-question",
+        "fr:soeur:sister",
+        "fr:tante:aunt",
+        "fr:trois:cardinal-number",
+        "fr:vous-avez-des-enfants:children-question"
+      ],
+      "task_count": 8
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:mere:mother",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q06",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:pere:father",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:parents:parents",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q07",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:frere:brother",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:soeur:sister",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:fils:son",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:fille:daughter",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:enfant:child",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:famille:family",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:oncle:uncle",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:tante:aunt",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:mon:first-person-masculine-possessive",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q07",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:ma:first-person-feminine-possessive",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L01",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q05",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:mes:first-person-plural-possessive",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L02",
+          "task_id": "Q05",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:vous-avez-des-enfants:children-question",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U06-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:jai-des-enfants:have-children",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L03",
+          "task_id": "Q05",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:qui-est-ce:identity-question",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U06-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 17,
+    "external_prerequisites": [
+      "PRE_A1-U05-L05"
+    ],
+    "external_reference_status": "Exists in prepared U05 package; full project validator including local database references returned no errors. Target database must contain U05 before U06 import.",
+    "new_lexemes_per_session": [
+      5,
+      3,
+      5,
+      4,
+      0
+    ],
+    "project_validator": {
+      "valid": true,
+      "errors": [],
+      "file_hash": "81a1c28dad824f6590bd70a10e2b1dc0266b0fe26a983139ae2f2be649cb66cd",
+      "warning_counts": {
+        "editorial_review_required": 5,
+        "browser_tts": 16
+      },
+      "requires_editorial_review": true,
+      "report_file": "PRE_A1-U06.validation.json"
+    }
+  }
+}

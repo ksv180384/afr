@@ -1,0 +1,1096 @@
+{
+  "unit_id": "A1-U08",
+  "package_file": "A1-U08.v1.json",
+  "session_ids": [
+    "A1-U08-L01",
+    "A1-U08-L02",
+    "A1-U08-L03",
+    "A1-U08-L04",
+    "A1-U08-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "hotel",
+      "lexeme_key": "fr:hotel:hotel",
+      "fr": "un hôtel",
+      "ru": [
+        "гостиница"
+      ],
+      "transcription_ru": "э(н) нотэ́ль",
+      "first_session_id": "A1-U08-L01"
+    },
+    {
+      "id": "reservation",
+      "lexeme_key": "fr:reservation:hotel-booking",
+      "fr": "une réservation",
+      "ru": [
+        "бронирование номера"
+      ],
+      "transcription_ru": "юн рэзэрвасьо́(н)",
+      "first_session_id": "A1-U08-L01"
+    },
+    {
+      "id": "chambre-hotel",
+      "lexeme_key": "fr:chambre:hotel-room",
+      "fr": "une chambre",
+      "ru": [
+        "номер в гостинице"
+      ],
+      "transcription_ru": "юн ша́(н)бр",
+      "first_session_id": "A1-U08-L01"
+    },
+    {
+      "id": "reserver",
+      "lexeme_key": "fr:reserver:book-hotel-room",
+      "fr": "réserver",
+      "ru": [
+        "бронировать номер"
+      ],
+      "transcription_ru": "рэзэрвэ́",
+      "first_session_id": "A1-U08-L01"
+    },
+    {
+      "id": "date",
+      "lexeme_key": "fr:date:calendar-date",
+      "fr": "une date",
+      "ru": [
+        "календарная дата"
+      ],
+      "transcription_ru": "юн да́т",
+      "first_session_id": "A1-U08-L02"
+    },
+    {
+      "id": "mai",
+      "lexeme_key": "fr:mai:month-may",
+      "fr": "mai",
+      "ru": [
+        "май (месяц)"
+      ],
+      "transcription_ru": "мэ́",
+      "first_session_id": "A1-U08-L02"
+    },
+    {
+      "id": "sejour",
+      "lexeme_key": "fr:sejour:hotel-stay",
+      "fr": "le séjour",
+      "ru": [
+        "проживание в гостинице (период)"
+      ],
+      "transcription_ru": "лё сэжу́р",
+      "first_session_id": "A1-U08-L02"
+    },
+    {
+      "id": "cle",
+      "lexeme_key": "fr:cle:hotel-room-key",
+      "fr": "une clé",
+      "ru": [
+        "ключ от гостиничного номера"
+      ],
+      "transcription_ru": "юн клэ́",
+      "first_session_id": "A1-U08-L03"
+    },
+    {
+      "id": "reception",
+      "lexeme_key": "fr:reception:hotel-front-desk",
+      "fr": "la réception",
+      "ru": [
+        "стойка регистрации в гостинице"
+      ],
+      "transcription_ru": "ла рэсэпсьо́(н)",
+      "first_session_id": "A1-U08-L03"
+    },
+    {
+      "id": "passeport",
+      "lexeme_key": "fr:passeport:passport",
+      "fr": "un passeport",
+      "ru": [
+        "паспорт"
+      ],
+      "transcription_ru": "э(н) паспо́р",
+      "first_session_id": "A1-U08-L03"
+    },
+    {
+      "id": "a-quel-nom",
+      "lexeme_key": "fr:a-quel-nom:booking-name-question",
+      "fr": "à quel nom ?",
+      "ru": [
+        "на какую фамилию бронирование?"
+      ],
+      "transcription_ru": "а кэль но́(н)",
+      "first_session_id": "A1-U08-L03"
+    },
+    {
+      "id": "douche",
+      "lexeme_key": "fr:douche:shower-facility",
+      "fr": "une douche",
+      "ru": [
+        "душ (удобство в номере)"
+      ],
+      "transcription_ru": "юн ду́ш",
+      "first_session_id": "A1-U08-L04"
+    },
+    {
+      "id": "salle-de-bains",
+      "lexeme_key": "fr:salle-de-bains:bathroom",
+      "fr": "une salle de bains",
+      "ru": [
+        "ванная комната"
+      ],
+      "transcription_ru": "юн саль дё бэ́(н)",
+      "first_session_id": "A1-U08-L04"
+    },
+    {
+      "id": "wifi",
+      "lexeme_key": "fr:wifi:wireless-internet-access",
+      "fr": "le wifi",
+      "ru": [
+        "беспроводной доступ в интернет"
+      ],
+      "transcription_ru": "лё уифи́",
+      "first_session_id": "A1-U08-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:a-cote-de:next-to",
+    "fr:arriver:transport-arrive",
+    "fr:ascenseur:lift",
+    "fr:bleu:blue",
+    "fr:bonjour:greeting",
+    "fr:bus:bus",
+    "fr:calme:quiet-place",
+    "fr:cher:expensive",
+    "fr:combien:how-much-many",
+    "fr:couter:cost",
+    "fr:deux:cardinal-number",
+    "fr:dix:cardinal-number",
+    "fr:essayer:try-on-clothing",
+    "fr:et:and",
+    "fr:euro:currency-unit",
+    "fr:gare:railway-station",
+    "fr:grand:large-object",
+    "fr:heure:clock-hour",
+    "fr:huit:cardinal-number",
+    "fr:je-peux:permission-request",
+    "fr:je-voudrais:polite-request",
+    "fr:merci:thanks",
+    "fr:neuf:cardinal-number",
+    "fr:nuit:night",
+    "fr:par-carte:card-payment",
+    "fr:partir:transport-leave",
+    "fr:payer:pay",
+    "fr:petit:small-object",
+    "fr:pres-de:near-place",
+    "fr:robe:dress",
+    "fr:sil-vous-plait:polite-request",
+    "fr:taille:clothing-size",
+    "fr:train:train",
+    "fr:trois:cardinal-number",
+    "fr:trop:excessive-degree",
+    "fr:voila:presenting"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A1.U08.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U08-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U08-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U08-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U08-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U08-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U08-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U08-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U08-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U08-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U08.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U08-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U08-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U08-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U08-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U08-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U08-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U08-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U08-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U07.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U08-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U05.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U08-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U08-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:date:calendar-date",
+      "reason": "Перенести календарную дату в следующую тему встреч."
+    },
+    {
+      "lexeme_key": "fr:mai:month-may",
+      "reason": "Вернуть уже знакомый месяц перед расширением календаря."
+    },
+    {
+      "lexeme_key": "fr:sejour:hotel-stay",
+      "reason": "Повторить период проживания как понятный контекст двух дат."
+    },
+    {
+      "lexeme_key": "fr:reservation:hotel-booking",
+      "reason": "Повторить бронирование отдельно от просьбы сделать его."
+    },
+    {
+      "lexeme_key": "fr:reserver:book-hotel-room",
+      "reason": "Вернуть действие бронирования до расширения планов."
+    },
+    {
+      "lexeme_key": "fr:chambre:hotel-room",
+      "reason": "Сохранить значение гостиничного номера отдельно от спальни в жилье."
+    },
+    {
+      "lexeme_key": "fr:heure:clock-hour",
+      "reason": "Повторить различие календарной даты и времени суток."
+    },
+    {
+      "lexeme_key": "fr:cle:hotel-room-key",
+      "reason": "Вернуть короткую просьбу о ключе в знакомой ситуации."
+    },
+    {
+      "lexeme_key": "fr:wifi:wireless-internet-access",
+      "reason": "Повторить наличие и отсутствие удобства."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "hotel_room_meaning_separated_from_bedroom": true,
+    "night_lexeme_key_reused": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "date_frame_transfer_checked": true,
+    "dialogue_roles_and_transfer_directions_reviewed": true,
+    "amenity_presence_and_absence_answers_reviewed": true,
+    "date_number_pronunciation_sources_consulted": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A1-U07-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Редактору проверить естественность французских реплик регистрации, даты, условные русские транскрипции и посильность форм наличия и свойства.",
+    "Прослушать браузерную озвучку, особенно фамилию, даты, бронирование, ключ и названия удобств. Время аудио и прохождения пока не измерено.",
+    "Выполнить предпросмотр и пробное прохождение: роли в диалоге, направления передачи документа и ключа, две даты и отрицание удобства."
+  ],
+  "progress": {
+    "current_unit": "A1-U08",
+    "prepared_session_ids": [
+      "A1-U08-L01",
+      "A1-U08-L02",
+      "A1-U08-L03",
+      "A1-U08-L04",
+      "A1-U08-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A1-U09",
+    "next_unit_title": "Календарь и встречи",
+    "previous_unit": "A1-U07",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A1-U08. Принятие и импорт предыдущих пакетов не подтверждены; повторение использует полные объекты подготовленных пакетов.",
+    "Новые значения распределены как четыре, три, четыре, три и ноль. В пятом занятии нового обязательного материала нет.",
+    "Номер гостиницы получает отдельный ключ fr:chambre:hotel-room. Прежний ключ спальни fr:chambre:bedroom не изменён и не подменён.",
+    "Бронирование как запись и действие бронировать различаются. Готовое начало J’ai сообщает наличие, вежливая рамка с réserver просит действие.",
+    "Прежний ключ ночи сохраняется: число ночей проживания не создаёт отдельного значения. Число ночей прямо названо, календарные вычисления не требуются.",
+    "В датах выбран май и знакомые числа восемь, девять и десять. Рамка du/au задаёт начало и окончание проживания в пределах одного месяца, без полного календаря и исключений первого числа.",
+    "Календарная дата отличается от целых часов из транспорта. Даты вымышленные, год и день недели не требуются.",
+    "Ключ, паспорт и стойка регистрации имеют разные значения. Вопрос à quel nom вводится готовой рамкой с вымышленной фамилией Martin; реальных персональных сведений нет.",
+    "Роли в диалоге явно заданы порядком реплик. Документ от гостя и ключ от сотрудника определяются словами и ролями, не тембром голоса.",
+    "В выбранных описаниях a сообщает наличие удобства, est — свойство номера. Отрицание повторяет уже показанную конструкцию. Полные таблицы avoir и être не вводятся.",
+    "Беспроводной интернет является только названным удобством; подключение к сети и внешние сервисы для решения не нужны. Наличие ванной комнаты не используется для вывода неназванных услуг.",
+    "В L01 повторено расписание A1-U07; в L03 и L04 — размер и оценка цены одежды из A1-U05.",
+    "Все гостиницы, записи, даты и реплики вымышленные. Проверка реальных мест, тарифов, правил заселения и документов не требуется.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A1-U08-L01",
+      "new_lexeme_keys": [
+        "fr:hotel:hotel",
+        "fr:reservation:hotel-booking",
+        "fr:chambre:hotel-room",
+        "fr:reserver:book-hotel-room"
+      ],
+      "reused_lexeme_keys": [
+        "fr:arriver:transport-arrive",
+        "fr:bonjour:greeting",
+        "fr:bus:bus",
+        "fr:deux:cardinal-number",
+        "fr:dix:cardinal-number",
+        "fr:et:and",
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:je-voudrais:polite-request",
+        "fr:merci:thanks",
+        "fr:neuf:cardinal-number",
+        "fr:nuit:night",
+        "fr:par-carte:card-payment",
+        "fr:partir:transport-leave",
+        "fr:payer:pay",
+        "fr:pres-de:near-place",
+        "fr:sil-vous-plait:polite-request",
+        "fr:train:train"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U08-L02",
+      "new_lexeme_keys": [
+        "fr:date:calendar-date",
+        "fr:mai:month-may",
+        "fr:sejour:hotel-stay"
+      ],
+      "reused_lexeme_keys": [
+        "fr:chambre:hotel-room",
+        "fr:deux:cardinal-number",
+        "fr:dix:cardinal-number",
+        "fr:euro:currency-unit",
+        "fr:heure:clock-hour",
+        "fr:huit:cardinal-number",
+        "fr:je-voudrais:polite-request",
+        "fr:merci:thanks",
+        "fr:neuf:cardinal-number",
+        "fr:nuit:night",
+        "fr:partir:transport-leave",
+        "fr:reservation:hotel-booking",
+        "fr:sil-vous-plait:polite-request",
+        "fr:train:train",
+        "fr:trois:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U08-L03",
+      "new_lexeme_keys": [
+        "fr:cle:hotel-room-key",
+        "fr:reception:hotel-front-desk",
+        "fr:passeport:passport",
+        "fr:a-quel-nom:booking-name-question"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-cote-de:next-to",
+        "fr:ascenseur:lift",
+        "fr:bleu:blue",
+        "fr:bonjour:greeting",
+        "fr:chambre:hotel-room",
+        "fr:combien:how-much-many",
+        "fr:couter:cost",
+        "fr:dix:cardinal-number",
+        "fr:essayer:try-on-clothing",
+        "fr:grand:large-object",
+        "fr:huit:cardinal-number",
+        "fr:je-peux:permission-request",
+        "fr:je-voudrais:polite-request",
+        "fr:mai:month-may",
+        "fr:merci:thanks",
+        "fr:petit:small-object",
+        "fr:reservation:hotel-booking",
+        "fr:robe:dress",
+        "fr:sil-vous-plait:polite-request",
+        "fr:taille:clothing-size",
+        "fr:trop:excessive-degree",
+        "fr:voila:presenting"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U08-L04",
+      "new_lexeme_keys": [
+        "fr:douche:shower-facility",
+        "fr:salle-de-bains:bathroom",
+        "fr:wifi:wireless-internet-access"
+      ],
+      "reused_lexeme_keys": [
+        "fr:calme:quiet-place",
+        "fr:chambre:hotel-room",
+        "fr:cher:expensive",
+        "fr:et:and",
+        "fr:je-voudrais:polite-request",
+        "fr:merci:thanks",
+        "fr:par-carte:card-payment",
+        "fr:payer:pay",
+        "fr:robe:dress",
+        "fr:sil-vous-plait:polite-request"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U08-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-quel-nom:booking-name-question",
+        "fr:bonjour:greeting",
+        "fr:calme:quiet-place",
+        "fr:chambre:hotel-room",
+        "fr:cle:hotel-room-key",
+        "fr:date:calendar-date",
+        "fr:deux:cardinal-number",
+        "fr:dix:cardinal-number",
+        "fr:douche:shower-facility",
+        "fr:huit:cardinal-number",
+        "fr:je-voudrais:polite-request",
+        "fr:mai:month-may",
+        "fr:neuf:cardinal-number",
+        "fr:nuit:night",
+        "fr:passeport:passport",
+        "fr:reservation:hotel-booking",
+        "fr:reserver:book-hotel-room",
+        "fr:salle-de-bains:bathroom",
+        "fr:sejour:hotel-stay",
+        "fr:sil-vous-plait:polite-request",
+        "fr:voila:presenting",
+        "fr:wifi:wireless-internet-access"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A1-U08-L01",
+      "material": "Готовое начало J’ai une réservation; Je voudrais réserver une chambre; pour с прямо названным числом ночей."
+    },
+    {
+      "session_id": "A1-U08-L02",
+      "material": "Число плюс mai для даты; выбранная рамка Le séjour est du huit au dix mai; отличие даты от времени суток."
+    },
+    {
+      "session_id": "A1-U08-L03",
+      "material": "Готовый вопрос La réservation est à quel nom; сочетание La clé de la chambre; повтор передачи предмета Voilà."
+    },
+    {
+      "session_id": "A1-U08-L04",
+      "material": "Выбранные формы La chambre a une douche / a le wifi и La chambre est calme; сочетание свойства и удобства, повтор Il n’y a pas de wifi."
+    }
+  ],
+  "text_conventions": {
+    "booking_status": "Вымышленные записи гостиничного бронирования.",
+    "date_scope": "Две даты внутри мая; начало и окончание прямо заданы, число ночей не вычисляется.",
+    "speaker_roles": "Роли в диалогах заданы порядком реплик; фамилия Martin вымышленная.",
+    "audio_basis": "Ответ зависит от содержания и ролей, не от тембра.",
+    "external_services_required": false
+  },
+  "editorial_sources": [
+    {
+      "topic": "Произношение huit в датах и перед следующим словом; выбран вариант с конечным т.",
+      "url": "https://vitrinelinguistique.oqlf.gouv.qc.ca/23149/la-prononciation/prononciation-des-nombres/prononciation-de-huit"
+    },
+    {
+      "topic": "Произношение dix в датах; выбран вариант с конечным с.",
+      "url": "https://vitrinelinguistique.oqlf.gouv.qc.ca/23137/la-prononciation/prononciation-des-nombres/prononciation-de-six-et-dix"
+    }
+  ],
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:hotel:hotel",
+      "evidence": [
+        {
+          "session_id": "A1-U08-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:reservation:hotel-booking",
+      "evidence": [
+        {
+          "session_id": "A1-U08-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U08-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:chambre:hotel-room",
+      "evidence": [
+        {
+          "session_id": "A1-U08-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:reserver:book-hotel-room",
+      "evidence": [
+        {
+          "session_id": "A1-U08-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:date:calendar-date",
+      "evidence": [
+        {
+          "session_id": "A1-U08-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:mai:month-may",
+      "evidence": [
+        {
+          "session_id": "A1-U08-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U08-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:sejour:hotel-stay",
+      "evidence": [
+        {
+          "session_id": "A1-U08-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:cle:hotel-room-key",
+      "evidence": [
+        {
+          "session_id": "A1-U08-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:reception:hotel-front-desk",
+      "evidence": [
+        {
+          "session_id": "A1-U08-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:passeport:passport",
+      "evidence": [
+        {
+          "session_id": "A1-U08-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:a-quel-nom:booking-name-question",
+      "evidence": [
+        {
+          "session_id": "A1-U08-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:douche:shower-facility",
+      "evidence": [
+        {
+          "session_id": "A1-U08-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:salle-de-bains:bathroom",
+      "evidence": [
+        {
+          "session_id": "A1-U08-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:wifi:wireless-internet-access",
+      "evidence": [
+        {
+          "session_id": "A1-U08-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U08-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U08-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U08-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 14,
+    "external_prerequisites": [
+      "A1-U07-L05"
+    ],
+    "external_reference_status": "A1-U07-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 12
+      },
+      "file_hash": "f4ae403db4b217304433b3d79908fb61cc9c240625663f0f7019e8a35f88d652",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 36,
+    "text_lengths": [
+      {
+        "session_id": "A1-U08-L01",
+        "reading_word_counts": [
+          22,
+          17
+        ],
+        "listening_word_counts": [
+          18
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U08-L02",
+        "reading_word_counts": [
+          17,
+          24
+        ],
+        "listening_word_counts": [
+          17
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U08-L03",
+        "reading_word_counts": [
+          20,
+          22
+        ],
+        "listening_word_counts": [
+          19
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U08-L04",
+        "reading_word_counts": [
+          19,
+          22
+        ],
+        "listening_word_counts": [
+          20
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U08-L05",
+        "reading_word_counts": [
+          22,
+          20
+        ],
+        "listening_word_counts": [
+          20,
+          22
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "J’ai une réservation",
+        "session_id": "A1-U08-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "pour deux nuits",
+        "session_id": "A1-U08-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "réserver une chambre",
+        "session_id": "A1-U08-L01",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "du huit au dix mai",
+        "session_id": "A1-U08-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "du neuf au dix mai",
+        "session_id": "A1-U08-L02",
+        "task_id": "Q05"
+      },
+      {
+        "frame": "La clé de la chambre",
+        "session_id": "A1-U08-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "à quel nom",
+        "session_id": "A1-U08-L03",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "La chambre a une douche",
+        "session_id": "A1-U08-L04",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "La chambre est calme",
+        "session_id": "A1-U08-L04",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "La chambre a le wifi",
+        "session_id": "A1-U08-L04",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "Il n’y a pas de wifi",
+        "session_id": "A1-U08-L04",
+        "task_id": "Q05"
+      }
+    ]
+  }
+}

@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 
@@ -18,8 +17,10 @@ class HandleInertiaRequests extends Middleware
 
     public function rootView(Request $request)
     {
-        $uri = request()->path();
-        return Str::startsWith($uri, 'admin') ? 'admin' : $this->rootView;
+        $admin = $request->is('admin', 'admin/*');
+        config(['inertia.ssr.url' => config($admin ? 'inertia.ssr.admin_url' : 'inertia.ssr.public_url')]);
+
+        return $admin ? 'admin' : $this->rootView;
     }
 
     /**
@@ -39,6 +40,7 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
+            'daily_practice_enabled' => (bool) config('daily_practice.enabled'),
             'auth' => [
                 'user' => $request->user(),
             ],

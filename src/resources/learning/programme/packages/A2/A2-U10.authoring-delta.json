@@ -1,0 +1,2183 @@
+{
+  "unit_id": "A2-U10",
+  "package_file": "A2-U10.v1.json",
+  "session_ids": [
+    "A2-U10-L01",
+    "A2-U10-L02",
+    "A2-U10-L03",
+    "A2-U10-L04",
+    "A2-U10-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "plus-comparatif",
+      "lexeme_key": "fr:plus:greater-degree-comparison",
+      "fr": "plus",
+      "ru": [
+        "более: степень признака в сравнении"
+      ],
+      "transcription_ru": "плю",
+      "first_session_id": "A2-U10-L01"
+    },
+    {
+      "id": "aussi-comparatif",
+      "lexeme_key": "fr:aussi:equality-comparison",
+      "fr": "aussi",
+      "ru": [
+        "такой же: равная степень признака в сравнении"
+      ],
+      "transcription_ru": "оси́",
+      "first_session_id": "A2-U10-L01"
+    },
+    {
+      "id": "le-plus",
+      "lexeme_key": "fr:le-plus:highest-degree",
+      "fr": "le plus",
+      "ru": [
+        "самый: наибольшая степень признака среди сравниваемых"
+      ],
+      "transcription_ru": "лё плю",
+      "first_session_id": "A2-U10-L02"
+    },
+    {
+      "id": "meilleur",
+      "lexeme_key": "fr:meilleur:better-quality",
+      "fr": "meilleur",
+      "ru": [
+        "лучше по качеству; с артиклем в изученной модели — лучший"
+      ],
+      "transcription_ru": "мэйё́р",
+      "first_session_id": "A2-U10-L02"
+    },
+    {
+      "id": "avantage",
+      "lexeme_key": "fr:avantage:benefit-of-option",
+      "fr": "un avantage",
+      "ru": [
+        "преимущество варианта"
+      ],
+      "transcription_ru": "э(н) нава(н)та́ж",
+      "first_session_id": "A2-U10-L03"
+    },
+    {
+      "id": "inconvenient",
+      "lexeme_key": "fr:inconvenient:drawback-of-option",
+      "fr": "un inconvénient",
+      "ru": [
+        "неудобство, недостаток варианта"
+      ],
+      "transcription_ru": "э(н) нэ(н)ко(н)вэнья́(н)",
+      "first_session_id": "A2-U10-L03"
+    },
+    {
+      "id": "assez",
+      "lexeme_key": "fr:assez:sufficient-degree",
+      "fr": "assez",
+      "ru": [
+        "достаточно: нужная степень признака достигнута"
+      ],
+      "transcription_ru": "асэ́",
+      "first_session_id": "A2-U10-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:a-louer:available-for-rent",
+    "fr:appartement:apartment",
+    "fr:autre:other",
+    "fr:avoir:compound-past-auxiliary",
+    "fr:billet:transport-ticket",
+    "fr:bruit:noise",
+    "fr:bruyant:noisy-place",
+    "fr:cabinet-medical:doctor-office",
+    "fr:cafe:coffee",
+    "fr:calme:quiet-place",
+    "fr:cent:cardinal-number",
+    "fr:chambre:bedroom",
+    "fr:charges:advertised-rental-charges",
+    "fr:cher:expensive",
+    "fr:choisir:choose-option",
+    "fr:cinq:cardinal-number",
+    "fr:coupe:haircut-service",
+    "fr:cuisine:kitchen",
+    "fr:demain:tomorrow",
+    "fr:depuis:ongoing-since-duration",
+    "fr:disponible:available-in-schedule",
+    "fr:dix:cardinal-number",
+    "fr:dos:back-body-part",
+    "fr:douleur:self-reported-pain",
+    "fr:ecrire:write",
+    "fr:euro:currency-unit",
+    "fr:faire-du-bruit:make-noise",
+    "fr:faire-le-menage:clean-home",
+    "fr:fermer:close-object",
+    "fr:gare:railway-station",
+    "fr:grand:large-object",
+    "fr:heure:clock-hour",
+    "fr:hier:yesterday",
+    "fr:hotel:hotel",
+    "fr:il-est-interdit-de:prohibition",
+    "fr:il-faut:necessary-action",
+    "fr:il-y-a:ago-time-marker",
+    "fr:inclus:included-in-service-price",
+    "fr:jai-mal:pain-report",
+    "fr:jai:possession",
+    "fr:je-dois:study-obligation",
+    "fr:je-voudrais:polite-request",
+    "fr:leur:indirect-object-plural",
+    "fr:loyer:rent-payment",
+    "fr:lui:indirect-object-singular",
+    "fr:lumineux:well-lit",
+    "fr:lundi:weekday",
+    "fr:maintenant:now",
+    "fr:maison:house-home",
+    "fr:mardi:weekday",
+    "fr:matin:morning",
+    "fr:medecin:doctor",
+    "fr:meuble:furnished-accommodation",
+    "fr:midi:noon",
+    "fr:minute:time-duration-unit",
+    "fr:moins:less-comparison",
+    "fr:musee:museum",
+    "fr:neuf:cardinal-number",
+    "fr:par-mois:per-month",
+    "fr:parc:park",
+    "fr:pendant:duration-preposition",
+    "fr:porte:door",
+    "fr:pourriez-vous:polite-action-request",
+    "fr:preciser:clarify-service-details",
+    "fr:prendre-rendez-vous:book-appointment",
+    "fr:prendre:use-transport",
+    "fr:pres-de:near-place",
+    "fr:proprietaire:property-owner",
+    "fr:quinze:cardinal-number",
+    "fr:rendez-vous:appointment",
+    "fr:shampooing:hair-wash-service",
+    "fr:si:real-condition",
+    "fr:soir:evening",
+    "fr:tarif:service-price",
+    "fr:tete:head",
+    "fr:train:train",
+    "fr:travailler:work",
+    "fr:trois:cardinal-number",
+    "fr:trop:excessive-degree",
+    "fr:vendredi:weekday",
+    "fr:vingt:cardinal-number",
+    "fr:visite:property-viewing",
+    "fr:voisin:neighbor"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A2.U10.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U10-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U10-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U10-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U10-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U10-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U10-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U10-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U10-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U10-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U10-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U10-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U10.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U10-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U10-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U10-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U10-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U10-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U10-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U10-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U10-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U09.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U10-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U10-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U07.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U10-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U10-L05",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U07.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U10-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U06.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U10-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U08.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U10-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U09.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U10-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U05.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U10-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:plus:greater-degree-comparison",
+      "reason": "Повторить большую степень признака без смешения с другими значениями plus."
+    },
+    {
+      "lexeme_key": "fr:moins:less-comparison",
+      "reason": "Сохранить прежний ключ меньшей степени."
+    },
+    {
+      "lexeme_key": "fr:aussi:equality-comparison",
+      "reason": "Вернуть равную степень отдельно от большей и меньшей."
+    },
+    {
+      "lexeme_key": "fr:le-plus:highest-degree",
+      "reason": "Указывать признак и группу сравнения."
+    },
+    {
+      "lexeme_key": "fr:meilleur:better-quality",
+      "reason": "Сохранять оценку качества отдельно от цены."
+    },
+    {
+      "lexeme_key": "fr:avantage:benefit-of-option",
+      "reason": "Связывать преимущество с потребностью и конкретным свойством."
+    },
+    {
+      "lexeme_key": "fr:inconvenient:drawback-of-option",
+      "reason": "Вернуть неудобство как отдельную сторону варианта."
+    },
+    {
+      "lexeme_key": "fr:assez:sufficient-degree",
+      "reason": "Повторить достаточную степень без вывода о наибольшей."
+    },
+    {
+      "lexeme_key": "fr:trop:excessive-degree",
+      "reason": "Вернуть чрезмерность с прежним ключом."
+    },
+    {
+      "lexeme_key": "fr:choisir:choose-option",
+      "reason": "Повторить выбор по названным условиям."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "new_local_ids_do_not_overwrite_existing_meanings": true,
+    "known_moins_and_trop_keys_preserved": true,
+    "quality_uses_existing_coffee_drink_key": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "checkpoint_has_eight_tasks_and_no_new_material": true,
+    "checkpoint_includes_u06_through_u10_and_earlier_return": true,
+    "block_coverage_audit_passed": true,
+    "transcriptions_structurally_checked_without_claim_of_listening": true,
+    "apostrophes_kept_in_whole_tokens": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A2-U09-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Редактору проверить естественность сравнений и оценок, понятность групп из трёх, различие качества, цены, достаточности и чрезмерности, нагрузку контроля.",
+    "Прослушать браузерную озвучку plus calme, aussi lumineux, le plus calme, meilleur, avantage, inconvénient, assez и связки est aussi / est assez. Время аудио и занятий не измерено.",
+    "Выполнить предпросмотр и пробное прохождение на сайте, особенно направления сравнения, принадлежность свойства варианту, условие включения платежей, время приёма и число адресатов."
+  ],
+  "progress": {
+    "current_unit": "A2-U10",
+    "prepared_session_ids": [
+      "A2-U10-L01",
+      "A2-U10-L02",
+      "A2-U10-L03",
+      "A2-U10-L04",
+      "A2-U10-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A2-U11",
+    "next_unit_title": "Праздники",
+    "previous_unit": "A2-U09",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку только A2-U10; принятие и импорт предыдущих пакетов пользователем не подтверждены.",
+    "Семь новых значений распределены как два, два, два, одно, ноль. В каждом введении не более трёх карточек. В L05 нет новых обязательных слов или грамматики.",
+    "В L01 повторены необходимость и запрет в доме из A2-U09. В L03 возвращаются день, час и кабинет врача из A2-U07; в L04 — время и длительность учебного самоописания из A2-U07. Полные прежние карточки сохраняются.",
+    "Moins сохраняет прежний ключ меньшей степени. Новый plus относится к большей степени признака; не заменяет plus tard, un peu plus или прежнюю целую просьбу говорить медленнее.",
+    "Aussi изучается только как равная степень в модели aussi + признак + que. Другие значения слова не включаются в карточку.",
+    "Le plus показано в мужском единственном числе с наибольшей степенью среди трёх. Не заявляется изучение полной таблицы рода и числа.",
+    "Meilleur оценивает качество. В модели с артиклем le meilleur des trois относится к лучшему в группе. Цена и качество не выводятся друг из друга. Café в этих заданиях — напиток, а не заведение; используется прежний ключ кофе.",
+    "Avantage и inconvénient относятся к явно названному свойству в конкретной ситуации. Тишина оценена как преимущество при потребности в тихой квартире; более высокая цена — как неудобство.",
+    "Assez означает достаточность, а не максимум и не равенство другого варианта. Trop сохраняет прежний ключ чрезмерной степени: сначала повторяется с размером, затем переносится на шум; ключ не дублируется ради смены прилагательного.",
+    "Оценки жилья и кофе, цены, условия и записи вымышлены. Это не рыночные сведения, рекомендации реальных товаров или юридические нормы.",
+    "Более высокая названная цена, меньшая цена и названные платежи не превращаются в неподтверждённый вывод о всех общих расходах. В контрольном объявлении проверяются только прямо названные платежи.",
+    "Медицинский контекст ограничен французским самоописанием и организацией записи; диагноз, срочность, лечение, препараты и дозировки не выбираются.",
+    "Контроль L05 содержит восемь заданий: два listening, два reading, два vocabulary, одно grammar и одно sentence_building. Включены U06, U07, U08, U09, U10 и возврат к условию будущей поездки U05.",
+    "Восемь заданий дают выборку, не все цели блока в каждой задаче. Старые цели прикреплены только к проверкам своего содержания, с неизменными объектами; общий аудит покрытия блока ведётся отдельно.",
+    "Во всех заданиях ответы выбираются или собираются. В сборках используются все карточки, а порядок сужен инструкцией; апострофы и устойчивые рамки не разрываются.",
+    "Озвучка только браузерным API: fr-FR, asset_id=null, без аудиофайлов и внешних сервисов. Реальные услуги не заказывались, записи и сообщения не отправлялись.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A2-U10-L01",
+      "new_lexeme_keys": [
+        "fr:plus:greater-degree-comparison",
+        "fr:aussi:equality-comparison"
+      ],
+      "reused_lexeme_keys": [
+        "fr:appartement:apartment",
+        "fr:autre:other",
+        "fr:bruyant:noisy-place",
+        "fr:calme:quiet-place",
+        "fr:chambre:bedroom",
+        "fr:choisir:choose-option",
+        "fr:cuisine:kitchen",
+        "fr:faire-du-bruit:make-noise",
+        "fr:faire-le-menage:clean-home",
+        "fr:fermer:close-object",
+        "fr:gare:railway-station",
+        "fr:il-est-interdit-de:prohibition",
+        "fr:il-faut:necessary-action",
+        "fr:je-dois:study-obligation",
+        "fr:je-voudrais:polite-request",
+        "fr:lumineux:well-lit",
+        "fr:maison:house-home",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:moins:less-comparison",
+        "fr:parc:park",
+        "fr:porte:door",
+        "fr:pres-de:near-place",
+        "fr:soir:evening",
+        "fr:vendredi:weekday",
+        "fr:voisin:neighbor"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U10-L02",
+      "new_lexeme_keys": [
+        "fr:le-plus:highest-degree",
+        "fr:meilleur:better-quality"
+      ],
+      "reused_lexeme_keys": [
+        "fr:appartement:apartment",
+        "fr:aussi:equality-comparison",
+        "fr:autre:other",
+        "fr:bruyant:noisy-place",
+        "fr:cafe:coffee",
+        "fr:calme:quiet-place",
+        "fr:cher:expensive",
+        "fr:choisir:choose-option",
+        "fr:gare:railway-station",
+        "fr:hotel:hotel",
+        "fr:je-voudrais:polite-request",
+        "fr:lumineux:well-lit",
+        "fr:moins:less-comparison",
+        "fr:musee:museum",
+        "fr:parc:park",
+        "fr:plus:greater-degree-comparison",
+        "fr:pres-de:near-place",
+        "fr:trois:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U10-L03",
+      "new_lexeme_keys": [
+        "fr:avantage:benefit-of-option",
+        "fr:inconvenient:drawback-of-option"
+      ],
+      "reused_lexeme_keys": [
+        "fr:appartement:apartment",
+        "fr:bruit:noise",
+        "fr:bruyant:noisy-place",
+        "fr:cabinet-medical:doctor-office",
+        "fr:calme:quiet-place",
+        "fr:cher:expensive",
+        "fr:depuis:ongoing-since-duration",
+        "fr:dos:back-body-part",
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:jai-mal:pain-report",
+        "fr:je-voudrais:polite-request",
+        "fr:lundi:weekday",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:medecin:doctor",
+        "fr:midi:noon",
+        "fr:minute:time-duration-unit",
+        "fr:neuf:cardinal-number",
+        "fr:parc:park",
+        "fr:plus:greater-degree-comparison",
+        "fr:prendre-rendez-vous:book-appointment",
+        "fr:pres-de:near-place",
+        "fr:rendez-vous:appointment",
+        "fr:travailler:work",
+        "fr:vingt:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U10-L04",
+      "new_lexeme_keys": [
+        "fr:assez:sufficient-degree"
+      ],
+      "reused_lexeme_keys": [
+        "fr:appartement:apartment",
+        "fr:autre:other",
+        "fr:avoir:compound-past-auxiliary",
+        "fr:bruit:noise",
+        "fr:bruyant:noisy-place",
+        "fr:calme:quiet-place",
+        "fr:choisir:choose-option",
+        "fr:depuis:ongoing-since-duration",
+        "fr:dix:cardinal-number",
+        "fr:dos:back-body-part",
+        "fr:douleur:self-reported-pain",
+        "fr:gare:railway-station",
+        "fr:grand:large-object",
+        "fr:hier:yesterday",
+        "fr:il-y-a:ago-time-marker",
+        "fr:inconvenient:drawback-of-option",
+        "fr:jai-mal:pain-report",
+        "fr:je-voudrais:polite-request",
+        "fr:maintenant:now",
+        "fr:medecin:doctor",
+        "fr:minute:time-duration-unit",
+        "fr:parc:park",
+        "fr:pendant:duration-preposition",
+        "fr:plus:greater-degree-comparison",
+        "fr:prendre-rendez-vous:book-appointment",
+        "fr:pres-de:near-place",
+        "fr:tete:head",
+        "fr:trop:excessive-degree",
+        "fr:vingt:cardinal-number"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U10-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:a-louer:available-for-rent",
+        "fr:appartement:apartment",
+        "fr:assez:sufficient-degree",
+        "fr:autre:other",
+        "fr:avantage:benefit-of-option",
+        "fr:billet:transport-ticket",
+        "fr:bruyant:noisy-place",
+        "fr:cabinet-medical:doctor-office",
+        "fr:cafe:coffee",
+        "fr:calme:quiet-place",
+        "fr:cent:cardinal-number",
+        "fr:charges:advertised-rental-charges",
+        "fr:cher:expensive",
+        "fr:choisir:choose-option",
+        "fr:cinq:cardinal-number",
+        "fr:coupe:haircut-service",
+        "fr:demain:tomorrow",
+        "fr:disponible:available-in-schedule",
+        "fr:dix:cardinal-number",
+        "fr:ecrire:write",
+        "fr:euro:currency-unit",
+        "fr:faire-du-bruit:make-noise",
+        "fr:fermer:close-object",
+        "fr:gare:railway-station",
+        "fr:heure:clock-hour",
+        "fr:il-est-interdit-de:prohibition",
+        "fr:il-faut:necessary-action",
+        "fr:inclus:included-in-service-price",
+        "fr:inconvenient:drawback-of-option",
+        "fr:jai:possession",
+        "fr:je-voudrais:polite-request",
+        "fr:le-plus:highest-degree",
+        "fr:leur:indirect-object-plural",
+        "fr:loyer:rent-payment",
+        "fr:lui:indirect-object-singular",
+        "fr:mardi:weekday",
+        "fr:medecin:doctor",
+        "fr:meilleur:better-quality",
+        "fr:meuble:furnished-accommodation",
+        "fr:midi:noon",
+        "fr:musee:museum",
+        "fr:par-mois:per-month",
+        "fr:parc:park",
+        "fr:pendant:duration-preposition",
+        "fr:plus:greater-degree-comparison",
+        "fr:porte:door",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:prendre-rendez-vous:book-appointment",
+        "fr:prendre:use-transport",
+        "fr:pres-de:near-place",
+        "fr:proprietaire:property-owner",
+        "fr:quinze:cardinal-number",
+        "fr:rendez-vous:appointment",
+        "fr:shampooing:hair-wash-service",
+        "fr:si:real-condition",
+        "fr:tarif:service-price",
+        "fr:train:train",
+        "fr:trois:cardinal-number",
+        "fr:trop:excessive-degree",
+        "fr:vendredi:weekday",
+        "fr:vingt:cardinal-number",
+        "fr:visite:property-viewing",
+        "fr:voisin:neighbor"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A2-U10-L01",
+      "material": "Plus / moins / aussi + признак + que; сравнение тишины и освещённости отдельно."
+    },
+    {
+      "session_id": "A2-U10-L02",
+      "material": "Le plus calme des trois; meilleur que l’autre и le meilleur des trois как оценка качества; сравнение группы и пары."
+    },
+    {
+      "session_id": "A2-U10-L03",
+      "material": "C’est un avantage / un inconvénient после явно названного свойства; сопоставление тишины и более высокой цены."
+    },
+    {
+      "session_id": "A2-U10-L04",
+      "material": "Assez grand / assez calme; повторение trop grand и перенос trop bruyant; достаточность отдельно от чрезмерности и максимума."
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:plus:greater-degree-comparison",
+      "evidence": [
+        {
+          "session_id": "A2-U10-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U10-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U10-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U10-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:aussi:equality-comparison",
+      "evidence": [
+        {
+          "session_id": "A2-U10-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U10-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U10-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:le-plus:highest-degree",
+      "evidence": [
+        {
+          "session_id": "A2-U10-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U10-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U10-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:meilleur:better-quality",
+      "evidence": [
+        {
+          "session_id": "A2-U10-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U10-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:avantage:benefit-of-option",
+      "evidence": [
+        {
+          "session_id": "A2-U10-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U10-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:inconvenient:drawback-of-option",
+      "evidence": [
+        {
+          "session_id": "A2-U10-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U10-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U10-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:assez:sufficient-degree",
+      "evidence": [
+        {
+          "session_id": "A2-U10-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U10-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U10-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U10-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "checkpoint_scope": {
+    "session_id": "A2-U10-L05",
+    "unit_range": [
+      "A2-U06",
+      "A2-U07",
+      "A2-U08",
+      "A2-U09",
+      "A2-U10"
+    ],
+    "earlier_return": "A2-U05.APPLY",
+    "task_count": 8,
+    "coverage_status": "Выборка условий услуги, аренды, записи, правил дома, адресатов, сравнения и степеней признака; не исчерпывающая проверка всех целей.",
+    "new_material": false
+  },
+  "text_conventions": {
+    "situation_status": "Оригинальные вымышленные объявления, оценки и диалоги.",
+    "comparison_scope": "Каждый вывод сохраняет признак, направление, сравниваемые варианты и явно названную группу.",
+    "quality_scope": "Оценка качества кофе дана в самом тексте, не выводится из цены.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 7,
+    "external_prerequisites": [
+      "A2-U09-L05"
+    ],
+    "external_reference_status": "A2-U09-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 10
+      },
+      "file_hash": "d1ad02f9a5f74ab331da60ff1ca9915d57ddbe8986cb37a10fe11c61f28aaa4f",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 83,
+    "text_lengths": [
+      {
+        "session_id": "A2-U10-L01",
+        "reading_word_counts": [
+          38,
+          34
+        ],
+        "listening_word_counts": [
+          34
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U10-L02",
+        "reading_word_counts": [
+          34,
+          42
+        ],
+        "listening_word_counts": [
+          40
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U10-L03",
+        "reading_word_counts": [
+          31,
+          34
+        ],
+        "listening_word_counts": [
+          34
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U10-L04",
+        "reading_word_counts": [
+          36,
+          31
+        ],
+        "listening_word_counts": [
+          31
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U10-L05",
+        "reading_word_counts": [
+          40,
+          39
+        ],
+        "listening_word_counts": [
+          35,
+          36
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "plus calme",
+        "session_id": "A2-U10-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "aussi lumineux",
+        "session_id": "A2-U10-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "le plus calme des trois",
+        "session_id": "A2-U10-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "meilleur que l’autre",
+        "session_id": "A2-U10-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Le meilleur des trois",
+        "session_id": "A2-U10-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "C’est un avantage",
+        "session_id": "A2-U10-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "C’est un inconvénient",
+        "session_id": "A2-U10-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "assez grand",
+        "session_id": "A2-U10-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "assez calme",
+        "session_id": "A2-U10-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "trop bruyant",
+        "session_id": "A2-U10-L04",
+        "task_id": "Q03"
+      }
+    ],
+    "level_description_included": false,
+    "curricula_included": false
+  },
+  "block_coverage_audit": {
+    "unit_ids": [
+      "A2-U06",
+      "A2-U07",
+      "A2-U08",
+      "A2-U09",
+      "A2-U10"
+    ],
+    "session_count": 25,
+    "task_count": 180,
+    "mandatory_objective_count": 10,
+    "objective_evidence": [
+      {
+        "objective_id": "A2.U06.UNDERSTAND",
+        "block_evidence": [
+          {
+            "session_id": "A2-U06-L01",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U06-L01",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U06-L01",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U06-L01",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U06-L01",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U06-L01",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U06-L02",
+            "task_id": "Q01",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U06-L02",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U06-L02",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U06-L02",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U06-L02",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U06-L02",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U06-L02",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U06-L05",
+            "task_id": "Q01",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U06-L05",
+            "task_id": "Q02",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U06-L05",
+            "task_id": "Q03",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U07-L01",
+            "task_id": "Q01",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U10-L05",
+            "task_id": "Q01",
+            "skill": "listening"
+          }
+        ],
+        "checkpoint_evidence": [
+          {
+            "session_id": "A2-U10-L05",
+            "task_id": "Q01",
+            "skill": "listening"
+          }
+        ]
+      },
+      {
+        "objective_id": "A2.U06.APPLY",
+        "block_evidence": [
+          {
+            "session_id": "A2-U06-L03",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U06-L03",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U06-L03",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U06-L03",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U06-L03",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U06-L03",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U06-L04",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U06-L04",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U06-L04",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U06-L04",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U06-L04",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U06-L04",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U06-L05",
+            "task_id": "Q04",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U06-L05",
+            "task_id": "Q05",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U06-L05",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U06-L05",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U06-L05",
+            "task_id": "Q08",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U09-L03",
+            "task_id": "Q01",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U09-L04",
+            "task_id": "Q01",
+            "skill": "reading"
+          }
+        ],
+        "checkpoint_evidence": []
+      },
+      {
+        "objective_id": "A2.U07.UNDERSTAND",
+        "block_evidence": [
+          {
+            "session_id": "A2-U07-L01",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U07-L01",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U07-L01",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U07-L01",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U07-L01",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U07-L01",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U07-L02",
+            "task_id": "Q01",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U07-L02",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U07-L02",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U07-L02",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U07-L02",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U07-L02",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U07-L02",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U07-L05",
+            "task_id": "Q01",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U07-L05",
+            "task_id": "Q02",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U07-L05",
+            "task_id": "Q03",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U08-L01",
+            "task_id": "Q01",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U10-L03",
+            "task_id": "Q01",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U10-L05",
+            "task_id": "Q03",
+            "skill": "listening"
+          }
+        ],
+        "checkpoint_evidence": [
+          {
+            "session_id": "A2-U10-L05",
+            "task_id": "Q03",
+            "skill": "listening"
+          }
+        ]
+      },
+      {
+        "objective_id": "A2.U07.APPLY",
+        "block_evidence": [
+          {
+            "session_id": "A2-U07-L03",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U07-L03",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U07-L03",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U07-L03",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U07-L03",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U07-L03",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U07-L04",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U07-L04",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U07-L04",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U07-L04",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U07-L04",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U07-L04",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U07-L05",
+            "task_id": "Q04",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U07-L05",
+            "task_id": "Q05",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U07-L05",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U07-L05",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U07-L05",
+            "task_id": "Q08",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U10-L04",
+            "task_id": "Q01",
+            "skill": "reading"
+          }
+        ],
+        "checkpoint_evidence": []
+      },
+      {
+        "objective_id": "A2.U08.UNDERSTAND",
+        "block_evidence": [
+          {
+            "session_id": "A2-U08-L01",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U08-L01",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U08-L01",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U08-L01",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U08-L01",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U08-L01",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U08-L02",
+            "task_id": "Q01",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U08-L02",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U08-L02",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U08-L02",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U08-L02",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U08-L02",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U08-L02",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U08-L05",
+            "task_id": "Q01",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U08-L05",
+            "task_id": "Q02",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U08-L05",
+            "task_id": "Q03",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U09-L01",
+            "task_id": "Q01",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U10-L05",
+            "task_id": "Q02",
+            "skill": "reading"
+          }
+        ],
+        "checkpoint_evidence": [
+          {
+            "session_id": "A2-U10-L05",
+            "task_id": "Q02",
+            "skill": "reading"
+          }
+        ]
+      },
+      {
+        "objective_id": "A2.U08.APPLY",
+        "block_evidence": [
+          {
+            "session_id": "A2-U08-L03",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U08-L03",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U08-L03",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U08-L03",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U08-L03",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U08-L03",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U08-L04",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U08-L04",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U08-L04",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U08-L04",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U08-L04",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U08-L04",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U08-L05",
+            "task_id": "Q03",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U08-L05",
+            "task_id": "Q04",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U08-L05",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U08-L05",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U08-L05",
+            "task_id": "Q07",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U08-L05",
+            "task_id": "Q08",
+            "skill": "sentence_building"
+          }
+        ],
+        "checkpoint_evidence": []
+      },
+      {
+        "objective_id": "A2.U09.UNDERSTAND",
+        "block_evidence": [
+          {
+            "session_id": "A2-U09-L01",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U09-L01",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U09-L01",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U09-L01",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U09-L01",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U09-L01",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U09-L02",
+            "task_id": "Q01",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U09-L02",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U09-L02",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U09-L02",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U09-L02",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U09-L02",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U09-L02",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U09-L05",
+            "task_id": "Q01",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U09-L05",
+            "task_id": "Q02",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U09-L05",
+            "task_id": "Q03",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U09-L05",
+            "task_id": "Q08",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U10-L01",
+            "task_id": "Q01",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U10-L05",
+            "task_id": "Q05",
+            "skill": "vocabulary"
+          }
+        ],
+        "checkpoint_evidence": [
+          {
+            "session_id": "A2-U10-L05",
+            "task_id": "Q05",
+            "skill": "vocabulary"
+          }
+        ]
+      },
+      {
+        "objective_id": "A2.U09.APPLY",
+        "block_evidence": [
+          {
+            "session_id": "A2-U09-L03",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U09-L03",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U09-L03",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U09-L03",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U09-L03",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U09-L03",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U09-L04",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U09-L04",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U09-L04",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U09-L04",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U09-L04",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U09-L04",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U09-L05",
+            "task_id": "Q04",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U09-L05",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U09-L05",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U09-L05",
+            "task_id": "Q07",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U09-L05",
+            "task_id": "Q08",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U10-L05",
+            "task_id": "Q05",
+            "skill": "vocabulary"
+          }
+        ],
+        "checkpoint_evidence": [
+          {
+            "session_id": "A2-U10-L05",
+            "task_id": "Q05",
+            "skill": "vocabulary"
+          }
+        ]
+      },
+      {
+        "objective_id": "A2.U10.UNDERSTAND",
+        "block_evidence": [
+          {
+            "session_id": "A2-U10-L01",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U10-L01",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U10-L01",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U10-L01",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U10-L01",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U10-L01",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U10-L02",
+            "task_id": "Q01",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U10-L02",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U10-L02",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U10-L02",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U10-L02",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U10-L02",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U10-L02",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U10-L05",
+            "task_id": "Q04",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U10-L05",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          }
+        ],
+        "checkpoint_evidence": [
+          {
+            "session_id": "A2-U10-L05",
+            "task_id": "Q04",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U10-L05",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          }
+        ]
+      },
+      {
+        "objective_id": "A2.U10.APPLY",
+        "block_evidence": [
+          {
+            "session_id": "A2-U10-L03",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U10-L03",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U10-L03",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U10-L03",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U10-L03",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U10-L03",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U10-L04",
+            "task_id": "Q02",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U10-L04",
+            "task_id": "Q03",
+            "skill": "listening"
+          },
+          {
+            "session_id": "A2-U10-L04",
+            "task_id": "Q04",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U10-L04",
+            "task_id": "Q05",
+            "skill": "reading"
+          },
+          {
+            "session_id": "A2-U10-L04",
+            "task_id": "Q06",
+            "skill": "grammar"
+          },
+          {
+            "session_id": "A2-U10-L04",
+            "task_id": "Q07",
+            "skill": "sentence_building"
+          },
+          {
+            "session_id": "A2-U10-L05",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U10-L05",
+            "task_id": "Q08",
+            "skill": "sentence_building"
+          }
+        ],
+        "checkpoint_evidence": [
+          {
+            "session_id": "A2-U10-L05",
+            "task_id": "Q06",
+            "skill": "vocabulary"
+          },
+          {
+            "session_id": "A2-U10-L05",
+            "task_id": "Q08",
+            "skill": "sentence_building"
+          }
+        ]
+      }
+    ],
+    "checks": {
+      "exact_plan_metadata": true,
+      "unchanged_objective_objects": true,
+      "each_objective_in_multiple_sessions": true,
+      "each_objective_has_vocabulary_and_another_skill": true
+    },
+    "checkpoint_task_map": [
+      {
+        "task_id": "Q01",
+        "skill": "listening",
+        "objective_ids": [
+          "A2.U06.UNDERSTAND"
+        ]
+      },
+      {
+        "task_id": "Q02",
+        "skill": "reading",
+        "objective_ids": [
+          "A2.U08.UNDERSTAND"
+        ]
+      },
+      {
+        "task_id": "Q03",
+        "skill": "listening",
+        "objective_ids": [
+          "A2.U07.UNDERSTAND"
+        ]
+      },
+      {
+        "task_id": "Q04",
+        "skill": "reading",
+        "objective_ids": [
+          "A2.U10.UNDERSTAND"
+        ]
+      },
+      {
+        "task_id": "Q05",
+        "skill": "vocabulary",
+        "objective_ids": [
+          "A2.U09.UNDERSTAND",
+          "A2.U09.APPLY"
+        ]
+      },
+      {
+        "task_id": "Q06",
+        "skill": "vocabulary",
+        "objective_ids": [
+          "A2.U10.UNDERSTAND",
+          "A2.U10.APPLY"
+        ]
+      },
+      {
+        "task_id": "Q07",
+        "skill": "grammar",
+        "objective_ids": [
+          "A2.U05.APPLY"
+        ]
+      },
+      {
+        "task_id": "Q08",
+        "skill": "sentence_building",
+        "objective_ids": [
+          "A2.U10.APPLY"
+        ]
+      }
+    ],
+    "objectives_not_separately_sampled_in_checkpoint": [
+      "A2.U06.APPLY",
+      "A2.U07.APPLY",
+      "A2.U08.APPLY"
+    ],
+    "interpretation": "Это аудит созданных заданий, не результат прохождения учеником. Контроль содержит выборку; накопленное покрытие не означает проверку каждой цели в восьми вопросах."
+  }
+}

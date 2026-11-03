@@ -1,0 +1,958 @@
+{
+  "unit_id": "PRE_A1-U10",
+  "package_file": "PRE_A1-U10.v1.json",
+  "session_ids": [
+    "PRE_A1-U10-L01",
+    "PRE_A1-U10-L02",
+    "PRE_A1-U10-L03",
+    "PRE_A1-U10-L04",
+    "PRE_A1-U10-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "pain",
+      "lexeme_key": "fr:pain:bread",
+      "fr": "du pain",
+      "ru": [
+        "хлеб (в просьбе: хлеба)"
+      ],
+      "transcription_ru": "дю пэ́(н)",
+      "first_session_id": "PRE_A1-U10-L01"
+    },
+    {
+      "id": "fromage",
+      "lexeme_key": "fr:fromage:cheese",
+      "fr": "du fromage",
+      "ru": [
+        "сыр (в просьбе: сыра)"
+      ],
+      "transcription_ru": "дю фрома́ж",
+      "first_session_id": "PRE_A1-U10-L01"
+    },
+    {
+      "id": "pomme",
+      "lexeme_key": "fr:pomme:apple",
+      "fr": "une pomme",
+      "ru": [
+        "яблоко"
+      ],
+      "transcription_ru": "юн по́м",
+      "first_session_id": "PRE_A1-U10-L02"
+    },
+    {
+      "id": "banane",
+      "lexeme_key": "fr:banane:banana",
+      "fr": "une banane",
+      "ru": [
+        "банан"
+      ],
+      "transcription_ru": "юн бана́н",
+      "first_session_id": "PRE_A1-U10-L02"
+    },
+    {
+      "id": "orange",
+      "lexeme_key": "fr:orange:orange-fruit",
+      "fr": "une orange",
+      "ru": [
+        "апельсин"
+      ],
+      "transcription_ru": "юн ора́(н)ж",
+      "first_session_id": "PRE_A1-U10-L02"
+    },
+    {
+      "id": "petit-dejeuner",
+      "lexeme_key": "fr:petit-dejeuner:breakfast",
+      "fr": "le petit déjeuner",
+      "ru": [
+        "завтрак"
+      ],
+      "transcription_ru": "лё пёти дэжёнэ́",
+      "first_session_id": "PRE_A1-U10-L03"
+    },
+    {
+      "id": "croissant",
+      "lexeme_key": "fr:croissant:pastry",
+      "fr": "un croissant",
+      "ru": [
+        "круассан"
+      ],
+      "transcription_ru": "э(н) круаса́(н)",
+      "first_session_id": "PRE_A1-U10-L03"
+    },
+    {
+      "id": "jaime",
+      "lexeme_key": "fr:jaime:food-liking",
+      "fr": "j’aime",
+      "ru": [
+        "Мне нравится (о еде)"
+      ],
+      "transcription_ru": "жэ́м",
+      "first_session_id": "PRE_A1-U10-L04"
+    },
+    {
+      "id": "je-naime-pas",
+      "lexeme_key": "fr:je-naime-pas:food-dislike",
+      "fr": "je n’aime pas",
+      "ru": [
+        "Мне не нравится (о еде)"
+      ],
+      "transcription_ru": "жё нэм па́",
+      "first_session_id": "PRE_A1-U10-L04"
+    },
+    {
+      "id": "et",
+      "lexeme_key": "fr:et:and",
+      "fr": "et",
+      "ru": [
+        "и (соединяет названия)"
+      ],
+      "transcription_ru": "э",
+      "first_session_id": "PRE_A1-U10-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:bleu:blue",
+    "fr:bonjour:greeting",
+    "fr:cafe:coffee",
+    "fr:cest:identify-object",
+    "fr:chaud:hot-temperature",
+    "fr:court:short-length",
+    "fr:deux:cardinal-number",
+    "fr:eau:water",
+    "fr:froid:cold-temperature",
+    "fr:grand:large-object",
+    "fr:je-mappelle:self_introduction",
+    "fr:je-voudrais:polite-request",
+    "fr:jus:juice",
+    "fr:long:long-length",
+    "fr:ma:first-person-feminine-possessive",
+    "fr:mere:mother",
+    "fr:mes:first-person-plural-possessive",
+    "fr:mon:first-person-masculine-possessive",
+    "fr:numero:identifier",
+    "fr:pere:father",
+    "fr:petit:small-object",
+    "fr:que-voulez-vous-boire:drink-question",
+    "fr:rouge:red",
+    "fr:sac:bag",
+    "fr:sil-vous-plait:polite-request",
+    "fr:soeur:sister",
+    "fr:stylo:pen",
+    "fr:the:tea",
+    "fr:trois:cardinal-number",
+    "fr:un:cardinal-number",
+    "fr:vert:green"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "PRE_A1.U10.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U10.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U10-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U10-L03",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L03",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L03",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q06",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U09.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q02",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U07.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U05.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U06.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U07.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q03",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U08.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q03",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U08.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "PRE_A1.U06.APPLY",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:je-voudrais:polite-request",
+      "reason": "Переиспользовать существующий ключ готовой вежливой просьбы при контрасте с новой более прямой просьбой."
+    },
+    {
+      "lexeme_key": "fr:pain:bread",
+      "reason": "Вернуть знакомый продукт для выбора из двух без нового пищевого словаря."
+    },
+    {
+      "lexeme_key": "fr:fromage:cheese",
+      "reason": "Вернуть знакомый продукт в просьбе, не смешивая его с формой общего предпочтения."
+    },
+    {
+      "lexeme_key": "fr:pomme:apple",
+      "reason": "Использовать знакомый фрукт при выборе, если нужен небольшой перенос."
+    },
+    {
+      "lexeme_key": "fr:jaime:food-liking",
+      "reason": "Сохранять различие предпочтения и просьбы о получении продукта."
+    },
+    {
+      "lexeme_key": "fr:je-naime-pas:food-dislike",
+      "reason": "В отложенном повторении вернуть отрицательное предпочтение как целую рамку."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "local_database_references_checked": true,
+    "pronunciation_coverage_warnings_absent": true,
+    "all_new_lexemes_have_task_evidence": true,
+    "checkpoint_kind_checked": true,
+    "checkpoint_skill_distribution_checked": true,
+    "checkpoint_u06_u10_coverage_checked": true,
+    "earlier_introduction_return_checked": true,
+    "checkpoint_introduction_contains_no_answer_examples": true,
+    "level_load_checked": true
+  },
+  "open_issues": [
+    "Проверка зависимостей штатным валидатором в локальной базе пройдена. При импорте в другую базу сначала требуется PRE_A1-U09-L05.",
+    "Человеку нужно проверить язык и браузерную озвучку продуктов, фруктов, носовых гласных и полных фраз предпочтения с отрицанием.",
+    "Выполнить предпросмотр, пробное прохождение и замер длительности. Ориентир 6 минут на занятие не измерен."
+  ],
+  "progress": {
+    "current_unit": "PRE_A1-U10",
+    "prepared_session_ids": [
+      "PRE_A1-U10-L01",
+      "PRE_A1-U10-L02",
+      "PRE_A1-U10-L03",
+      "PRE_A1-U10-L04",
+      "PRE_A1-U10-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "PRE_A1-U11",
+    "previous_unit": "PRE_A1-U09",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку U10; отдельное подтверждение языкового принятия или импорта U09 не получено.",
+    "Сочетания для просьбы и образцы общего предпочтения объясняются отдельно. Части du/le/les не превращены в полную таблицу артиклей.",
+    "Формы продукта в просьбе и в предпочтении сохраняют один смысловой ключ; отдельные ключи для le pain и du pain не создаются.",
+    "Положительное предпочтение, отрицательное предпочтение и просьба не считаются взаимозаменяемыми. Личные вкусы учащегося не определяют правильность ответа.",
+    "Полное название завтрака имеет собственный ключ и не трактуется как описание маленького размера.",
+    "Союз et получает ключ отдельного слова; существующее выражение et toi сохраняется как другой полный лексический элемент.",
+    "В L01–L04 соответственно 2, 3, 2 и 3 новых значения; в L05 нового обязательного материала нет.",
+    "Контроль выборочно охватывает U06–U10 и возвращает понимание имени из U05. Исчерпывающая проверка всех слов и целей не заявляется.",
+    "Public_page контроля описывает охват и порядок работы без таблицы готовых ответов.",
+    "Подписанная сборка не оценивает знание всех слов: assessed_vocabulary_ids в word_order пуст.",
+    "Основной LEXEME_REGISTRY.json и ранее подготовленные пакеты не изменены. Новые ключи предложены отдельно до принятия."
+  ],
+  "session_material": [
+    {
+      "session_id": "PRE_A1-U10-L01",
+      "new_lexeme_keys": [
+        "fr:pain:bread",
+        "fr:fromage:cheese"
+      ],
+      "reused_lexeme_keys": [
+        "fr:cafe:coffee",
+        "fr:chaud:hot-temperature",
+        "fr:eau:water",
+        "fr:froid:cold-temperature",
+        "fr:je-voudrais:polite-request",
+        "fr:jus:juice",
+        "fr:sil-vous-plait:polite-request",
+        "fr:the:tea"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U10-L02",
+      "new_lexeme_keys": [
+        "fr:pomme:apple",
+        "fr:banane:banana",
+        "fr:orange:orange-fruit"
+      ],
+      "reused_lexeme_keys": [
+        "fr:cafe:coffee",
+        "fr:fromage:cheese",
+        "fr:je-voudrais:polite-request",
+        "fr:pain:bread",
+        "fr:sil-vous-plait:polite-request"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U10-L03",
+      "new_lexeme_keys": [
+        "fr:petit-dejeuner:breakfast",
+        "fr:croissant:pastry"
+      ],
+      "reused_lexeme_keys": [
+        "fr:cafe:coffee",
+        "fr:fromage:cheese",
+        "fr:je-voudrais:polite-request",
+        "fr:pain:bread",
+        "fr:pomme:apple",
+        "fr:rouge:red",
+        "fr:sil-vous-plait:polite-request",
+        "fr:the:tea"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U10-L04",
+      "new_lexeme_keys": [
+        "fr:jaime:food-liking",
+        "fr:je-naime-pas:food-dislike",
+        "fr:et:and"
+      ],
+      "reused_lexeme_keys": [
+        "fr:bleu:blue",
+        "fr:fromage:cheese",
+        "fr:je-voudrais:polite-request",
+        "fr:pain:bread",
+        "fr:pomme:apple",
+        "fr:rouge:red",
+        "fr:vert:green"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "PRE_A1-U10-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:bleu:blue",
+        "fr:bonjour:greeting",
+        "fr:cafe:coffee",
+        "fr:cest:identify-object",
+        "fr:chaud:hot-temperature",
+        "fr:court:short-length",
+        "fr:croissant:pastry",
+        "fr:deux:cardinal-number",
+        "fr:froid:cold-temperature",
+        "fr:fromage:cheese",
+        "fr:grand:large-object",
+        "fr:jaime:food-liking",
+        "fr:je-mappelle:self_introduction",
+        "fr:je-naime-pas:food-dislike",
+        "fr:je-voudrais:polite-request",
+        "fr:long:long-length",
+        "fr:ma:first-person-feminine-possessive",
+        "fr:mere:mother",
+        "fr:mes:first-person-plural-possessive",
+        "fr:mon:first-person-masculine-possessive",
+        "fr:numero:identifier",
+        "fr:orange:orange-fruit",
+        "fr:pain:bread",
+        "fr:pere:father",
+        "fr:petit:small-object",
+        "fr:pomme:apple",
+        "fr:que-voulez-vous-boire:drink-question",
+        "fr:rouge:red",
+        "fr:sac:bag",
+        "fr:sil-vous-plait:polite-request",
+        "fr:soeur:sister",
+        "fr:stylo:pen",
+        "fr:the:tea",
+        "fr:trois:cardinal-number",
+        "fr:un:cardinal-number"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "PRE_A1-U10-L01",
+      "material": "Целые сочетания du pain/du fromage в знакомой просьбе."
+    },
+    {
+      "session_id": "PRE_A1-U10-L02",
+      "material": "Названия фруктов с артиклем и французским родом."
+    },
+    {
+      "session_id": "PRE_A1-U10-L04",
+      "material": "Готовые положительная и отрицательная рамки предпочтения, показанные сочетания le pain/le fromage/les pommes, соединение двух названий словом et."
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:pain:bread",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L03",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:fromage:cheese",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L01",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:pomme:apple",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:banane:banana",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:orange:orange-fruit",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:petit-dejeuner:breakfast",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:croissant:pastry",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "PRE_A1-U10-L03",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:jaime:food-liking",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q04",
+          "skill": "reading"
+        },
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "PRE_A1-U10-L05",
+          "task_id": "Q04",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:je-naime-pas:food-dislike",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:et:and",
+      "evidence": [
+        {
+          "session_id": "PRE_A1-U10-L04",
+          "task_id": "Q06",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "checkpoint_scope": {
+    "session_id": "PRE_A1-U10-L05",
+    "kind": "checkpoint",
+    "source_units": [
+      "PRE_A1-U06",
+      "PRE_A1-U07",
+      "PRE_A1-U08",
+      "PRE_A1-U09",
+      "PRE_A1-U10"
+    ],
+    "earlier_return_units": [
+      "PRE_A1-U05"
+    ],
+    "skill_evidence": {
+      "listening": [
+        "Q01",
+        "Q02"
+      ],
+      "reading": [
+        "Q03",
+        "Q04"
+      ],
+      "vocabulary": [
+        "Q05",
+        "Q06"
+      ],
+      "grammar": [
+        "Q07"
+      ],
+      "sentence_building": [
+        "Q08"
+      ]
+    },
+    "new_material": false,
+    "coverage_limit": "Representative sample; not exhaustive assessment of every earlier word or objective.",
+    "unit_evidence": {
+      "PRE_A1-U06": [
+        {
+          "task_id": "Q01",
+          "skill": "listening",
+          "objective_ids": [
+            "PRE_A1.U06.UNDERSTAND"
+          ]
+        },
+        {
+          "task_id": "Q07",
+          "skill": "grammar",
+          "objective_ids": [
+            "PRE_A1.U06.APPLY"
+          ]
+        }
+      ],
+      "PRE_A1-U07": [
+        {
+          "task_id": "Q03",
+          "skill": "reading",
+          "objective_ids": [
+            "PRE_A1.U07.APPLY"
+          ]
+        }
+      ],
+      "PRE_A1-U08": [
+        {
+          "task_id": "Q03",
+          "skill": "reading",
+          "objective_ids": [
+            "PRE_A1.U08.APPLY"
+          ]
+        },
+        {
+          "task_id": "Q06",
+          "skill": "vocabulary",
+          "objective_ids": [
+            "PRE_A1.U08.UNDERSTAND"
+          ]
+        }
+      ],
+      "PRE_A1-U09": [
+        {
+          "task_id": "Q02",
+          "skill": "listening",
+          "objective_ids": [
+            "PRE_A1.U09.APPLY"
+          ]
+        }
+      ],
+      "PRE_A1-U10": [
+        {
+          "task_id": "Q04",
+          "skill": "reading",
+          "objective_ids": [
+            "PRE_A1.U10.APPLY"
+          ]
+        },
+        {
+          "task_id": "Q05",
+          "skill": "vocabulary",
+          "objective_ids": [
+            "PRE_A1.U10.UNDERSTAND"
+          ]
+        },
+        {
+          "task_id": "Q08",
+          "skill": "sentence_building",
+          "objective_ids": [
+            "PRE_A1.U10.APPLY"
+          ]
+        }
+      ],
+      "PRE_A1-U05": [
+        {
+          "task_id": "Q01",
+          "skill": "listening",
+          "objective_ids": [
+            "PRE_A1.U05.UNDERSTAND"
+          ]
+        }
+      ]
+    }
+  },
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 10,
+    "external_prerequisites": [
+      "PRE_A1-U09-L05"
+    ],
+    "external_reference_status": "Exists in prepared U09 package; full project validator including local database references returned no errors. Target database must contain U09 before U10 import.",
+    "new_lexemes_per_session": [
+      2,
+      3,
+      2,
+      3,
+      0
+    ],
+    "project_validator": {
+      "valid": true,
+      "errors": [],
+      "file_hash": "a3c11a6ae4048a298699e08145a5def4bd4a76ed4a79f0334816ac0c1efa11be",
+      "warning_counts": {
+        "editorial_review_required": 5,
+        "browser_tts": 13
+      },
+      "requires_editorial_review": true,
+      "report_file": "PRE_A1-U10.validation.json"
+    }
+  }
+}

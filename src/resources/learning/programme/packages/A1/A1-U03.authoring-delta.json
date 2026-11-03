@@ -1,0 +1,1135 @@
+{
+  "unit_id": "A1-U03",
+  "package_file": "A1-U03.v1.json",
+  "session_ids": [
+    "A1-U03-L01",
+    "A1-U03-L02",
+    "A1-U03-L03",
+    "A1-U03-L04",
+    "A1-U03-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "carte-menu",
+      "lexeme_key": "fr:carte:menu",
+      "fr": "la carte",
+      "ru": [
+        "меню — список блюд и напитков"
+      ],
+      "transcription_ru": "ла ка́рт",
+      "first_session_id": "A1-U03-L01"
+    },
+    {
+      "id": "boisson",
+      "lexeme_key": "fr:boisson:drink",
+      "fr": "une boisson",
+      "ru": [
+        "напиток"
+      ],
+      "transcription_ru": "юн буасо́(н)",
+      "first_session_id": "A1-U03-L01"
+    },
+    {
+      "id": "tartine",
+      "lexeme_key": "fr:tartine:bread-with-spread",
+      "fr": "une tartine",
+      "ru": [
+        "ломтик хлеба с намазкой"
+      ],
+      "transcription_ru": "юн тарти́н",
+      "first_session_id": "A1-U03-L01"
+    },
+    {
+      "id": "formule",
+      "lexeme_key": "fr:formule:set-offer",
+      "fr": "une formule",
+      "ru": [
+        "комплексное предложение в меню"
+      ],
+      "transcription_ru": "юн формю́ль",
+      "first_session_id": "A1-U03-L01"
+    },
+    {
+      "id": "commander",
+      "lexeme_key": "fr:commander:order-food",
+      "fr": "commander",
+      "ru": [
+        "заказывать еду или напиток"
+      ],
+      "transcription_ru": "кома(н)дэ́",
+      "first_session_id": "A1-U03-L02"
+    },
+    {
+      "id": "beurre",
+      "lexeme_key": "fr:beurre:butter",
+      "fr": "le beurre",
+      "ru": [
+        "сливочное масло"
+      ],
+      "transcription_ru": "лё бё́р",
+      "first_session_id": "A1-U03-L02"
+    },
+    {
+      "id": "confiture",
+      "lexeme_key": "fr:confiture:jam",
+      "fr": "la confiture",
+      "ru": [
+        "варенье, джем"
+      ],
+      "transcription_ru": "ла ко(н)фитю́р",
+      "first_session_id": "A1-U03-L02"
+    },
+    {
+      "id": "lait",
+      "lexeme_key": "fr:lait:milk",
+      "fr": "le lait",
+      "ru": [
+        "молоко"
+      ],
+      "transcription_ru": "лё лэ́",
+      "first_session_id": "A1-U03-L02"
+    },
+    {
+      "id": "tasse",
+      "lexeme_key": "fr:tasse:cup",
+      "fr": "une tasse",
+      "ru": [
+        "чашка (порция напитка)"
+      ],
+      "transcription_ru": "юн та́с",
+      "first_session_id": "A1-U03-L03"
+    },
+    {
+      "id": "verre",
+      "lexeme_key": "fr:verre:drinking-glass",
+      "fr": "un verre",
+      "ru": [
+        "стакан (порция напитка)"
+      ],
+      "transcription_ru": "э(н) вэ́р",
+      "first_session_id": "A1-U03-L03"
+    },
+    {
+      "id": "portion",
+      "lexeme_key": "fr:portion:serving",
+      "fr": "une portion",
+      "ru": [
+        "порция еды"
+      ],
+      "transcription_ru": "юн порсьо́(н)",
+      "first_session_id": "A1-U03-L03"
+    },
+    {
+      "id": "carafe",
+      "lexeme_key": "fr:carafe:carafe",
+      "fr": "une carafe",
+      "ru": [
+        "графин"
+      ],
+      "transcription_ru": "юн кара́ф",
+      "first_session_id": "A1-U03-L03"
+    },
+    {
+      "id": "addition",
+      "lexeme_key": "fr:addition:restaurant-bill",
+      "fr": "l’addition",
+      "ru": [
+        "счёт в кафе"
+      ],
+      "transcription_ru": "ладисьо́(н)",
+      "first_session_id": "A1-U03-L04"
+    },
+    {
+      "id": "payer",
+      "lexeme_key": "fr:payer:pay",
+      "fr": "payer",
+      "ru": [
+        "платить"
+      ],
+      "transcription_ru": "пэйе́",
+      "first_session_id": "A1-U03-L04"
+    },
+    {
+      "id": "par-carte",
+      "lexeme_key": "fr:par-carte:card-payment",
+      "fr": "par carte",
+      "ru": [
+        "картой (способ оплаты)"
+      ],
+      "transcription_ru": "пар ка́рт",
+      "first_session_id": "A1-U03-L04"
+    },
+    {
+      "id": "en-especes",
+      "lexeme_key": "fr:en-especes:cash-payment",
+      "fr": "en espèces",
+      "ru": [
+        "наличными (способ оплаты)"
+      ],
+      "transcription_ru": "а(н) нэспэ́с",
+      "first_session_id": "A1-U03-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:appartement:apartment",
+    "fr:au-revoir:farewell",
+    "fr:bonjour:greeting",
+    "fr:cafe:coffee",
+    "fr:calme:quiet-place",
+    "fr:croissant:pastry",
+    "fr:cuisine:kitchen",
+    "fr:dans:inside",
+    "fr:deux:cardinal-number",
+    "fr:diner:evening-meal",
+    "fr:eau:water",
+    "fr:et:and",
+    "fr:faire-une-pause:take-break",
+    "fr:fromage:cheese",
+    "fr:je-voudrais:polite-request",
+    "fr:je:first-person-subject",
+    "fr:jus:juice",
+    "fr:maison:house-home",
+    "fr:matin:morning",
+    "fr:merci:thanks",
+    "fr:petit-dejeuner:breakfast",
+    "fr:prendre-le-petit-dejeuner:have-breakfast",
+    "fr:preparer:prepare-food",
+    "fr:puis:then-sequence",
+    "fr:rentrer:return-home",
+    "fr:salon:living-room",
+    "fr:se-coucher:go-to-bed",
+    "fr:sil-vous-plait:polite-request",
+    "fr:soir:evening",
+    "fr:souvent:often",
+    "fr:table:table",
+    "fr:the:tea",
+    "fr:toujours:always",
+    "fr:travailler:work",
+    "fr:un:cardinal-number",
+    "fr:un:indefinite-masculine",
+    "fr:une:indefinite-feminine",
+    "fr:voila:presenting"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A1.U03.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U03-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U03-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U03-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U03-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U03-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U03-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U03-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U03-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U03-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U03-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U03-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U03.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U03-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U03-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U03-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U03-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U03-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U03-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U03-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U03-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U03-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U03-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U03-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U02.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U01.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U03-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:je-voudrais:polite-request",
+      "reason": "Сохранить готовую вежливую рамку без новой таблицы условного наклонения."
+    },
+    {
+      "lexeme_key": "fr:commander:order-food",
+      "reason": "Повторить действие заказа, не смешивая его с самим приёмом пищи."
+    },
+    {
+      "lexeme_key": "fr:beurre:butter",
+      "reason": "Вернуть знакомый продукт в следующей теме покупок."
+    },
+    {
+      "lexeme_key": "fr:confiture:jam",
+      "reason": "Повторить известное сочетание продукта без точной меры до новых упаковок."
+    },
+    {
+      "lexeme_key": "fr:lait:milk",
+      "reason": "Сохранять прежний ключ молока в просьбах с разной мерой."
+    },
+    {
+      "lexeme_key": "fr:portion:serving",
+      "reason": "Вернуть готовое сочетание меры и содержимого перед расширением количеств."
+    },
+    {
+      "lexeme_key": "fr:carafe:carafe",
+      "reason": "Повторить показанную форму с водой, не подменяя её новой упаковкой."
+    },
+    {
+      "lexeme_key": "fr:addition:restaurant-bill",
+      "reason": "Сохранить значение счёта в кафе отдельно от других значений слова."
+    },
+    {
+      "lexeme_key": "fr:par-carte:card-payment",
+      "reason": "Повторить способ оплаты картой отдельно от названия меню."
+    },
+    {
+      "lexeme_key": "fr:en-especes:cash-payment",
+      "reason": "Вернуть оплату наличными в понятной ситуации."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "local_database_references_checked": true,
+    "registry_collisions_checked": true,
+    "package_hash_verified": true,
+    "pronunciation_coverage_warnings_absent": true,
+    "new_lexeme_evidence_checked": true,
+    "practice_kind_checked": true,
+    "existing_food_and_polite_formula_cards_preserved": true,
+    "croissant_reused_not_reintroduced": true,
+    "menu_and_card_payment_meanings_distinguished": true,
+    "no_cross_level_objective_tags": true,
+    "main_reading_load_checked": true,
+    "audio_word_counts_recorded": true,
+    "menu_composition_and_portion_answers_checked": true,
+    "payment_and_dialogue_answers_checked": true,
+    "grammar_samples_and_closing_formulas_shown_before_use": true,
+    "apostrophe_and_fixed_chunks_preserved": true,
+    "shuffled_choice_feedback_checked": true,
+    "no_unused_local_vocabulary": true
+  },
+  "open_issues": [
+    "До импорта целевая база должна содержать A1-U02-L05; пакет не создаёт отсутствующую внешнюю зависимость.",
+    "Человеку нужно проверить естественность заказов и коротких обменов, выбранные значения позиций завтрака и условные русские транскрипции.",
+    "Прослушать браузерную озвучку, особенно названия порций, счёт и наличные. Ориентиры 8–20 секунд основных аудио и 5–7 минут на занятие пока не измерены.",
+    "Выполнить предпросмотр и пробное прохождение, включая сопоставление состава набора, порции и способа оплаты; проверить понятность заданного порядка говорящих при одном синтетическом голосе."
+  ],
+  "progress": {
+    "current_unit": "A1-U03",
+    "prepared_session_ids": [
+      "A1-U03-L01",
+      "A1-U03-L02",
+      "A1-U03-L03",
+      "A1-U03-L04",
+      "A1-U03-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A1-U04",
+    "next_unit_title": "Покупки продуктов",
+    "previous_unit": "A1-U02",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A1-U03. Принятие и импорт предыдущего пакета не подтверждены. Следующая тема не начата.",
+    "Меню и записи о столиках вымышленные. Цены, валюты, настоящие заведения и внешние сведения не нужны для решения.",
+    "Существующие слова кофе как напитка, чай, сок, круассан, сыр, вода и название завтрака сохраняют прежние ключи и полные объекты. Круассан повторяется, а не объявляется новым словом.",
+    "Комплекс содержит только прямо указанные позиции конкретного меню. Слово само по себе не задаёт постоянный состав или цену.",
+    "Заказывать завтрак и уже завтракать различаются; прежний ключ действия завтракать сохранён, а новый глагол обозначает именно заказ.",
+    "Готовая вежливая рамка je voudrais повторяется без полной таблицы условного наклонения. Частичный артикль вводится на выбранных продуктах, без смешения всех исключений.",
+    "После выбранных названий меры показана форма de и сочетание d’eau перед водой. Форма просьбы без меры не переносится автоматически в обозначение порции.",
+    "Количество два кофе вводится с известным числом и показанной формой множественного числа; отдельные ключи для форм числа не создаются.",
+    "Название меню la carte и целый способ оплаты par carte различаются по значению. Ключ меню не переименовывается в банковскую карту.",
+    "Форма о себе при оплате дана одним образцом; новые лица и общая таблица спряжения не вводятся.",
+    "Роли в диалоге явно заданы порядком реплик. Пол, возраст, ирония, интонация и свойства голоса не являются основанием ответа.",
+    "В первых четырёх занятиях по 4 новых значения. Знакомые передача, благодарность и прощание повторены до итогового занятия. В пятом занятии нового обязательного материала нет.",
+    "Апострофы и формула вежливости сохраняются целыми в сборке. Подписанная сборка и грамматическое восстановление не объявляются независимой проверкой каждого слова.",
+    "Текущий пакет содержит только тему; levels и curricula не добавляются. Основной реестр и предыдущие пакеты не изменены."
+  ],
+  "session_material": [
+    {
+      "session_id": "A1-U03-L01",
+      "new_lexeme_keys": [
+        "fr:carte:menu",
+        "fr:boisson:drink",
+        "fr:tartine:bread-with-spread",
+        "fr:formule:set-offer"
+      ],
+      "reused_lexeme_keys": [
+        "fr:appartement:apartment",
+        "fr:cafe:coffee",
+        "fr:calme:quiet-place",
+        "fr:croissant:pastry",
+        "fr:cuisine:kitchen",
+        "fr:dans:inside",
+        "fr:et:and",
+        "fr:je-voudrais:polite-request",
+        "fr:jus:juice",
+        "fr:petit-dejeuner:breakfast",
+        "fr:salon:living-room",
+        "fr:table:table",
+        "fr:the:tea",
+        "fr:un:indefinite-masculine",
+        "fr:une:indefinite-feminine"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U03-L02",
+      "new_lexeme_keys": [
+        "fr:commander:order-food",
+        "fr:beurre:butter",
+        "fr:confiture:jam",
+        "fr:lait:milk"
+      ],
+      "reused_lexeme_keys": [
+        "fr:bonjour:greeting",
+        "fr:cafe:coffee",
+        "fr:croissant:pastry",
+        "fr:eau:water",
+        "fr:et:and",
+        "fr:formule:set-offer",
+        "fr:je-voudrais:polite-request",
+        "fr:je:first-person-subject",
+        "fr:merci:thanks",
+        "fr:petit-dejeuner:breakfast",
+        "fr:sil-vous-plait:polite-request",
+        "fr:tartine:bread-with-spread",
+        "fr:the:tea"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U03-L03",
+      "new_lexeme_keys": [
+        "fr:tasse:cup",
+        "fr:verre:drinking-glass",
+        "fr:portion:serving",
+        "fr:carafe:carafe"
+      ],
+      "reused_lexeme_keys": [
+        "fr:cafe:coffee",
+        "fr:deux:cardinal-number",
+        "fr:eau:water",
+        "fr:et:and",
+        "fr:faire-une-pause:take-break",
+        "fr:fromage:cheese",
+        "fr:je-voudrais:polite-request",
+        "fr:je:first-person-subject",
+        "fr:lait:milk",
+        "fr:matin:morning",
+        "fr:merci:thanks",
+        "fr:petit-dejeuner:breakfast",
+        "fr:prendre-le-petit-dejeuner:have-breakfast",
+        "fr:sil-vous-plait:polite-request",
+        "fr:souvent:often",
+        "fr:toujours:always",
+        "fr:travailler:work"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U03-L04",
+      "new_lexeme_keys": [
+        "fr:addition:restaurant-bill",
+        "fr:payer:pay",
+        "fr:par-carte:card-payment",
+        "fr:en-especes:cash-payment"
+      ],
+      "reused_lexeme_keys": [
+        "fr:au-revoir:farewell",
+        "fr:cafe:coffee",
+        "fr:commander:order-food",
+        "fr:croissant:pastry",
+        "fr:deux:cardinal-number",
+        "fr:diner:evening-meal",
+        "fr:et:and",
+        "fr:je-voudrais:polite-request",
+        "fr:je:first-person-subject",
+        "fr:maison:house-home",
+        "fr:merci:thanks",
+        "fr:petit-dejeuner:breakfast",
+        "fr:preparer:prepare-food",
+        "fr:puis:then-sequence",
+        "fr:rentrer:return-home",
+        "fr:se-coucher:go-to-bed",
+        "fr:sil-vous-plait:polite-request",
+        "fr:soir:evening",
+        "fr:table:table",
+        "fr:tartine:bread-with-spread",
+        "fr:the:tea",
+        "fr:toujours:always",
+        "fr:un:cardinal-number",
+        "fr:voila:presenting"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U03-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:addition:restaurant-bill",
+        "fr:au-revoir:farewell",
+        "fr:beurre:butter",
+        "fr:boisson:drink",
+        "fr:bonjour:greeting",
+        "fr:cafe:coffee",
+        "fr:carafe:carafe",
+        "fr:confiture:jam",
+        "fr:croissant:pastry",
+        "fr:deux:cardinal-number",
+        "fr:eau:water",
+        "fr:en-especes:cash-payment",
+        "fr:et:and",
+        "fr:formule:set-offer",
+        "fr:fromage:cheese",
+        "fr:je-voudrais:polite-request",
+        "fr:je:first-person-subject",
+        "fr:jus:juice",
+        "fr:lait:milk",
+        "fr:merci:thanks",
+        "fr:par-carte:card-payment",
+        "fr:payer:pay",
+        "fr:petit-dejeuner:breakfast",
+        "fr:portion:serving",
+        "fr:sil-vous-plait:polite-request",
+        "fr:table:table",
+        "fr:tartine:bread-with-spread",
+        "fr:tasse:cup",
+        "fr:the:tea",
+        "fr:un:cardinal-number",
+        "fr:verre:drinking-glass",
+        "fr:voila:presenting"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A1-U03-L01",
+      "material": "Повтор готовой вежливой рамки, одной порции напитка и выбранных форм заголовков меню."
+    },
+    {
+      "session_id": "A1-U03-L02",
+      "material": "Выбранные сочетания частичного артикля с маслом, вареньем, молоком и водой; готовая вежливая рамка без полного conditionnel."
+    },
+    {
+      "session_id": "A1-U03-L03",
+      "material": "Название порции плюс de перед содержимым, d’eau перед водой; известное число два с показанной формой множественного числа кофе."
+    },
+    {
+      "session_id": "A1-U03-L04",
+      "material": "Готовая просьба о счёте и выбранная личная форма платить с двумя целыми способами оплаты."
+    }
+  ],
+  "text_conventions": {
+    "menu_status": "Вымышленные меню с прямо заданным составом.",
+    "table_labels": "Table 1 и Table 2 обозначают два столика, а не порядок вариантов ответа.",
+    "speaker_roles": "Порядок реплик задан в условии; один нейтральный голос допустим.",
+    "prices_required": false,
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:carte:menu",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:boisson:drink",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:tartine:bread-with-spread",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U03-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:formule:set-offer",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U03-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U03-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:commander:order-food",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:beurre:butter",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U03-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:confiture:jam",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U03-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:lait:milk",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:tasse:cup",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U03-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:verre:drinking-glass",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U03-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:portion:serving",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:carafe:carafe",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:addition:restaurant-bill",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U03-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:payer:pay",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:par-carte:card-payment",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:en-especes:cash-payment",
+      "evidence": [
+        {
+          "session_id": "A1-U03-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U03-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U03-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 16,
+    "external_prerequisites": [
+      "A1-U02-L05"
+    ],
+    "external_reference_status": "prepared_A1_U02_and_local_project_validator_passed; other_target_databases_unverified",
+    "project_validator": {
+      "valid": true,
+      "errors": [],
+      "file_hash": "8cd6a04555e6e0e26c794088fc29e28545b62ca5d9e00240d7b0d374a2480b39",
+      "warning_counts": {
+        "editorial_review_required": 5,
+        "browser_tts": 15
+      },
+      "requires_editorial_review": true,
+      "report_file": "A1-U03.validation.json"
+    },
+    "main_reading_texts": [
+      {
+        "session_id": "A1-U03-L01",
+        "texts": [
+          {
+            "task_id": "Q01",
+            "words": 19
+          },
+          {
+            "task_id": "Q05",
+            "words": 24
+          }
+        ]
+      },
+      {
+        "session_id": "A1-U03-L02",
+        "texts": [
+          {
+            "task_id": "Q05",
+            "words": 24
+          }
+        ]
+      },
+      {
+        "session_id": "A1-U03-L03",
+        "texts": [
+          {
+            "task_id": "Q01",
+            "words": 17
+          },
+          {
+            "task_id": "Q05",
+            "words": 18
+          }
+        ]
+      },
+      {
+        "session_id": "A1-U03-L04",
+        "texts": [
+          {
+            "task_id": "Q01",
+            "words": 16
+          },
+          {
+            "task_id": "Q05",
+            "words": 24
+          }
+        ]
+      },
+      {
+        "session_id": "A1-U03-L05",
+        "texts": [
+          {
+            "task_id": "Q02",
+            "words": 21
+          },
+          {
+            "task_id": "Q08",
+            "words": 18
+          }
+        ]
+      }
+    ],
+    "reading_word_range_including_short_warmups": [
+      8,
+      24
+    ],
+    "listening_texts": [
+      {
+        "session_id": "A1-U03-L01",
+        "task_id": "Q03",
+        "words": 19,
+        "duration_seconds_measured": null
+      },
+      {
+        "session_id": "A1-U03-L02",
+        "task_id": "Q03",
+        "words": 21,
+        "duration_seconds_measured": null
+      },
+      {
+        "session_id": "A1-U03-L03",
+        "task_id": "Q03",
+        "words": 21,
+        "duration_seconds_measured": null
+      },
+      {
+        "session_id": "A1-U03-L04",
+        "task_id": "Q03",
+        "words": 18,
+        "duration_seconds_measured": null
+      },
+      {
+        "session_id": "A1-U03-L05",
+        "task_id": "Q01",
+        "words": 20,
+        "duration_seconds_measured": null
+      },
+      {
+        "session_id": "A1-U03-L05",
+        "task_id": "Q04",
+        "words": 19,
+        "duration_seconds_measured": null
+      }
+    ],
+    "audio_duration_status": "not_measured_or_listened",
+    "new_lexical_meanings": 16
+  }
+}

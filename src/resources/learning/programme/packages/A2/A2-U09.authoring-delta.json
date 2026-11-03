@@ -1,0 +1,1062 @@
+{
+  "unit_id": "A2-U09",
+  "package_file": "A2-U09.v1.json",
+  "session_ids": [
+    "A2-U09-L01",
+    "A2-U09-L02",
+    "A2-U09-L03",
+    "A2-U09-L04",
+    "A2-U09-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "faire-le-menage",
+      "lexeme_key": "fr:faire-le-menage:clean-home",
+      "fr": "faire le ménage",
+      "ru": [
+        "делать уборку дома"
+      ],
+      "transcription_ru": "фэр лё мэна́ж",
+      "first_session_id": "A2-U09-L01"
+    },
+    {
+      "id": "tache-menagere",
+      "lexeme_key": "fr:tache-menagere:household-chore",
+      "fr": "une tâche ménagère",
+      "ru": [
+        "домашняя обязанность по хозяйству"
+      ],
+      "transcription_ru": "юн таш мэнажэ́р",
+      "first_session_id": "A2-U09-L01"
+    },
+    {
+      "id": "partager",
+      "lexeme_key": "fr:partager:share-household-tasks",
+      "fr": "partager",
+      "ru": [
+        "делить между собой домашние обязанности"
+      ],
+      "transcription_ru": "партажэ́",
+      "first_session_id": "A2-U09-L01"
+    },
+    {
+      "id": "faire-du-bruit",
+      "lexeme_key": "fr:faire-du-bruit:make-noise",
+      "fr": "faire du bruit",
+      "ru": [
+        "шуметь"
+      ],
+      "transcription_ru": "фэр дю брюи́",
+      "first_session_id": "A2-U09-L02"
+    },
+    {
+      "id": "il-est-interdit-de",
+      "lexeme_key": "fr:il-est-interdit-de:prohibition",
+      "fr": "il est interdit de",
+      "ru": [
+        "запрещено выполнять действие"
+      ],
+      "transcription_ru": "иль э тэ(н)тэрди дё",
+      "first_session_id": "A2-U09-L02"
+    },
+    {
+      "id": "gener",
+      "lexeme_key": "fr:gener:disturb-person",
+      "fr": "gêner",
+      "ru": [
+        "мешать человеку, причинять неудобство"
+      ],
+      "transcription_ru": "жэнэ́",
+      "first_session_id": "A2-U09-L03"
+    },
+    {
+      "id": "lui-coi",
+      "lexeme_key": "fr:lui:indirect-object-singular",
+      "fr": "lui",
+      "ru": [
+        "ему или ей: один адресат при глаголе писать"
+      ],
+      "transcription_ru": "люи́",
+      "first_session_id": "A2-U09-L03"
+    },
+    {
+      "id": "bruit",
+      "lexeme_key": "fr:bruit:noise",
+      "fr": "le bruit",
+      "ru": [
+        "шум"
+      ],
+      "transcription_ru": "лё брюи́",
+      "first_session_id": "A2-U09-L03"
+    },
+    {
+      "id": "leur-coi",
+      "lexeme_key": "fr:leur:indirect-object-plural",
+      "fr": "leur",
+      "ru": [
+        "им: нескольким адресатам при глаголе писать"
+      ],
+      "transcription_ru": "лёр",
+      "first_session_id": "A2-U09-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:a-louer:available-for-rent",
+    "fr:appartement:apartment",
+    "fr:avec-lui:with-him",
+    "fr:calme:quiet-place",
+    "fr:cent:cardinal-number",
+    "fr:chambre:bedroom",
+    "fr:charges:advertised-rental-charges",
+    "fr:coiffeur:hairdresser",
+    "fr:coupe:haircut-service",
+    "fr:cuisine:kitchen",
+    "fr:disponible:available-in-schedule",
+    "fr:ecrire:write",
+    "fr:euro:currency-unit",
+    "fr:fermer:close-object",
+    "fr:heure:clock-hour",
+    "fr:il-faut:necessary-action",
+    "fr:inclus:included-in-service-price",
+    "fr:je-dois:study-obligation",
+    "fr:je-voudrais:polite-request",
+    "fr:jeudi:weekday",
+    "fr:le:direct-object-pronoun-masculine",
+    "fr:loyer:rent-payment",
+    "fr:maison:house-home",
+    "fr:mardi:weekday",
+    "fr:matin:morning",
+    "fr:merci:thanks",
+    "fr:midi:noon",
+    "fr:neuf:cardinal-number",
+    "fr:par-mois:per-month",
+    "fr:parce-que:because-reason",
+    "fr:porte:door",
+    "fr:pourriez-vous:polite-action-request",
+    "fr:preciser:clarify-service-details",
+    "fr:proprietaire:property-owner",
+    "fr:qui:relative-subject",
+    "fr:rendez-vous:appointment",
+    "fr:reporter:postpone-appointment",
+    "fr:seulement:only",
+    "fr:shampooing:hair-wash-service",
+    "fr:sil-vous-plait:polite-request",
+    "fr:six:cardinal-number",
+    "fr:soir:evening",
+    "fr:tarif:service-price",
+    "fr:travailler:work",
+    "fr:vendredi:weekday",
+    "fr:vingt:cardinal-number",
+    "fr:visite:property-viewing",
+    "fr:voisin:neighbor"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A2.U09.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U09-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U09-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U09-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U09-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U09-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U09-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U09-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U09-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U09-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U09-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U09-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U09-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U09.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U09-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U09-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U09-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U09-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U09-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U09-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U09-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U09-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A2-U09-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U09-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U09-L05",
+          "task_id": "Q06",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U09-L05",
+          "task_id": "Q08",
+          "skill": "sentence_building"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U08.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A2-U09-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A2.U06.APPLY",
+      "evidence": [
+        {
+          "session_id": "A2-U09-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U09-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:partager:share-household-tasks",
+      "reason": "Вернуть предложение разделить домашние обязанности."
+    },
+    {
+      "lexeme_key": "fr:tache-menagere:household-chore",
+      "reason": "Сохранять конкретную обязанность отдельно от денежного платежа."
+    },
+    {
+      "lexeme_key": "fr:faire-le-menage:clean-home",
+      "reason": "Повторить действие уборки с человеком, помещением и сроком."
+    },
+    {
+      "lexeme_key": "fr:il-faut:necessary-action",
+      "reason": "Сравнивать необходимость с другими условиями без дублирования ключа."
+    },
+    {
+      "lexeme_key": "fr:il-est-interdit-de:prohibition",
+      "reason": "Отличать запрет от необходимости выполнить действие."
+    },
+    {
+      "lexeme_key": "fr:gener:disturb-person",
+      "reason": "Повторить сообщение о конкретном неудобстве."
+    },
+    {
+      "lexeme_key": "fr:bruit:noise",
+      "reason": "Отличать название шума от действия шуметь."
+    },
+    {
+      "lexeme_key": "fr:lui:indirect-object-singular",
+      "reason": "Вернуть одного явно названного адресата перед глаголом писать."
+    },
+    {
+      "lexeme_key": "fr:leur:indirect-object-plural",
+      "reason": "Вернуть нескольких явно названных адресатов перед глаголом писать."
+    },
+    {
+      "lexeme_key": "fr:pourriez-vous:polite-action-request",
+      "reason": "Повторить вежливую просьбу с конкретным действием."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "new_local_ids_do_not_overwrite_existing_meanings": true,
+    "known_obligation_necessity_neighbor_and_request_keys_preserved": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "selected_doit_and_gene_forms_explained_before_testing": true,
+    "cleaning_chore_and_task_sharing_distinguished": true,
+    "noise_noun_and_make_noise_expression_have_distinct_keys": true,
+    "lui_coi_distinguished_from_existing_avec_lui": true,
+    "one_and_several_recipients_explicitly_named": true,
+    "transcriptions_structurally_checked_without_claim_of_listening": true,
+    "apostrophes_kept_in_whole_tokens": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A2-U08-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Редактору проверить естественность бытовых договорённостей и просьб, ясность различия необходимости и запрета, прозрачность одного и нескольких адресатов.",
+    "Прослушать браузерную озвучку ménage, tâches ménagères, partager, bruit, gêne, lui и leur, а также связку il est interdit de. Время аудио и занятий не измерено.",
+    "Выполнить предпросмотр и пробное прохождение на сайте: распределение кухни и спальни, день и время уборки, область запрета, действие просьбы, число адресатов."
+  ],
+  "progress": {
+    "current_unit": "A2-U09",
+    "prepared_session_ids": [
+      "A2-U09-L01",
+      "A2-U09-L02",
+      "A2-U09-L03",
+      "A2-U09-L04",
+      "A2-U09-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A2-U10",
+    "next_unit_title": "Сравнение и выбор",
+    "previous_unit": "A2-U08",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A2-U09. Принятие и импорт предыдущих пакетов пользователем не подтверждены; не утверждается, что ученик их освоил.",
+    "Новые значения по занятиям: три, два, три, одно, ноль. В каждом введении не более трёх карточек; новые формы и значения показаны до проверки.",
+    "В L01 повторены арендная плата и названные дополнительные платежи A2-U08. В L03 повторено уточнение цены и времени A2-U06; в L04 — запрос переноса записи из той же темы. Полные прежние карточки сохраняются.",
+    "Faire le ménage — отдельное выражение об уборке; une tâche ménagère — отдельная обязанность; partager ограничено разделением домашних обязанностей. Карточка не объединяет все значения этого глагола.",
+    "Le bruit как существительное имеет отдельный ключ от выражения faire du bruit; gêner относится к неудобству конкретному человеку. Причины и степень конфликта не выводятся из голоса.",
+    "Je dois сохраняет прежний ключ fr:je-dois:study-obligation и полный объект. Та же личная обязанность переносится из учебного примера в бытовой контекст; отдельный ключ ради смены темы не создаётся. Форма doit для одного соседа объяснена отдельно.",
+    "Il faut сохраняет прежнее значение необходимости. Il est interdit de — новое значение запрета; эти рамки не взаимозаменяемы.",
+    "Правила дома, обязанности, сообщения и просьбы вымышлены для обучения французскому. Это не утверждения о действующих нормах аренды, часах тишины или юридических обязанностях.",
+    "Уборка вечером не запрещена только потому, что в тот же период запрещён шум. Запрет связан с явно указанным действием; исполнители и сроки читаются по отдельным словам.",
+    "Lui и leur изучаются только как косвенные дополнения при écrire à: один и несколько явно названных адресатов. Lui может относиться к мужчине или женщине; в заданиях используется прозрачный знакомый сосед.",
+    "Avec lui сохраняет прежнее значение с ним; оно не подменяется новым косвенным дополнением. Leur здесь не притяжательное определение. Количество адресатов не выводится из количества сообщений.",
+    "Écrire, fermer, porte, voisin, pourriez-vous, il faut и je dois используют прежние ключи и полные карточки. Выбранная форма gêne и множественное mes voisins объясняются до проверки.",
+    "В L05 нового обязательного материала нет; вид practice сохранён по плану.",
+    "Сборки ограничены инструкцией, используют все готовые блоки и не разрывают апострофы. Свободного набора текста, микрофона и отправки сообщений нет.",
+    "Озвучка только браузером: fr-FR, asset_id=null, без аудиофайлов и внешних сервисов. Реальные просьбы соседям не отправлялись.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A2-U09-L01",
+      "new_lexeme_keys": [
+        "fr:faire-le-menage:clean-home",
+        "fr:tache-menagere:household-chore",
+        "fr:partager:share-household-tasks"
+      ],
+      "reused_lexeme_keys": [
+        "fr:a-louer:available-for-rent",
+        "fr:appartement:apartment",
+        "fr:cent:cardinal-number",
+        "fr:chambre:bedroom",
+        "fr:charges:advertised-rental-charges",
+        "fr:cuisine:kitchen",
+        "fr:disponible:available-in-schedule",
+        "fr:euro:currency-unit",
+        "fr:il-faut:necessary-action",
+        "fr:inclus:included-in-service-price",
+        "fr:je-dois:study-obligation",
+        "fr:je-voudrais:polite-request",
+        "fr:loyer:rent-payment",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:midi:noon",
+        "fr:par-mois:per-month",
+        "fr:proprietaire:property-owner",
+        "fr:six:cardinal-number",
+        "fr:soir:evening",
+        "fr:vendredi:weekday",
+        "fr:vingt:cardinal-number",
+        "fr:visite:property-viewing",
+        "fr:voisin:neighbor"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U09-L02",
+      "new_lexeme_keys": [
+        "fr:faire-du-bruit:make-noise",
+        "fr:il-est-interdit-de:prohibition"
+      ],
+      "reused_lexeme_keys": [
+        "fr:chambre:bedroom",
+        "fr:cuisine:kitchen",
+        "fr:faire-le-menage:clean-home",
+        "fr:fermer:close-object",
+        "fr:il-faut:necessary-action",
+        "fr:je-dois:study-obligation",
+        "fr:je-voudrais:polite-request",
+        "fr:maison:house-home",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:partager:share-household-tasks",
+        "fr:porte:door",
+        "fr:soir:evening",
+        "fr:tache-menagere:household-chore",
+        "fr:vendredi:weekday",
+        "fr:voisin:neighbor"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U09-L03",
+      "new_lexeme_keys": [
+        "fr:gener:disturb-person",
+        "fr:lui:indirect-object-singular",
+        "fr:bruit:noise"
+      ],
+      "reused_lexeme_keys": [
+        "fr:avec-lui:with-him",
+        "fr:calme:quiet-place",
+        "fr:coupe:haircut-service",
+        "fr:cuisine:kitchen",
+        "fr:disponible:available-in-schedule",
+        "fr:ecrire:write",
+        "fr:euro:currency-unit",
+        "fr:faire-du-bruit:make-noise",
+        "fr:faire-le-menage:clean-home",
+        "fr:fermer:close-object",
+        "fr:il-faut:necessary-action",
+        "fr:inclus:included-in-service-price",
+        "fr:je-dois:study-obligation",
+        "fr:je-voudrais:polite-request",
+        "fr:maison:house-home",
+        "fr:mardi:weekday",
+        "fr:merci:thanks",
+        "fr:midi:noon",
+        "fr:porte:door",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:qui:relative-subject",
+        "fr:rendez-vous:appointment",
+        "fr:seulement:only",
+        "fr:shampooing:hair-wash-service",
+        "fr:sil-vous-plait:polite-request",
+        "fr:soir:evening",
+        "fr:tarif:service-price",
+        "fr:vingt:cardinal-number",
+        "fr:voisin:neighbor"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U09-L04",
+      "new_lexeme_keys": [
+        "fr:leur:indirect-object-plural"
+      ],
+      "reused_lexeme_keys": [
+        "fr:bruit:noise",
+        "fr:coiffeur:hairdresser",
+        "fr:coupe:haircut-service",
+        "fr:disponible:available-in-schedule",
+        "fr:ecrire:write",
+        "fr:faire-du-bruit:make-noise",
+        "fr:fermer:close-object",
+        "fr:gener:disturb-person",
+        "fr:heure:clock-hour",
+        "fr:il-est-interdit-de:prohibition",
+        "fr:il-faut:necessary-action",
+        "fr:je-voudrais:polite-request",
+        "fr:jeudi:weekday",
+        "fr:le:direct-object-pronoun-masculine",
+        "fr:lui:indirect-object-singular",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:parce-que:because-reason",
+        "fr:porte:door",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:rendez-vous:appointment",
+        "fr:reporter:postpone-appointment",
+        "fr:sil-vous-plait:polite-request",
+        "fr:soir:evening",
+        "fr:travailler:work",
+        "fr:voisin:neighbor"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A2-U09-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:bruit:noise",
+        "fr:calme:quiet-place",
+        "fr:chambre:bedroom",
+        "fr:cuisine:kitchen",
+        "fr:ecrire:write",
+        "fr:faire-du-bruit:make-noise",
+        "fr:faire-le-menage:clean-home",
+        "fr:fermer:close-object",
+        "fr:gener:disturb-person",
+        "fr:il-est-interdit-de:prohibition",
+        "fr:il-faut:necessary-action",
+        "fr:je-dois:study-obligation",
+        "fr:je-voudrais:polite-request",
+        "fr:leur:indirect-object-plural",
+        "fr:loyer:rent-payment",
+        "fr:lui:indirect-object-singular",
+        "fr:maison:house-home",
+        "fr:mardi:weekday",
+        "fr:matin:morning",
+        "fr:partager:share-household-tasks",
+        "fr:porte:door",
+        "fr:pourriez-vous:polite-action-request",
+        "fr:preciser:clarify-service-details",
+        "fr:qui:relative-subject",
+        "fr:sil-vous-plait:polite-request",
+        "fr:soir:evening",
+        "fr:tache-menagere:household-chore",
+        "fr:vendredi:weekday",
+        "fr:voisin:neighbor"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A2-U09-L01",
+      "material": "Повторение личной обязанности je dois и безличной необходимости il faut; выбранная форма doit для одного соседа; распределение домашних обязанностей."
+    },
+    {
+      "session_id": "A2-U09-L02",
+      "material": "Il est interdit de с действием; необходимость fermer la porte и запрет faire du bruit le soir имеют разные действия и область."
+    },
+    {
+      "session_id": "A2-U09-L03",
+      "material": "Gêner в выбранной форме Le bruit gêne mon voisin; J’écris à mon voisin → Je lui écris; повторение Pourriez-vous fermer la porte, s’il vous plaît."
+    },
+    {
+      "session_id": "A2-U09-L04",
+      "material": "Mon voisin / mes voisins; J’écris à mes voisins → Je leur écris; контраст одного и нескольких адресатов."
+    }
+  ],
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:faire-le-menage:clean-home",
+      "evidence": [
+        {
+          "session_id": "A2-U09-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:tache-menagere:household-chore",
+      "evidence": [
+        {
+          "session_id": "A2-U09-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:partager:share-household-tasks",
+      "evidence": [
+        {
+          "session_id": "A2-U09-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:faire-du-bruit:make-noise",
+      "evidence": [
+        {
+          "session_id": "A2-U09-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U09-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U09-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U09-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:il-est-interdit-de:prohibition",
+      "evidence": [
+        {
+          "session_id": "A2-U09-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U09-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U09-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U09-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:gener:disturb-person",
+      "evidence": [
+        {
+          "session_id": "A2-U09-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:lui:indirect-object-singular",
+      "evidence": [
+        {
+          "session_id": "A2-U09-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U09-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U09-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U09-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U09-L05",
+          "task_id": "Q07",
+          "skill": "grammar"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:leur:indirect-object-plural",
+      "evidence": [
+        {
+          "session_id": "A2-U09-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A2-U09-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A2-U09-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A2-U09-L05",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:bruit:noise",
+      "evidence": [
+        {
+          "session_id": "A2-U09-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A2-U09-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    }
+  ],
+  "text_conventions": {
+    "situation_status": "Оригинальные вымышленные бытовые договорённости, правила и сообщения.",
+    "rule_scope": "Конкретное названное действие и время, без правовых или рыночных утверждений.",
+    "recipient_scope": "Один или несколько получателей названы явно; не определяются голосом или количеством сообщений.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 9,
+    "external_prerequisites": [
+      "A2-U08-L05"
+    ],
+    "external_reference_status": "A2-U08-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 10
+      },
+      "file_hash": "c95c9253d6716c9dd7a09e81d6c15f29364c7cfdc4274a66f52ef1513edda9ce",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 48,
+    "text_lengths": [
+      {
+        "session_id": "A2-U09-L01",
+        "reading_word_counts": [
+          37,
+          36
+        ],
+        "listening_word_counts": [
+          36
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U09-L02",
+        "reading_word_counts": [
+          36,
+          38
+        ],
+        "listening_word_counts": [
+          38
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U09-L03",
+        "reading_word_counts": [
+          39,
+          35
+        ],
+        "listening_word_counts": [
+          35
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U09-L04",
+        "reading_word_counts": [
+          32,
+          37
+        ],
+        "listening_word_counts": [
+          37
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A2-U09-L05",
+        "reading_word_counts": [
+          38,
+          37
+        ],
+        "listening_word_counts": [
+          36,
+          35
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "faire le ménage",
+        "session_id": "A2-U09-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "une tâche ménagère",
+        "session_id": "A2-U09-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "partager les tâches ménagères",
+        "session_id": "A2-U09-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Mon voisin doit faire le ménage",
+        "session_id": "A2-U09-L01",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "faire du bruit",
+        "session_id": "A2-U09-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Il est interdit de",
+        "session_id": "A2-U09-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Le bruit gêne mon voisin",
+        "session_id": "A2-U09-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je lui écris",
+        "session_id": "A2-U09-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "J’écris à mon voisin",
+        "session_id": "A2-U09-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je leur écris",
+        "session_id": "A2-U09-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "J’écris à mes voisins",
+        "session_id": "A2-U09-L04",
+        "task_id": "Q02"
+      }
+    ],
+    "level_description_included": false,
+    "curricula_included": false
+  }
+}

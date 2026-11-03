@@ -1,0 +1,971 @@
+{
+  "unit_id": "A1-U17",
+  "package_file": "A1-U17.v1.json",
+  "session_ids": [
+    "A1-U17-L01",
+    "A1-U17-L02",
+    "A1-U17-L03",
+    "A1-U17-L04",
+    "A1-U17-L05"
+  ],
+  "new_lexemes": [
+    {
+      "id": "aller-futur",
+      "lexeme_key": "fr:aller:near-future-auxiliary",
+      "fr": "aller",
+      "ru": [
+        "собираться сделать (вспомогательный глагол ближайшего будущего)"
+      ],
+      "transcription_ru": "алэ́",
+      "first_session_id": "A1-U17-L01"
+    },
+    {
+      "id": "bientot",
+      "lexeme_key": "fr:bientot:soon",
+      "fr": "bientôt",
+      "ru": [
+        "скоро"
+      ],
+      "transcription_ru": "бьэ(н)то́",
+      "first_session_id": "A1-U17-L01"
+    },
+    {
+      "id": "ce-week-end",
+      "lexeme_key": "fr:ce-week-end:this-weekend",
+      "fr": "ce week-end",
+      "ru": [
+        "в эти выходные"
+      ],
+      "transcription_ru": "сё уикэ́нд",
+      "first_session_id": "A1-U17-L02"
+    },
+    {
+      "id": "rendre-visite",
+      "lexeme_key": "fr:rendre-visite:visit-person",
+      "fr": "rendre visite",
+      "ru": [
+        "навещать человека"
+      ],
+      "transcription_ru": "ра(н)др визи́т",
+      "first_session_id": "A1-U17-L02"
+    },
+    {
+      "id": "rester",
+      "lexeme_key": "fr:rester:stay-at-place",
+      "fr": "rester",
+      "ru": [
+        "оставаться в месте"
+      ],
+      "transcription_ru": "рэстэ́",
+      "first_session_id": "A1-U17-L02"
+    },
+    {
+      "id": "ce-soir",
+      "lexeme_key": "fr:ce-soir:this-evening",
+      "fr": "ce soir",
+      "ru": [
+        "сегодня вечером"
+      ],
+      "transcription_ru": "сё суа́р",
+      "first_session_id": "A1-U17-L03"
+    },
+    {
+      "id": "je-promets",
+      "lexeme_key": "fr:je-promets:explicit-promise",
+      "fr": "je promets",
+      "ru": [
+        "я обещаю (явная рамка обещания)"
+      ],
+      "transcription_ru": "жё промэ́",
+      "first_session_id": "A1-U17-L04"
+    },
+    {
+      "id": "apporter",
+      "lexeme_key": "fr:apporter:bring-object",
+      "fr": "apporter",
+      "ru": [
+        "приносить предмет с собой"
+      ],
+      "transcription_ru": "апортэ́",
+      "first_session_id": "A1-U17-L04"
+    }
+  ],
+  "reused_lexeme_keys": [
+    "fr:adorer:love-activity",
+    "fr:aide:assistance",
+    "fr:aimer:enjoy-activity",
+    "fr:aller:go",
+    "fr:cinema:cinema-venue",
+    "fr:demain:tomorrow",
+    "fr:demander:ask-for",
+    "fr:dimanche:weekday",
+    "fr:diner:evening-meal",
+    "fr:ecouter:listen",
+    "fr:fatigue:tired-person",
+    "fr:film:film",
+    "fr:frere:brother",
+    "fr:gorge:throat",
+    "fr:heure:clock-hour",
+    "fr:jai-mal:pain-report",
+    "fr:je-voudrais:polite-request",
+    "fr:lire:read",
+    "fr:livre:book",
+    "fr:maison:house-home",
+    "fr:malade:self-reported-illness",
+    "fr:matin:morning",
+    "fr:midi:noon",
+    "fr:musique:music",
+    "fr:neuf:cardinal-number",
+    "fr:non:negative-answer",
+    "fr:parc:park",
+    "fr:preferer:prefer-choice",
+    "fr:preparer:prepare-food",
+    "fr:regarder:look-watch",
+    "fr:samedi:weekday",
+    "fr:se-promener:take-walk",
+    "fr:se-sentir:describe-feeling",
+    "fr:tete:head"
+  ],
+  "objective_coverage": [
+    {
+      "objective_id": "A1.U17.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U17-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U17-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U17-L01",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U17-L01",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U17-L02",
+          "task_id": "Q01",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U17-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U17-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U17-L02",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U17-L02",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U17-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U17-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U17.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U17-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L03",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U17-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U17-L03",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U17-L03",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U17-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U17-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U17-L04",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U17-L04",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U17-L05",
+          "task_id": "Q01",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U17-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U17-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L05",
+          "task_id": "Q06",
+          "skill": "grammar"
+        },
+        {
+          "session_id": "A1-U17-L05",
+          "task_id": "Q07",
+          "skill": "sentence_building"
+        },
+        {
+          "session_id": "A1-U17-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U16.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U17-L01",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U14.UNDERSTAND",
+      "evidence": [
+        {
+          "session_id": "A1-U17-L03",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "objective_id": "A1.U14.APPLY",
+      "evidence": [
+        {
+          "session_id": "A1-U17-L04",
+          "task_id": "Q01",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "review_targets_for_next_unit": [
+    {
+      "lexeme_key": "fr:aller:near-future-auxiliary",
+      "reason": "Перенести ближайшее намерение в короткое сообщение следующей темы."
+    },
+    {
+      "lexeme_key": "fr:demain:tomorrow",
+      "reason": "Сохранить прежний ключ завтра в сообщении о планах."
+    },
+    {
+      "lexeme_key": "fr:ce-week-end:this-weekend",
+      "reason": "Повторить период этих выходных отдельно от конкретного дня."
+    },
+    {
+      "lexeme_key": "fr:ce-soir:this-evening",
+      "reason": "Вернуть сегодняшний вечер как точное временное условие."
+    },
+    {
+      "lexeme_key": "fr:bientot:soon",
+      "reason": "Сохранить неопределённое скоро, не подменяя его часом."
+    },
+    {
+      "lexeme_key": "fr:rendre-visite:visit-person",
+      "reason": "Повторить визит к названному человеку."
+    },
+    {
+      "lexeme_key": "fr:rester:stay-at-place",
+      "reason": "Вернуть пребывание дома отдельно от визита."
+    },
+    {
+      "lexeme_key": "fr:je-promets:explicit-promise",
+      "reason": "Повторить явное обещание отдельно от простого намерения."
+    },
+    {
+      "lexeme_key": "fr:apporter:bring-object",
+      "reason": "Перенести действие принести предмет в короткую переписку."
+    }
+  ],
+  "checks": {
+    "json_parsed": true,
+    "schema_validated": true,
+    "site_preview_passed": false,
+    "browser_audio_checked": false,
+    "language_reviewed_by_human": false,
+    "plan_metadata_checked": true,
+    "local_references_checked": true,
+    "answer_structures_checked": true,
+    "lexeme_registry_checked": true,
+    "introduction_order_checked": true,
+    "objective_coverage_checked": true,
+    "no_new_material_in_l05": true,
+    "transcriptions_structurally_checked": true,
+    "project_validator_passed": true,
+    "target_database_dependency_available": true,
+    "existing_full_lexeme_objects_preserved": true,
+    "new_lexeme_keys_checked_against_registry_and_previous_packages": true,
+    "known_motion_tomorrow_and_action_keys_reused": true,
+    "auxiliary_aller_meaning_separated_from_motion": true,
+    "reading_lengths_checked": true,
+    "selected_new_frames_explained_before_testing": true,
+    "positive_and_negated_plan_distinctions_reviewed": true,
+    "promise_and_intention_distinction_reviewed": true,
+    "action_day_hour_and_speaker_references_reviewed": true,
+    "apostrophe_kept_in_whole_token": true,
+    "final_package_hash_verified": true
+  },
+  "open_issues": [
+    "Внешняя зависимость A1-U16-L05 найдена валидатором в целевой базе. Публикация предыдущей темы и принятие пакетов пользователем этой проверкой не подтверждаются.",
+    "Редактору проверить естественность французских планов и обещаний, временных сочетаний и приблизительные русские транскрипции.",
+    "Прослушать браузерную озвучку, особенно ближайшее будущее и отрицание, визит, время и целую форму d’apporter. Время аудио и занятий пока не измерено.",
+    "Выполнить предпросмотр и пробное прохождение: намерение и предпочтение, два дня выходных, отрицательный план, предмет и время явного обещания."
+  ],
+  "progress": {
+    "current_unit": "A1-U17",
+    "prepared_session_ids": [
+      "A1-U17-L01",
+      "A1-U17-L02",
+      "A1-U17-L03",
+      "A1-U17-L04",
+      "A1-U17-L05"
+    ],
+    "user_accepted_session_ids": [],
+    "remaining_session_ids": [],
+    "next_unit_not_started": "A1-U18",
+    "next_unit_title": "Простые сообщения",
+    "previous_unit": "A1-U16",
+    "previous_unit_advance_authorized": true,
+    "previous_unit_import_confirmed": false
+  },
+  "scope_notes": [
+    "Команда «Следующий этап» разрешает подготовку A1-U17. Принятие и импорт предыдущих пакетов не подтверждены; повторение использует полные объекты подготовленных пакетов.",
+    "Новые значения распределены как два, три, одно, два и ноль. Нагрузка сосредоточена на применении знакомых действий в новой временной рамке. В пятом занятии нового обязательного материала нет.",
+    "Demain, дни недели, часы, чтение, музыка, приготовление еды и родство сохраняют прежние ключи.",
+    "Aller как движение сохраняет fr:aller:go. Новое вспомогательное употребление ближайшего будущего имеет fr:aller:near-future-auxiliary; старый объект не переписывается.",
+    "Показана форма Je vais с названием действия, без полной таблицы будущих времён или всех лиц. Любить занятие и собираться выполнить его различаются.",
+    "Bientôt не задаёт точный час. Ce soir, demain matin, samedi/dimanche и ce week-end сохраняются в пределах прямо названного условия.",
+    "Rendre visite относится к посещению названного человека; rester à la maison — другое действие. Дни одного действия не переносятся на другое.",
+    "Отрицание ne/pas охватывает вспомогательную форму в показанном образце. Упомянутое отрицательно действие не становится положительным планом.",
+    "Je promets задаёт явное обещание. Простая форма будущего не объявляется обещанием без явно заданного контекста; в задачах нужный речевой акт назван словами.",
+    "Apporter — принести предмет с собой, не читать или покупать его. Пример Je promets d’apporter учится целиком с сокращением связки перед гласным; апостроф не разрывается в сборке.",
+    "В L01 повторено предпочтение из A1-U16; в L03 и L04 — уточнение места боли и самоописание из A1-U14. Возврат проверяет только язык, без медицинских выводов.",
+    "Роли говорящих заданы порядком реплик, не свойствами голоса. Данные первого человека не переносятся на второго.",
+    "Все планы, обещания, визиты и диалоги вымышленные. Относительные завтра и сегодняшний вечер относятся к ситуации текста, а не к текущей дате сайта.",
+    "Пакет содержит только текущую тему, без levels и curricula. Основной реестр, прежние пакеты и база сайта не изменялись."
+  ],
+  "session_material": [
+    {
+      "session_id": "A1-U17-L01",
+      "new_lexeme_keys": [
+        "fr:aller:near-future-auxiliary",
+        "fr:bientot:soon"
+      ],
+      "reused_lexeme_keys": [
+        "fr:adorer:love-activity",
+        "fr:aimer:enjoy-activity",
+        "fr:aller:go",
+        "fr:cinema:cinema-venue",
+        "fr:demain:tomorrow",
+        "fr:diner:evening-meal",
+        "fr:ecouter:listen",
+        "fr:film:film",
+        "fr:heure:clock-hour",
+        "fr:lire:read",
+        "fr:midi:noon",
+        "fr:musique:music",
+        "fr:neuf:cardinal-number",
+        "fr:parc:park",
+        "fr:preferer:prefer-choice",
+        "fr:preparer:prepare-food",
+        "fr:regarder:look-watch",
+        "fr:se-promener:take-walk"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U17-L02",
+      "new_lexeme_keys": [
+        "fr:ce-week-end:this-weekend",
+        "fr:rendre-visite:visit-person",
+        "fr:rester:stay-at-place"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aimer:enjoy-activity",
+        "fr:aller:near-future-auxiliary",
+        "fr:demain:tomorrow",
+        "fr:dimanche:weekday",
+        "fr:diner:evening-meal",
+        "fr:ecouter:listen",
+        "fr:film:film",
+        "fr:frere:brother",
+        "fr:lire:read",
+        "fr:maison:house-home",
+        "fr:musique:music",
+        "fr:preparer:prepare-food",
+        "fr:regarder:look-watch",
+        "fr:samedi:weekday"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U17-L03",
+      "new_lexeme_keys": [
+        "fr:ce-soir:this-evening"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aide:assistance",
+        "fr:aller:go",
+        "fr:aller:near-future-auxiliary",
+        "fr:bientot:soon",
+        "fr:ce-week-end:this-weekend",
+        "fr:cinema:cinema-venue",
+        "fr:demain:tomorrow",
+        "fr:demander:ask-for",
+        "fr:ecouter:listen",
+        "fr:frere:brother",
+        "fr:gorge:throat",
+        "fr:heure:clock-hour",
+        "fr:jai-mal:pain-report",
+        "fr:je-voudrais:polite-request",
+        "fr:lire:read",
+        "fr:maison:house-home",
+        "fr:matin:morning",
+        "fr:midi:noon",
+        "fr:musique:music",
+        "fr:neuf:cardinal-number",
+        "fr:non:negative-answer",
+        "fr:rendre-visite:visit-person",
+        "fr:rester:stay-at-place",
+        "fr:tete:head"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U17-L04",
+      "new_lexeme_keys": [
+        "fr:je-promets:explicit-promise",
+        "fr:apporter:bring-object"
+      ],
+      "reused_lexeme_keys": [
+        "fr:aide:assistance",
+        "fr:aimer:enjoy-activity",
+        "fr:aller:near-future-auxiliary",
+        "fr:ce-soir:this-evening",
+        "fr:demain:tomorrow",
+        "fr:demander:ask-for",
+        "fr:diner:evening-meal",
+        "fr:fatigue:tired-person",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:je-voudrais:polite-request",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:maison:house-home",
+        "fr:malade:self-reported-illness",
+        "fr:midi:noon",
+        "fr:neuf:cardinal-number",
+        "fr:preferer:prefer-choice",
+        "fr:preparer:prepare-food",
+        "fr:rester:stay-at-place",
+        "fr:se-sentir:describe-feeling"
+      ],
+      "task_count": 7
+    },
+    {
+      "session_id": "A1-U17-L05",
+      "new_lexeme_keys": [],
+      "reused_lexeme_keys": [
+        "fr:aimer:enjoy-activity",
+        "fr:aller:near-future-auxiliary",
+        "fr:apporter:bring-object",
+        "fr:bientot:soon",
+        "fr:ce-soir:this-evening",
+        "fr:ce-week-end:this-weekend",
+        "fr:demain:tomorrow",
+        "fr:dimanche:weekday",
+        "fr:diner:evening-meal",
+        "fr:ecouter:listen",
+        "fr:frere:brother",
+        "fr:heure:clock-hour",
+        "fr:je-promets:explicit-promise",
+        "fr:lire:read",
+        "fr:livre:book",
+        "fr:maison:house-home",
+        "fr:matin:morning",
+        "fr:midi:noon",
+        "fr:musique:music",
+        "fr:neuf:cardinal-number",
+        "fr:preparer:prepare-food",
+        "fr:rendre-visite:visit-person",
+        "fr:rester:stay-at-place",
+        "fr:samedi:weekday"
+      ],
+      "task_count": 8
+    }
+  ],
+  "introduced_grammar": [
+    {
+      "session_id": "A1-U17-L01",
+      "material": "Je vais с названием действия; отличие от движения Je vais au parc и отношения J’aime lire."
+    },
+    {
+      "session_id": "A1-U17-L02",
+      "material": "Ближайшее будущее с ce week-end и конкретным днём; rendre visite à + человек, rester à la maison."
+    },
+    {
+      "session_id": "A1-U17-L03",
+      "material": "Отрицание Je ne vais pas + название действия; ce soir и demain matin с точным часом."
+    },
+    {
+      "session_id": "A1-U17-L04",
+      "material": "Явная рамка Je promets de préparer и выбранная форма d’apporter; предмет и время обещанного действия."
+    }
+  ],
+  "text_conventions": {
+    "plan_status": "Вымышленные планы и обещания.",
+    "time_scope": "Относительные указания времени относятся к тексту, не к текущей дате.",
+    "promise_scope": "Обещание прямо названо словами, не угадывается по тону.",
+    "speaker_roles": "Роли заданы порядком реплик.",
+    "external_services_required": false
+  },
+  "catalog_metadata": {
+    "levels_included": false,
+    "curricula_included": false,
+    "database_modified": false
+  },
+  "lexeme_evidence": [
+    {
+      "lexeme_key": "fr:aller:near-future-auxiliary",
+      "evidence": [
+        {
+          "session_id": "A1-U17-L01",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L01",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U17-L01",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U17-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:bientot:soon",
+      "evidence": [
+        {
+          "session_id": "A1-U17-L01",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:ce-week-end:this-weekend",
+      "evidence": [
+        {
+          "session_id": "A1-U17-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:rendre-visite:visit-person",
+      "evidence": [
+        {
+          "session_id": "A1-U17-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L02",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U17-L02",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L02",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U17-L05",
+          "task_id": "Q02",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U17-L05",
+          "task_id": "Q03",
+          "skill": "vocabulary"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:rester:stay-at-place",
+      "evidence": [
+        {
+          "session_id": "A1-U17-L02",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:ce-soir:this-evening",
+      "evidence": [
+        {
+          "session_id": "A1-U17-L03",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L03",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L03",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U17-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:je-promets:explicit-promise",
+      "evidence": [
+        {
+          "session_id": "A1-U17-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U17-L04",
+          "task_id": "Q04",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U17-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U17-L05",
+          "task_id": "Q05",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    },
+    {
+      "lexeme_key": "fr:apporter:bring-object",
+      "evidence": [
+        {
+          "session_id": "A1-U17-L04",
+          "task_id": "Q02",
+          "skill": "vocabulary"
+        },
+        {
+          "session_id": "A1-U17-L04",
+          "task_id": "Q03",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U17-L04",
+          "task_id": "Q05",
+          "skill": "reading"
+        },
+        {
+          "session_id": "A1-U17-L05",
+          "task_id": "Q04",
+          "skill": "listening"
+        },
+        {
+          "session_id": "A1-U17-L05",
+          "task_id": "Q08",
+          "skill": "reading"
+        }
+      ]
+    }
+  ],
+  "verification_summary": {
+    "schema": "Draft 2020-12; python jsonschema",
+    "sessions": 5,
+    "tasks": 36,
+    "tasks_per_session": [
+      7,
+      7,
+      7,
+      7,
+      8
+    ],
+    "new_lexemes": 8,
+    "external_prerequisites": [
+      "A1-U16-L05"
+    ],
+    "external_reference_status": "A1-U16-L05_found_by_project_reference_validator; publication_and_user_acceptance_not_inferred",
+    "project_validator": {
+      "valid": true,
+      "errors": 0,
+      "warnings_by_code": {
+        "editorial_review_required": 5,
+        "browser_tts": 10
+      },
+      "file_hash": "618e65b29d31b1799e13c2aa812fe4dea3720f6694a118c33aa06109251d842a",
+      "requires_editorial_review": true
+    },
+    "existing_lexeme_objects_preserved": 34,
+    "text_lengths": [
+      {
+        "session_id": "A1-U17-L01",
+        "reading_word_counts": [
+          17,
+          18
+        ],
+        "listening_word_counts": [
+          19
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U17-L02",
+        "reading_word_counts": [
+          19,
+          21
+        ],
+        "listening_word_counts": [
+          21
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U17-L03",
+        "reading_word_counts": [
+          21,
+          27
+        ],
+        "listening_word_counts": [
+          23
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U17-L04",
+        "reading_word_counts": [
+          16,
+          23
+        ],
+        "listening_word_counts": [
+          21
+        ],
+        "duration_measured": false
+      },
+      {
+        "session_id": "A1-U17-L05",
+        "reading_word_counts": [
+          26,
+          26
+        ],
+        "listening_word_counts": [
+          23,
+          20
+        ],
+        "duration_measured": false
+      }
+    ],
+    "selected_new_frame_first_tasks": [
+      {
+        "frame": "Je vais lire",
+        "session_id": "A1-U17-L01",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "bientôt",
+        "session_id": "A1-U17-L01",
+        "task_id": "Q04"
+      },
+      {
+        "frame": "ce week-end",
+        "session_id": "A1-U17-L02",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "rendre visite à mon frère",
+        "session_id": "A1-U17-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "rester à la maison",
+        "session_id": "A1-U17-L02",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "ce soir",
+        "session_id": "A1-U17-L03",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je ne vais pas lire",
+        "session_id": "A1-U17-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "demain matin",
+        "session_id": "A1-U17-L03",
+        "task_id": "Q03"
+      },
+      {
+        "frame": "Je promets de préparer",
+        "session_id": "A1-U17-L04",
+        "task_id": "Q02"
+      },
+      {
+        "frame": "Je promets d’apporter",
+        "session_id": "A1-U17-L04",
+        "task_id": "Q03"
+      }
+    ]
+  }
+}
