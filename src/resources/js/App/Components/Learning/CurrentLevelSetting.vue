@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { Link } from '@inertiajs/vue3';
 import AfrButton from '@/App/Components/Form/AfrButton.vue';
 import AfrSelect from '@/App/Components/Form/Select/AfrSelect.vue';
@@ -12,26 +12,40 @@ const store=usePracticeHome();
 const level=ref(null);
 const error=ref('');
 const saved=ref(false);
-const retrying=ref(false);
-let retryTimer;
-let retryAction;
-let disposed=false;
-const scheduleRetry=action=>{retrying.value=true;retryAction=action;clearTimeout(retryTimer);if(!disposed)retryTimer=setTimeout(action,5000);};
 const feedback=usePracticeFeedback({error,source:'practice-level-setting',status:computed(()=>saved.value ? {kind:'success',message:'Текущий уровень сохранён.'} : null)});
 const ready=computed(()=>store.state.ready && store.state.owner===props.authUser?.id);
-const load=async()=>{clearTimeout(retryTimer);try {
-  if(store.state.profilePending) await store.changeLevel(props.authUser.id,level.value);
-  await store.refresh(props.authUser.id);level.value=store.state.home.profile.current_level;error.value='';retrying.value=false;retryAction=null;
-}catch(failure){if(!failure.response?.status || failure.response.status>=500) scheduleRetry(load);else error.value=failure.message;}};
-const save=async()=>{
-  clearTimeout(retryTimer);
-  error.value=''; saved.value=false;
-  try {await store.changeLevel(props.authUser.id,level.value);level.value=store.state.home.profile.current_level;saved.value=true;retrying.value=false;retryAction=null;}
-  catch(failure){if(!failure.response?.status || failure.response.status>=500 || failure.response.status===409) scheduleRetry(save);else error.value=failure.response?.data?.message ?? failure.message;}
+const load = async (force = false) => {
+  const owner = props.authUser?.id;
+  if (!owner) return;
+  try {
+    const result = await (force ? store.refresh(owner) : store.load(owner));
+    if (!result || props.authUser?.id !== owner) return;
+    level.value = result.home.profile.current_level;
+    error.value = '';
+  } catch (failure) {
+    if (props.authUser?.id === owner) error.value = failure.message;
+  }
 };
-const reconnect=()=>retryAction?.();
-onMounted(()=>{load();window.addEventListener('online',reconnect);});
-onBeforeUnmount(()=>{disposed=true;clearTimeout(retryTimer);window.removeEventListener('online',reconnect);});
+const save = async () => {
+  error.value = '';
+  saved.value = false;
+  const owner = props.authUser.id;
+  try {
+    await store.changeLevel(owner, level.value);
+    if (props.authUser?.id !== owner) return;
+    level.value = store.state.home.profile.current_level;
+    saved.value = true;
+  } catch (failure) {
+    if (props.authUser?.id === owner) error.value = failure.response?.data?.message ?? failure.message;
+  }
+};
+onMounted(load);
+watch(() => props.authUser?.id, () => {
+  level.value = null;
+  saved.value = false;
+  error.value = '';
+  load();
+});
 </script>
 <template>
   <section class="level-setting" aria-labelledby="practice-level-heading">
@@ -39,12 +53,13 @@ onBeforeUnmount(()=>{disposed=true;clearTimeout(retryTimer);window.removeEventLi
     <p v-if="!ready" role="status">Проверяем сохранённый уровень…</p>
     <form v-else @submit.prevent="save">
       <div class="practice-field"><label for="practice-current-level">Текущий уровень</label><afr-select id="practice-current-level" v-model="level" native :disabled="store.state.busy || store.state.profilePending"><afr-option v-for="item in LEVELS" :key="item.code" :value="item.code" :label="item.title" /></afr-select></div>
-      <afr-button native-type="submit" type="primary" :loading="store.state.busy" :disabled="!level || retrying">Сохранить уровень</afr-button>
+      <afr-button native-type="submit" type="primary" :loading="store.state.busy" :disabled="!level || store.state.profilePending">Сохранить уровень</afr-button>
     </form>
-    <p>Начатое занятие сохранится: его можно закончить на прежнем уровне либо отложить и начать на новом в разделе «Сегодня».</p>
+    <p>При смене уровня ваш словарь, ошибки и расписание повторений сохраняются. Новые слова добавляются после завершения занятий.</p>
+    <p>Начатое занятие можно закончить на прежнем уровне. Следующий урок будет выбран с учётом нового уровня.</p>
     <Link href="/daily">Открыть практику на сегодня</Link>
     <p v-if="saved && !feedback.enabled" role="status">Текущий уровень сохранён.</p>
-    <p v-if="retrying" role="status">Настройки сохранятся автоматически, когда появится соединение.</p>
+    <afr-button v-if="error" :disabled="store.state.busy || store.state.loading" @click="store.state.profilePending ? save() : load(true)">Повторить</afr-button>
     <p v-if="error && !feedback.enabled" role="alert">{{ error }}</p>
   </section>
 </template>

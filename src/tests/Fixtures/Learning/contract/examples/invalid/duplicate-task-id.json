@@ -1,0 +1,1713 @@
+{
+  "schema_version": 1,
+  "package_id": "invalid-duplicate-task-id",
+  "language_pair": "fr-ru",
+  "levels": [
+    {
+      "code": "PRE_A1",
+      "title": "С нуля",
+      "summary": "Первые готовые выражения для короткого разговора.",
+      "learning_outcomes": [
+        "Узнавать базовые приветствия",
+        "Представляться и спрашивать имя",
+        "Поддерживать короткий разговор о самочувствии"
+      ]
+    }
+  ],
+  "units": [
+    {
+      "id": "PRE_A1-U01",
+      "level": "PRE_A1",
+      "slug": "pervoe-znakomstvo",
+      "title": "Первое знакомство",
+      "summary": "Приветствия, имя и первые вопросы собеседнику.",
+      "learning_outcomes": [
+        "Выбирать приветствие по ситуации",
+        "Называть себя",
+        "Понимать короткий ответ о самочувствии"
+      ],
+      "order": 1
+    }
+  ],
+  "sessions": [
+    {
+      "id": "PRE_A1-U01-L01",
+      "version": 1,
+      "level": "PRE_A1",
+      "unit_id": "PRE_A1-U01",
+      "order": 1,
+      "kind": "practice",
+      "prerequisite_ids": [],
+      "title": "Bonjour ! Je m’appelle…",
+      "description": "Поймите базовые приветствия, спросите имя и представьтесь.",
+      "duration_minutes": 5,
+      "objectives": [
+        {
+          "id": "PRE_A1.GREET.RECOGNIZE",
+          "title": "Распознавать приветствия и прощание"
+        },
+        {
+          "id": "PRE_A1.NAME.UNDERSTAND",
+          "title": "Понимать неформальный вопрос об имени"
+        },
+        {
+          "id": "PRE_A1.NAME.INTRODUCE",
+          "title": "Представляться по имени"
+        }
+      ],
+      "skills": [
+        "vocabulary",
+        "listening",
+        "reading",
+        "grammar",
+        "sentence_building"
+      ],
+      "pronunciation_notes": [
+        {
+          "fr": "Bonjour !",
+          "transcription_ru": "бо(н)жу́р"
+        },
+        {
+          "fr": "Je m’appelle…",
+          "transcription_ru": "жё мапэ́ль…"
+        }
+      ],
+      "introductions": [
+        {
+          "id": "I01",
+          "before_task_id": "Q01",
+          "text": "Послушайте приветствия и прощание, посмотрите перевод. Приблизительное произношение русскими буквами помогает читать. Обозначение (н) после гласной означает носовой звук: отдельный «н» не произносится. Аудио передаёт произношение точнее.",
+          "vocabulary_ids": [
+            "bonjour",
+            "salut",
+            "bonsoir",
+            "au-revoir"
+          ]
+        },
+        {
+          "id": "I02",
+          "before_task_id": "Q04",
+          "text": "Je m’appelle Léa — «Меня зовут Леа». Comment tu t’appelles ? — «Как тебя зовут?». Здесь je — «я», tu — «ты». Запомните готовые выражения: заранее знать спряжение не нужно.",
+          "vocabulary_ids": [
+            "je-mappelle",
+            "comment-tu-tappelles"
+          ],
+          "audio": {
+            "text": "Je m’appelle Léa.",
+            "transcription_ru": "жё мапэль леа́",
+            "lang": "fr-FR",
+            "asset_id": null
+          },
+          "pronunciation_notes": [
+            {
+              "fr": "Je m’appelle Léa",
+              "transcription_ru": "жё мапэль леа́"
+            },
+            {
+              "fr": "Comment tu t’appelles ?",
+              "transcription_ru": "кома(н) тю тапэ́ль?"
+            },
+            {
+              "fr": "je",
+              "transcription_ru": "жё"
+            },
+            {
+              "fr": "tu",
+              "transcription_ru": "тю"
+            }
+          ]
+        }
+      ],
+      "vocabulary": [
+        {
+          "id": "bonjour",
+          "lexeme_key": "fr:bonjour:greeting",
+          "fr": "bonjour",
+          "ru": [
+            "Здравствуйте!",
+            "Добрый день!"
+          ],
+          "transcription_ru": "бо(н)жу́р",
+          "dictionary_word_id": null,
+          "review_items": [
+            {
+              "id": "R01",
+              "type": "single_choice",
+              "instruction": "Выберите перевод выражения.",
+              "prompt": {
+                "text": "bonjour",
+                "text_lang": "fr",
+                "transcription_ru": "бо(н)жу́р"
+              },
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "Здравствуйте!",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "b",
+                  "text": "Спасибо",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "c",
+                  "text": "До скорой встречи!",
+                  "text_lang": "ru"
+                }
+              ],
+              "correct_choice_id": "a",
+              "feedback": {
+                "correct": "Верно. Это означает «Здравствуйте!».",
+                "incorrect": "Правильный перевод: «Здравствуйте!»."
+              }
+            }
+          ]
+        },
+        {
+          "id": "salut",
+          "lexeme_key": "fr:salut:informal_greeting",
+          "fr": "salut",
+          "ru": [
+            "Привет!"
+          ],
+          "transcription_ru": "салю́",
+          "dictionary_word_id": null,
+          "review_items": [
+            {
+              "id": "R01",
+              "type": "single_choice",
+              "instruction": "Выберите перевод выражения.",
+              "prompt": {
+                "text": "salut",
+                "text_lang": "fr",
+                "transcription_ru": "салю́"
+              },
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "Привет!",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "b",
+                  "text": "Спасибо",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "c",
+                  "text": "До скорой встречи!",
+                  "text_lang": "ru"
+                }
+              ],
+              "correct_choice_id": "a",
+              "feedback": {
+                "correct": "Верно. Это означает «Привет!».",
+                "incorrect": "Правильный перевод: «Привет!»."
+              }
+            }
+          ]
+        },
+        {
+          "id": "bonsoir",
+          "lexeme_key": "fr:bonsoir:evening_greeting",
+          "fr": "bonsoir",
+          "ru": [
+            "Добрый вечер!"
+          ],
+          "transcription_ru": "бо(н)суа́р",
+          "dictionary_word_id": null,
+          "review_items": [
+            {
+              "id": "R01",
+              "type": "single_choice",
+              "instruction": "Выберите перевод выражения.",
+              "prompt": {
+                "text": "bonsoir",
+                "text_lang": "fr",
+                "transcription_ru": "бо(н)суа́р"
+              },
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "Добрый вечер!",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "b",
+                  "text": "Спасибо",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "c",
+                  "text": "До скорой встречи!",
+                  "text_lang": "ru"
+                }
+              ],
+              "correct_choice_id": "a",
+              "feedback": {
+                "correct": "Верно. Это означает «Добрый вечер!».",
+                "incorrect": "Правильный перевод: «Добрый вечер!»."
+              }
+            }
+          ]
+        },
+        {
+          "id": "au-revoir",
+          "lexeme_key": "fr:au-revoir:farewell",
+          "fr": "au revoir",
+          "ru": [
+            "До свидания!"
+          ],
+          "transcription_ru": "о рёвуа́р",
+          "dictionary_word_id": null,
+          "review_items": [
+            {
+              "id": "R01",
+              "type": "single_choice",
+              "instruction": "Выберите перевод выражения.",
+              "prompt": {
+                "text": "au revoir",
+                "text_lang": "fr",
+                "transcription_ru": "о рёвуа́р"
+              },
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "До свидания!",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "b",
+                  "text": "Спасибо",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "c",
+                  "text": "До скорой встречи!",
+                  "text_lang": "ru"
+                }
+              ],
+              "correct_choice_id": "a",
+              "feedback": {
+                "correct": "Верно. Это означает «До свидания!».",
+                "incorrect": "Правильный перевод: «До свидания!»."
+              }
+            }
+          ]
+        },
+        {
+          "id": "je-mappelle",
+          "lexeme_key": "fr:je-mappelle:self_introduction",
+          "fr": "je m’appelle…",
+          "ru": [
+            "Меня зовут…"
+          ],
+          "transcription_ru": "жё мапэ́ль…",
+          "dictionary_word_id": null,
+          "review_items": [
+            {
+              "id": "R01",
+              "type": "single_choice",
+              "instruction": "Выберите перевод выражения.",
+              "prompt": {
+                "text": "je m’appelle…",
+                "text_lang": "fr",
+                "transcription_ru": "жё мапэ́ль…"
+              },
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "Меня зовут…",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "b",
+                  "text": "Спасибо",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "c",
+                  "text": "До скорой встречи!",
+                  "text_lang": "ru"
+                }
+              ],
+              "correct_choice_id": "a",
+              "feedback": {
+                "correct": "Верно. Это означает «Меня зовут…».",
+                "incorrect": "Правильный перевод: «Меня зовут…»."
+              }
+            }
+          ]
+        },
+        {
+          "id": "comment-tu-tappelles",
+          "lexeme_key": "fr:comment-tu-tappelles:informal_name_question",
+          "fr": "comment tu t’appelles ?",
+          "ru": [
+            "Как тебя зовут?"
+          ],
+          "transcription_ru": "кома(н) тю тапэ́ль?",
+          "dictionary_word_id": null,
+          "review_items": [
+            {
+              "id": "R01",
+              "type": "single_choice",
+              "instruction": "Выберите перевод выражения.",
+              "prompt": {
+                "text": "comment tu t’appelles ?",
+                "text_lang": "fr",
+                "transcription_ru": "кома(н) тю тапэ́ль?"
+              },
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "Как тебя зовут?",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "b",
+                  "text": "Спасибо",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "c",
+                  "text": "До скорой встречи!",
+                  "text_lang": "ru"
+                }
+              ],
+              "correct_choice_id": "a",
+              "feedback": {
+                "correct": "Верно. Это означает «Как тебя зовут?».",
+                "incorrect": "Правильный перевод: «Как тебя зовут?»."
+              }
+            }
+          ]
+        }
+      ],
+      "tasks": [
+        {
+          "id": "Q01",
+          "type": "single_choice",
+          "instruction": "Прослушайте фразу. Что она значит?",
+          "prompt": {
+            "text": "Что означает это приветствие?",
+            "text_lang": "ru",
+            "audio": {
+              "text": "Bonjour !",
+              "transcription_ru": "бо(н)жу́р",
+              "lang": "fr-FR",
+              "asset_id": null
+            }
+          },
+          "feedback": {
+            "correct": "Bonjour — обычное приветствие днём: «Здравствуйте» или «Добрый день».",
+            "incorrect": "Bonjour — приветствие днём, а не прощание.",
+            "pronunciation_notes": [
+              {
+                "fr": "Bonjour",
+                "transcription_ru": "бо(н)жу́р"
+              }
+            ]
+          },
+          "objective_ids": [
+            "PRE_A1.GREET.RECOGNIZE"
+          ],
+          "skill": "listening",
+          "vocabulary_ids": [
+            "bonjour"
+          ],
+          "assessed_vocabulary_ids": [
+            "bonjour"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "text": "До свидания!",
+              "text_lang": "ru"
+            },
+            {
+              "id": "b",
+              "text": "Здравствуйте! / Добрый день!",
+              "text_lang": "ru"
+            },
+            {
+              "id": "c",
+              "text": "Добрый вечер!",
+              "text_lang": "ru"
+            }
+          ],
+          "correct_choice_id": "b"
+        },
+        {
+          "id": "Q01",
+          "type": "matching_pairs",
+          "instruction": "Соедините французскую фразу с переводом.",
+          "prompt": {
+            "text": "Составьте все пары и проверьте ответ.",
+            "text_lang": "ru"
+          },
+          "feedback": {
+            "correct": "Salut — неформальное «Привет». Bonsoir используют вечером. Au revoir говорят при прощании.",
+            "incorrect": "Сверьте пары: Salut — «Привет», Bonsoir — «Добрый вечер», Au revoir — «До свидания».",
+            "pronunciation_notes": [
+              {
+                "fr": "Salut",
+                "transcription_ru": "салю́"
+              },
+              {
+                "fr": "Bonsoir",
+                "transcription_ru": "бо(н)суа́р"
+              },
+              {
+                "fr": "Au revoir",
+                "transcription_ru": "о рёвуа́р"
+              }
+            ]
+          },
+          "objective_ids": [
+            "PRE_A1.GREET.RECOGNIZE"
+          ],
+          "skill": "vocabulary",
+          "vocabulary_ids": [
+            "bonjour",
+            "salut",
+            "bonsoir",
+            "au-revoir"
+          ],
+          "assessed_vocabulary_ids": [
+            "bonjour",
+            "salut",
+            "bonsoir",
+            "au-revoir"
+          ],
+          "left_items": [
+            {
+              "id": "l-bonjour",
+              "text": "bonjour",
+              "text_lang": "fr",
+              "transcription_ru": "бо(н)жу́р"
+            },
+            {
+              "id": "l-salut",
+              "text": "salut",
+              "text_lang": "fr",
+              "transcription_ru": "салю́"
+            },
+            {
+              "id": "l-bonsoir",
+              "text": "bonsoir",
+              "text_lang": "fr",
+              "transcription_ru": "бо(н)суа́р"
+            },
+            {
+              "id": "l-au-revoir",
+              "text": "au revoir",
+              "text_lang": "fr",
+              "transcription_ru": "о рёвуа́р"
+            }
+          ],
+          "right_items": [
+            {
+              "id": "r-au-revoir",
+              "text": "До свидания!",
+              "text_lang": "ru"
+            },
+            {
+              "id": "r-bonsoir",
+              "text": "Добрый вечер!",
+              "text_lang": "ru"
+            },
+            {
+              "id": "r-salut",
+              "text": "Привет!",
+              "text_lang": "ru"
+            },
+            {
+              "id": "r-bonjour",
+              "text": "Здравствуйте!",
+              "text_lang": "ru"
+            }
+          ],
+          "correct_pairs": [
+            {
+              "left_id": "l-bonjour",
+              "right_id": "r-bonjour",
+              "assessed_vocabulary_ids": [
+                "bonjour"
+              ]
+            },
+            {
+              "left_id": "l-salut",
+              "right_id": "r-salut",
+              "assessed_vocabulary_ids": [
+                "salut"
+              ]
+            },
+            {
+              "left_id": "l-bonsoir",
+              "right_id": "r-bonsoir",
+              "assessed_vocabulary_ids": [
+                "bonsoir"
+              ]
+            },
+            {
+              "left_id": "l-au-revoir",
+              "right_id": "r-au-revoir",
+              "assessed_vocabulary_ids": [
+                "au-revoir"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "Q03",
+          "type": "single_choice",
+          "instruction": "Вы вечером вежливо здороваетесь с преподавателем. Что сказать?",
+          "prompt": {
+            "text": "Выберите подходящее приветствие.",
+            "text_lang": "ru"
+          },
+          "feedback": {
+            "correct": "Bonsoir — вежливое приветствие вечером.",
+            "incorrect": "Bonsoir — «Добрый вечер». Au revoir означает «До свидания».",
+            "pronunciation_notes": [
+              {
+                "fr": "Bonsoir",
+                "transcription_ru": "бо(н)суа́р"
+              },
+              {
+                "fr": "Au revoir",
+                "transcription_ru": "о рёвуа́р"
+              }
+            ]
+          },
+          "objective_ids": [
+            "PRE_A1.GREET.RECOGNIZE"
+          ],
+          "skill": "vocabulary",
+          "vocabulary_ids": [
+            "salut",
+            "bonsoir",
+            "au-revoir"
+          ],
+          "assessed_vocabulary_ids": [
+            "bonsoir"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "text": "Salut !",
+              "text_lang": "fr",
+              "transcription_ru": "салю́"
+            },
+            {
+              "id": "b",
+              "text": "Bonsoir !",
+              "text_lang": "fr",
+              "transcription_ru": "бо(н)суа́р"
+            },
+            {
+              "id": "c",
+              "text": "Au revoir !",
+              "text_lang": "fr",
+              "transcription_ru": "о рёвуа́р"
+            }
+          ],
+          "correct_choice_id": "b"
+        },
+        {
+          "id": "Q04",
+          "type": "fill_blank",
+          "instruction": "Закончите фразу «Меня зовут Леа».",
+          "prompt": {
+            "text": "Выберите форму для одного пропуска.",
+            "text_lang": "ru"
+          },
+          "feedback": {
+            "correct": "Чтобы представиться, используйте Je m’appelle…",
+            "incorrect": "Скажите Je m’appelle Léa. В этой фразе нужна форма appelle.",
+            "pronunciation_notes": [
+              {
+                "fr": "Je m’appelle…",
+                "transcription_ru": "жё мапэ́ль…"
+              },
+              {
+                "fr": "Je m’appelle Léa.",
+                "transcription_ru": "жё мапэль леа́"
+              },
+              {
+                "fr": "appelle",
+                "transcription_ru": "апэ́ль"
+              }
+            ]
+          },
+          "objective_ids": [
+            "PRE_A1.NAME.INTRODUCE"
+          ],
+          "skill": "grammar",
+          "vocabulary_ids": [
+            "je-mappelle"
+          ],
+          "assessed_vocabulary_ids": [],
+          "text_before": "Je m’",
+          "text_after": " Léa.",
+          "text_before_transcription_ru": "жё м",
+          "text_after_transcription_ru": "леа́",
+          "input_mode": "choice",
+          "choices": [
+            {
+              "id": "a",
+              "text": "appelle",
+              "text_lang": "fr",
+              "transcription_ru": "апэ́ль"
+            },
+            {
+              "id": "b",
+              "text": "appelles",
+              "text_lang": "fr",
+              "transcription_ru": "апэ́ль"
+            },
+            {
+              "id": "c",
+              "text": "appelez",
+              "text_lang": "fr",
+              "transcription_ru": "аплэ́"
+            }
+          ],
+          "correct_choice_id": "a",
+          "completed_phrases": [
+            {
+              "fr": "Je m’appelle Léa.",
+              "transcription_ru": "жё мапэль леа́"
+            }
+          ]
+        },
+        {
+          "id": "Q05",
+          "type": "single_choice",
+          "instruction": "Выберите перевод вопроса.",
+          "prompt": {
+            "text": "Comment tu t’appelles ?",
+            "text_lang": "fr",
+            "transcription_ru": "кома(н) тю тапэ́ль?"
+          },
+          "feedback": {
+            "correct": "Это неформальный вопрос «Как тебя зовут?». Здесь tu — обращение на «ты».",
+            "incorrect": "Вопрос означает «Как тебя зовут?». Здесь tu — «ты».",
+            "pronunciation_notes": [
+              {
+                "fr": "tu",
+                "transcription_ru": "тю"
+              }
+            ]
+          },
+          "objective_ids": [
+            "PRE_A1.NAME.UNDERSTAND"
+          ],
+          "skill": "reading",
+          "vocabulary_ids": [
+            "comment-tu-tappelles"
+          ],
+          "assessed_vocabulary_ids": [
+            "comment-tu-tappelles"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "text": "Как тебя зовут?",
+              "text_lang": "ru"
+            },
+            {
+              "id": "b",
+              "text": "Где ты живёшь?",
+              "text_lang": "ru"
+            },
+            {
+              "id": "c",
+              "text": "Ты откуда?",
+              "text_lang": "ru"
+            }
+          ],
+          "correct_choice_id": "a"
+        },
+        {
+          "id": "Q06",
+          "type": "word_order",
+          "instruction": "Соберите по-французски фразу «Меня зовут Поль».",
+          "prompt": {
+            "text": "Нажимайте на карточки в нужном порядке.",
+            "text_lang": "ru"
+          },
+          "feedback": {
+            "correct": "Je m’appelle Paul значит «Меня зовут Поль».",
+            "incorrect": "Правильная фраза: Je m’appelle Paul.",
+            "pronunciation_notes": [
+              {
+                "fr": "Je m’appelle Paul",
+                "transcription_ru": "жё мапэль по́ль"
+              }
+            ]
+          },
+          "objective_ids": [
+            "PRE_A1.NAME.INTRODUCE"
+          ],
+          "skill": "sentence_building",
+          "vocabulary_ids": [
+            "je-mappelle"
+          ],
+          "assessed_vocabulary_ids": [],
+          "tokens": [
+            {
+              "id": "paul",
+              "text": "Paul",
+              "text_lang": "fr",
+              "transcription_ru": "по́ль"
+            },
+            {
+              "id": "je",
+              "text": "Je",
+              "text_lang": "fr",
+              "transcription_ru": "жё"
+            },
+            {
+              "id": "mappelle",
+              "text": "m’appelle",
+              "text_lang": "fr",
+              "transcription_ru": "мапэ́ль"
+            }
+          ],
+          "accepted_orders": [
+            [
+              "je",
+              "mappelle",
+              "paul"
+            ]
+          ],
+          "completed_phrases": [
+            {
+              "fr": "Je m’appelle Paul.",
+              "transcription_ru": "жё мапэль по́ль"
+            }
+          ]
+        }
+      ],
+      "public_page": {
+        "slug": "bonjour-je-mappelle",
+        "summary": "Научитесь узнавать приветствия и прощание, понимать вопрос об имени и представляться. Перед упражнениями прочитайте объяснения и примеры.",
+        "seo_title": "Приветствия и знакомство — французский с нуля",
+        "seo_description": "Первое короткое занятие: приветствия, прощание и знакомство, с переводами и произношением русскими буквами.",
+        "related_session_ids": [
+          "PRE_A1-U01-L02"
+        ],
+        "explanation_blocks": [
+          {
+            "heading": "Приветствие выбирают по ситуации",
+            "paragraphs": [
+              "Днём подходит обычное вежливое приветствие, вечером — вечернее. С друзьями можно здороваться неформально. Прощание — отдельное выражение."
+            ],
+            "examples": [
+              {
+                "fr": "Bonjour !",
+                "ru": "Здравствуйте! Добрый день!",
+                "transcription_ru": "бо(н)жу́р"
+              },
+              {
+                "fr": "Salut !",
+                "ru": "Привет!",
+                "transcription_ru": "салю́"
+              },
+              {
+                "fr": "Bonsoir !",
+                "ru": "Добрый вечер!",
+                "transcription_ru": "бо(н)суа́р"
+              },
+              {
+                "fr": "Au revoir !",
+                "ru": "До свидания!",
+                "transcription_ru": "о рёвуа́р"
+              }
+            ]
+          },
+          {
+            "heading": "Как назвать себя и спросить имя",
+            "paragraphs": [
+              "Имя добавляется к готовому выражению. Вопрос в этом занятии предполагает неформальное обращение на «ты». Формальное обращение будет изучаться отдельно."
+            ],
+            "examples": [
+              {
+                "fr": "Je m’appelle Léa.",
+                "ru": "Меня зовут Леа.",
+                "transcription_ru": "жё мапэль леа́"
+              },
+              {
+                "fr": "Comment tu t’appelles ?",
+                "ru": "Как тебя зовут?",
+                "transcription_ru": "кома(н) тю тапэ́ль?"
+              }
+            ]
+          },
+          {
+            "heading": "Разобранный пример",
+            "paragraphs": [
+              "Вы входите в кабинет вечером и вежливо здороваетесь с преподавателем. Выберите вечернее приветствие; прощание для этой ситуации не подходит.",
+              "Приблизительное произношение русскими буквами помогает читать. Обозначение (н) означает носовой гласный без отдельного звука «н»; слушайте аудио для более точного произношения."
+            ],
+            "examples": [
+              {
+                "fr": "Bonsoir !",
+                "ru": "Добрый вечер!",
+                "transcription_ru": "бо(н)суа́р"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRE_A1-U01-L02",
+      "version": 1,
+      "level": "PRE_A1",
+      "unit_id": "PRE_A1-U01",
+      "order": 2,
+      "kind": "practice",
+      "prerequisite_ids": [
+        "PRE_A1-U01-L01"
+      ],
+      "title": "Ça va ?",
+      "description": "Спросите, как дела, поймите простой ответ и поддержите короткий диалог.",
+      "duration_minutes": 5,
+      "objectives": [
+        {
+          "id": "PRE_A1.WELLBEING.ASK",
+          "title": "Понимать вопрос о самочувствии"
+        },
+        {
+          "id": "PRE_A1.WELLBEING.UNDERSTAND",
+          "title": "Различать простые ответы о самочувствии"
+        },
+        {
+          "id": "PRE_A1.WELLBEING.REPLY",
+          "title": "Поддерживать диалог ответным вопросом"
+        }
+      ],
+      "skills": [
+        "vocabulary",
+        "listening",
+        "reading",
+        "grammar"
+      ],
+      "pronunciation_notes": [
+        {
+          "fr": "Ça va ?",
+          "transcription_ru": "са ва́?"
+        }
+      ],
+      "introductions": [
+        {
+          "id": "I01",
+          "before_task_id": "Q01",
+          "text": "Посмотрите выражения с переводом и послушайте их. Они изучаются целиком. Приблизительная запись русскими буквами не заменяет аудио: (н) обозначает носовой гласный без отдельного звука «н».",
+          "vocabulary_ids": [
+            "ca-va",
+            "ca-va-bien",
+            "tres-bien",
+            "pas-tres-bien",
+            "merci"
+          ]
+        },
+        {
+          "id": "I02",
+          "before_task_id": "Q06",
+          "text": "Et toi ? — «А ты?». После своего ответа так можно задать собеседнику тот же вопрос. Это неформальное обращение на «ты».",
+          "vocabulary_ids": [
+            "et-toi"
+          ],
+          "audio": {
+            "text": "Et toi ?",
+            "transcription_ru": "э туа́?",
+            "lang": "fr-FR",
+            "asset_id": null
+          },
+          "pronunciation_notes": [
+            {
+              "fr": "Et toi ?",
+              "transcription_ru": "э туа́?"
+            }
+          ]
+        }
+      ],
+      "vocabulary": [
+        {
+          "id": "ca-va",
+          "lexeme_key": "fr:ca-va:wellbeing_question",
+          "fr": "ça va ?",
+          "ru": [
+            "Как дела?",
+            "Всё хорошо?"
+          ],
+          "transcription_ru": "са ва́?",
+          "dictionary_word_id": null,
+          "review_items": [
+            {
+              "id": "R01",
+              "type": "single_choice",
+              "instruction": "Выберите перевод выражения.",
+              "prompt": {
+                "text": "ça va ?",
+                "text_lang": "fr",
+                "transcription_ru": "са ва́?"
+              },
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "Как дела?",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "b",
+                  "text": "Спасибо",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "c",
+                  "text": "До скорой встречи!",
+                  "text_lang": "ru"
+                }
+              ],
+              "correct_choice_id": "a",
+              "feedback": {
+                "correct": "Верно. Это означает «Как дела?».",
+                "incorrect": "Правильный перевод: «Как дела?»."
+              }
+            }
+          ]
+        },
+        {
+          "id": "ca-va-bien",
+          "lexeme_key": "fr:ca-va-bien:positive_wellbeing",
+          "fr": "ça va bien",
+          "ru": [
+            "Всё хорошо"
+          ],
+          "transcription_ru": "са ва бье́(н)",
+          "dictionary_word_id": null,
+          "review_items": [
+            {
+              "id": "R01",
+              "type": "single_choice",
+              "instruction": "Выберите перевод выражения.",
+              "prompt": {
+                "text": "ça va bien",
+                "text_lang": "fr",
+                "transcription_ru": "са ва бье́(н)"
+              },
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "Всё хорошо",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "b",
+                  "text": "Спасибо",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "c",
+                  "text": "До скорой встречи!",
+                  "text_lang": "ru"
+                }
+              ],
+              "correct_choice_id": "a",
+              "feedback": {
+                "correct": "Верно. Это означает «Всё хорошо».",
+                "incorrect": "Правильный перевод: «Всё хорошо»."
+              }
+            }
+          ]
+        },
+        {
+          "id": "tres-bien",
+          "lexeme_key": "fr:tres-bien:very_well",
+          "fr": "très bien",
+          "ru": [
+            "Очень хорошо"
+          ],
+          "transcription_ru": "трэ бье́(н)",
+          "dictionary_word_id": null,
+          "review_items": [
+            {
+              "id": "R01",
+              "type": "single_choice",
+              "instruction": "Выберите перевод выражения.",
+              "prompt": {
+                "text": "très bien",
+                "text_lang": "fr",
+                "transcription_ru": "трэ бье́(н)"
+              },
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "Очень хорошо",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "b",
+                  "text": "Спасибо",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "c",
+                  "text": "До скорой встречи!",
+                  "text_lang": "ru"
+                }
+              ],
+              "correct_choice_id": "a",
+              "feedback": {
+                "correct": "Верно. Это означает «Очень хорошо».",
+                "incorrect": "Правильный перевод: «Очень хорошо»."
+              }
+            }
+          ]
+        },
+        {
+          "id": "pas-tres-bien",
+          "lexeme_key": "fr:pas-tres-bien:unwell",
+          "fr": "pas très bien",
+          "ru": [
+            "Не очень хорошо"
+          ],
+          "transcription_ru": "па трэ бье́(н)",
+          "dictionary_word_id": null,
+          "review_items": [
+            {
+              "id": "R01",
+              "type": "single_choice",
+              "instruction": "Выберите перевод выражения.",
+              "prompt": {
+                "text": "pas très bien",
+                "text_lang": "fr",
+                "transcription_ru": "па трэ бье́(н)"
+              },
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "Не очень хорошо",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "b",
+                  "text": "Спасибо",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "c",
+                  "text": "До скорой встречи!",
+                  "text_lang": "ru"
+                }
+              ],
+              "correct_choice_id": "a",
+              "feedback": {
+                "correct": "Верно. Это означает «Не очень хорошо».",
+                "incorrect": "Правильный перевод: «Не очень хорошо»."
+              }
+            }
+          ]
+        },
+        {
+          "id": "merci",
+          "lexeme_key": "fr:merci:thanks",
+          "fr": "merci",
+          "ru": [
+            "Спасибо"
+          ],
+          "transcription_ru": "мэрси́",
+          "dictionary_word_id": null,
+          "review_items": [
+            {
+              "id": "R01",
+              "type": "single_choice",
+              "instruction": "Выберите перевод выражения.",
+              "prompt": {
+                "text": "merci",
+                "text_lang": "fr",
+                "transcription_ru": "мэрси́"
+              },
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "Спасибо",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "b",
+                  "text": "До свидания!",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "c",
+                  "text": "До скорой встречи!",
+                  "text_lang": "ru"
+                }
+              ],
+              "correct_choice_id": "a",
+              "feedback": {
+                "correct": "Верно. Это означает «Спасибо».",
+                "incorrect": "Правильный перевод: «Спасибо»."
+              }
+            }
+          ]
+        },
+        {
+          "id": "et-toi",
+          "lexeme_key": "fr:et-toi:reciprocal_question",
+          "fr": "et toi ?",
+          "ru": [
+            "А ты?"
+          ],
+          "transcription_ru": "э туа́?",
+          "dictionary_word_id": null,
+          "review_items": [
+            {
+              "id": "R01",
+              "type": "single_choice",
+              "instruction": "Выберите перевод выражения.",
+              "prompt": {
+                "text": "et toi ?",
+                "text_lang": "fr",
+                "transcription_ru": "э туа́?"
+              },
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "А ты?",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "b",
+                  "text": "Спасибо",
+                  "text_lang": "ru"
+                },
+                {
+                  "id": "c",
+                  "text": "До скорой встречи!",
+                  "text_lang": "ru"
+                }
+              ],
+              "correct_choice_id": "a",
+              "feedback": {
+                "correct": "Верно. Это означает «А ты?».",
+                "incorrect": "Правильный перевод: «А ты?»."
+              }
+            }
+          ]
+        }
+      ],
+      "tasks": [
+        {
+          "id": "Q01",
+          "type": "single_choice",
+          "instruction": "Что спрашивает собеседник?",
+          "prompt": {
+            "text": "Прослушайте вопрос.",
+            "text_lang": "ru",
+            "audio": {
+              "text": "Ça va ?",
+              "transcription_ru": "са ва́?",
+              "lang": "fr-FR",
+              "asset_id": null
+            }
+          },
+          "feedback": {
+            "correct": "Ça va ? — короткий вопрос «Как дела?» или «Всё хорошо?».",
+            "incorrect": "Ça va ? спрашивает о самочувствии, а не об имени.",
+            "pronunciation_notes": [
+              {
+                "fr": "Ça va ?",
+                "transcription_ru": "са ва́?"
+              }
+            ]
+          },
+          "objective_ids": [
+            "PRE_A1.WELLBEING.ASK"
+          ],
+          "skill": "listening",
+          "vocabulary_ids": [
+            "ca-va"
+          ],
+          "assessed_vocabulary_ids": [
+            "ca-va"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "text": "Как дела?",
+              "text_lang": "ru"
+            },
+            {
+              "id": "b",
+              "text": "Как тебя зовут?",
+              "text_lang": "ru"
+            },
+            {
+              "id": "c",
+              "text": "До свидания?",
+              "text_lang": "ru"
+            }
+          ],
+          "correct_choice_id": "a"
+        },
+        {
+          "id": "Q02",
+          "type": "matching_pairs",
+          "instruction": "Соедините французскую фразу с переводом.",
+          "prompt": {
+            "text": "Составьте все пары и проверьте ответ.",
+            "text_lang": "ru"
+          },
+          "feedback": {
+            "correct": "bien — «хорошо», très bien — «очень хорошо», pas très bien — «не очень хорошо».",
+            "incorrect": "Сравните ответы: bien — «хорошо», très bien — «очень хорошо», pas très bien — «не очень хорошо».",
+            "pronunciation_notes": [
+              {
+                "fr": "bien",
+                "transcription_ru": "бье́(н)"
+              },
+              {
+                "fr": "très bien",
+                "transcription_ru": "трэ бье́(н)"
+              },
+              {
+                "fr": "pas très bien",
+                "transcription_ru": "па трэ бье́(н)"
+              }
+            ]
+          },
+          "objective_ids": [
+            "PRE_A1.WELLBEING.UNDERSTAND"
+          ],
+          "skill": "vocabulary",
+          "vocabulary_ids": [
+            "ca-va-bien",
+            "tres-bien",
+            "pas-tres-bien",
+            "merci"
+          ],
+          "assessed_vocabulary_ids": [
+            "ca-va-bien",
+            "tres-bien",
+            "pas-tres-bien",
+            "merci"
+          ],
+          "left_items": [
+            {
+              "id": "l-ca-va-bien",
+              "text": "ça va bien",
+              "text_lang": "fr",
+              "transcription_ru": "са ва бье́(н)"
+            },
+            {
+              "id": "l-tres-bien",
+              "text": "très bien",
+              "text_lang": "fr",
+              "transcription_ru": "трэ бье́(н)"
+            },
+            {
+              "id": "l-pas-tres-bien",
+              "text": "pas très bien",
+              "text_lang": "fr",
+              "transcription_ru": "па трэ бье́(н)"
+            },
+            {
+              "id": "l-merci",
+              "text": "merci",
+              "text_lang": "fr",
+              "transcription_ru": "мэрси́"
+            }
+          ],
+          "right_items": [
+            {
+              "id": "r-merci",
+              "text": "Спасибо",
+              "text_lang": "ru"
+            },
+            {
+              "id": "r-pas-tres-bien",
+              "text": "Не очень хорошо",
+              "text_lang": "ru"
+            },
+            {
+              "id": "r-tres-bien",
+              "text": "Очень хорошо",
+              "text_lang": "ru"
+            },
+            {
+              "id": "r-ca-va-bien",
+              "text": "Всё хорошо",
+              "text_lang": "ru"
+            }
+          ],
+          "correct_pairs": [
+            {
+              "left_id": "l-ca-va-bien",
+              "right_id": "r-ca-va-bien",
+              "assessed_vocabulary_ids": [
+                "ca-va-bien"
+              ]
+            },
+            {
+              "left_id": "l-tres-bien",
+              "right_id": "r-tres-bien",
+              "assessed_vocabulary_ids": [
+                "tres-bien"
+              ]
+            },
+            {
+              "left_id": "l-pas-tres-bien",
+              "right_id": "r-pas-tres-bien",
+              "assessed_vocabulary_ids": [
+                "pas-tres-bien"
+              ]
+            },
+            {
+              "left_id": "l-merci",
+              "right_id": "r-merci",
+              "assessed_vocabulary_ids": [
+                "merci"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "Q03",
+          "type": "single_choice",
+          "instruction": "Выберите перевод услышанной фразы.",
+          "prompt": {
+            "text": "Прослушайте ответ.",
+            "text_lang": "ru",
+            "audio": {
+              "text": "Ça va bien, merci.",
+              "transcription_ru": "са ва бье(н), мэрси́",
+              "lang": "fr-FR",
+              "asset_id": null
+            }
+          },
+          "feedback": {
+            "correct": "Ça va bien, merci — «Всё хорошо, спасибо».",
+            "incorrect": "Услышанный ответ Ça va bien, merci означает «Всё хорошо, спасибо».",
+            "pronunciation_notes": [
+              {
+                "fr": "Ça va bien, merci",
+                "transcription_ru": "са ва бье(н), мэрси́"
+              }
+            ]
+          },
+          "objective_ids": [
+            "PRE_A1.WELLBEING.UNDERSTAND"
+          ],
+          "skill": "listening",
+          "vocabulary_ids": [
+            "ca-va-bien",
+            "merci"
+          ],
+          "assessed_vocabulary_ids": [
+            "ca-va-bien"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "text": "Всё хорошо, спасибо.",
+              "text_lang": "ru"
+            },
+            {
+              "id": "b",
+              "text": "Не очень хорошо, спасибо.",
+              "text_lang": "ru"
+            },
+            {
+              "id": "c",
+              "text": "Меня зовут Поль.",
+              "text_lang": "ru"
+            }
+          ],
+          "correct_choice_id": "a"
+        },
+        {
+          "id": "Q04",
+          "type": "fill_blank",
+          "instruction": "Вы хотите ответить, что у вас всё хорошо. Дополните выражение.",
+          "prompt": {
+            "text": "Выберите слово для одного пропуска.",
+            "text_lang": "ru"
+          },
+          "feedback": {
+            "correct": "В этом выражении используется bien: Ça va bien — «Всё хорошо».",
+            "incorrect": "Нужна форма bien. Полный ответ: Ça va bien, merci.",
+            "pronunciation_notes": [
+              {
+                "fr": "bien",
+                "transcription_ru": "бье́(н)"
+              },
+              {
+                "fr": "Ça va bien",
+                "transcription_ru": "са ва бье́(н)"
+              },
+              {
+                "fr": "Ça va bien, merci.",
+                "transcription_ru": "са ва бье(н), мэрси́"
+              }
+            ]
+          },
+          "objective_ids": [
+            "PRE_A1.WELLBEING.UNDERSTAND"
+          ],
+          "skill": "grammar",
+          "vocabulary_ids": [
+            "ca-va-bien",
+            "merci"
+          ],
+          "assessed_vocabulary_ids": [],
+          "text_before": "Ça va ",
+          "text_after": ", merci.",
+          "text_before_transcription_ru": "са ва́",
+          "text_after_transcription_ru": "мэрси́",
+          "input_mode": "choice",
+          "choices": [
+            {
+              "id": "a",
+              "text": "bien",
+              "text_lang": "fr",
+              "transcription_ru": "бье́(н)"
+            },
+            {
+              "id": "b",
+              "text": "bon",
+              "text_lang": "fr",
+              "transcription_ru": "бо́(н)"
+            },
+            {
+              "id": "c",
+              "text": "bonne",
+              "text_lang": "fr",
+              "transcription_ru": "бо́н"
+            }
+          ],
+          "correct_choice_id": "a",
+          "completed_phrases": [
+            {
+              "fr": "Ça va bien, merci.",
+              "transcription_ru": "са ва бье(н), мэрси́"
+            }
+          ]
+        },
+        {
+          "id": "Q05",
+          "type": "single_choice",
+          "instruction": "Как себя чувствует говорящий?",
+          "prompt": {
+            "text": "Прослушайте короткий ответ.",
+            "text_lang": "ru",
+            "audio": {
+              "text": "Pas très bien.",
+              "transcription_ru": "па трэ бье́(н)",
+              "lang": "fr-FR",
+              "asset_id": null
+            }
+          },
+          "feedback": {
+            "correct": "Pas très bien значит «Не очень хорошо». Это ответ на вопрос Ça va ?",
+            "incorrect": "Говорящий чувствует себя не очень хорошо: Pas très bien.",
+            "pronunciation_notes": [
+              {
+                "fr": "Pas très bien",
+                "transcription_ru": "па трэ бье́(н)"
+              },
+              {
+                "fr": "Ça va ?",
+                "transcription_ru": "са ва́?"
+              }
+            ]
+          },
+          "objective_ids": [
+            "PRE_A1.WELLBEING.UNDERSTAND"
+          ],
+          "skill": "listening",
+          "vocabulary_ids": [
+            "pas-tres-bien",
+            "ca-va"
+          ],
+          "assessed_vocabulary_ids": [
+            "pas-tres-bien"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "text": "Очень хорошо.",
+              "text_lang": "ru"
+            },
+            {
+              "id": "b",
+              "text": "Не очень хорошо.",
+              "text_lang": "ru"
+            },
+            {
+              "id": "c",
+              "text": "Он прощается.",
+              "text_lang": "ru"
+            }
+          ],
+          "correct_choice_id": "b"
+        },
+        {
+          "id": "Q06",
+          "type": "single_choice",
+          "instruction": "Завершите диалог ответным вопросом.",
+          "prompt": {
+            "text": "Заполните пропуск в диалоге:\nА: Salut, Léa ! Ça va ?\nБ: Ça va bien, merci. _____\nА: Très bien, merci.",
+            "text_lang": "ru"
+          },
+          "feedback": {
+            "correct": "Et toi ? значит «А ты?»: так возвращают вопрос собеседнику.",
+            "incorrect": "Подходит ответный вопрос Et toi ?, а не прощание или вопрос об имени.",
+            "pronunciation_notes": [
+              {
+                "fr": "Et toi ?",
+                "transcription_ru": "э туа́?"
+              }
+            ]
+          },
+          "objective_ids": [
+            "PRE_A1.WELLBEING.REPLY"
+          ],
+          "skill": "reading",
+          "vocabulary_ids": [
+            "ca-va",
+            "ca-va-bien",
+            "tres-bien",
+            "merci",
+            "et-toi"
+          ],
+          "assessed_vocabulary_ids": [
+            "et-toi"
+          ],
+          "choices": [
+            {
+              "id": "a",
+              "text": "Et toi ?",
+              "text_lang": "fr",
+              "transcription_ru": "э туа́?"
+            },
+            {
+              "id": "b",
+              "text": "Au revoir !",
+              "text_lang": "fr",
+              "transcription_ru": "о рёвуа́р"
+            },
+            {
+              "id": "c",
+              "text": "Comment tu t’appelles ?",
+              "text_lang": "fr",
+              "transcription_ru": "кома(н) тю тапэ́ль?"
+            }
+          ],
+          "correct_choice_id": "a",
+          "pronunciation_notes": [
+            {
+              "fr": "Salut, Léa ! Ça va ?",
+              "transcription_ru": "салю леа́! са ва́?"
+            },
+            {
+              "fr": "Ça va bien, merci.",
+              "transcription_ru": "са ва бье(н), мэрси́"
+            },
+            {
+              "fr": "Très bien, merci.",
+              "transcription_ru": "трэ бье(н), мэрси́"
+            }
+          ]
+        }
+      ],
+      "public_page": {
+        "slug": "ca-va",
+        "summary": "Научитесь спрашивать о самочувствии, различать простые ответы и возвращать вопрос собеседнику. Выражения изучаются как готовые реплики.",
+        "seo_title": "Как спросить «Как дела?» по-французски",
+        "seo_description": "Короткий диалог для начинающих: вопрос о самочувствии, положительные и отрицательные ответы, благодарность и ответный вопрос.",
+        "related_session_ids": [
+          "PRE_A1-U01-L01"
+        ],
+        "explanation_blocks": [
+          {
+            "heading": "Короткий вопрос и простые ответы",
+            "paragraphs": [
+              "В неформальном разговоре можно коротко спросить о самочувствии. Ответ бывает положительным, очень положительным или осторожно отрицательным."
+            ],
+            "examples": [
+              {
+                "fr": "Ça va ?",
+                "ru": "Как дела?",
+                "transcription_ru": "са ва́?"
+              },
+              {
+                "fr": "Ça va bien",
+                "ru": "Всё хорошо",
+                "transcription_ru": "са ва бье́(н)"
+              },
+              {
+                "fr": "Très bien",
+                "ru": "Очень хорошо",
+                "transcription_ru": "трэ бье́(н)"
+              },
+              {
+                "fr": "Pas très bien",
+                "ru": "Не очень хорошо",
+                "transcription_ru": "па трэ бье́(н)"
+              }
+            ]
+          },
+          {
+            "heading": "Благодарность и ответный вопрос",
+            "paragraphs": [
+              "К ответу можно добавить благодарность. Затем спросите собеседника о том же: в этом занятии используется обращение на «ты»."
+            ],
+            "examples": [
+              {
+                "fr": "Ça va bien, merci.",
+                "ru": "Всё хорошо, спасибо.",
+                "transcription_ru": "са ва бье(н), мэрси́"
+              },
+              {
+                "fr": "Et toi ?",
+                "ru": "А ты?",
+                "transcription_ru": "э туа́?"
+              }
+            ]
+          },
+          {
+            "heading": "Разобранный диалог",
+            "paragraphs": [
+              "Первый собеседник здоровается и задаёт вопрос. Второй отвечает, благодарит и возвращает вопрос. Первый тоже сообщает, как у него дела."
+            ],
+            "examples": [
+              {
+                "fr": "Salut, Léa ! Ça va ?",
+                "ru": "Привет, Леа! Как дела?",
+                "transcription_ru": "салю леа́! са ва́?"
+              },
+              {
+                "fr": "Ça va bien, merci. Et toi ?",
+                "ru": "Всё хорошо, спасибо. А ты?",
+                "transcription_ru": "са ва бье(н), мэрси́. э туа́?"
+              },
+              {
+                "fr": "Très bien, merci.",
+                "ru": "Очень хорошо, спасибо.",
+                "transcription_ru": "трэ бье(н), мэрси́"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

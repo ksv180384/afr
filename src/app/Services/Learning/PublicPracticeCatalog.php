@@ -15,7 +15,7 @@ final class PublicPracticeCatalog
         return LearningSession::query()->whereNull('archived_at')->whereNotNull('slug')
             ->whereHas('activeVersion', fn ($query) => $query->where('status', 'published')->whereNotNull('published_at')->whereJsonLength('payload->public_page->explanation_blocks', '>', 0)->whereNotNull('payload->public_page->summary'))
             ->whereHas('unit', fn ($query) => $query->whereNotNull('published_at')->whereNull('archived_at'))
-            ->whereHas('levelDefinition', fn ($query) => $query->whereNotNull('published_at'));
+            ->whereHas('levelDefinition', fn ($query) => $query->published());
     }
 
     private function summaries(Builder $query)
@@ -33,9 +33,16 @@ final class PublicPracticeCatalog
             'path' => PracticeUrls::session($session)];
     }
 
+    private function assertLevel(LearningLevel $level): void
+    {
+        abort_unless($level->published_at, 404);
+        abort_if($level->archived_at, 410, 'Уровень снят с публикации.');
+    }
+
     public function assertUnit(LearningUnit $unit): void
     {
-        abort_unless($unit->published_at && $unit->levelDefinition->published_at, 404);
+        $this->assertLevel($unit->levelDefinition);
+        abort_unless($unit->published_at, 404);
         abort_if($unit->archived_at, 410, 'Тема снята с публикации.');
     }
 
@@ -64,7 +71,7 @@ final class PublicPracticeCatalog
     {
         $breadcrumbs = [['title' => 'Практика', 'path' => '/practice']];
         if (! $levelSlug) {
-            $levels = LearningLevel::orderBy('sort_order')->get();
+            $levels = LearningLevel::whereNull('archived_at')->orderBy('sort_order')->get();
             $cards = $levels->map(function ($level) {
                 $count = $this->sessions()->where('level', $level->code)->count();
 
@@ -76,8 +83,9 @@ final class PublicPracticeCatalog
                 $cards, array_sum(array_column($cards, 'count')) > 0, $this->modified());
         }
         $code = strtoupper(str_replace('-', '_', $levelSlug));
-        $level = LearningLevel::where('code', $code)->whereNotNull('published_at')->firstOrFail();
+        $level = LearningLevel::where('code', $code)->firstOrFail();
         abort_unless(PracticeUrls::level($level->code) === '/practice/'.$levelSlug, 404);
+        $this->assertLevel($level);
         $breadcrumbs[] = ['title' => $level->title, 'path' => PracticeUrls::level($code)];
         if (! $unitSlug) {
             $units = $level->units()->whereNotNull('published_at')->whereNull('archived_at')->orderBy('sort_order')->orderBy('external_id')->get();
@@ -141,7 +149,7 @@ final class PublicPracticeCatalog
             return [];
         }
         $entries[] = ['path' => '/practice', 'modified' => $this->modified()];
-        foreach (LearningLevel::whereNotNull('published_at')->get() as $level) {
+        foreach (LearningLevel::published()->get() as $level) {
             if (! $this->sessions()->where('level', $level->code)->exists()) {
                 continue;
             }

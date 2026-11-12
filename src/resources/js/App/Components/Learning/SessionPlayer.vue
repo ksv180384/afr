@@ -3,12 +3,15 @@ import { computed, nextTick, onBeforeUnmount, onMounted, provide, ref, watch } f
 import AfrButton from '@/App/Components/Form/AfrButton.vue';
 import AfrCard from '@/App/Components/Card/AfrCard.vue';
 import { assertPlayerAdapter } from '@/App/Learning/playerAdapter.js';
-import { answerComplete, emptyAnswer } from '@/App/Learning/playerUi.js';
+import { answerComplete, emptyAnswer, questionSupport } from '@/App/Learning/playerUi.js';
 import { createAudioPlayer } from '@/App/Learning/audioPlayer.js';
 import { usePracticeFeedback } from '@/App/Learning/usePracticeFeedback.js';
 import PracticeReport from './PracticeReport.vue';
+import ReviewSuggestionCard from './ReviewSuggestionCard.vue';
+import { reviewWordCount } from '@/App/Learning/shortReview.js';
 import FrenchText from './FrenchText.vue';
 import AudioControl from './AudioControl.vue';
+import AudioPreferences from './AudioPreferences.vue';
 import PronunciationNotes from './PronunciationNotes.vue';
 import IntroductionCards from './IntroductionCards.vue';
 import TaskFeedback from './TaskFeedback.vue';
@@ -19,8 +22,8 @@ import WordOrderTask from './Tasks/WordOrderTask.vue';
 import ShortAnswerTask from './Tasks/ShortAnswerTask.vue';
 import PracticeDate from './PracticeDate.vue';
 
-const props = defineProps({ locked: Boolean, timezone: String, adapter: { type: Object, required: true }, audioUrls: { type: Object, default: () => ({}) } });
-const emit = defineEmits(['exit', 'repeat', 'test-next', 'vocabulary']);
+const props = defineProps({ locked: Boolean, timezone: String, routeOwner: Number, routeStore: Object, navigationBusy: Boolean, adapter: { type: Object, required: true }, audioUrls: { type: Object, default: () => ({}) } });
+const emit = defineEmits(['exit', 'repeat', 'review', 'next-lesson', 'test-next', 'vocabulary']);
 const adapter = assertPlayerAdapter(props.adapter);
 const audio = createAudioPlayer({ resolveAsset: (id) => props.audioUrls[id] ?? view.value?.audioUrls?.[id] ?? null });
 provide('practiceAudioPlayer', audio);
@@ -33,11 +36,51 @@ const retry = ref(null);
 const retrying = ref(false);
 let disposed = false;
 const transcriptVisible = ref(false);
+const languageSupportVisible = ref(false);
 const referenceOpen = ref(false);
 const hintOpen = ref(false);
 const audioUnavailable = ref(false);
 const heading = ref(null);
 const isPreview = computed(() => adapter.mode === 'preview');
+const routeResult = ref(null);
+const routeError = ref('');
+const routeLoading = ref(false);
+const lessonFinished = computed(() => view.value?.finished && ['daily','extra'].includes(view.value.kind));
+const loadResultRoute = async () => {
+  if (!props.routeStore || routeLoading.value) return;
+  routeLoading.value = true;
+  routeError.value = '';
+  try {
+    const result = await props.routeStore.refresh(props.routeOwner);
+    if (disposed || !result) return;
+    if (result.home.content_error && !result.home.active_run) throw new Error(result.home.content_error);
+    routeResult.value = result.home;
+  } catch {
+    if (!disposed) routeError.value = 'Не удалось проверить, какой урок доступен дальше.';
+  } finally {
+    if (!disposed) routeLoading.value = false;
+  }
+};
+watch(lessonFinished, finished => { if (finished) loadResultRoute(); });
+
+const reviewFinished = computed(() => view.value?.finished && view.value.kind === 'review');
+const anotherReview = ref(null);
+const anotherReviewError = ref(false);
+const anotherReviewLoading = ref(false);
+const loadAnotherReview = async () => {
+  if (!props.routeStore || anotherReviewLoading.value) return;
+  anotherReviewLoading.value = true;
+  anotherReviewError.value = false;
+  try {
+    const plan = await props.routeStore.loadReviewPlan(props.routeOwner);
+    if (!disposed) anotherReview.value = plan;
+  } catch {
+    if (!disposed) anotherReviewError.value = true;
+  } finally {
+    if (!disposed) anotherReviewLoading.value = false;
+  }
+};
+watch(reviewFinished, finished => { if (finished) loadAnotherReview(); });
 const task = computed(() => view.value?.task);
 const correcting = ref(false);
 const graded = computed(() => Boolean(view.value?.presentation?.first_result));
@@ -46,13 +89,23 @@ const introductory = computed(() => view.value?.started && !view.value.introduct
 const component = computed(() => ({ single_choice: SingleChoiceTask, matching_pairs: MatchingPairsTask, fill_blank: FillBlankTask, word_order: WordOrderTask, short_answer: ShortAnswerTask })[task.value?.type]);
 const ready = computed(() => answerComplete(task.value, draft.value));
 const listening = computed(() => task.value?.skill === 'listening');
-const promptVisible = computed(() => !listening.value || transcriptVisible.value || graded.value);
+const missingAudio = computed(() => listening.value && !task.value?.prompt?.audio);
+const promptVisible = computed(() => !listening.value || transcriptVisible.value || graded.value ||
+  (missingAudio.value && languageSupportVisible.value));
 const referenceIntroductions = computed(() => {
   const introductions = view.value?.introductions.length ? view.value.introductions : [{ id: 'reference', text: 'Выражения для этого вопроса' }];
   return introductions.map(intro => ({ ...intro, vocabulary_ids: [...new Set([...(intro.vocabulary_ids ?? []), ...(task.value?.vocabulary_ids ?? [])])] }));
 });
-const notesFor = (surface) => (task.value?.pronunciation_notes ?? []).filter(({ fr }) => surface.normalize('NFC').includes(fr.normalize('NFC')));
-const visibleNotes = computed(() => notesFor([task.value?.instruction, promptVisible.value ? task.value?.prompt?.text : ''].filter(Boolean).join(' ')));
+const notesFor = (surface) => (task.value?.pronunciation_notes ?? []).filter(({ fr }) => (surface ?? '').normalize('NFC').includes(fr.normalize('NFC')));
+const visibleNotes = computed(() => notesFor([task.value?.instruction,
+  promptVisible.value ? task.value?.prompt?.text : '',
+  listening.value && promptVisible.value ? task.value?.prompt?.audio?.text : '',
+].filter(Boolean).join(' ')));
+const support = computed(() => questionSupport(view.value?.session?.level, task.value, {
+  graded: graded.value, revealed: languageSupportVisible.value, hasNotes: !!visibleNotes.value.length,
+  promptVisible: promptVisible.value && !(listening.value && transcriptVisible.value),
+}));
+const showPromptPronunciation = computed(() => support.value.prompt || (listening.value && transcriptVisible.value));
 const missingMessage = computed(() => task.value?.type === 'matching_pairs' ? 'Составьте все пары, чтобы проверить ответ.'
   : (task.value?.type === 'word_order' ? 'Используйте все карточки, чтобы проверить фразу.'
     : (['short_answer', 'fill_blank'].includes(task.value?.type) && task.value?.input_mode !== 'choice' ? 'Введите ответ, чтобы проверить его.' : 'Выберите ответ, чтобы проверить его.')));
@@ -83,6 +136,7 @@ watch(() => view.value?.presentation?.presentation_id, () => {
   correcting.value = false;
   draft.value = task.value ? (view.value.local_draft || view.value.presentation?.answer ? JSON.parse(JSON.stringify(view.value.local_draft ?? view.value.presentation.answer)) : emptyAnswer(task.value)) : null;
   transcriptVisible.value = false;
+  languageSupportVisible.value = false;
   referenceOpen.value = false;
   hintOpen.value = false;
   audioUnavailable.value = false;
@@ -91,6 +145,7 @@ watch(() => view.value?.presentation?.presentation_id, () => {
 watch(() => view.value, () => {
   if (!view.value?.restore_assistance || !view.value.assistance) return;
   transcriptVisible.value = view.value.assistance.includes('audio_transcript');
+  languageSupportVisible.value = view.value.assistance.includes('language_support');
   referenceOpen.value = view.value.assistance.includes('reference');
   hintOpen.value = view.value.assistance.includes('hint');
 });
@@ -100,9 +155,34 @@ watch(draft, () => {
   }
 }, {deep:true});
 const start = () => perform(() => adapter.start(), focusQuestion);
+const introPositionKey = () => {
+  if (!view.value?.run_id || !view.value.presentation) return null;
+  return `practice-intro:${adapter.mode}:${props.routeOwner ?? 'guest'}:${view.value.run_id}:${view.value.presentation.presentation_id}`;
+};
+const introPage = computed(() => {
+  const key = introPositionKey();
+  if (!key) return 0;
+  try {
+    const index = Number(window.localStorage.getItem(key));
+    return Number.isInteger(index) && index > 0 ? index : 0;
+  } catch {
+    return 0;
+  }
+});
+const rememberIntroPage = index => {
+  const key = introPositionKey();
+  if (!key) return;
+  try { window.localStorage.setItem(key, String(index)); } catch {}
+};
 const continueIntroduction = () => {
   const id = view.value.presentation.presentation_id;
-  return perform(() => adapter.load({ introductionSeen: id }), focusQuestion);
+  const key = introPositionKey();
+  return perform(() => adapter.load({ introductionSeen: id }), () => {
+    if (key && view.value.introduction_seen) {
+      try { window.localStorage.removeItem(key); } catch {}
+    }
+    return focusQuestion();
+  });
 };
 const submit = () => {
   if (!ready.value || (graded.value && !correcting.value) || busy.value) return;
@@ -112,13 +192,21 @@ const submit = () => {
 };
 const sendHelp = (fields, after) => {
   const input = { client_event_id: crypto.randomUUID(), presentation_id: view.value.presentation.presentation_id, ...fields };
-  return perform(() => adapter.help(input), after);
+  return perform(() => adapter.help(input), after ? () => {
+    if (view.value.presentation?.presentation_id !== input.presentation_id) return;
+    const confirmed = isPreview.value ? view.value.presentation.last_result?.event_type === 'help'
+      : view.value.assistance?.includes(fields.help_kind);
+    if (confirmed) after();
+  } : undefined);
 };
-const revealTranscript = () => graded.value ? (transcriptVisible.value = true)
+const revealLanguageSupport = () => sendHelp({ event_type: 'help', help_kind: 'language_support' },
+  () => { languageSupportVisible.value = true; });
+const revealTranscript = () => missingAudio.value ? revealLanguageSupport()
   : sendHelp({ event_type: 'help', help_kind: 'audio_transcript' }, () => { transcriptVisible.value = true; });
 const showReference = () => graded.value ? (referenceOpen.value = true)
   : sendHelp({ event_type: 'help', help_kind: 'reference' }, () => { referenceOpen.value = true; });
-const showHint = () => sendHelp({ event_type: 'help', help_kind: 'hint' }, () => { hintOpen.value = true; });
+const showHint = () => graded.value ? (hintOpen.value = true)
+  : sendHelp({ event_type: 'help', help_kind: 'hint' }, () => { hintOpen.value = true; });
 const unknown = () => { audio.stop(); return sendHelp({ event_type: 'unknown' }); };
 const technicalSkip = () => { audio.stop(); return sendHelp({ event_type: 'technical_skip', reason: 'audio_unavailable' }); };
 const next = () => {
@@ -128,7 +216,7 @@ const next = () => {
   return perform(() => adapter.load({ advanceFrom: id }), focusQuestion);
 };
 const exit = async () => {
-  if (busy.value) return;
+  if (busy.value || props.navigationBusy) return;
   audio.stop();
   if (typeof adapter.saveDraft === 'function' && view.value?.presentation && !view.value.finished && (['account','guest'].includes(adapter.mode) || !graded.value)) {
     await perform(async () => { await adapter.saveDraft({ presentation_id: view.value.presentation.presentation_id, answer: JSON.parse(JSON.stringify(draft.value)) }); return null; },
@@ -139,7 +227,12 @@ defineExpose({prepareAuthentication:async () => {
   if (busy.value) throw new Error('Дождитесь сохранения текущего действия.');
   if (adapter.saveDraft && view.value?.presentation && !view.value.finished) await adapter.saveDraft({presentation_id:view.value.presentation.presentation_id,answer:JSON.parse(JSON.stringify(draft.value))});
 },reload:() => perform(() => adapter.load()),reconcile:() => perform(() => adapter.acceptServerState())});
-onMounted(() => { perform(() => adapter.load()); });
+const loadForPlayback = async () => {
+  const loaded = await adapter.load();
+  if (!loaded.resume || !['account','guest'].includes(adapter.mode) || disposed) return loaded;
+  return {...await adapter.start(), restore_assistance: true};
+};
+onMounted(() => { perform(loadForPlayback); });
 onBeforeUnmount(() => { disposed=true; audio.stop(); });
 </script>
 <template>
@@ -149,14 +242,16 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
       <p role="alert">{{ error }}</p>
     </div>
     <afr-button v-if="retrying && retry" :disabled="busy" @click="retry()">Повторить отправку</afr-button>
+    <afr-button v-if="!view && error" :disabled="busy" @click="exit">К моему пути</afr-button>
     <p v-if="!view && !error" role="status" class="loading-message">Загружаем занятие…</p>
     <template v-if="view">
       <header class="player-header">
         <div><p class="level-label">{{ view.session.level === 'PRE_A1' ? 'С нуля' : view.session.level }} · Около {{ view.session.duration_minutes }} мин</p>
           <h1>{{ view.session.title }}</h1>
         </div>
-        <afr-button :disabled="busy" @click="exit">{{ isPreview ? 'Выйти из предпросмотра' : (view.finished ? 'К списку занятий' : 'Выйти из занятия') }}</afr-button>
+        <afr-button v-if="!view.finished || isPreview" :disabled="busy || navigationBusy" @click="exit">{{ isPreview ? 'Выйти из предпросмотра' : 'Выйти с сохранением' }}</afr-button>
       </header>
+      <audio-preferences v-if="view.started && !view.finished" />
       <p v-if="view.import_meta" class="level-label">Начато до входа · <practice-date :value="view.import_meta.client_started_at || view.import_meta.original_local_date" :timezone="timezone || view.timezone" /></p>
       <p v-else-if="view.started_at" class="level-label">Начато <practice-date :value="view.started_at" :timezone="timezone || view.timezone" /></p>
       <pronunciation-notes v-if="!view.started" :notes="view.session.pronunciation_notes ?? []" />
@@ -165,7 +260,7 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
         <afr-button @click="exit">К выбору занятий</afr-button>
       </afr-card>
       <afr-card v-else-if="view.finished" class="player-card result-card">
-        <h2 ref="heading" tabindex="-1">{{ isPreview ? 'Предпросмотр завершён' : 'Занятие завершено' }}</h2>
+        <h2 ref="heading" tabindex="-1">{{ isPreview ? 'Предпросмотр завершён' : reviewFinished ? 'Повторили ' + reviewWordCount(view.total) : 'Занятие завершено' }}</h2>
         <p class="result-score">Самостоятельно: {{ view.summary.independent_correct_steps }} из {{ view.summary.total_steps }}</p>
         <p v-if="view.summary.technical_skips">Технических пропусков: {{ view.summary.technical_skips }}. Они не являются языковыми ошибками.</p>
         <p v-if="view.finished_at || view.activity_date">Завершено <practice-date :value="view.finished_at || view.activity_date" :timezone="timezone || view.timezone" /></p>
@@ -175,11 +270,32 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
         <p v-if="view.summary.promotion" role="status">Уровень повышен до {{ view.summary.promotion.new_level }}. {{ view.summary.promotion.reason.message }}</p>
         <p v-if="isPreview">Результат относится к этому просмотру. Личный прогресс не изменён.</p>
         <p v-if="view.summary.words_added !== undefined">Добавлено выражений: {{ view.summary.words_added }}. Уже были в словаре: {{ view.summary.words_existing }}.</p>
-        <afr-button class="practice-primary" type="primary" @click="exit">К выбору занятий</afr-button>
+        <div v-if="lessonFinished && routeStore" class="result-next">
+          <p v-if="routeLoading" role="status">Проверяем следующий урок…</p>
+          <template v-else-if="routeError">
+            <p role="status">{{ routeError }}</p>
+            <afr-button :disabled="navigationBusy" @click="loadResultRoute">Проверить снова</afr-button>
+          </template>
+          <template v-else-if="routeResult?.active_run || routeResult?.candidate">
+            <p>{{ (routeResult.active_run ?? routeResult.candidate).title }}</p>
+            <afr-button class="practice-primary" type="primary" :disabled="locked || busy || navigationBusy" @click="emit('next-lesson')">
+              {{ routeResult.active_run ? 'Продолжить начатое' : 'Следующее занятие' }}
+            </afr-button>
+          </template>
+          <p v-else-if="routeResult">На вашем уровне пока нет новых доступных уроков. Можно повторить пройденное.</p>
+        </div>
+        <review-suggestion-card v-if="lessonFinished && routeStore" :suggestion="routeResult?.review_suggestion"
+          :owner="routeOwner" :store="routeStore" :busy="locked || busy || navigationBusy"
+          @start="emit('review', 'suggested')" @dismissed="loadResultRoute" />
+        <afr-button :type="isPreview || reviewFinished ? 'primary' : 'default'" :disabled="busy || navigationBusy" @click="exit">{{ isPreview ? 'К выбору занятий' : 'К моему пути' }}</afr-button>
         <afr-button v-if="!isPreview" @click="emit('vocabulary')">Мой словарь</afr-button>
-        <afr-button v-if="view.has_next_test_block" :disabled="busy || locked" @click="emit('test-next', {continue_run_id:view.run_id})">Следующий блок слов</afr-button>
+        <afr-button v-if="view.has_next_test_block" :disabled="busy || locked || navigationBusy" @click="emit('test-next', {continue_run_id:view.run_id})">Следующий блок слов</afr-button>
         <p v-if="view.self_check_words?.length">Для {{ view.self_check_words.length }} выражений доступна самопроверка в словаре без зачёта.</p>
-        <afr-button v-if="['account','guest'].includes(adapter.mode) && ['daily','extra'].includes(view.kind)" :disabled="locked || busy" @click="emit('repeat', {session_id:view.session.id})">Пройти ещё раз</afr-button>
+        <afr-button v-if="reviewFinished && anotherReview?.total" :disabled="locked || busy || navigationBusy || anotherReviewLoading"
+          @click="emit('review', 'manual')">Ещё {{ reviewWordCount(anotherReview.total) }}</afr-button>
+        <afr-button v-if="reviewFinished && anotherReviewError" :disabled="navigationBusy"
+          @click="loadAnotherReview">Проверить, что ещё можно повторить</afr-button>
+        <afr-button v-if="['account','guest'].includes(adapter.mode) && ['daily','extra'].includes(view.kind)" :disabled="locked || busy || navigationBusy" @click="emit('repeat', {session_id:view.session.id})">Пройти ещё раз</afr-button>
       </afr-card>
       <afr-card v-else-if="!view.started" class="player-card overview-card">
         <h2>Короткое занятие из {{ view.total }} шагов</h2>
@@ -193,39 +309,45 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
           <progress :value="view.position - (graded ? 0 : 1)" :max="view.total" :aria-label="'Пройдено шагов: ' + (view.position - (graded ? 0 : 1)) + ' из ' + view.total" />
         </div>
         <afr-card v-if="introductory" class="player-card">
-          <introduction-cards :introductions="view.introductions" :vocabulary="view.vocabulary" :busy="busy" @complete="continueIntroduction" />
+          <introduction-cards :key="view.presentation.presentation_id" :introductions="view.introductions" :vocabulary="view.vocabulary"
+            :busy="busy" :initial-page="introPage" @page-change="rememberIntroPage" @complete="continueIntroduction" />
         </afr-card>
         <form v-else @submit.prevent="submit">
           <afr-card class="player-card">
             <h2 ref="heading" tabindex="-1" class="question-heading">{{ task.instruction }}</h2>
-            <audio-control v-if="task.prompt?.audio" :key="view.presentation.presentation_id" :audio="task.prompt.audio" @unavailable="audioUnavailable = true" />
+            <audio-control v-if="task.prompt?.audio" :key="view.presentation.presentation_id" :audio="task.prompt.audio" @available="audioUnavailable = false" @unavailable="audioUnavailable = true" />
             <div v-if="promptVisible" class="question-prompt">
-              <french-text v-if="task.prompt?.text_lang === 'fr'" :text="task.prompt.text" :transcription-ru="task.prompt.transcription_ru" />
+              <french-text v-if="task.prompt?.text_lang === 'fr'" :text="task.prompt.text"
+                :show-transcription="showPromptPronunciation"
+                :transcription-ru="task.prompt.transcription_ru || (task.prompt.audio?.text === task.prompt.text ? task.prompt.audio?.transcription_ru : '')" />
               <p v-else-if="task.prompt?.text">{{ task.prompt.text }}</p>
-              <french-text v-if="listening && task.prompt?.audio && (transcriptVisible || graded)" :text="task.prompt.audio.text" :transcription-ru="task.prompt.audio.transcription_ru" />
+              <french-text v-if="listening && task.prompt?.audio?.text && task.prompt.audio.text !== task.prompt.text"
+                :text="task.prompt.audio.text" :transcription-ru="task.prompt.audio.transcription_ru" />
             </div>
-            <div v-if="listening && !transcriptVisible && !graded" class="assistance-link">
+            <div v-if="listening && !promptVisible && (task.prompt?.audio?.text || task.prompt?.text)" class="assistance-link">
               <afr-button :disabled="busy || locked" @click="revealTranscript">Показать текст и произношение</afr-button>
             </div>
-            <pronunciation-notes :notes="visibleNotes" />
+            <pronunciation-notes v-if="showPromptPronunciation" :notes="visibleNotes" />
             <div class="task-controls">
-              <component :is="component" v-if="component && draft" :key="view.presentation.presentation_id" v-model="draft" :task="task" :uid="view.presentation.presentation_id" :disabled="busy || (graded && !correcting) || locked" />
+              <component :is="component" v-if="component && draft" :key="view.presentation.presentation_id" v-model="draft" :task="task" :uid="view.presentation.presentation_id"
+                v-bind="task.type === 'short_answer' ? {} : {showTranscription:support.choices}" :disabled="busy || (graded && !correcting) || locked" />
               <p v-else role="alert">Этот тип задания пока недоступен.</p>
             </div>
-            <div v-if="!graded || correcting" class="help-actions">
+            <div class="help-actions">
+              <afr-button v-if="support.canReveal" :disabled="busy || locked" @click="revealLanguageSupport">Показать произношение</afr-button>
               <afr-button v-if="(task.hint || task.has_hint) && !hintOpen" :disabled="busy || locked" @click="showHint">Подсказка</afr-button>
-              <afr-button v-if="!referenceOpen" :disabled="busy || locked" @click="showReference">Вернуться к справке</afr-button>
+              <afr-button v-if="!referenceOpen" :disabled="busy || locked" @click="showReference">Справка и перевод</afr-button>
             </div>
-            <div v-if="hintOpen && (!graded || correcting)" class="hint-panel"><p>{{ task.hint }}</p><pronunciation-notes :notes="notesFor(task.hint)" /></div>
-            <introduction-cards v-if="referenceOpen && (!graded || correcting)" class="reference-panel" :introductions="referenceIntroductions" :vocabulary="view.vocabulary" reference @close="referenceOpen = false; focusQuestion()" />
+            <div v-if="hintOpen" class="hint-panel"><p>{{ task.hint }}</p><pronunciation-notes :notes="notesFor(task.hint)" /></div>
+            <introduction-cards v-if="referenceOpen" class="reference-panel" :introductions="referenceIntroductions" :vocabulary="view.vocabulary" reference @close="referenceOpen = false; focusQuestion()" />
             <task-feedback v-if="graded && !correcting && result" :task="task" :result="result" />
-            <afr-button v-if="graded && !correcting && !view.presentation.first_result.correct && !view.presentation.first_result.technical_skip" :disabled="busy || locked" @click="correcting = true; draft = emptyAnswer(task)">Попробовать исправить</afr-button>
+            <afr-button v-if="view.kind !== 'review' && graded && !correcting && !view.presentation.first_result.correct && !view.presentation.first_result.technical_skip" :disabled="busy || locked" @click="correcting = true; draft = emptyAnswer(task)">Попробовать исправить</afr-button>
             <p v-if="correcting">Исправление помогает потренироваться и не меняет первый балл.</p>
           </afr-card>
           <div class="player-actions">
             <div v-if="!graded || correcting" class="secondary-actions">
               <afr-button :disabled="busy || locked" @click="unknown">Не знаю — показать решение</afr-button>
-              <afr-button v-if="audioUnavailable && task.prompt?.audio" :disabled="busy || locked" @click="technicalSkip">Пропустить: звук недоступен</afr-button>
+              <afr-button v-if="!graded && (missingAudio || (audioUnavailable && task.prompt?.audio))" :disabled="busy || locked" @click="technicalSkip">Пропустить: звук недоступен</afr-button>
             </div>
             <div class="primary-action">
               <p v-if="(!graded || correcting) && !ready" id="answer-needed" class="answer-needed">{{ missingMessage }}</p>
@@ -240,19 +362,19 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
   </section>
 </template>
 <style scoped>
-.session-player { max-width: 880px; margin: 0 auto; padding: 1.5rem; color: #1e293b; overflow-wrap: anywhere; }
+.session-player { max-width: 820px; margin: 0 auto; padding: var(--player-padding, 1rem); color: var(--practice-ink, #1e293b); overflow-wrap: anywhere; }
 .preview-notice { padding: .75rem 1rem; background: #dbeafe; border: 1px solid #93c5fd; border-radius: .25rem; font-size: .875rem; margin-bottom: 1.25rem; }
-.player-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: .75rem; }
-h1 { font-size: 1.65rem; line-height: 1.35; font-weight: bold; }
+.player-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: .55rem 1rem; margin-bottom: .7rem; }
+h1 { font-size: clamp(1.45rem, 1.15rem + 1.35vw, 2.1rem); line-height: 1.2; font-weight: 750; }
 h2 { font-size: 1.25rem; font-weight: bold; line-height: 1.5; }
 .level-label { color: #475569; font-size: .95rem; margin-bottom: .3rem; }
 .step-progress { margin: 1rem 0 1.25rem; color: #475569; font-size: .95rem; }
 progress { width: 100%; height: .4rem; margin-top: .65rem; accent-color: #19679b; border: 0; }
 progress::-webkit-progress-bar { background: #cbdfee; border-radius: .25rem; }
 progress::-webkit-progress-value { background: #19679b; border-radius: .25rem; }
-.player-card :deep(.body) { padding: 1.5rem; border: 1px solid #bdd3e7; border-radius: .25rem; background: white; }
-.player-header :deep(button) { flex-shrink: 0; }
-.question-heading { margin-bottom: 1rem; scroll-margin-top: 80px; }
+.player-card :deep(.body) { padding: var(--practice-pad, 1.25rem); border: 1px solid var(--practice-border, #bdd3e7); border-radius: var(--practice-radius, .85rem); background: white; }
+.player-header :deep(button) { justify-self: start; }
+.question-heading { margin-bottom: .75rem; scroll-margin-top: 1rem; }
 .question-prompt p { white-space: pre-line; }
 .question-prompt { margin-top: .8rem; display: grid; gap: .75rem; }
 .assistance-link { margin-top: .75rem; }
@@ -270,11 +392,10 @@ progress::-webkit-progress-value { background: #19679b; border-radius: .25rem; }
 .overview-card p, .result-card p { margin: .75rem 0; line-height: 1.6; }
 .overview-card :deep(button), .result-card :deep(button) { margin-top: 1rem; }
 .result-score { font-size: 1.5rem; font-weight: bold; }
+.result-next { padding: .75rem 1rem; margin: 1rem 0; border-radius: var(--practice-control-radius, .5rem); background: var(--practice-accent, #eaf3ff); }
+.result-next :deep(button) { margin-top: .35rem; }
 @media (max-width: 600px) {
-  .session-player { padding: 1rem .75rem; }
-  .player-header { flex-direction: column; }
-  h1 { font-size: 1.4rem; }
-  .player-card :deep(.body) { padding: 1rem .75rem; }
+  .player-header { grid-template-columns: minmax(0, 1fr); }
   .player-actions { flex-direction: column; }
   .primary-action { margin-left: 0; width: 100%; align-items: stretch; }
 }

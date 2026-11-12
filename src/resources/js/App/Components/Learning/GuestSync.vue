@@ -18,8 +18,6 @@ let base;
 let currentRepositories=[];
 let stop;
 let running=false;
-let retryTimer;
-let retryDelay=5000;
 let disposed=false;
 const status=value=>{
   if(value.kind==='syncing' && guestSyncUi.value.kind==='pending') return;
@@ -27,7 +25,6 @@ const status=value=>{
 };
 const run=async (retryRejected=false)=>{
   if(running || !owner.value || !enabled.value || disposed) return;
-  clearTimeout(retryTimer);
   const actor=owner.value;
   running=true;
   try {
@@ -44,10 +41,13 @@ const run=async (retryRejected=false)=>{
     let partial=false; const rejections=[];
     let target=null;
     for(const repository of sources) {
-      const source=await repository.read();
+      let source=await repository.read();
       if(!hasGuestWork(source)) continue;
       if((source.bound_user_id ?? source.sync?.owner_user_id ?? actor)!==actor) continue;
-      if(retryRejected) await repository.mutate((state)=>retryRejectedGuestEvents(state));
+      if(retryRejected) {
+        await repository.mutate((state)=>retryRejectedGuestEvents(state));
+        source=await repository.read();
+      }
       if(!source.outbox.length && !source.return_run_id && !source.return_path && !source.sync?.batches.some((batch)=>batch.status==='pending')) continue;
       worked=true;
       const result=await syncGuestRepository({ownerUserId:actor,repository,accountRepository,transport:accountTransport,getOwner:()=>owner.value,onStatus:status});
@@ -62,7 +62,6 @@ const run=async (retryRejected=false)=>{
       if(repository.temporary && !result.rejected?.length) { clearTemporaryGuest(); repository.syncComplete=true; }
     }
     if(owner.value!==actor) return;
-    retryDelay=5000;
     if(worked) {
       guestSyncRevision.value++;
       if(partial) status({kind:'partial',message:'Часть гостевых данных не перенесена. Они остались в этом браузере.',rejected:rejections});
@@ -72,8 +71,7 @@ const run=async (retryRejected=false)=>{
   } catch(error) {
     const auth=[401,419].includes(error.response?.status) || error.code==='owner_changed';
     if(owner.value===actor) status({kind:auth ? 'auth' : 'pending',
-      message:auth ? 'Войдите в свой аккаунт, чтобы перенести прогресс.' : 'Прогресс остался в этом браузере. Перенесём его автоматически, когда восстановится соединение.'});
-    if(!auth && !disposed) { retryTimer=setTimeout(()=>run(),retryDelay); retryDelay=Math.min(retryDelay*2,60000); }
+      message:auth ? 'Войдите в свой аккаунт, чтобы перенести прогресс.' : 'Прогресс остался в этом браузере. Повторите перенос, когда сервис будет доступен.'});
   } finally {
     running=false;
     for(const repository of currentRepositories) { if(repository.temporary && !repository.syncComplete) rememberTemporaryGuest(await repository.read()); repository.close(); }
@@ -82,7 +80,9 @@ const run=async (retryRejected=false)=>{
   }
 };
 const dismiss=()=>status({kind:'idle',message:''});
-const online=()=>{if(['pending','error','auth','partial'].includes(guestSyncUi.value.kind)) run(guestSyncUi.value.kind==='partial');};
+const canRetry=computed(()=>['pending','partial'].includes(guestSyncUi.value.kind));
+const retry=()=>run(guestSyncUi.value.kind==='partial');
+const online=()=>{if(guestSyncUi.value.kind==='pending') run();};
 const feedback=usePracticeFeedback({
   source:'practice-guest-sync',
   status:computed(()=>enabled.value && guestSyncUi.value.message ? {
@@ -91,6 +91,7 @@ const feedback=usePracticeFeedback({
       ...(['error','auth','partial'].includes(guestSyncUi.value.kind) ? ['Неподтверждённые данные не удалены из браузера.'] : [])].join('\n'),
   } : null),
   actions:computed(()=>[
+    ...(canRetry.value ? [{label:'Повторить перенос',run:retry}] : []),
     ...(guestSyncUi.value.kind==='auth' ? [{label:'Войти в тот же аккаунт',run:()=>router.visit('/login?practice=1')}] : []),
   ]),
 });
@@ -105,7 +106,7 @@ onMounted(()=>{
   },{immediate:true});
   window.addEventListener('online',online);
 });
-onBeforeUnmount(()=>{disposed=true;clearTimeout(retryTimer);stop?.();window.removeEventListener('online',online);base?.close();});
+onBeforeUnmount(()=>{disposed=true;stop?.();window.removeEventListener('online',online);base?.close();});
 </script>
 <template>
   <aside v-if="!feedback.enabled && enabled && guestSyncUi.message" class="guest-sync-notice" role="status" aria-live="polite">
@@ -114,6 +115,7 @@ onBeforeUnmount(()=>{disposed=true;clearTimeout(retryTimer);stop?.();window.remo
     <p v-if="['error','auth','partial'].includes(guestSyncUi.kind)">Неподтверждённые данные не удалены из браузера.</p>
     <div class="actions">
       <a v-if="guestSyncUi.kind === 'auth'" href="/login?practice=1" @click.prevent="router.visit('/login?practice=1')">Войти в тот же аккаунт</a>
+      <afr-button v-if="canRetry" @click="retry">Повторить перенос</afr-button>
       <afr-button v-if="guestSyncUi.kind !== 'syncing'" @click="dismiss">Закрыть</afr-button>
     </div>
   </aside>

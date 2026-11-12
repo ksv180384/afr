@@ -1,4 +1,4 @@
-import contract from './contract.json' assert { type: 'json' };
+import contract from './contract.json' with { type: 'json' };
 
 const freeze = (value) => {
   if (value && typeof value === 'object') {

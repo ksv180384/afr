@@ -20,7 +20,7 @@ beforeEach(function () {
 
 function statusImport($test, bool $catalog = true, bool $incomplete = false, bool $omitRelated = false): array
 {
-    $package = json_decode(file_get_contents(resource_path('learning/templates/pre-a1-u01-examples.json')), true);
+    $package = json_decode(file_get_contents(resource_path('practice/templates/pre-a1-u01-examples.json')), true);
     if ($omitRelated) {
         foreach ($package['sessions'] as &$session) {
             unset($session['public_page']['related_session_ids']);
@@ -99,7 +99,7 @@ it('validates status requests and denies ordinary users all simplified actions',
 });
 
 it('publishes a complete programme without a checklist but still requires its published controls', function () {
-    $package = json_decode(file_get_contents(resource_path('learning/templates/pre-a1-u01-examples.json')), true);
+    $package = json_decode(file_get_contents(resource_path('practice/templates/pre-a1-u01-examples.json')), true);
     foreach ($package['sessions'] as &$session) {
         $session['kind'] = 'checkpoint';
     }

@@ -22,3 +22,16 @@ export const introductionPages = (introductions, vocabulary) => introductions.fl
 export const insertedValue = (value, character, start, end = start) => ({
   value: value.slice(0, start) + character + value.slice(end), caret: start + character.length,
 });
+
+export function questionSupport(level, task, {graded = false, revealed = false, promptVisible = true, hasNotes = false} = {}) {
+  const gradual = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'].includes(level);
+  const showAll = graded || revealed || !gradual;
+  const prompt = showAll || level === 'A1';
+  const choices = showAll;
+  const hasPrompt = promptVisible && (hasNotes ||
+    (task?.prompt?.text_lang === 'fr' && !!task.prompt.transcription_ru));
+  const hasChoices = !!task?.text_before_transcription_ru || !!task?.text_after_transcription_ru ||
+    ['choices', 'tokens', 'left_items', 'right_items'].some(key =>
+      task?.[key]?.some(item => (item.text_lang ?? 'fr') === 'fr' && !!item.transcription_ru));
+  return {prompt, choices, canReveal: (!prompt && hasPrompt) || (!choices && hasChoices)};
+}

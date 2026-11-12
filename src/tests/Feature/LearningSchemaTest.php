@@ -171,14 +171,15 @@ it('preserves pinned runs and vocabulary when publishing and archiving content v
         ->and($run->fresh()->snapshot)->toBe(['fixture' => true])
         ->and($source->fresh()->sessionVersion->status)->toBe(SessionVersionStatus::Archived)
         ->and($old->session->fresh()->activeVersion->id)->toBe($new->id);
-    expect(fn () => $old->delete())->toThrow(LogicException::class);
+    expect(fn () => $old->delete())->toThrow(QueryException::class);
     expect(fn () => LearningSessionVersion::query()->whereKey($old->id)->delete())->toThrow(QueryException::class);
     expect(fn () => $old->session->delete())->toThrow(QueryException::class);
 });
 
 it('guards imported payloads and started snapshots against in-place mutation', function () {
     $version = LearningSessionVersion::factory()->create();
-    expect(fn () => $version->update(['payload' => ['changed' => true]]))->toThrow(LogicException::class);
+    $version->update(['payload' => ['changed' => true]]);
+    expect($version->fresh()->payload)->toBe(['changed' => true]);
     $version = $version->fresh();
     $version->update(['status' => 'reviewed', 'editor_notes' => 'Проверено']);
     expect($version->status)->toBe(SessionVersionStatus::Reviewed);

@@ -3,9 +3,10 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createPreviewAdapter, createTransportAdapter } from '../../resources/js/App/Learning/playerAdapter.js';
 import { createAudioPlayer } from '../../resources/js/App/Learning/audioPlayer.js';
-import { emptyAnswer, answerComplete, introductionPages, insertedValue } from '../../resources/js/App/Learning/playerUi.js';
+import { emptyAnswer, answerComplete, introductionPages, insertedValue, questionSupport } from '../../resources/js/App/Learning/playerUi.js';
 
-const packages = ['pre-a1-u01-examples', 'task-types'].map((name) => JSON.parse(readFileSync(new URL('../../resources/learning/templates/' + name + '.json', import.meta.url))));
+const packages = ['pre-a1-u01-examples', 'task-types'].map((name) => JSON.parse(readFileSync(new URL('../../resources/practice/templates/' + name + '.json', import.meta.url))));
+packages.push({ sessions: [JSON.parse(readFileSync(new URL('../Fixtures/Learning/twelve-task-package.json', import.meta.url))).sessions[0]] });
 let serial = 0;
 const adapterFor = (session) => createPreviewAdapter({ loadSession: async () => session, idFactory: () => 'presentation-' + ++serial });
 const input = (view, extra = {}) => ({ client_event_id: 'event-' + ++serial, presentation_id: view.presentation.presentation_id, ...extra });
@@ -45,6 +46,7 @@ for (const session of packages.flatMap(({ sessions }) => sessions)) {
     view = await adapter.finish();
     assert.equal(view.finished, true);
     assert.equal(view.summary.independent_correct_steps, session.tasks.length);
+    assert.equal(view.summary.score_denominator, session.tasks.length);
     assert.deepEqual(await adapter.finish(), view);
     assert.deepEqual(session, original);
   });
@@ -120,7 +122,7 @@ test('introduction paging and French symbol replacement', () => {
 
 const speechEnv = (voices = []) => {
   let timeout;
-  let listener;
+  const listeners = new Set();
   const utterances = [];
   let cancellations = 0;
   const env = {
@@ -128,13 +130,13 @@ const speechEnv = (voices = []) => {
     SpeechSynthesisUtterance: function (text) { this.text = text; },
     speechSynthesis: {
       getVoices: () => voices,
-      addEventListener: (name, fn) => { listener = fn; },
-      removeEventListener: () => { listener = null; },
+      addEventListener: (name, fn) => { listeners.add(fn); },
+      removeEventListener: (name, fn) => { listeners.delete(fn); },
       speak: (utterance) => { utterances.push(utterance); },
       cancel: () => { cancellations++; utterances.at(-1)?.onerror(); },
     },
   };
-  return { env, utterances, timeout: () => timeout(), voicesChanged: () => listener?.(), cancellations: () => cancellations };
+  return { env, utterances, timeout: () => timeout(), voicesChanged: () => [...listeners].forEach(listener => listener()), cancellations: () => cancellations };
 };
 
 test('French voice only; async voices; slow/replay/stop and late events', () => {
@@ -192,4 +194,64 @@ test('asset failures and stalled playback surface an error', async () => {
   timeout();
   assert.deepEqual(states, ['loading', 'playing', 'error']);
   assert.equal(media.paused, true);
+});
+
+
+test('voice and pace persist and fall back to a French voice without splitting the passage', () => {
+  const voices = [{voiceURI:'en', lang:'en-GB'}, {voiceURI:'fr-ca', lang:'fr-CA'}, {voiceURI:'fr-fr', lang:'fr-FR'}];
+  const fake = speechEnv(voices);
+  const storage = new Map();
+  fake.env.localStorage = {getItem:key => storage.get(key), setItem:(key, value) => storage.set(key, value)};
+  const player = createAudioPlayer({environment: () => fake.env});
+  const notifications = [];
+  const unwatch = player.watchVoices(options => notifications.push(options.map(voice => voice.id)));
+  player.configure({voice:'fr-ca', pace:'deliberate'});
+  const second = createAudioPlayer({environment: () => fake.env});
+  const passage = 'Bonjour ! Comment allez-vous ? Très bien.';
+  second.play({text:passage, lang:'fr-FR'});
+  assert.equal(fake.utterances.length, 1);
+  assert.equal(fake.utterances[0].voice.voiceURI, 'fr-ca');
+  assert.equal(fake.utterances[0].text, passage);
+  assert.equal(fake.utterances[0].rate, 0.8);
+  voices.splice(1, 1);
+  fake.voicesChanged();
+  second.play({text:passage, lang:'fr-FR'}, {slow:true});
+  assert.equal(fake.utterances[1].voice.voiceURI, 'fr-fr');
+  assert.equal(fake.utterances[1].rate, 0.55);
+  unwatch();
+  fake.voicesChanged();
+  assert.deepEqual(notifications, [['fr-ca','fr-fr'], ['fr-fr']]);
+});
+
+test('question support keeps PRE_A1 and legacy defaults and fades progressively', () => {
+  const task = {prompt:{text_lang:'fr',transcription_ru:'бонжур'},choices:[{text_lang:'fr',transcription_ru:'салю'}]};
+  for (const level of ['PRE_A1', undefined]) {
+    assert.deepEqual(questionSupport(level, task), {prompt:true, choices:true, canReveal:false});
+  }
+  assert.deepEqual(questionSupport('A1', task), {prompt:true, choices:false, canReveal:true});
+  for (const level of ['A2','B1']) {
+    assert.deepEqual(questionSupport(level, task), {prompt:false, choices:false, canReveal:true});
+    assert.deepEqual(questionSupport(level, task, {revealed:true}), {prompt:true, choices:true, canReveal:false});
+    assert.deepEqual(questionSupport(level, task, {graded:true}), {prompt:true, choices:true, canReveal:false});
+  }
+  assert.equal(questionSupport('B1', {prompt:task.prompt}, {promptVisible:false}).canReveal, false);
+});
+
+test('language support before an answer costs independence and after grading preserves the first result', async () => {
+  const session = packages[0].sessions[0];
+  const assisted = adapterFor(session);
+  let view = await assisted.start();
+  view = await assisted.help(input(view, {event_type:'help', help_kind:'language_support'}));
+  assert.equal(view.presentation.help_used, true);
+  view = await assisted.answer(input(view, {answer:correct(view.task)}));
+  assert.equal(view.presentation.first_result.correct, true);
+  assert.equal(view.presentation.first_result.score, 0);
+
+  const independent = adapterFor(session);
+  view = await independent.start();
+  view = await independent.answer(input(view, {answer:correct(view.task)}));
+  const first = view.presentation.first_result;
+  view = await independent.help(input(view, {event_type:'help', help_kind:'language_support'}));
+  assert.deepEqual(view.presentation.first_result, first);
+  assert.equal(view.presentation.first_result.score, 1);
 });

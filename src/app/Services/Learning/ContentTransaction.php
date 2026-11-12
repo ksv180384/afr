@@ -19,7 +19,7 @@ final class ContentTransaction
             return DB::transaction(function () use ($actor, $operation): mixed {
                 // Existing fixed rows serialize catalog mutations, including IDs not yet inserted.
                 $levels = LearningLevel::query()->orderBy('id')->lockForUpdate()->get();
-                if ($levels->count() !== count(config('daily_practice.levels'))) {
+                if ($levels->isEmpty()) {
                     throw new ContentOperationException(PracticeErrorCode::Unavailable, 'Справочник уровней не подготовлен.');
                 }
                 $this->access->check($actor);

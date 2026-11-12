@@ -105,7 +105,7 @@ it('serializes distinct tokens for identical versions without creating duplicate
     $results = raceWorkers($this->actor, [['operation' => 'commit', ...$first], ['operation' => 'commit', ...$second]]);
     expect(array_column($results, 'ok'))->toBe([true, true])
         ->and(array_sum(array_map(fn (array $result): int => count($result['receipt']['created_version_ids']), $results)))->toBe(2)
-        ->and(array_sum(array_map(fn (array $result): int => count($result['receipt']['skipped_version_ids']), $results)))->toBe(2)
+        ->and(array_sum(array_map(fn (array $result): int => count($result['receipt']['updated_version_ids']), $results)))->toBe(2)
         ->and(LearningSessionVersion::count())->toBe(2);
 });
 
@@ -116,12 +116,12 @@ it('atomically rejects one of two concurrent conflicting versions', function () 
     $second = racePreview($this->actor, $data);
     $results = raceWorkers($this->actor, [['operation' => 'commit', ...$first], ['operation' => 'commit', ...$second]]);
     expect(count(array_filter($results, fn (array $result): bool => $result['ok'])))->toBe(1)
-        ->and(collect($results)->first(fn (array $result): bool => ! $result['ok'])['code'])->toBe('version_conflict')
+        ->and(collect($results)->first(fn (array $result): bool => ! $result['ok'])['code'])->toBe('revision_conflict')
         ->and(LearningSessionVersion::count())->toBe(2)
         ->and(\App\Models\Learning\LearningCatalogRevision::count())->toBe(2);
 });
 
-it('serializes competing publications and preserves one active version and old run snapshots', function () {
+it('serializes competing published imports and preserves the active session and run snapshot', function () {
     $preview = racePreview($this->actor, racePackage());
     $receipt = app(SessionImportService::class)->commit($this->actor, $preview['batch_id'], $preview['token'], $preview['file_hash']);
     $checks = array_fill_keys(ContentAccess::REVIEW_CHECKS, true);
@@ -134,25 +134,25 @@ it('serializes competing publications and preserves one active version and old r
     }
     app(SessionPublicationService::class)->publishMany($this->actor, $receipt['created_version_ids']);
     $old = LearningSessionVersion::find($receipt['created_version_ids'][0]);
-    $run = \App\Models\Learning\LearningRun::factory()->create(['user_id' => $this->actor->id, 'session_version_id' => $old->id]);
+    $snapshot = $old->payload;
+    $run = \App\Models\Learning\LearningRun::factory()->create([
+        'user_id' => $this->actor->id, 'session_version_id' => $old->id, 'snapshot' => $snapshot,
+    ]);
     $jobs = [];
-    foreach ([2, 3] as $number) {
+    foreach ([' первая редакция', ' вторая редакция'] as $suffix) {
         $data = racePackage();
         unset($data['levels'], $data['units']);
         $data['sessions'] = [$data['sessions'][0]];
-        $data['sessions'][0]['version'] = $number;
-        $data['sessions'][0]['title'] .= ' '.$number;
-        $preview = racePreview($this->actor, $data);
-        $receipt = app(SessionImportService::class)->commit($this->actor, $preview['batch_id'], $preview['token'], $preview['file_hash']);
-        $id = $receipt['created_version_ids'][0];
-        app(SessionPublicationService::class)->review($this->actor, $id, $checks);
-        $jobs[] = ['operation' => 'publish', 'version_id' => $id];
+        $data['sessions'][0]['title'] .= $suffix;
+        $jobs[] = ['operation' => 'commit', ...racePreview($this->actor, $data)];
     }
     $results = raceWorkers($this->actor, $jobs);
-    expect(array_column($results, 'ok'))->toBe([true, true])
+    $accepted = array_values(array_filter($results, fn ($result) => $result['ok']));
+    expect($accepted)->toHaveCount(1)
+        ->and($accepted[0]['receipt']['updated_version_ids'])->toBe([$old->id])
         ->and($old->session->versions()->where('status', 'published')->count())->toBe(1)
-        ->and($run->refresh()->session_version_id)->toBe($old->id)
-        ->and(LearningSession::find($old->session_id)->active_version_id)->toBeIn(array_column($jobs, 'version_id'));
+        ->and($run->refresh()->snapshot)->toBe($snapshot)
+        ->and(LearningSession::find($old->session_id)->active_version_id)->toBe($old->id);
 });
 
 function raceAnswerRun(User $actor): array
@@ -252,7 +252,7 @@ it('serializes competing account answer IDs and returns only one first score', f
     expect(\App\Models\Learning\LearningAttempt::count())->toBe(1);
 });
 
-it('serializes vocabulary successes from two separate runs without losing either increment', function () {
+it('records both simultaneous vocabulary answers and credits only one elapsed interval', function () {
     raceAccountReady($this->actor);
     $snapshot = racePackage()['sessions'][0]['vocabulary'][0];
     $word = \App\Models\Learning\PersonalVocabulary::factory()->create(['user_id' => $this->actor->id, 'lexeme_key' => $snapshot['lexeme_key'], 'snapshot' => $snapshot, 'needs_review' => true]);
@@ -265,10 +265,10 @@ it('serializes vocabulary successes from two separate runs without losing either
     }
     $results = raceWorkers($this->actor, $jobs);
     expect(array_column($results, 'ok'))->toBe([true, true]);
-    expect($word->fresh()->streak)->toBe(2);
-    expect($word->fresh()->review_step)->toBe(2);
+    expect($word->fresh()->streak)->toBe(1);
+    expect($word->fresh()->review_step)->toBe(1);
     expect(\App\Models\Learning\VocabularyEventEffect::count())->toBe(2);
-    expect(\App\Models\Learning\VocabularyRunEffect::where('success_applied', true)->count())->toBe(2);
+    expect(\App\Models\Learning\VocabularyRunEffect::where('success_applied', true)->count())->toBe(1);
 });
 
 it('serializes duplicate guest sync batches and repacked events without a second import or level merge', function (bool $sameBatch) {

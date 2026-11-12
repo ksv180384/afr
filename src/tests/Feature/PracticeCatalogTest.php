@@ -19,7 +19,7 @@ beforeEach(function () {
     $this->withoutVite();
     $this->seed(LearningLevelSeeder::class);
     LearningLevel::where('code', 'PRE_A1')->update(['published_at' => now('UTC'), 'summary' => 'Начните знакомство с французским.']);
-    $data = json_decode(file_get_contents(resource_path('learning/templates/pre-a1-u01-examples.json')), true);
+    $data = json_decode(file_get_contents(resource_path('practice/templates/pre-a1-u01-examples.json')), true);
     $this->unit = LearningUnit::factory()->create(['slug' => $data['units'][0]['slug'], 'published_at' => now('UTC')]);
     $this->sessions = collect($data['sessions'])->map(function ($payload) {
         $session = LearningSession::factory()->create(['external_id' => $payload['id'], 'slug' => $payload['public_page']['slug'], 'unit_id' => $this->unit->id]);
@@ -102,6 +102,56 @@ it('returns 404 for unknown or never published and 410 for removed published mat
     $this->get(PracticeUrls::session($first))->assertStatus(410);
     $this->unit->update(['archived_at' => now('UTC')]);
     $this->get(PracticeUrls::unit($this->unit))->assertStatus(410);
+});
+
+it('hides a topic and its published lessons until an administrator restores it', function () {
+    $session = $this->sessions[0];
+    $unitPath = PracticeUrls::unit($this->unit);
+    $sessionPath = PracticeUrls::session($session);
+    $endpoint = '/admin/daily-practice/catalog/units/'.$this->unit->id.'/visibility';
+    $publishedAt = $this->unit->getRawOriginal('published_at');
+
+    $this->actingAs($this->admin)->postJson($endpoint, ['published' => false])->assertOk();
+    $this->get('/practice/pre-a1')->assertOk()->assertInertia(fn (Assert $page) => $page->has('catalog.cards', 0));
+    $this->get($unitPath)->assertStatus(410);
+    $this->get($sessionPath)->assertStatus(410);
+    $this->getJson(route('daily.content.show', ['session' => $session->external_id]))->assertNotFound();
+    $this->get('/sitemap.xml')->assertOk()->assertDontSee($sessionPath, false);
+    expect($this->unit->fresh()->getRawOriginal('published_at'))->toBe($publishedAt)
+        ->and($session->fresh()->active_version_id)->toBe($session->active_version_id);
+
+    $this->postJson($endpoint, ['published' => true])->assertOk()->assertJsonPath('archived_at', null);
+    $this->get($unitPath)->assertOk();
+    $this->get($sessionPath)->assertOk();
+    $this->get('/sitemap.xml')->assertOk()->assertSee($sessionPath, false);
+});
+
+it('hides a level and restores only its independently published topics', function () {
+    $level = LearningLevel::where('code', 'PRE_A1')->firstOrFail();
+    $session = $this->sessions[0];
+    $unitPath = PracticeUrls::unit($this->unit);
+    $sessionPath = PracticeUrls::session($session);
+    $endpoint = '/admin/daily-practice/catalog/levels/'.$level->id.'/visibility';
+    $draftTopic = LearningUnit::factory()->create(['sort_order' => 90, 'slug' => 'hidden-topic',
+        'published_at' => now('UTC'), 'archived_at' => now('UTC')]);
+
+    $this->actingAs($this->admin)->postJson($endpoint, ['published' => false])->assertOk();
+    $this->postJson($endpoint, ['published' => false])->assertOk();
+    $this->assertDatabaseCount('learning_editorial_events', 1);
+    $this->get('/practice')->assertOk()->assertInertia(fn (Assert $page) => $page
+        ->where('levels', fn ($levels) => ! collect($levels)->contains('code', 'PRE_A1'))
+        ->where('catalog.cards', fn ($cards) => ! collect($cards)->contains('path', '/practice/pre-a1')));
+    foreach (['/practice/pre-a1', $unitPath, $sessionPath] as $path) {
+        $this->get($path)->assertStatus(410);
+    }
+    $this->getJson(route('daily.content.index'))->assertOk()->assertJsonCount(0, 'sessions')
+        ->assertJsonMissing(['id' => 'PRE_A1']);
+    $this->get('/sitemap.xml')->assertOk()->assertDontSee($sessionPath, false);
+
+    $this->postJson($endpoint, ['published' => true])->assertOk()->assertJsonPath('archived_at', null);
+    $this->get($unitPath)->assertOk();
+    $this->get($sessionPath)->assertOk();
+    $this->get(PracticeUrls::unit($draftTopic))->assertStatus(410);
 });
 
 it('keeps lastmod stable on reads and excludes pending material from the public page', function () {
@@ -206,4 +256,41 @@ it('accepts login and logout POST requests from public practice without losing a
     $this->post('/logout')->assertRedirect('/');
     $this->assertGuest();
     $this->get('/practice')->assertOk()->assertInertia(fn (Assert $page) => $page->where('authUser', null));
+});
+
+it('shares a route selection from the public entry with the clean canonical', function () {
+    $query = http_build_query(['level' => 'PRE_A1', 'unit' => $this->unit->external_id]);
+    $this->get('/practice?'.$query)->assertOk()->assertHeader('X-Robots-Tag', 'noindex, follow')
+        ->assertSee('href="http://localhost:5000/practice"', false)
+        ->assertSee('Учиться')->assertSee('Повторять')->assertSee('Мой прогресс')
+        ->assertInertia(fn (Assert $page) => $page->component('Practice/Index')
+            ->where('routeSelection.level', 'PRE_A1')->where('routeSelection.unit', $this->unit->external_id)
+            ->where('accessOutline', []));
+    foreach (['/daily?'.$query => 'Daily/Index', '/daily/vocabulary' => 'Daily/Vocabulary', '/daily/progress' => 'Daily/Index'] as $path => $component) {
+        $this->get($path)->assertOk()->assertHeader('X-Robots-Tag', 'noindex, nofollow')
+            ->assertInertia(fn (Assert $page) => $page->component($component));
+    }
+    expect(LearningRun::count())->toBe(0)->and(LearningProfile::count())->toBe(0);
+});
+
+it('searches published lesson titles without granting access or completion', function () {
+    $first = $this->sessions[0];
+    $second = $this->sessions[1];
+    $search = '/daily/api/route/search?'.http_build_query(['q' => $second->activeVersion->payload['title']]);
+    $reference = fn ($lesson) => '/daily/api/route/reference?'.http_build_query(['path' => PracticeUrls::session($lesson)]);
+
+    $this->getJson($search)->assertUnauthorized();
+    $this->getJson($reference($first))->assertOk()->assertHeader('Cache-Control', 'no-store, private')
+        ->assertJsonMissingPath('tasks')->assertJsonMissingPath('vocabulary');
+    $this->actingAs($this->admin)->getJson($search)->assertOk()
+        ->assertHeader('Cache-Control', 'no-store, private')
+        ->assertJsonPath('items.0.id', $second->external_id)->assertJsonPath('items.0.status', 'locked');
+    $this->getJson($reference($second))->assertNotFound();
+
+    LearningProfile::factory()->create(['user_id' => $this->admin->id, 'current_level' => 'B1']);
+    $this->getJson($search)->assertOk()->assertJsonPath('items.0.status', 'available');
+    $this->getJson($search.'&completed=1')->assertOk()->assertJsonCount(0, 'items');
+    $this->getJson($reference($second))->assertOk()->assertJsonPath('title', $second->activeVersion->payload['title']);
+    $this->getJson('/daily/api/route/reference?path=https://example.com')->assertUnprocessable();
+    expect(LearningRun::count())->toBe(0)->and(LearningProfile::first()->getRawOriginal('current_level'))->toBe('B1');
 });

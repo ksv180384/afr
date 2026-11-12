@@ -25,6 +25,7 @@ class ContentOperationRequest extends FormRequest
             ],
             'changeStatus' => ['version_ids' => ['required', 'array', 'min:1', 'max:100'], 'version_ids.*' => ['required', 'integer', 'min:1', 'distinct'],
                 'status' => ['required', 'in:draft,reviewed,published,archived'], 'notes' => ['sometimes', 'nullable', 'string', 'max:20000']],
+            'setCatalogVisibility' => ['published' => ['required', 'boolean']],
             'publishMany' => ['version_ids' => ['required', 'array', 'min:1', 'max:100'], 'version_ids.*' => ['required', 'integer', 'min:1', 'distinct']],
             'archiveSessions' => ['session_ids' => ['required', 'array', 'min:1', 'max:100'], 'session_ids.*' => ['required', 'integer', 'min:1', 'distinct']],
             default => [],

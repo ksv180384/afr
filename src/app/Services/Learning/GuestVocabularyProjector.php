@@ -12,18 +12,22 @@ class GuestVocabularyProjector
 {
     public function project(GuestSyncEpisode $episode): void
     {
-        $words = PersonalVocabulary::query()->where('user_id', $episode->owner_user_id)->whereIn('id', $episode->created_word_ids ?? [])->get()->keyBy('lexeme_key');
+        $words = PersonalVocabulary::query()->where('user_id', $episode->owner_user_id)->whereIn('id', $episode->created_word_ids ?? [])->lockForUpdate()->get()->keyBy('lexeme_key');
         $eligible = $words->filter(fn ($word) => $word->native_revision === 0);
         if ($eligible->isEmpty()) {
             return;
         }
+        // Existing credits (including those predating the 24-hour rule) are immutable.
+        $recorded = VocabularyEventEffect::whereIn('personal_word_id', $eligible->pluck('id'))->get()
+            ->keyBy(fn ($effect) => $effect->event_id.'|'.$effect->lexeme_key);
+        $lastSuccess = $eligible->map(fn ($word) => VocabularySuccessWindow::latest($word))->all();
         $visible = [];
         $applied = [];
         $success = [];
         $pending = [];
         $runs = [];
         $mappings = $episode->mappings()->where('entity_type', 'event')->with('serverEvent')->get()->sortBy(fn ($row) => $row->receipt['sequence']);
-        $apply = function ($mapping) use (&$visible, &$applied, &$success, $eligible, $episode): void {
+        $apply = function ($mapping) use (&$visible, &$applied, &$success, &$lastSuccess, $recorded, $eligible, $episode): void {
             $event = $mapping->serverEvent;
             if (! $event) {
                 return;
@@ -40,11 +44,13 @@ class GuestVocabularyProjector
                 }
                 $word = $eligible[$key];
                 $at = $event->received_at;
+                $previous = $recorded->get($event->id.'|'.$key);
                 $didApply = false;
                 if ($kind === 'error') {
                     $visible[$key] = [...$visible[$key], 'needs_review' => true, 'errors' => $visible[$key]['errors'] + 1,
                         'streak' => 0, 'review_step' => 0, 'next_review_at' => $at, 'last_reviewed_at' => $at];
-                } elseif ($kind === 'success' && ! isset($success[$event->run_id][$key])) {
+                } elseif ($kind === 'success' && ! isset($success[$event->run_id][$key])
+                    && ($previous ? ($previous->effect['success_applied'] ?? false) : VocabularySuccessWindow::allows($lastSuccess[$key] ?? null, $at))) {
                     $success[$event->run_id][$key] = true;
                     $streak = min(3, $visible[$key]['streak'] + 1);
                     $step = min(5, $visible[$key]['review_step'] + 1);
@@ -53,6 +59,9 @@ class GuestVocabularyProjector
                         'next_review_at' => $at->addDays(VocabularyProgressService::INTERVAL_DAYS[$step - 1]), 'last_reviewed_at' => $at];
                     VocabularyRunEffect::firstOrCreate(['user_id' => $episode->owner_user_id, 'lexeme_key' => $key, 'run_id' => $event->run_id],
                         ['success_applied' => true, 'applied_at' => $at]);
+                    if (! isset($lastSuccess[$key]) || $at->greaterThan($lastSuccess[$key])) {
+                        $lastSuccess[$key] = $at;
+                    }
                     $didApply = true;
                 }
                 VocabularyEventEffect::firstOrCreate(['event_id' => $event->id, 'lexeme_key' => $key], [

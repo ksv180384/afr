@@ -23,6 +23,7 @@ services:
       dockerfile: ./_docker/php/php.dockerfile
     volumes:
       - ./src/:/var/www/afr
+      - ./learning:/var/www/learning
       - ./_docker/php/php.ini:/usr/local/etc/php/php.ini
     command: php-fpm
 

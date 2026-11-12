@@ -10,6 +10,7 @@ export const useOperation = () => {
     failure.value = null;
     try {
       const result = await operation();
+      if (result === null) return null;
       push.success({ title: 'Готово', message: 'Действие выполнено.' });
       if (refresh) router.reload({ preserveScroll: true });
       return result;

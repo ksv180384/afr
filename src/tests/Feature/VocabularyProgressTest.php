@@ -20,7 +20,7 @@ beforeEach(function () {
     $this->seed(LearningLevelSeeder::class);
     $this->learner = User::factory()->create();
     $this->actingAs($this->learner);
-    $this->payload = json_decode(file_get_contents(resource_path('learning/templates/pre-a1-u01-examples.json')), true)['sessions'][0];
+    $this->payload = json_decode(file_get_contents(resource_path('practice/templates/pre-a1-u01-examples.json')), true)['sessions'][0];
     LearningLevel::where('code', 'PRE_A1')->update(['published_at' => now('UTC')]);
     $unit = LearningUnit::factory()->create(['published_at' => now('UTC')]);
     $session = LearningSession::factory()->create(['unit_id' => $unit->id, 'external_id' => $this->payload['id']]);
@@ -63,6 +63,33 @@ function vocabularyWord($test, int $index = 0): PersonalVocabulary
     return $word;
 }
 
+it('preserves vocabulary and review schedules when raising and lowering the profile level', function (bool $hasWords) {
+    if ($hasWords) {
+        vocabularyWord($this)->update([
+            'errors' => 4, 'streak' => 2, 'review_step' => 3,
+            'last_reviewed_at' => now('UTC')->subDay(), 'next_review_at' => now('UTC')->addDays(7),
+        ]);
+    }
+    $words = fn () => PersonalVocabulary::orderBy('id')->get()->map->getRawOriginal()->all();
+    $sources = fn () => PersonalVocabularySource::orderBy('id')->get()->map->getRawOriginal()->all();
+    $beforeWords = $words();
+    $beforeSources = $sources();
+    $revision = 1;
+
+    foreach (['B1', 'PRE_A1'] as $level) {
+        $this->patchJson('/daily/api/profile', vocabularyInput(['current_level' => $level, 'timezone' => 'UTC'], $revision++))
+            ->assertOk()->assertJsonPath('profile.current_level', $level);
+        $this->getJson('/daily/api/vocabulary')->assertOk()->assertJsonPath('pagination.total', $hasWords ? 1 : 0);
+        expect($words())->toBe($beforeWords);
+        expect($sources())->toBe($beforeSources);
+
+        if ($hasWords && $level === 'B1') {
+            $this->postJson('/daily/api/runs', vocabularyInput(['kind' => 'vocabulary_test', 'word_ids' => [PersonalVocabulary::sole()->id]], $revision))
+                ->assertOk()->assertJsonPath('state.kind', 'vocabulary_test');
+        }
+    }
+})->with(['empty dictionary' => false, 'studied words' => true]);
+
 it('adds studied words only at finish and replays accumulated mistakes once without distractors', function () {
     $state = vocabularyStart($this);
     $state = vocabularyCommand($this, $state, 'help', ['presentation_id' => $state['presentation']['presentation_id'], 'event_type' => 'unknown']);
@@ -89,8 +116,10 @@ it('updates existing words immediately, ignores help for streak, and accepts thr
     $state = vocabularyCommand($this, $state, 'help', ['presentation_id' => $state['presentation']['presentation_id'], 'event_type' => 'help', 'help_kind' => 'reference']);
     $state = vocabularyCommand($this, $state, 'answers', ['presentation_id' => $state['presentation']['presentation_id'], 'event_type' => 'answer', 'answer' => ['choice_id' => 'a']]);
     expect($word->fresh()->streak)->toBe(0);
+    expect(\App\Services\Learning\VocabularySuccessWindow::latest($word->fresh()))->toBeNull();
     vocabularyCommand($this, $state, 'finish');
     for ($i = 1; $i <= 3; $i++) {
+        $this->travel(1)->days();
         $state = vocabularyStart($this, ['kind' => 'vocabulary_test', 'session_id' => null, 'word_ids' => [$word->id]]);
         $state = vocabularyCommand($this, $state, 'answers', ['presentation_id' => $state['presentation']['presentation_id'], 'event_type' => 'answer', 'answer' => ['choice_id' => 'a']]);
         expect($word->fresh()->streak)->toBe($i);
@@ -211,7 +240,7 @@ it('matches the guest parity fixture for every interval and a success followed b
         }
         $run = $runs[$entry['run']];
         $event = \App\Models\Learning\LearningAttempt::factory()->create(['run_id' => $run->id, 'user_id' => $this->learner->id, 'presentation_id' => $presentations[$entry['run']]->id,
-            'is_first_answer' => null, 'sequence' => $index + 1, 'received_at' => \Carbon\CarbonImmutable::parse('2026-10-25T12:00:00Z'),
+            'is_first_answer' => null, 'sequence' => $index + 1, 'received_at' => \Carbon\CarbonImmutable::parse($entry['at']),
             'result' => ['assessed_lexemes' => [['lexeme_key' => $word->lexeme_key, 'effect' => $entry['kind']]]]]);
         $service = app(\App\Services\Learning\VocabularyProgressService::class);
         \Illuminate\Support\Facades\DB::transaction(function () use ($service, $run, $event) {
@@ -222,7 +251,7 @@ it('matches the guest parity fixture for every interval and a success followed b
             expect($word->fresh()->$key)->toBe($entry[$key]);
         }
     }
-    expect($word->fresh()->next_review_at->toIso8601String())->toBe('2026-11-24T12:00:00+00:00');
+    expect($word->fresh()->next_review_at->toIso8601String())->toBe('2026-11-30T12:00:00+00:00');
     expect(VocabularyEventEffect::count())->toBe(count($fixture['events']));
 });
 
@@ -261,4 +290,23 @@ it('rolls back newly added words sources and effects when finish fails and retri
     $this->postJson($url, $input)->assertExactJson($receipt);
     $this->assertDatabaseCount('personal_vocabulary', 6);
     $this->assertDatabaseCount('personal_vocabulary_sources', 6);
+});
+
+
+it('keeps two tab runs correct but credits one elapsed-day success across review types', function () {
+    $this->travelTo(\Carbon\Carbon::parse('2026-03-28T23:00:00Z'));
+    $word = vocabularyWord($this);
+    $first = vocabularyStart($this, ['kind' => 'vocabulary_test', 'session_id' => null, 'word_ids' => [$word->id]]);
+    $second = vocabularyStart($this, ['kind' => 'vocabulary_test', 'session_id' => null, 'word_ids' => [$word->id]]);
+    $first = vocabularyCommand($this, $first, 'answers', ['presentation_id' => $first['presentation']['presentation_id'], 'event_type' => 'answer', 'answer' => ['choice_id' => 'a']]);
+    $this->travel(10)->minutes();
+    $request = vocabularyInput(['presentation_id' => $second['presentation']['presentation_id'], 'event_type' => 'answer', 'answer' => ['choice_id' => 'a']], $second['revision']);
+    $receipt = $this->postJson('/daily/api/runs/'.$second['run_id'].'/answers', $request)->assertOk()->json();
+    expect($receipt['state']['presentation']['first_result']['score'])->toBe(1);
+    expect($word->fresh()->review_step)->toBe(1);expect($word->fresh()->streak)->toBe(1);
+    $this->travelTo(\Carbon\Carbon::parse('2026-03-29T23:00:00Z'));
+    $this->postJson('/daily/api/runs/'.$second['run_id'].'/answers', $request)->assertExactJson($receipt);
+    $next = vocabularyStart($this, ['kind' => 'vocabulary_test', 'session_id' => null, 'word_ids' => [$word->id]]);
+    vocabularyCommand($this, $next, 'answers', ['presentation_id' => $next['presentation']['presentation_id'], 'event_type' => 'answer', 'answer' => ['choice_id' => 'a']]);
+    expect($word->fresh()->review_step)->toBe(2);expect($word->fresh()->streak)->toBe(2);
 });

@@ -56,6 +56,34 @@ final class CatalogPublicationService
         });
     }
 
+    public function setVisibility(User $actor, string $kind, int $id, bool $published): LearningUnit|LearningLevel
+    {
+        return $this->transaction->run($actor, function () use ($actor, $kind, $id, $published): LearningUnit|LearningLevel {
+            $target = match ($kind) {
+                'levels' => LearningLevel::query()->findOrFail($id),
+                'units' => LearningUnit::query()->findOrFail($id),
+            };
+            if ($target->published_at === null) {
+                throw new ContentOperationException(PracticeErrorCode::RevisionConflict, 'Сначала опубликуйте редакцию.');
+            }
+            if (($target->archived_at === null) === $published) {
+                return $target;
+            }
+
+            $before = $target->only(['id', 'published_at', 'archived_at']);
+            $target->update(['archived_at' => $published ? null : now('UTC')]);
+            $this->access->audit(
+                $actor,
+                $published ? 'catalog_restore' : 'catalog_unpublish',
+                [],
+                [...$before, 'kind' => $kind],
+                [...$target->only(['id', 'published_at', 'archived_at']), 'kind' => $kind],
+            );
+
+            return $target;
+        });
+    }
+
     public function publish(User $actor, int $id, bool $requireReview = true): LearningCatalogRevision
     {
         return $this->transaction->run($actor, function () use ($actor, $id, $requireReview): LearningCatalogRevision {
@@ -79,7 +107,7 @@ final class CatalogPublicationService
             $target->fill([
                 'title' => $content['title'], 'summary' => $content['summary'],
                 'learning_outcomes' => $content['learning_outcomes'], 'pronunciation_notes' => $content['pronunciation_notes'] ?? [],
-                'revision' => $target->revision + 1, 'published_at' => now('UTC'),
+                'revision' => $target->revision + 1, 'published_at' => now('UTC'), 'archived_at' => null,
                 ...($revision->unit_id ? ['slug' => $content['slug'], 'sort_order' => $content['order']] : []),
             ])->save();
             $revision->update(['status' => 'published', 'published_by' => $actor->id, 'published_at' => now('UTC')]);

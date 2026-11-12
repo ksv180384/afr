@@ -18,7 +18,7 @@ beforeEach(function () {
     $this->withoutVite();
     $this->seed(LearningLevelSeeder::class);
     $this->learner = User::factory()->create();
-    $package = json_decode(file_get_contents(resource_path('learning/templates/pre-a1-u01-examples.json')), true);
+    $package = json_decode(file_get_contents(resource_path('practice/templates/pre-a1-u01-examples.json')), true);
     LearningLevel::where('code', 'PRE_A1')->update(['published_at' => now('UTC')]);
     $unit = LearningUnit::factory()->create(['external_id' => $package['units'][0]['id'], 'sort_order' => 1, 'published_at' => now('UTC')]);
     $this->versions = [];
@@ -307,4 +307,145 @@ it('refuses to reset an active daily assignment on the same level', function () 
     $this->postJson('/daily/api/runs', accountInput(1, ['kind' => 'daily', 'replace_assignment' => true]))->assertUnprocessable();
     expect(LearningRun::count())->toBe(1);
     expect(DailyAssignment::sole()->selected_run_id)->toBe($run['run_id']);
+});
+
+
+it('keeps an unfinished six-task snapshot and completes a new twelve-task run including late help and resume', function () {
+    $old = accountStart($this);
+    $oldSnapshot = LearningRun::findOrFail($old['run_id'])->snapshot;
+    $payload = json_decode(file_get_contents(base_path('tests/Fixtures/Learning/twelve-task-package.json')), true)['sessions'][0];
+    $this->versions[0]->update(['payload' => $payload, 'checksum' => CanonicalJson::hash($payload)]);
+    $loaded = $this->getJson('/daily/api/runs/'.$old['run_id'])->assertOk()->json();
+    expect($loaded['total'])->toBe(6)->and(LearningRun::find($old['run_id'])->snapshot)->toBe($oldSnapshot);
+    $old = accountCommand($this, accountComplete($this, $loaded), 'finish');
+    expect($old['summary']['score_denominator'])->toBe(6);
+    $state = accountStart($this, ['kind' => 'extra', 'session_id' => $payload['id']]);
+    expect($state['total'])->toBe(12);
+    foreach ($payload['tasks'] as $index => $task) {
+        expect($state['position'])->toBe($index + 1)->and($state['task']['id'])->toBe($task['id']);
+        if ($state['introductions']) {
+            $state = accountCommand($this, $state, 'introduction', ['presentation_id' => $state['presentation']['presentation_id']]);
+        }
+        if ($index === 8) {
+            $state = accountCommand($this, $state, 'help', ['presentation_id' => $state['presentation']['presentation_id'], 'event_type' => 'help', 'help_kind' => 'audio_transcript']);
+            $state = $this->getJson('/daily/api/runs/'.$state['run_id'])->assertOk()->json();
+            expect($state['task']['id'])->toBe('Q09')->and($state['presentation']['help_used'])->toBeTrue();
+        }
+        if ($index === 9) {
+            $state = accountCommand($this, accountCommand($this, $state, 'pause'), 'resume');
+            expect($state['position'])->toBe(10)->and($state['total'])->toBe(12);
+        }
+        $answer = match ($task['type']) {
+            'single_choice' => ['choice_id' => $task['correct_choice_id']],
+            'matching_pairs' => ['pairs' => array_map(fn (array $pair): array => ['left_id' => $pair['left_id'], 'right_id' => $pair['right_id']], $task['correct_pairs'])],
+            'word_order' => ['token_ids' => $task['accepted_orders'][0]],
+            'fill_blank' => $task['input_mode'] === 'choice' ? ['choice_id' => $task['correct_choice_id']] : ['value' => $task['accepted_answers'][0]],
+            'short_answer' => ['value' => $task['accepted_answers'][0]],
+        };
+        $state = accountCommand($this, $state, 'answers', ['presentation_id' => $state['presentation']['presentation_id'], 'event_type' => 'answer', 'answer' => $answer]);
+        if ($index < 11) {
+            $state = accountCommand($this, $state, 'advance', ['presentation_id' => $state['presentation']['presentation_id']]);
+        }
+    }
+    $state = accountCommand($this, $state, 'finish');
+    expect($state['finished'])->toBeTrue()
+        ->and($state['summary']['processed_steps'])->toBe(12)
+        ->and($state['summary']['score_denominator'])->toBe(12)
+        ->and($state['summary']['score_numerator'])->toBe(11)
+        ->and(LearningRun::find($old['run_id'])->snapshot)->toBe($oldSnapshot);
+});
+
+
+it('keeps short review blocks below the ordinary lesson minimum', function (int $count) {
+    foreach (array_slice($this->versions[0]->payload['vocabulary'], 0, $count) as $word) {
+        \App\Models\Learning\PersonalVocabulary::factory()->create([
+            'user_id' => $this->learner->id, 'lexeme_key' => $word['lexeme_key'],
+            'snapshot' => $word, 'next_review_at' => now('UTC')->subDay(),
+        ]);
+    }
+    $state = accountStart($this, ['kind' => 'review']);
+    expect($state['total'])->toBe($count);
+    $finished = accountCommand($this, accountComplete($this, $state), 'finish');
+    expect($finished['finished'])->toBeTrue()->and($finished['summary']['score_denominator'])->toBe($count);
+})->with([1, 2, 3]);
+
+it('gives an unfinished extra run priority over the completed daily assignment', function () {
+    $first = accountStart($this);
+    $finished = accountCommand($this, accountComplete($this, $first), 'finish');
+    $this->getJson('/daily/api/today')->assertJsonPath('active_run', null)->assertJsonPath('candidate.id', 'PRE_A1-U01-L02');
+    $extra = accountStart($this, ['kind' => 'extra', 'session_id' => 'PRE_A1-U01-L02']);
+    $this->getJson('/daily/api/today')->assertOk()
+        ->assertJsonPath('run.id', $finished['run_id'])
+        ->assertJsonPath('active_run.id', $extra['run_id'])
+        ->assertJsonPath('route.lessons.0.status', 'completed')
+        ->assertJsonPath('route.lessons.1.status', 'active');
+});
+
+it('rejects a start from a cached profile after the authenticated owner changes', function () {
+    $this->postJson('/daily/api/runs', accountInput(1, ['kind' => 'daily', 'expected_owner_user_id' => $this->learner->id + 1]))->assertForbidden();
+    $this->assertDatabaseCount('learning_runs', 0);
+    $this->assertDatabaseCount('learning_profiles', 0);
+});
+
+it('opens the active run for a route start and preserves its pinned first step on resume', function () {
+    $first = accountStart($this, ['route_start' => true]);
+    $this->getJson('/daily/api/runs/'.$first['run_id'])->assertOk()
+        ->assertJsonPath('presentation.presentation_id', $first['presentation']['presentation_id'])
+        ->assertJsonPath('introduction_seen', false);
+    $paused = accountCommand($this, $first, 'pause');
+    $operation = accountInput(1, ['kind' => 'extra', 'session_id' => 'PRE_A1-U01-L02', 'route_start' => true]);
+    $this->postJson('/daily/api/runs', $operation)->assertOk()
+        ->assertJsonPath('state.run_id', $first['run_id'])->assertJsonPath('state.status', 'paused');
+    $this->postJson('/daily/api/runs', $operation)->assertOk()
+        ->assertJsonPath('state.run_id', $first['run_id'])->assertJsonPath('accepted_event_id', $operation['client_event_id']);
+    $resumed = accountCommand($this, $paused, 'resume');
+    expect($resumed['presentation']['presentation_id'])->toBe($first['presentation']['presentation_id'])
+        ->and($resumed['introductions'])->toBe($first['introductions'])
+        ->and($resumed['introduction_seen'])->toBeFalse();
+    $this->assertDatabaseCount('learning_runs', 1);
+});
+
+it('only creates the next or repeated route lesson after an explicit start', function () {
+    $first = accountStart($this, ['route_start' => true]);
+    accountCommand($this, accountComplete($this, $first), 'finish');
+    $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('candidate.id', 'PRE_A1-U01-L02');
+    $this->assertDatabaseCount('learning_runs', 1);
+
+    $input = accountInput(1, ['kind' => 'daily', 'route_start' => true]);
+    $next = $this->postJson('/daily/api/runs', $input)->assertOk()->assertJsonPath('state.session.id', 'PRE_A1-U01-L02')->json('state');
+    $this->postJson('/daily/api/runs', $input)->assertOk()->assertJsonPath('state.run_id', $next['run_id']);
+    accountCommand($this, accountComplete($this, $next), 'finish');
+    $profile = $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('candidate', null)->json('profile');
+    $this->postJson('/daily/api/runs', accountInput($profile['revision'], ['kind' => 'daily', 'route_start' => true]))->assertNotFound();
+    $this->assertDatabaseCount('learning_runs', 2);
+
+    $repeat = $this->postJson('/daily/api/runs', accountInput($profile['revision'], [
+        'kind' => 'extra', 'route_start' => true, 'session_id' => 'PRE_A1-U01-L01',
+    ]))->assertOk()->json('state');
+    expect($repeat['session']['id'])->toBe('PRE_A1-U01-L01')->and($repeat['run_id'])->not->toBe($first['run_id']);
+    $this->assertDatabaseCount('learning_runs', 3);
+});
+
+
+it('persists pronunciation help for the current question and leaves a graded answer intact', function () {
+    $run = accountStart($this);
+    $event = ['presentation_id' => $run['presentation']['presentation_id'], 'event_type' => 'help', 'help_kind' => 'language_support'];
+    $helped = accountCommand($this, $run, 'help', $event);
+    expect($helped['presentation']['help_used'])->toBeTrue();
+    $this->getJson('/daily/api/runs/'.$run['run_id'])->assertOk()->assertJsonPath('assistance', ['language_support']);
+    $graded = accountCommand($this, $helped, 'answers', [
+        'presentation_id' => $event['presentation_id'], 'event_type' => 'answer',
+        'answer' => ['choice_id' => $this->versions[0]->payload['tasks'][0]['correct_choice_id']],
+    ]);
+    expect($graded['presentation']['first_result'])->toMatchArray(['correct' => true, 'score' => 0]);
+
+    $fresh = accountStart($this, ['kind' => 'extra', 'session_id' => $this->versions[0]->payload['id']]);
+    $wrong = accountCommand($this, $fresh, 'answers', [
+        'presentation_id' => $fresh['presentation']['presentation_id'], 'event_type' => 'answer',
+        'answer' => ['choice_id' => collect($this->versions[0]->payload['tasks'][0]['choices'])
+            ->firstWhere('id', '!=', $this->versions[0]->payload['tasks'][0]['correct_choice_id'])['id']],
+    ]);
+    $after = accountCommand($this, $wrong, 'help', [...$event, 'presentation_id' => $fresh['presentation']['presentation_id']]);
+    expect($after['presentation']['first_result'])->toBe($wrong['presentation']['first_result'])
+        ->and($after['presentation']['help_used'])->toBeFalse();
 });

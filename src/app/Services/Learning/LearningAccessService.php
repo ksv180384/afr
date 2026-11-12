@@ -22,7 +22,7 @@ final class LearningAccessService
                 'payload->title as access_title', 'payload->prerequisite_ids as access_prerequisites')])
             ->orderBy('sort_order')->orderBy('external_id')->get()->groupBy('unit_id');
 
-        return LearningLevel::query()->orderBy('sort_order')->get()->map(fn ($level) => [
+        return LearningLevel::query()->whereNull('archived_at')->orderBy('sort_order')->get()->map(fn ($level) => [
             'id' => $level->code, 'title' => $level->title, 'path' => PracticeUrls::level($level->code),
             'published' => $level->published_at !== null, 'has_curriculum' => in_array($level->code, $curricula, true),
             'units' => $units->filter(fn ($unit) => $unit->getRawOriginal('level') === $level->code)->values()->map(fn ($unit) => [
@@ -131,12 +131,12 @@ final class LearningAccessService
 
         return ['total' => count($ids), 'completed' => count(array_intersect($ids, array_unique($completed))),
             'complete' => $ready && array_diff($ids, $completed) === [],
-            'next_level' => \App\Enums\Learning\LearningLevel::from($level)->next()?->value];
+            'next_level' => AvailableLevels::next($level)];
     }
 
     public function profileLevel(User $actor): string
     {
-        return LearningProfile::query()->where('user_id', $actor->id)->first()?->getRawOriginal('current_level') ?? 'PRE_A1';
+        return LearningProfile::query()->where('user_id', $actor->id)->first()?->getRawOriginal('current_level') ?? AvailableLevels::first();
     }
 
     public function decorate(array $catalog, array $states): array

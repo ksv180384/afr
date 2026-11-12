@@ -50,7 +50,7 @@ class VocabularyProgressService
                 $word->fill(['needs_review' => true, 'errors' => $word->errors + 1, 'streak' => 0, 'review_step' => 0, 'next_review_at' => $at, 'last_reviewed_at' => $at])->save();
             } elseif ($kind === 'success') {
                 $runEffect = VocabularyRunEffect::firstOrCreate(['user_id' => $run->user_id, 'lexeme_key' => $key, 'run_id' => $run->id], ['success_applied' => false]);
-                if (! $runEffect->success_applied) {
+                if (! $runEffect->success_applied && VocabularySuccessWindow::allows(VocabularySuccessWindow::latest($word), $at)) {
                     $step = min(count(self::INTERVAL_DAYS), $word->review_step + 1);
                     $streak = min(3, $word->streak + 1);
                     $word->fill(['streak' => $streak, 'review_step' => $step, 'needs_review' => $streak >= 3 ? false : $word->needs_review,

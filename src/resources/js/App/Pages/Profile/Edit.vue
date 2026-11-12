@@ -1,4 +1,5 @@
 <script setup>
+import ReviewSuggestionSetting from '@/App/Components/Learning/ReviewSuggestionSetting.vue';
 import CurrentLevelSetting from '@/App/Components/Learning/CurrentLevelSetting.vue';
 import { computed, onMounted, ref } from 'vue';
 import { browserTimezone, timezoneLabel } from '@/App/Learning/practiceTime.js';
@@ -70,6 +71,16 @@ const submitForm = () => {
   form.patch(route('profile.update'));
 }
 
+const updateAvatar = ({ avatar, avatar_link }) => {
+  for (const user of [page.props.user, page.props.authUser, page.props.auth?.user]) {
+    if (user) {
+      user.avatar = avatar;
+      user.avatar_link = avatar_link;
+    }
+  }
+  page.props.errors.avatar = null;
+}
+
 const uploadAvatar = async (image) => {
 
   isUploadingAvatar.value = true;
@@ -78,9 +89,7 @@ const uploadAvatar = async (image) => {
     formData.append('avatar', image);
     const res = await api.user.uploadAvatar(formData);
 
-    page.props.user.avatar = res.data.avatar;
-    page.props.user.avatar_link = res.data.avatar_link;
-    page.props.errors.avatar = null;
+    updateAvatar(res.data);
   } catch (e) {
     console.error(e);
     page.props.errors.avatar = e.response.data.errors.avatar;
@@ -95,9 +104,7 @@ const removeAvatar = async () => {
 
     const res = await api.user.removeAvatar();
 
-    page.props.user.avatar = res.data.avatar;
-    page.props.user.avatar_link = res.data.avatar_link;
-    page.props.errors.avatar = null;
+    updateAvatar(res.data);
   } catch (e) {
     console.error(e);
     page.props.errors.avatar = e.response.data.errors.avatar;
@@ -123,6 +130,7 @@ const removeAvatar = async () => {
 
     <div class="profile-content bg-blue-50 p-4 rounded flex-1">
       <current-level-setting v-if="page.props.daily_practice_enabled" :auth-user="authUser" />
+      <review-suggestion-setting v-if="page.props.daily_practice_enabled" :auth-user="authUser" />
       <afr-tabs v-model="tabActive" class="profile-tabs">
         <afr-tab-plane label="Профиль" name="profile" class="py-4">
 

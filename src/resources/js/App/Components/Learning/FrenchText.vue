@@ -1,11 +1,13 @@
 <script setup>
-defineProps({ text: { type: String, required: true }, transcriptionRu: { type: String, default: '' }, translation: { type: [String, Array], default: null }, compact: Boolean });
+defineProps({ text: { type: String, required: true }, transcriptionRu: { type: String, default: '' }, translation: { type: [String, Array], default: null }, showTranscription: { type: Boolean, default: true }, compact: Boolean });
 </script>
 <template>
   <span class="french-material" :class="{ compact }">
     <span lang="fr" class="french-line">{{ text }}</span>
-    <span v-if="transcriptionRu" lang="ru" class="transcription-line">{{ transcriptionRu }}</span>
-    <span v-else-if="text.trim()" class="transcription-missing">Произношение не подготовлено</span>
+    <template v-if="showTranscription">
+      <span v-if="transcriptionRu" lang="ru" class="transcription-line">{{ transcriptionRu }}</span>
+      <span v-else-if="text.trim()" class="transcription-missing">Произношение не подготовлено</span>
+    </template>
     <span v-if="translation" lang="ru" class="translation-line">{{ Array.isArray(translation) ? translation.join(' / ') : translation }}</span>
   </span>
 </template>

@@ -96,7 +96,7 @@ it('keeps opt-in settings cacheable without conflating content targets and limit
             ->and(eval('return '.var_export($config, true).';'))->toBe($config)
             ->and($config['content_targets']['sessions_per_level'] * count(LearningLevel::cases()))->toBe($config['content_targets']['total_sessions'])
             ->and($config['import']['max_bytes'])->toBe(10485760)
-            ->and($config['session'])->toBe(['min_tasks' => 6, 'max_tasks' => 8])
+            ->and($config['session'])->toBe(['min_tasks' => 6, 'max_tasks' => 12])
             ->and($config['vocabulary_test']['max_words'])->toBe(10)
             ->and($config['additional_review'])->toBe(['min_words' => 1, 'max_words' => 3])
             ->and($config['review']['interval_days'])->toBe([1, 3, 7, 14, 30])

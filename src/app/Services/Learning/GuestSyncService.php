@@ -49,6 +49,7 @@ class GuestSyncService
 
                     return $previous->receipt;
                 }
+                $reviewSnoozeApplied = app(ReviewSuggestionSettings::class)->mergeGuestSnooze($actor, $input['review_snooze'] ?? null);
                 $accepted = [];
                 $rejected = [];
                 $mapping = [];
@@ -60,7 +61,7 @@ class GuestSyncService
                             if ($this->ledger->previous($episode, $event)) {
                                 return;
                             }
-                            Validator::make($event, ['action' => 'required|in:level_selection', 'current_level' => 'required|in:PRE_A1,A1,A2,B1,B2,C1,C2', 'timezone' => 'required|timezone:all'])->validate();
+                            Validator::make($event, ['action' => 'required|in:level_selection', 'current_level' => 'required|in:'.implode(',', array_column(AvailableLevels::choices(), 'code')), 'timezone' => 'required|timezone:all'])->validate();
                             if ($event['client_event_id'] !== $activeLevelId) {
                                 $this->ledger->record($episode, $event, ['receipt' => ['applied' => false]]);
 
@@ -115,7 +116,7 @@ class GuestSyncService
                 $episode->update(['status' => $rejected ? 'partial' : 'completed', 'completed_at' => $rejected ? null : PracticeTime::now()]);
                 $receipt = ['owner_user_id' => $actor->id, 'guest_id' => $episode->guest_id, 'episode_id' => $episode->id, 'batch_id' => $input['batch_id'],
                     'accepted' => array_values(array_unique($accepted)), 'rejected' => $rejected, 'mapping' => $mapping,
-                    'profile' => app(AccountRunService::class)->profile($actor)];
+                    'review_snooze_applied' => $reviewSnoozeApplied, 'profile' => app(AccountRunService::class)->profile($actor)];
                 GuestSyncBatch::create(['episode_id' => $episode->id, 'guest_id' => $episode->guest_id, 'owner_user_id' => $actor->id, 'batch_id' => $input['batch_id'],
                     'payload_hash' => $hash, 'status' => $episode->status, 'accepted' => $receipt['accepted'], 'rejected' => $rejected, 'receipt' => $receipt, 'received_at' => PracticeTime::now(), 'completed_at' => PracticeTime::now()]);
 

@@ -14,7 +14,7 @@ beforeEach(function () {
     config(['daily_practice.enabled' => true]);
     $this->withoutVite();
     $this->seed(LearningLevelSeeder::class);
-    $package = json_decode(file_get_contents(resource_path('learning/templates/pre-a1-u01-examples.json')), true);
+    $package = json_decode(file_get_contents(resource_path('practice/templates/pre-a1-u01-examples.json')), true);
     LearningLevel::where('code', 'PRE_A1')->update(['published_at' => now('UTC')]);
     $this->unit = LearningUnit::factory()->create(['external_id' => $package['units'][0]['id'], 'sort_order' => 1, 'published_at' => now('UTC')]);
     $this->sessions = [];
@@ -70,4 +70,13 @@ it('keeps account endpoints protected while guests read public teaching snapshot
     $this->get('/daily/api/content')->assertOk();
     $this->actingAs(User::factory()->create())->get('/daily/guest/20000000-0000-4000-8000-000000000001')->assertOk()
         ->assertInertia(fn (Assert $page) => $page->where('runId', null)->where('authUser.id', auth()->id()));
+});
+
+
+it('serves all twelve guest tasks without truncation or creating progress', function () {
+    $payload = json_decode(file_get_contents(base_path('tests/Fixtures/Learning/twelve-task-package.json')), true)['sessions'][0];
+    $this->sessions[0]->activeVersion->update(['payload' => $payload, 'checksum' => CanonicalJson::hash($payload)]);
+    $this->getJson('/daily/api/content/'.$payload['id'])->assertOk()->assertJsonCount(12, 'snapshot.tasks')
+        ->assertJsonPath('snapshot.tasks.11.id', 'Q12')->assertJsonPath('snapshot.version', 1);
+    expect(LearningRun::count())->toBe(0);
 });

@@ -16,6 +16,9 @@ class VocabularyTestService
         if (($filter['filter'] ?? '') === 'errors') {
             $query->where('needs_review', true);
         }
+        if (($filter['filter'] ?? '') === 'due') {
+            $query->where('next_review_at', '<=', PracticeTime::now());
+        }
         if (! empty($filter['source_session'])) {
             $query->whereHas('sources.sessionVersion.session', fn ($source) => $source->where('external_id', $filter['source_session']));
         }
@@ -62,8 +65,8 @@ class VocabularyTestService
     {
         $sources = $word->sources->sort(function ($a, $b) {
             return ($b->first_added_at <=> $a->first_added_at)
-                ?: strcmp($a->sessionVersion->session->external_id, $b->sessionVersion->session->external_id)
-                ?: ($a->sessionVersion->version <=> $b->sessionVersion->version);
+                ?: strcmp($a->sessionVersion?->session?->external_id ?? '', $b->sessionVersion?->session?->external_id ?? '')
+                ?: (($a->sessionVersion?->version ?? 0) <=> ($b->sessionVersion?->version ?? 0));
         });
         foreach ($sources as $source) {
             if ($this->items($source->snapshot)) {
@@ -71,12 +74,12 @@ class VocabularyTestService
             }
         }
 
-        return $sources->isEmpty() ? $word->snapshot : ($sources->first()?->snapshot ?? $word->snapshot);
+        return $sources->isEmpty() || $this->items($word->snapshot) ? $word->snapshot : ($sources->first()?->snapshot ?? $word->snapshot);
     }
 
     public function items(array $source): array
     {
-        return array_values(array_filter($source['review_items'] ?? [], fn ($item) => in_array($item['type'] ?? '', ['single_choice', 'short_answer'], true)));
+        return ShortReviewSelection::items($source);
     }
 
     public function data(PersonalVocabulary $word): array
@@ -120,9 +123,83 @@ class VocabularyTestService
         return $sorted->take($limit);
     }
 
+    private function shortContext(User $actor): array
+    {
+        $profile = app(AccountRunService::class)->profile($actor);
+        $runs = \App\Models\Learning\LearningRun::where('user_id', $actor->id)->where('kind', 'review')->orderByDesc('started_at')->orderByDesc('id')->get();
+        $previousKeys = []; $previousKinds = []; $done = false; $finished = false;
+        foreach ($runs as $index => $run) {
+            $snapshot = $run->snapshot;
+            $items = $snapshot['items'] ?? [];
+            foreach ($items as $item) {
+                $key = $item['review_lexeme_key'] ?? null;
+                if (! $key) { continue; }
+                if ($index === 0) { $previousKeys[] = $key; }
+                if (! isset($previousKinds[$key])) {
+                    $source = collect($snapshot['vocabulary'] ?? [])->firstWhere('lexeme_key', $key) ?? [];
+                    $previousKinds[$key] = ShortReviewSelection::category($item['task'], $source);
+                }
+            }
+            $result = $run->result ?? [];
+            if ($run->status->value === 'completed' && count($items) >= 1 && count($items) <= 3 && $run->finished_at
+                && PracticeTime::localDate($run->finished_at, $profile['timezone']) === PracticeTime::localDate(PracticeTime::now(), $profile['timezone'])
+                && ($result['all_steps_processed'] ?? false)) {
+                $finished = true;
+                $done = $done || ($result['independent_correct_steps'] ?? 0) === count($items);
+            }
+        }
+
+        return [$profile, $previousKeys, $previousKinds, $done, $finished];
+    }
+
+    public function shortPlan(User $actor, string $mode = 'manual', array $filter = []): array
+    {
+        [$profile, $previousKeys, $previousKinds, $done, $finished] = $this->shortContext($actor);
+        $active = \App\Models\Learning\LearningRun::where('user_id', $actor->id)->where('status', 'in_progress')->orderByDesc('started_at')->first();
+        $rows = []; $sources = []; $selfCheck = 0;
+        $query = $this->query($actor, $filter);
+        if (isset($filter['word_ids'])) { $query->whereIn('id', $filter['word_ids']); }
+        $words = $query->get();
+        if (isset($filter['word_ids']) && $words->count() !== count(array_unique($filter['word_ids']))) {
+            throw new AnswerCheckingException(PracticeErrorCode::NotFound, 'Выбранные выражения недоступны.');
+        }
+        foreach ($words as $word) {
+            $source = $this->source($word);
+            if (! $this->items($source)) { $selfCheck++; continue; }
+            $due = $word->next_review_at->lessThanOrEqualTo(PracticeTime::now());
+            if ($mode === 'suggested' && ! $word->needs_review && ! $due) { continue; }
+            $session = $word->sources->sortByDesc('first_added_at')->first()?->sessionVersion?->session?->external_id ?? $word->lexeme_key;
+            $sources[$word->id] = $source;
+            $rows[] = ['key' => $word->lexeme_key, 'id' => $word->id, 'tier' => $word->needs_review ? 0 : ($due ? 1 : 2),
+                'due' => $word->next_review_at->getTimestamp(), 'topic' => preg_replace('/-L[0-9]+$/', '', $session),
+                'previous_kind' => $previousKinds[$word->lexeme_key] ?? null];
+        }
+        $blocked = $active !== null || ($mode === 'suggested' && (! $profile['review_suggestions']['can_suggest'] || $finished));
+        $selected = $blocked ? [] : ShortReviewSelection::select($rows, $mode === 'manual' ? $previousKeys : []);
+
+        $estimate = 0;
+        foreach ($selected as $index => $row) {
+            $estimate += ShortReviewSelection::estimateSeconds($sources[$row['id']], $index, $row['previous_kind']);
+        }
+
+        return ['mode' => $mode, 'total' => count($selected), 'estimated_seconds' => $estimate, 'word_ids' => array_column($selected, 'id'), 'selection' => $selected,
+            'self_check_count' => $selfCheck, 'active_run_id' => $active?->id, 'completed_today' => $done, 'finished_today' => $finished,
+            'includes_not_due' => count(array_filter($selected, fn ($row) => $row['tier'] === 2)) > 0];
+    }
+
     public function snapshot(User $actor, array $input, string $level): array
     {
 
+        $short = null;
+        if ($input['kind'] === 'review') {
+            if (isset($input['continue_run_id']) || (($input['review_mode'] ?? 'manual') === 'suggested' && (isset($input['word_ids']) || isset($input['source_session']) || isset($input['filter'])))) {
+                AnswerChecker::invalid('Для предложения короткого повторения набор выбирается из изученного словаря.');
+            }
+            $short = $this->shortPlan($actor, $input['review_mode'] ?? 'manual', $input);
+            if ($short['active_run_id']) { throw new AnswerCheckingException(PracticeErrorCode::ValidationFailed, 'Сначала завершите или явно отложите активное занятие.'); }
+            if (! $short['total']) { throw new AnswerCheckingException(PracticeErrorCode::Unavailable, $short['self_check_count'] ? 'Доступны примеры и самопроверка в словаре; проверяемых вопросов сейчас нет.' : 'Сейчас нет подходящего короткого повторения.'); }
+            $input['word_ids'] = $short['word_ids'];
+        }
         if (isset($input['continue_run_id'])) {
             $old = app(AccountRunService::class)->owned($actor, $input['continue_run_id']);
             if ($old->status->value !== 'completed') {
@@ -160,10 +237,11 @@ class VocabularyTestService
         $seed = (string) \Illuminate\Support\Str::uuid();
         $items = [];
         $vocabulary = [];
-        foreach ($gradable->take(10) as $word) {
+        foreach ($gradable->take(10) as $index => $word) {
             $source = $this->source($word);
             $options = $this->items($source);
-            $item = $options[array_sum(unpack('C*', $seed.$word->lexeme_key)) % count($options)];
+            $previousKind = collect($short['selection'] ?? [])->firstWhere('key', $word->lexeme_key)['previous_kind'] ?? null;
+            $item = $short ? ShortReviewSelection::option($source, $seed, $word->lexeme_key, $index, $previousKind) : $options[array_sum(unpack('C*', $seed.$word->lexeme_key)) % count($options)];
             $source['id'] = 'word-'.$word->id;
             $source['lexeme_key'] = $word->lexeme_key;
             $items[] = PresentationSnapshot::forReview($item, $word->lexeme_key);
@@ -171,7 +249,7 @@ class VocabularyTestService
         }
 
         return [['id' => (string) \Illuminate\Support\Str::uuid(), 'title' => $input['kind'] === 'review' ? 'Повторение выражений' : 'Тест личного словаря',
-            'description' => 'Набор выражений закреплён при старте.', 'level' => $level, 'duration_minutes' => 3, 'seed' => $seed,
+            'description' => $short && $short['includes_not_due'] ? 'Повторение изученного: срок части слов ещё не наступил.' : 'Набор выражений закреплён при старте.', 'review_mode' => $short['mode'] ?? null, 'level' => $level, 'duration_minutes' => $short ? (int) ceil($short['estimated_seconds'] / 60) : 3, 'seed' => $seed,
             'items' => $items, 'vocabulary' => $vocabulary, 'introductions' => [],
             'word_ids' => $gradable->take(10)->pluck('id')->all(), 'remaining_word_ids' => $gradable->skip(10)->pluck('id')->all(), 'self_check_words' => $selfCheck], $items];
     }

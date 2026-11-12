@@ -23,7 +23,7 @@ beforeEach(function () {
     $this->seed(LearningLevelSeeder::class);
     LearningLevel::where('code', 'PRE_A1')->update(['published_at' => now('UTC')]);
     $this->unit = LearningUnit::factory()->create(['published_at' => now('UTC')]);
-    $this->payload = json_decode(file_get_contents(resource_path('learning/templates/pre-a1-u01-examples.json')), true)['sessions'][0];
+    $this->payload = json_decode(file_get_contents(resource_path('practice/templates/pre-a1-u01-examples.json')), true)['sessions'][0];
     $this->session = LearningSession::factory()->create(['unit_id' => $this->unit->id, 'external_id' => $this->payload['id']]);
     $this->version = LearningSessionVersion::factory()->create(['session_id' => $this->session->id, 'payload' => $this->payload,
         'checksum' => CanonicalJson::hash($this->payload), 'status' => 'published', 'published_at' => now('UTC')]);
@@ -241,7 +241,7 @@ it('does not create successful import or media records when private storage retu
     $disk = Mockery::mock();
     \Illuminate\Support\Facades\Storage::shouldReceive('disk')->with('learning_private')->andReturn($disk);
     $disk->shouldReceive('put')->twice()->andReturn(false);
-    $data = json_decode(file_get_contents(resource_path('learning/templates/pre-a1-u01-examples.json')), true);
+    $data = json_decode(file_get_contents(resource_path('practice/templates/pre-a1-u01-examples.json')), true);
     $package = ['schema_version' => 1, 'package_id' => 'storage-failure', 'language_pair' => 'fr-ru', 'levels' => $data['levels'], 'sessions' => []];
     $file = \Illuminate\Http\UploadedFile::fake()->createWithContent('package.json', CanonicalJson::encode($package));
     expect(fn () => app(\App\Services\Learning\SessionImportService::class)->preview($admin, $file))->toThrow(\App\Services\Learning\ContentOperationException::class);

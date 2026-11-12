@@ -22,6 +22,8 @@ class LearningProfile extends Model
         'current_level',
         'timezone',
         'revision',
+        'review_suggestions_enabled',
+        'review_suggestions_snoozed_until',
         'last_manual_level_event_id',
     ];
 
@@ -31,6 +33,8 @@ class LearningProfile extends Model
             'user_id' => 'integer',
             'current_level' => LevelCode::class,
             'revision' => 'integer',
+            'review_suggestions_enabled' => 'boolean',
+            'review_suggestions_snoozed_until' => 'immutable_datetime',
         ];
     }
 

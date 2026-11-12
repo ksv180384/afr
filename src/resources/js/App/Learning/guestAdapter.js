@@ -1,6 +1,6 @@
 import { applyGuestOperation, guestRunView, guestError } from './guestProgress.js';
 
-export const createGuestAdapter = ({repository,runId,tabId,onStatus = () => {},idFactory = () => crypto.randomUUID(),now = () => new Date().toISOString()}) => {
+export const createGuestAdapter = ({repository,runId,tabId,onStatus = () => {},onMutation = () => {},idFactory = () => crypto.randomUUID(),now = () => new Date().toISOString()}) => {
   let current;
   let serial = Promise.resolve();
   const envelopes = new Map();
@@ -30,7 +30,7 @@ export const createGuestAdapter = ({repository,runId,tabId,onStatus = () => {},i
     },{run_id:runId});
     current = run;
     if (action === 'draft') onStatus({kind:'draft',message:'Черновик сохранён в этом браузере.'});
-    else saved();
+    else { onMutation(); saved(); }
     return guestRunView(current);
   });
   const command = async (action,fields = {}) => {

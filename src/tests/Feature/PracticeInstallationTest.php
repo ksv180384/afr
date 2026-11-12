@@ -6,14 +6,16 @@ use App\Models\User\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
-it('imports on a migrated database without running a seeder', function () {
+it('imports on a migrated database without a seeder or a local content bank', function () {
     $this->withoutVite();
+    config(['daily_practice.content_path' => storage_path('uninstalled-learning-bank')]);
+    expect(is_dir(config('daily_practice.content_path')))->toBeFalse();
     Storage::fake('learning_private');
     expect(LearningLevel::count())->toBe(7);
     $rank = Rang::firstOrCreate(['alias' => 'administrator'], ['title' => 'Администратор']);
     $admin = User::factory()->create(['rang_id' => $rank->id]);
     $preview = $this->actingAs($admin)->post('/admin/daily-practice/imports/preview', [
-        'file' => UploadedFile::fake()->createWithContent('first.json', file_get_contents(resource_path('learning/templates/pre-a1-u01-examples.json'))),
+        'file' => UploadedFile::fake()->createWithContent('first.json', file_get_contents(resource_path('practice/templates/pre-a1-u01-examples.json'))),
     ], ['Accept' => 'application/json'])->assertCreated()->json();
     $this->postJson('/admin/daily-practice/imports/'.$preview['batch_id'].'/commit', [
         'token' => $preview['token'], 'file_hash' => $preview['file_hash'],

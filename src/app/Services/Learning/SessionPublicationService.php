@@ -147,7 +147,7 @@ final class SessionPublicationService
             }
             $previousStatus = $version->status->value;
             $this->validate($version);
-            if (! $session->unit->published_at || $session->unit->archived_at || ! LearningLevel::query()->where('code', $session->getRawOriginal('level'))->whereNotNull('published_at')->exists()) {
+            if (! $session->unit->published_at || $session->unit->archived_at || ! LearningLevel::published()->where('code', $session->getRawOriginal('level'))->exists()) {
                 throw new ContentOperationException(PracticeErrorCode::ValidationFailed, 'Сначала опубликуйте описание уровня и темы.');
             }
             foreach ($version->payload['prerequisite_ids'] as $reference) {

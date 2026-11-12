@@ -3,6 +3,7 @@
 use App\Http\Controllers\App\DailyPracticeController;
 use App\Http\Controllers\App\GuestPracticeController;
 use App\Http\Controllers\App\GuestSyncController;
+use App\Http\Controllers\App\PracticeRouteController;
 use App\Http\Controllers\App\VocabularyController;
 use App\Http\Middleware\DailyApiMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -13,6 +14,8 @@ Route::post('/daily/api/reports', \App\Http\Controllers\App\PracticeReportContro
 Route::get('/daily', [DailyPracticeController::class, 'page'])->name('daily');
 Route::get('/daily/run/{run}', [DailyPracticeController::class, 'page'])->whereUuid('run')->name('daily.run');
 Route::get('/daily/guest/{run}', [DailyPracticeController::class, 'page'])->whereUuid('run')->name('daily.guest');
+Route::get('/daily/api/route/reference', [PracticeRouteController::class, 'reference'])
+    ->middleware([DailyApiMiddleware::class, 'throttle:120,1'])->name('daily.route.reference');
 Route::prefix('daily/api/content')->name('daily.content.')->middleware([DailyApiMiddleware::class, 'throttle:120,1'])->group(function (): void {
     Route::get('/', [GuestPracticeController::class, 'index'])->name('index');
     Route::get('{session}', [GuestPracticeController::class, 'show'])->where('session', '[A-Za-z0-9_-]+')->name('show');
@@ -20,12 +23,15 @@ Route::prefix('daily/api/content')->name('daily.content.')->middleware([DailyApi
 });
 Route::prefix('daily/api')->name('daily.api.')->middleware([DailyApiMiddleware::class, 'auth', 'throttle:120,1'])->group(function (): void {
     Route::get('vocabulary', [VocabularyController::class, 'index'])->name('vocabulary');
+    Route::get('vocabulary/review-plan', [VocabularyController::class, 'reviewPlan'])->name('vocabulary.review-plan');
     Route::get('vocabulary/test-plan', [VocabularyController::class, 'plan'])->name('vocabulary.plan');
     Route::patch('vocabulary/{word}', [VocabularyController::class, 'mark'])->whereNumber('word')->name('vocabulary.mark');
     Route::post('guest-sync', GuestSyncController::class)->middleware('throttle:12,1,practice-sync')->name('guest-sync');
+    Route::get('route/search', [PracticeRouteController::class, 'search'])->name('route.search');
     Route::get('today', [DailyPracticeController::class, 'today'])->name('today');
     Route::get('profile', [DailyPracticeController::class, 'profile'])->name('profile');
     Route::patch('profile', [DailyPracticeController::class, 'profileUpdate'])->name('profile.update');
+    Route::patch('review-settings', [DailyPracticeController::class, 'reviewSettings'])->name('review-settings.update');
     Route::get('history', [DailyPracticeController::class, 'history'])->name('history');
     Route::post('runs', [DailyPracticeController::class, 'start'])->name('start');
     Route::get('runs/{run}', [DailyPracticeController::class, 'show'])->whereUuid('run')->name('show');

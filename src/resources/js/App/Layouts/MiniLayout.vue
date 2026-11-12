@@ -6,13 +6,14 @@ import AfrFooter from '@/App/Components/Footer/AfrFooter.vue';
 const props = defineProps({
   authUser: { type: Object, default: null },
   subMenu: { type: Array, default: null },
+  focused: Boolean,
 });
 
 </script>
 <template>
-  <div class="mini-layout">
+  <div class="mini-layout" :class="{ 'mini-layout--focused': focused }">
 
-    <afr-header
+    <afr-header v-if="!focused"
       :auth-user="authUser"
       :sub-menu="subMenu"
     />
@@ -25,7 +26,7 @@ const props = defineProps({
       </div>
     </div>
 
-    <afr-footer/>
+    <afr-footer v-if="!focused" />
 
   </div>
 </template>
@@ -38,6 +39,9 @@ const props = defineProps({
 .mini-layout-container{
   @apply flex flex-1 w-[1440px] mx-auto bg-sky-50 max-w-full;
 }
+
+.mini-layout--focused { padding-top: 0; }
+.mini-layout.practice-layout .mini-layout-container { background: var(--practice-bg); }
 
 .content-container{
   @apply min-h-full w-full;

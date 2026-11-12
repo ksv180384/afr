@@ -1,9 +1,9 @@
 <script setup>
-import { inject, onBeforeUnmount, ref } from 'vue';
+import { inject, onBeforeUnmount, ref, watch } from 'vue';
 import AfrButton from '@/App/Components/Form/AfrButton.vue';
 import { usePracticeFeedback } from '@/App/Learning/usePracticeFeedback.js';
 const props = defineProps({ audio: { type: Object, required: true }, label: { type: String, default: 'Прослушать фразу' } });
-const emit = defineEmits(['unavailable']);
+const emit = defineEmits(['available', 'unavailable']);
 const player = inject('practiceAudioPlayer');
 const status = ref('idle');
 const message = ref('');
@@ -15,10 +15,16 @@ const play = (slow = false) => {
   player.play(props.audio, { slow, onState: (next) => {
     status.value = next.state;
     message.value = next.message;
+    if (next.state === 'playing') emit('available');
     if (next.state === 'error') emit('unavailable');
   } });
 };
-onBeforeUnmount(() => { if (active()) player?.stop(); });
+const stopIfActive = () => { if (active()) player?.stop(); };
+watch([() => props.audio.asset_id, () => props.audio.text, () => props.audio.lang], () => {
+  stopIfActive();
+  message.value = '';
+});
+onBeforeUnmount(stopIfActive);
 </script>
 <template>
   <div class="practice-audio">

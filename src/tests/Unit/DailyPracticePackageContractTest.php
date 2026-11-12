@@ -8,7 +8,7 @@ use Opis\JsonSchema\CompliantValidator;
 
 function practiceContractDirectory(): string
 {
-    return getenv('PRACTICE_CONTRACT_ROOT') ?: dirname(__DIR__, 3).'/docs/daily-practice';
+    return getenv('PRACTICE_CONTRACT_ROOT') ?: dirname(__DIR__).'/Fixtures/Learning/contract';
 }
 
 function practiceContractJson(string $path): array
@@ -284,7 +284,7 @@ it('rejects the documented invalid package for the specified reason', function (
         }
         expect(array_diff(array_column($errors, 'code'), array_column($case['expected_errors'], 'code')))->toBe([]);
     }
-})->with(range(0, 9));
+})->with(fn (): array => array_keys(practiceContractJson('examples/invalid/manifest.json')['cases']));
 
 it('distinguishes valid drafts and catalog packages from publication readiness', function () {
     $package = practiceContractJson('examples/pre-a1-u01-examples.json');

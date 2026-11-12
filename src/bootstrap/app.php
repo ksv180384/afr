@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -18,11 +19,11 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->prepend(\App\Http\Middleware\PracticeOperations::class);
-        $middleware->trimStrings(except: [fn (Request $request) => $request->is('daily/api/guest-sync', 'daily/api/reports')]);
-        $middleware->convertEmptyStringsToNull(except: [fn (Request $request) => $request->is('daily/api/guest-sync', 'daily/api/reports')]);
+        $middleware->trimStrings(except: [fn (Request $request) => $request->is('daily/api/guest-sync', 'daily/api/reports', 'admin/daily-practice/versions/*/save')]);
+        $middleware->convertEmptyStringsToNull(except: [fn (Request $request) => $request->is('daily/api/guest-sync', 'daily/api/reports', 'admin/daily-practice/versions/*/save')]);
         $middleware->web(append: [
             //            \App\Http\Middleware\PrerenderIfCrawler::class,
-            \App\Http\Middleware\HandleInertiaRequests::class,
+            HandleInertiaRequests::class,
             \App\Http\Middleware\PracticeRobots::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
             \App\Http\Middleware\TrackRefererMiddleware::class,
@@ -74,11 +75,19 @@ return Application::configure(basePath: dirname(__DIR__))
 
                 return $response;
             }
-            if (! $request->is('admin/daily-practice', 'admin/daily-practice/*') && ! app()->environment(['testing']) && in_array($response->getStatusCode(), [500, 503, 404, 403])) {
-                return Inertia::render('ErrorPage', ['status' => $response->getStatusCode()])
+            $status = $response->getStatusCode();
+
+            if (
+                ! $request->is('admin/daily-practice', 'admin/daily-practice/*')
+                && ! app()->environment(['testing'])
+                && in_array($status, [403, 404, 500, 503], true)
+            ) {
+                Inertia::setRootView(app(HandleInertiaRequests::class)->rootView($request));
+
+                return Inertia::render("Errors/Error{$status}")
                     ->toResponse($request)
-                    ->setStatusCode($response->getStatusCode());
-            } elseif ($response->getStatusCode() === 419) {
+                    ->setStatusCode($status);
+            } elseif ($status === 419) {
                 return back()->with([
                     'message' => 'The page expired, please try again.',
                 ]);

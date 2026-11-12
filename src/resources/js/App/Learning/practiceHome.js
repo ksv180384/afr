@@ -16,9 +16,11 @@ export const usePracticeHome = () => {
   if(typeof window==='undefined') return create();
   if(!clientStore) {
     clientStore=create();
-    watch(guestSyncRevision,()=>{if(clientStore.state.owner!=null) clientStore.refresh(clientStore.state.owner).catch(()=>{});});
+    watch(guestSyncRevision, () => {
+      if (clientStore.state.owner != null) clientStore.invalidate(clientStore.state.owner);
+    });
     clientStore.guestRepository.subscribe('home-'+crypto.randomUUID(),(notice)=>{
-      if(clientStore.state.owner===null && (notice.claimed || notice.profile || notice.bound || notice.rotated)) clientStore.refresh(null).catch(()=>{});
+      if (clientStore.state.owner === null && (notice.run_id || notice.profile || notice.bound || notice.rotated)) clientStore.invalidate(null);
     });
   }
   return clientStore;

@@ -40,6 +40,15 @@ class VocabularyController extends Controller
         return response()->json(['word_ids' => $ids, 'self_check_words' => $selfCheck, 'total' => count($ids)]);
     }
 
+    public function reviewPlan(VocabularyRequest $request, VocabularyTestService $service)
+    {
+        $mode = $request->validated('mode') ?? 'manual';
+        $filters = $mode === 'manual' ? $request->safe()->only(['filter', 'source_session', 'q']) : [];
+        $plan = $service->shortPlan($request->user(), $mode, $filters);
+
+        return response()->json(['owner_user_id' => $request->user()->id, ...array_diff_key($plan, ['selection' => true])]);
+    }
+
     public function mark(VocabularyRequest $request, string $word, VocabularyTestService $service)
     {
         $result = DB::transaction(function () use ($request, $word, $service) {

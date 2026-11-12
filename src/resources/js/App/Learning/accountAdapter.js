@@ -24,14 +24,16 @@ const canRetryRejected = (row, state) => {
   return ['answer','help'].includes(row.action) && !state.presentation.first_result;
 };
 
-const deliverQueue = async ({ ownerUserId, runId, repository, transport, state = null, profile: checkedProfile = null, onStatus = () => {}, idFactory = id }) => {
+const deliverQueue = async ({ ownerUserId, runId, repository, transport, state = null, profile: checkedProfile = null, onMutation = () => {}, onStatus = () => {}, idFactory = id }) => {
   let rows;
   try { rows = await repository.pending(ownerUserId, runId); }
   catch (error) { onStatus({kind:'storage',message:localFailure(error).message}); throw localFailure(error); }
   if (!rows.length) { onStatus({kind:'idle',message:''}); return state; }
   let activeRow;
   try {
-    const profile = checkedProfile ?? await transport.profile();
+    if (checkedProfile && checkedProfile.owner_user_id !== ownerUserId) throw statusError('Войдите в исходный аккаунт.',401,'owner_changed');
+    const ownerBound = runId === null && rows.every(row => row.request.expected_owner_user_id === ownerUserId);
+    const profile = (ownerBound ? checkedProfile : null) ?? await transport.profile();
     if (profile.owner_user_id !== ownerUserId) throw statusError('Восстановите вход в тот же аккаунт. Очередь другого владельца не отправлена.', 401, 'owner_changed');
     let previousAccepted = false;
     for (let row of rows) {
@@ -48,10 +50,13 @@ const deliverQueue = async ({ ownerUserId, runId, repository, transport, state =
           if (error.response?.status !== 409 || !['revision_conflict','stale_presentation'].includes(error.response.data?.code)) throw error;
           const latest = error.response.data?.state;
           if (runId === null) {
-            const profile = await transport.profile();
+            const profile = Number.isInteger(latest?.profile?.revision) ? latest.profile : await transport.profile();
             if (profile.owner_user_id !== ownerUserId) throw statusError('Войдите в исходный аккаунт.',401,'owner_changed');
-            const selected = latest?.profile?.owner_user_id === ownerUserId ? latest.run : null;
-            if (row.request.kind === 'daily' && selected && (!row.request.replace_assignment || (selected.status !== 'completed' && selected.level === profile.current_level))) {
+            const sameOwner = latest?.profile?.owner_user_id === ownerUserId;
+            const selected = sameOwner ? (row.request.route_start ? latest.active_run : latest.run) : null;
+            const restoreDaily = !row.request.route_start && row.request.kind === 'daily' && selected &&
+              (!row.request.replace_assignment || (selected.status !== 'completed' && selected.level === profile.current_level));
+            if (selected && (row.request.route_start || restoreDaily)) {
               state = await transport.loadRun(selected.id);
               if (state.owner_user_id !== ownerUserId) throw statusError('Войдите в исходный аккаунт.',401,'owner_changed');
               await repository.mark(ownerUserId,row.local_id,'dismissed');
@@ -77,6 +82,7 @@ const deliverQueue = async ({ ownerUserId, runId, repository, transport, state =
         if (receipt.accepted_event_id !== sealed.client_event_id || receipt.state?.owner_user_id !== ownerUserId) {
           throw statusError('Сервер не подтвердил событие. Повторите тот же запрос.',503,'unavailable');
         }
+        onMutation();
         try { await repository.mark(ownerUserId, sealed.local_id, 'acked', receipt); }
         catch (error) { onStatus({kind:'storage',message:localFailure(error).message}); throw localFailure(error); }
         previousAccepted = !state || receipt.state.revision >= state.revision;
@@ -105,25 +111,28 @@ const deliverQueue = async ({ ownerUserId, runId, repository, transport, state =
   }
 };
 
-export const startAccountRun = async ({ ownerUserId, input, repository, transport, onStatus, profile = null }) => {
+export const startAccountRun = async ({ ownerUserId, input, repository, transport, onStatus, profile = null, onMutation }) => {
+  if (profile) input = {...input, expected_owner_user_id: ownerUserId};
   let row;
   try {
     const pending = await repository.pending(ownerUserId,null);
-    if (pending.length && pending[0].client_event_id !== input.client_event_id) return deliverAccountQueue({ownerUserId,runId:null,repository,transport,onStatus,profile});
+    if (pending.length && pending[0].client_event_id !== input.client_event_id) return deliverAccountQueue({ownerUserId,runId:null,repository,transport,onStatus,profile,onMutation});
     row = await repository.enqueue(ownerUserId,null,'start',input,input);
   } catch (error) {
     if (error.message.startsWith('Сначала восстановите')) throw error;
     onStatus?.({kind:'storage',message:localFailure(error).message}); throw localFailure(error);
   }
   if (row.status === 'acked') {
-    const currentProfile = profile ?? await transport.profile();
+    const currentProfile = row.request?.expected_owner_user_id === ownerUserId && profile ? profile : await transport.profile();
     if (currentProfile.owner_user_id !== ownerUserId) throw new Error('Войдите в исходный аккаунт.');
-    return transport.loadRun(row.acknowledgement.run_id);
+    const view = await transport.loadRun(row.acknowledgement.run_id);
+    if (view.owner_user_id !== ownerUserId) throw new Error('Войдите в исходный аккаунт.');
+    return view;
   }
-  return deliverAccountQueue({ownerUserId,runId:null,repository,transport,onStatus,profile});
+  return deliverAccountQueue({ownerUserId,runId:null,repository,transport,onStatus,profile,onMutation});
 };
 
-export const createAccountAdapter = ({ ownerUserId, runId, repository, transport, onStatus = () => {}, idFactory = id }) => {
+export const createAccountAdapter = ({ ownerUserId, runId, repository, transport, onStatus = () => {}, onMutation = () => {}, idFactory = id }) => {
   let state;
   let status = 'loading';
   const notify = (next) => { status = next.kind; onStatus(next); };
@@ -141,7 +150,7 @@ export const createAccountAdapter = ({ ownerUserId, runId, repository, transport
     try { pending = await repository.pending(ownerUserId,runId); }
     catch (error) { notify({kind:'storage',message:localFailure(error).message}); throw localFailure(error); }
     if (pending.length && !pending.some(item => item.client_event_id === logical.client_event_id)) {
-      state = await deliverAccountQueue({ownerUserId,runId,repository,transport,state,onStatus:notify,idFactory});
+      state = await deliverAccountQueue({ownerUserId,runId,repository,transport,state,onStatus:notify,onMutation,idFactory});
       return storedDraft(state);
     }
     try {
@@ -155,7 +164,7 @@ export const createAccountAdapter = ({ ownerUserId, runId, repository, transport
       state = await transport.loadRun(runId);
       return storedDraft(state);
     }
-    state = await deliverAccountQueue({ownerUserId,runId,repository,transport,state,onStatus:notify,idFactory});
+    state = await deliverAccountQueue({ownerUserId,runId,repository,transport,state,onStatus:notify,onMutation,idFactory});
     return storedDraft(state);
   };
   const commands = new Map();
@@ -173,7 +182,7 @@ export const createAccountAdapter = ({ ownerUserId, runId, repository, transport
       if (introductionSeen) return command('introduction',{presentation_id:introductionSeen});
       state = await transport.loadRun(runId);
       if (state.owner_user_id !== ownerUserId) throw new Error('Состояние принадлежит другому аккаунту.');
-      state = await deliverAccountQueue({ownerUserId,runId,repository,transport,state,onStatus:notify,idFactory});
+      state = await deliverAccountQueue({ownerUserId,runId,repository,transport,state,onStatus:notify,onMutation,idFactory});
       return {...await storedDraft(state),restore_assistance:true};
     },
     start: () => command('resume'),

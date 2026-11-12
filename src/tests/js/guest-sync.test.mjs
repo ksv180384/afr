@@ -4,7 +4,7 @@ import { randomUUID } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { newGuestState, addGuestRun, applyGuestOperation } from '../../resources/js/App/Learning/guestProgress.js';
 import { freezeGuestBatch as freezeBatch, acknowledgeGuestBatch, syncGuestRepository as syncRepository, retryRejectedGuestEvents } from '../../resources/js/App/Learning/guestSync.js';
-const snapshot=JSON.parse(readFileSync(new URL('../../resources/learning/templates/pre-a1-u01-examples.json',import.meta.url))).sessions[0];
+const snapshot=JSON.parse(readFileSync(new URL('../../resources/practice/templates/pre-a1-u01-examples.json',import.meta.url))).sessions[0];
 const stamp='2026-10-25T10:00:00.000Z';
 const freezeGuestBatch=(state,owner)=>freezeBatch(state,owner,randomUUID);
 const syncGuestRepository=(options)=>syncRepository({...options,idFactory:randomUUID});

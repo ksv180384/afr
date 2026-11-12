@@ -20,7 +20,7 @@ beforeEach(function () {
     $this->seed(LearningLevelSeeder::class);
     LearningLevel::where('code', 'PRE_A1')->update(['published_at' => now('UTC')]);
     $unit = LearningUnit::factory()->create(['published_at' => now('UTC')]);
-    $payload = json_decode(file_get_contents(resource_path('learning/templates/pre-a1-u01-examples.json')), true)['sessions'][0];
+    $payload = json_decode(file_get_contents(resource_path('practice/templates/pre-a1-u01-examples.json')), true)['sessions'][0];
     $session = LearningSession::factory()->create(['external_id' => $payload['id'], 'unit_id' => $unit->id]);
     $this->version = LearningSessionVersion::factory()->create(['session_id' => $session->id, 'payload' => $payload, 'checksum' => CanonicalJson::hash($payload), 'status' => 'published', 'published_at' => now('UTC')]);
     $session->update(['active_version_id' => $this->version->id]);

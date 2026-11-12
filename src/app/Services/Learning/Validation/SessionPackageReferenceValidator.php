@@ -190,10 +190,6 @@ final class SessionPackageReferenceValidator
                 if ($existing->getRawOriginal('level') !== $session['level'] || $existing->unit->external_id !== $session['unit_id']) {
                     $report->error('session_identity_conflict', $path.'/id', 'Существующий session ID нельзя перенести в другую тему или на другой уровень.');
                 }
-                $previous = LearningSessionVersion::query()->where('session_id', $existing->id)->where('version', $session['version'])->first();
-                if ($previous && CanonicalJson::hash($previous->payload) !== CanonicalJson::hash($session)) {
-                    $report->error('version_conflict', $path.'/version', 'Тот же ID и version уже имеют другое неизменяемое содержимое; увеличьте version.');
-                }
             }
             foreach (['prerequisite_ids' => $session['prerequisite_ids'], 'public_page/related_session_ids' => $session['public_page']['related_session_ids'] ?? []] as $field => $targets) {
                 foreach ($targets as $ri => $id) {

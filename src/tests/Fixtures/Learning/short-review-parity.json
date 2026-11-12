@@ -1,0 +1,192 @@
+{
+  "cases": [
+    {
+      "rows": [],
+      "previous": [],
+      "expected": []
+    },
+    {
+      "rows": [
+        {
+          "key": "k0",
+          "tier": 0,
+          "due": 0,
+          "topic": "A"
+        }
+      ],
+      "previous": [],
+      "expected": [
+        "k0"
+      ]
+    },
+    {
+      "rows": [
+        {
+          "key": "k0",
+          "tier": 0,
+          "due": 0,
+          "topic": "A"
+        },
+        {
+          "key": "k1",
+          "tier": 0,
+          "due": 1,
+          "topic": "A"
+        }
+      ],
+      "previous": [],
+      "expected": [
+        "k0",
+        "k1"
+      ]
+    },
+    {
+      "rows": [
+        {
+          "key": "k0",
+          "tier": 0,
+          "due": 0,
+          "topic": "A"
+        },
+        {
+          "key": "k1",
+          "tier": 0,
+          "due": 1,
+          "topic": "A"
+        },
+        {
+          "key": "k2",
+          "tier": 0,
+          "due": 2,
+          "topic": "B"
+        }
+      ],
+      "previous": [],
+      "expected": [
+        "k0",
+        "k2",
+        "k1"
+      ]
+    },
+    {
+      "rows": [
+        {
+          "key": "k0",
+          "tier": 0,
+          "due": 0,
+          "topic": "A"
+        },
+        {
+          "key": "k1",
+          "tier": 0,
+          "due": 1,
+          "topic": "A"
+        },
+        {
+          "key": "k2",
+          "tier": 0,
+          "due": 2,
+          "topic": "B"
+        },
+        {
+          "key": "k3",
+          "tier": 0,
+          "due": 3,
+          "topic": "B"
+        },
+        {
+          "key": "k4",
+          "tier": 1,
+          "due": 4,
+          "topic": "C"
+        },
+        {
+          "key": "k5",
+          "tier": 1,
+          "due": 5,
+          "topic": "C"
+        },
+        {
+          "key": "k6",
+          "tier": 2,
+          "due": 6,
+          "topic": "D"
+        },
+        {
+          "key": "k7",
+          "tier": 2,
+          "due": 7,
+          "topic": "D"
+        }
+      ],
+      "previous": [],
+      "expected": [
+        "k0",
+        "k2",
+        "k1"
+      ]
+    },
+    {
+      "rows": [
+        {
+          "key": "k0",
+          "tier": 0,
+          "due": 0,
+          "topic": "A"
+        },
+        {
+          "key": "k1",
+          "tier": 0,
+          "due": 1,
+          "topic": "A"
+        },
+        {
+          "key": "k2",
+          "tier": 0,
+          "due": 2,
+          "topic": "B"
+        },
+        {
+          "key": "k3",
+          "tier": 0,
+          "due": 3,
+          "topic": "B"
+        },
+        {
+          "key": "k4",
+          "tier": 1,
+          "due": 4,
+          "topic": "C"
+        },
+        {
+          "key": "k5",
+          "tier": 1,
+          "due": 5,
+          "topic": "C"
+        },
+        {
+          "key": "k6",
+          "tier": 2,
+          "due": 6,
+          "topic": "D"
+        },
+        {
+          "key": "k7",
+          "tier": 2,
+          "due": 7,
+          "topic": "D"
+        }
+      ],
+      "previous": [
+        "k0",
+        "k2",
+        "k1"
+      ],
+      "expected": [
+        "k3",
+        "k4",
+        "k5"
+      ]
+    }
+  ]
+}

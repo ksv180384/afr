@@ -42,8 +42,9 @@ final class AccountRunService
     {
         $profile = LearningProfile::query()->where('user_id', $actor->id)->first();
 
-        return ['owner_user_id' => $actor->id, 'current_level' => $profile?->getRawOriginal('current_level') ?? 'PRE_A1',
-            'timezone' => $profile?->timezone ?? PracticeTime::DEFAULT_TIMEZONE, 'revision' => $profile?->revision ?? 1, 'persisted' => $profile !== null];
+        return ['owner_user_id' => $actor->id, 'current_level' => $profile?->getRawOriginal('current_level') ?? AvailableLevels::first(),
+            'timezone' => $profile?->timezone ?? PracticeTime::DEFAULT_TIMEZONE, 'revision' => $profile?->revision ?? 1, 'persisted' => $profile !== null,
+            'review_suggestions' => app(ReviewSuggestionSettings::class)->view($profile)];
     }
 
     public function updateTimezone(User $actor, string $timezone): void
@@ -51,7 +52,7 @@ final class AccountRunService
         PracticeTime::timezone($timezone);
         DB::transaction(function () use ($actor, $timezone): void {
             User::query()->lockForUpdate()->findOrFail($actor->id);
-            $profile = LearningProfile::firstOrCreate(['user_id' => $actor->id], ['current_level' => 'PRE_A1', 'timezone' => $timezone, 'revision' => 1]);
+            $profile = LearningProfile::firstOrCreate(['user_id' => $actor->id], ['current_level' => AvailableLevels::first(), 'timezone' => $timezone, 'revision' => 1]);
             if ($profile->timezone !== $timezone) {
                 $profile->update(['timezone' => $timezone, 'revision' => $profile->revision + 1]);
             }
@@ -72,17 +73,21 @@ final class AccountRunService
         $session->loadMissing('activeVersion', 'unit', 'levelDefinition');
 
         return $session->archived_at === null && $session->activeVersion?->status->value === 'published'
-            && $session->unit->published_at !== null && $session->unit->archived_at === null && $session->levelDefinition->published_at !== null;
+            && $session->unit->published_at !== null && $session->unit->archived_at === null && $session->levelDefinition->isPublished();
     }
 
-    private function candidate(User $actor, ?array $access = null): ?LearningSession
+    private function candidate(User $actor, ?array $access = null, bool $compact = false): ?LearningSession
     {
-        $completed = $this->completed($actor);
-        $access ??= app(LearningAccessService::class)->states(app(LearningAccessService::class)->outline(), $completed, $this->profile($actor)['current_level']);
+        $access ??= app(LearningAccessService::class)->forUser($actor);
         $allowed = array_keys(array_filter($access['sessions'], fn ($state) => ! $state['locked'] && ! $state['completed'] && ! $state['review_only']));
         $query = LearningSession::query()->select('learning_sessions.*')->join('learning_units', 'learning_units.id', '=', 'learning_sessions.unit_id')
             ->whereIn('learning_sessions.external_id', $allowed)->whereNull('learning_sessions.archived_at')->whereNotNull('learning_sessions.active_version_id')
-            ->whereNotIn('learning_sessions.external_id', $completed)->with('activeVersion', 'unit', 'levelDefinition')
+            ->with(['unit', 'levelDefinition', 'activeVersion' => function ($query) use ($compact) {
+                if ($compact) {
+                    $query->select('id', 'session_id', 'status', 'payload->title as home_title', 'payload->duration_minutes as home_duration',
+                        'payload->objectives[0]->title as home_goal');
+                }
+            }])
             ->orderBy('learning_units.sort_order')->orderBy('learning_sessions.sort_order')->orderBy('learning_sessions.external_id');
         foreach ($query->lazy(100) as $session) {
             if ($this->available($session)) {
@@ -93,27 +98,54 @@ final class AccountRunService
         return null;
     }
 
-    public function today(User $actor): array
+    public function today(User $actor, array $selection = []): array
     {
         $profile = $this->profile($actor);
         $date = PracticeTime::localDate(PracticeTime::now(), $profile['timezone']);
         $assignment = DailyAssignment::query()->where('user_id', $actor->id)->orderByDesc('id')->first();
         $selected = $assignment?->selected_run_id ? $this->owned($actor, $assignment->selected_run_id) : null;
         $show = $selected && ($selected->status !== RunStatus::Completed || $assignment->local_date->format('Y-m-d') === $date);
-        $access = app(LearningAccessService::class)->forUser($actor);
-        $candidate = $this->candidate($actor, $access);
+        $accessService = app(LearningAccessService::class);
+        $outline = $accessService->outline();
+        $access = $accessService->states($outline, $accessService->completed($actor), $profile['current_level']);
+        $candidate = $this->candidate($actor, $access, compact: true);
+        $next = $candidate ? ['id' => $candidate->external_id, 'level' => $candidate->getRawOriginal('level'),
+            'theme' => $candidate->unit->title, 'duration_minutes' => (int) $candidate->activeVersion->home_duration,
+            'title' => $candidate->activeVersion->home_title, 'goal' => $candidate->activeVersion->home_goal] : null;
+        $active = $this->activeRun($actor);
+        $activeSummary = $active ? $this->homeRun($active) : null;
         $progress = app(LevelPromotionService::class)->progress($actor);
         if (isset($progress['available_checkpoints'])) {
             $progress['available_checkpoints'] = array_values(array_filter($progress['available_checkpoints'], fn ($item) => isset($access['sessions'][$item['id']]) && ! $access['sessions'][$item['id']]['locked']));
         }
-        $selected?->loadMissing('sessionVersion.session.unit');
 
         return ['progress' => $progress, 'profile' => $profile, 'local_date' => $date, 'assignment' => $show ? ['id' => $assignment->id,
             'local_date' => $assignment->local_date->format('Y-m-d'), 'revision' => $assignment->revision, 'selected_run_id' => $selected->id] : null,
-            'run' => $show ? ['id' => $selected->id, 'status' => $selected->status->value, 'level' => $selected->snapshot['level'] ?? null, 'theme' => $selected->sessionVersion?->session?->unit?->title, 'duration_minutes' => $selected->snapshot['duration_minutes'] ?? 3, 'title' => $selected->snapshot['title'] ?? 'Повторение'] : null,
-            'candidate' => $candidate ? ['id' => $candidate->external_id, 'level' => $candidate->getRawOriginal('level'), 'theme' => $candidate->unit->title, 'duration_minutes' => $candidate->activeVersion->payload['duration_minutes'], 'title' => $candidate->activeVersion->payload['title']] : null,
+            'run' => $show ? $this->homeRun($selected) : null,
+            'active_run' => $activeSummary,
+            'candidate' => $next,
+            'route' => app(PracticeHomeRoute::class)->make($outline, $access, $profile['current_level'], $selection, $activeSummary, $next),
             'activity_today' => LearningActivityDay::query()->where('user_id', $actor->id)->where('local_date', $date)->exists(),
+            'review_suggestion' => ($review = app(VocabularyTestService::class)->shortPlan($actor, 'suggested'))['total'] ? array_diff_key($review, ['selection' => true]) : null,
             'exhausted' => $candidate === null];
+    }
+
+    private function activeRun(User $actor): ?LearningRun
+    {
+        return LearningRun::query()->where('user_id', $actor->id)->whereIn('status', ['in_progress', 'paused'])
+            ->orderByRaw("CASE WHEN status = 'in_progress' THEN 0 ELSE 1 END")
+            ->orderByDesc('started_at')->orderByDesc('id')->first();
+    }
+
+    private function homeRun(LearningRun $run): array
+    {
+        $run->loadMissing('sessionVersion:id,session_id', 'sessionVersion.session:id,external_id,unit_id', 'sessionVersion.session.unit:id,title');
+        $session = $run->sessionVersion?->session;
+
+        return ['id' => $run->id, 'status' => $run->status->value, 'kind' => $run->kind,
+            'session_id' => $session?->external_id, 'level' => $run->snapshot['level'] ?? null,
+            'theme' => $session?->unit?->title, 'duration_minutes' => $run->snapshot['duration_minutes'] ?? 3,
+            'title' => $run->snapshot['title'] ?? 'Повторение', 'goal' => $run->snapshot['objectives'][0]['title'] ?? null];
     }
 
     private function envelope(LearningRunOperation $operation): array
@@ -156,8 +188,11 @@ final class AccountRunService
     public function profileUpdate(User $actor, array $input): array
     {
         return $this->operation($actor, 'profile', $input, null, function () use ($actor, $input) {
+            if (! \App\Models\Learning\LearningLevel::where('code', $input['current_level'])->exists()) {
+                throw new AnswerCheckingException(PracticeErrorCode::ValidationFailed, 'Этот уровень удалён. Выберите доступный уровень.');
+            }
             PracticeTime::timezone($input['timezone']);
-            $profile = LearningProfile::firstOrCreate(['user_id' => $actor->id], ['current_level' => 'PRE_A1', 'timezone' => 'UTC', 'revision' => 1]);
+            $profile = LearningProfile::firstOrCreate(['user_id' => $actor->id], ['current_level' => AvailableLevels::first(), 'timezone' => 'UTC', 'revision' => 1]);
             $this->revision($profile->revision, $input);
             $attributes = ['current_level' => $input['current_level'], 'timezone' => $input['timezone'], 'revision' => $profile->revision + 1];
             if ($profile->getRawOriginal('current_level') !== $input['current_level']) {
@@ -166,6 +201,22 @@ final class AccountRunService
                 $attributes['last_manual_level_event_id'] = $event->id;
             }
             $profile->update($attributes);
+
+            return ['profile' => $this->profile($actor)];
+        });
+    }
+
+    public function reviewSettings(User $actor, array $input): array
+    {
+        return $this->operation($actor, 'review_settings', $input, null, function () use ($actor, $input) {
+            $settings = app(ReviewSuggestionSettings::class);
+            if (! $settings->available()) {
+                throw new AnswerCheckingException(PracticeErrorCode::Unavailable, 'Настройки повторения пока недоступны. Повторите позже.');
+            }
+            $profile = LearningProfile::firstOrCreate(['user_id' => $actor->id], ['current_level' => AvailableLevels::first(),
+                'timezone' => PracticeTime::DEFAULT_TIMEZONE, 'revision' => 1]);
+            $this->revision($profile->revision, $input);
+            $settings->apply($profile, $input);
 
             return ['profile' => $this->profile($actor)];
         });
@@ -180,6 +231,10 @@ final class AccountRunService
 
     public function start(User $actor, array $input): array
     {
+        if (isset($input['expected_owner_user_id']) && (int) $input['expected_owner_user_id'] !== $actor->id) {
+            throw new AnswerCheckingException(PracticeErrorCode::Forbidden, 'Войдите в исходный аккаунт.');
+        }
+
         return $this->operation($actor, 'start', $input, null, function () use ($actor, $input) {
             $kind = $input['kind'];
             if (! in_array($kind, ['daily', 'extra', 'review', 'vocabulary_test'], true)) {
@@ -189,14 +244,24 @@ final class AccountRunService
                 || (! in_array($kind, ['review', 'vocabulary_test'], true) && (isset($input['word_ids']) || isset($input['continue_run_id']) || isset($input['filter']) || isset($input['source_session'])))) {
                 AnswerChecker::invalid('Поля не соответствуют виду прохождения.');
             }
+            $routeStart = (bool) ($input['route_start'] ?? false);
+            if ($routeStart) {
+                if (! in_array($kind, ['daily', 'extra'], true)) {
+                    AnswerChecker::invalid('Из маршрута можно запустить только урок.');
+                }
+                if ($active = $this->activeRun($actor)) {
+                    return ['state' => $this->view->make($actor, $active)];
+                }
+            }
+
             $timezone = $input['timezone'] ?? PracticeTime::DEFAULT_TIMEZONE;
             PracticeTime::timezone($timezone);
-            $profile = LearningProfile::firstOrCreate(['user_id' => $actor->id], ['current_level' => 'PRE_A1', 'timezone' => $timezone, 'revision' => 1]);
+            $profile = LearningProfile::firstOrCreate(['user_id' => $actor->id], ['current_level' => AvailableLevels::first(), 'timezone' => $timezone, 'revision' => 1]);
             $this->revision($profile->revision, $input);
             $date = PracticeTime::localDate(PracticeTime::now(), $profile->timezone);
             $latest = $kind === 'daily' ? DailyAssignment::query()->where('user_id', $actor->id)->orderByDesc('id')->first() : null;
             $selected = $latest?->selected_run_id ? $this->owned($actor, $latest->selected_run_id, true) : null;
-            $replace = (bool) ($input['replace_assignment'] ?? false);
+            $replace = (bool) ($input['replace_assignment'] ?? false) || ($routeStart && $selected?->status === RunStatus::Completed);
             if ($selected && $replace && $selected->status !== RunStatus::Completed && ($selected->snapshot['level'] ?? null) === $profile->getRawOriginal('current_level')) {
                 AnswerChecker::invalid('Начатое назначение можно отложить для другого уровня. Для повтора используйте дополнительную практику.');
             }

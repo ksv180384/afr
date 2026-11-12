@@ -103,7 +103,10 @@ it('commits once with canonical checksums and pending catalog then replays the s
         ->and(LearningEditorialEvent::count())->toBe($events);
     $again = lifecycleCommit($this->admin, lifecyclePreview($this->admin));
     expect($again['created_version_ids'])->toBe([])
-        ->and($again['skipped_version_ids'])->toHaveCount(2);
+        ->and($again['updated_version_ids'])->toBe($receipt['created_version_ids'])
+        ->and($again['catalog_revision_ids'])->toBe($receipt['catalog_revision_ids'])
+        ->and(LearningSessionVersion::count())->toBe(2)
+        ->and(LearningSessionVersion::where('status', 'draft')->count())->toBe(2);
 });
 
 it('rejects wrong owner token hash expiry and removed privileges', function (string $kind) {
@@ -152,7 +155,9 @@ it('publishes only reviewed catalog revisions and rejects stale bases', function
     $id = $receipt['catalog_revision_ids'][0];
     expect(fn () => $this->catalog->publish($this->admin, $id))->toThrow(ContentOperationException::class);
     $this->catalog->review($this->admin, $id, lifecycleChecks());
-    $second = lifecycleCommit($this->admin, lifecyclePreview($this->admin));
+    $changed = lifecycleData();
+    $changed['levels'][0]['title'] .= ' для повторения';
+    $second = lifecycleCommit($this->admin, lifecyclePreview($this->admin, $changed));
     $stale = $second['catalog_revision_ids'][0];
     $this->catalog->review($this->admin, $stale, lifecycleChecks());
     $this->catalog->publish($this->admin, $id);
@@ -175,7 +180,7 @@ it('requires explicit editorial checks and published catalog', function () {
     expect(LearningSession::whereNotNull('active_version_id')->count())->toBe(2);
 });
 
-it('switches the active version atomically while preserving old runs payloads and publication dates', function () {
+it('updates the stable published session while preserving the run snapshot and publication date', function () {
     $receipt = lifecycleCommit($this->admin, lifecyclePreview($this->admin));
     lifecyclePublishCatalog($this->admin, $receipt);
     lifecycleReview($this->admin, $receipt);
@@ -183,22 +188,22 @@ it('switches the active version atomically while preserving old runs payloads an
     $old = LearningSessionVersion::find($receipt['created_version_ids'][0]);
     $snapshot = $old->payload;
     $publishedAt = $old->published_at->toIso8601String();
-    $run = LearningRun::factory()->create(['user_id' => $this->admin->id, 'session_version_id' => $old->id]);
+    $run = LearningRun::factory()->create(['user_id' => $this->admin->id, 'session_version_id' => $old->id, 'snapshot' => $snapshot]);
     $data = lifecycleData();
     $data['sessions'] = [$data['sessions'][0]];
     $data['sessions'][0]['version'] = 2;
     $data['sessions'][0]['title'] .= ' новая версия';
     unset($data['levels'], $data['units']);
     $newReceipt = lifecycleCommit($this->admin, lifecyclePreview($this->admin, $data));
-    lifecycleReview($this->admin, $newReceipt);
-    $newId = $newReceipt['created_version_ids'][0];
-    $this->publisher->publish($this->admin, $newId);
-    $this->publisher->publish($this->admin, $newId);
-    expect($old->refresh()->status)->toBe(SessionVersionStatus::Archived)
-        ->and($old->payload)->toBe($snapshot)
+    expect($newReceipt['created_version_ids'])->toBe([])
+        ->and($newReceipt['updated_version_ids'])->toBe([$old->id])
+        ->and($old->refresh()->status)->toBe(SessionVersionStatus::Published)
+        ->and($old->payload['title'])->toBe($data['sessions'][0]['title'])
+        ->and($old->payload['version'])->toBe(1)
         ->and($old->published_at->toIso8601String())->toBe($publishedAt)
         ->and($run->refresh()->session_version_id)->toBe($old->id)
-        ->and($old->session->active_version_id)->toBe($newId)
+        ->and($run->snapshot)->toBe($snapshot)
+        ->and($old->session->active_version_id)->toBe($old->id)
         ->and($old->session->versions()->where('status', 'published')->count())->toBe(1);
 });
 
@@ -442,7 +447,8 @@ it('publishes revised material at the stable explicitly renamed URL', function (
     $data['sessions'][0]['public_page']['summary'] = 'Обновлённое публичное объяснение приветствий и знакомства перед практикой.';
     $next = lifecycleCommit($this->admin, lifecyclePreview($this->admin, $data));
     lifecycleReview($this->admin, $next);
-    $this->publisher->publish($this->admin, $next['created_version_ids'][0]);
+    expect($next['created_version_ids'])->toBe([])
+        ->and($next['updated_version_ids'])->toBe([$session->active_version_id]);
     $this->withoutVite()->get($renamed)->assertOk()->assertSee($data['sessions'][0]['public_page']['summary']);
     $this->get($old)->assertStatus(301)->assertRedirect(url($renamed));
     expect($session->fresh()->slug)->toBe('stable-published-address');

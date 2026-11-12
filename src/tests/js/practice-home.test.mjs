@@ -1,11 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { reactive } from 'vue';
 import { randomUUID } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { createPracticeHomeStore } from '../../resources/js/App/Learning/practiceHomeStore.js';
 import { newGuestState } from '../../resources/js/App/Learning/guestProgress.js';
 const stamp='2026-10-26T09:00:00.000Z';
-const snapshot=JSON.parse(readFileSync(new URL('../../resources/learning/templates/pre-a1-u01-examples.json',import.meta.url))).sessions[0];
+const snapshot=JSON.parse(readFileSync(new URL('../../resources/practice/templates/pre-a1-u01-examples.json',import.meta.url))).sessions[0];
 const deferred=()=>{let resolve,reject;const promise=new Promise((a,b)=>{resolve=a;reject=b;});return {promise,resolve,reject};};
 class Repository {
   constructor(){this.state=newGuestState({idFactory:randomUUID,now:stamp,timezone:'Europe/Moscow'});}
@@ -14,9 +15,14 @@ class Repository {
   async read(){return structuredClone(this.state);}
   async mutate(apply){const copy=structuredClone(this.state);const result=apply(copy);this.state=copy;return structuredClone(result);}
 }
+const lesson = {id:snapshot.id, title:snapshot.title, level:'PRE_A1', prerequisite_ids:[], duration_minutes:5};
+const outline = [
+  {id:'PRE_A1', title:'С нуля', published:true, units:[{id:'first', title:'Первая тема', sessions:[lesson]}]},
+  {id:'B1', title:'B1', published:false, units:[]},
+];
 const guestTransport={
-  async catalog(){return {sessions:[{id:snapshot.id,title:snapshot.title,level:'PRE_A1',prerequisite_ids:[],duration_minutes:5}]};},
-  async session(){return {snapshot,session_version_id:1,checking_policy_version:1};},
+  async catalog(){return {sessions:[lesson], access_outline:outline};},
+  async session(){return {snapshot,session_version_id:1,checking_policy_version:1,access_outline:outline};},
 };
 const home=(owner=7,level='PRE_A1')=>({profile:{owner_user_id:owner,current_level:level,timezone:'UTC',revision:1},candidate:{id:snapshot.id},run:null});
 const make=(extra={})=>createPracticeHomeStore({transport:{async today(){return home();},async history(){return {data:[]};}},
@@ -118,7 +124,194 @@ test('today can load without requesting unopened history, which is fetched when 
   assert.equal(todayCalls,1);
   assert.equal(historyCalls,0);
   assert.equal(store.state.history,null);
-  await store.refresh(7);
+  await store.loadHistory(7);
+  assert.equal(todayCalls,1);
   assert.equal(historyCalls,1);
   assert.equal(store.state.history.current_page,1);
+});
+
+
+test('selected routes replace late responses and a second reader reuses the same view', async () => {
+  const old = deferred();
+  let calls = 0;
+  const store = make({transport: {
+    today({unit}) {
+      calls++;
+      return unit === 'old' ? old.promise : Promise.resolve({...home(), route:{unit:{id:unit}}});
+    },
+  }});
+  const first = store.load(7, 1, {selection:{unit:'old'}});
+  const options = {selection:{unit:'new'}};
+  const current = store.load(7, 1, options);
+  assert.equal(store.load(7, 1, options), current);
+  await current;
+  old.resolve({...home(), route:{unit:{id:'old'}}});
+  assert.equal(await first, null);
+  assert.equal((await store.load(7, 1, options)).home.route.unit.id, 'new');
+  assert.equal(calls, 2);
+});
+
+test('account start uses the loaded profile and invalidates the view after acceptance', async () => {
+  let queued;
+  let profileCalls = 0;
+  let todayCalls = 0;
+  const repository = {
+    async pending() { return queued ? [queued] : []; },
+    async enqueue(owner, run, action, logical, request) {
+      queued = {local_id:1, action, run_id:run, client_event_id:logical.client_event_id, request};
+      return queued;
+    },
+    async seal() { return queued; },
+    async mark() { queued = undefined; },
+  };
+  const store = make({accountRepository:repository, transport:{
+    async today() { todayCalls++; return home(); },
+    async profile() { profileCalls++; return home().profile; },
+    async call(action, run, request) {
+      assert.equal(request.expected_owner_user_id, 7);
+      assert.equal(request.expected_revision, 1);
+      return {accepted_event_id:request.client_event_id, state:{owner_user_id:7, run_id:'accepted'}};
+    },
+  }});
+  await store.load(7);
+  assert.equal(await store.start(7), '/daily/run/accepted');
+  assert.equal(profileCalls, 0);
+  assert.equal(store.state.ready, false);
+  await store.load(7);
+  assert.equal(todayCalls, 2);
+});
+
+test('invalidation discards an in-flight view and clears cached history', async () => {
+  const old = deferred();
+  let calls = 0;
+  const store = make({transport:{
+    today() { return ++calls === 1 ? old.promise : Promise.resolve(home(7,'B1')); },
+    async history() { return {current_page:1,data:[{id:'history'}]}; },
+  }});
+  await store.loadHistory(7);
+  const pending = store.load(7);
+  store.invalidate(7);
+  await store.load(7);
+  old.resolve(home());
+  assert.equal(await pending, null);
+  assert.equal(store.state.home.profile.current_level, 'B1');
+  assert.equal(store.state.history, null);
+});
+
+test('guest direct topic separates lower-level access from completion and omits unrelated lesson lists', async () => {
+  const repository = new Repository();
+  repository.state.current_level = 'B1';
+  const store = make({guestRepository:repository});
+  const selected = await store.load(null, 1, {selection:{unit:'first'}});
+  assert.equal(selected.home.route.level.id, 'PRE_A1');
+  assert.equal(selected.home.route.lessons[0].status, 'available');
+  assert.equal(selected.home.route.lessons[0].review_only, true);
+  assert.equal(selected.home.candidate, null);
+  assert.equal(selected.home.route.contents[0].units[0].session_count, 1);
+  assert.equal(Object.hasOwn(selected.home.route.contents[0].units[0], 'sessions'), false);
+  const empty = await store.load(null, 1, {selection:{level:'B1'}});
+  assert.equal(empty.home.route.level.status, 'unavailable');
+  assert.deepEqual(empty.home.route.lessons, []);
+});
+
+test('cached route is refreshed after midnight in the profile timezone', async () => {
+  let instant = '2026-10-26T20:59:00.000Z';
+  let loads = 0;
+  const store = make({
+    now: () => instant,
+    transport: {async today() {
+      const result = home();
+      result.profile.timezone = 'Europe/Moscow';
+      result.local_date = ++loads === 1 ? '2026-10-26' : '2026-10-27';
+      return result;
+    }},
+  });
+  assert.equal((await store.load(7)).home.local_date, '2026-10-26');
+  await store.load(7);
+  assert.equal(loads, 1);
+  instant = '2026-10-26T21:01:00.000Z';
+  assert.equal((await store.load(7)).home.local_date, '2026-10-27');
+  assert.equal(loads, 2);
+});
+
+test('guest search distinguishes lower-level access from completed lessons', async () => {
+  const repository = new Repository();
+  const lockedLesson = {...lesson, id:'locked-lesson', title:'Вторая тема'};
+  const catalog = {
+    sessions: [lesson, lockedLesson],
+    access_outline: [{...outline[0], units:[{...outline[0].units[0], sessions:[lesson, lockedLesson]}]}, outline[1]],
+  };
+  const store = make({guestRepository:repository, guestTransport:{...guestTransport, catalog:async () => catalog}});
+  await store.load(null);
+  assert.equal(store.searchGuest('ВТОРАЯ', false).items[0].status, 'locked');
+  repository.state.current_level = 'B1';
+  await store.refresh(null);
+  assert.equal(store.searchGuest('ВТОРАЯ', false).items[0].status, 'available');
+  assert.deepEqual(store.searchGuest('ВТОРАЯ', true).items, []);
+});
+
+test('a lost route start receipt keeps the selected lesson and event key when retried', async () => {
+  let queued;
+  const requests = [];
+  const repository = {
+    async pending() { return queued ? [queued] : []; },
+    async enqueue(owner, run, action, logical, request) {
+      queued = {local_id:1, action, run_id:run, client_event_id:logical.client_event_id, request};
+      return queued;
+    },
+    async seal() { return queued; },
+    async mark() { queued = undefined; },
+  };
+  const store = make({accountRepository:repository, transport:{
+    async today() { return home(); },
+    async call(action, run, request) {
+      requests.push(request);
+      if (requests.length === 1) throw new Error('lost acknowledgement');
+      return {accepted_event_id:request.client_event_id, state:{owner_user_id:7, run_id:'accepted'}};
+    },
+  }});
+  const first = store.start(7, 'selected-lesson');
+  assert.equal(first, store.start(7, 'selected-lesson'));
+  await assert.rejects(first);
+  assert.equal(await store.start(7, 'selected-lesson'), '/daily/run/accepted');
+  assert.equal(requests[0].route_start, true);
+  assert.equal(requests[0].session_id, 'selected-lesson');
+  assert.deepEqual(requests[0], requests[1]);
+});
+
+test('guest route opening another lesson reuses the existing unfinished run without loading content', async () => {
+  let loads = 0;
+  const store = make({guestTransport:{...guestTransport, async session(id) {
+    loads++;
+    assert.equal(id, snapshot.id);
+    return guestTransport.session();
+  }}});
+  const first = await store.start(null, snapshot.id);
+  assert.equal(await store.start(null, 'a-different-lesson'), first);
+  assert.equal(loads, 1);
+  assert.equal(Object.values(store.state.guest.runs)[0].kind, 'extra');
+});
+
+test('starting a filtered review persists plain word IDs from the reactive plan', async () => {
+  let queued;
+  const store = make({
+    accountRepository: {
+      async pending() { return queued ? [queued] : []; },
+      async enqueue(owner, run, action, logical, request) {
+        queued = {local_id:1, action, run_id:run, client_event_id:logical.client_event_id, request:structuredClone(request)};
+        return queued;
+      },
+      async seal() { return queued; },
+      async mark() { queued = undefined; },
+    },
+    transport: {
+      async profile() { return home().profile; },
+      async call(action, run, input) {
+        assert.equal(input.review_mode, 'manual');
+        assert.deepEqual(input.word_ids, [27, 31]);
+        return {accepted_event_id:input.client_event_id, state:{owner_user_id:7, run_id:'review'}};
+      },
+    },
+  });
+  assert.equal(await store.startReview(7, {wordIds:reactive([27, 31])}), '/daily/run/review');
 });

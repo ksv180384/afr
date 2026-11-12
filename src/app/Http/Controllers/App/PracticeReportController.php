@@ -25,7 +25,7 @@ class PracticeReportController extends Controller
             $session = $version->session;
             abort_unless($version->published_at && $session->activeVersion?->status->value === 'published'
                 && $session->archived_at === null && $session->unit->published_at && ! $session->unit->archived_at
-                && $session->levelDefinition->published_at, 404);
+                && $session->levelDefinition->isPublished(), 404);
         }
         if (! empty($input['task_id']) && ! collect($version->payload['tasks'])->contains('id', $input['task_id'])) {
             throw ValidationException::withMessages(['task_id' => 'Шаг отсутствует в указанной версии.']);

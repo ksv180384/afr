@@ -4,9 +4,10 @@ import { readFileSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
 import { newGuestState, migrateGuestState, changeGuestProfile, addGuestRun, applyGuestOperation, guestRunView } from '../../resources/js/App/Learning/guestProgress.js';
 import { GuestProgressRepository, GUEST_DATABASE, GUEST_DATABASE_VERSION } from '../../resources/js/App/Learning/guestRepository.js';
+import { freezeGuestBatch } from '../../resources/js/App/Learning/guestSync.js';
 import { createGuestAdapter } from '../../resources/js/App/Learning/guestAdapter.js';
 
-const templates = JSON.parse(readFileSync(new URL('../../resources/learning/templates/pre-a1-u01-examples.json',import.meta.url)));
+const templates = JSON.parse(readFileSync(new URL('../../resources/practice/templates/pre-a1-u01-examples.json',import.meta.url)));
 const stamp = '2026-10-25T20:55:00.000Z';
 const copy = structuredClone;
 const seed = () => newGuestState({idFactory:randomUUID,now:stamp,timezone:'Europe/Moscow'});
@@ -36,7 +37,7 @@ test('guest storage migrations preserve snapshots outbox owner binding and recei
   const old = seed();
   old.storage_schema_version = 1; delete old.sync_receipts; delete old.bound_user_id;
   const migrated = migrateGuestState(old);
-  assert.equal(migrated.storage_schema_version,4);
+  assert.equal(migrated.storage_schema_version,6);
   assert.deepEqual(migrated.sync_receipts,{});
   assert.equal(migrated.bound_user_id,null);
   assert.equal(migrated.guest_id,old.guest_id);
@@ -243,4 +244,42 @@ test('explicit extra session from public catalog keeps the selected level and st
   assert.equal(state.runs[input.runId].snapshot.level,'A1');
   const blocked=copy(snapshot); blocked.prerequisite_ids=['NOT_COMPLETED'];
   assert.throws(()=>addGuestRun(state,{...input,source:content(blocked),runId:randomUUID(),kind:'extra'}),/предыдущие/);
+});
+
+
+test('twelve-task guest run reloads at Q09, retains late help, and seals all steps for synchronization', async () => {
+  const snapshot = JSON.parse(readFileSync(new URL('../Fixtures/Learning/twelve-task-package.json', import.meta.url))).sessions[0];
+  const repository = new MemoryTransactions(seed());
+  const runId = await repository.mutate(state => append(state, snapshot));
+  const pinned = copy(repository.state.runs[runId].snapshot);
+  let adapter = adapterFor(repository, runId);
+  let view = await adapter.load();
+  for (let index = 0; index < 12; index++) {
+    assert.equal(view.total, 12);
+    assert.equal(view.position, index + 1);
+    assert.equal(view.task.id, snapshot.tasks[index].id);
+    if (view.introductions.length) view = await adapter.load({introductionSeen:view.presentation.presentation_id});
+    if (index === 8) {
+      view = await adapter.help({client_event_id:randomUUID(),presentation_id:view.presentation.presentation_id,event_type:'help',help_kind:'audio_transcript'});
+      // Reopen the adapter using only persisted state, including its pinned snapshot.
+      adapter = adapterFor(repository, runId, 'reload-q09');
+      view = await adapter.load();
+      assert.equal(view.task.id, 'Q09');
+      assert.equal(view.presentation.help_used, true);
+    }
+    view = await adapter.answer({client_event_id:randomUUID(),presentation_id:view.presentation.presentation_id,answer:correct(view.task)});
+    if (index < 11) view = await adapter.load({advanceFrom:view.presentation.presentation_id});
+  }
+  view = await adapter.finish();
+  assert.equal(view.finished, true);
+  assert.equal(view.summary.score_denominator, 12);
+  assert.equal(view.summary.score_numerator, 11);
+  assert.equal(view.summary.processed_steps, 12);
+  assert.deepEqual(repository.state.runs[runId].snapshot, pinned);
+  const batch = freezeGuestBatch(repository.state, 7, randomUUID);
+  const bundle = batch.payload.runs.find(run => run.guest_run_id === runId);
+  assert.equal(bundle.snapshot.tasks.length, 12);
+  assert.equal(bundle.presentation_ids.length, 12);
+  assert.ok(bundle.events.some(event => event.action === 'finish'));
+  assert.ok(bundle.events.some(event => event.action === 'answer' && event.presentation_id === bundle.presentation_ids[11]));
 });

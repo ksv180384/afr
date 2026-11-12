@@ -47,9 +47,14 @@ class PracticeCatalogController extends Controller
         $data = $catalog->page($level, $unit, $session);
         $queries = array_filter($request->query(), fn ($value, $key) => ! str_starts_with($key, 'utm_') && ! in_array($key, ['gclid', 'fbclid', 'page']), ARRAY_FILTER_USE_BOTH);
         ksort($queries);
+        $routeSelection = $level === null ? array_filter($request->only('level', 'unit'),
+            fn ($value) => is_string($value) && $value !== '' && strlen($value) <= 128) : [];
         if ($queries) {
             $data['seo']['noIndex'] = true;
-            $data['seo']['canonicalUrl'] .= '?'.http_build_query($queries);
+            $canonicalQueries = $level === null ? array_diff_key($queries, array_flip(['level', 'unit'])) : $queries;
+            if ($canonicalQueries) {
+                $data['seo']['canonicalUrl'] .= '?'.http_build_query($canonicalQueries);
+            }
         }
         $outline = app(\App\Services\Learning\LearningAccessService::class)->outline();
         $accessService = app(\App\Services\Learning\LearningAccessService::class);
@@ -60,7 +65,8 @@ class PracticeCatalogController extends Controller
         }
         $authUser = Helper::getUserData();
 
-        return Inertia::render('Practice/Index', ['catalog' => $data, 'accessOutline' => $outline, 'accessNotice' => $request->session()->get('practice_access_notice'), 'public_practice' => true, 'authUser' => $authUser, 'auth' => ['user' => $authUser]])
+        return Inertia::render('Practice/Index', ['catalog' => $data, 'accessOutline' => $level === null ? [] : $outline, 'accessNotice' => $request->session()->get('practice_access_notice'), 'public_practice' => true, 'routeSelection' => (object) $routeSelection,
+            'levels' => $level === null ? \App\Services\Learning\AvailableLevels::choices() : [], 'authUser' => $authUser, 'auth' => ['user' => $authUser]])
             ->rootView('practice')->toResponse($request)->withHeaders([
                 'Cache-Control' => 'private, no-store', 'X-Robots-Tag' => $data['seo']['noIndex'] ? 'noindex, follow' : 'index, follow',
             ]);

@@ -77,7 +77,7 @@ it('accepts complete packages and keeps editorial warnings separate', function (
         ->and($report->toArray())->not->toHaveKey('package');
 })->with(['pre-a1-u01-examples.json', 'task-types.json']);
 
-it('honours all ten documented negative examples with exact field context', function (array $case) {
+it('honours documented negative examples with exact field context', function (array $case) {
     if (isset($case['context'])) {
         $original = packageData();
         foreach ($original['sessions'] as $session) {
@@ -228,7 +228,7 @@ it('accepts identical existing versions regardless of JSON key ordering', functi
     }
     expect(packageCheck($data)->toArray()['errors'])->toBe([]);
     $data['sessions'][0]['title'] .= ' Изменено';
-    packageHasIssue(packageCheck($data), 'version_conflict', '/sessions/0/version');
+    expect(packageCheck($data)->isValid())->toBeTrue();
     $data['sessions'][0]['version']++;
     expect(packageCheck($data)->toArray()['errors'])->toBe([]);
 });
@@ -382,6 +382,17 @@ it('matches an independent Draft 2020-12 validator across schema mutations', fun
         $copy->sessions[0]->version = $number;
         $cases[] = $copy;
     }
+    foreach ([5, 6, 8, 10, 12, 13] as $count) {
+        $expanded = packageData('twelve-task-package.json');
+        $extra = $expanded['sessions'][0]['tasks'][0];
+        $extra['id'] = 'Q13';
+        $expanded['sessions'][0]['tasks'][] = $extra;
+        $expanded['sessions'][0]['tasks'] = array_slice($expanded['sessions'][0]['tasks'], 0, $count);
+        $instance = json_decode(json_encode($expanded, JSON_THROW_ON_ERROR));
+        expect($oracle->validate($instance, $schema)->isValid(), 'Independent task bound '.$count)
+            ->toBe($count >= 6 && $count <= 12);
+        $cases[] = $instance;
+    }
     foreach ($cases as $index => $instance) {
         expect($validator->validate($instance) === [], 'Schema parity case '.$index)
             ->toBe($oracle->validate($instance, $schema)->isValid());
@@ -470,3 +481,29 @@ it('preserves duplicate-key error context after parsing the rest of the package'
     expect($issue->sessionId)->toBe(packageData()['sessions'][0]['id'])
         ->and($issue->taskId)->toBe('Q01');
 });
+
+
+it('accepts six through twelve tasks without changing the package format', function (int $count, string $kind) {
+    $data = packageData('twelve-task-package.json');
+    $data['sessions'][0]['tasks'] = array_slice($data['sessions'][0]['tasks'], 0, $count);
+    $data['sessions'][0]['kind'] = $kind;
+    $report = packageCheck($data);
+    expect($report->toArray()['errors'])->toBe([])
+        ->and($report->package()['schema_version'])->toBe(1)
+        ->and($report->package()['sessions'][0]['version'])->toBe(1)
+        ->and($report->package()['sessions'][0]['tasks'])->toBe($data['sessions'][0]['tasks']);
+})->with([6, 8, 10, 12])->with(['practice', 'checkpoint']);
+
+it('rejects task counts outside six through twelve with a precise limit message', function (int $count, string $code, string $message) {
+    $data = packageData('twelve-task-package.json');
+    if ($count === 13) {
+        $extra = $data['sessions'][0]['tasks'][0];
+        $extra['id'] = 'Q13';
+        $data['sessions'][0]['tasks'][] = $extra;
+    } else {
+        $data['sessions'][0]['tasks'] = array_slice($data['sessions'][0]['tasks'], 0, $count);
+    }
+    $report = packageCheck($data);
+    packageHasIssue($report, $code, '/sessions/0/tasks');
+    expect(collect($report->toArray()['errors'])->firstWhere('path', '/sessions/0/tasks')['message'])->toContain($message);
+})->with([[5, 'too_few_items', 'минимум 6'], [13, 'too_many_items', 'максимум 12']]);

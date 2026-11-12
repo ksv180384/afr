@@ -2,16 +2,16 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { randomUUID } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import { newGuestState, addGuestRun, applyGuestOperation, migrateGuestState, guestRunView } from '../../resources/js/App/Learning/guestProgress.js';
+import { newGuestState, changeGuestProfile, addGuestRun, applyGuestOperation, migrateGuestState, guestRunView } from '../../resources/js/App/Learning/guestProgress.js';
 import { applyGuestVocabularyEvent, guestWordSource, guestTestPlan, guestTestSource, selectGuestBlock } from '../../resources/js/App/Learning/guestVocabulary.js';
 
-const session = JSON.parse(readFileSync(new URL('../../resources/learning/templates/pre-a1-u01-examples.json',import.meta.url))).sessions[0];
+const session = JSON.parse(readFileSync(new URL('../../resources/practice/templates/pre-a1-u01-examples.json',import.meta.url))).sessions[0];
 const parity = JSON.parse(readFileSync(new URL('../Fixtures/Learning/vocabulary-parity.json',import.meta.url)));
 const at = '2026-10-25T12:00:00.000Z';
 const stateFor = () => newGuestState({idFactory:randomUUID,now:at,timezone:'Europe/Moscow'});
-const start = (state,source={session_version_id:1,checking_policy_version:1,snapshot:session},kind='daily') => {
+const start = (state,source={session_version_id:1,checking_policy_version:1,snapshot:session},kind='daily',instant=at) => {
   const runId=randomUUID();
-  addGuestRun(state,{source,runId,presentationIds:source.snapshot.tasks.map(()=>randomUUID()),eventId:randomUUID(),tabId:'tab',now:at,kind});
+  addGuestRun(state,{source,runId,presentationIds:source.snapshot.tasks.map(()=>randomUUID()),eventId:randomUUID(),tabId:'tab',now:instant,kind});
   return state.runs[runId];
 };
 const act = (state,run,action,extra={}) => {
@@ -19,14 +19,14 @@ const act = (state,run,action,extra={}) => {
   const result=applyGuestOperation(state,run.id,'tab',action,input);
   return result;
 };
-const end = (state,run) => {
+const end = (state,run,instant=at) => {
   while(true) {
     const current=run.presentations[run.cursor];
-    if (!current.first_result) act(state,run,'help',{presentation_id:current.presentation_id,event_type:'unknown'});
+    if (!current.first_result) act(state,run,'help',{presentation_id:current.presentation_id,event_type:'unknown',client_occurred_at:instant});
     if(run.cursor===run.presentations.length-1) break;
-    act(state,run,'advance',{presentation_id:current.presentation_id});
+    act(state,run,'advance',{presentation_id:current.presentation_id,client_occurred_at:instant});
   }
-  return act(state,run,'finish');
+  return act(state,run,'finish',{client_occurred_at:instant});
 };
 
 test('PHP and guest vocabulary transitions share the same parity fixture including run success after a later error', () => {
@@ -35,13 +35,35 @@ test('PHP and guest vocabulary transitions share the same parity fixture includi
   state.vocabulary[word.lexeme_key]=word;
   for (const [index,entry] of parity.events.entries()) {
     const result={assessed_lexemes:[{lexeme_key:word.lexeme_key,effect:entry.kind}]};
-    const event={client_event_id:'event-'+index,client_occurred_at:at};
+    const event={client_event_id:'event-'+index,client_occurred_at:entry.at};
     applyGuestVocabularyEvent(state,{id:'run-'+entry.run},event,result);
     applyGuestVocabularyEvent(state,{id:'run-'+entry.run},event,result);
     for(const key of ['streak','errors','review_step','needs_review']) assert.equal(word[key],entry[key],key+' at '+index);
   }
-  assert.equal(word.next_review_at,'2026-11-24T12:00:00.000Z');
+  assert.equal(word.next_review_at,'2026-11-30T12:00:00.000Z');
   assert.equal(Object.keys(state.vocabulary_effects).length,parity.events.length);
+});
+
+test('raising and lowering the guest level preserve vocabulary and review schedules without importing skipped words', () => {
+  for (const hasWords of [false,true]) {
+    const state=stateFor();
+    if (hasWords) end(state,start(state));
+    const vocabulary=structuredClone(state.vocabulary);
+    const effects=structuredClone(state.vocabulary_effects);
+    const runEffects=structuredClone(state.vocabulary_run_effects);
+    for (const level of ['B1','PRE_A1']) {
+      changeGuestProfile(state,{client_event_id:randomUUID(),expected_revision:state.profile_revision,current_level:level,
+        timezone:state.timezone,client_occurred_at:at});
+      assert.equal(state.current_level,level);
+      assert.deepEqual(state.vocabulary,vocabulary);
+      assert.deepEqual(state.vocabulary_effects,effects);
+      assert.deepEqual(state.vocabulary_run_effects,runEffects);
+      if (hasWords) {
+        const source=guestTestSource(state,[session.vocabulary[0].lexeme_key],randomUUID(),randomUUID);
+        assert.ok(source.snapshot.tasks.length>0);
+      }
+    }
+  }
 });
 
 test('new guest words appear only at finish, preserve transcription and sources, and are not duplicated by another finish', () => {
@@ -73,13 +95,15 @@ test('guest wrong then helped correction then three separate word tests clears t
   act(state,run,'answer',{presentation_id:id,event_type:'answer',answer:{choice_id:'b'}});
   act(state,run,'answer',{presentation_id:id,event_type:'answer',answer:{choice_id:'a'}});
   assert.equal(state.vocabulary[key].streak,0);
+  assert.equal(state.vocabulary[key].last_independent_success_at,null);
   end(state,run);
   const errors=state.vocabulary[key].errors;
   for(let i=1;i<=3;i++) {
+    const instant=new Date(Date.parse(at)+i*86400000).toISOString();
     source=guestTestSource(state,[key],randomUUID(),randomUUID);
-    run=start(state,source,'vocabulary_test');
-    act(state,run,'answer',{presentation_id:run.presentations[0].presentation_id,event_type:'answer',answer:{choice_id:'a'}});
-    end(state,run);
+    run=start(state,source,'vocabulary_test',instant);
+    act(state,run,'answer',{presentation_id:run.presentations[0].presentation_id,event_type:'answer',answer:{choice_id:'a'},client_occurred_at:instant});
+    end(state,run,instant);
     assert.equal(state.vocabulary[key].streak,i);
     assert.equal(state.vocabulary[key].needs_review,i<3);
   }
@@ -92,7 +116,7 @@ test('v2 upgrade reconstructs ordered event effects and completed words exactly 
   old.storage_schema_version=2; old.vocabulary={}; delete old.vocabulary_effects; delete old.vocabulary_run_effects;
   for (const value of Object.values(old.runs)) { delete value.vocabulary_events; delete value.result.words_added; delete value.result.words_existing; }
   const migrated=migrateGuestState(old);
-  assert.equal(migrated.storage_schema_version,4);
+  assert.equal(migrated.storage_schema_version,6);
   assert.deepEqual(migrated.vocabulary,current.vocabulary);
   assert.equal(migrated.runs[run.id].result.score_numerator,current.runs[run.id].result.score_numerator);
   assert.deepEqual(migrated.outbox,current.outbox);

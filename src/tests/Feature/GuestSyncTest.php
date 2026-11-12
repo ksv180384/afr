@@ -19,7 +19,7 @@ beforeEach(function () {
     $this->seed(LearningLevelSeeder::class);
     $this->learner = User::factory()->create();
     $this->actingAs($this->learner);
-    $this->payload = json_decode(file_get_contents(resource_path('learning/templates/pre-a1-u01-examples.json')), true)['sessions'][0];
+    $this->payload = json_decode(file_get_contents(resource_path('practice/templates/pre-a1-u01-examples.json')), true)['sessions'][0];
     LearningLevel::where('code', 'PRE_A1')->update(['published_at' => now('UTC')]);
     $unit = LearningUnit::factory()->create(['published_at' => now('UTC')]);
     $row = LearningSession::factory()->create(['unit_id' => $unit->id, 'external_id' => $this->payload['id']]);
@@ -167,6 +167,7 @@ it('keeps the vocabulary boundary across batches and respects newer native answe
     $word = PersonalVocabulary::where('user_id', $this->learner->id)->where('lexeme_key', $key)->sole();
     $errors = $word->errors;
     foreach ([30, 40] as $offset) {
+        $this->travel(1)->days();
         $review = syncReviewFixture($this, $this->payload['vocabulary'][0], $offset);
         $batch['batch_id'] = (string) Str::uuid();
         $batch['level_events'] = [];
@@ -175,6 +176,7 @@ it('keeps the vocabulary boundary across batches and respects newer native answe
     }
     expect($word->fresh()->streak)->toBe(2);
     expect($word->fresh()->errors)->toBe($errors);
+    $this->travel(1)->days();
     $service = app(AccountRunService::class);
     $state = $service->start($this->learner, ['kind' => 'vocabulary_test', 'word_ids' => [$word->id], 'client_event_id' => (string) Str::uuid(), 'expected_revision' => $service->profile($this->learner)['revision']])['state'];
     $service->event($this->learner, $state['run_id'], 'answer', ['client_event_id' => (string) Str::uuid(), 'expected_revision' => $state['revision'], 'presentation_id' => $state['presentation']['presentation_id'], 'event_type' => 'answer', 'answer' => ['choice_id' => 'a']]);
@@ -260,4 +262,48 @@ it('registers an unverified learner who can sync from verification without invok
     $this->get('/verify-email')->assertOk();
     $this->postJson('/daily/api/guest-sync', syncBatch([syncFixture($this, true, 2)]))->assertOk()->assertJsonCount(0, 'rejected');
     expect(LearningRun::where('user_id', $created->id)->count())->toBe(1);
+});
+
+
+it('replays all twelve guest presentations once and preserves the full result denominator', function () {
+    $this->payload = json_decode(file_get_contents(base_path('tests/Fixtures/Learning/twelve-task-package.json')), true)['sessions'][0];
+    $this->version->update(['payload' => $this->payload, 'checksum' => CanonicalJson::hash($this->payload)]);
+    $bundle = syncFixture($this, true, 2);
+    $batch = syncBatch([$bundle]);
+    $receipt = $this->postJson('/daily/api/guest-sync', $batch)->assertOk()->json();
+    expect($receipt['rejected'])->toBe([]);
+    $run = LearningRun::findOrFail($receipt['mapping'][$bundle['guest_run_id']]['server_run_id']);
+    expect($run->status->value)->toBe('completed')->and($run->snapshot['tasks'])->toHaveCount(12)
+        ->and($run->presentations()->count())->toBe(12)->and($run->result['score_denominator'])->toBe(12)
+        ->and($run->result['processed_steps'])->toBe(12);
+    $this->postJson('/daily/api/guest-sync', $batch)->assertOk()->assertExactJson($receipt);
+    expect(LearningRun::count())->toBe(1);
+});
+
+
+it('throttles imported successes by trusted receipt time across batches and ignores fast-forwarded guest clocks', function () {
+    $this->travelTo(\Carbon\Carbon::parse('2026-11-06T12:00:00Z'));
+    $batch = syncBatch([syncFixture($this, true, 2)]);
+    $this->postJson('/daily/api/guest-sync', $batch)->assertOk();
+    $word = PersonalVocabulary::where('user_id', $this->learner->id)->where('lexeme_key', $this->payload['vocabulary'][0]['lexeme_key'])->sole();
+    $batch['level_events'] = [];
+    $batch['runs'] = [syncReviewFixture($this, $this->payload['vocabulary'][0], 30)];
+    $batch['batch_id'] = (string) Str::uuid();
+    $this->postJson('/daily/api/guest-sync', $batch)->assertOk()->assertJsonCount(0, 'rejected');
+    expect($word->fresh()->review_step)->toBe(1);
+    $this->travel(10)->minutes();
+    $future = syncReviewFixture($this, $this->payload['vocabulary'][0], 40);
+    $future['started_at'] = '2099-01-01T00:00:00Z';
+    $future['local_date'] = '2099-01-01';
+    foreach ($future['events'] as &$event) { $event['client_occurred_at'] = '2099-01-01T00:00:00Z'; } unset($event);
+    $batch['runs'] = [$future];$batch['batch_id'] = (string) Str::uuid();
+    $receipt = $this->postJson('/daily/api/guest-sync', $batch)->assertOk()->assertJsonCount(0, 'rejected')->json();
+    expect($receipt['mapping'][$future['guest_run_id']]['clock_warning'])->toBeTrue();
+    expect($word->fresh()->review_step)->toBe(1);expect($word->fresh()->streak)->toBe(1);
+    $this->travelTo(\Carbon\Carbon::parse('2026-11-07T12:00:00Z'));
+    $this->postJson('/daily/api/guest-sync', $batch)->assertExactJson($receipt);
+    $batch['batch_id'] = (string) Str::uuid();$batch['runs'] = [syncReviewFixture($this, $this->payload['vocabulary'][0], 50)];
+    $this->postJson('/daily/api/guest-sync', $batch)->assertOk()->assertJsonCount(0, 'rejected');
+    expect($word->fresh()->review_step)->toBe(2);expect($word->fresh()->streak)->toBe(2);
+    expect(\App\Services\Learning\VocabularySuccessWindow::latest($word->fresh())->toIso8601String())->toBe('2026-11-07T12:00:00+00:00');
 });

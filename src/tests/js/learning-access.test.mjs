@@ -20,7 +20,7 @@ test('a missing previous level never unlocks the next one', () => {
 });
 test('an extra guest run cannot skip topics or levels when the selected profile has not reached that level', () => {
   const state = newGuestState({idFactory:randomUUID,now:'2026-10-31T09:00:00Z',timezone:'UTC'});
-  const original = JSON.parse(readFileSync(new URL('../../resources/learning/templates/pre-a1-u01-examples.json',import.meta.url))).sessions[0];
+  const original = JSON.parse(readFileSync(new URL('../../resources/practice/templates/pre-a1-u01-examples.json',import.meta.url))).sessions[0];
   const source = {snapshot:{...original,id:'S4',level:'A1',prerequisite_ids:[]},checking_policy_version:1,session_version_id:1,access_outline:fixture.outline};
   state.current_level = 'PRE_A1';
   const input = {source,runId:randomUUID(),presentationIds:original.tasks.map(randomUUID),eventId:randomUUID(),tabId:randomUUID(),now:'2026-10-31T09:00:00Z',kind:'extra'};
@@ -44,7 +44,7 @@ test('the profile opens lower levels for review without recording false completi
 test('guest completion raises the selected level once and preserves a syncable profile event', () => {
   const state = newGuestState({idFactory:randomUUID,now:'2026-10-31T09:00:00Z',timezone:'UTC'});
   state.current_level = 'A1';
-  const original = JSON.parse(readFileSync(new URL('../../resources/learning/templates/pre-a1-u01-examples.json',import.meta.url))).sessions[0];
+  const original = JSON.parse(readFileSync(new URL('../../resources/practice/templates/pre-a1-u01-examples.json',import.meta.url))).sessions[0];
   const source = {snapshot:{...original,id:'S4',level:'A1',prerequisite_ids:[]},checking_policy_version:1,session_version_id:1,access_outline:fixture.outline};
   const runId = randomUUID(), tabId = randomUUID();
   addGuestRun(state,{source,runId,promotionEventId:randomUUID(),presentationIds:original.tasks.map(randomUUID),eventId:randomUUID(),tabId,now:'2026-10-31T09:00:00Z',kind:'extra'});

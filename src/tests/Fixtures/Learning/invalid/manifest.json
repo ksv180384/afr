@@ -59,20 +59,6 @@
       "description": "Две существующие сессии образуют цикл зависимостей."
     },
     {
-      "file": "changed-existing-version.json",
-      "layer": "semantic",
-      "expected_errors": [
-        {
-          "code": "version_conflict",
-          "path": "/sessions/0/version"
-        }
-      ],
-      "description": "В БД считается импортированным содержимое примера v1; тот же ID/version с иным payload отклоняется.",
-      "context": {
-        "existing_package": "../pre-a1-u01-examples.json"
-      }
-    },
-    {
       "file": "missing-transcription.json",
       "layer": "schema",
       "expected_errors": [

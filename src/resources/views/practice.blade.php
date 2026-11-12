@@ -20,9 +20,9 @@
 </head>
 <body class="font-sans antialiased">
   <div id="app" data-page="{{ json_encode($page) }}">
-    <div class="practice-static">
+    <div class="practice-static practice-with-navigation">
     <header class="practice-server-header"><a href="/">Главная</a><a href="/practice">Практика</a><a href="/grammar">Грамматика</a><a href="/lessons">Уроки</a><a href="/dictionary">Словарь</a><a href="/games">Игры</a></header>
-    <main class="practice-shell">
+    <main class="practice-shell practice-columns">
       @include('practice.content', ['catalog' => $catalog])
     </main></div>
   </div>

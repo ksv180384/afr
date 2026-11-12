@@ -4,17 +4,18 @@ import { Link, router } from '@inertiajs/vue3';
 import { usePracticeHome } from '@/App/Learning/practiceHome.js';
 import { learningAccess, completedGuestSessions, decorateLearningCatalog } from '@/App/Learning/learningAccess.js';
 import PracticeLayout from '@/App/Layouts/PracticeLayout.vue';
+import DailyPractice from '@/App/Pages/Daily/Index.vue';
 import SeoHead from '@/App/Components/Seo/SeoHead.vue';
 import FrenchText from '@/App/Components/Learning/FrenchText.vue';
 import PronunciationNotes from '@/App/Components/Learning/PronunciationNotes.vue';
 
-const props = defineProps({catalog:Object, accessOutline:Array, accessNotice:String, authUser: { type: Object, default: null }});
+const props = defineProps({catalog:Object, accessOutline:Array, accessNotice:String, routeSelection:Object, levels:Array, authUser: { type: Object, default: null }});
 const accessReady = ref(!!props.authUser);
 const completed = ref([]);
 const profileLevel = ref('PRE_A1');
-const catalog = computed(() => props.authUser || !props.accessOutline ? props.catalog : decorateLearningCatalog(props.catalog, learningAccess(props.accessOutline, completed.value, profileLevel.value)));
+const catalog = computed(() => props.authUser || props.catalog.kind === 'index' || !props.accessOutline ? props.catalog : decorateLearningCatalog(props.catalog, learningAccess(props.accessOutline, completed.value, profileLevel.value)));
 onMounted(async () => {
-  if (props.authUser) return;
+  if (props.authUser || props.catalog.kind === 'index') { accessReady.value = true; return; }
   try { const repository = usePracticeHome().guestRepository; await repository.archiveBound(); const state = await repository.read(); completed.value = completedGuestSessions(state); profileLevel.value = state?.current_level ?? 'PRE_A1'; }
   catch { completed.value = []; }
   accessReady.value = true;
@@ -23,15 +24,18 @@ onMounted(async () => {
 </script>
 <template>
   <seo-head :title="catalog.seo.title" :description="catalog.seo.description" :canonical-url="catalog.seo.canonicalUrl" :no-index="catalog.seo.noIndex" :robots="catalog.seo.noIndex?'noindex, follow':'index, follow'" :json-ld="catalog.seo.jsonLd" />
-  <practice-layout :auth-user="authUser" :title="catalog.title" active="catalog"><div class="practice-body">
+  <practice-layout :auth-user="authUser" :title="catalog.kind === 'index' ? 'Практика' : catalog.title" active="learn">
+    <p v-if="catalog.kind === 'index' && accessNotice" role="status" class="practice-locked-notice">{{ accessNotice }}</p>
+    <daily-practice v-if="catalog.kind === 'index'" :auth-user="authUser" :route-selection="routeSelection" :levels="levels" enabled embedded />
+    <div class="practice-body" :class="{ 'practice-public-catalog': catalog.kind === 'index' }">
+      <h2 v-if="catalog.kind === 'index'">{{ catalog.title }}</h2>
       <nav v-if="catalog.kind!=='index'" aria-label="Хлебные крошки" class="practice-breadcrumbs"><template v-for="(crumb,index) in catalog.breadcrumbs" :key="crumb.path">
         <Link v-if="index<catalog.breadcrumbs.length-1" :href="crumb.path">{{ crumb.title }}</Link><span v-else aria-current="page">{{ crumb.title }}</span><span v-if="index<catalog.breadcrumbs.length-1" aria-hidden="true">/</span>
       </template></nav>
-      <p v-if="accessNotice" role="status" class="practice-locked-notice">{{ accessNotice }}</p>
+      <p v-if="catalog.kind !== 'index' && accessNotice" role="status" class="practice-locked-notice">{{ accessNotice }}</p>
       <p v-if="catalog.access?.locked" role="status">{{ catalog.access.reason }}</p>
       <template v-if="!catalog.access?.locked">
       <p>{{ catalog.summary }}</p>
-      <p v-if="catalog.kind==='index'">Сессия обычно занимает около пяти минут: сначала знакомство с выражениями, затем вопросы и разбор. Занятия открываются по порядку. Завершённые материалы доступны для повторения. Без регистрации прогресс сохраняется в этом браузере.</p>
       <template v-if="catalog.outcomes.length"><h2>Чему вы научитесь</h2><ul><li v-for="outcome in catalog.outcomes" :key="outcome">{{ outcome }}</li></ul></template>
       <pronunciation-notes :notes="catalog.notes" />
       <p v-if="!catalog.indexable" role="status">Материалы этой страницы ещё готовятся. Новые занятия появятся после публикации.</p>
@@ -65,12 +69,13 @@ onMounted(async () => {
 </template>
 <style>
 .practice-lock,.practice-locked-notice { color:#7c4a03; } .practice-completed { color:#21613b; }
+.practice-public-catalog > h2:first-child { margin-top:.45rem; }
 .practice-body h2 { font-size:1.3rem; font-weight:bold; margin:1.5rem 0 .7rem; } .practice-body h3 { font-size:1.1rem; font-weight:bold; }
 .practice-body p { line-height:1.7; margin:.7rem 0; white-space:pre-line; } .practice-body a { color:#155e91; text-decoration:underline; }
 .practice-breadcrumbs { display:flex; gap:.5rem 1rem; flex-wrap:wrap; margin:.5rem 0; }
 .practice-breadcrumbs a,.practice-body>p>a { display:inline-flex; align-items:center; min-height:44px; }
 .practice-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)); gap:1rem; }
-.practice-cards>li,.practice-word,.practice-french { background:#fff; padding:1rem; border:1px solid #cbd5e1; border-radius:.25rem; margin:.5rem 0; }
-.practice-examples { display:grid; gap:1rem; margin:1rem 0; } .practice-examples>li { padding:1rem; border:1px solid #cbd5e1; border-radius:.25rem; } .practice-transcription { color:#475569; } .practice-body .practice-primary { display:inline-flex; min-height:44px; align-items:center; padding:.7rem 1rem; background:#17658b; color:white; text-decoration:none; border-radius:.25rem; }
+.practice-cards>li,.practice-word,.practice-french { background:#fff; padding:1rem; border:1px solid var(--practice-border); border-radius:var(--practice-radius); margin:.5rem 0; }
+.practice-examples { display:grid; gap:1rem; margin:1rem 0; } .practice-examples>li { padding:1rem; border:1px solid var(--practice-border); border-radius:var(--practice-radius); } .practice-transcription { color:#475569; } .practice-body .practice-primary { display:inline-flex; min-height:44px; align-items:center; padding:.7rem 1rem; background:var(--practice-blue); color:white; text-decoration:none; border-radius:var(--practice-control-radius); }
 .practice-body :focus-visible { outline:3px solid #2563eb; outline-offset:3px; }
 </style>

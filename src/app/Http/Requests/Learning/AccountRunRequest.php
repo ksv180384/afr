@@ -24,10 +24,15 @@ class AccountRunRequest extends FormRequest
         $event = ['client_event_id' => ['required', 'uuid'], 'expected_revision' => $revision];
 
         return match ($this->route()->getActionMethod()) {
-            'start' => [...$event, 'kind' => ['required', Rule::in(['daily', 'extra', 'review', 'vocabulary_test'])],
-                'session_id' => ['nullable', 'string', 'max:128'], 'replace_assignment' => ['sometimes', 'boolean'], 'timezone' => ['nullable', 'timezone:all'],
+            'today' => ['level' => ['sometimes', 'string', 'max:128'], 'unit' => ['sometimes', 'string', 'max:128']],
+            'start' => [...$event, 'expected_owner_user_id' => ['sometimes', 'integer', 'min:1'], 'kind' => ['required', Rule::in(['daily', 'extra', 'review', 'vocabulary_test'])], 'review_mode' => ['sometimes', 'required', Rule::in(['manual', 'suggested']), 'prohibited_unless:kind,review'],
+                'session_id' => ['nullable', 'string', 'max:128'], 'replace_assignment' => ['sometimes', 'boolean'], 'route_start' => ['sometimes', 'boolean'], 'timezone' => ['nullable', 'timezone:all'],
                 'word_ids' => ['sometimes', 'array', 'min:1', 'max:5000'], 'word_ids.*' => ['integer', 'min:1', 'distinct'], 'filter' => ['sometimes', Rule::in(['all', 'errors'])], 'source_session' => ['sometimes', 'string', 'max:128'], 'continue_run_id' => ['sometimes', 'uuid']],
-            'profileUpdate' => [...$event, 'current_level' => ['required', Rule::in(array_column(config('daily_practice.levels'), 'code'))], 'timezone' => ['required', 'timezone:all']],
+            'profileUpdate' => [...$event, 'current_level' => ['required', Rule::in(array_column(\App\Services\Learning\AvailableLevels::choices(), 'code'))], 'timezone' => ['required', 'timezone:all']],
+            'reviewSettings' => [...$event, 'action' => ['required', Rule::in(['toggle', 'snooze_today'])],
+                'enabled' => ['required_if:action,toggle', 'prohibited_unless:action,toggle', 'boolean', function ($attribute, $value, $fail) {
+                    if (! is_bool($value)) { $fail('Нужно логическое JSON-значение.'); }
+                }]],
             'answer', 'help' => [...$event, 'presentation_id' => ['required', 'uuid'], 'event_type' => ['required', Rule::in($this->route()->getActionMethod() === 'answer' ? ['answer'] : ['help', 'unknown', 'technical_skip'])],
                 'answer' => ['sometimes', 'array'], 'help_kind' => ['sometimes', 'string'], 'reason' => ['sometimes', 'string'], 'client_occurred_at' => ['sometimes', 'string', 'max:40']],
             'pause', 'resume', 'finish' => $event,

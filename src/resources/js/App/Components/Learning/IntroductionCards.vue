@@ -1,20 +1,25 @@
 <script setup>
-import { computed, nextTick, onMounted, ref, watch } from 'vue';
+import { computed, inject, nextTick, onMounted, ref, watch } from 'vue';
 import AfrButton from '@/App/Components/Form/AfrButton.vue';
 import FrenchText from './FrenchText.vue';
 import AudioControl from './AudioControl.vue';
 import PronunciationNotes from './PronunciationNotes.vue';
 import { introductionPages } from '@/App/Learning/playerUi.js';
-const props = defineProps({ introductions: { type: Array, required: true }, vocabulary: { type: Array, required: true }, reference: Boolean, busy: Boolean });
-const emit = defineEmits(['complete', 'close']);
-const index = ref(0);
+const props = defineProps({ introductions: { type: Array, required: true }, vocabulary: { type: Array, required: true }, reference: Boolean, busy: Boolean, initialPage: {type:Number, default:0} });
+const audio = inject('practiceAudioPlayer', null);
+const emit = defineEmits(['complete', 'close', 'page-change']);
+const pages = computed(() => introductionPages(props.introductions, props.vocabulary));
+const index = ref(Math.min(props.initialPage, Math.max(0, pages.value.length - 1)));
 const heading = ref(null);
 const focusHeading = async () => { await nextTick(); heading.value?.focus(); };
 onMounted(focusHeading);
-watch(index, focusHeading);
-const pages = computed(() => introductionPages(props.introductions, props.vocabulary));
+watch(index, page => {
+  audio?.stop();
+  emit('page-change', page);
+  focusHeading();
+});
 const page = computed(() => pages.value[index.value]);
-watch(() => props.introductions, () => { index.value = 0; });
+watch(() => pages.value.length, count => { index.value = Math.min(index.value, Math.max(0, count - 1)); });
 </script>
 <template>
   <section class="introduction-card" aria-label="Вводная карточка">

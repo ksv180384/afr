@@ -1,9 +1,7 @@
 <script setup>
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue';
-import { Icon } from '@iconify/vue';
+import { nextTick, ref, watch, onMounted, onBeforeUnmount } from 'vue';
 
 // import AfrSidebarMenu from '@/App/Components/Header/Sidebar/AfrSidebarMenu.vue';
-import AfrCloseBtn from '@/App/Components/Form/AfrCloseBtn.vue';
 import AfrSidebarSubMenu from '@/App/Components/Header/Sidebar/AfrSidebarSubMenu.vue';
 import ProfileControl from '@/App/Components/Header/Authentification/ProfileControl.vue';
 
@@ -15,6 +13,26 @@ const props = defineProps({
 });
 
 const isSidebarVisible = ref(false);
+const menuButton = ref(null);
+const closeButton = ref(null);
+const onSidebarKey = event => {
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    isSidebarVisible.value = false;
+  }
+  if (event.key !== 'Tab') return;
+  const items = [...event.currentTarget.querySelectorAll('a[href], button:not(:disabled), input:not(:disabled), [tabindex="0"]')]
+    .filter(item => item.getClientRects().length);
+  const first = items[0];
+  const last = items.at(-1);
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last?.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first?.focus();
+  }
+};
 
 const toggleSidebar = () => {
   isSidebarVisible.value = !isSidebarVisible.value;
@@ -23,14 +41,17 @@ const toggleSidebar = () => {
 
 watch(
   () => isSidebarVisible.value,
-  (newVal) => {
+  async (newVal) => {
     if(newVal){
       document.body.style.overflow = 'hidden';
       document.body.style.height = '100vh';
+      await nextTick();
+      if (isSidebarVisible.value) closeButton.value?.focus();
     }
     else{
       document.body.style.overflow = '';
       document.body.style.height = '';
+      menuButton.value?.focus({preventScroll:true});
     }
   }
 );
@@ -50,6 +71,10 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', handleResize);
+  if (isSidebarVisible.value) {
+    document.body.style.overflow = '';
+    document.body.style.height = '';
+  }
 });
 // Скрыть боковую панель при навигации
 // router.on('before', () => {
@@ -63,16 +88,10 @@ onBeforeUnmount(() => {
     <template v-if="user">
       <profile-control :user="user"/>
     </template>
-    <div
-      class="menu-mini"
-      @click="toggleSidebar"
-    >
-      <Icon
-        icon="mingcute:menu-fill"
-        width="24px"
-        height="24px"
-      />
-    </div>
+    <button ref="menuButton" type="button" class="menu-mini" aria-label="Меню сайта"
+      :aria-expanded="isSidebarVisible" aria-controls="site-mobile-menu" @click="toggleSidebar">
+      <span class="menu-bars" aria-hidden="true"></span>
+    </button>
   </div>
 
   <transition name="transition-bg-sidebar">
@@ -82,10 +101,11 @@ onBeforeUnmount(() => {
   <transition name="transition-sidebar">
     <aside
       v-if="isSidebarVisible"
-      class="sidebar-container"
+      id="site-mobile-menu" class="sidebar-container" role="dialog" aria-modal="true" aria-label="Меню сайта"
+      @keydown="onSidebarKey"
       :class="{ 'transform -translate-x-full': !isSidebarVisible, 'translate-x-0': isSidebarVisible }"
     >
-      <afr-close-btn class="absolute right-2 top-2 z-10" size="large" @click="toggleSidebar"/>
+      <button ref="closeButton" type="button" class="menu-close" aria-label="Закрыть меню" @click="toggleSidebar">×</button>
 
 <!--      <template v-if="subMenu">-->
         <afr-sidebar-sub-menu
@@ -111,6 +131,10 @@ onBeforeUnmount(() => {
 .menu-mini{
   @apply flex w-[56px] h-[56px] justify-center items-center cursor-pointer hover:bg-gray-50 transition duration-300 whitespace-nowrap;
 }
+
+.menu-bars { width:24px; height:2px; background:currentColor; box-shadow:0 -7px currentColor, 0 7px currentColor; }
+.menu-close { position:absolute; top:.5rem; right:.5rem; z-index:1; width:44px; height:44px; border-radius:.5rem; background:#fff; font-size:1.65rem; }
+.menu-mini:focus-visible, .menu-close:focus-visible { outline:3px solid #195bb2; outline-offset:-3px; }
 
 .sidebar-container{
   @apply fixed top-0 h-full left-0 w-[400px] max-w-full bg-sky-50 shadow-lg transform transition-transform duration-300;
@@ -152,5 +176,9 @@ onBeforeUnmount(() => {
 .transition-sidebar-enter-from, .transition-sidebar-leave-to{
   opacity: 0;
   transform: translateX(-100%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-mini, .sidebar-container, .transition-bg-sidebar-enter-active, .transition-bg-sidebar-leave-active,
+  .transition-sidebar-enter-active, .transition-sidebar-leave-active { transition: none; }
 }
 </style>

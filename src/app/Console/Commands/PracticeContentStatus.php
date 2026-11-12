@@ -17,7 +17,11 @@ class PracticeContentStatus extends Command
 
     public function handle(SessionPackageValidator $validator, PublicPracticeCatalog $catalog): int
     {
-        $root = resource_path('learning/programme');
+        $root = (config('daily_practice.content_path').'/programme');
+        if (!is_file($root.'/map.v1.json')) {
+            $this->error('Банк занятий не найден. Укажите LEARNING_CONTENT_PATH или разместите learning рядом с приложением.');
+            return self::FAILURE;
+        }
         $map = json_decode(file_get_contents($root.'/map.v1.json'), true, 512, JSON_THROW_ON_ERROR);
         $levels = [];
         $packages = [];

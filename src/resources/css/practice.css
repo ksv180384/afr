@@ -1,16 +1,175 @@
-html { scrollbar-gutter:stable; }
-@supports not (scrollbar-gutter:stable) { html { overflow-y:scroll; } }
-.practice-shell { width:100%; max-width:1100px; margin:0 auto; padding:1.5rem 1rem; color:#17364d; overflow-wrap:anywhere; }
-.practice-heading { font-size:1.6rem; line-height:1.35; font-weight:700; margin:0 0 1rem; }
-.practice-nav { display:grid; grid-template-columns:repeat(4,max-content); gap:.4rem; margin:0 0 1rem; }
-.practice-nav a { display:flex; align-items:center; justify-content:center; min-height:36px; padding:.3rem .55rem; border:1px solid transparent; border-radius:4px; font-size:.875rem; line-height:1.4; font-weight:600; text-align:center; color:#155e91; text-decoration:none; }
-.practice-nav a:hover { background:#e4f0ff; }
-.practice-nav a[aria-current="page"] { background:#dbeafe; border-color:#bfdbfe; color:#084b91; }
-.practice-nav a:focus-visible { outline:2px solid #2563eb; outline-offset:2px; }
-.practice-static { min-height:100vh; max-width:1440px; margin:0 auto; padding-top:57px; background:#f0f9ff; }
-.practice-server-header { position:fixed; top:0; left:0; width:100%; height:57px; display:flex; align-items:center; flex-wrap:wrap; gap:.5rem 1rem; padding:0 1rem; color:#17364d; background:#dbeafe; z-index:2; }
-@media(max-width:600px) {
-  .practice-shell { padding:1rem .65rem; }
-  .practice-heading { font-size:1.45rem; }
-  .practice-nav { grid-template-columns:repeat(2,minmax(0,1fr)); }
+html { scrollbar-gutter: stable; }
+@supports not (scrollbar-gutter: stable) { html { overflow-y: scroll; } }
+
+.practice-layout, .practice-static, .daily-session-card {
+  --practice-ink: #18344c;
+  --practice-muted: #475f75;
+  --practice-blue: #165ca7;
+  --practice-blue-hover: #114a89;
+  --practice-bg: #f3f7fc;
+  --practice-surface: #fff;
+  --practice-accent: #eaf3ff;
+  --practice-border: #ccdaea;
+  --practice-radius: .85rem;
+  --practice-control-radius: .5rem;
+  --practice-pad: clamp(.85rem, 2.5vw, 1.25rem);
+  --practice-target: 44px;
+}
+
+.practice-shell {
+  width: 100%;
+  max-width: 1100px;
+  margin-inline: auto;
+  padding: clamp(1rem, 3vw, 1.8rem) clamp(.75rem, 2.6vw, 1.5rem);
+  color: var(--practice-ink);
+  --player-padding: 0;
+  overflow-wrap: anywhere;
+}
+.practice-heading {
+  margin: 0 0 .9rem;
+  font-size: clamp(1.45rem, 1.1rem + 1.3vw, 2rem);
+  line-height: 1.2;
+  font-weight: 750;
+}
+.practice-columns {
+  display: grid;
+  grid-template-columns: 10.75rem minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: start;
+}
+.practice-content { min-width: 0; }
+.practice-content:focus { outline-offset: .25rem; }
+.practice-shell--focused { max-width: 880px; }
+.practice-nav {
+  position: sticky;
+  top: 72px;
+  display: grid;
+  gap: .35rem;
+  align-content: start;
+}
+.practice-nav a {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  min-width: 0;
+  min-height: var(--practice-target);
+  padding: .45rem .7rem;
+  border: 1px solid transparent;
+  border-radius: var(--practice-control-radius);
+  font-size: .875rem;
+  line-height: 1.3;
+  font-weight: 650;
+  color: var(--practice-blue);
+  text-decoration: none;
+}
+.practice-nav a:hover { background: var(--practice-accent); }
+.practice-nav a[aria-current="page"] {
+  background: var(--practice-accent);
+  border-color: #adc9ed;
+  color: #10477f;
+  font-weight: 750;
+}
+
+.practice-panel {
+  min-width: 0;
+  padding: var(--practice-pad);
+  margin: .9rem 0;
+  border: 1px solid var(--practice-border);
+  border-radius: var(--practice-radius);
+  background: var(--practice-surface);
+}
+.practice-shell .lesson-main {
+  margin: 0;
+  padding: clamp(1rem, 3vw, 1.6rem);
+  border-color: #a8c7ed;
+  background: var(--practice-accent);
+}
+.practice-shell .lesson-main h2 { font-size: clamp(1.3rem, 1rem + 1vw, 1.7rem); line-height: 1.25; font-weight: 750; }
+.lesson-main .practice-cta { margin-top: .35rem; }
+.practice-shell button.type-primary:not(.text, .link, .plain, :disabled),
+.practice-shell a.practice-primary,
+.daily-session-card .daily-start:not(:disabled) {
+  background: var(--practice-blue);
+  border-color: var(--practice-blue);
+  color: #fff;
+}
+.practice-shell button.type-primary:not(.text, .link, .plain, :disabled):hover,
+.practice-shell a.practice-primary:hover,
+.daily-session-card .daily-start:not(:disabled):hover { background: var(--practice-blue-hover); }
+
+.practice-shell :is(button, select, textarea, input:not([type="radio"], [type="checkbox"]), summary) {
+  max-inline-size: 100%;
+  min-block-size: var(--practice-target);
+  scroll-margin-block-start: 4.75rem;
+}
+.practice-shell :is(button, select, textarea, input:not([type="radio"], [type="checkbox"])) { border-radius: var(--practice-control-radius); }
+.practice-shell button { white-space: normal; overflow-wrap: anywhere; }
+.practice-shell :is(button, a, input, select, textarea, summary):focus-visible,
+.daily-session-card :focus-visible { outline: 3px solid #195bb2; outline-offset: 3px; }
+.practice-skip-link {
+  position: fixed;
+  z-index: 40;
+  top: 4.5rem;
+  left: 1rem;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--practice-target);
+  padding: .4rem .8rem;
+  border-radius: var(--practice-control-radius);
+  color: #fff;
+  background: var(--practice-blue-hover);
+}
+.practice-skip-link:not(:focus) { clip-path: inset(50%); pointer-events: none; }
+.practice-public-catalog { border-top: 1px solid var(--practice-border); margin-top: 1.75rem; padding-top: .75rem; }
+.practice-static {
+  min-height: 100vh;
+  max-width: 1440px;
+  margin-inline: auto;
+  background: var(--practice-bg);
+}
+.practice-server-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 57px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .5rem 1rem;
+  padding-inline: 1rem;
+  color: var(--practice-ink);
+  background: #dbeafe;
+  z-index: 2;
+}
+
+@media (max-width: 800px) {
+  .practice-shell { display: block; }
+  .practice-with-navigation {
+    --practice-nav-space: max(var(--practice-nav-height, 0px), calc(4.5rem + env(safe-area-inset-bottom, 0px)));
+    padding-bottom: var(--practice-nav-space);
+  }
+  .practice-with-navigation :is(a, button, input, select, textarea, summary) {
+    scroll-margin-block-end: calc(var(--practice-nav-space) + .5rem);
+  }
+  .practice-nav {
+    position: fixed;
+    z-index: 10;
+    inset: auto 0 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: .35rem .45rem calc(.35rem + env(safe-area-inset-bottom, 0px));
+    background: var(--practice-surface);
+    border-top: 1px solid var(--practice-border);
+    box-shadow: 0 -4px 18px #153b6710;
+  }
+  .practice-nav a { flex-direction: column; justify-content: center; gap: .2rem; min-height: 52px; padding: .25rem; text-align: center; font-size: .8125rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .practice-layout *, .practice-static *, .daily-session-card * {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

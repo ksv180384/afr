@@ -29,14 +29,19 @@ class DailyPracticeController extends Controller
             }
         }
 
+        $routeSelection = array_filter($request->only('level', 'unit'), fn ($value) => is_string($value) && $value !== '' && strlen($value) <= 128);
+        if ($selected) {
+            $routeSelection = ['level' => $selected->getRawOriginal('level'), 'unit' => $selected->unit->external_id];
+        }
+
         return Inertia::render('Daily/Index', ['selectedSession' => $selected ? ['id' => $selected->external_id, 'title' => $selected->activeVersion->payload['title'], 'completed' => $selectedCompleted] : null, 'authUser' => Helper::getUserData(), 'runId' => $request->routeIs('daily.guest') ? null : $run, 'guestRunId' => $request->routeIs('daily.guest') ? $run : null,
-            'screen' => $request->routeIs('daily.progress') ? 'progress' : 'today', 'enabled' => (bool) config('daily_practice.enabled'), 'levels' => config('daily_practice.levels')])
+            'routeSelection' => (object) $routeSelection, 'screen' => $request->routeIs('daily.progress') ? 'progress' : 'today', 'enabled' => (bool) config('daily_practice.enabled'), 'levels' => \App\Services\Learning\AvailableLevels::choices()])
             ->toResponse($request)->withHeaders(['Cache-Control' => 'private, no-store', 'X-Robots-Tag' => 'noindex, nofollow']);
     }
 
     public function today(AccountRunRequest $request, AccountRunService $service)
     {
-        return response()->json($service->today($request->user()));
+        return response()->json($service->today($request->user(), $request->validated()));
     }
 
     public function profile(AccountRunRequest $request, AccountRunService $service)
@@ -80,6 +85,11 @@ class DailyPracticeController extends Controller
     public function profileUpdate(AccountRunRequest $request, AccountRunService $service)
     {
         return $this->mutate($request, $service, fn () => $service->profileUpdate($request->user(), $request->validated()));
+    }
+
+    public function reviewSettings(AccountRunRequest $request, AccountRunService $service)
+    {
+        return $this->mutate($request, $service, fn () => $service->reviewSettings($request->user(), $request->validated()));
     }
 
     public function answer(AccountRunRequest $request, string $run, AccountRunService $service)

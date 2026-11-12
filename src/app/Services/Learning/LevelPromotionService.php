@@ -56,7 +56,7 @@ final class LevelPromotionService
             ->whereIn('external_id', $curriculum->checkpoint_session_ids)->whereNull('archived_at')->with('activeVersion', 'unit', 'levelDefinition')->get();
 
         return $sessions->count() === count($curriculum->checkpoint_session_ids) && $sessions->every(
-            fn ($session) => $session->unit?->published_at !== null && $session->unit?->archived_at === null && $session->levelDefinition?->published_at !== null
+            fn ($session) => $session->unit?->published_at !== null && $session->unit?->archived_at === null && $session->levelDefinition?->isPublished()
                 && $session->activeVersion?->status->value === 'published'
                 && ($session->activeVersion->payload['kind'] ?? null) === 'checkpoint'
         );
@@ -95,7 +95,7 @@ final class LevelPromotionService
     public function progress(User $actor, ?array $current = null): array
     {
         $profile = LearningProfile::query()->where('user_id', $actor->id)->first();
-        $level = $profile?->getRawOriginal('current_level') ?? 'PRE_A1';
+        $level = $profile?->getRawOriginal('current_level') ?? AvailableLevels::first();
         $enrollment = $this->objectives->current($actor, $level);
         $curriculum = $enrollment?->curriculum ?? $this->objectives->published($level);
         $policy = $this->policy($enrollment, $curriculum);
@@ -103,7 +103,7 @@ final class LevelPromotionService
         $mastered = count(array_filter($goals, fn ($goal) => $goal['mastered']));
         $records = $this->checkpoints($actor, $enrollment, $current);
         $pair = $this->pair($records);
-        $next = LearningLevel::from($level)->next()?->value;
+        $next = AvailableLevels::next($level);
         $enabled = $next !== null && $policy !== null && $this->ready($curriculum);
         $latest = LearningLevelEvent::query()->where('user_id', $actor->id)->orderByDesc('occurred_at')->orderByDesc('id')->first();
 
@@ -115,7 +115,7 @@ final class LevelPromotionService
             'policy_version' => $enrollment?->promotion_policy_version ?? $curriculum?->promotion_policy_version,
             'available_checkpoints' => $curriculum ? LearningSession::query()->where('level', $level)->whereIn('external_id', $curriculum->checkpoint_session_ids)
                 ->whereNull('archived_at')->whereHas('unit', fn ($query) => $query->whereNotNull('published_at')->whereNull('archived_at'))
-                ->whereHas('levelDefinition', fn ($query) => $query->whereNotNull('published_at'))
+                ->whereHas('levelDefinition', fn ($query) => $query->published())
                 ->whereHas('activeVersion', fn ($query) => $query->where('status', 'published'))->with('activeVersion')->get()
                 ->filter(fn ($session) => ($session->activeVersion->payload['kind'] ?? null) === 'checkpoint')
                 ->map(fn ($session) => ['id' => $session->external_id, 'title' => $session->activeVersion->payload['title']])->values()->all() : [],
@@ -174,14 +174,14 @@ final class LevelPromotionService
         $event = null;
         if ($checkpoint && $checkpoint['qualified'] && $profile && $progress['enrollment_id'] === $enrollment->id
             && $progress['enabled'] && $progress['goals_met'] && $progress['checkpoints_met'] && $this->afterManualChange($run, $profile)) {
-            $next = LearningLevel::from($profile->getRawOriginal('current_level'))->next();
+            $next = AvailableLevels::next($profile->getRawOriginal('current_level'));
             $reason = ['message' => 'Освоены '.$progress['mastered'].' из '.$progress['required'].' целей программы. Два разных контроля пройдены не ниже '.$policy['checkpoint_score_percent'].'% в разные дни; подтверждены словарь и другой навык.',
                 'enrollment_id' => $enrollment->id, 'curriculum_id' => $enrollment->curriculum_version_id,
                 'curriculum_version' => $enrollment->curriculum->version, 'promotion_policy_version' => $enrollment->promotion_policy_version,
                 'mastered' => $progress['mastered'], 'required' => $progress['required'], 'checkpoints' => $progress['qualifying_checkpoints']];
             $event = LearningLevelEvent::create(['user_id' => $actor->id, 'old_level' => $profile->getRawOriginal('current_level'),
-                'new_level' => $next->value, 'source' => 'automatic', 'source_event_id' => $run->id, 'reason' => $reason, 'occurred_at' => $finishedAt]);
-            $profile->update(['current_level' => $next->value, 'revision' => $profile->revision + 1]);
+                'new_level' => $next, 'source' => 'automatic', 'source_event_id' => $run->id, 'reason' => $reason, 'occurred_at' => $finishedAt]);
+            $profile->update(['current_level' => $next, 'revision' => $profile->revision + 1]);
         }
 
         // Published curricula keep their existing mastery policy. Routes without a curriculum advance on completion.

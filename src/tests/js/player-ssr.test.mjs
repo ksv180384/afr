@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { createServer } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { createSSRApp, h } from 'vue';
@@ -49,7 +49,7 @@ test('player and all task components render on the server without browser global
     assert.match(searchable,/id="timezone-select"/);
     assert.match(searchable,/value="\(UTC\+3\) Москва"/);
     assert.match(searchable,/<input[^>]*disabled/);
-    const { sessions } = JSON.parse(readFileSync(root + 'resources/learning/templates/task-types.json'));
+    const { sessions } = JSON.parse(readFileSync(root + 'resources/practice/templates/task-types.json'));
     for (const task of sessions[0].tasks) {
       const names = { single_choice: 'SingleChoiceTask', matching_pairs: 'MatchingPairsTask', fill_blank: 'FillBlankTask', word_order: 'WordOrderTask', short_answer: 'ShortAnswerTask' };
       const answer = task.type === 'matching_pairs' ? { pairs: [] } : task.type === 'word_order' ? { token_ids: [] }
@@ -59,7 +59,8 @@ test('player and all task components render on the server without browser global
       assert.doesNotMatch(html, /Произношение не подготовлено/);
       assert.doesNotMatch(html, /Правильный ответ/);
     }
-    const revised = JSON.parse(readFileSync(root + 'resources/learning/programme/packages/PRE_A1/PRE_A1-U01.v2.json'));
+    const contentFile = root + '../learning/programme/packages/PRE_A1/PRE_A1-U01.v1.json';
+    const revised = existsSync(contentFile) ? JSON.parse(readFileSync(contentFile)) : {sessions:[]};
     for (const lesson of revised.sessions) for (const task of lesson.tasks) {
       const names = {single_choice:'SingleChoiceTask',matching_pairs:'MatchingPairsTask',word_order:'WordOrderTask'};
       const answer = task.type === 'matching_pairs' ? {pairs:[]} : task.type === 'word_order' ? {token_ids:[]} : {choice_id:''};

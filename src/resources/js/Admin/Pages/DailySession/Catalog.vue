@@ -1,20 +1,49 @@
 <script setup>
 import { ref } from 'vue';
 import { router } from '@inertiajs/vue3';
+import { ElMessageBox } from 'element-plus';
 import api from '@/Admin/Services/Api';
 import Shell from './Shell.vue';
 import Issues from './Issues.vue';
 import Pager from './Pager.vue';
 import { useOperation } from './useOperation';
+import { deleteContent } from './deleteContent';
 import { statusLabel } from './editorUi';
 import PronunciationNotes from '@/App/Components/Learning/PronunciationNotes.vue';
 
-defineProps({ authUser: Object, levels: Array, revisions: Object, curricula: Object, coverage: Object, filters: Object });
+const props = defineProps({ authUser: Object, levels: Array, units: Array, revisions: Object, curricula: Object, coverage: Object, filters: Object });
+const remove = (kind, id, title) => run(() => deleteContent(kind, id, title), true);
 const diffs = ref({});
 const slugs = ref({});
 const confirmations = ref({});
 const { busy, failure, run } = useOperation();
 const action = (path, id, name) => run(() => api.dailyPractice.action(path + '/' + id + '/' + name), true);
+const publicationStatus = (row) => {
+  if (!row.published_at) return { type: 'info', label: 'Не опубликовано' };
+  if (row.archived_at) return { type: 'warning', label: 'Снято с публикации' };
+  if (props.levels.some(level => level.code === row.level && level.archived_at)) {
+    return { type: 'warning', label: 'Уровень снят с публикации' };
+  }
+  return { type: 'success', label: 'Опубликовано' };
+};
+const setVisibility = (kind, row) => run(async () => {
+  const published = Boolean(row.archived_at);
+  if (!published) {
+    try {
+      const consequence = kind === 'levels'
+        ? 'Темы и занятия этого уровня будут скрыты из публичной практики.'
+        : 'Занятия этой темы будут скрыты из публичной практики.';
+      await ElMessageBox.confirm(
+        'Снять с публикации «' + row.title + '»? ' + consequence,
+        'Снятие с публикации',
+        { confirmButtonText: 'Снять с публикации', cancelButtonText: 'Отмена', type: 'warning' },
+      );
+    } catch {
+      return null;
+    }
+  }
+  return api.dailyPractice.action('catalog/' + kind + '/' + row.id + '/visibility', { published });
+}, true);
 const renameUnit = (unit) => run(() => api.dailyPractice.action('units/' + unit.id + '/rename', { slug: slugs.value[unit.id], expected_slug: unit.slug, confirmed: confirmations.value[unit.id] }), true);
 const diff = async (id) => { const result = await run(() => api.dailyPractice.diff(id)); if (result) diffs.value[id] = result; };
 </script>
@@ -27,11 +56,58 @@ const diff = async (id) => { const result = await run(() => api.dailyPractice.di
     <el-collapse>
       <el-collapse-item title="Текущие описания уровней" name="levels">
         <el-table :data="levels" border stripe>
-          <el-table-column prop="code" label="Уровень" width="100" /><el-table-column prop="title" label="Название" min-width="200" /><el-table-column prop="summary" label="Описание" min-width="300" />
-          <el-table-column label="Статус" width="170"><template #default="{ row }"><el-tag :type="row.published_at ? 'success' : 'info'">{{ row.published_at ? 'Опубликовано' : 'Не опубликовано' }}</el-tag></template></el-table-column>
+          <el-table-column prop="code" label="Уровень" width="100" />
+          <el-table-column prop="title" label="Название" min-width="200" />
+          <el-table-column prop="summary" label="Описание" min-width="300" />
+          <el-table-column label="Статус" width="180">
+            <template #default="{ row }">
+              <el-tag :type="publicationStatus(row).type">{{ publicationStatus(row).label }}</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column label="Действия" width="280">
+            <template #default="{ row }">
+              <el-button
+                v-if="row.published_at"
+                :disabled="busy"
+                @click="setVisibility('levels', row)"
+              >
+                {{ row.archived_at ? 'Вернуть в публикацию' : 'Снять с публикации' }}
+              </el-button>
+              <el-button type="danger" :disabled="busy" @click="remove('levels', row.code, row.title)">
+                Удалить
+              </el-button>
+            </template>
+          </el-table-column>
         </el-table>
       </el-collapse-item>
     </el-collapse>
+    <el-card class="panel" shadow="never">
+      <template #header>Темы</template>
+      <el-table :data="units" border stripe>
+        <el-table-column prop="external_id" label="ID" />
+        <el-table-column prop="title" label="Название" />
+        <el-table-column prop="level" label="Уровень" width="100" />
+        <el-table-column label="Статус" width="220">
+          <template #default="{ row }">
+            <el-tag :type="publicationStatus(row).type">{{ publicationStatus(row).label }}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="Действия" width="280">
+          <template #default="{ row }">
+            <el-button
+              v-if="row.published_at"
+              :disabled="busy"
+              @click="setVisibility('units', row)"
+            >
+              {{ row.archived_at ? 'Вернуть в публикацию' : 'Снять с публикации' }}
+            </el-button>
+            <el-button type="danger" :disabled="busy" @click="remove('units', row.id, row.title)">
+              Удалить тему
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-card>
     <el-card class="panel" shadow="never">
       <template #header>Описания уровней и тем</template>
       <p class="muted">Редакции импортируются в JSON. Опубликуйте уровень, затем тему. Отдельные чек-листы не требуются.</p>
@@ -64,9 +140,9 @@ const diff = async (id) => { const result = await run(() => api.dailyPractice.di
           <p>Контроли: {{ row.checkpoint_session_ids.join(', ') || 'Не заданы' }}</p><ul><li v-for="checkpoint in row.checkpoints" :key="checkpoint.id">{{ checkpoint.id }} — {{ checkpoint.ready ? 'Опубликован' : 'Не готов' }}</li></ul>
           <el-link :href="'/admin/daily-practice/curricula/' + row.id + '/export'">Экспорт программы JSON</el-link>
         </div></template></el-table-column>
-        <el-table-column prop="external_id" label="Программа" min-width="240" /><el-table-column prop="level" label="Уровень" width="100" /><el-table-column prop="version" label="Версия" width="90" />
+        <el-table-column prop="external_id" label="Программа" min-width="240" /><el-table-column prop="level" label="Уровень" width="100" />
         <el-table-column label="Статус" width="170"><template #default="{ row }"><el-tag>{{ statusLabel(row.status) }}</el-tag></template></el-table-column>
-        <el-table-column label="Действия" min-width="280"><template #default="{ row }"><el-button type="primary" :disabled="busy || row.status === 'published'" @click="action('curricula', row.id, 'publish-direct')">Опубликовать</el-button><el-button :disabled="busy || row.status === 'archived'" @click="action('curricula', row.id, 'archive')">В архив</el-button></template></el-table-column>
+        <el-table-column label="Действия" min-width="280"><template #default="{ row }"><el-button type="primary" :disabled="busy || row.status === 'published'" @click="action('curricula', row.id, 'publish-direct')">Опубликовать</el-button><el-button :disabled="busy || row.status === 'archived'" @click="action('curricula', row.id, 'archive')">В архив</el-button><el-button type="danger" :disabled="busy" @click="remove('curricula', row.id, row.external_id)">Удалить</el-button></template></el-table-column>
       </el-table>
       <pager :page="curricula" />
     </el-card>

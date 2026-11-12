@@ -40,6 +40,7 @@ final class SessionImportService
         if ($json === false || ! hash_equals($report->fileHash, hash('sha256', $json))) {
             throw new ContentOperationException(PracticeErrorCode::IdempotencyConflict, 'Файл изменился во время проверки.');
         }
+        $sessionChecksums = $this->sessionChecksums($report->package()['sessions']);
         $id = (string) Str::uuid();
         $token = bin2hex(random_bytes(32));
         $path = 'previews/'.$id.'.json';
@@ -47,12 +48,12 @@ final class SessionImportService
             throw new ContentOperationException(PracticeErrorCode::Unavailable, 'Не удалось сохранить приватный файл импорта. Повторите загрузку.');
         }
         try {
-            $batch = \Illuminate\Support\Facades\DB::transaction(function () use ($actor, $report, $token, $path, $json, $file): SessionImportBatch {
+            $batch = \Illuminate\Support\Facades\DB::transaction(function () use ($actor, $report, $token, $path, $json, $file, $sessionChecksums): SessionImportBatch {
                 $batch = SessionImportBatch::create([
                     'file_hash' => $report->fileHash, 'preview_token_hash' => hash('sha256', $token),
                     'created_by' => $actor->id, 'private_path' => $path,
                     'original_filename' => mb_substr(basename(str_replace('\\', '/', $file->getClientOriginalName())), 0, 255),
-                    'file_size' => strlen($json), 'status' => 'preview', 'validation_report' => $report->toArray(),
+                    'file_size' => strlen($json), 'status' => 'preview', 'validation_report' => [...$report->toArray(), 'session_checksums' => $sessionChecksums],
                     'expires_at' => now('UTC')->addSeconds(config('daily_practice.import.preview_ttl_seconds')),
                 ]);
                 $this->access->audit($actor, 'import_preview', ['import_batch_id' => $batch->id], [], ['file_hash' => $report->fileHash]);
@@ -92,9 +93,20 @@ final class SessionImportService
                 throw new ContentOperationException(PracticeErrorCode::IdempotencyConflict, 'Приватный исходник изменён.');
             }
             $package = $this->access->validateReport($this->validator->validate($json));
+            $expected = $batch->validation_report['session_checksums'] ?? null;
+            if ($expected !== null) {
+                $current = $this->sessionChecksums($package['sessions']);
+                foreach ($package['sessions'] as $content) {
+                    $key = $content['id'];
+                    $content['version'] = 1;
+                    if ($expected[$key] !== $current[$key] && $current[$key] !== CanonicalJson::hash($content)) {
+                        throw new ContentOperationException(PracticeErrorCode::RevisionConflict, 'Материал изменился после preview. Загрузите файл заново.');
+                    }
+                }
+            }
             $receipt = [
                 'batch_id' => $batch->id, 'file_hash' => $fileHash, 'package_id' => $package['package_id'],
-                'version_ids' => [], 'created_version_ids' => [], 'skipped_version_ids' => [], 'catalog_revision_ids' => [], 'curriculum_ids' => [],
+                'version_ids' => [], 'created_version_ids' => [], 'skipped_version_ids' => [], 'updated_version_ids' => [], 'catalog_revision_ids' => [], 'curriculum_ids' => [],
                 'committed_at' => now('UTC')->toIso8601String(),
             ];
             foreach ($package['levels'] ?? [] as $content) {
@@ -112,23 +124,22 @@ final class SessionImportService
                 $session = LearningSession::query()->firstOrCreate(['external_id' => $content['id']], [
                     'level' => $content['level'], 'unit_id' => $unit->id, 'sort_order' => $content['order'],
                 ]);
-                $version = $session->versions()->where('version', $content['version'])->first();
-                if ($version) {
-                    if (! hash_equals(CanonicalJson::hash($version->payload), CanonicalJson::hash($content))) {
-                        throw new ContentOperationException(PracticeErrorCode::VersionConflict, 'Версия уже содержит другой материал.');
-                    }
-                    $receipt['skipped_version_ids'][] = $version->id;
-                    $receipt['version_ids'][] = $version->id;
-
-                    continue;
-                }
+                $session->update(['sort_order' => $content['order']]);
+                $content['version'] = 1;
+                $version = $session->activeVersion ?? $session->versions()->orderByDesc('id')->first();
+                $wasExisting = $version !== null;
                 foreach ($content['objectives'] as $objective) {
                     LearningObjective::query()->firstOrCreate(['stable_id' => $objective['id']], ['level' => $content['level'], 'title' => $objective['title']]);
                 }
-                $version = $session->versions()->create([
-                    'version' => $content['version'], 'schema_version' => $package['schema_version'], 'payload' => $content,
-                    'checksum' => CanonicalJson::hash($content), 'status' => 'draft', 'import_batch_id' => $batch->id, 'created_by' => $actor->id,
-                ]);
+                $attributes = [
+                    'version' => $version?->version ?? 1, 'schema_version' => $package['schema_version'], 'payload' => $content,
+                    'checksum' => CanonicalJson::hash($content), 'status' => $version?->status->value ?? 'draft', 'import_batch_id' => $batch->id, 'created_by' => $actor->id,
+                ];
+                if ($version) {
+                    $version->update($attributes);
+                } else {
+                    $version = $session->versions()->create($attributes);
+                }
                 $assets = [];
                 $collect = function (array $node) use (&$collect, &$assets): void {
                     if (is_string($node['audio']['asset_id'] ?? null)) {
@@ -142,9 +153,9 @@ final class SessionImportService
                 };
                 $collect($content);
                 $version->media()->sync(array_unique($assets));
-                $receipt['created_version_ids'][] = $version->id;
+                $receipt[$wasExisting ? 'updated_version_ids' : 'created_version_ids'][] = $version->id;
                 $receipt['version_ids'][] = $version->id;
-                $this->access->audit($actor, 'session_import', ['session_version_id' => $version->id, 'import_batch_id' => $batch->id], [], ['checksum' => $version->checksum, 'status' => 'draft']);
+                $this->access->audit($actor, 'session_import', ['session_version_id' => $version->id, 'import_batch_id' => $batch->id], [], ['checksum' => $version->checksum, 'status' => $version->status->value]);
             }
             foreach ($package['curricula'] ?? [] as $content) {
                 $curriculum = LearningCurriculum::query()->where('external_id', $content['id'])->where('version', $content['version'])->first();
@@ -170,8 +181,27 @@ final class SessionImportService
         });
     }
 
+    private function sessionChecksums(array $sessions): array
+    {
+        $ids = array_column($sessions, 'id');
+        $existing = LearningSession::query()->whereIn('external_id', $ids)
+            ->with(['activeVersion', 'versions' => fn ($query) => $query->latest('id')->limit(1)])
+            ->get()->keyBy('external_id');
+        $checksums = [];
+        foreach ($ids as $id) {
+            $session = $existing->get($id);
+            $checksums[$id] = ($session?->activeVersion ?? $session?->versions->first())?->checksum;
+        }
+
+        return $checksums;
+    }
+
     private function catalogRevision(User $actor, SessionImportBatch $batch, array $content, int $baseRevision, array $target): LearningCatalogRevision
     {
+        $previous = LearningCatalogRevision::query()->where($target)->orderByDesc('id')->first();
+        if ($previous && CanonicalJson::hash($previous->content) === CanonicalJson::hash($content)) {
+            return $previous;
+        }
         $revision = LearningCatalogRevision::create([
             ...$target, 'import_batch_id' => $batch->id, 'content' => $content,
             'base_revision' => $baseRevision, 'status' => 'pending', 'created_by' => $actor->id,

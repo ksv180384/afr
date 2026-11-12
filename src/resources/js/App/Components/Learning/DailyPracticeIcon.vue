@@ -10,6 +10,11 @@ const paths = {
   list: ['M3 4h2v2H3zM3 11h2v2H3zM3 18h2v2H3zM9 5h12M9 12h12M9 19h12'],
   chevron: ['m9 5 7 7-7 7'],
   play: ['m9 5 11 7-11 7Z'],
+  check: ['m5 12 4 4L19 6'],
+  lock: ['M5 11h14v10H5zM8 11V7a4 4 0 0 1 8 0v4'],
+  circle: ['M20 12a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z'],
+  dash: ['M6 12h12'],
+  pause: ['M8 5v14M16 5v14'],
 };
 </script>
 

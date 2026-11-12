@@ -43,6 +43,8 @@ header{
   z-index: 2;
 }
 
+header:has(.menu-mini[aria-expanded="true"]) { z-index: 20; }
+
 .header-content{
   @apply flex flex-row lg:justify-between px-4 justify-end;
 }

@@ -1,6 +1,10 @@
-<header class="practice-section-header">
-<nav class="practice-nav" aria-label="Навигация практики"><a href="/practice" aria-current="page">Все задания по уровням</a><a href="/daily">Сегодня</a><a href="/daily/vocabulary">Мой словарь</a><a href="/daily/progress">Прогресс</a></nav>
-<h1 class="practice-heading">{{ $catalog['title'] }}</h1></header><div class="practice-body">
+<nav class="practice-nav" aria-label="Навигация практики">
+  <a href="/practice" aria-current="page">Учиться</a>
+  <a href="/daily/vocabulary">Повторять</a>
+  <a href="/daily/progress">Мой прогресс</a>
+</nav>
+<div class="practice-content">
+<h1 class="practice-heading">{{ $catalog['title'] }}</h1><div class="practice-body">
 @if($catalog['kind'] !== 'index')
 <nav aria-label="Хлебные крошки" class="practice-breadcrumbs">
 @foreach($catalog['breadcrumbs'] as $crumb)
@@ -13,7 +17,6 @@
 @if(!empty($catalog['access']['locked']))<p role="status">{{ $catalog['access']['reason'] }}</p>
 @else
 <p>{{ $catalog['summary'] }}</p>
-@if($catalog['kind'] === 'index')<p>Сессия обычно занимает около пяти минут: сначала знакомство с выражениями, затем вопросы и разбор. Занятия открываются по порядку. Завершённые материалы доступны для повторения. Без регистрации прогресс сохраняется в этом браузере.</p>@endif
 @if($catalog['outcomes'])<h2>Чему вы научитесь</h2><ul>@foreach($catalog['outcomes'] as $outcome)<li>{{ $outcome }}</li>@endforeach</ul>@endif
 @include('practice.notes', ['notes' => $catalog['notes']])
 @if(!$catalog['indexable'])<p role="status">Материалы этой страницы ещё готовятся. Новые занятия появятся после публикации.</p>@endif
@@ -51,4 +54,5 @@
 <nav aria-label="По теме" class="practice-breadcrumbs">@if($catalog['previous'] && empty($catalog['previous']['locked']))<a href="{{ $catalog['previous']['path'] }}">Предыдущее: {{ $catalog['previous']['title'] }}</a>@endif @if($catalog['next'] && empty($catalog['next']['locked']))<a href="{{ $catalog['next']['path'] }}">Следующее: {{ $catalog['next']['title'] }}</a>@endif</nav>
 
 @endif
+</div>
 </div>

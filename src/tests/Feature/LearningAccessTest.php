@@ -17,7 +17,7 @@ beforeEach(function () {
     $this->seed(LearningLevelSeeder::class);
     LearningLevel::whereIn('code', ['PRE_A1', 'A1'])->update(['published_at' => now('UTC')]);
     $this->learner = User::factory()->create();
-    $template = json_decode(file_get_contents(resource_path('learning/templates/pre-a1-u01-examples.json')), true)['sessions'][0];
+    $template = json_decode(file_get_contents(resource_path('practice/templates/pre-a1-u01-examples.json')), true)['sessions'][0];
     $this->lessons = [];
     foreach ([['PRE_A1', 1, 2], ['PRE_A1', 2, 1], ['A1', 1, 1]] as [$level, $order, $count]) {
         $unit = LearningUnit::factory()->create(['level' => $level, 'sort_order' => $order, 'slug' => strtolower(str_replace('_', '-', $level)).'-unit-'.$order, 'published_at' => now('UTC')]);
@@ -187,4 +187,28 @@ it('keeps an empty profile level closed and distinguishes missing content from p
         ->and($state['levels']['B1']['reason'])->toBe('Занятия ещё не опубликованы.')
         ->and($state['levels']['A1']['locked'])->toBeFalse();
     $this->get('/practice/b1')->assertRedirect('/practice');
+});
+
+it('returns a private compact route for an explicitly selected topic', function () {
+    $unit = $this->lessons['PRE_A1-U2-L1']->unit->external_id;
+    $this->get('/daily?unit='.$unit)->assertInertia(fn (Assert $page) => $page->where('routeSelection.unit', $unit));
+    $response = $this->getJson('/daily/api/today?unit='.$unit)->assertOk()
+        ->assertHeader('Cache-Control', 'no-store, private')
+        ->assertJsonPath('route.level.id', 'PRE_A1')
+        ->assertJsonPath('route.unit.id', $unit)
+        ->assertJsonPath('route.lessons.0.status', 'locked')
+        ->assertJsonMissingPath('route.contents.0.units.0.sessions')
+        ->assertJsonMissingPath('route.lessons.0.tasks');
+    expect($response->getContent())->not->toContain('correct_choice_id');
+});
+
+it('keeps profile access separate from completion and represents unpublished levels', function () {
+    \App\Models\Learning\LearningProfile::factory()->create(['user_id' => $this->learner->id, 'current_level' => 'A1']);
+    $unit = $this->lessons['PRE_A1-U1-L1']->unit->external_id;
+    $this->getJson('/daily/api/today?unit='.$unit)->assertOk()
+        ->assertJsonPath('profile.current_level', 'A1')
+        ->assertJsonPath('route.lessons.0.status', 'available')
+        ->assertJsonPath('route.lessons.0.review_only', true);
+    $this->getJson('/daily/api/today?level=B2')->assertOk()
+        ->assertJsonPath('route.level.status', 'unavailable')->assertJsonCount(0, 'route.lessons');
 });

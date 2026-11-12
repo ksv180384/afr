@@ -3,6 +3,7 @@
 namespace App\Models\Learning;
 
 use App\Support\Learning\UsesUtcDates;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -21,6 +22,7 @@ class LearningLevel extends Model
         'pronunciation_notes',
         'revision',
         'published_at',
+        'archived_at',
     ];
 
     protected function casts(): array
@@ -31,7 +33,18 @@ class LearningLevel extends Model
             'pronunciation_notes' => 'array',
             'revision' => 'integer',
             'published_at' => 'immutable_datetime',
+            'archived_at' => 'immutable_datetime',
         ];
+    }
+
+    public function scopePublished(Builder $query): Builder
+    {
+        return $query->whereNotNull('published_at')->whereNull('archived_at');
+    }
+
+    public function isPublished(): bool
+    {
+        return $this->published_at !== null && $this->archived_at === null;
     }
 
     public function units(): HasMany

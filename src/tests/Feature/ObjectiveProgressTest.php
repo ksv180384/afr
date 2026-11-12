@@ -42,7 +42,7 @@ function objectiveProgram($test, int $required = 1, ?int $covered = null, string
         $ids[] = $level.'.GOAL.'.$i;
         LearningObjective::create(['stable_id' => end($ids), 'level' => $level, 'title' => 'Цель '.$i]);
     }
-    $template = json_decode(file_get_contents(resource_path('learning/templates/pre-a1-u01-examples.json')), true)['sessions'][0];
+    $template = json_decode(file_get_contents(resource_path('practice/templates/pre-a1-u01-examples.json')), true)['sessions'][0];
     $sessions = [];
     foreach (['A', 'B', 'PRACTICE'] as $index => $suffix) {
         $payload = $template;

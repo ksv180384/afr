@@ -1,0 +1,182 @@
+{
+  "stage": "LP-21",
+  "date": "2026-11-12",
+  "deployment": "local source and build ready; hosting not changed",
+  "target": {
+    "levels": [
+      "PRE_A1",
+      "A1",
+      "A2",
+      "B1"
+    ],
+    "packages": 80,
+    "sessions": 400,
+    "tasks": 2878,
+    "task_counts_per_session": {
+      "6": 1,
+      "7": 320,
+      "8": 79
+    }
+  },
+  "isolated_inventory": {
+    "packages_validated": 140,
+    "sessions_imported_and_published": 700,
+    "sessions_graded": 35,
+    "tasks_graded": 240,
+    "levels": {
+      "PRE_A1": {
+        "packages": 20,
+        "sessions": 100,
+        "tasks": 723,
+        "graded_in_smoke": 35
+      },
+      "A1": {
+        "packages": 20,
+        "sessions": 100,
+        "tasks": 723,
+        "graded_in_smoke": 36
+      },
+      "A2": {
+        "packages": 20,
+        "sessions": 100,
+        "tasks": 724,
+        "graded_in_smoke": 36
+      },
+      "B1": {
+        "packages": 20,
+        "sessions": 100,
+        "tasks": 708,
+        "graded_in_smoke": 35
+      },
+      "B2": {
+        "packages": 20,
+        "sessions": 100,
+        "tasks": 676,
+        "graded_in_smoke": 35
+      },
+      "C1": {
+        "packages": 20,
+        "sessions": 100,
+        "tasks": 665,
+        "graded_in_smoke": 30
+      },
+      "C2": {
+        "packages": 20,
+        "sessions": 100,
+        "tasks": 668,
+        "graded_in_smoke": 33
+      }
+    },
+    "objective_evidence": {
+      "PRE_A1": {
+        "required": 48,
+        "missing_evidence": []
+      },
+      "A1": {
+        "required": 40,
+        "missing_evidence": []
+      },
+      "A2": {
+        "required": 40,
+        "missing_evidence": []
+      },
+      "B1": {
+        "required": 40,
+        "missing_evidence": []
+      },
+      "B2": {
+        "required": 40,
+        "missing_evidence": []
+      },
+      "C1": {
+        "required": 40,
+        "missing_evidence": []
+      },
+      "C2": {
+        "required": 40,
+        "missing_evidence": []
+      }
+    }
+  },
+  "regression": {
+    "php_sqlite": 586,
+    "php_mariadb": 15,
+    "js": 248,
+    "js_node22_compatibility_loader": "JSON import assertion syntax only"
+  },
+  "release": {
+    "build": "Vite client and SSR rebuilt with Node 22.17.1; deploy Composer production dependencies separately from composer.lock",
+    "package_hashes": "packages.sha256",
+    "hosting_migration_test": "verified administrator authenticated and applied pending migration on SQLite",
+    "hosting_environment_checked": false,
+    "audio_on_device_checked": false,
+    "application_source": "src",
+    "client_build": "src/public/build",
+    "ssr_build": "src/bootstrap/ssr",
+    "full_application_zip_required": false
+  },
+  "recheck": {
+    "date": "2026-11-12",
+    "scope": "LP-00–LP-21 requirements, implementation and evidence",
+    "regression": {
+      "php_sqlite_passed": 586,
+      "php_sqlite_skipped": 1,
+      "skip_reason": "MariaDB concurrency suite runs separately",
+      "php_assertions": 9928,
+      "mariadb_passed": 15,
+      "mariadb_assertions": 136,
+      "js_passed": 248,
+      "js_skipped": 0,
+      "js_loader_required": false
+    },
+    "bank": {
+      "validated_packages": 140,
+      "test_published_sessions": 700,
+      "target_lessons_completed": 400,
+      "target_tasks_graded": 2878,
+      "b2_c2_lessons_completed": 15,
+      "b2_c2_tasks_graded": 98,
+      "reimported_packages": 83,
+      "vocabulary_and_run_snapshots_preserved": true,
+      "inventory_exit_code": 0,
+      "baselines_hash_checked": 80,
+      "stable_session_and_vocabulary_ids_checked": 400
+    },
+    "corrections": [
+      "Node.js JSON import attributes replace obsolete assertions",
+      "Current client and SSR build copied into src",
+      "Four A1 review questions now assess their target French lexemes",
+      "Full application ZIP removed; operations instructions updated",
+      "Current editorial guide reconciled with coverage; historical pilot notes labelled"
+    ],
+    "review_item_corrections": {
+      "units": [
+        "A1-U04",
+        "A1-U07",
+        "A1-U11",
+        "A1-U18"
+      ],
+      "items": 4,
+      "canonical_valid": true,
+      "new_analyzer_warnings": 0,
+      "php_answer_variants_checked": 12,
+      "js_answer_variants_checked": 12,
+      "lesson_task_ids_changed": false,
+      "lexeme_keys_changed": false,
+      "validation_sequence": "Full-bank replay used the prior snapshot. Only these four vocabulary review items changed afterwards; their final packages and answer choices were checked separately."
+    },
+    "build": {
+      "client": true,
+      "ssr": true,
+      "manifest_sha256": "dff299bf123731d386cbf243d7716f63ae7bf69b7c5b9a3a26236fc27f1145ce",
+      "manifest_entries": 198,
+      "referenced_assets_checked": 283
+    },
+    "limitations": [
+      "No new physical-phone or audible speech-rate observation (LP-12)",
+      "No learner outcomes or measured retention/duration (optional LP-15)",
+      "Hosting not deployed or tested",
+      "Key-based traversal verifies grading and progress, not independent language correctness for every question; added context reviews and recorded editorial risks were examined separately"
+    ]
+  }
+}

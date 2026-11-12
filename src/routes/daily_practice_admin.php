@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\DailySession\EditorController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin/daily-practice')->name('admin.daily-practice.')->middleware(['auth', 'verified', 'is-admin', 'throttle:120,1'])->group(function (): void {
+    Route::post('versions/{version}/save', [\App\Http\Controllers\Admin\DailySession\MaintenanceController::class, 'save'])->whereNumber('version');
+    Route::post('manage/{kind}/{id}/delete', [\App\Http\Controllers\Admin\DailySession\MaintenanceController::class, 'delete'])->whereIn('kind', ['sessions','units','levels','curricula']);
     Route::get('/', [EditorController::class, 'index'])->name('index');
     Route::post('sessions/{session}/rename', [EditorController::class, 'renameSession'])->whereNumber('session')->name('sessions.rename');
     Route::post('units/{unit}/rename', [EditorController::class, 'renameUnit'])->whereNumber('unit')->name('units.rename');
@@ -18,6 +20,7 @@ Route::prefix('admin/daily-practice')->name('admin.daily-practice.')->middleware
     Route::get('media/{media}/file', [EditorController::class, 'mediaFile'])->whereUuid('media')->name('media.file');
     Route::get('versions/{version}', [EditorController::class, 'show'])->whereNumber('version')->name('versions.show');
     Route::get('versions/{version}/preview', [EditorController::class, 'preview'])->whereNumber('version')->name('versions.preview');
+    Route::post('imports/bulk', [ContentController::class, 'bulk'])->middleware('throttle:60,1,practice-bulk-import')->name('imports.bulk');
     Route::post('imports/preview', [ContentController::class, 'preview'])->middleware('throttle:6,1,practice-import')->name('imports.preview');
     Route::post('imports/{batch}/commit', [ContentController::class, 'commit'])->whereUuid('batch')->name('imports.commit');
     Route::get('imports/{batch}/export', [ContentController::class, 'exportBatch'])->whereUuid('batch')->name('imports.export');
@@ -36,6 +39,8 @@ Route::prefix('admin/daily-practice')->name('admin.daily-practice.')->middleware
     Route::post('curricula/{curriculum}/publish', [ContentController::class, 'publishCurriculum'])->whereNumber('curriculum')->name('curricula.publish');
     Route::post('curricula/{curriculum}/archive', [ContentController::class, 'archiveCurriculum'])->whereNumber('curriculum')->name('curricula.archive');
     Route::post('versions/status', [ContentController::class, 'changeStatus'])->name('versions.status');
+    Route::post('catalog/{kind}/{id}/visibility', [ContentController::class, 'setCatalogVisibility'])
+        ->whereIn('kind', ['levels', 'units'])->whereNumber('id')->name('catalog.visibility');
     Route::post('catalog/{revision}/publish-direct', [ContentController::class, 'publishCatalogDirect'])->whereNumber('revision')->name('catalog.publish-direct');
     Route::post('curricula/{curriculum}/publish-direct', [ContentController::class, 'publishCurriculumDirect'])->whereNumber('curriculum')->name('curricula.publish-direct');
     Route::get('schema', [ContentController::class, 'schema'])->name('schema');

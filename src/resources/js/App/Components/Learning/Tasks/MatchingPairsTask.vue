@@ -4,7 +4,7 @@ import { presentationOrder } from '@/App/Learning/presentationOrder.js';
 import FrenchText from '../FrenchText.vue';
 import AfrSelect from '@/App/Components/Form/Select/AfrSelect.vue';
 import AfrOption from '@/App/Components/Form/Select/AfrOption.vue';
-const props = defineProps({ task: { type: Object, required: true }, modelValue: { type: Object, required: true }, disabled: Boolean, uid: { type: String, required: true } });
+const props = defineProps({ task: { type: Object, required: true }, modelValue: { type: Object, required: true }, disabled: Boolean, showTranscription: { type: Boolean, default: true }, uid: { type: String, required: true } });
 const rightItems = computed(() => presentationOrder(props.task.right_items, props.uid + ':pairs'));
 const emit = defineEmits(['update:modelValue']);
 const selected = (id) => props.modelValue.pairs.find((pair) => pair.left_id === id)?.right_id ?? '';
@@ -13,14 +13,14 @@ const choose = (left, right) => {
   if (right) pairs.push({ left_id: left, right_id: right });
   emit('update:modelValue', { pairs });
 };
-const optionText = (item) => item.text + (item.text_lang === 'fr' ? ' · ' + item.transcription_ru : '');
+const optionText = (item) => item.text + (props.showTranscription && item.text_lang === 'fr' && item.transcription_ru ? ' · ' + item.transcription_ru : '');
 </script>
 <template>
   <fieldset :disabled="disabled">
     <legend class="pair-instructions">Подберите пару к каждому выражению. Каждый вариант используется один раз.</legend>
     <div v-for="(left, index) in task.left_items" :key="left.id" class="pair-row">
       <div>
-        <french-text v-if="left.text_lang === 'fr'" :text="left.text" :transcription-ru="left.transcription_ru" compact />
+        <french-text :show-transcription="showTranscription" v-if="left.text_lang === 'fr'" :text="left.text" :transcription-ru="left.transcription_ru" compact />
         <span v-else>{{ left.text }}</span>
       </div>
       <div class="pair-answer">
@@ -30,7 +30,7 @@ const optionText = (item) => item.text + (item.text_lang === 'fr' ? ' · ' + ite
           <afr-option v-for="right in rightItems" :key="right.id" :value="right.id" :label="optionText(right)" />
         </afr-select>
         <template v-if="selected(left.id)">
-          <french-text v-for="right in task.right_items.filter((item) => item.id === selected(left.id) && item.text_lang === 'fr')" :key="right.id" :text="right.text" :transcription-ru="right.transcription_ru" compact />
+          <french-text :show-transcription="showTranscription" v-for="right in task.right_items.filter((item) => item.id === selected(left.id) && item.text_lang === 'fr')" :key="right.id" :text="right.text" :transcription-ru="right.transcription_ru" compact />
         </template>
       </div>
     </div>

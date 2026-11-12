@@ -114,7 +114,7 @@ export const evaluateEvent = (snapshot, previousState, event, version) => {
   if (event.presentation_id !== state.presentation_id) invalid();
   const task = snapshot.task;
   const first = state.first_result === null;
-  if (type === 'help' && (!['hint', 'audio_transcript', 'reference'].includes(event.help_kind)
+  if (type === 'help' && (!['hint', 'audio_transcript', 'reference', 'language_support'].includes(event.help_kind)
     || (event.help_kind === 'audio_transcript' && !task.prompt?.audio))) invalid();
   if (type === 'technical_skip' && (event.reason !== 'audio_unavailable' || (!task.prompt?.audio && task.skill !== 'listening'))) invalid();
   const check = type === 'answer' ? checkAnswer(task, event.answer, version) : null;

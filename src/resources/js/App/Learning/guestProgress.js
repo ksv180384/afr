@@ -1,11 +1,12 @@
+import { defaultReviewSuggestions } from './reviewSuggestions.js';
 import { learningAccess, completedGuestSessions } from './learningAccess.js';
 import { initialPresentation, evaluateEvent, calculateSessionResult, taskSnapshot } from './answerChecker.js';
 import { checkingPolicy, LEVELS } from './types/index.js';
 import { ensureSyncState } from './guestSync.js';
 import { logicalKey } from './accountRepository.js';
-import { applyGuestVocabularyEvent, finishGuestVocabulary, upgradeGuestVocabulary } from './guestVocabulary.js';
+import { applyGuestVocabularyEvent, finishGuestVocabulary, upgradeGuestVocabulary, upgradeGuestSuccessClock } from './guestVocabulary.js';
 
-export const GUEST_SCHEMA_VERSION = 4;
+export const GUEST_SCHEMA_VERSION = 6;
 export const guestError = (message, code = 'revision_conflict') => Object.assign(new Error(message), {code});
 const copy = (value) => structuredClone(value);
 export const guestDate = (instant, timezone) => {
@@ -21,6 +22,8 @@ export const migrateGuestState = (source) => {
   }
   if (state.storage_schema_version === 2) { upgradeGuestVocabulary(state); state.storage_schema_version = 3; }
   if (state.storage_schema_version === 3) { ensureSyncState(state); state.storage_schema_version = 4; }
+  if (state.storage_schema_version === 4) { state.review_suggestions=defaultReviewSuggestions(); state.review_settings_receipts={}; state.storage_schema_version=5; }
+  if (state.storage_schema_version === 5) { upgradeGuestSuccessClock(state); state.storage_schema_version=6; }
   if (state.storage_schema_version !== GUEST_SCHEMA_VERSION) throw guestError('Версия гостевого хранилища не поддерживается. Данные сохранены без изменений.', 'unsupported_schema');
   return state;
 };
@@ -34,6 +37,8 @@ export const newGuestState = ({idFactory, now, timezone}) => {
   const eventId = idFactory();
   const state = {storage_schema_version:GUEST_SCHEMA_VERSION,guest_id:idFactory(),current_level:'PRE_A1',timezone,
     level_selection_event_id:eventId,profile_revision:1,sequence:0,runs:{},vocabulary:{},outbox:[],sync_receipts:{},bound_user_id:null,receipts:{},vocabulary_effects:{},vocabulary_run_effects:{}};
+  state.review_suggestions=defaultReviewSuggestions();
+  state.review_settings_receipts={};
   ensureSyncState(state);
   recordGuestEvent(state,{client_event_id:eventId,action:'level_selection',current_level:state.current_level,timezone,client_occurred_at:now});
   return state;
@@ -51,6 +56,7 @@ export const changeGuestProfile = (state, input) => {
 };
 export const addGuestRun = (state, {source,runId,presentationIds,eventId,tabId,now,promotionEventId,kind = 'daily'}) => {
   if (state.bound_user_id !== null) throw guestError('Этот гостевой набор уже связан с аккаунтом. Войдите для продолжения.', 'bound_owner');
+  if (kind==='review' && Object.values(state.runs).some(run=>run.status==='in_progress')) throw guestError('Сначала завершите или явно отложите активное занятие.', 'validation_failed');
   checkingPolicy(source.checking_policy_version);
   const snapshot = copy(source.snapshot);
   if (!snapshot.tasks?.length || snapshot.tasks.length !== presentationIds.length) throw guestError('В занятии нет доступных заданий.', 'validation_failed');

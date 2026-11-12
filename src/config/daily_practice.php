@@ -14,7 +14,8 @@ return [
         'vocabulary_page_size' => 30,
     ],
     'schema_version' => 1,
-    'schema_path' => dirname(__DIR__).'/resources/learning/session-package-v1.schema.json',
+    'content_path' => env('LEARNING_CONTENT_PATH', dirname(__DIR__, 2).'/learning'),
+    'schema_path' => dirname(__DIR__).'/resources/practice/session-package-v1.schema.json',
     'language_pair' => 'fr-ru',
     'default_profile' => [
         'current_level' => LearningLevel::PreA1->value,
@@ -42,7 +43,7 @@ return [
     ],
     'session' => [
         'min_tasks' => 6,
-        'max_tasks' => 8,
+        'max_tasks' => 12,
     ],
     'vocabulary_test' => [
         'max_words' => 10,

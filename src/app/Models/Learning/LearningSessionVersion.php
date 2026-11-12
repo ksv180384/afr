@@ -56,19 +56,12 @@ class LearningSessionVersion extends Model
         ];
     }
 
+
     protected static function booted(): void
     {
         static::updating(function (self $model): void {
-            if ($model->getRawOriginal('published_at') !== null && $model->isDirty('published_at')) {
-                throw new LogicException('Publication timestamp cannot be cleared or rewritten.');
-            }
-            if ($model->isDirty(['session_id', 'version', 'schema_version', 'payload', 'checksum', 'import_batch_id'])) {
-                throw new LogicException('LearningSessionVersion identity and snapshot cannot be changed.');
-            }
-        });
-        static::deleting(function (self $model): void {
-            if ($model->published_at !== null) {
-                throw new LogicException('Published versions must be archived, not deleted.');
+            if ($model->isDirty(['session_id', 'version']) || ($model->getRawOriginal('published_at') !== null && $model->isDirty('published_at'))) {
+                throw new LogicException('Content identity and publication timestamp cannot be rewritten.');
             }
         });
     }

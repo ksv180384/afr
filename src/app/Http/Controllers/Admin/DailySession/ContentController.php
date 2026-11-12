@@ -15,6 +15,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ContentController extends Controller
 {
+    public function bulk(UploadSessionPackageRequest $request, SessionImportService $service): JsonResponse
+    {
+        // One ordinary HTTP request per package; no workers or command line required.
+        $preview = $service->preview($request->user(), $request->file('file'));
+
+        return response()->json($service->commit($request->user(), $preview['batch_id'], $preview['token'], $preview['file_hash']))->header('Cache-Control', 'no-store');
+    }
+
     public function preview(UploadSessionPackageRequest $request, SessionImportService $service): JsonResponse
     {
         return response()->json([...$service->preview($request->user(), $request->file('file')), 'plan' => app(\App\Services\Learning\ContentEditorService::class)->importPlan($request->packageReport()->package())], 201)->header('Cache-Control', 'no-store');
@@ -48,6 +56,11 @@ class ContentController extends Controller
     public function changeStatus(ContentOperationRequest $request, SessionPublicationService $service): JsonResponse
     {
         return response()->json($service->changeStatus($request->user(), $request->validated('version_ids'), $request->validated('status'), $request->safe()->only(['notes'])));
+    }
+
+    public function setCatalogVisibility(ContentOperationRequest $request, string $kind, int $id, CatalogPublicationService $service): JsonResponse
+    {
+        return response()->json($service->setVisibility($request->user(), $kind, $id, $request->boolean('published')));
     }
 
     public function publishCatalogDirect(ContentOperationRequest $request, int $revision, CatalogPublicationService $service): JsonResponse
@@ -119,12 +132,12 @@ class ContentController extends Controller
     public function template(ContentOperationRequest $request, string $template): Response
     {
         $path = match ($template) {
-            'pre-a1-u01' => resource_path('learning/templates/pre-a1-u01-examples.json'),
-            'task-types' => resource_path('learning/templates/task-types.json'),
-            'pre-a1-u01-v2' => resource_path('learning/programme/packages/PRE_A1/PRE_A1-U01.v2.json'),
+            'pre-a1-u01' => resource_path('practice/templates/pre-a1-u01-examples.json'),
+            'task-types' => resource_path('practice/templates/task-types.json'),
+            'pre-a1-u01-v2' => (config('daily_practice.content_path').'/programme/packages/PRE_A1/PRE_A1-U01.v1.json'),
             default => null,
         };
-        abort_if($path === null, 404);
+        abort_if($path === null || ! is_file($path), 404);
 
         return response()->download($path, $template.'.json', ['Cache-Control' => 'private, no-store']);
     }

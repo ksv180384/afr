@@ -18,8 +18,8 @@ final class ContentEditorService
 {
     public function versions(array $filters): LengthAwarePaginator
     {
-        $query = LearningSessionVersion::query()->with('session.unit');
-        foreach (['status', 'version'] as $field) {
+        $query = LearningSessionVersion::query()->with('session.unit')->whereRaw('learning_session_versions.id = COALESCE((SELECT active_version_id FROM learning_sessions WHERE learning_sessions.id = learning_session_versions.session_id), (SELECT MAX(current_content.id) FROM learning_session_versions AS current_content WHERE current_content.session_id = learning_session_versions.session_id))');
+        foreach (['status'] as $field) {
             if (! empty($filters[$field])) {
                 $query->where($field, $filters[$field]);
             }
@@ -100,7 +100,7 @@ final class ContentEditorService
                     'id' => $s->external_id, 'ready' => $s->archived_at === null && $s->activeVersion?->status->value === 'published' && ($s->activeVersion->payload['kind'] ?? '') === 'checkpoint'])->all()];
         });
 
-        return ['levels' => LearningLevel::query()->orderBy('sort_order')->get(),
+        return ['units' => \App\Models\Learning\LearningUnit::query()->orderBy('level')->orderBy('sort_order')->get(), 'levels' => LearningLevel::query()->orderBy('sort_order')->get(),
             'revisions' => $revisions->orderByDesc('id')->paginate(20)->withQueryString(), 'curricula' => $programs,
             'coverage' => ['published_sessions' => LearningSession::query()->whereNull('archived_at')->whereHas('activeVersion', fn ($q) => $q->where('status', 'published'))->count(),
                 'published_objectives' => count($published)]];
@@ -140,7 +140,7 @@ final class ContentEditorService
             ->get()->keyBy(fn ($v) => $v->session->external_id.':'.$v->version);
 
         return ['sessions' => array_map(fn ($s) => ['id' => $s['id'], 'version' => $s['version'],
-            'action' => isset($existing[$s['id'].':'.$s['version']]) ? 'skip' : 'create'], $package['sessions']),
+            'action' => $existing->contains(fn ($row) => $row->session->external_id === $s['id']) ? 'replace' : 'create'], $package['sessions']),
             'catalog_revisions' => count($package['levels'] ?? []) + count($package['units'] ?? []),
             'curricula' => array_map(fn ($c) => ['id' => $c['id'], 'version' => $c['version'],
                 'action' => LearningCurriculum::query()->where('external_id', $c['id'])->where('version', $c['version'])->exists() ? 'skip' : 'create'], $package['curricula'] ?? [])];

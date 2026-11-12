@@ -28,7 +28,7 @@ final class PresentationEvaluator
         }
         $task = $snapshot['task'];
         $first = $state['first_result'] === null;
-        if ($type === 'help' && (! in_array($event['help_kind'], ['hint', 'audio_transcript', 'reference'], true) || ($event['help_kind'] === 'audio_transcript' && empty($task['prompt']['audio'])))) {
+        if ($type === 'help' && (! in_array($event['help_kind'], ['hint', 'audio_transcript', 'reference', 'language_support'], true) || ($event['help_kind'] === 'audio_transcript' && empty($task['prompt']['audio'])))) {
             AnswerChecker::invalid('Недоступный вид помощи.');
         }
         if ($type === 'technical_skip' && ($event['reason'] !== 'audio_unavailable' || (empty($task['prompt']['audio']) && ($task['skill'] ?? null) !== 'listening'))) {

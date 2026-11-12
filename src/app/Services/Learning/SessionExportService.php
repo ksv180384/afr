@@ -36,7 +36,11 @@ final class SessionExportService
         $this->access->check($actor);
         $version = LearningSessionVersion::query()->with('session.unit')->findOrFail($id);
 
-        $unitContent = LearningCatalogRevision::query()->where('import_batch_id', $version->import_batch_id)->where('unit_id', $version->session->unit_id)->orderByDesc('id')->first()?->content
+        // An unchanged unit revision can be reused from an earlier import batch.
+        $catalogIds = $version->importBatch?->receipt['catalog_revision_ids'] ?? [];
+        $unitContent = LearningCatalogRevision::query()->where('unit_id', $version->session->unit_id)
+            ->where(fn ($query) => $query->where('import_batch_id', $version->import_batch_id)->orWhereIn('id', $catalogIds))
+            ->orderByDesc('id')->first()?->content
             ?? $this->unit($version->session->unit);
 
         return $this->envelope(['units' => [$unitContent], 'sessions' => [$version->payload]], 'version-'.$version->id);
@@ -51,13 +55,16 @@ final class SessionExportService
         }
         $receipt = $batch->receipt;
         $versions = LearningSessionVersion::query()->whereIn('id', $receipt['version_ids'])->get()->keyBy('id');
-        $resources = ['sessions' => array_map(fn (int $id): array => $versions[$id]->payload, $receipt['version_ids'])];
-        foreach (LearningCatalogRevision::query()->whereIn('id', $receipt['catalog_revision_ids'])->orderBy('id')->get() as $revision) {
-            $resources[$revision->unit_id === null ? 'levels' : 'units'][] = $revision->content;
+        $resources = ['sessions' => collect($receipt['version_ids'])->map(fn ($id) => $versions->get($id)?->payload)->filter()->values()->all()];
+        $revisions = LearningCatalogRevision::query()->whereIn('id', $receipt['catalog_revision_ids'])->get()->keyBy('id');
+        foreach ($receipt['catalog_revision_ids'] as $revisionId) {
+            if ($revision = $revisions->get($revisionId)) {
+                $resources[$revision->unit_id === null ? 'levels' : 'units'][] = $revision->content;
+            }
         }
         if ($receipt['curriculum_ids'] !== []) {
             $curricula = LearningCurriculum::query()->whereIn('id', $receipt['curriculum_ids'])->get()->keyBy('id');
-            $resources['curricula'] = array_map(fn (int $id): array => $this->curriculum($curricula[$id]), $receipt['curriculum_ids']);
+            $resources['curricula'] = collect($receipt['curriculum_ids'])->map(fn ($id) => $curricula->get($id))->filter()->values()->map($this->curriculum(...))->all();
         }
 
         return $this->envelope($resources, $receipt['package_id']);

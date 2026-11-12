@@ -15,7 +15,7 @@ class PracticePreviewController extends Controller
         abort_unless(app()->environment('local'), 404);
         $sessions = [];
         foreach (['pre-a1-u01-examples', 'task-types'] as $template) {
-            $package = json_decode(file_get_contents(resource_path('learning/templates/'.$template.'.json')), true, 512, JSON_THROW_ON_ERROR);
+            $package = json_decode(file_get_contents(resource_path('practice/templates/'.$template.'.json')), true, 512, JSON_THROW_ON_ERROR);
             array_push($sessions, ...$package['sessions']);
         }
 

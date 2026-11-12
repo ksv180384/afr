@@ -18,9 +18,10 @@ class GuestPracticeController extends Controller
             ->whereNull('learning_sessions.archived_at')
             ->whereHas('activeVersion', fn ($query) => $query->where('status', 'published'))
             ->whereHas('unit', fn ($query) => $query->whereNotNull('published_at')->whereNull('archived_at'))
-            ->whereHas('levelDefinition', fn ($query) => $query->whereNotNull('published_at'))
+            ->whereHas('levelDefinition', fn ($query) => $query->published())
             ->with(['activeVersion' => fn ($query) => $query->select('id', 'session_id', 'version', 'status', 'checksum',
-                'payload->title as content_title', 'payload->duration_minutes as content_duration', 'payload->prerequisite_ids as content_prerequisites'), 'unit'])->orderBy('learning_units.sort_order')
+                'payload->title as content_title', 'payload->duration_minutes as content_duration',
+                'payload->objectives[0]->title as content_goal', 'payload->prerequisite_ids as content_prerequisites'), 'unit'])->orderBy('learning_units.sort_order')
             ->orderBy('learning_sessions.sort_order')->orderBy('learning_sessions.external_id');
     }
 
@@ -28,7 +29,7 @@ class GuestPracticeController extends Controller
     {
         return response()->json(['access_outline' => app(\App\Services\Learning\LearningAccessService::class)->outline(), 'sessions' => $this->published()->get()->map(fn ($session) => [
             'id' => $session->external_id, 'theme' => $session->unit->title, 'duration_minutes' => (int) $session->activeVersion->content_duration, 'title' => $session->activeVersion->content_title,
-            'level' => $session->getRawOriginal('level'), 'session_version_id' => $session->active_version_id,
+            'level' => $session->getRawOriginal('level'), 'goal' => $session->activeVersion->content_goal, 'session_version_id' => $session->active_version_id,
             'prerequisite_ids' => json_decode($session->activeVersion->content_prerequisites, true),
         ])]);
     }
