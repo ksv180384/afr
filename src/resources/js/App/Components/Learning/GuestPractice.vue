@@ -22,7 +22,7 @@ import { guestContentTransport } from '@/App/Services/Api/daily_practice.js';
 import { returnToPractice, visitPracticeRun } from '@/App/Learning/practiceRunNavigation.js';
 import { usePracticeFeedback } from '@/App/Learning/usePracticeFeedback.js';
 
-const props = defineProps({runId:String,levels:Array,progressOnly:Boolean,selectedSession:Object,routeSelection:Object});
+const props = defineProps({runId:String,levels:Array,progressOnly:Boolean,trail:Boolean,selectedSession:Object,routeSelection:Object});
 const state = ref(null);
 const vocabularyMode = ref(false);
 const sharedStore = usePracticeHome();
@@ -218,13 +218,13 @@ onBeforeUnmount(() => { window.removeEventListener('focus',focus); unregisterAut
       @exit="exit" @next-lesson="start()" @review="startShortReview" @repeat="start($event.session_id)" @test-next="nextTest" @vocabulary="openVocabulary" />
     <template v-else-if="ready && state">
       <p v-if="!progressOnly && !home" role="status">Загружаем учебный маршрут…</p>
-      <practice-route-topic v-if="!progressOnly && home" :route="home.route" :store="store" :selection="routeSelection" :active-run="currentRun"
-        :busy="busy || locked || (dirty && !currentRun)" @start="start" @continue="open" guest>
+      <practice-route-topic v-if="!progressOnly && home" :trail="trail" :route="home.route" :store="store" :selection="routeSelection"
+        :busy="busy || locked || dirty" @start="start" @continue="open" guest>
       <section v-if="selectedSession" class="practice-panel lesson-main">
         <p class="muted">Выбранное занятие</p><h2>{{ selectedSession.title }}</h2>
         <p v-if="['locked','unavailable'].includes(selectedAccess?.status)" role="status">{{ selectedAccess.reason }}</p>
-        <afr-button v-if="currentRun" type="primary" :disabled="busy || locked" @click="open(currentRun.id)">
-          {{ selectedAccess?.status === 'active' ? 'Продолжить занятие' : 'Продолжить начатое · ' + currentRun.title }}
+        <afr-button v-if="selectedAccess?.run_id" type="primary" :disabled="busy || locked" @click="open(selectedAccess.run_id)">
+          Продолжить занятие
         </afr-button>
         <afr-button v-else-if="['available', 'completed'].includes(selectedAccess?.status)" type="primary"
           :disabled="busy || locked" @click="start(selectedSession.id)">{{ selectedAccess.completed ? 'Пройти повторно' : 'Начать занятие' }}</afr-button>
@@ -238,10 +238,10 @@ onBeforeUnmount(() => { window.removeEventListener('focus',focus); unregisterAut
         <p v-else>Новые занятия появятся после публикации.</p>
       </section>
       </practice-route-topic>
-      <review-suggestion-card v-if="!progressOnly" :suggestion="reviewPlan" :store="store" :busy="busy || locked"
+      <review-suggestion-card v-if="!progressOnly && !trail" :suggestion="reviewPlan" :store="store" :busy="busy || locked"
         @start="startShortReview('suggested')" @dismissed="refreshSuggestion" />
-      <p v-if="!progressOnly && repository?.temporary"><afr-button @click="openVocabulary">Повторять · Личный словарь</afr-button></p>
-      <details v-if="!progressOnly" class="practice-panel">
+      <p v-if="!progressOnly && !trail && repository?.temporary"><afr-button @click="openVocabulary">Повторять · Личный словарь</afr-button></p>
+      <details v-if="!progressOnly && !trail" class="practice-panel">
         <summary>Уровень занятий</summary>
         <div class="settings">
           <div class="practice-field"><label for="daily-guest-level">Уровень</label><afr-select id="daily-guest-level" v-model="level" native :disabled="busy"><afr-option v-for="item in levels" :key="item.code" :value="item.code" :label="item.title" /></afr-select></div>
@@ -268,7 +268,7 @@ onBeforeUnmount(() => { window.removeEventListener('focus',focus); unregisterAut
         </li></ol>
       </details>
     </template>
-    <p v-if="ready && !vocabularyMode" class="muted guest-note">Прогресс в этом браузере. <a href="/login?practice=1" @click.prevent="authenticate('/login')">Войти в аккаунт</a></p>
+    <p v-if="ready && !vocabularyMode && !trail" class="muted guest-note">Прогресс в этом браузере. <a href="/login?practice=1" @click.prevent="authenticate('/login')">Войти в аккаунт</a></p>
   </section>
 </template>
 <style scoped>

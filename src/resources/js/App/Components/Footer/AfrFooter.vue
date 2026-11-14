@@ -1,9 +1,7 @@
 <script setup>
-import { Link, usePage } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
 import dayjs from 'dayjs';
-
-
-const page=usePage();
+import { openCookiePreferences } from '@/App/Services/cookiePreferences.js';
 </script>
 
 <template>
@@ -16,6 +14,7 @@ const page=usePage();
           <Link class="link mx-10" :href="route('info.terms-user')">Правила пользовательского соглашения</Link>
           <Link class="link mx-10" :href="route('info.privacy-policy')">Политика по защите персональных данных</Link>
         </li>
+        <li><button type="button" class="link" @click="openCookiePreferences">Настройки cookie</button></li>
       </ul>
     </div>
   </footer>

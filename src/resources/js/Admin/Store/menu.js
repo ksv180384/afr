@@ -2,6 +2,7 @@ export default [
   {
     path: '/admin/daily-practice',
     name: 'admin.daily-practice.index',
+    activeRoute: 'admin.daily-practice.*',
     title: 'Задания на сегодня'
   },
   {

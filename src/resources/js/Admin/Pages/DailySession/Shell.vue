@@ -5,24 +5,28 @@ import { Head, Link, usePage } from '@inertiajs/vue3';
 import AdminLayout from '@/Admin/Layouts/AdminLayout.vue';
 import { activePracticeSection, practiceSections } from './editorUi';
 
-defineProps({ authUser: Object, title: { type: String, default: 'Задания на сегодня' } });
+defineProps({ authUser: Object, fixedHeight: Boolean, compactHeading: Boolean, title: { type: String, default: 'Задания на сегодня' } });
 const page = usePage();
 const active = computed(() => activePracticeSection(page.url));
 </script>
 <template>
-  <admin-layout :auth-user="authUser" :title="title">
+  <admin-layout :auth-user="authUser" :title="title" :fixed-height="fixedHeight">
     <Head :title="title"><meta name="robots" content="noindex, nofollow" /></Head>
-    <el-config-provider :locale="ru"><section class="daily-admin">
+    <el-config-provider :locale="ru"><section class="daily-admin" :class="{ 'daily-admin--fixed': fixedHeight, 'daily-admin--compact': compactHeading || fixedHeight }">
       <nav aria-label="Управление практикой">
         <Link v-for="section in practiceSections" :key="section.path" :href="section.path" class="practice-tab" :class="{ active: active === section.path }" :aria-current="active === section.path ? 'page' : undefined">{{ section.label }}</Link>
       </nav>
-      <h1>{{ title }}</h1>
+      <h1 :class="{ 'sr-only': compactHeading || fixedHeight }">{{ title }}</h1>
       <slot />
     </section></el-config-provider>
   </admin-layout>
 </template>
 <style scoped>
 .daily-admin { padding: 1rem; min-width: 0; overflow-wrap: anywhere; }
+.daily-admin--fixed { display: flex; flex: 1; flex-direction: column; min-height: 0; }
+.daily-admin--compact { padding-block: .5rem; }
+.daily-admin--compact nav { flex-shrink: 0; margin-bottom: .5rem; }
+.daily-admin--compact .practice-tab { padding-block: .5rem; }
 nav { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--el-border-color-light); }
 .practice-tab { padding: .75rem 0; border-bottom: 2px solid transparent; }
 .practice-tab.active { color: var(--el-color-primary); border-bottom-color: var(--el-color-primary); }

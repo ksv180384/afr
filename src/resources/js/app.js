@@ -1,6 +1,7 @@
 import '../css/app.css';
 import '../css/practice.css';
 import './bootstrap';
+import CookieNotice from './App/Components/Info/CookieNotice.vue';
 import GuestSync from './App/Components/Learning/GuestSync.vue';
 import PracticeToasts from './App/Components/Learning/PracticeToasts.vue';
 import { createPracticeNotifications, practiceNotificationsKey } from './App/Learning/practiceNotifications.js';
@@ -31,7 +32,9 @@ createInertiaApp({
         ),
     setup({ el, App, props, plugin }) {
         const practiceNotifications = createPracticeNotifications();
-        return createApp({ render: () => [h(App, props), h(GuestSync), h(PracticeToasts, { notifications: practiceNotifications })] })
+        return createApp({
+            render: () => [h(App, props), h(GuestSync), h(PracticeToasts, { notifications: practiceNotifications }), h(CookieNotice)],
+        })
             .provide(practiceNotificationsKey, practiceNotifications)
             .use(plugin)
             .use(ZiggyVue)

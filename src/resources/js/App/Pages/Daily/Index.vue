@@ -178,7 +178,7 @@ onBeforeUnmount(() => { disposed = true; window.removeEventListener('online',onO
     <div class="daily-account">
       <p v-if="!enabled" role="status">Раздел ещё не открыт для прохождения.</p>
       <p v-else-if="runId && !authUser" role="status"><Link href="/login?practice=1">Войдите в аккаунт</Link>, чтобы открыть сохранённое занятие.</p>
-      <guest-practice v-else-if="!authUser" :run-id="guestRunId" :selected-session="selectedSession" :route-selection="routeSelection" :levels="levels" :progress-only="screen==='progress'" />
+      <guest-practice v-else-if="!authUser" :run-id="guestRunId" :selected-session="selectedSession" :route-selection="routeSelection" :levels="levels" :progress-only="screen==='progress'" :trail="embedded" />
       <template v-else>
         <p v-if="saving.kind === 'auth'" class="muted"><Link href="/login?practice=1">Войти в аккаунт</Link>, чтобы продолжить занятие. Ваш ответ сохранён.</p>
         <p v-if="saving.message && !feedback.enabled" role="status">{{ saving.message }}</p>
@@ -189,12 +189,12 @@ onBeforeUnmount(() => { disposed = true; window.removeEventListener('online',onO
           @next-lesson="startLesson()" @review="startReview" @repeat="repeat" @test-next="repeat" @vocabulary="router.visit('/daily/vocabulary')" @exit="returnToPractice" />
         <template v-else-if="home">
           <template v-if="screen!=='progress'">
-            <practice-route-topic :route="home.route" :owner="owner" :selection="routeSelection" :active-run="home.active_run"
+            <practice-route-topic :trail="embedded" :route="home.route" :owner="owner" :selection="routeSelection"
               :busy="busy || syncing || pendingStart" @start="startLesson" @continue="continueRun">
             <section v-if="selectedSession" class="practice-panel lesson-main">
               <p class="eyebrow">Выбранное занятие</p><h2>{{ selectedSession.title }}</h2>
-              <afr-button v-if="home.active_run" type="primary" :disabled="busy || syncing"
-                @click="continueRun(home.active_run.id)">{{ selectedRun ? 'Продолжить занятие' : 'Продолжить начатое · ' + home.active_run.title }}</afr-button>
+              <afr-button v-if="selectedRun" type="primary" :disabled="busy || syncing"
+                @click="continueRun(selectedRun)">Продолжить занятие</afr-button>
               <afr-button v-else type="primary" :loading="busy" :disabled="pendingStart || syncing" @click="startLesson(selectedSession.id)">{{ selectedSession.completed ? 'Пройти повторно' : 'Начать занятие' }}</afr-button>
             </section>
             <section v-else-if="showNext" class="practice-panel lesson-main">
@@ -208,8 +208,8 @@ onBeforeUnmount(() => { disposed = true; window.removeEventListener('online',onO
               </div>
             </section>
             </practice-route-topic>
-            <div class="daily-overview"><Link href="/profile">Изменить уровень в профиле</Link></div>
-            <review-suggestion-card :suggestion="home.review_suggestion" :owner="owner" :store="homeStore" :busy="busy || syncing || pendingStart"
+            <div v-if="!embedded" class="daily-overview"><Link href="/profile">Изменить уровень в профиле</Link></div>
+            <review-suggestion-card v-if="!embedded" :suggestion="home.review_suggestion" :owner="owner" :store="homeStore" :busy="busy || syncing || pendingStart"
               @start="startReview('suggested')" @dismissed="refreshSuggestion" />
           </template>
           <template v-else>

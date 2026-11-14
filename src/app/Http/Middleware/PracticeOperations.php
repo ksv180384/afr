@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Services\Learning\AnswerCheckingException;
 use App\Services\Learning\ContentOperationException;
 use App\Services\Learning\PracticeTelemetry;
+use App\Services\Learning\TopicBackgroundService;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,6 +30,7 @@ class PracticeOperations
                 $limit = match (true) {
                     $request->is('daily/api/guest-sync') => config('daily_practice.operations.sync_bytes'),
                     $request->is('admin/daily-practice/imports/preview', 'admin/daily-practice/imports/bulk', 'admin/daily-practice/media') => config('daily_practice.import.max_bytes') + 65536,
+                    $request->is('admin/daily-practice/units/*/background') => TopicBackgroundService::MAX_KILOBYTES * 1024 + 65536,
                     default => config('daily_practice.operations.request_bytes'),
                 };
                 if ((int) $request->header('Content-Length', 0) > $limit || strlen($request->getContent()) > $limit) {

@@ -43,4 +43,5 @@ export function restorePracticeScroll() {
   if (!position || window.location.pathname + window.location.search !== position.path) return;
   returnScroll = undefined;
   requestAnimationFrame(() => window.scrollTo(0, position.scroll));
+  return true;
 }

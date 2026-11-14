@@ -24,10 +24,9 @@ onMounted(async () => {
 </script>
 <template>
   <seo-head :title="catalog.seo.title" :description="catalog.seo.description" :canonical-url="catalog.seo.canonicalUrl" :no-index="catalog.seo.noIndex" :robots="catalog.seo.noIndex?'noindex, follow':'index, follow'" :json-ld="catalog.seo.jsonLd" />
-  <practice-layout :auth-user="authUser" :title="catalog.kind === 'index' ? 'Практика' : catalog.title" active="learn">
-    <p v-if="catalog.kind === 'index' && accessNotice" role="status" class="practice-locked-notice">{{ accessNotice }}</p>
+  <practice-layout :auth-user="authUser" :title="catalog.kind === 'index' ? 'Практика' : catalog.title" active="learn" :hide-heading="catalog.kind === 'index'">
     <daily-practice v-if="catalog.kind === 'index'" :auth-user="authUser" :route-selection="routeSelection" :levels="levels" enabled embedded />
-    <div class="practice-body" :class="{ 'practice-public-catalog': catalog.kind === 'index' }">
+    <div v-if="catalog.kind !== 'index'" class="practice-body" :class="{ 'practice-public-catalog': catalog.kind === 'index' }">
       <h2 v-if="catalog.kind === 'index'">{{ catalog.title }}</h2>
       <nav v-if="catalog.kind!=='index'" aria-label="Хлебные крошки" class="practice-breadcrumbs"><template v-for="(crumb,index) in catalog.breadcrumbs" :key="crumb.path">
         <Link v-if="index<catalog.breadcrumbs.length-1" :href="crumb.path">{{ crumb.title }}</Link><span v-else aria-current="page">{{ crumb.title }}</span><span v-if="index<catalog.breadcrumbs.length-1" aria-hidden="true">/</span>

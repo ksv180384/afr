@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Models\User\User;
 use App\Models\User\UserConfigsView;
+use App\Support\CookiePreferences;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
@@ -40,18 +41,19 @@ class Helper
         return false;
     }
 
-    /**
-     * @return string
-     */
-    public static function getUserKey(): string
+    public static function getUserKey(): ?string
     {
-        $userKey = Cookie::get('user_key');
-        if (!$userKey) {
-            // Генерируем новый UUID
-            $userKey = (string) Str::uuid();
+        if (! CookiePreferences::allowsAnalytics(request())) {
+            return null;
+        }
 
-            // Устанавливаем куку для всего домена с вечным сроком действия
-            Cookie::queue(Cookie::forever('user_key', $userKey, '/', null, false, false, false, 'Lax'));
+        $userKey = Cookie::get('user_key');
+        if (! $userKey) {
+            $userKey = (string) Str::uuid();
+            Cookie::queue(Cookie::make(
+                'user_key', $userKey, CookiePreferences::DURATION_MINUTES, '/',
+                secure: request()->isSecure() || app()->isProduction(), sameSite: 'lax',
+            ));
         }
 
         return $userKey;

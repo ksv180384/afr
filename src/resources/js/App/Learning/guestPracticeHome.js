@@ -16,7 +16,7 @@ function card(entry, access, published = true) {
   };
 }
 
-function routeView(outline, access, profileLevel, selection, active, candidate) {
+function routeView(outline, access, profileLevel, selection, active, candidate, runs) {
   const inferredLevel = selection.unit && outline.find(level => level.units.some(unit => unit.id === selection.unit));
   const levelId = selection.level ?? inferredLevel?.id ?? profileLevel;
   const level = outline.find(entry => entry.id === levelId);
@@ -24,9 +24,9 @@ function routeView(outline, access, profileLevel, selection, active, candidate) 
   const findUnit = id => id && units.find(unit => unit.sessions.some(session => session.id === id));
   const unitId = selection.unit ?? (findUnit(active?.session_id) || findUnit(candidate?.id) || units[0])?.id;
   const unit = units.find(entry => entry.id === unitId);
-  const lessons = (unit?.sessions ?? []).map(session => {
+  const lessonCard = session => {
     const state = access.sessions[session.id];
-    const current = active?.session_id === session.id;
+    const current = activeGuestRun(runs, profileLevel, session.id);
     const lesson = card(session, state);
     if (current) {
       lesson.status = 'active';
@@ -36,9 +36,15 @@ function routeView(outline, access, profileLevel, selection, active, candidate) 
       ...lesson,
       completed: state?.completed ?? false,
       review_only: state?.review_only ?? false,
-      run_id: current ? active.id : null,
+      run_id: current?.id ?? null,
     };
-  });
+  };
+  const lessons = (unit?.sessions ?? []).map(lessonCard);
+  const topics = units.map(topic => ({
+    ...card(topic, access.units[topic.id], topic.sessions.length > 0),
+    background_url: topic.background_url ?? null,
+    lessons: topic.sessions.map(lessonCard),
+  }));
   const contents = outline.map(entry => {
     const publishedUnits = entry.published ? entry.units : [];
     return {
@@ -53,6 +59,8 @@ function routeView(outline, access, profileLevel, selection, active, candidate) 
     level: card(level ?? { id: levelId }, access.levels[levelId], units.some(entry => entry.sessions.length)),
     unit: unitId == null ? null : card(unit ?? { id: unitId }, access.units[unitId], !!unit?.sessions.length),
     lessons,
+    topics,
+    current_lesson_id: active?.session_id ?? candidate?.id ?? null,
     contents,
   };
 }
@@ -76,9 +84,13 @@ export function searchGuestRoute(local, catalog, query, completedOnly) {
   return {items, more: false};
 }
 
-export function activeGuestRun(runs) {
-  const ordered = Object.values(runs).sort((a, b) =>
-    b.started_at.localeCompare(a.started_at) || b.record_sequence - a.record_sequence);
+export function activeGuestRun(runs, level, sessionId = null) {
+  const ordered = Object.values(runs)
+    .filter(run => {
+      const lesson = ['daily', 'extra'].includes(run.kind);
+      return sessionId === null ? !lesson || run.snapshot.level === level : lesson && run.snapshot.id === sessionId;
+    })
+    .sort((a, b) => b.started_at.localeCompare(a.started_at) || b.record_sequence - a.record_sequence);
   return ordered.find(run => run.status === 'in_progress') ?? ordered.find(run => run.status === 'paused');
 }
 
@@ -95,7 +107,7 @@ export function guestPracticeHome(local, catalog, selection, now, contentError =
     duration_minutes: next.duration_minutes, goal: next.goal ?? null,
   } : null;
   const runs = Object.values(local.runs);
-  const current = activeGuestRun(local.runs);
+  const current = activeGuestRun(local.runs, local.current_level);
   const sessionId = current && ['daily', 'extra'].includes(current.kind) ? current.snapshot.id : null;
   const active = current ? {
     id: current.id,
@@ -116,7 +128,7 @@ export function guestPracticeHome(local, catalog, selection, now, contentError =
     active_run: active,
     run: active,
     candidate,
-    route: routeView(outline, access, local.current_level, selection, active, candidate),
+    route: routeView(outline, access, local.current_level, selection, active, candidate, local.runs),
     review_suggestion: review.total ? suggestion : null,
     exhausted: !candidate,
     content_error: contentError,

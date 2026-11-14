@@ -393,7 +393,7 @@ it('opens the active run for a route start and preserves its pinned first step o
         ->assertJsonPath('presentation.presentation_id', $first['presentation']['presentation_id'])
         ->assertJsonPath('introduction_seen', false);
     $paused = accountCommand($this, $first, 'pause');
-    $operation = accountInput(1, ['kind' => 'extra', 'session_id' => 'PRE_A1-U01-L02', 'route_start' => true]);
+    $operation = accountInput(1, ['kind' => 'extra', 'session_id' => 'PRE_A1-U01-L01', 'route_start' => true]);
     $this->postJson('/daily/api/runs', $operation)->assertOk()
         ->assertJsonPath('state.run_id', $first['run_id'])->assertJsonPath('state.status', 'paused');
     $this->postJson('/daily/api/runs', $operation)->assertOk()
@@ -403,6 +403,59 @@ it('opens the active run for a route start and preserves its pinned first step o
         ->and($resumed['introductions'])->toBe($first['introductions'])
         ->and($resumed['introduction_seen'])->toBeFalse();
     $this->assertDatabaseCount('learning_runs', 1);
+});
+
+it('opens the requested available lesson while keeping another unfinished lesson', function () {
+    $first = accountStart($this, ['route_start' => true]);
+    accountCommand($this, accountComplete($this, $first), 'finish');
+
+    $firstInput = ['kind' => 'extra', 'session_id' => 'PRE_A1-U01-L01', 'route_start' => true];
+    $secondInput = ['kind' => 'extra', 'session_id' => 'PRE_A1-U01-L02', 'route_start' => true];
+    $repeat = accountStart($this, $firstInput);
+    $this->getJson('/daily/api/today')->assertOk()
+        ->assertJsonPath('route.lessons.0.status', 'active')
+        ->assertJsonPath('route.lessons.1.status', 'available');
+
+    $second = accountStart($this, $secondInput);
+    expect($second['session']['id'])->toBe('PRE_A1-U01-L02');
+    $this->getJson('/daily/api/today')->assertOk()
+        ->assertJsonPath('route.lessons.0.run_id', $repeat['run_id'])
+        ->assertJsonPath('route.lessons.1.run_id', $second['run_id']);
+    expect(accountStart($this, $firstInput)['run_id'])->toBe($repeat['run_id']);
+    expect(accountStart($this, $secondInput)['run_id'])->toBe($second['run_id']);
+    $this->assertDatabaseCount('learning_runs', 3);
+});
+
+it('continues the selected practice level and keeps the previous lesson available', function () {
+    LearningLevel::where('code', 'B1')->update(['published_at' => now('UTC')]);
+    $unit = LearningUnit::factory()->create(['level' => 'B1', 'published_at' => now('UTC')]);
+    $payload = [...$this->versions[0]->payload, 'id' => 'B1-FIRST', 'level' => 'B1', 'unit_id' => $unit->external_id];
+    $session = LearningSession::factory()->create(['external_id' => $payload['id'], 'level' => 'B1', 'unit_id' => $unit->id]);
+    $version = LearningSessionVersion::factory()->create([
+        'session_id' => $session->id,
+        'payload' => $payload,
+        'checksum' => CanonicalJson::hash($payload),
+        'status' => 'published',
+        'published_at' => now('UTC'),
+    ]);
+    $session->update(['active_version_id' => $version->id]);
+
+    $this->patchJson('/daily/api/profile', accountInput(1, ['current_level' => 'B1', 'timezone' => 'UTC']))->assertOk();
+    $previous = $this->postJson('/daily/api/runs', accountInput(2, ['kind' => 'daily', 'route_start' => true]))
+        ->assertOk()->assertJsonPath('state.session.level', 'B1')->json('state');
+    $this->patchJson('/daily/api/profile', accountInput(2, ['current_level' => 'PRE_A1', 'timezone' => 'UTC']))->assertOk();
+    $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('active_run', null)
+        ->assertJsonPath('candidate.level', 'PRE_A1');
+    $current = $this->postJson('/daily/api/runs', accountInput(3, ['kind' => 'daily', 'route_start' => true]))
+        ->assertOk()->assertJsonPath('state.session.level', 'PRE_A1')->json('state');
+    $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('active_run.id', $current['run_id']);
+
+    $this->patchJson('/daily/api/profile', accountInput(3, ['current_level' => 'B1', 'timezone' => 'UTC']))->assertOk();
+    $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('active_run.id', $previous['run_id']);
+    $this->postJson('/daily/api/runs', accountInput(4, ['kind' => 'daily', 'route_start' => true]))
+        ->assertOk()->assertJsonPath('state.run_id', $previous['run_id'])
+        ->assertJsonPath('state.presentation.presentation_id', $previous['presentation']['presentation_id']);
+    $this->assertDatabaseCount('learning_runs', 2);
 });
 
 it('only creates the next or repeated route lesson after an explicit start', function () {

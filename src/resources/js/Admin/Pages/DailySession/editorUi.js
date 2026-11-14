@@ -6,7 +6,8 @@ export const sessionStatuses = [
 ];
 export const statusLabel = (value) => sessionStatuses.find((item) => item.value === value)?.label ?? value;
 export const practiceSections = [
-  { path: '/admin/daily-practice', label: 'Сессии и импорт' },
+  { path: '/admin/daily-practice', label: 'Занятия' },
+  { path: '/admin/daily-practice/imports', label: 'Импорт' },
   { path: '/admin/daily-practice/catalog', label: 'Уровни, темы и программы' },
   { path: '/admin/daily-practice/reports', label: 'Обращения' },
 ];

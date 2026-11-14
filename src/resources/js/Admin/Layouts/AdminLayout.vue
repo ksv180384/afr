@@ -53,7 +53,7 @@ onBeforeUnmount(() => {
           Панель управления
         </div>
 
-        <afr-admin-menu class="sticky top-[10px] mt-4" />
+        <afr-admin-menu class="admin-menu mt-4" />
       </div>
 
       <div class="content-container">
@@ -108,7 +108,7 @@ body{
 }
 
 .layout-admin--fixed .left-container{
-  @apply h-full overflow-hidden;
+  @apply h-full overflow-y-auto;
 }
 
 .content-container{
@@ -118,6 +118,11 @@ body{
 
 .layout-admin--fixed .content-container{
   @apply h-full min-h-0 overflow-hidden flex flex-col;
+}
+
+.admin-menu{
+  position: sticky;
+  top: 10px;
 }
 
 .panel-title{
@@ -173,11 +178,19 @@ body{
     @apply block;
   }
 
-  .left-container{
-    @apply fixed left-0 top-0 z-50 h-screen overflow-y-auto shadow-xl;
+  .left-container,
+  .layout-admin--fixed .left-container{
+    @apply fixed left-0 top-0 z-50 overflow-y-auto shadow-xl;
     width: min(280px, 86vw);
+    height: 100dvh;
+    overscroll-behavior-y: contain;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
     transform: translateX(-100%);
     transition: transform 0.25s ease;
+  }
+
+  .admin-menu{
+    position: static;
   }
 
   .layout-admin--menu-open .left-container{

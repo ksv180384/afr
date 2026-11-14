@@ -168,10 +168,12 @@ export const createPracticeHomeStore = ({transport, guestTransport, guestReposit
     await load(owner, 1, {selection: currentSelection});
     assertOwner(token);
     const home = state.home;
+    const active = sessionId === null ? home.active_run?.id
+      : home.route?.lessons.find(lesson => lesson.id === sessionId)?.run_id;
     if (owner !== null) {
       const pending = await accountRepository.pending(owner, null);
       assertOwner(token);
-      if (!pending.length && home.active_run) return '/daily/run/' + home.active_run.id;
+      if (!pending.length && active) return '/daily/run/' + active;
       if (!pending.length && !sessionId && !home.candidate) throw new Error('Новых доступных занятий пока нет.');
       const profile = home.profile;
       const onStatus = value => {
@@ -192,7 +194,7 @@ export const createPracticeHomeStore = ({transport, guestTransport, guestReposit
       invalidate(owner);
       return '/daily/run/' + view.run_id;
     }
-    if (home.active_run) return '/daily/guest/' + home.active_run.id;
+    if (active) return '/daily/guest/' + active;
     const lessonId = sessionId ?? home.candidate?.id;
     if (!lessonId) throw new Error(home.content_error || 'Новых доступных занятий пока нет.');
     let source;
@@ -206,7 +208,7 @@ export const createPracticeHomeStore = ({transport, guestTransport, guestReposit
       eventId: idFactory(), tabId: idFactory(), now: now(), kind: sessionId ? 'extra' : 'daily'};
     const chosen = await guestRepository.mutate(local => {
       assertOwner(token);
-      const existing = activeGuestRun(local.runs);
+      const existing = activeGuestRun(local.runs, local.current_level, sessionId);
       if (existing) return existing.id;
       addGuestRun(local, input);
       return runId;

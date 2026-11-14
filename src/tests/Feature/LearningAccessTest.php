@@ -197,6 +197,10 @@ it('returns a private compact route for an explicitly selected topic', function 
         ->assertJsonPath('route.level.id', 'PRE_A1')
         ->assertJsonPath('route.unit.id', $unit)
         ->assertJsonPath('route.lessons.0.status', 'locked')
+        ->assertJsonCount(2, 'route.topics')
+        ->assertJsonPath('route.topics.0.lessons.0.id', 'PRE_A1-U1-L1')
+        ->assertJsonPath('route.topics.1.lessons.0.id', 'PRE_A1-U2-L1')
+        ->assertJsonPath('route.current_lesson_id', 'PRE_A1-U1-L1')
         ->assertJsonMissingPath('route.contents.0.units.0.sessions')
         ->assertJsonMissingPath('route.lessons.0.tasks');
     expect($response->getContent())->not->toContain('correct_choice_id');

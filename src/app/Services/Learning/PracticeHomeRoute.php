@@ -5,7 +5,7 @@ namespace App\Services\Learning;
 final class PracticeHomeRoute
 {
     /** Present existing access decisions as compact screen states. */
-    public function make(array $outline, array $access, string $profileLevel, array $selection, ?array $active, ?array $candidate): array
+    public function make(array $outline, array $access, string $profileLevel, array $selection, ?array $active, ?array $candidate, array $lessonRuns): array
     {
         $levelId = $selection['level'] ?? $profileLevel;
         if (! isset($selection['level']) && isset($selection['unit'])) {
@@ -34,18 +34,24 @@ final class PracticeHomeRoute
             $unitId ??= $units[0]['id'] ?? null;
         }
         $unit = collect($units)->firstWhere('id', $unitId);
-        $lessons = array_map(function ($session) use ($active, $access) {
+        $lessonCard = function ($session) use ($lessonRuns, $access) {
             $state = $access['sessions'][$session['id']] ?? null;
-            $current = $active && $active['session_id'] === $session['id'];
+            $runId = $lessonRuns[$session['id']] ?? null;
             $card = $this->card($session, $state);
-            if ($current) {
+            if ($runId !== null) {
                 $card['status'] = 'active';
                 $card['reason'] = '';
             }
 
             return [...$card,
-                'completed' => $state['completed'] ?? false, 'review_only' => $state['review_only'] ?? false, 'run_id' => $current ? $active['id'] : null];
-        }, $unit['sessions'] ?? []);
+                'completed' => $state['completed'] ?? false, 'review_only' => $state['review_only'] ?? false, 'run_id' => $runId];
+        };
+        $lessons = array_map($lessonCard, $unit['sessions'] ?? []);
+        $topics = array_map(fn ($topic) => [
+            ...$this->card($topic, $access['units'][$topic['id']] ?? null, $topic['sessions'] !== []),
+            'background_url' => $topic['background_url'] ?? null,
+            'lessons' => array_map($lessonCard, $topic['sessions']),
+        ], $units);
         $contents = array_map(function ($entry) use ($access) {
             $units = $entry['published'] ? $entry['units'] : [];
             $unitCards = array_map(fn ($unit) => [...$this->card($unit, $access['units'][$unit['id']] ?? null, $unit['sessions'] !== []),
@@ -59,6 +65,8 @@ final class PracticeHomeRoute
             'level' => $this->card($level ?? ['id' => $levelId], $access['levels'][$levelId] ?? null, collect($units)->contains(fn ($entry) => $entry['sessions'] !== [])),
             'unit' => $unitId === null ? null : $this->card($unit ?? ['id' => $unitId], $access['units'][$unitId] ?? null, ! empty($unit['sessions'])),
             'lessons' => $lessons,
+            'topics' => $topics,
+            'current_lesson_id' => $active['session_id'] ?? $candidate['id'] ?? null,
             'contents' => $contents,
         ];
     }

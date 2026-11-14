@@ -16,7 +16,7 @@ import AfrAdminMenuItem from '@/Admin/Components/Menu/AfrAdminMenuItem.vue';
       <afr-admin-menu-item
         v-for="menuItem in menu"
         :key="menuItem.name"
-        :is-active="route().current(menuItem.name)"
+        :is-active="route().current(menuItem.activeRoute ?? menuItem.name)"
       >
         <Link :href="route(menuItem.name)">
           {{ menuItem.title }}

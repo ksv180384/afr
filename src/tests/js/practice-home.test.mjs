@@ -105,6 +105,36 @@ test('guest level changes preserve all existing run identities and snapshots',as
   assert.equal(store.state.home.profile.current_level,'A1');
   assert.deepEqual(repository.state.runs,runs);
 });
+test('guest practice resumes lessons on the selected level after switching levels', async () => {
+  const b1Snapshot = {...snapshot, id: 'B1-FIRST', level: 'B1'};
+  const b1Lesson = {...lesson, id: b1Snapshot.id, level: 'B1'};
+  const accessOutline = [outline[0], {
+    id: 'B1', title: 'B1', published: true,
+    units: [{id: 'b1-first', title: 'Первая тема Б1', sessions: [b1Lesson]}],
+  }];
+  const store = make({
+    guestTransport: {
+      async catalog() { return {sessions: [lesson, b1Lesson], access_outline: accessOutline}; },
+      async session(id) {
+        return {...await guestTransport.session(), access_outline: accessOutline,
+          snapshot: id === b1Lesson.id ? b1Snapshot : snapshot};
+      },
+    },
+  });
+  await store.changeLevel(null, 'B1');
+  const b1Path = await store.start(null);
+  assert.equal(store.state.home.active_run.level, 'B1');
+
+  await store.changeLevel(null, 'PRE_A1');
+  assert.equal(store.state.home.active_run, null);
+  const beginnerPath = await store.start(null);
+  assert.notEqual(beginnerPath, b1Path);
+  assert.equal(store.state.home.active_run.level, 'PRE_A1');
+
+  await store.changeLevel(null, 'B1');
+  assert.equal(await store.start(null), b1Path);
+});
+
 test('a changed server identity blocks profile writes from a stale account screen',async()=>{
   let writes=0;
   const store=make({transport:{async today(){return home(7);},async history(){return {data:[]};},
@@ -208,6 +238,8 @@ test('guest direct topic separates lower-level access from completion and omits 
   assert.equal(selected.home.route.lessons[0].review_only, true);
   assert.equal(selected.home.candidate, null);
   assert.equal(selected.home.route.contents[0].units[0].session_count, 1);
+  assert.equal(selected.home.route.topics[0].lessons[0].id, snapshot.id);
+  assert.equal(selected.home.route.topics[0].lessons[0].status, 'available');
   assert.equal(Object.hasOwn(selected.home.route.contents[0].units[0], 'sessions'), false);
   const empty = await store.load(null, 1, {selection:{level:'B1'}});
   assert.equal(empty.home.route.level.status, 'unavailable');
@@ -279,17 +311,30 @@ test('a lost route start receipt keeps the selected lesson and event key when re
   assert.deepEqual(requests[0], requests[1]);
 });
 
-test('guest route opening another lesson reuses the existing unfinished run without loading content', async () => {
-  let loads = 0;
-  const store = make({guestTransport:{...guestTransport, async session(id) {
-    loads++;
-    assert.equal(id, snapshot.id);
-    return guestTransport.session();
-  }}});
-  const first = await store.start(null, snapshot.id);
-  assert.equal(await store.start(null, 'a-different-lesson'), first);
-  assert.equal(loads, 1);
-  assert.equal(Object.values(store.state.guest.runs)[0].kind, 'extra');
+test('guest route starts the selected available lesson and resumes each lesson separately', async () => {
+  const second = {...lesson, id: 'PRE_A1-SECOND'};
+  const accessOutline = [
+    {...outline[0], units: [{...outline[0].units[0], sessions: [lesson, second]}]},
+    {id: 'A1', title: 'A1', published: false, units: []},
+  ];
+  const loads = [];
+  const store = make({guestTransport: {
+    async catalog() { return {sessions: [lesson, second], access_outline: accessOutline}; },
+    async session(id) {
+      loads.push(id);
+      return {...await guestTransport.session(), snapshot: {...snapshot, id}, access_outline: accessOutline};
+    },
+  }});
+  await store.changeLevel(null, 'A1');
+  await store.refresh(null, 1, {selection: {level: 'PRE_A1'}});
+  const firstPath = await store.start(null, lesson.id);
+  assert.equal(store.state.home.route.lessons[1].status, 'available');
+  const secondPath = await store.start(null, second.id);
+  assert.notEqual(secondPath, firstPath);
+  assert.equal(await store.start(null, lesson.id), firstPath);
+  assert.equal(await store.start(null, second.id), secondPath);
+  assert.deepEqual(loads, [lesson.id, second.id]);
+  assert.equal(Object.keys(store.state.guest.runs).length, 2);
 });
 
 test('starting a filtered review persists plain word IDs from the reactive plan', async () => {

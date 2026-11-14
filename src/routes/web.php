@@ -51,6 +51,8 @@ Route::get('/dictionary/word/{id}', [\App\Http\Controllers\App\DictionaryControl
 Route::get('/games', [\App\Http\Controllers\App\GamesController::class, 'index'])->name('games');
 Route::get('/games/falling-translations', [\App\Http\Controllers\App\GamesController::class, 'fallingTranslations'])->name('games.falling-translations');
 Route::get('/info/terms-user', [\App\Http\Controllers\App\Info\InfoController::class, 'termsUser'])->name('info.terms-user');
+Route::post('/cookie-preferences', \App\Http\Controllers\App\Info\CookiePreferencesController::class)
+    ->name('info.cookie-preferences');
 Route::get('/privacy-policy', [\App\Http\Controllers\App\Info\InfoController::class, 'privacyPolicy'])->name('info.privacy-policy');
 
 Route::get('/sitemap.xml', \App\Http\Controllers\App\SitemapController::class)->name('sitemap');

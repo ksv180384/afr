@@ -12,6 +12,8 @@ use App\Services\Learning\ContentEditorService;
 use App\Services\Learning\MediaLibraryService;
 use App\Services\Learning\SessionExportService;
 use App\Services\Learning\SessionPackageValidator;
+use App\Services\Learning\TopicBackgroundService;
+use Illuminate\Http\JsonResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -27,6 +29,13 @@ class EditorController extends Controller
         return response()->json($urls->rename($request->user(), 'unit', $unit, $request->validated()));
     }
 
+    public function uploadUnitBackground(EditorRequest $request, int $unit, TopicBackgroundService $backgrounds): JsonResponse
+    {
+        $topic = $backgrounds->replace($request->user(), $unit, $request->file('file'));
+
+        return response()->json(['background_url' => $topic->background_url]);
+    }
+
     public function index(EditorRequest $request, ContentEditorService $editor): Response
     {
         $versions = $editor->versions($request->validated());
@@ -34,6 +43,11 @@ class EditorController extends Controller
         return Inertia::render('DailySession/Index', ['authUser' => Helper::getUserData(),
             'versions' => $versions->getCollection()->map(fn ($version) => $editor->versionRow($version)), 'paginate' => [...PaginateResource::make($versions)->resolve(), 'prev_page_url' => $versions->previousPageUrl(), 'next_page_url' => $versions->nextPageUrl()],
             'filters' => $request->validated(), 'levels' => config('daily_practice.levels')]);
+    }
+
+    public function imports(EditorRequest $request): Response
+    {
+        return Inertia::render('DailySession/Imports', ['authUser' => Helper::getUserData()]);
     }
 
     public function show(EditorRequest $request, int $version, ContentEditorService $editor, SessionPackageValidator $validator, SessionExportService $export): Response

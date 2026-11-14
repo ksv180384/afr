@@ -4,7 +4,11 @@
   <a href="/daily/progress">Мой прогресс</a>
 </nav>
 <div class="practice-content">
-<h1 class="practice-heading">{{ $catalog['title'] }}</h1><div class="practice-body">
+<h1 class="practice-heading {{ $catalog['kind'] === 'index' ? 'sr-only' : '' }}">{{ $catalog['title'] }}</h1>
+@if($catalog['kind'] === 'index')
+<p role="status">Загружаем учебный маршрут…</p>
+@else
+<div class="practice-body">
 @if($catalog['kind'] !== 'index')
 <nav aria-label="Хлебные крошки" class="practice-breadcrumbs">
 @foreach($catalog['breadcrumbs'] as $crumb)
@@ -55,4 +59,5 @@
 
 @endif
 </div>
+@endif
 </div>

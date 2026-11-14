@@ -4,7 +4,7 @@ import api from '@/Admin/Services/Api';
 import Issues from './Issues.vue';
 import { prepareImport, importPrepared } from './bulkImport';
 const props = defineProps({ disabled: Boolean });
-const emit = defineEmits(['busy', 'finished']);
+const emit = defineEmits(['busy']);
 const filesInput = ref(null), folderInput = ref(null), rows = ref([]);
 const preparing = ref(false), running = ref(false), paused = ref(false), notice = ref(''), waitSeconds = ref(0);
 let alive = true, retryAt = 0;
@@ -48,7 +48,7 @@ const start = async (retry = false) => {
       },
       onFatal: error => { paused.value = true; notice.value = [401, 403, 419].includes(error.response?.status) ? 'Сессия администратора недоступна. Войдите снова, затем повторите импорт.' : 'Импорт остановлен из-за ошибки связи или сервера. Уже загруженные занятия сохранены. Повторите ошибки после устранения причины.'; },
     });
-  } finally { running.value = false; emit('busy', false); if (alive) emit('finished'); }
+  } finally { running.value = false; emit('busy', false); }
 };
 const leave = event => { if (running.value) { event.preventDefault(); event.returnValue = ''; } };
 onMounted(() => window.addEventListener('beforeunload', leave));
@@ -56,14 +56,13 @@ onBeforeUnmount(() => { alive = false; paused.value = true; window.removeEventLi
 </script>
 <template>
   <el-card class="panel" shadow="never">
-    <template #header>Массовый импорт занятий</template>
     <p>Выберите папку <code>packages</code> целиком или несколько JSON-файлов. Новые занятия добавятся черновиками, существующие обновятся по ID с сохранением статуса.</p>
     <p class="muted"><code>*.v1.json</code> — занятия. <code>*.authoring-delta.json</code> — заметки подготовки, <code>*.validation.json</code> — отчёты проверки. Сопроводительные файлы пропускаются автоматически.</p>
     <p class="muted">Среди пакетов с одинаковыми ID занятий выбирается максимальный номер в имени файла: <code>v10</code> новее <code>v2</code>. Старые версии, идентичные копии и фрагменты, покрытые полным пакетом той же или более новой версии, пропускаются. <code>IMPORT_MANIFEST.json</code> не используется.</p>
+    <p class="muted">Файлы отправляются последовательно с учётом зависимостей. Во время импорта держите страницу открытой. После закрытия страницы можно выбрать папку заново: повторный импорт обновит занятия без дубликатов. Импорт не публикует новые занятия автоматически.</p>
     <input ref="folderInput" type="file" webkitdirectory multiple hidden @change="select" />
     <input ref="filesInput" type="file" accept=".json,application/json" multiple hidden @change="select" />
     <div class="actions"><el-button :disabled="disabled || running || preparing" :loading="preparing" @click="folderInput.click()">Выбрать папку</el-button><el-button :disabled="disabled || running || preparing" @click="filesInput.click()">Выбрать несколько JSON</el-button></div>
-    <p class="muted">Файлы отправляются последовательно с учётом зависимостей. Во время импорта держите страницу открытой. После закрытия страницы можно выбрать папку заново: повторный импорт обновит занятия без дубликатов. Импорт не публикует новые занятия автоматически.</p>
     <el-alert v-if="notice" :title="notice" type="warning" :closable="false" />
     <template v-if="rows.length">
       <p>Пакетов: {{ total }} · Готово: {{ imported.length }} · Ошибок: {{ failures.length }} · Пропущено файлов: {{ skipped }}</p>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin\DailySession;
 
+use App\Services\Learning\TopicBackgroundService;
 use Illuminate\Validation\Rule;
 
 class EditorRequest extends ContentOperationRequest
@@ -21,6 +22,10 @@ class EditorRequest extends ContentOperationRequest
                 'curricula_page' => ['nullable', 'integer', 'min:1', 'max:100000'],
             ],
             'renameSession', 'renameUnit' => ['slug' => ['required', 'string', 'max:120', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/D'], 'expected_slug' => ['required', 'string', 'max:200'], 'confirmed' => ['required', 'accepted']],
+            'uploadUnitBackground' => ['file' => [
+                'required', 'image', 'mimes:jpg,jpeg,png,webp',
+                'max:'.TopicBackgroundService::MAX_KILOBYTES, 'dimensions:max_width=4096,max_height=4096',
+            ]],
             'storeMedia' => ['file' => ['required', 'file', 'max:10240', 'mimetypes:audio/wav,audio/x-wav,audio/vnd.wave']],
             'approveMedia' => ['confirmed' => ['required', 'accepted']],
             'storeReport' => ['version_id' => ['required', 'integer', 'min:1'], 'task_id' => ['nullable', 'string', 'max:128'], 'text' => ['required', 'string', 'max:10000']],

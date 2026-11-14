@@ -1,8 +1,10 @@
 <?php
 
 use App\Models\Learning\LearningContentReport;
+use App\Models\Learning\LearningLevel;
 use App\Models\Learning\LearningRun;
 use App\Models\Learning\LearningSessionVersion;
+use App\Models\Learning\LearningUnit;
 use App\Models\User\Rang;
 use App\Models\User\User;
 use App\Services\Learning\ContentAccess;
@@ -18,6 +20,55 @@ beforeEach(function () {
     Storage::fake('learning_private');
     $rank = Rang::firstOrCreate(['alias' => 'administrator'], ['title' => 'Администратор']);
     $this->admin = User::factory()->create(['rang_id' => $rank->id]);
+});
+
+it('uploads and replaces the topic background for both practice routes', function () {
+    config(['daily_practice.enabled' => true]);
+    Storage::fake('public');
+    LearningLevel::where('code', 'PRE_A1')->update(['published_at' => now('UTC')]);
+    $unit = LearningUnit::factory()->create(['published_at' => now('UTC')]);
+    $url = route('admin.daily-practice.units.background', $unit->id);
+    $headers = ['Accept' => 'application/json'];
+
+    $this->post($url, [], $headers)->assertUnauthorized();
+    $this->actingAs(User::factory()->create())->post($url, [], $headers)->assertForbidden();
+    $this->actingAs($this->admin)->post($url, ['file' => UploadedFile::fake()->create('background.svg')], $headers)
+        ->assertUnprocessable();
+
+    $upload = fn () => $this->post($url, ['file' => UploadedFile::fake()->image('background.png', 1600, 2400)],
+        [...$headers, 'Content-Length' => '1000000'])->assertOk()->json('background_url');
+    $first = $upload();
+    $oldPath = $unit->fresh()->background_path;
+    Storage::disk('public')->assertExists($oldPath);
+
+    $replacement = $upload();
+    expect($replacement)->not->toBe($first);
+    Storage::disk('public')->assertMissing($oldPath);
+    Storage::disk('public')->assertExists($unit->fresh()->background_path);
+    $this->get('/admin/daily-practice/catalog')->assertInertia(fn (Assert $page) => $page
+        ->where('units.0.background_url', $replacement));
+    $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('route.topics.0.background_url', $replacement);
+    $this->getJson('/daily/api/content')->assertOk()->assertJsonPath('access_outline.0.units.0.background_url', $replacement);
+});
+
+it('opens the separate import page only for administrators', function () {
+    $this->get('/admin/daily-practice/imports')->assertRedirect('/login');
+    $this->actingAs($this->admin)->get('/admin/daily-practice/imports')
+        ->assertOk()->assertInertia(fn (Assert $page) => $page->component('DailySession/Imports', false));
+});
+
+it('filters the lesson table through a partial Inertia request', function () {
+    $version = (string) app(\App\Http\Middleware\HandleInertiaRequests::class)->version(request());
+
+    $this->actingAs($this->admin)->get('/admin/daily-practice?search=Bonjour', [
+        'X-Inertia' => 'true',
+        'X-Inertia-Version' => $version,
+        'X-Inertia-Partial-Component' => 'DailySession/Index',
+        'X-Inertia-Partial-Data' => 'versions,paginate,filters',
+    ])->assertOk()->assertJsonPath('component', 'DailySession/Index')
+        ->assertJsonPath('props.filters.search', 'Bonjour')
+        ->assertJsonMissingPath('props.levels')
+        ->assertJsonMissingPath('props.authUser');
 });
 
 function adminPackage(): array

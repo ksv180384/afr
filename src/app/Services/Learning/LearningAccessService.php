@@ -27,6 +27,7 @@ final class LearningAccessService
             'published' => $level->published_at !== null, 'has_curriculum' => in_array($level->code, $curricula, true),
             'units' => $units->filter(fn ($unit) => $unit->getRawOriginal('level') === $level->code)->values()->map(fn ($unit) => [
                 'id' => $unit->external_id, 'title' => $unit->title, 'path' => PracticeUrls::unit($unit),
+                'background_url' => $unit->background_url,
                 'sessions' => ($sessions[$unit->id] ?? collect())->map(fn ($session) => [
                     'id' => $session->external_id, 'title' => $session->activeVersion->access_title,
                     'path' => $session->slug ? PracticeUrls::unit($unit).'/'.$session->slug : null,

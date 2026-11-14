@@ -13,6 +13,8 @@ const paths = {
   check: ['m5 12 4 4L19 6'],
   lock: ['M5 11h14v10H5zM8 11V7a4 4 0 0 1 8 0v4'],
   circle: ['M20 12a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z'],
+  close: ['m6 6 12 12M18 6 6 18'],
+  search: ['M21 21l-5-5M18 11a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z'],
   dash: ['M6 12h12'],
   pause: ['M8 5v14M16 5v14'],
 };

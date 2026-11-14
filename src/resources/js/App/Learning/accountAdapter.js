@@ -56,7 +56,9 @@ const deliverQueue = async ({ ownerUserId, runId, repository, transport, state =
             const selected = sameOwner ? (row.request.route_start ? latest.active_run : latest.run) : null;
             const restoreDaily = !row.request.route_start && row.request.kind === 'daily' && selected &&
               (!row.request.replace_assignment || (selected.status !== 'completed' && selected.level === profile.current_level));
-            if (selected && (row.request.route_start || restoreDaily)) {
+            const restoreRoute = row.request.route_start &&
+              (!row.request.session_id || selected?.session_id === row.request.session_id);
+            if (selected && (restoreRoute || restoreDaily)) {
               state = await transport.loadRun(selected.id);
               if (state.owner_user_id !== ownerUserId) throw statusError('Войдите в исходный аккаунт.',401,'owner_changed');
               await repository.mark(ownerUserId,row.local_id,'dismissed');

@@ -10,6 +10,8 @@ Route::prefix('admin/daily-practice')->name('admin.daily-practice.')->middleware
     Route::get('/', [EditorController::class, 'index'])->name('index');
     Route::post('sessions/{session}/rename', [EditorController::class, 'renameSession'])->whereNumber('session')->name('sessions.rename');
     Route::post('units/{unit}/rename', [EditorController::class, 'renameUnit'])->whereNumber('unit')->name('units.rename');
+    Route::post('units/{unit}/background', [EditorController::class, 'uploadUnitBackground'])
+        ->whereNumber('unit')->name('units.background');
     Route::get('catalog', [EditorController::class, 'catalog'])->name('catalog');
     Route::get('reports', [EditorController::class, 'reports'])->name('reports');
     Route::post('reports', [EditorController::class, 'storeReport'])->name('reports.store');
@@ -20,6 +22,7 @@ Route::prefix('admin/daily-practice')->name('admin.daily-practice.')->middleware
     Route::get('media/{media}/file', [EditorController::class, 'mediaFile'])->whereUuid('media')->name('media.file');
     Route::get('versions/{version}', [EditorController::class, 'show'])->whereNumber('version')->name('versions.show');
     Route::get('versions/{version}/preview', [EditorController::class, 'preview'])->whereNumber('version')->name('versions.preview');
+    Route::get('imports', [EditorController::class, 'imports'])->name('imports');
     Route::post('imports/bulk', [ContentController::class, 'bulk'])->middleware('throttle:60,1,practice-bulk-import')->name('imports.bulk');
     Route::post('imports/preview', [ContentController::class, 'preview'])->middleware('throttle:6,1,practice-import')->name('imports.preview');
     Route::post('imports/{batch}/commit', [ContentController::class, 'commit'])->whereUuid('batch')->name('imports.commit');

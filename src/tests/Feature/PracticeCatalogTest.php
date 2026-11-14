@@ -112,7 +112,7 @@ it('hides a topic and its published lessons until an administrator restores it',
     $publishedAt = $this->unit->getRawOriginal('published_at');
 
     $this->actingAs($this->admin)->postJson($endpoint, ['published' => false])->assertOk();
-    $this->get('/practice/pre-a1')->assertOk()->assertInertia(fn (Assert $page) => $page->has('catalog.cards', 0));
+    expect(app(PublicPracticeCatalog::class)->page('pre-a1', null, null)['cards'])->toBe([]);
     $this->get($unitPath)->assertStatus(410);
     $this->get($sessionPath)->assertStatus(410);
     $this->getJson(route('daily.content.show', ['session' => $session->external_id]))->assertNotFound();

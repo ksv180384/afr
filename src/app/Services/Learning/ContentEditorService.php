@@ -100,7 +100,7 @@ final class ContentEditorService
                     'id' => $s->external_id, 'ready' => $s->archived_at === null && $s->activeVersion?->status->value === 'published' && ($s->activeVersion->payload['kind'] ?? '') === 'checkpoint'])->all()];
         });
 
-        return ['units' => \App\Models\Learning\LearningUnit::query()->orderBy('level')->orderBy('sort_order')->get(), 'levels' => LearningLevel::query()->orderBy('sort_order')->get(),
+        return ['units' => \App\Models\Learning\LearningUnit::query()->orderBy('level')->orderBy('sort_order')->get()->each->append('background_url'), 'levels' => LearningLevel::query()->orderBy('sort_order')->get(),
             'revisions' => $revisions->orderByDesc('id')->paginate(20)->withQueryString(), 'curricula' => $programs,
             'coverage' => ['published_sessions' => LearningSession::query()->whereNull('archived_at')->whereHas('activeVersion', fn ($q) => $q->where('status', 'published'))->count(),
                 'published_objectives' => count($published)]];

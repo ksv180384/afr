@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\UserReferer;
+use App\Support\CookiePreferences;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,8 +18,7 @@ class TrackRefererMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Проверяем, нужно ли сохранять данные (например, только для GET-запросов)
-        if ($request->isMethod('get')) {
+        if ($request->isMethod('get') && ! $request->is('admin', 'admin/*') && CookiePreferences::allowsAnalytics($request)) {
             $referer = $request->headers->get('referer');
 
             // Если реферер есть и это не наш же сайт

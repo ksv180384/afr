@@ -146,12 +146,17 @@ class PostService
     {
         $userId = Auth::id();
         $userKey = Helper::getUserKey();
+        if ($userKey === null) {
+            return;
+        }
 
         $postView = PostView::query()
             ->where('post_id', $postId)
             ->where(function ($q) use ($userId, $userKey) {
-                $q->where('user_id', $userId ?? 0)
-                    ->orWhere('user_key', $userKey);
+                $q->where('user_key', $userKey);
+                if ($userId !== null) {
+                    $q->orWhere('user_id', $userId);
+                }
             })
             ->first();
 

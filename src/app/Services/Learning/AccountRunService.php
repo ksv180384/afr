@@ -16,6 +16,7 @@ use App\Models\Learning\LearningSessionVersion;
 use App\Models\User\User;
 use App\Services\Learning\Validation\CanonicalJson;
 use App\Support\Learning\PracticeTime;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -112,7 +113,11 @@ final class AccountRunService
         $next = $candidate ? ['id' => $candidate->external_id, 'level' => $candidate->getRawOriginal('level'),
             'theme' => $candidate->unit->title, 'duration_minutes' => (int) $candidate->activeVersion->home_duration,
             'title' => $candidate->activeVersion->home_title, 'goal' => $candidate->activeVersion->home_goal] : null;
-        $active = $this->activeRun($actor);
+        $active = $this->unfinishedRuns($actor)
+            ->where(fn ($query) => $query->where('snapshot->level', $profile['current_level'])->orWhereNotIn('kind', ['daily', 'extra']))
+            ->first();
+        $lessonRuns = $this->unfinishedRuns($actor)->whereIn('kind', ['daily', 'extra'])
+            ->get(['id', 'snapshot->id as lesson_id'])->unique('lesson_id')->pluck('id', 'lesson_id')->all();
         $activeSummary = $active ? $this->homeRun($active) : null;
         $progress = app(LevelPromotionService::class)->progress($actor);
         if (isset($progress['available_checkpoints'])) {
@@ -124,17 +129,17 @@ final class AccountRunService
             'run' => $show ? $this->homeRun($selected) : null,
             'active_run' => $activeSummary,
             'candidate' => $next,
-            'route' => app(PracticeHomeRoute::class)->make($outline, $access, $profile['current_level'], $selection, $activeSummary, $next),
+            'route' => app(PracticeHomeRoute::class)->make($outline, $access, $profile['current_level'], $selection, $activeSummary, $next, $lessonRuns),
             'activity_today' => LearningActivityDay::query()->where('user_id', $actor->id)->where('local_date', $date)->exists(),
             'review_suggestion' => ($review = app(VocabularyTestService::class)->shortPlan($actor, 'suggested'))['total'] ? array_diff_key($review, ['selection' => true]) : null,
             'exhausted' => $candidate === null];
     }
 
-    private function activeRun(User $actor): ?LearningRun
+    private function unfinishedRuns(User $actor): Builder
     {
         return LearningRun::query()->where('user_id', $actor->id)->whereIn('status', ['in_progress', 'paused'])
             ->orderByRaw("CASE WHEN status = 'in_progress' THEN 0 ELSE 1 END")
-            ->orderByDesc('started_at')->orderByDesc('id')->first();
+            ->orderByDesc('started_at')->orderByDesc('id');
     }
 
     private function homeRun(LearningRun $run): array
@@ -245,11 +250,19 @@ final class AccountRunService
                 AnswerChecker::invalid('Поля не соответствуют виду прохождения.');
             }
             $routeStart = (bool) ($input['route_start'] ?? false);
+            $level = $this->profile($actor)['current_level'];
             if ($routeStart) {
                 if (! in_array($kind, ['daily', 'extra'], true)) {
                     AnswerChecker::invalid('Из маршрута можно запустить только урок.');
                 }
-                if ($active = $this->activeRun($actor)) {
+                $unfinished = $this->unfinishedRuns($actor);
+                if ($kind === 'extra') {
+                    $unfinished->whereIn('kind', ['daily', 'extra'])->where('snapshot->id', $input['session_id'] ?? '');
+                } else {
+                    $unfinished->where(fn ($query) => $query->where('snapshot->level', $level)->orWhereNotIn('kind', ['daily', 'extra']));
+                }
+
+                if ($active = $unfinished->first()) {
                     return ['state' => $this->view->make($actor, $active)];
                 }
             }
@@ -261,7 +274,8 @@ final class AccountRunService
             $date = PracticeTime::localDate(PracticeTime::now(), $profile->timezone);
             $latest = $kind === 'daily' ? DailyAssignment::query()->where('user_id', $actor->id)->orderByDesc('id')->first() : null;
             $selected = $latest?->selected_run_id ? $this->owned($actor, $latest->selected_run_id, true) : null;
-            $replace = (bool) ($input['replace_assignment'] ?? false) || ($routeStart && $selected?->status === RunStatus::Completed);
+            $replace = (bool) ($input['replace_assignment'] ?? false) || ($routeStart && $selected
+                && ($selected->status === RunStatus::Completed || ($selected->snapshot['level'] ?? null) !== $level));
             if ($selected && $replace && $selected->status !== RunStatus::Completed && ($selected->snapshot['level'] ?? null) === $profile->getRawOriginal('current_level')) {
                 AnswerChecker::invalid('Начатое назначение можно отложить для другого уровня. Для повтора используйте дополнительную практику.');
             }

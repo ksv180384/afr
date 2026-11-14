@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 
 class LearningUnit extends Model
 {
@@ -29,6 +30,7 @@ class LearningUnit extends Model
         'revision',
         'published_at',
         'archived_at',
+        'background_path',
     ];
 
     protected function casts(): array
@@ -47,6 +49,11 @@ class LearningUnit extends Model
     protected static function newFactory(): LearningUnitFactory
     {
         return LearningUnitFactory::new();
+    }
+
+    public function getBackgroundUrlAttribute(): ?string
+    {
+        return $this->background_path ? Storage::disk('public')->url($this->background_path) : null;
     }
 
     public function levelDefinition(): BelongsTo

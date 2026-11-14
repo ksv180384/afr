@@ -15,11 +15,10 @@ const update = (report) => run(() => api.dailyPractice.action('reports/' + repor
 const change = (report, field, value) => { drafts.value[report.id] = { ...(drafts.value[report.id] ?? { status: report.status, editor_notes: report.editor_notes }), [field]: value }; };
 </script>
 <template>
-  <shell :auth-user="authUser" title="Обращения об ошибках">
+  <shell :auth-user="authUser" title="Обращения" compact-heading>
     <el-form class="filters" label-position="top"><el-form-item label="Статус обращения"><el-select :model-value="filters.status || ''" clearable placeholder="Все обращения" @change="value => router.get('/admin/daily-practice/reports', value ? { status: value } : {})"><el-option v-for="status in statuses" :key="status.value" :value="status.value" :label="status.label" /></el-select></el-form-item></el-form>
     <issues :report="failure" />
     <el-card class="panel" shadow="never">
-      <template #header>Обращения</template>
       <el-table :data="reports.data" border stripe empty-text="Обращений по выбранным условиям нет.">
         <el-table-column type="expand"><template #default="{ row }"><div class="report-detail">
           <p class="report-text">{{ row.text }}</p>
