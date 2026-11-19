@@ -56,6 +56,23 @@ function syncBatch(array $runs = [], string $level = 'PRE_A1'): array
         'level_events' => [['client_event_id' => (string) Str::uuid(), 'sequence' => 1, 'action' => 'level_selection', 'current_level' => $level, 'timezone' => 'Europe/Moscow', 'client_occurred_at' => now('UTC')->subDay()->toIso8601String()]]];
 }
 
+it('imports a personal difficult mark independently of review marks and deduplicates retries', function () {
+    $bundle = syncFixture($this, true, 2);
+    $batch = syncBatch([$bundle]);
+    $key = $this->payload['vocabulary'][0]['lexeme_key'];
+    $batch['marks'] = [[
+        'action' => 'vocabulary_mark', 'client_event_id' => (string) Str::uuid(),
+        'sequence' => 100, 'client_occurred_at' => now('UTC')->toIso8601String(),
+        'lexeme_key' => $key, 'is_difficult' => true,
+    ]];
+    $receipt = $this->postJson('/daily/api/guest-sync', $batch)->assertOk()->assertJsonCount(0, 'rejected')->json();
+    $word = PersonalVocabulary::where('user_id', $this->learner->id)->where('lexeme_key', $key)->sole();
+    expect($word->is_difficult)->toBeTrue();
+    expect($word->needs_review)->toBeTrue();
+    $this->postJson('/daily/api/guest-sync', $batch)->assertExactJson($receipt);
+    expect($word->fresh()->is_difficult)->toBeTrue();
+});
+
 it('rechecks a completed run and preserves higher level and existing vocabulary while adding sources', function () {
     $profile = LearningProfile::factory()->create(['user_id' => $this->learner->id, 'current_level' => 'B1', 'timezone' => 'UTC']);
     $snapshot = $this->payload['vocabulary'][0];

@@ -14,6 +14,26 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use LogicException;
 
+/**
+ * Хранит версию программы уровня с обязательными целями и контрольными занятиями.
+ *
+ * @property int $id Первичный ключ записи.
+ * @property string $external_id Стабильный идентификатор из пакета контента.
+ * @property int $version Порядковый номер версии.
+ * @property LevelCode $level Код уровня CEFR.
+ * @property array $required_objective_ids Список стабильных идентификаторов обязательных учебных целей.
+ * @property array $checkpoint_session_ids Список внешних идентификаторов контрольных занятий.
+ * @property int $promotion_policy_version Версия правил перехода на следующий уровень.
+ * @property array $promotion_policy_snapshot Зафиксированные параметры оценки и перехода на следующий уровень.
+ * @property string $checksum SHA-256 содержимого для проверки целостности и совпадения версий.
+ * @property SessionVersionStatus $status Состояние версии программы: черновик, проверена, опубликована или архивирована.
+ * @property int|null $created_by Пользователь, создавший запись.
+ * @property int|null $published_by Редактор, выполнивший публикацию.
+ * @property \Carbon\CarbonImmutable|null $published_at Момент публикации.
+ * @property \Carbon\CarbonImmutable|null $archived_at Момент архивации или снятия с публикации.
+ * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
+ * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
+ */
 class LearningCurriculum extends Model
 {
     use HasFactory;
@@ -57,7 +77,18 @@ class LearningCurriculum extends Model
     protected static function booted(): void
     {
         static::updating(function (self $model): void {
-            if ($model->isDirty(['external_id', 'version', 'level', 'required_objective_ids', 'checkpoint_session_ids', 'promotion_policy_version', 'promotion_policy_snapshot', 'checksum']) || ($model->getRawOriginal('published_at') !== null && $model->isDirty('published_at'))) {
+            if ($model->isDirty([
+                'external_id',
+                'version',
+                'level',
+                'required_objective_ids',
+                'checkpoint_session_ids',
+                'promotion_policy_version',
+                'promotion_policy_snapshot',
+                'checksum',
+            ])
+                || ($model->getRawOriginal('published_at') !== null && $model->isDirty('published_at'))
+            ) {
                 throw new LogicException('Published curriculum is immutable.');
             }
         });
@@ -75,12 +106,22 @@ class LearningCurriculum extends Model
 
     public function objectives(): BelongsToMany
     {
-        return $this->belongsToMany(LearningObjective::class, 'learning_curriculum_objectives', 'curriculum_id', 'objective_id');
+        return $this->belongsToMany(
+            LearningObjective::class,
+            'learning_curriculum_objectives',
+            'curriculum_id',
+            'objective_id',
+        );
     }
 
     public function checkpoints(): BelongsToMany
     {
-        return $this->belongsToMany(LearningSession::class, 'learning_curriculum_checkpoints', 'curriculum_id', 'session_id');
+        return $this->belongsToMany(
+            LearningSession::class,
+            'learning_curriculum_checkpoints',
+            'curriculum_id',
+            'session_id',
+        );
     }
 
     public function enrollments(): HasMany

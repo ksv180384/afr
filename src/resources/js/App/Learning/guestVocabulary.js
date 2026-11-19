@@ -106,6 +106,7 @@ export const upgradeGuestSuccessClock = state => {
 };
 
 export const filterGuestWords = (state,{filter='all',source_session='',q=''}={},instant=new Date().toISOString()) => Object.values(state.vocabulary)
+  .filter((word)=>filter!=='difficult' || word.is_difficult === true)
   .filter((word)=>filter!=='errors' || word.needs_review)
   .filter((word)=>filter!=='due' || Date.parse(word.next_review_at) <= Date.parse(instant))
   .filter((word)=>!source_session || word.sources.some((source)=>source.session_id===source_session))
@@ -181,12 +182,19 @@ export const guestTestSource = (state,keys,seed,idFactory,kind='vocabulary_test'
   const usable = words.filter((word)=>reviewItems(guestWordSource(word)).length);
   if (!usable.length) throw new Error('Для этих слов доступна самопроверка без зачёта.');
   const vocabulary = []; const items = [];
+  const previous = new Map();
+  if (!shortPlan) {
+    const runs = Object.values(state.runs).filter(run => ['review', 'vocabulary_test'].includes(run.kind))
+      .sort((a, b) => b.record_sequence - a.record_sequence);
+    for (const run of runs) for (const item of run.snapshot.review_items ?? []) {
+      if (!previous.has(item.review_lexeme_key)) previous.set(item.review_lexeme_key, item.task);
+    }
+  }
   for (const [index,word] of usable.slice(0,kind==='review'?3:10).entries()) {
     const source = copy(guestWordSource(word));
-    const options = reviewItems(source);
-    const value = [...new TextEncoder().encode(seed+word.lexeme_key)].reduce((sum,byte)=>sum+byte,0);
-    const previousKind=shortPlan?.selection.find(row=>row.key===word.lexeme_key)?.previous_kind;
-    items.push(reviewSnapshot(shortPlan ? shortReviewOption(source,seed,word.lexeme_key,index,previousKind) : options[value%options.length],word.lexeme_key));
+    const previousItem = previous.get(word.lexeme_key);
+    const previousKind = previousItem ? reviewCategory(previousItem, source) : shortPlan?.selection.find(row=>row.key===word.lexeme_key)?.previous_kind;
+    items.push(reviewSnapshot(shortReviewOption(source,seed,word.lexeme_key,index,previousKind,previousItem?.id),word.lexeme_key));
     vocabulary.push({...source,id:'word-'+word.lexeme_key,lexeme_key:word.lexeme_key});
   }
   return {session_version_id:null,checking_policy_version:1,snapshot:{id:idFactory(),level:state.current_level,title:kind==='review'?'Повторение выражений':'Тест личного словаря',

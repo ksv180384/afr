@@ -3,8 +3,9 @@ import { computed } from 'vue';
 import FrenchText from './FrenchText.vue';
 import PronunciationNotes from './PronunciationNotes.vue';
 import AudioControl from './AudioControl.vue';
+import DailyPracticeIcon from './DailyPracticeIcon.vue';
 import { normalizeSurface } from '@/App/Learning/answerChecker.js';
-const props = defineProps({ task: { type: Object, required: true }, result: { type: Object, required: true } });
+const props = defineProps({ task: { type: Object, required: true }, result: { type: Object, required: true }, hideHeading: Boolean });
 const solution = computed(() => props.result.solution ?? {});
 const choice = computed(() => props.task.choices?.find(({ id }) => id === solution.value.choice_id));
 const notes = computed(() => solution.value.pronunciation_notes ?? []);
@@ -15,21 +16,23 @@ const item = (side, id) => props.task[side].find((entry) => entry.id === id);
 </script>
 <template>
   <section class="task-feedback" :class="{ success: result.correct, skipped: result.technical_skip }" aria-label="Обратная связь">
-    <h3 role="status" aria-live="polite">{{ title }}</h3>
-    <p v-if="result.pairs.length">Верно пар: {{ result.pairs.filter((pair) => pair.correct).length }} из {{ result.pairs.length }}.</p>
-    <p class="feedback-message">{{ result.feedback?.message }}</p>
+    <div v-if="!hideHeading" class="feedback-heading"><span class="feedback-icon"><daily-practice-icon :name="result.technical_skip ? 'dash' : result.correct ? 'check' : 'book'" /></span><h3 role="status" aria-live="polite">{{ title }}</h3></div>
+    <p v-if="result.pairs?.length" class="feedback-message">Верно пар: {{ result.pairs.filter((pair) => pair.correct).length }} из {{ result.pairs.length }}.</p>
+    <p v-if="result.feedback?.message" class="feedback-message">{{ result.feedback.message }}</p>
+    <details v-if="!result.technical_skip" class="feedback-details" :open="!result.correct">
+      <summary>Ответ и объяснение</summary>
     <pronunciation-notes :notes="result.feedback?.pronunciation_notes ?? []" />
     <div v-if="solution.completed_phrases?.length" class="solutions">
-      <div v-for="(phrase, index) in solution.completed_phrases" :key="index">
+      <div v-for="(phrase, index) in solution.completed_phrases" :key="index" class="spoken-solution">
         <french-text :text="phrase.fr" :transcription-ru="phrase.transcription_ru" />
-        <audio-control :audio="{ text: phrase.fr, lang: 'fr-FR', asset_id: null }" label="Прослушать ответ" />
+        <audio-control compact :audio="{ text: phrase.fr, lang: 'fr-FR', asset_id: null }" label="Прослушать ответ" />
       </div>
     </div>
     <div v-else-if="choice" class="solutions">
-      <template v-if="choice.text_lang === 'fr'">
+      <div v-if="choice.text_lang === 'fr'" class="spoken-solution">
         <french-text :text="choice.text" :transcription-ru="choice.transcription_ru" />
-        <audio-control :audio="{ text: choice.text, lang: 'fr-FR', asset_id: null }" label="Прослушать ответ" />
-      </template>
+        <audio-control compact :audio="{ text: choice.text, lang: 'fr-FR', asset_id: null }" label="Прослушать ответ" />
+      </div>
       <p v-else>{{ choice.text }}</p>
     </div>
     <ul v-else-if="solution.pairs" class="solved-pairs">
@@ -44,25 +47,34 @@ const item = (side, id) => props.task[side].find((entry) => entry.id === id);
     </ul>
     <div v-else-if="solution.accepted_answers" class="solutions">
       <div v-for="answer in solution.accepted_answers" :key="answer">
-        <template v-if="task.answer_lang === 'fr'">
+        <div v-if="task.answer_lang === 'fr'" class="spoken-solution">
           <french-text :text="answer" :transcription-ru="transcription(answer)" />
-          <audio-control :audio="{ text: answer, lang: 'fr-FR', asset_id: null }" label="Прослушать ответ" />
-        </template>
+          <audio-control compact :audio="{ text: answer, lang: 'fr-FR', asset_id: null }" label="Прослушать ответ" />
+        </div>
         <p v-else>{{ answer }}</p>
       </div>
     </div>
     <p v-if="!result.technical_skip && (solution.completed_phrases?.length || choice?.text_lang === 'fr')" class="score-caption">По желанию послушайте ответ и повторите его вслух. Это не оценивается.</p>
     <p v-if="result.help_used && result.correct" class="score-caption">Ответ найден с помощью. Самостоятельный балл за шаг — 0.</p>
+    </details>
     <p v-if="result.technical_skip" class="score-caption">Пропуск учитывается отдельно и не считается словарной ошибкой.</p>
   </section>
 </template>
 <style scoped>
-.task-feedback { margin-top: 1.25rem; border: 1px solid #b45309; border-radius: .25rem; background: #fffbeb; padding: 1rem; overflow-wrap: anywhere; }
-.task-feedback.success { border-color: #15803d; background: #f0fdf4; }
-.task-feedback.skipped { border-color: #64748b; background: #f8fafc; }
-h3 { font-size: 1.125rem; font-weight: bold; }
-.feedback-message { margin-top: .5rem; line-height: 1.6; }
+.task-feedback { overflow-wrap: anywhere; color: #6d5022; }
+.task-feedback.success { color: #226343; }
+.task-feedback.skipped { color: #475569; }
+.feedback-heading { display: flex; align-items: center; gap: .55rem; }
+.feedback-icon { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #f5e8cc; flex-shrink: 0; }
+.success .feedback-icon { background: #d7efe2; }
+.skipped .feedback-icon { background: #e2e8f0; }
+.feedback-icon :deep(svg) { width: 18px; height: 18px; }
+h3 { font-size: 1.05rem; font-weight: 700; }
+.feedback-message { margin-top: .3rem; line-height: 1.5; font-size: .9rem; }
+.feedback-details { color: #344e63; margin-top: .25rem; }
+.feedback-details summary { cursor: pointer; font-size: .8rem; padding: .5rem 0; min-height: 36px; }
 .solutions { margin-top: .75rem; display: grid; gap: .75rem; }
+.spoken-solution { display: flex; justify-content: space-between; align-items: flex-start; gap: .75rem; }
 .solved-pairs { display: grid; gap: .75rem; margin-top: .75rem; }
 .solved-pairs li { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
 .score-caption { color: #475569; font-size: .95rem; margin-top: .75rem; }

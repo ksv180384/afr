@@ -7,6 +7,16 @@ use App\Support\Learning\UsesUtcDates;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Отмечает день учебной активности, который учитывается в серии занятий.
+ *
+ * @property int $id Первичный ключ записи.
+ * @property int $user_id Пользователь, к которому относится запись.
+ * @property \Carbon\CarbonImmutable $local_date Календарная дата в часовом поясе ученика.
+ * @property string $qualifying_run_id Прохождение, по которому день зачтён в серию.
+ * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
+ * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
+ */
 class LearningActivityDay extends Model
 {
     use UsesUtcDates;

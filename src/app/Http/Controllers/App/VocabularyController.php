@@ -54,7 +54,7 @@ class VocabularyController extends Controller
         $result = DB::transaction(function () use ($request, $word, $service) {
             User::query()->lockForUpdate()->findOrFail($request->user()->id);
             $row = PersonalVocabulary::query()->where('user_id', $request->user()->id)->lockForUpdate()->findOrFail($word);
-            $row->update(['needs_review' => $request->validated('needs_review'), 'native_revision' => $row->native_revision + 1]);
+            $row->update([...$request->safe()->only(['needs_review', 'is_difficult']), 'native_revision' => $row->native_revision + 1]);
             $row->load('sources.sessionVersion.session');
 
             return $service->data($row);

@@ -13,6 +13,21 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use LogicException;
 
+/**
+ * Фиксирует конкретную выдачу задания пользователю, включая порядок вариантов и состояние.
+ *
+ * @property string $id Первичный ключ записи.
+ * @property int $user_id Пользователь, к которому относится запись.
+ * @property string $run_id Прохождение, к которому относится запись.
+ * @property string $task_id Стабильный идентификатор задания внутри версии занятия.
+ * @property int $position Позиция задания в прохождении.
+ * @property array $snapshot Снимок задания на момент выдачи.
+ * @property array|null $choice_order Порядок вариантов ответа, сохранённый для этой выдачи.
+ * @property string $status Состояние выданного задания в прохождении.
+ * @property bool $help_used Была ли использована подсказка.
+ * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
+ * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
+ */
 class LearningPresentation extends Model
 {
     use HasFactory;

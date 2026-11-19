@@ -13,6 +13,25 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use LogicException;
 
+/**
+ * Хранит отдельный ответ, запрос подсказки или другое действие внутри прохождения.
+ *
+ * @property string $id Первичный ключ записи.
+ * @property int $user_id Пользователь, к которому относится запись.
+ * @property string $run_id Прохождение, к которому относится запись.
+ * @property string $presentation_id Выдача задания, с которой связано действие.
+ * @property string $client_event_id Клиентский UUID действия для обработки повторной отправки.
+ * @property string $event_type Тип действия, например ответ или запрос подсказки.
+ * @property int $sequence Порядковый номер события в прохождении.
+ * @property array $payload Входные данные учебного действия, например ответ пользователя.
+ * @property string $payload_hash SHA-256 входных данных для проверки, что повторная отправка содержит те же данные.
+ * @property bool|null $is_first_answer Отмечает первый ответ на выданное задание.
+ * @property \Carbon\CarbonImmutable $received_at Момент получения события или запроса сервером.
+ * @property \Carbon\CarbonImmutable|null $client_occurred_at Момент события по данным клиента.
+ * @property array|null $result Результат обработки действия, включая оценку ответа при её наличии.
+ * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
+ * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
+ */
 class LearningAttempt extends Model
 {
     use HasFactory;

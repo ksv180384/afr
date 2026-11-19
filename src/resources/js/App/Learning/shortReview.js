@@ -35,8 +35,10 @@ export const estimateReviewSeconds = (source, index, previousKind) => Math.max(.
   return base + Math.max(25, Math.ceil(words * 4 / 3));
 }));
 
-export const shortReviewOption = (source, seed, key, index, previousKind) => {
-  const pool = optionPool(source, index, previousKind);
+export const shortReviewOption = (source, seed, key, index, previousKind, previousId = null) => {
+  const options = optionPool(source, index, previousKind);
+  const alternatives = options.filter(item => item.id !== previousId);
+  const pool = alternatives.length ? alternatives : options;
   const value = [...new TextEncoder().encode(seed + key)].reduce((sum, byte) => sum + byte, 0);
   return pool[value % pool.length];
 };

@@ -8,6 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use LogicException;
 
+/**
+ * Отмечает учтённый успешный ответ для пары «прохождение — слово».
+ *
+ * @property int $id Первичный ключ записи.
+ * @property int $user_id Пользователь, к которому относится запись.
+ * @property string $lexeme_key Стабильный ключ слова или выражения для объединения одинаковых слов.
+ * @property string $run_id Прохождение, к которому относится запись.
+ * @property bool $success_applied Был ли уже учтён успех по этому слову в прохождении.
+ * @property \Carbon\CarbonImmutable|null $applied_at Момент применения изменения к слову.
+ * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
+ * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
+ */
 class VocabularyRunEffect extends Model
 {
     use UsesUtcDates;

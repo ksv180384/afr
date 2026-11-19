@@ -10,6 +10,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Учебные настройки пользователя: уровень, часовой пояс и предложения повторения.
+ *
+ * @property int $id Первичный ключ записи.
+ * @property int $user_id Пользователь, к которому относится запись.
+ * @property LevelCode $current_level Текущий уровень, по которому подбираются занятия.
+ * @property string $timezone Часовой пояс IANA для расчёта локальных дат.
+ * @property int $revision Номер ревизии записи, изменяемый при обновлении её состояния.
+ * @property string|null $last_manual_level_event_id Последнее ручное изменение уровня.
+ * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
+ * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
+ * @property bool $review_suggestions_enabled Разрешено ли предлагать пользователю повторения.
+ * @property \Carbon\CarbonImmutable|null $review_suggestions_snoozed_until До какого момента предложения повторения скрыты.
+ */
 class LearningProfile extends Model
 {
     use HasFactory;

@@ -10,6 +10,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use LogicException;
 
+/**
+ * Фиксирует версию занятия и словарный элемент, из которых пользователь добавил слово.
+ *
+ * @property int $id Первичный ключ записи.
+ * @property int $user_id Пользователь, к которому относится запись.
+ * @property int $personal_word_id Запись слова в личном словаре.
+ * @property int $session_version_id Версия занятия, к которой относится запись.
+ * @property string $vocabulary_id Идентификатор словарного элемента в версии занятия.
+ * @property array $snapshot Снимок исходного словарного элемента в момент добавления.
+ * @property \Carbon\CarbonImmutable $first_added_at Момент первого добавления слова.
+ * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
+ * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
+ */
 class PersonalVocabularySource extends Model
 {
     use HasFactory;
@@ -40,7 +53,14 @@ class PersonalVocabularySource extends Model
     protected static function booted(): void
     {
         static::updating(function (self $model): void {
-            if ($model->isDirty(['user_id', 'personal_word_id', 'session_version_id', 'vocabulary_id', 'snapshot', 'first_added_at'])) {
+            if ($model->isDirty([
+                'user_id',
+                'personal_word_id',
+                'session_version_id',
+                'vocabulary_id',
+                'snapshot',
+                'first_added_at',
+            ])) {
                 throw new LogicException('PersonalVocabularySource identity and snapshot cannot be changed.');
             }
         });

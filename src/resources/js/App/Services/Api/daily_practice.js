@@ -21,6 +21,7 @@ export const vocabularyTransport = {
   list: (filters) => get(root + '/vocabulary',{params:filters}),
   plan: (filters) => get(root + '/vocabulary/test-plan',{params:filters}),
   mark: (id, needs_review) => patch(root + '/vocabulary/' + id,{needs_review}),
+  markDifficult: (id, is_difficult) => patch(root + '/vocabulary/' + id,{is_difficult}),
 };
 
 export const reportPracticeProblem = (payload) => post(root+'/reports',payload);

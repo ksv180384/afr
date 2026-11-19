@@ -7,8 +7,7 @@ defineProps({authUser:Object,enabled:Boolean});
 </script>
 <template>
   <Head title="Мой словарь"><meta name="robots" content="noindex, nofollow"></Head>
-  <practice-layout :auth-user="authUser" title="Повторять" active="review" :navigation="enabled"><div class="vocabulary-page">
-    <p>Изученные слова и выражения — с произношением и повторением.</p>
+  <practice-layout :auth-user="authUser" title="Мой словарь" hide-heading active="review" :navigation="enabled"><div class="vocabulary-page">
     <vocabulary-panel v-if="enabled" :auth-user="authUser" />
     <p v-else role="status">Раздел ещё не открыт для прохождения.</p>
   </div></practice-layout>

@@ -13,6 +13,30 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use LogicException;
 
+/**
+ * Хранит прохождение занятия или словарного повторения и снимки для воспроизводимой проверки.
+ *
+ * @property string $id Первичный ключ записи.
+ * @property int $user_id Пользователь, к которому относится запись.
+ * @property string $kind Тип прохождения, определяющий его сценарий.
+ * @property RunStatus $status Состояние прохождения: в процессе, на паузе или завершено.
+ * @property int|null $session_version_id Версия занятия, к которой относится запись.
+ * @property array $snapshot Снимок содержимого прохождения, закреплённый при запуске.
+ * @property int $checking_policy_version Версия правил проверки ответов.
+ * @property array $checking_policy_snapshot Зафиксированные для прохождения параметры проверки ответов.
+ * @property string $timezone Часовой пояс IANA для расчёта локальных дат.
+ * @property \Carbon\CarbonImmutable $local_date Календарная дата в часовом поясе ученика.
+ * @property \Carbon\CarbonImmutable $started_at Момент запуска прохождения.
+ * @property \Carbon\CarbonImmutable|null $paused_at Момент приостановки прохождения.
+ * @property \Carbon\CarbonImmutable|null $finished_at Момент завершения прохождения.
+ * @property int $revision Номер ревизии записи, изменяемый при обновлении её состояния.
+ * @property array|null $result Итоги завершённого прохождения.
+ * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
+ * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
+ * @property int $cursor_position Текущая позиция в прохождении для возобновления.
+ * @property array|null $introductions_seen Идентификаторы уже просмотренных вводных материалов.
+ * @property array|null $import_meta Сведения о переносе прохождения из гостевого режима: исходные UUID и время приёма.
+ */
 class LearningRun extends Model
 {
     use HasFactory;
@@ -22,7 +46,8 @@ class LearningRun extends Model
     protected $table = 'learning_runs';
 
     protected $fillable = [
-        'import_meta', 'user_id',
+        'import_meta',
+        'user_id',
         'kind',
         'status',
         'session_version_id',
@@ -43,7 +68,8 @@ class LearningRun extends Model
     protected function casts(): array
     {
         return [
-            'import_meta' => 'array', 'user_id' => 'integer',
+            'import_meta' => 'array',
+            'user_id' => 'integer',
             'session_version_id' => 'integer',
             'snapshot' => 'array',
             'checking_policy_version' => 'integer',
@@ -63,10 +89,23 @@ class LearningRun extends Model
     protected static function booted(): void
     {
         static::updating(function (self $model): void {
-            if ($model->getOriginal('status') === RunStatus::Completed || $model->getRawOriginal('status') === RunStatus::Completed->value) {
+            if ($model->getOriginal('status') === RunStatus::Completed
+                || $model->getRawOriginal('status') === RunStatus::Completed->value
+            ) {
                 throw new LogicException('Completed run cannot be changed.');
             }
-            if ($model->isDirty(['import_meta', 'user_id', 'kind', 'session_version_id', 'snapshot', 'checking_policy_version', 'checking_policy_snapshot', 'timezone', 'local_date', 'started_at'])) {
+            if ($model->isDirty([
+                'import_meta',
+                'user_id',
+                'kind',
+                'session_version_id',
+                'snapshot',
+                'checking_policy_version',
+                'checking_policy_snapshot',
+                'timezone',
+                'local_date',
+                'started_at',
+            ])) {
                 throw new LogicException('LearningRun identity and snapshot cannot be changed.');
             }
         });

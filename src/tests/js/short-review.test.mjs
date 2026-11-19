@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
 import { selectShortReview, reviewCategory } from '../../resources/js/App/Learning/shortReview.js';
-import { guestShortReviewPlan, guestShortReviewSource } from '../../resources/js/App/Learning/guestVocabulary.js';
+import { guestShortReviewPlan, guestShortReviewSource, guestTestPlan, guestTestSource } from '../../resources/js/App/Learning/guestVocabulary.js';
 import { newGuestState, addGuestRun, applyGuestOperation, migrateGuestState } from '../../resources/js/App/Learning/guestProgress.js';
 const now='2026-11-06T12:00:00Z';const original=JSON.parse(readFileSync(new URL('../../resources/practice/templates/pre-a1-u01-examples.json',import.meta.url))).sessions[0].vocabulary[0];
 const stateFor=(n=0)=>{const state=newGuestState({idFactory:randomUUID,now,timezone:'Europe/Moscow'});state.current_level='B1';
@@ -62,4 +62,28 @@ test('a manual plan applies the dictionary filters and budgets for longer audio'
   assert.equal(source.snapshot.duration_minutes, Math.ceil(selected.estimated_seconds / 60));
   state.vocabulary['fr:short:1'].next_review_at = '2027-01-01T00:00:00Z';
   assert.deepEqual(guestShortReviewPlan(state, now, 'manual', {filter:'due'}).word_ids, [word.lexeme_key]);
+});
+
+test('personal difficult selection survives mastery and alternates vocabulary test questions', () => {
+  const state = stateFor(2);
+  const word = state.vocabulary['fr:short:0'];
+  word.is_difficult = true;
+  word.needs_review = true;
+  const plan = guestTestPlan(state, {filter:'difficult'});
+  assert.deepEqual(plan.word_ids, [word.lexeme_key]);
+  let previousId;
+  for (let day = 0; day < 3; day++) {
+    const instant = new Date(Date.parse(now) + day * 86400000).toISOString();
+    const source = guestTestSource(state, plan.word_ids, randomUUID(), randomUUID);
+    assert.notEqual(source.snapshot.tasks[0].id, previousId);
+    previousId = source.snapshot.tasks[0].id;
+    const runId = randomUUID();
+    addGuestRun(state, {source, runId, presentationIds:source.snapshot.tasks.map(() => randomUUID()),
+      eventId:randomUUID(), tabId:'tab', now:instant, kind:'vocabulary_test'});
+    finish(state, state.runs[runId], instant);
+  }
+  assert.equal(word.is_difficult, true);
+  assert.equal(word.needs_review, false);
+  word.is_difficult = false;
+  assert.equal(guestTestPlan(state, {filter:'difficult'}).total, 0);
 });

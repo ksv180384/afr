@@ -10,17 +10,17 @@ const emit = defineEmits(['update:modelValue']);
   <fieldset class="choice-set" :disabled="disabled">
     <legend class="sr-only">Выберите один ответ</legend>
     <label v-for="choice in choices" :key="choice.id" class="choice-row" :class="{ selected: modelValue.choice_id === choice.id }">
-      <input type="radio" :name="'choice-' + uid" :value="choice.id" :checked="modelValue.choice_id === choice.id" @change="emit('update:modelValue', { choice_id: choice.id })">
+      <input class="sr-only" type="radio" :name="'choice-' + uid" :value="choice.id" :checked="modelValue.choice_id === choice.id" @change="emit('update:modelValue', { choice_id: choice.id })">
       <french-text :show-transcription="showTranscription" v-if="choice.text_lang === 'fr'" :text="choice.text" :transcription-ru="choice.transcription_ru" compact />
       <span v-else>{{ choice.text }}</span>
     </label>
   </fieldset>
 </template>
 <style scoped>
-.choice-set { display: grid; gap: .5rem; min-width: 0; }
-.choice-row { display: flex; gap: .5rem; align-items: flex-start; border: 1px solid #d1d5db; border-radius: .25rem; padding: .5rem .65rem; background: white; min-height: 44px; cursor: pointer; overflow-wrap: anywhere; }
+.choice-set { display: grid; gap: .65rem; min-width: 0; }
+.choice-row { display: flex; gap: .8rem; align-items: center; border: 2px solid #dce5ed; border-radius: .75rem; padding: .75rem .9rem; background: white; min-height: 56px; cursor: pointer; overflow-wrap: anywhere; box-shadow: 0 2px 0 #e5ebf1; }
+.choice-row:hover { background: #f7faff; border-color: #aac4dc; }
 .choice-row:has(input:focus-visible) { outline: 3px solid #195bb2; outline-offset: 2px; }
-.choice-row.selected { border-color: #93c5fd; background: #eff6ff; }
-input { width:14px; height:14px; margin-top: .3rem; flex-shrink: 0; accent-color:#3b82f6; }
+.choice-row.selected { border-color: #3979b8; background: #edf5ff; box-shadow: 0 2px 0 #3979b8; }
 fieldset:disabled .choice-row { cursor: default; }
 </style>

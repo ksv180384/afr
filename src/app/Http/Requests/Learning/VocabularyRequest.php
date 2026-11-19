@@ -15,13 +15,16 @@ class VocabularyRequest extends FormRequest
     public function rules(): array
     {
         $filters = [
-            'filter' => ['sometimes', Rule::in(['all', 'errors', 'due'])],
+            'filter' => ['sometimes', Rule::in(['all', 'errors', 'due', 'difficult'])],
             'source_session' => ['sometimes', 'string', 'max:128'],
             'q' => ['sometimes', 'string', 'max:100'],
         ];
 
         return match ($this->route()->getActionMethod()) {
-            'mark' => ['needs_review' => ['required', 'boolean']],
+            'mark' => [
+                'needs_review' => ['required_without:is_difficult', 'boolean'],
+                'is_difficult' => ['required_without:needs_review', 'boolean'],
+            ],
             'reviewPlan' => [...$filters, 'mode' => ['sometimes', Rule::in(['manual', 'suggested'])]],
             default => [...$filters, 'page' => ['sometimes', 'integer', 'min:1', 'max:100000']],
         };

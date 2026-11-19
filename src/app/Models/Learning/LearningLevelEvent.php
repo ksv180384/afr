@@ -10,6 +10,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use LogicException;
 
+/**
+ * История изменения уровня ученика вручную, при синхронизации или по итогам обучения.
+ *
+ * @property string $id Первичный ключ записи.
+ * @property int $user_id Пользователь, к которому относится запись.
+ * @property LevelCode|null $old_level Код уровня до изменения.
+ * @property LevelCode $new_level Код уровня после изменения.
+ * @property string $source Источник смены уровня.
+ * @property array|null $reason Детали причины изменения уровня.
+ * @property string $source_event_id UUID исходного действия, вызвавшего смену уровня.
+ * @property \Carbon\CarbonImmutable $occurred_at Момент события.
+ * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
+ * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
+ */
 class LearningLevelEvent extends Model
 {
     use HasUuids;

@@ -75,9 +75,11 @@ final class ShortReviewSelection
         }, self::optionPool($source, $index, $previousKind)));
     }
 
-    public static function option(array $source, string $seed, string $key, int $index, ?string $previousKind): array
+    public static function option(array $source, string $seed, string $key, int $index, ?string $previousKind, ?string $previousId = null): array
     {
         $pool = self::optionPool($source, $index, $previousKind);
+        $alternatives = array_values(array_filter($pool, fn ($item) => $item['id'] !== $previousId));
+        $pool = $alternatives ?: $pool;
 
         return $pool[array_sum(unpack('C*', $seed.$key)) % count($pool)];
     }

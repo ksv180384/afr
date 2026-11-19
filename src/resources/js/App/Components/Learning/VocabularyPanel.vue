@@ -1,7 +1,9 @@
 <script setup>
-import { computed, onBeforeUnmount, onMounted, provide, ref } from 'vue';
+import { computed, nextTick, onBeforeUnmount, onMounted, provide, ref } from 'vue';
+import useClickOutside from '@/Composables/useClickOutside.js';
 import { rememberTemporaryGuest, registerGuestAuthentication } from '@/App/Learning/guestSyncState.js';
-import { Link, router } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
+import { Icon } from '@iconify/vue';
 import AfrButton from '@/App/Components/Form/AfrButton.vue';
 import AfrInput from '@/App/Components/Form/AfrInput.vue';
 import AfrSelect from '@/App/Components/Form/Select/AfrSelect.vue';
@@ -14,6 +16,7 @@ import AudioPreferences from './AudioPreferences.vue';
 import { createAudioPlayer } from '@/App/Learning/audioPlayer.js';
 import { reviewDurationLabel, reviewWordCount } from '@/App/Learning/shortReview.js';
 import ReviewSuggestionSetting from './ReviewSuggestionSetting.vue';
+import DailyPracticeIcon from './DailyPracticeIcon.vue';
 import { addGuestRun, recordGuestEvent } from '@/App/Learning/guestProgress.js';
 import { filterGuestWords, guestWordData, guestTestPlan, guestTestSource } from '@/App/Learning/guestVocabulary.js';
 import { usePracticeHome } from '@/App/Learning/practiceHome.js';
@@ -27,12 +30,34 @@ const emit = defineEmits(['open-guest-run','back']);
 const words = ref([]);
 const pagination = ref({current_page:1,last_page:1,total:0});
 const sessions = ref([]);
-const filters = ref({filter:'all',source_session:'',q:''});
+const defaultFilters = {filter:'all',source_session:'',q:''};
+const filters = ref({...defaultFilters});
 const appliedFilters = ref({filter:'all'});
 const shortPlan = ref(null);
 const shortError = ref('');
 const settingsOpen = ref(false);
+const activePopover = ref(null);
+const headerTools = ref(null);
+const popoverPanel = ref(null);
+let popoverTrigger;
+const closePopover = (restoreFocus = false) => {
+  activePopover.value = null;
+  if (restoreFocus) popoverTrigger?.focus();
+};
+const togglePopover = async (name, event) => {
+  if (activePopover.value === name) return closePopover(true);
+  popoverTrigger = event.currentTarget;
+  activePopover.value = name;
+  if (name === 'settings') settingsOpen.value = true;
+  await nextTick();
+  popoverPanel.value?.focus();
+};
+useClickOutside(headerTools, () => closePopover());
 const busy = ref(false);
+const searching = ref(false);
+const markingWordId = ref(null);
+const markingField = ref(null);
+const isMarking = (word, field) => markingWordId.value === word.id && markingField.value === field;
 const error = ref('');
 const saving = ref({kind:'loading',message:''});
 const pendingStart = ref(false);
@@ -42,6 +67,36 @@ const feedback = usePracticeFeedback({
 });
 const plan = ref(null);
 const revealed = ref({});
+const expandedWords = ref({});
+const clock = ref(Date.now());
+const due = word => Date.parse(word.next_review_at) <= clock.value;
+let clockTimer;
+const filterBar = ref(null);
+const filterDropdown = ref(null);
+const filterWidth = ref(0);
+const inlineStatus = computed(() => filterWidth.value >= 500);
+const inlineSource = computed(() => filterWidth.value >= 680);
+const canResetFilters = computed(() => Object.entries(defaultFilters).some(([key, value]) =>
+  filters.value[key] !== value || (appliedFilters.value[key] ?? value) !== value));
+const overflowActive = computed(() => (!inlineStatus.value && filters.value.filter !== 'all')
+  || (!inlineSource.value && !!filters.value.source_session));
+let filterObserver;
+const closeFilters = () => {
+  if (filterDropdown.value) filterDropdown.value.open = false;
+};
+useClickOutside(filterDropdown, event => {
+  // The searchable select renders its list in body, outside the filter panel.
+  if (!event.composedPath().some(element => element.id === 'vocabulary-source-options')) closeFilters();
+});
+onMounted(() => {
+  filterWidth.value = filterBar.value.clientWidth;
+  filterObserver = new ResizeObserver(([entry]) => {
+    filterWidth.value = entry.contentRect.width;
+  });
+  filterObserver.observe(filterBar.value);
+  clockTimer = setInterval(() => { clock.value = Date.now(); }, 60000);
+});
+onBeforeUnmount(() => { filterObserver?.disconnect(); clearInterval(clockTimer); });
 let repository;
 let unsubscribe;
 let unregisterAuthentication;
@@ -77,50 +132,94 @@ const load = async (page = pagination.value.current_page) => {
     const result = await vocabularyTransport.list({...current,page});
     words.value = result.words;
     pagination.value = result.pagination;
-    sessions.value = result.source_sessions;
+    sessions.value = result.source_session_options;
   } else {
-    const all = filterGuestWords(await repository.read(),current).map(guestWordData);
-    sessions.value = [...new Set(all.flatMap((word)=>(word.sources ?? []).map((source)=>source.session_id)))].sort();
+    const state = await repository.read();
+    const all = filterGuestWords(state, current);
+    const titles = new Map(Object.values(state.runs).map(run => [run.session_version_id, run.snapshot.title]));
+    const sources = Object.values(state.vocabulary).flatMap(word => word.sources ?? [])
+      .sort((a, b) => b.version - a.version);
+    const sessionOptions = new Map();
+    for (const source of sources) {
+      if (!sessionOptions.has(source.session_id)) {
+        sessionOptions.set(source.session_id, {id:source.session_id,
+          title:titles.get(source.session_version_id) || source.session_title || 'Изученное занятие'});
+      }
+    }
+    sessions.value = [...sessionOptions.values()].sort((a, b) => a.title.localeCompare(b.title, 'ru'));
     pagination.value = {current_page:page,last_page:Math.max(1,Math.ceil(all.length/30)),total:all.length};
-    words.value = all.slice((page-1)*30,page*30);
+    words.value = all.slice((page-1)*30,page*30).map(word => {
+      const data = guestWordData(word);
+      data.sources = data.sources.map(source => ({...source, session_title: titles.get(source.session_version_id)}));
+      return data;
+    });
   }
-  sessions.value = [...new Set([...sessions.value,...words.value.flatMap((word)=>(word.sources ?? []).map((source)=>source.session_id))])].sort();
+  clock.value = Date.now();
   plan.value = null;
   if (owner) pendingStart.value = (await accountRepository.pending(owner,null)).length>0;
 };
 const loadShortPlan = async () => {
-  shortError.value = '';
-  shortPlan.value = null;
-  try { shortPlan.value = await homeStore.loadReviewPlan(owner ?? null, appliedFilters.value); }
-  catch (failure) { if (!disposed) shortError.value = failure.response?.data?.message ?? failure.message; }
+  try {
+    shortPlan.value = await homeStore.loadReviewPlan(owner ?? null, appliedFilters.value);
+    shortError.value = '';
+  } catch (failure) {
+    if (!disposed) {
+      shortPlan.value = null;
+      shortError.value = failure.response?.data?.message ?? failure.message;
+    }
+  }
 };
 const refresh = () => perform(async () => {
-  appliedFilters.value = requestFilters();
-  await Promise.all([load(1), loadShortPlan()]);
+  searching.value = true;
+  try {
+    closeFilters();
+    appliedFilters.value = requestFilters();
+    await Promise.all([load(1), loadShortPlan()]);
+  } finally {
+    searching.value = false;
+  }
 });
-const showErrors = () => {
-  if (busy.value) return;
-  filters.value.filter = 'errors';
-  refresh();
+const resetFilters = () => {
+  filters.value = {...defaultFilters};
+  return refresh();
 };
 const turnPage = (page) => perform(()=>load(page));
-const mark = (word) => perform(async () => {
-  const target = !word.needs_review;
-  if (owner) await vocabularyTransport.mark(word.id,target);
-  else await repository.mutate((state) => {
-    if(state.bound_user_id !== null) throw Object.assign(new Error('Продолжите работу со словарём в аккаунте.'),{code:'bound_owner'});
-    const current = state.vocabulary[word.lexeme_key];
-    if (!current) throw new Error('Выражение отсутствует в этом браузере.');
-    current.needs_review = target;
-    recordGuestEvent(state,{action:'vocabulary_mark',lexeme_key:word.lexeme_key,needs_review:target,client_event_id:crypto.randomUUID(),client_occurred_at:new Date().toISOString()});
-  });
-  invalidateHome();
-  await Promise.all([load(), loadShortPlan()]);
-  onStatus({kind:'saved',message:target ? 'Выражение отмечено для повторения.' : 'Отметка повторения снята.'});
+const mark = (word, field = 'needs_review') => perform(async () => {
+  markingWordId.value = word.id;
+  markingField.value = field;
+  try {
+    const target = !word[field];
+    if (owner) {
+      if (field === 'is_difficult') await vocabularyTransport.markDifficult(word.id, target);
+      else await vocabularyTransport.mark(word.id, target);
+    }
+    else await repository.mutate((state) => {
+      if(state.bound_user_id !== null) throw Object.assign(new Error('Продолжите работу со словарём в аккаунте.'),{code:'bound_owner'});
+      const current = state.vocabulary[word.lexeme_key];
+      if (!current) throw new Error('Выражение отсутствует в этом браузере.');
+      current[field] = target;
+      recordGuestEvent(state,{action:'vocabulary_mark',lexeme_key:word.lexeme_key,[field]:target,client_event_id:crypto.randomUUID(),client_occurred_at:new Date().toISOString()});
+    });
+    invalidateHome();
+    await Promise.all([load(1), loadShortPlan()]);
+    onStatus({kind:'saved',message:field === 'is_difficult'
+      ? (target ? 'Слово добавлено в сложные.' : 'Отметка сложного слова снята.')
+      : (target ? 'Выражение отмечено для повторения.' : 'Отметка повторения снята.')});
+  } finally {
+    markingWordId.value = null;
+    markingField.value = null;
+  }
 });
 const prepare = () => perform(async () => {
   plan.value = owner ? await vocabularyTransport.plan(appliedFilters.value) : guestTestPlan(await repository.read(), appliedFilters.value);
   if (!plan.value.total) onStatus({kind:'info',message:'Автоматически проверяемых вопросов нет. Откройте самопроверку у выражения ниже; серия и цели от неё не меняются.'});
+});
+const prepareDifficult = () => perform(async () => {
+  filters.value = {...defaultFilters, filter:'difficult'};
+  appliedFilters.value = requestFilters();
+  closeFilters();
+  await Promise.all([load(1), loadShortPlan()]);
+  plan.value = owner ? await vocabularyTransport.plan(appliedFilters.value) : guestTestPlan(await repository.read(), appliedFilters.value);
 });
 const start = (all = false) => perform(async () => {
   const ids = all ? [...plan.value.word_ids] : plan.value.word_ids.slice(0, 10);
@@ -152,9 +251,7 @@ const openReviewRun = async id => {
 };
 const startShortReview = () => perform(async () => {
   const plan = shortPlan.value;
-  if (!plan) return;
-  if (plan.active_run_id) return openReviewRun(plan.active_run_id);
-  if (!plan.total || pendingStart.value) return;
+  if (!plan?.total || plan.active_run_id || pendingStart.value) return;
   try {
     openRecoveredStart = true;
     const path = await homeStore.startReview(owner ?? null, {filters:appliedFilters.value, wordIds:plan.word_ids, onStatus});
@@ -190,7 +287,6 @@ const recover = async () => {
     queueSyncing=false;
   }
 };
-const sourceLabels = (word) => (word.sources ?? []).map((source)=>source.session_id+' · v'+source.version).join(', ');
 onMounted(async () => {
   await perform(async () => {
     if (owner) {
@@ -214,50 +310,116 @@ onMounted(() => window.addEventListener('online',recover));
 onBeforeUnmount(() => { disposed=true; window.removeEventListener('online',recover); unregisterAuthentication?.(); unsubscribe?.(); audio.stop(); });
 </script>
 <template>
-  <section class="vocabulary-panel">
-    <div class="actions"><Link v-if="!guestRepository" href="/practice">К занятиям</Link><afr-button v-else @click="emit('back')">К занятиям</afr-button>
-      <a v-if="!authUser" href="/login?practice=1" @click.prevent="authenticate">Войти в аккаунт</a></div>
-    <p v-if="!authUser">Гостевой словарь хранится только в этом браузере. После входа он переносится в аккаунт.</p>
+  <section class="vocabulary-panel" @keydown.esc="activePopover && closePopover(true)">
+    <header class="vocabulary-header">
+      <h2>Личный словарь</h2>
+      <div ref="headerTools" class="header-tools">
+        <button type="button" class="utility-button" title="Настройки повторения" aria-label="Настройки повторения"
+          aria-haspopup="dialog" :aria-expanded="activePopover === 'settings'" aria-controls="vocabulary-popover"
+          @click="togglePopover('settings', $event)"><daily-practice-icon name="settings" /></button>
+        <audio-preferences popover compact @click="closePopover()" />
+        <button type="button" class="utility-button" title="Как работает повторение" aria-label="Как работает повторение"
+          aria-haspopup="dialog" :aria-expanded="activePopover === 'help'" aria-controls="vocabulary-popover"
+          @click="togglePopover('help', $event)"><daily-practice-icon name="help" /></button>
+        <div v-if="activePopover" id="vocabulary-popover" ref="popoverPanel" class="header-popover" role="dialog"
+          tabindex="-1" :aria-label="activePopover === 'help' ? 'Как работает повторение' : 'Настройки повторения'">
+          <div class="popover-heading">
+            <h3>{{ activePopover === 'help' ? 'Как работает повторение' : 'Настройки повторения' }}</h3>
+            <button type="button" class="utility-button" aria-label="Закрыть" @click="closePopover(true)"><daily-practice-icon name="close" /></button>
+          </div>
+          <template v-if="activePopover === 'help'">
+            <p>Первое повторение — через сутки. Ошибка или ответ «Не знаю» сбрасывает серию и возвращает слово в «Пора повторить».</p>
+            <p>Правильные ответы с первой попытки без подсказок увеличивают интервалы до 1, 3, 7, 14 и 30 дней. Засчитывается один успех за прохождение и не чаще раза в 24 часа.</p>
+            <p>После трёх успехов отметка повторения снимается. Кнопка с книгой позволяет управлять ею вручную.</p>
+            <p>Звёздочкой отмечайте сложные слова. Она сохраняется до снятия вручную. «Тренировать сложные» собирает их в блоки до 10 вопросов и чередует доступные задания на значение и контекст.</p>
+            <p v-if="!authUser" class="guest-note">Слова сохраняются в этом браузере и переносятся в аккаунт после входа. <a href="/login?practice=1" @click.prevent="authenticate">Войти в аккаунт</a></p>
+          </template>
+          <review-suggestion-setting v-else-if="settingsOpen" :auth-user="authUser" :guest-repository="repository" />
+        </div>
+      </div>
+    </header>
+    <div class="vocabulary-toolbar">
+      <div class="training-actions">
+        <afr-button :disabled="busy || !pagination.total" @click="prepare">Тест по словам</afr-button>
+        <afr-button :disabled="busy" @click="prepareDifficult">Тренировать сложные</afr-button>
+      </div>
+      <afr-button v-if="guestRepository" text @click="emit('back')">К занятиям</afr-button>
+    </div>
     <p v-if="saving.message && !feedback.enabled" role="status" class="notice">{{ saving.message }}</p>
     <p v-if="error && !feedback.enabled" role="alert" class="error">{{ error }}</p>
     <afr-button v-if="pendingStart" :disabled="busy" @click="recover">Повторить отправку</afr-button>
-    <section class="short-review" aria-labelledby="short-review-title">
-      <h2 id="short-review-title">Короткое повторение</h2>
-      <template v-if="shortPlan?.active_run_id">
-        <p>У вас есть начатое занятие.</p>
-        <afr-button :disabled="busy" @click="startShortReview">Продолжить начатое</afr-button>
-      </template>
-      <template v-else-if="shortPlan?.total">
-        <p>{{ reviewWordCount(shortPlan.total) }} · {{ reviewDurationLabel(shortPlan.estimated_seconds) }}</p>
-        <p v-if="shortPlan.includes_not_due">В блоке есть выражения, срок повторения которых ещё не наступил.</p>
+    <section v-if="!shortPlan?.active_run_id && (shortPlan?.total || shortError)" class="short-review" aria-label="Короткое повторение">
+      <template v-if="shortPlan?.total">
+        <div>
+          <p>{{ reviewWordCount(shortPlan.total) }} · {{ reviewDurationLabel(shortPlan.estimated_seconds) }}</p>
+          <p v-if="shortPlan.includes_not_due" class="review-note">Включая слова для досрочного повторения</p>
+        </div>
         <afr-button type="primary" :disabled="busy || pendingStart" @click="startShortReview">Повторить изученное</afr-button>
       </template>
       <template v-else-if="shortError">
         <p role="alert">{{ shortError }}</p><afr-button :disabled="busy" @click="perform(loadShortPlan)">Обновить предложение</afr-button>
       </template>
-      <p v-else-if="shortPlan">{{ shortPlan.self_check_count ? 'Для этих выражений в словаре доступны примеры и самопроверка.' : 'В этой выборке пока нет выражений для короткого повторения.' }}</p>
-      <p v-else-if="busy" role="status">Проверяем изученные выражения…</p>
     </section>
-    <details class="review-preferences" @toggle="settingsOpen ||= $event.target.open">
-      <summary>Настройки предложений</summary>
-      <review-suggestion-setting v-if="settingsOpen" :auth-user="authUser" :guest-repository="repository" />
-    </details>
-    <h2>Личный словарь</h2>
-    <afr-button :disabled="busy || appliedFilters.filter === 'errors'" @click="showErrors">Ошибки и отметки</afr-button>
-    <form class="filters" @submit.prevent="refresh">
-      <div class="practice-field"><label for="vocabulary-filter">Показать</label><afr-select id="vocabulary-filter" v-model="filters.filter" native><afr-option value="all" label="Все выражения" /><afr-option value="errors" label="Ошибки и отметки" /><afr-option value="due" label="Пора повторить" /></afr-select></div>
-      <div class="practice-field"><label for="vocabulary-source">Из занятия</label><afr-select id="vocabulary-source" v-model="filters.source_session" native><afr-option value="" label="Все изученные занятия" /><afr-option v-for="session in sessions" :key="session" :value="session" :label="session" /></afr-select></div>
-      <afr-input id="vocabulary-search" v-model="filters.q" label="Поиск" maxlength="100" placeholder="Французское слово или перевод" />
-      <afr-button native-type="submit" type="primary" :loading="busy">Применить</afr-button>
-      <afr-button :disabled="busy || !words.length || pendingStart || !!shortPlan?.active_run_id" @click="prepare">Тест по словам</afr-button>
+    <form ref="filterBar" class="filters" aria-label="Фильтр словаря" @submit.prevent="refresh">
+      <afr-input id="vocabulary-search" v-model="filters.q" aria-label="Поиск по слову или переводу" maxlength="100" placeholder="Слово или перевод" />
+      <afr-select v-if="inlineStatus" id="vocabulary-filter" v-model="filters.filter" class="inline-filter" aria-label="Показать" native>
+        <afr-option value="all" label="Все выражения" />
+        <afr-option value="errors" label="Ошибки и отметки" />
+        <afr-option value="due" label="Пора повторить" />
+        <afr-option value="difficult" label="Сложные для меня" />
+      </afr-select>
+      <afr-select v-if="inlineSource" id="vocabulary-source" v-model="filters.source_session" class="inline-filter" aria-label="Из занятия" searchable search-placeholder="Поиск занятия…">
+        <afr-option value="" label="Все занятия" />
+        <afr-option v-for="session in sessions" :key="session.id" :value="session.id" :label="session.title" />
+      </afr-select>
+      <details
+        v-if="!inlineStatus || !inlineSource"
+        ref="filterDropdown"
+        class="filter-dropdown"
+        @keydown.esc.stop.prevent="closeFilters(); filterDropdown?.querySelector('summary')?.focus()"
+      >
+        <summary :class="{ 'has-filters': overflowActive }" title="Дополнительные фильтры" aria-label="Дополнительные фильтры">
+          <daily-practice-icon name="list" />
+        </summary>
+        <div class="filter-popover">
+          <div v-if="!inlineStatus" class="practice-field">
+            <label for="vocabulary-filter">Показать</label>
+            <afr-select id="vocabulary-filter" v-model="filters.filter" native>
+              <afr-option value="all" label="Все выражения" />
+              <afr-option value="errors" label="Ошибки и отметки" />
+              <afr-option value="due" label="Пора повторить" />
+              <afr-option value="difficult" label="Сложные для меня" />
+            </afr-select>
+          </div>
+          <div v-if="!inlineSource" class="practice-field">
+            <label for="vocabulary-source">Из занятия</label>
+            <afr-select id="vocabulary-source" v-model="filters.source_session" aria-label="Из занятия" searchable search-placeholder="Поиск занятия…">
+              <afr-option value="" label="Все занятия" />
+              <afr-option v-for="session in sessions" :key="session.id" :value="session.id" :label="session.title" />
+            </afr-select>
+          </div>
+          <afr-button native-type="submit" type="primary" :loading="searching" :disabled="busy && !searching">Применить</afr-button>
+        </div>
+      </details>
+      <afr-button
+        class="filter-submit"
+        native-type="submit"
+        :loading="searching"
+        :disabled="busy && !searching"
+        aria-label="Найти"
+        title="Найти"
+      >
+        <daily-practice-icon v-show="!searching" name="search" />
+      </afr-button>
+      <button type="button" class="utility-button filter-reset" :disabled="busy || !canResetFilters"
+        aria-label="Сбросить фильтры" title="Сбросить фильтры" @click="resetFilters"><daily-practice-icon name="reset" /></button>
     </form>
-    <p v-if="busy" role="status">Загружаем словарь…</p>
-    <p v-else-if="!words.length">В этом списке пока нет выражений. Завершите занятие или измените фильтры.</p>
+    <p v-if="!busy && !words.length">{{ appliedFilters.filter === 'difficult' ? 'Сложных слов в этой выборке пока нет. В списке «Все выражения» отметьте слова звёздочкой.' : 'В этом списке пока нет выражений. Завершите занятие или измените фильтры.' }}</p>
     <section v-if="plan" class="notice">
       <p>Для проверяемого теста: {{ plan.total }}. Для самопроверки без зачёта: {{ plan.self_check_words.length }}.</p>
       <div v-if="plan.total" class="actions">
-        <afr-button :disabled="busy || pendingStart || !!shortPlan?.active_run_id" @click="start(false)">Короткий тест — до 10 слов</afr-button>
-        <afr-button v-if="plan.total > 10" :disabled="busy || pendingStart || !!shortPlan?.active_run_id" @click="start(true)">Все слова — блоками по 10</afr-button>
+        <afr-button :disabled="busy || pendingStart" @click="start(false)">Короткий тест — до 10 слов</afr-button>
+        <afr-button v-if="plan.total > 10" :disabled="busy || pendingStart" @click="start(true)">Все слова — блоками по 10</afr-button>
       </div>
       <p v-if="!plan.total && !feedback.enabled">Автоматически проверяемых вопросов нет. Откройте самопроверку у выражения ниже; серия и цели от неё не меняются.</p>
     </section>
@@ -266,52 +428,437 @@ onBeforeUnmount(() => { disposed=true; window.removeEventListener('online',recov
       <span role="status">Страница {{ pagination.current_page }} из {{ pagination.last_page }} · Всего выражений: {{ pagination.total }}</span>
       <afr-button :disabled="busy || pagination.current_page>=pagination.last_page" @click="turnPage(pagination.current_page+1)">Следующая страница</afr-button>
     </nav>
-    <audio-preferences v-if="words.length" />
-    <ol class="word-list"><li v-for="word in words" :key="word.id">
-      <div class="word-main"><french-text :text="word.snapshot.fr" :transcription-ru="word.snapshot.transcription_ru" :translation="word.self_check && !revealed[word.id] ? null : word.snapshot.ru" />
-        <p :class="word.needs_review ? 'needs-review' : 'known'">{{ word.needs_review ? 'Нужно повторить · '+word.streak+' из 3' : 'В вашем словаре' }}</p>
-        <p>Ошибок за всё время: {{ word.errors }}<span v-if="word.next_review_at"> · Следующее повторение: <practice-date :value="word.next_review_at" :timezone="timezone" :time="false" /></span></p>
-        <p v-if="word.self_check">Самопроверка без автоматического зачёта.</p>
-      </div>
-      <div class="word-actions"><audio-control :audio="{text:word.snapshot.fr,lang:'fr-FR',asset_id:null}" label="Прослушать" />
-        <afr-button :disabled="busy" @click="mark(word)">{{ word.needs_review ? 'Снять отметку повторения' : 'Отметить для повторения' }}</afr-button>
-        <afr-button v-if="word.self_check && !revealed[word.id]" @click="revealed[word.id] = true">Показать перевод для самопроверки</afr-button>
-      </div>
-      <details><summary>Изученные источники и примеры</summary>
-        <p>{{ sourceLabels(word) || 'Сохранённое выражение' }}</p>
-        <div v-for="source in word.sources" :key="source.session_version_id" class="source">
-          <p>{{ source.session_id }} · v{{ source.version }}</p>
-          <practice-report v-if="owner && source.session_version_id" :version-id="source.session_version_id" />
-          <french-text :text="source.snapshot.fr" :transcription-ru="source.snapshot.transcription_ru" :translation="source.snapshot.ru" compact />
-          <french-text v-if="source.snapshot.example" :text="source.snapshot.example.fr" :transcription-ru="source.snapshot.example.transcription_ru" :translation="source.snapshot.example.ru" compact />
+    <ol class="word-list">
+      <li v-for="word in words" :key="word.id" :class="{ 'word-due': due(word) }">
+        <div class="word-main">
+          <french-text
+            :text="word.snapshot.fr"
+            :transcription-ru="word.snapshot.transcription_ru"
+            :translation="word.self_check && !revealed[word.id] ? null : word.snapshot.ru"
+            compact
+          />
+          <button v-if="word.self_check && !revealed[word.id]" type="button" class="reveal-translation" @click="revealed[word.id] = true">
+            Показать перевод
+          </button>
+          <span v-if="due(word)" class="due-label">Пора повторить</span>
         </div>
-      </details>
-    </li></ol>
+        <div class="word-actions">
+          <audio-control :audio="{text:word.snapshot.fr,lang:'fr-FR',asset_id:null}" :label="'Прослушать «' + word.snapshot.fr + '»'" compact />
+          <button type="button" class="mark-button difficult-button" :class="{ marked: word.is_difficult }"
+            :disabled="busy" :aria-pressed="!!word.is_difficult"
+            :aria-busy="isMarking(word, 'is_difficult')"
+            :title="word.is_difficult ? 'Снять отметку сложного слова' : 'Отметить как сложное слово'"
+            :aria-label="(word.is_difficult ? 'Снять отметку сложного слова' : 'Отметить как сложное слово') + ' «' + word.snapshot.fr + '»'"
+            @click="mark(word, 'is_difficult')">
+            <Icon v-if="isMarking(word, 'is_difficult')" icon="svg-spinners:6-dots-rotate" aria-hidden="true" />
+            <daily-practice-icon v-else name="star" />
+          </button>
+          <button
+            type="button"
+            class="mark-button"
+            :class="{ marked: word.needs_review }"
+            :disabled="busy"
+            :aria-busy="isMarking(word, 'needs_review')"
+            :aria-pressed="word.needs_review"
+            :aria-label="(word.needs_review ? 'Снять отметку повторения' : 'Отметить для повторения') + ' «' + word.snapshot.fr + '»'"
+            :title="word.needs_review ? 'Снять отметку повторения' : 'Отметить для повторения'"
+            @click="mark(word)"
+          >
+            <Icon v-if="isMarking(word, 'needs_review')" icon="svg-spinners:6-dots-rotate" aria-hidden="true" />
+            <daily-practice-icon v-else :name="word.needs_review ? 'check' : 'book'" />
+          </button>
+          <button
+            type="button"
+            class="mark-button details-button"
+            :aria-expanded="!!expandedWords[word.id]"
+            :aria-controls="'word-details-' + word.id"
+            :aria-label="'Подробнее о «' + word.snapshot.fr + '»'"
+            title="Примеры и статистика"
+            @click="expandedWords[word.id] = !expandedWords[word.id]"
+          >
+            <daily-practice-icon name="chevron" />
+          </button>
+        </div>
+        <div v-show="expandedWords[word.id]" :id="'word-details-' + word.id" class="word-details">
+          <div class="word-stats">
+            <span>Ошибок в ответах за всё время · {{ word.errors }}</span>
+            <span v-if="word.next_review_at">
+              {{ due(word) ? 'Срок наступил' : 'Следующее повторение' }} · <practice-date :value="word.next_review_at" :timezone="timezone" :relative="false" />
+            </span>
+          </div>
+          <p v-if="word.self_check" class="review-note">Самопроверка без автоматического зачёта.</p>
+          <h3 v-if="word.sources?.length">Занятия, где встречалось слово</h3>
+          <div v-for="source in word.sources" :key="source.session_version_id" class="source">
+            <div class="source-heading">
+              <p>{{ source.session_title || 'Занятие' }}</p>
+              <practice-report v-if="owner && source.session_version_id" :version-id="source.session_version_id" compact />
+            </div>
+            <french-text v-if="source.snapshot.example" :text="source.snapshot.example.fr" :transcription-ru="source.snapshot.example.transcription_ru" :translation="source.snapshot.example.ru" compact />
+          </div>
+        </div>
+      </li>
+    </ol>
   </section>
 </template>
 <style scoped>
-.short-review { padding:var(--practice-pad); margin:1rem 0; border:1px solid var(--practice-border); border-radius:var(--practice-radius); background:var(--practice-surface); }
-h2 { font-weight:700; font-size:1.15rem; }
-.review-preferences { margin-bottom:1rem; }
-.short-review :deep(button) { min-height:44px; }
-p { line-height:1.6; margin:.5rem 0; }
-.actions,.word-actions { display:flex; flex-wrap:wrap; gap:.5rem; align-items:end; margin:.5rem 0; }
-.filters { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,1.4fr) auto auto; gap:.5rem; align-items:end; margin:.75rem 0; }
-.practice-field { display:grid; gap:.25rem; min-width:0; }
-.practice-field label { font-size:.875rem; }
-.filters :deep(.afr-input-component) { min-width:0; }
-.notice { padding:1rem; background:#eff6ff; border:1px solid #bdd3e7; }
-.error { padding:1rem; background:#fef2f2; }
-.word-list>li { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:.5rem 1rem; padding:1.25rem 0; border-bottom:1px solid #bdd3e7; }
-details { grid-column:1/-1; }
-summary { cursor:pointer; min-height:44px; padding:.5rem 0; }
-.source { padding:.75rem; margin:.5rem 0; background:white; border:1px solid #cbd5e1; }
-.source :deep(.french-material) { margin-right:1rem; }
-.needs-review { color:#9a3412; }.known { color:#166534; }
-a { color:#155e91; text-decoration:underline; }
-:deep(button) { max-width:100%; white-space:normal; }
-:deep(:focus-visible) { outline:3px solid #2563eb; outline-offset:3px; }
-@media(max-width:1000px) { .filters { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-@media(max-width:700px) { .word-list>li { grid-template-columns:minmax(0,1fr); } }
-@media(max-width:480px) { .filters { grid-template-columns:minmax(0,1fr); } .filters > button { justify-self:start; } }
+.vocabulary-panel {
+  --practice-target: 34px;
+  --vocabulary-control-size: 34px;
+}
+.vocabulary-panel :deep(button),
+.vocabulary-panel :deep(select),
+.vocabulary-panel :deep(input) {
+  min-block-size: var(--vocabulary-control-size);
+  font-size: .8125rem;
+  line-height: 1.3;
+}
+.vocabulary-panel :deep(.practice-audio.compact button) {
+  width: var(--vocabulary-control-size);
+  height: var(--vocabulary-control-size);
+}
+.vocabulary-header,
+.short-review,
+.actions,
+.word-actions,
+.word-stats {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .5rem 1rem;
+}
+.vocabulary-header,
+.short-review {
+  justify-content: space-between;
+}
+h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 750;
+}
+.vocabulary-toolbar, .training-actions, .header-tools { display: flex; align-items: center; gap: .5rem; }
+.vocabulary-toolbar { justify-content: space-between; flex-wrap: wrap; margin: .4rem 0; }
+.training-actions { flex-wrap: wrap; }
+.header-tools { position: relative; gap: .15rem; flex-shrink: 0; }
+.utility-button { display: grid; place-items: center; width: var(--vocabulary-control-size); height: var(--vocabulary-control-size); padding: 0; border-radius: .5rem; color: #51718e; }
+.utility-button:hover, .utility-button[aria-expanded="true"] { background: var(--practice-accent); color: var(--practice-blue); }
+.utility-button :deep(svg) { width: 18px; height: 18px; }
+.header-tools :deep(.audio-preferences) { margin: 0; }
+.header-tools :deep(.audio-preferences.popover) { position: static; }
+.header-popover { position: absolute; right: 0; top: calc(100% + .4rem); z-index: 15; width: min(390px, calc(100vw - 2.5rem)); max-height: min(520px, 70svh); overflow-y: auto; padding: 1rem; border: 1px solid var(--practice-border); border-radius: .85rem; background: var(--practice-surface); box-shadow: 0 12px 35px #18344c24; }
+.popover-heading { display: flex; justify-content: space-between; align-items: center; gap: .5rem; margin-bottom: .4rem; }
+.popover-heading h3 { font-size: .9375rem; font-weight: 650; }
+.header-popover p { margin: .65rem 0; color: var(--practice-muted); font-size: .8125rem; line-height: 1.6; }
+.header-popover :deep(.review-settings) { margin: 0; padding: 0; border: 0; background: transparent; font-size: .8125rem; }
+.header-popover :deep(.review-settings h2) { display: none; }
+p {
+  margin: .35rem 0;
+  line-height: 1.5;
+}
+.guest-note,
+.review-note,
+.word-stats {
+  color: var(--practice-muted);
+  font-size: .8125rem;
+}
+.short-review {
+  margin-top: .5rem;
+  padding: .5rem .75rem;
+  border-radius: var(--practice-radius);
+  background: var(--practice-accent);
+  font-size: .875rem;
+}
+.short-review p {
+  margin: 0;
+}
+.short-review .review-note {
+  margin-top: .2rem;
+}
+summary {
+  cursor: pointer;
+  min-height: var(--vocabulary-control-size);
+  padding: .45rem 0;
+  color: var(--practice-blue);
+  font-size: .8125rem;
+}
+.filters {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .375rem;
+  margin: .35rem 0 .75rem;
+}
+.filters :deep(.afr-search-control > input[role="combobox"]) {
+  font-family: inherit;
+  font-size: .8125rem;
+  line-height: 1.3;
+}
+:global(#vocabulary-source-options > li) {
+  font-family: inherit;
+  font-size: .8125rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.filter-reset { flex: 0 0 var(--vocabulary-control-size); }
+.filter-reset:disabled { opacity: .4; cursor: default; }
+.inline-filter {
+  flex: 0 0 170px;
+  min-width: 0;
+}
+.filter-dropdown {
+  flex: 0 0 var(--vocabulary-control-size);
+}
+.filter-dropdown > summary,
+.filter-submit {
+  display: grid;
+  place-items: center;
+  width: var(--vocabulary-control-size);
+  height: var(--vocabulary-control-size);
+  padding: 0;
+  border: 1px solid var(--practice-border);
+  border-radius: var(--practice-control-radius);
+  background: var(--practice-surface);
+}
+.filter-dropdown > summary {
+  list-style: none;
+}
+.filter-dropdown > summary::-webkit-details-marker {
+  display: none;
+}
+.filter-dropdown[open] > summary,
+.filter-dropdown .has-filters {
+  border-color: var(--practice-blue);
+  background: var(--practice-accent);
+}
+.filters .filter-submit {
+  flex: 0 0 var(--vocabulary-control-size);
+  border-color: var(--practice-blue);
+  background: var(--practice-blue);
+  color: #fff;
+}
+.filters .filter-submit:enabled:hover {
+  background: var(--practice-blue-hover);
+}
+.filters .filter-submit.is-loading {
+  opacity: 1;
+}
+.filter-submit :deep(svg),
+.filter-dropdown > summary :deep(svg) {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+}
+.filter-popover {
+  position: absolute;
+  top: calc(100% + .5rem);
+  right: 0;
+  z-index: 5;
+  display: grid;
+  gap: .75rem;
+  width: min(280px, 100%);
+  padding: .875rem;
+  border: 1px solid var(--practice-border);
+  border-radius: var(--practice-radius);
+  background: var(--practice-surface);
+  box-shadow: 0 8px 24px #18344c24;
+}
+.practice-field {
+  display: grid;
+  gap: .25rem;
+  min-width: 0;
+}
+.practice-field label {
+  font-size: .8125rem;
+  color: var(--practice-muted);
+}
+.filters :deep(.afr-input-component) {
+  flex: 1 1 140px;
+  min-width: 0;
+}
+.notice,
+.error {
+  margin: .75rem 0;
+  padding: .75rem;
+  border-radius: var(--practice-radius);
+  background: var(--practice-accent);
+}
+.error {
+  background: #fef2f2;
+}
+.actions {
+  margin: .5rem 0;
+}
+.word-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.word-list > li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0 .75rem;
+  padding: .75rem 0;
+  border-bottom: 1px solid var(--practice-border);
+}
+.word-list > .word-due {
+  padding-inline: .75rem;
+  border-inline-start: 3px solid #cb893b;
+  background: #fff8ed;
+}
+.due-label {
+  display: inline-block;
+  margin-top: .35rem;
+  color: #894516;
+  font-size: .75rem;
+  font-weight: 650;
+}
+.difficult-button.marked :deep(svg) { fill: currentColor; }
+.word-main {
+  min-width: 0;
+}
+.word-main :deep(.french-material) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: .1rem 1rem;
+}
+.word-main :deep(.french-line) {
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.4;
+}
+.word-main :deep(.transcription-line),
+.word-main :deep(.transcription-missing) {
+  grid-column: 1;
+  font-size: .8125rem;
+  line-height: 1.4;
+}
+.word-main :deep(.translation-line) {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  margin: 0;
+  font-size: .9375rem;
+  line-height: 1.4;
+}
+.word-actions {
+  align-self: start;
+  flex-wrap: nowrap;
+  gap: .25rem;
+  flex-shrink: 0;
+}
+.mark-button {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: var(--vocabulary-control-size);
+  height: var(--vocabulary-control-size);
+  padding: 0;
+  border: 1px solid var(--practice-border);
+  border-radius: var(--practice-control-radius);
+  background: #fff;
+  color: var(--practice-blue);
+}
+.mark-button:hover {
+  background: var(--practice-accent);
+}
+.mark-button.marked {
+  border-color: #e9cda7;
+  background: #fff5e8;
+  color: #9a5219;
+}
+.mark-button:disabled {
+  cursor: wait;
+  opacity: .6;
+}
+.mark-button :deep(svg) {
+  width: 19px;
+  height: 19px;
+}
+.reveal-translation {
+  color: var(--practice-blue);
+  font-size: .8125rem;
+  text-decoration: underline;
+}
+.word-details {
+  grid-column: 1 / -1;
+  margin-top: .65rem;
+  padding: .75rem;
+  border: 1px solid var(--practice-border);
+  border-radius: var(--practice-control-radius);
+  background: var(--practice-bg);
+}
+.details-button[aria-expanded="true"] {
+  background: var(--practice-accent);
+  border-color: var(--practice-blue);
+}
+.details-button[aria-expanded="true"] :deep(svg) {
+  transform: rotate(90deg);
+}
+.word-stats {
+  margin-bottom: .5rem;
+}
+.word-details h3 {
+  margin-top: .75rem;
+  font-size: .875rem;
+  font-weight: 650;
+}
+.source {
+  margin: .5rem 0;
+  padding: .35rem .65rem;
+  border: 1px solid var(--practice-border);
+  border-radius: var(--practice-control-radius);
+  background: var(--practice-surface);
+}
+.source-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+}
+.source-heading p {
+  font-size: .8125rem;
+  font-weight: 650;
+}
+.source :deep(.french-material) {
+  margin: .25rem 1rem .25rem 0;
+}
+a {
+  color: var(--practice-blue);
+  text-decoration: underline;
+}
+:deep(button) {
+  max-width: 100%;
+  white-space: normal;
+}
+:deep(:focus-visible) {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+}
+@media (max-width: 600px) {
+  .vocabulary-header { flex-wrap: nowrap; gap: .35rem; }
+  .vocabulary-header h2 { font-size: 1.05rem; }
+  .vocabulary-toolbar { gap: .25rem .75rem; }
+  .training-actions { flex-wrap: nowrap; }
+  .training-actions :deep(button) { padding-inline: .6rem; }
+  .word-list > li { grid-template-columns: minmax(0, 1fr); gap: .4rem; }
+  .word-main :deep(.french-material) {
+    display: flex;
+    gap: .15rem;
+  }
+  .word-actions {
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    justify-self: end;
+    max-width: none;
+  }
+  .short-review {
+    align-items: flex-start;
+  }
+}
+@media (pointer: coarse) {
+  .vocabulary-panel {
+    --practice-target: 40px;
+    --vocabulary-control-size: 40px;
+  }
+}
 </style>

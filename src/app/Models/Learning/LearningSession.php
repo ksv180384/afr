@@ -12,6 +12,20 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use LogicException;
 
+/**
+ * Постоянная карточка занятия в каталоге со ссылкой на активную версию.
+ *
+ * @property int $id Первичный ключ записи.
+ * @property string $external_id Стабильный идентификатор из пакета контента.
+ * @property LevelCode $level Код уровня CEFR.
+ * @property int $unit_id Тема, к которой относится запись.
+ * @property int $sort_order Позиция в порядке показа.
+ * @property string|null $slug Часть публичного адреса.
+ * @property int|null $active_version_id Версия занятия, выбранная для новых прохождений.
+ * @property \Carbon\CarbonImmutable|null $archived_at Момент архивации или снятия с публикации.
+ * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
+ * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
+ */
 class LearningSession extends Model
 {
     use HasFactory;

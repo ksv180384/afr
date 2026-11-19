@@ -39,7 +39,7 @@ html { scrollbar-gutter: stable; }
 }
 .practice-content { min-width: 0; }
 .practice-content:focus { outline-offset: .25rem; }
-.practice-shell--focused { max-width: 880px; }
+.practice-shell--focused { max-width: 880px; padding-block: .75rem; }
 .practice-nav {
   position: sticky;
   top: 72px;

@@ -100,11 +100,12 @@ class GuestSyncService
                             if ($this->ledger->previous($episode, $event)) {
                                 return;
                             }
-                            Validator::make($event, ['action' => 'required|in:vocabulary_mark', 'lexeme_key' => 'required|string|max:128', 'needs_review' => 'required|boolean'])->validate();
+                            $mark = Validator::make($event, ['action' => 'required|in:vocabulary_mark', 'lexeme_key' => 'required|string|max:128',
+                                'needs_review' => 'required_without:is_difficult|boolean', 'is_difficult' => 'required_without:needs_review|boolean'])->validate();
                             if (! PersonalVocabulary::where('user_id', $actor->id)->where('lexeme_key', $event['lexeme_key'])->exists()) {
                                 throw new AnswerCheckingException(PracticeErrorCode::NotFound, 'Выражение ещё не перенесено.');
                             }
-                            $this->ledger->record($episode, $event, ['receipt' => ['lexeme_key' => $event['lexeme_key'], 'needs_review' => (bool) $event['needs_review']]]);
+                            $this->ledger->record($episode, $event, ['receipt' => $mark]);
                         });
                         $accepted[] = $event['client_event_id'];
                     } catch (AnswerCheckingException|ValidationException|\InvalidArgumentException $error) {

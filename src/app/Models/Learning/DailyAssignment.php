@@ -7,6 +7,17 @@ use App\Support\Learning\UsesUtcDates;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Хранит выбранное прохождение для календарного дня пользователя и его ревизию.
+ *
+ * @property int $id Первичный ключ записи.
+ * @property int $user_id Пользователь, к которому относится запись.
+ * @property \Carbon\CarbonImmutable $local_date Календарная дата в часовом поясе ученика.
+ * @property string|null $selected_run_id Выбранное на этот день прохождение.
+ * @property int $revision Номер ревизии записи, изменяемый при обновлении её состояния.
+ * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
+ * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
+ */
 class DailyAssignment extends Model
 {
     use UsesUtcDates;

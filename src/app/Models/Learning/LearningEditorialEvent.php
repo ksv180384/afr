@@ -8,6 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use LogicException;
 
+/**
+ * Журнал редакторских действий: импорт, проверка, публикация и другие изменения контента. Записи добавляются, а штатное удаление связанных материалов может удалить их события.
+ *
+ * @property int $id Первичный ключ записи.
+ * @property int|null $actor_id Пользователь, от имени которого выполнено действие.
+ * @property int|null $session_version_id Версия занятия, к которой относится запись.
+ * @property int|null $curriculum_id Версия программы, затронутая действием.
+ * @property int|null $catalog_revision_id Редакция метаданных уровня или темы, затронутая действием.
+ * @property string|null $media_id Медиафайл, затронутый действием.
+ * @property string|null $import_batch_id Пакет, из которого импортирована запись.
+ * @property string $operation Код редакторского действия, например session_import или session_publish.
+ * @property array|null $previous_state Поля или значения до действия, если они записаны.
+ * @property array|null $new_state Поля или результат после действия, если они записаны.
+ * @property \Carbon\CarbonImmutable $occurred_at Момент события.
+ * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
+ * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
+ */
 class LearningEditorialEvent extends Model
 {
     use UsesUtcDates;

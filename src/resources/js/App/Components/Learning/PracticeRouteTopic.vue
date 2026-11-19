@@ -168,6 +168,7 @@ const search = async () => {
       </div>
       <div class="route-actions">
         <button id="practice-topics-trigger" type="button" class="topics-trigger" @click="openPanel('topics', $event)">
+          <daily-practice-icon v-if="trail" name="list" />
           Уровни и темы
         </button>
         <Link v-if="selected && !trail" href="/practice">К текущему занятию</Link>
@@ -292,9 +293,28 @@ const search = async () => {
   top: calc(var(--practice-route-top) + var(--practice-topic-button-offset));
   z-index: 3;
   justify-content: flex-end;
+  padding-inline: 16px;
   pointer-events: none;
 }
-.trail-toolbar .topics-trigger { pointer-events:auto; box-shadow:0 3px 12px #18344c14; }
+.trail-toolbar .route-actions .topics-trigger {
+  gap: 8px;
+  padding-inline: 12px;
+  border-color: #d6e3dc;
+  border-radius: 13px;
+  background: #fffffff5;
+  color: #42645a;
+  font-size: .875rem;
+  box-shadow: 0 4px 12px #25475b08;
+  pointer-events: auto;
+}
+.trail-toolbar .topics-trigger:hover {
+  background: #f5faf6;
+  border-color: #adcbb8;
+}
+.trail-toolbar .topics-trigger:focus-visible {
+  outline: 3px solid #165ca7;
+  outline-offset: 3px;
+}
 .learn-route {
   display: grid;
   gap: .85rem;
@@ -303,7 +323,7 @@ const search = async () => {
 }
 .learn-route--trail {
   --practice-route-top: 68px;
-  --practice-topic-heading-height: 54px;
+  --practice-topic-heading-height: 64px;
   --practice-topic-button-offset: calc(var(--practice-topic-heading-height) + 6px);
   --practice-topic-controls-height: calc(var(--practice-topic-button-offset) + 44px);
 }

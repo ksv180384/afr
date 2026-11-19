@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { readFileSync, existsSync } from 'node:fs';
 import { createServer } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import { createSSRApp, h } from 'vue';
+import { createSSRApp, createRenderer, h, nextTick, ssrContextKey } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { renderToString } from '@vue/server-renderer';
 import { createPracticeNotifications } from '../../resources/js/App/Learning/practiceNotifications.js';
@@ -23,6 +23,43 @@ test('player and all task components render on the server without browser global
     const adapter = { mode: 'preview', load: async () => { loads++; }, start() {}, answer() {}, help() {}, finish() {} };
     assert.match(await render('SessionPlayer', { adapter }), /Загружаем занятие/);
     assert.equal(loads, 0);
+    // A resumed run retains the assistance history without reopening transient UI.
+    const { default: SessionPlayer } = await server.ssrLoadModule('/resources/js/App/Components/Learning/SessionPlayer.vue');
+    const savedView = {
+      session: { level: 'PRE_A1' }, started: true, finished: false, total: 1, position: 1,
+      introductions: [], introduction_seen: true, restore_assistance: true,
+      assistance: ['audio_transcript', 'reference'],
+      presentation: { presentation_id: 'restored-question' },
+      task: { type: 'single_choice', skill: 'listening', choices: [{id:'a',text:'Хорошо'}],
+        prompt: { text: 'Прослушайте вопрос.', text_lang: 'ru', audio: {text:'Ça va ?',transcription_ru:'са ва?'} } },
+    };
+    let helpCalls = 0;
+    const restoredAdapter = { mode:'account', load:async()=>structuredClone(savedView), start:async()=>structuredClone(savedView),
+      answer(){}, help(){helpCalls++;}, finish(){} };
+    const renderer = createRenderer({createElement:()=>({}), createComment:()=>({}), createText:()=>({}),
+      insert(){}, remove(){}, setElementText(){}, setText(){}, patchProp(){}, parentNode:()=>null, nextSibling:()=>null});
+    const mounted = renderer.createApp({...SessionPlayer, render:()=>h('div')}, {adapter:restoredAdapter});
+    mounted.provide(ssrContextKey, {});
+    const api = mounted.mount({});
+    try {
+      await new Promise(resolve=>setImmediate(resolve));
+      await nextTick();
+      const state = mounted._instance.setupState;
+      assert.equal(state.transcriptVisible, false);
+      assert.equal(state.referenceOpen, false);
+      assert.equal(state.transcriptGranted, true);
+      assert.equal(state.listeningCue, 'Прослушайте вопрос.');
+      assert.equal(state.listeningText, 'Ça va ?');
+      state.toggleTranscript();
+      assert.equal(state.transcriptVisible, true);
+      state.toggleTranscript();
+      assert.equal(state.transcriptVisible, false);
+      await api.reload();
+      await nextTick();
+      assert.equal(state.transcriptVisible, false);
+      assert.equal(state.referenceOpen, false);
+      assert.equal(helpCalls, 0);
+    } finally { mounted.unmount(); }
     assert.match(await render('GuestPractice', {levels:[]}), /Проверяем хранилище браузера/);
     assert.match(await render('VocabularyPanel', {}), /Тест по словам/);
     assert.match(await render('CurrentLevelSetting', {authUser:{id:7}}), /Проверяем сохранённый уровень/);

@@ -63,6 +63,34 @@ function vocabularyWord($test, int $index = 0): PersonalVocabulary
     return $word;
 }
 
+it('keeps personal difficult marks through mastery and trains only the marked selection with alternating questions', function () {
+    $context = $this->payload['vocabulary'][0]['review_items'][0];
+    $context['id'] = 'context-question';
+    $context['prompt'] = ['text' => 'Bonjour, Marie !', 'text_lang' => 'fr'];
+    $this->payload['vocabulary'][0]['review_items'][] = $context;
+    $word = vocabularyWord($this);
+    vocabularyWord($this, 1);
+    $this->patchJson('/daily/api/vocabulary/'.$word->id, ['is_difficult' => true])
+        ->assertOk()->assertJsonPath('word.is_difficult', true);
+    $plan = $this->getJson('/daily/api/vocabulary/test-plan?filter=difficult')->assertOk()->json();
+    expect($plan['word_ids'])->toBe([$word->id]);
+    $previous = null;
+    foreach (range(1, 3) as $step) {
+        $this->travel(1)->days();
+        $state = vocabularyStart($this, ['kind' => 'vocabulary_test', 'session_id' => null, 'word_ids' => $plan['word_ids']]);
+        expect($state['task']['id'])->not->toBe($previous);
+        $previous = $state['task']['id'];
+        $state = vocabularyCommand($this, $state, 'answers', ['presentation_id' => $state['presentation']['presentation_id'],
+            'event_type' => 'answer', 'answer' => ['choice_id' => 'a']]);
+        vocabularyCommand($this, $state, 'finish');
+    }
+    expect($word->fresh()->is_difficult)->toBeTrue();
+    expect($word->fresh()->needs_review)->toBeFalse();
+    $this->getJson('/daily/api/vocabulary?filter=difficult')->assertOk()->assertJsonCount(1, 'words');
+    $this->patchJson('/daily/api/vocabulary/'.$word->id, ['is_difficult' => false])->assertOk();
+    $this->getJson('/daily/api/vocabulary?filter=difficult')->assertOk()->assertJsonCount(0, 'words');
+});
+
 it('preserves vocabulary and review schedules when raising and lowering the profile level', function (bool $hasWords) {
     if ($hasWords) {
         vocabularyWord($this)->update([
@@ -165,18 +193,32 @@ it('marks only wrong assessed pairs and deduplicates an accepted event before ef
 
 it('preserves studied source examples after archive and chooses the latest studied source rather than a new publication', function () {
     $word = vocabularyWord($this);
+    $lesson = vocabularyStart($this);
     $later = $this->payload;
     $later['version'] = 2;
+    $later['title'] = 'Название второй версии';
     $later['vocabulary'][0]['fr'] = 'bonjour nouvelle version';
     $new = LearningSessionVersion::factory()->create(['session_id' => $this->version->session_id, 'version' => 2, 'payload' => $later, 'checksum' => CanonicalJson::hash($later), 'status' => 'published']);
     $this->version->session->update(['active_version_id' => $new->id, 'archived_at' => now()]);
-    $this->getJson('/daily/api/vocabulary')->assertOk()->assertJsonPath('words.0.snapshot.fr', 'bonjour');
+    $this->getJson('/daily/api/vocabulary')->assertOk()
+        ->assertJsonPath('words.0.snapshot.fr', 'bonjour')
+        ->assertJsonPath('source_session_options.0.id', $this->payload['id'])
+        ->assertJsonPath('source_session_options.0.title', $this->payload['title'])
+        ->assertJsonPath('words.0.sources.0.session_title', $this->payload['title']);
     $state = vocabularyStart($this, ['kind' => 'vocabulary_test', 'session_id' => null, 'word_ids' => [$word->id]]);
+    expect($state['kind'])->toBe('vocabulary_test');
+    expect($this->getJson('/daily/api/runs/'.$lesson['run_id'])->json('status'))->toBe('in_progress');
     expect($state['vocabulary'][0]['fr'])->toBe('bonjour');
     $source = $later['vocabulary'][0];
     $source['example'] = ['fr' => 'Bonjour Léa !', 'ru' => 'Здравствуйте, Леа!', 'transcription_ru' => 'бо(н)жур леа́'];
     PersonalVocabularySource::factory()->create(['user_id' => $this->learner->id, 'personal_word_id' => $word->id, 'session_version_id' => $new->id, 'snapshot' => $source, 'first_added_at' => now()->addMinute()]);
-    $this->getJson('/daily/api/vocabulary')->assertJsonPath('words.0.snapshot.fr', 'bonjour nouvelle version')->assertJsonPath('words.0.snapshot.example.fr', 'Bonjour Léa !');
+    $this->getJson('/daily/api/vocabulary')
+        ->assertJsonPath('words.0.snapshot.fr', 'bonjour nouvelle version')
+        ->assertJsonPath('words.0.snapshot.example.fr', 'Bonjour Léa !')
+        ->assertJsonPath('source_session_options.0.title', $later['title'])
+        ->assertJsonFragment(['session_version_id' => $new->id, 'session_title' => $later['title']]);
+    $this->getJson('/daily/api/vocabulary?q=nonexistent-expression')->assertOk()
+        ->assertJsonCount(0, 'words')->assertJsonPath('source_session_options.0.title', $later['title']);
     expect($this->getJson('/daily/api/runs/'.$state['run_id'])->json('vocabulary.0.fr'))->toBe('bonjour');
 });
 

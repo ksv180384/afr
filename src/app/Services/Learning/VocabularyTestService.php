@@ -11,10 +11,15 @@ class VocabularyTestService
 {
     private function query(User $actor, array $filter = []): \Illuminate\Database\Eloquent\Builder
     {
-        $query = PersonalVocabulary::query()->where('user_id', $actor->id)
-            ->with('sources.sessionVersion:id,session_id,version', 'sources.sessionVersion.session:id,external_id');
+        $query = PersonalVocabulary::query()->where('user_id', $actor->id)->with([
+            'sources.sessionVersion' => fn ($version) => $version->select('id', 'session_id', 'version', 'payload->title as source_title'),
+            'sources.sessionVersion.session:id,external_id',
+        ]);
         if (($filter['filter'] ?? '') === 'errors') {
             $query->where('needs_review', true);
+        }
+        if (($filter['filter'] ?? '') === 'difficult') {
+            $query->where('is_difficult', true);
         }
         if (($filter['filter'] ?? '') === 'due') {
             $query->where('next_review_at', '<=', PracticeTime::now());
@@ -50,15 +55,23 @@ class VocabularyTestService
         $page = $query->orderByDesc('needs_review')->orderBy('next_review_at')->orderBy('id')
             ->paginate(config('daily_practice.operations.vocabulary_page_size'));
         $sources = \App\Models\Learning\LearningSession::whereHas('versions.vocabularySources', fn ($source) => $source->where('user_id', $actor->id))
-            ->orderBy('external_id')->pluck('external_id');
+            ->with(['versions' => fn ($versions) => $versions
+                ->whereHas('vocabularySources', fn ($source) => $source->where('user_id', $actor->id))
+                ->select('id', 'session_id', 'version', 'payload->title as source_title')->orderByDesc('version')])
+            ->orderBy('external_id')->get(['id', 'external_id']);
+        $options = $sources->map(fn ($session) => [
+            'id' => $session->external_id,
+            'title' => $session->versions->first()?->source_title ?? 'Изученное занятие',
+        ])->sortBy('title')->values();
 
-        return ['words' => $page->getCollection()->map(fn ($word) => $this->data($word))->all(), 'source_sessions' => $sources,
+        return ['words' => $page->getCollection()->map(fn ($word) => $this->data($word))->all(),
+            'source_sessions' => $sources->pluck('external_id'), 'source_session_options' => $options,
             'pagination' => ['current_page' => $page->currentPage(), 'last_page' => $page->lastPage(), 'total' => $page->total()]];
     }
 
     public function words(User $actor)
     {
-        return PersonalVocabulary::query()->where('user_id', $actor->id)->with('sources.sessionVersion:id,session_id,version', 'sources.sessionVersion.session:id,external_id')->get();
+        return $this->query($actor)->get();
     }
 
     public function source(PersonalVocabulary $word): array
@@ -88,6 +101,7 @@ class VocabularyTestService
         unset($snapshot['review_items']);
 
         return ['id' => $word->id, 'lexeme_key' => $word->lexeme_key, 'snapshot' => $snapshot,
+            'is_difficult' => (bool) $word->is_difficult,
             'needs_review' => $word->needs_review, 'streak' => $word->streak, 'errors' => $word->errors, 'review_step' => $word->review_step,
             'next_review_at' => $word->next_review_at->toIso8601String(), 'self_check' => ! $this->items($this->source($word)),
             'sources' => $word->sources->map(function ($source) {
@@ -95,6 +109,7 @@ class VocabularyTestService
                 unset($snapshot['review_items']);
 
                 return ['session_id' => $source->sessionVersion->session->external_id, 'version' => $source->sessionVersion->version,
+                    'session_title' => $source->sessionVersion->source_title ?? $source->sessionVersion->payload['title'] ?? null,
                     'session_version_id' => $source->session_version_id, 'first_added_at' => $source->first_added_at->toIso8601String(), 'snapshot' => $snapshot];
             })->values()->all()];
     }
@@ -187,6 +202,24 @@ class VocabularyTestService
             'includes_not_due' => count(array_filter($selected, fn ($row) => $row['tier'] === 2)) > 0];
     }
 
+    private function previousTestItems(User $actor, array $keys): array
+    {
+        $previous = [];
+        $runs = \App\Models\Learning\LearningRun::where('user_id', $actor->id)
+            ->whereIn('kind', ['review', 'vocabulary_test'])->orderByDesc('started_at')->orderByDesc('id')->lazy(100);
+        foreach ($runs as $run) {
+            foreach ($run->snapshot['items'] ?? [] as $item) {
+                $key = $item['review_lexeme_key'] ?? null;
+                if (in_array($key, $keys, true) && ! isset($previous[$key])) {
+                    $previous[$key] = $item['task'];
+                }
+            }
+            if (count($previous) === count($keys)) { break; }
+        }
+
+        return $previous;
+    }
+
     public function snapshot(User $actor, array $input, string $level): array
     {
 
@@ -237,11 +270,13 @@ class VocabularyTestService
         $seed = (string) \Illuminate\Support\Str::uuid();
         $items = [];
         $vocabulary = [];
+        $previous = $short ? [] : $this->previousTestItems($actor, $gradable->take(10)->pluck('lexeme_key')->all());
         foreach ($gradable->take(10) as $index => $word) {
             $source = $this->source($word);
-            $options = $this->items($source);
+            $previousItem = $previous[$word->lexeme_key] ?? null;
             $previousKind = collect($short['selection'] ?? [])->firstWhere('key', $word->lexeme_key)['previous_kind'] ?? null;
-            $item = $short ? ShortReviewSelection::option($source, $seed, $word->lexeme_key, $index, $previousKind) : $options[array_sum(unpack('C*', $seed.$word->lexeme_key)) % count($options)];
+            if ($previousItem) { $previousKind = ShortReviewSelection::category($previousItem, $source); }
+            $item = ShortReviewSelection::option($source, $seed, $word->lexeme_key, $index, $previousKind, $previousItem['id'] ?? null);
             $source['id'] = 'word-'.$word->id;
             $source['lexeme_key'] = $word->lexeme_key;
             $items[] = PresentationSnapshot::forReview($item, $word->lexeme_key);

@@ -7,6 +7,22 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * Настройки уровня CEFR, которые отображаются в маршруте и каталоге практики.
+ *
+ * @property int $id Первичный ключ записи.
+ * @property string $code Стабильный код уровня, например PRE_A1.
+ * @property bool $sort_order Позиция в порядке показа.
+ * @property string $title Название, отображаемое в интерфейсе.
+ * @property string|null $summary Краткое описание для каталога.
+ * @property array|null $learning_outcomes Список ожидаемых результатов обучения.
+ * @property array|null $pronunciation_notes Список рекомендаций по произношению.
+ * @property int $revision Номер ревизии записи, изменяемый при обновлении её состояния.
+ * @property \Carbon\CarbonImmutable|null $published_at Момент публикации.
+ * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
+ * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
+ * @property \Carbon\CarbonImmutable|null $archived_at Момент архивации или снятия с публикации.
+ */
 class LearningLevel extends Model
 {
     use UsesUtcDates;

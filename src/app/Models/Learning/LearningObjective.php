@@ -7,6 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * Справочник учебных целей, которые связывают задания с требованиями программы.
+ *
+ * @property int $id Первичный ключ записи.
+ * @property string $stable_id Стабильный идентификатор учебной цели, на который ссылаются пакеты.
+ * @property LevelCode $level Код уровня CEFR.
+ * @property string $title Название, отображаемое в интерфейсе.
+ * @property string|null $definition Определение учебной цели.
+ * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
+ * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
+ */
 class LearningObjective extends Model
 {
     protected $table = 'learning_objectives';
@@ -41,6 +52,11 @@ class LearningObjective extends Model
 
     public function curricula(): BelongsToMany
     {
-        return $this->belongsToMany(LearningCurriculum::class, 'learning_curriculum_objectives', 'objective_id', 'curriculum_id');
+        return $this->belongsToMany(
+            LearningCurriculum::class,
+            'learning_curriculum_objectives',
+            'objective_id',
+            'curriculum_id',
+        );
     }
 }

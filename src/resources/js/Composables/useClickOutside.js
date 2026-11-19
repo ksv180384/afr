@@ -24,7 +24,7 @@ export default function useClickOutside(
             return
         }
         if (typeof callback === 'function') {
-            callback()
+            callback(event)
         }
     }
 

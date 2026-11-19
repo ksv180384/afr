@@ -106,7 +106,7 @@ if (!props.native || props.searchable) useClickOutside(refOptionsList,() => prop
       <Teleport to="body">
         <div v-if="isShowOptionsList" ref="refOptionsList" class="afr-search-options" :style="menuStyle">
           <ul :id="listId" role="listbox" :aria-label="ariaLabel || placeholder || 'Варианты'">
-            <li v-for="(option,index) in filteredOptions" :id="listId+'-'+index" :key="String(option.value)" role="option" :aria-selected="String(model)===String(option.value)" :aria-disabled="option.disabled" :data-active="index===activeIndex"
+            <li v-for="(option,index) in filteredOptions" :id="listId+'-'+index" :key="String(option.value)" role="option" :title="option.label" :aria-selected="String(model)===String(option.value)" :aria-disabled="option.disabled" :data-active="index===activeIndex"
               @mousedown.prevent @mouseenter="activeIndex=index" @click="chooseSearch(option)">{{ option.label }}</li>
           </ul>
           <p v-if="!filteredOptions.length" class="afr-select-empty" role="status">Ничего не найдено</p>

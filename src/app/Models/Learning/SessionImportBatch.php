@@ -9,6 +9,24 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * Хранит предпросмотр импортируемого пакета, проверку и результат подтверждения.
+ *
+ * @property string $id Первичный ключ записи.
+ * @property string $file_hash SHA-256 исходного файла пакета.
+ * @property string $preview_token_hash SHA-256 токена подтверждения предпросмотра.
+ * @property int|null $created_by Пользователь, создавший запись.
+ * @property string $private_path Путь исходного пакета в закрытом хранилище.
+ * @property string $original_filename Имя файла при загрузке.
+ * @property int $file_size Размер исходного файла в байтах.
+ * @property string $status Состояние импорта: предпросмотр или подтверждённый импорт.
+ * @property array|null $validation_report Результат проверки структуры и содержания пакета.
+ * @property array|null $receipt Сохранённый результат обработки для повторных запросов.
+ * @property \Carbon\CarbonImmutable $expires_at Срок действия предпросмотра и токена подтверждения.
+ * @property \Carbon\CarbonImmutable|null $committed_at Момент фиксации импорта.
+ * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
+ * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
+ */
 class SessionImportBatch extends Model
 {
     use HasUuids;

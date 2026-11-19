@@ -83,7 +83,7 @@ class GuestVocabularyProjector
                     foreach ($run->snapshot['vocabulary'] ?? [] as $source) {
                         $key = $source['lexeme_key'];
                         if (! isset($visible[$key]) && $eligible->has($key)) {
-                            $visible[$key] = ['needs_review' => false, 'streak' => 0, 'errors' => 0,
+                            $visible[$key] = ['needs_review' => false, 'is_difficult' => false, 'streak' => 0, 'errors' => 0,
                                 'review_step' => 0, 'last_reviewed_at' => null, 'next_review_at' => $eligible[$key]->first_added_at->addDay()];
                         }
                     }
@@ -94,7 +94,11 @@ class GuestVocabularyProjector
             } elseif ($action === 'vocabulary_mark') {
                 $key = $mapping->receipt['lexeme_key'];
                 if (isset($visible[$key])) {
-                    $visible[$key]['needs_review'] = $mapping->receipt['needs_review'];
+                    foreach (['needs_review', 'is_difficult'] as $field) {
+                        if (array_key_exists($field, $mapping->receipt)) {
+                            $visible[$key][$field] = (bool) $mapping->receipt[$field];
+                        }
+                    }
                 }
             }
         }

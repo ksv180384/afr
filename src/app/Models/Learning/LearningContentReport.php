@@ -7,6 +7,24 @@ use App\Support\Learning\UsesUtcDates;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Хранит обращение о содержании занятия или задания и результат его рассмотрения.
+ *
+ * @property int $id Первичный ключ записи.
+ * @property int $session_version_id Версия занятия, к которой относится запись.
+ * @property string|null $task_id Стабильный идентификатор задания внутри версии занятия.
+ * @property int|null $user_id Автор обращения, если он связан с аккаунтом.
+ * @property string $text Текст обращения пользователя.
+ * @property string $status Состояние рассмотрения обращения.
+ * @property int|null $processed_by Редактор, обработавший обращение.
+ * @property string|null $editor_notes Заметки редактора.
+ * @property \Carbon\CarbonImmutable|null $resolved_at Момент закрытия обращения.
+ * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
+ * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
+ * @property string|null $client_report_id Клиентский UUID обращения для безопасной повторной отправки.
+ * @property string|null $payload_hash SHA-256 входных данных для проверки, что повторная отправка содержит те же данные.
+ * @property array|null $answer_snapshot Контекст обращения о проверке ответа, сохранённый в момент отправки.
+ */
 class LearningContentReport extends Model
 {
     use UsesUtcDates;
@@ -14,7 +32,9 @@ class LearningContentReport extends Model
     protected $table = 'learning_content_reports';
 
     protected $fillable = [
-        'client_report_id', 'payload_hash', 'answer_snapshot',
+        'client_report_id',
+        'payload_hash',
+        'answer_snapshot',
         'session_version_id',
         'task_id',
         'user_id',

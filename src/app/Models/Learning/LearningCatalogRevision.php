@@ -8,6 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use LogicException;
 
+/**
+ * Хранит редакцию метаданных уровня или темы до проверки и публикации.
+ *
+ * @property int $id Первичный ключ записи.
+ * @property string|null $level_code Код уровня, к которому относится запись.
+ * @property int|null $unit_id Тема, к которой относится запись.
+ * @property string|null $import_batch_id Пакет, из которого импортирована запись.
+ * @property array $content Метаданные уровня или темы, предложенные к публикации.
+ * @property int $base_revision Ревизия уровня или темы, на основе которой подготовлено изменение.
+ * @property string $status Состояние редакции в процессе проверки и публикации.
+ * @property int|null $created_by Пользователь, создавший запись.
+ * @property int|null $reviewed_by Редактор, выполнивший проверку.
+ * @property int|null $published_by Редактор, выполнивший публикацию.
+ * @property \Carbon\CarbonImmutable|null $reviewed_at Момент редакторской проверки.
+ * @property \Carbon\CarbonImmutable|null $published_at Момент публикации.
+ * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
+ * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
+ */
 class LearningCatalogRevision extends Model
 {
     use UsesUtcDates;

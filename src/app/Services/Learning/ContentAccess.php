@@ -35,8 +35,12 @@ final class ContentAccess
     public function audit(User $actor, string $operation, array $target, array $before = [], array $after = []): void
     {
         LearningEditorialEvent::create([
-            ...$target, 'actor_id' => $actor->id, 'operation' => $operation,
-            'previous_state' => $before, 'new_state' => $after, 'occurred_at' => now('UTC'),
+            ...$target,
+            'actor_id' => $actor->id,
+            'operation' => $operation,
+            'previous_state' => $before,
+            'new_state' => $after,
+            'occurred_at' => now('UTC'),
         ]);
     }
 

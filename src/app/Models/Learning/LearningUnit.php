@@ -11,6 +11,25 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Тема уровня: группирует занятия и задаёт оформление и описание темы.
+ *
+ * @property int $id Первичный ключ записи.
+ * @property string $external_id Стабильный идентификатор из пакета контента.
+ * @property LevelCode $level Код уровня CEFR.
+ * @property int $sort_order Позиция в порядке показа.
+ * @property string $slug Часть публичного адреса.
+ * @property string $title Название, отображаемое в интерфейсе.
+ * @property string|null $summary Краткое описание для каталога.
+ * @property array|null $learning_outcomes Список ожидаемых результатов обучения.
+ * @property array|null $pronunciation_notes Список рекомендаций по произношению.
+ * @property int $revision Номер ревизии записи, изменяемый при обновлении её состояния.
+ * @property \Carbon\CarbonImmutable|null $published_at Момент публикации.
+ * @property \Carbon\CarbonImmutable|null $archived_at Момент архивации или снятия с публикации.
+ * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
+ * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
+ * @property string|null $background_path Путь загруженного изображения фона темы.
+ */
 class LearningUnit extends Model
 {
     use HasFactory;
