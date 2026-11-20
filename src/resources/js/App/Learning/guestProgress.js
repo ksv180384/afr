@@ -3,12 +3,31 @@ import { learningAccess, completedGuestSessions } from './learningAccess.js';
 import { initialPresentation, evaluateEvent, calculateSessionResult, taskSnapshot } from './answerChecker.js';
 import { checkingPolicy, LEVELS } from './types/index.js';
 import { ensureSyncState } from './guestSync.js';
-import { logicalKey } from './accountRepository.js';
+import { logicalKey, practiceDraftId } from './accountRepository.js';
 import { applyGuestVocabularyEvent, finishGuestVocabulary, upgradeGuestVocabulary, upgradeGuestSuccessClock } from './guestVocabulary.js';
 
 export const GUEST_SCHEMA_VERSION = 6;
 export const guestError = (message, code = 'revision_conflict') => Object.assign(new Error(message), {code});
 const copy = (value) => structuredClone(value);
+const mistakePositions = run => ['daily', 'extra'].includes(run.kind)
+  ? run.presentations.flatMap((step, index) => step.first_result?.correct === false && !step.first_result.technical_skip ? [index] : [])
+  : [];
+const canFinishCorrections = corrections => corrections.started && corrections.index === corrections.positions.length - 1
+  && !corrections.remaining?.length && corrections.result?.correct === true;
+const advanceCorrections = corrections => {
+  if (!corrections.started) return {...corrections, started:true};
+  if (corrections.result?.correct == null) throw guestError('Сначала ответьте на текущее задание.', 'validation_failed');
+  const {positions,index} = corrections;
+  const remaining = [...(corrections.remaining ?? [])];
+  if (!corrections.result.correct) remaining.push(positions[index]);
+  if (index + 1 < positions.length) return {...corrections, index:index+1, result:null, remaining};
+  if (!remaining.length) throw guestError('Все ошибки исправлены. Завершите занятие.', 'validation_failed');
+  return {
+    positions:remaining, index:0, started:false, result:null, remaining:[],
+    round:(corrections.round ?? 1)+1, initial_total:corrections.initial_total ?? positions.length,
+    fixed_last_round:positions.length-remaining.length,
+  };
+};
 export const guestDate = (instant, timezone) => {
   const parts = Object.fromEntries(new Intl.DateTimeFormat('en', {timeZone:timezone,year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date(instant)).map(({type,value})=>[type,value]));
   return [parts.year,parts.month,parts.day].join('-');
@@ -80,7 +99,11 @@ export const addGuestRun = (state, {source,runId,presentationIds,eventId,tabId,n
 };
 export const guestRunView = (run, {restore = false} = {}) => {
   const snapshot = run.snapshot;
-  const presentation = run.presentations[run.cursor];
+  const original = run.presentations[run.cursor];
+  const corrections = run.corrections;
+  const correctionResult = corrections?.result ?? null;
+  const presentation = corrections ? {...original, answer:correctionResult?.event_type === 'answer' ? original.answer : null,
+    first_result:correctionResult, last_result:correctionResult} : original;
   const task = copy(snapshot.tasks[run.cursor]);
   const reviewKey = snapshot.review_items?.[run.cursor]?.review_lexeme_key;
   if (reviewKey) task.vocabulary_ids = snapshot.vocabulary.filter((word)=>word.lexeme_key===reviewKey).map((word)=>word.id);
@@ -88,9 +111,12 @@ export const guestRunView = (run, {restore = false} = {}) => {
     session:{id:snapshot.id,title:snapshot.title,description:snapshot.description,level:snapshot.level,duration_minutes:snapshot.duration_minutes,pronunciation_notes:snapshot.pronunciation_notes ?? []},
     session_version_id:run.session_version_id,checking_policy_version:run.checking_policy_version,timezone:run.timezone,local_date:run.local_date,started_at:run.started_at,finished_at:run.finished_at,
     task,presentation,position:run.cursor+1,total:run.presentations.length,
+    mistakes_count:corrections ? (corrections.initial_total ?? corrections.positions.length) : mistakePositions(run).length,
+    corrections:corrections ? {started:corrections.started, position:corrections.index+1, total:corrections.positions.length,
+      round:corrections.round ?? 1, fixed_last_round:corrections.fixed_last_round ?? 0, can_finish:canFinishCorrections(corrections)} : null,
     introductions:(snapshot.introductions ?? []).filter((intro) => intro.before_task_id === snapshot.tasks[run.cursor].id),
     introduction_seen:run.introductions_seen.includes(presentation.presentation_id),vocabulary:snapshot.vocabulary,
-    local_draft:!presentation.first_result ? run.drafts[presentation.presentation_id] ?? null : null,
+    local_draft:!presentation.first_result ? run.drafts[practiceDraftId(presentation.presentation_id,corrections)] ?? null : null,
     assistance:run.assistance[presentation.presentation_id] ?? [],restore_assistance:restore,audioUrls:run.audioUrls,
     summary:run.result ?? calculateSessionResult(run.presentations,run.presentations.length,run.checking_policy_version)});
 };
@@ -107,32 +133,53 @@ export const applyGuestOperation = (state, runId, tabId, action, input) => {
   if (run.lease !== tabId || input.expected_revision !== run.revision) throw guestError('Занятие продолжено в другой вкладке. Загрузите принятую версию.');
   if (run.status === 'completed') throw guestError('Завершённое занятие неизменно.');
   const current = run.presentations[run.cursor];
+  const corrections = run.corrections;
   if (['answer','help','advance','introduction','draft'].includes(action) && input.presentation_id !== current.presentation_id) throw guestError('Текущий шаг изменился. Обновите занятие.');
   if (action === 'draft') {
-    run.drafts[current.presentation_id] = copy(input.answer);
+    run.drafts[practiceDraftId(current.presentation_id,corrections)] = copy(input.answer);
     return copy(run);
   }
   if (action === 'answer' || action === 'help') {
     if (run.status !== 'in_progress') throw guestError('Сначала продолжите занятие.');
+    if (corrections && (!corrections.started || input.event_type === 'technical_skip')) {
+      throw guestError('Сначала начните работу над ошибками. Для задания со звуком можно открыть текст.', 'validation_failed');
+    }
     const {client_event_id,expected_revision,client_occurred_at,...event} = input;
     if ((action === 'answer') !== (event.event_type === 'answer')) throw guestError('Некорректный тип события.', 'validation_failed');
     const next = evaluateEvent(run.snapshot.review_items?.[run.cursor] ?? taskSnapshot(run.snapshot,run.snapshot.tasks[run.cursor].id),current,event,run.checking_policy_version);
     if (event.answer) next.answer = copy(event.answer);
+    if (corrections && event.event_type !== 'help') corrections.result = next.last_result;
     run.presentations[run.cursor] = next;
     run.vocabulary_events ??= [];
     run.vocabulary_events.push({event:copy(input),result:copy(next.last_result)});
     applyGuestVocabularyEvent(state,run,input,next.last_result);
     if (event.event_type === 'help') run.assistance[current.presentation_id] = [...new Set([...(run.assistance[current.presentation_id] ?? []),event.help_kind])];
+  } else if (action === 'reviewMistakes') {
+    const positions = mistakePositions(run);
+    const summary = calculateSessionResult(run.presentations,run.presentations.length,run.checking_policy_version);
+    if (run.status !== 'in_progress' || corrections || !summary.all_steps_processed || !positions.length) {
+      throw guestError('Нет обработанных заданий для работы над ошибками.', 'validation_failed');
+    }
+    run.corrections = {positions,index:0,started:false,result:null};
+    run.cursor = positions[0];
   } else if (action === 'advance' || action === 'introduction') {
     if (run.status !== 'in_progress') throw guestError('Сначала продолжите занятие.');
     if (action === 'advance') {
-      if (!current.first_result || run.cursor >= run.presentations.length-1) throw guestError('Сначала обработайте текущий шаг.', 'validation_failed');
-      run.cursor++;
+      if (corrections) {
+        run.corrections = advanceCorrections(corrections);
+        run.cursor = run.corrections.positions[run.corrections.index];
+      } else {
+        if (!current.first_result || run.cursor >= run.presentations.length-1) throw guestError('Сначала обработайте текущий шаг.', 'validation_failed');
+        run.cursor++;
+      }
     } else run.introductions_seen = [...new Set([...run.introductions_seen,current.presentation_id])];
   } else if (action === 'pause' || action === 'resume') run.status = action === 'pause' ? 'paused' : 'in_progress';
   else if (action === 'finish') {
     const summary = calculateSessionResult(run.presentations,run.presentations.length,run.checking_policy_version);
     if (!summary.all_steps_processed || run.status !== 'in_progress') throw guestError('Сначала обработайте все шаги.', 'validation_failed');
+    if (corrections && !canFinishCorrections(corrections)) {
+      throw guestError('Сначала исправьте все задания с ошибками.', 'validation_failed');
+    }
     run.result = {...summary,...finishGuestVocabulary(state,run,input.client_occurred_at),integrations_pending:['objectives']};
     run.finished_at = input.client_occurred_at;
     run.status = 'completed';

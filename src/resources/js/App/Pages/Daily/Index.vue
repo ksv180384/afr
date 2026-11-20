@@ -30,6 +30,7 @@ const saving = ref({kind:'idle',message:''});
 const timezone = computed(() => home.value?.profile.persisted ? home.value.profile.timezone : browserTimezone());
 const pendingStart = ref(false);
 const pendingActions = ref(false);
+const conflictingRun = ref(null);
 const player = ref(null);
 const syncing = ref(false);
 let disposed = false;
@@ -45,16 +46,18 @@ const updatePending = async actor => {
     const rows = await repository.pending(actor);
     if (currentActor(actor)) {
       pendingStart.value = rows.some(row => row.run_id === null);
-      pendingActions.value = rows.length > 0;
+      pendingActions.value = rows.some(row => !props.runId || row.run_id !== props.runId);
     }
   } catch {}
 };
 const feedback = usePracticeFeedback({source:'practice-session',status:saving,error});
-const locked = computed(() => ['pending','auth','storage'].includes(saving.value.kind));
+const locked = computed(() => ['pending','auth','storage','conflict'].includes(saving.value.kind));
 const adapter = computed(() => {
   const actor = owner.value;
-  return props.runId && actor ? createAccountAdapter({
-    ownerUserId: actor, runId: props.runId, repository, transport: accountTransport, onStatus: actorStatus(actor),
+  const runId = props.runId;
+  return runId && actor ? createAccountAdapter({
+    ownerUserId: actor, runId, repository, transport: accountTransport,
+    onStatus: next => { if (currentActor(actor) && props.runId === runId) onStatus(next); },
     onMutation: () => homeStore.invalidate(actor),
   }) : null;
 });
@@ -89,17 +92,21 @@ const reconnect = async (force = false) => {
   homeStore.setOwner(actor);
   syncing.value = true;
   error.value = '';
+  conflictingRun.value = null;
+  let queueRun;
   try {
     const rows = await repository.pending(actor);
     if (currentActor(actor) && !rows.length && !props.runId) onStatus({kind:'idle',message:''});
     const queues = [...new Set(rows.map(row => row.run_id))].filter(id => id !== props.runId);
     for (const runId of queues) {
       if (actor !== owner.value || disposed) break;
+      queueRun = runId;
       const restored = await deliverAccountQueue({ownerUserId:actor,runId,repository,transport:accountTransport,onMutation:()=>homeStore.invalidate(actor),onStatus:props.runId ? () => {} : actorStatus(actor)});
       if (runId === null && restored && currentActor(actor)) await openState(restored);
     }
   } catch (failure) {
-    if (currentActor(actor)) error.value = failure.response?.data?.message || failure.message || 'Не удалось восстановить сохранённое действие. Повторите вручную.';
+    if (currentActor(actor) && !props.runId && failure.response?.data?.code === 'playback_conflict') conflictingRun.value = queueRun;
+    else if (currentActor(actor)) error.value = failure.response?.data?.message || failure.message || 'Не удалось восстановить сохранённое действие. Повторите вручную.';
   } finally {
     await updatePending(actor);
     try {
@@ -130,7 +137,11 @@ const perform = async operation => {
   }
 };
 const retryFailed = () => retryAction.value ? perform(retryAction.value) : reconnect(true);
-const onOnline = () => { if (pendingStart.value || saving.value.kind === 'pending') reconnect(); };
+const retryBackground = () => adapter.value?.sync().catch(() => {});
+const onOnline = () => {
+  if (adapter.value && saving.value.kind === 'warning') retryBackground();
+  else if (pendingStart.value || saving.value.kind === 'pending') reconnect();
+};
 const loadHistory = event => {
   if (event.target.open && !history.value) homeStore.loadHistory(owner.value).catch(failure => { error.value = failure.message; });
 };
@@ -160,6 +171,7 @@ watch(owner, actor => {
   retryAction.value = null;
   pendingStart.value = false;
   pendingActions.value = false;
+  conflictingRun.value = null;
   busy.value = false;
   syncing.value = false;
   onStatus({kind:'idle',message:''});
@@ -183,7 +195,14 @@ onBeforeUnmount(() => { disposed = true; window.removeEventListener('online',onO
         <p v-if="saving.kind === 'auth'" class="muted"><Link href="/login?practice=1">Войти в аккаунт</Link>, чтобы продолжить занятие. Ваш ответ сохранён.</p>
         <p v-if="saving.message && !feedback.enabled" role="status">{{ saving.message }}</p>
         <p v-if="error" role="alert">{{ error }}</p>
-        <div v-if="pendingActions || retryAction || (!home && error)" class="actions"><afr-button :disabled="busy || syncing" @click="retryFailed">Повторить</afr-button><span class="muted">Автоматические повторы остановлены. Сохранённое действие можно отправить вручную.</span></div>
+        <div v-if="saving.kind === 'conflict' && (adapter || conflictingRun)" class="actions">
+          <afr-button v-if="adapter" @click="player?.reconcile()">Загрузить состояние сервера</afr-button>
+          <afr-button v-else :disabled="busy || syncing" @click="continueRun(conflictingRun)">Открыть сохранённое занятие</afr-button>
+        </div>
+        <div v-else-if="adapter && ['warning','storage'].includes(saving.kind)" class="actions">
+          <afr-button text @click="retryBackground">Повторить отправку</afr-button>
+        </div>
+        <div v-else-if="pendingActions || retryAction || (!home && error)" class="actions"><afr-button :disabled="busy || syncing" @click="retryFailed">Повторить</afr-button><span class="muted">Автоматические повторы остановлены. Сохранённое действие можно отправить вручную.</span></div>
         <session-player v-if="adapter" :key="runId" ref="player" :adapter="adapter" :locked="locked"
           :route-owner="owner" :route-store="homeStore" :navigation-busy="busy || syncing || pendingStart"
           @next-lesson="startLesson()" @review="startReview" @repeat="repeat" @test-next="repeat" @vocabulary="router.visit('/daily/vocabulary')" @exit="returnToPractice" />

@@ -34,9 +34,9 @@ final class AccountRunService
         return $query->find($id) ?? throw new AnswerCheckingException(PracticeErrorCode::NotFound, 'Прохождение не найдено.');
     }
 
-    public function load(User $actor, string $id): array
+    public function load(User $actor, string $id, bool $playback = false): array
     {
-        return DB::transaction(fn () => $this->view->make($actor, $this->owned($actor, $id, true)));
+        return DB::transaction(fn () => $this->view->make($actor, $this->owned($actor, $id, true), $playback));
     }
 
     public function profile(User $actor): array
@@ -344,12 +344,19 @@ final class AccountRunService
                 if ($current->id !== $input['presentation_id']) {
                     throw new AnswerCheckingException(PracticeErrorCode::RevisionConflict, 'Это не текущий шаг прохождения.');
                 }
+                if ($run->corrections && (! $run->corrections['started'] || $input['event_type'] === 'technical_skip')) {
+                    AnswerChecker::invalid('Сначала начните работу над ошибками. Для задания со звуком можно открыть текст.');
+                }
             }
             if (($name === 'answer') !== ($input['event_type'] === 'answer')) {
                 AnswerChecker::invalid('Неверный endpoint события.');
             }
             $receipt = $this->answers->accept($actor, $run->id, $input);
             if (! $previous) {
+                if ($run->corrections && $input['event_type'] !== 'help') {
+                    // The checker already advanced the revision; attach the new answer to that same operation.
+                    $run->update(['corrections' => [...$run->corrections, 'attempt_id' => $receipt['attempt_id']]]);
+                }
                 $this->integrations->accepted($run->fresh(), LearningAttempt::findOrFail($receipt['attempt_id']));
             }
 
@@ -364,13 +371,30 @@ final class AccountRunService
                 return ['state' => $this->view->make($actor, $run)];
             }
             $this->revision($run->revision, $input);
-            if ($name === 'finish') {
+            if ($name === 'reviewMistakes') {
+                if ($run->status !== RunStatus::InProgress || $run->corrections !== null) {
+                    AnswerChecker::invalid('Работа над ошибками уже начата или занятие завершено.');
+                }
+                $summary = $this->answers->result($actor, $run->id);
+                $positions = LessonCorrections::positions($run, $run->presentations()->with('firstAttempt')->orderBy('position')->get());
+                if (! $summary['all_steps_processed'] || ! $positions) {
+                    AnswerChecker::invalid('Нет обработанных заданий для работы над ошибками.');
+                }
+                $run->update([
+                    'corrections' => ['positions' => $positions, 'index' => 0, 'started' => false, 'attempt_id' => null],
+                    'cursor_position' => $positions[0], 'revision' => $run->revision + 1,
+                ]);
+            } elseif ($name === 'finish') {
                 if ($run->status !== RunStatus::InProgress) {
                     throw new AnswerCheckingException(PracticeErrorCode::RevisionConflict, 'Сначала продолжите прохождение.');
                 }
                 $summary = $this->answers->result($actor, $run->id);
                 if (! $summary['all_steps_processed']) {
                     AnswerChecker::invalid('Сначала обработайте все шаги.');
+                }
+                $corrections = $run->corrections;
+                if ($corrections && ! LessonCorrections::canFinish($corrections, LessonCorrections::attempt($run)?->result['correct'] ?? null)) {
+                    AnswerChecker::invalid('Сначала исправьте все задания с ошибками.');
                 }
                 $finishedAt = PracticeTime::now();
                 $result = [...$summary, ...$this->integrations->finishing($run, $summary, $finishedAt)];
@@ -393,10 +417,15 @@ final class AccountRunService
                     throw new AnswerCheckingException(PracticeErrorCode::RevisionConflict, 'Шаг уже изменён.');
                 }
                 if ($name === 'advance') {
-                    if (! $current->firstAttempt || $run->cursor_position >= $run->presentations()->count()) {
+                    if ($run->corrections) {
+                        $corrections = LessonCorrections::advance($run->corrections, LessonCorrections::attempt($run)?->result['correct'] ?? null);
+                        $run->update(['corrections' => $corrections, 'cursor_position' => $corrections['positions'][$corrections['index']],
+                            'revision' => $run->revision + 1]);
+                    } elseif (! $current->firstAttempt || $run->cursor_position >= $run->presentations()->count()) {
                         AnswerChecker::invalid('Сначала обработайте шаг; последний шаг завершайте отдельным finish.');
+                    } else {
+                        $run->update(['cursor_position' => $run->cursor_position + 1, 'revision' => $run->revision + 1]);
                     }
-                    $run->update(['cursor_position' => $run->cursor_position + 1, 'revision' => $run->revision + 1]);
                 } else {
                     $seen = array_values(array_unique([...($run->introductions_seen ?? []), $current->id]));
                     $run->update(['introductions_seen' => $seen, 'revision' => $run->revision + 1]);

@@ -194,7 +194,7 @@ class GuestRunImporter
                 }
                 $response = $this->runs->event($actor, $run->id, $action, $input);
                 $attemptId = $response['attempt']['attempt_id'];
-            } elseif (in_array($action, ['introduction', 'advance', 'pause', 'resume', 'finish'], true)) {
+            } elseif (in_array($action, ['introduction', 'advance', 'pause', 'resume', 'finish', 'reviewMistakes'], true)) {
 
                 $context = app(GuestImportContext::class);
                 $context->sourceAt = $action === 'finish' && ! $receipt['clock_warning'] ? $time : null;

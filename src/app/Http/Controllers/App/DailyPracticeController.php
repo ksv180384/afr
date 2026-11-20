@@ -56,7 +56,7 @@ class DailyPracticeController extends Controller
 
     public function show(AccountRunRequest $request, string $run, AccountRunService $service)
     {
-        return response()->json($service->load($request->user(), $run));
+        return response()->json($service->load($request->user(), $run, $request->boolean('playback')));
     }
 
     private function mutate(AccountRunRequest $request, AccountRunService $service, \Closure $action, ?string $run = null)
@@ -123,6 +123,11 @@ class DailyPracticeController extends Controller
     }
 
     public function finish(AccountRunRequest $request, string $run, AccountRunService $service)
+    {
+        return $this->command($request, $run, $service);
+    }
+
+    public function reviewMistakes(AccountRunRequest $request, string $run, AccountRunService $service)
     {
         return $this->command($request, $run, $service);
     }

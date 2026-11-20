@@ -33,6 +33,43 @@ const correct = (task) => task.correct_choice_id ? {choice_id:task.correct_choic
   : task.type === 'matching_pairs' ? {pairs:task.correct_pairs.map(({left_id,right_id})=>({left_id,right_id}))}
   : task.type === 'word_order' ? {token_ids:task.accepted_orders[0]} : {value:task.accepted_answers[0]};
 
+test('guest correction rounds persist and reuse the task with a fresh draft until it is solved', async () => {
+  const lesson = templates.sessions[0];
+  const repository = new MemoryTransactions(seed());
+  const runId = await repository.mutate(state => append(state, lesson));
+  let adapter = adapterFor(repository, runId);
+  let view = await adapter.load();
+  const input = () => ({client_event_id:randomUUID(), presentation_id:view.presentation.presentation_id});
+  for (const [index, task] of lesson.tasks.entries()) {
+    view = index === 0 ? await adapter.help({...input(), event_type:'unknown'})
+      : await adapter.answer({...input(), answer:correct(task)});
+    if (index + 1 < lesson.tasks.length) view = await adapter.load({advanceFrom:view.presentation.presentation_id});
+  }
+  const originalScore = view.summary.independent_correct_steps;
+  view = await adapter.reviewMistakes();
+  assert.deepEqual(view.corrections, {started:false, position:1, total:1, round:1, fixed_last_round:0, can_finish:false});
+  adapter = adapterFor(repository, runId, 'reopened');
+  view = await adapter.load();
+  assert.equal(view.corrections.started, false);
+  view = await adapter.load({advanceFrom:view.presentation.presentation_id});
+  assert.equal(view.presentation.first_result, null);
+  await adapter.storeDraft({presentation_id:view.presentation.presentation_id,answer:{choice_id:'b'}});
+  view = await adapter.help({...input(), event_type:'unknown'});
+  assert.equal(view.corrections.can_finish, false);
+  view = await adapter.load({advanceFrom:view.presentation.presentation_id});
+  adapter = adapterFor(repository, runId, 'reopened-again');
+  view = await adapter.load();
+  assert.deepEqual(view.corrections, {started:false, position:1, total:1, round:2, fixed_last_round:0, can_finish:false});
+  view = await adapter.load({advanceFrom:view.presentation.presentation_id});
+  assert.equal(view.local_draft, null);
+  view = await adapter.answer({...input(), answer:correct(lesson.tasks[0])});
+  assert.equal(view.presentation.last_result.correct, true);
+  assert.equal(view.corrections.can_finish, true);
+  const finished = await adapter.finish();
+  assert.equal(finished.finished, true);
+  assert.equal(finished.summary.independent_correct_steps, originalScore);
+});
+
 test('guest storage migrations preserve snapshots outbox owner binding and receipts', () => {
   const old = seed();
   old.storage_schema_version = 1; delete old.sync_receipts; delete old.bound_user_id;

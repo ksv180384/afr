@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Learning;
 
+use App\Enums\Learning\PracticeErrorCode;
+use App\Services\Learning\AnswerCheckingException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -11,7 +13,13 @@ class AccountRunRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return $this->user() !== null;
+        $actor = $this->user();
+        $expectedOwner = $this->header('X-Practice-Owner');
+        if ($actor && $expectedOwner !== null && $expectedOwner !== (string) $actor->id) {
+            throw new AnswerCheckingException(PracticeErrorCode::Forbidden, 'Войдите в исходный аккаунт.');
+        }
+
+        return $actor !== null;
     }
 
     public function rules(): array
@@ -35,7 +43,7 @@ class AccountRunRequest extends FormRequest
                 }]],
             'answer', 'help' => [...$event, 'presentation_id' => ['required', 'uuid'], 'event_type' => ['required', Rule::in($this->route()->getActionMethod() === 'answer' ? ['answer'] : ['help', 'unknown', 'technical_skip'])],
                 'answer' => ['sometimes', 'array'], 'help_kind' => ['sometimes', 'string'], 'reason' => ['sometimes', 'string'], 'client_occurred_at' => ['sometimes', 'string', 'max:40']],
-            'pause', 'resume', 'finish' => $event,
+            'pause', 'resume', 'finish', 'reviewMistakes' => $event,
             'advance', 'introduction' => [...$event, 'presentation_id' => ['required', 'uuid']],
             'history' => ['page' => ['sometimes', 'integer', 'min:1', 'max:100000']],
             default => [],

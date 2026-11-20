@@ -3,6 +3,12 @@ const logicalKey = (value) => JSON.stringify(value, (_, item) => item && typeof 
   ? Object.fromEntries(Object.keys(item).sort().map((key) => [key, item[key]])) : item);
 export { logicalKey };
 
+export const practiceDraftId = (presentationId, corrections) => {
+  if (!corrections) return presentationId;
+  const round = corrections.round ?? 1;
+  return round === 1 ? 'correction:' + presentationId : 'correction:' + round + ':' + presentationId;
+};
+
 export const createAccountRepository = ({ indexedDB = () => globalThis.indexedDB, name = 'afr-account-practice-v1' } = {}) => {
   let connection;
   const open = () => {
@@ -48,7 +54,7 @@ export const createAccountRepository = ({ indexedDB = () => globalThis.indexedDB
     async saveDraft(owner, run, presentation, answer) {
       return transact('drafts', 'readwrite', (store, done) => { store.put({ schema_version:1, key:draftKey(owner,run,presentation), owner_user_id:owner, run_id:run, presentation_id:presentation, answer:copy(answer), updated_at:Date.now() }); done(true); });
     },
-    async enqueue(owner, run, action, logical, requestBody) {
+    async enqueue(owner, run, action, logical, requestBody, prediction) {
       return transact('events', 'readwrite', (store, done) => {
         const get = store.index('event').get(logical.client_event_id);
         get.onsuccess = () => {
@@ -60,7 +66,8 @@ export const createAccountRepository = ({ indexedDB = () => globalThis.indexedDB
             done(previous); return;
           }
           const row = { schema_version:1, owner_user_id:owner, run_id:run, action, client_event_id:logical.client_event_id,
-            logical_hash:logicalKey(logical), request:copy(requestBody), status:'queued', queued_at:Date.now() };
+            logical_hash:logicalKey(logical), request:copy(requestBody), status:'queued', queued_at:Date.now(),
+            ...(prediction && {prediction:copy(prediction)}) };
           const add = store.add(row);
           add.onsuccess = () => done({...row,local_id:add.result});
         };
@@ -91,6 +98,7 @@ export const createAccountRepository = ({ indexedDB = () => globalThis.indexedDB
         get.onsuccess = () => {
           const row = get.result;
           if (!row || row.owner_user_id !== owner) { store.transaction.abort(); return; }
+          if (status === 'conflict' && ['acked','dismissed'].includes(row.status)) { done(row); return; }
           const next = {...row,status};
           if (receipt) next.acknowledgement = { accepted_event_id:receipt.accepted_event_id, run_id:receipt.state?.run_id, revision:receipt.state?.revision };
           store.put(next); done(next);

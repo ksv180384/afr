@@ -155,6 +155,13 @@ it('uses independent integer checkpoint scores and refuses every technical skip'
     expect(LearningLevelEvent::count())->toBe(0);
 })->with([[4, null, false], [5, null, true], [6, 6, false]]);
 
+it('withholds the preload answer key for account checkpoints', function () {
+    objectiveProgram($this);
+    $run = objectiveStart($this);
+    $this->getJson('/daily/api/runs/'.$run['run_id'].'?playback=1')->assertOk()
+        ->assertJsonMissingPath('playback')->assertJsonMissingPath('task.correct_choice_id');
+});
+
 it('requires two different controls and local days rather than server dates or repeated controls', function () {
     objectiveProgram($this);
     LearningProfile::factory()->create(['user_id' => $this->learner->id, 'timezone' => 'Europe/Moscow']);

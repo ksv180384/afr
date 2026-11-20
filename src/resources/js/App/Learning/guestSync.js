@@ -1,3 +1,5 @@
+import { practiceDraftId } from './accountRepository.js';
+
 const clone = structuredClone;
 const pendingReviewSnooze = state => state?.review_suggestions?.snoozed_until && state.review_suggestions.snoozed_until!==state.sync?.review_snooze_acknowledged_until
   && new Date(state.review_suggestions.snoozed_until).getTime()>Date.now();
@@ -87,8 +89,12 @@ export const syncGuestRepository = async ({ownerUserId,repository,transport,acco
   for(const [guestId,mapping] of Object.entries(state.sync?.mapping ?? {})) {
     const run=state.runs[guestId];
     const presentation=run?.presentations[run.cursor];
-    if(presentation && !presentation.first_result && run.drafts[presentation.presentation_id]) {
-      await accountRepository.saveDraft(ownerUserId,mapping.server_run_id,mapping.presentation_map[presentation.presentation_id],clone(run.drafts[presentation.presentation_id]));
+    if (!presentation) continue;
+    const graded = run.corrections ? run.corrections.result : presentation.first_result;
+    const serverPresentation = mapping.presentation_map[presentation.presentation_id];
+    const draft = run.drafts[practiceDraftId(presentation.presentation_id,run.corrections)];
+    if (!graded && draft && serverPresentation) {
+      await accountRepository.saveDraft(ownerUserId,mapping.server_run_id,practiceDraftId(serverPresentation,run.corrections),clone(draft));
     }
   }
   const rejected=state.outbox.filter((event)=>event.sync_status==='rejected');

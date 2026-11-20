@@ -42,7 +42,7 @@ it('hides foreign run reads commands media and presentations without creating at
     $this->actingAs($this->stranger);
     $this->getJson('/daily/api/runs/'.$run['run_id'])->assertNotFound();
     $this->get('/daily/api/runs/'.$run['run_id'].'/media/'.Str::uuid())->assertNotFound();
-    foreach (['answers', 'help', 'pause', 'resume', 'finish', 'advance', 'introduction'] as $path) {
+    foreach (['answers', 'help', 'pause', 'resume', 'finish', 'advance', 'introduction', 'review-mistakes'] as $path) {
         $this->postJson('/daily/api/runs/'.$run['run_id'].'/'.$path, ['client_event_id' => (string) Str::uuid(), 'expected_revision' => 1,
             ...in_array($path, ['answers', 'help', 'advance', 'introduction']) ? ['presentation_id' => $run['presentation']['presentation_id']] : [],
             ...$path === 'answers' ? ['event_type' => 'answer', 'answer' => ['choice_id' => 'a']] : [],
@@ -50,6 +50,64 @@ it('hides foreign run reads commands media and presentations without creating at
     }
     $this->get('/admin/daily-practice/versions/'.$this->version->id.'/export')->assertForbidden();
     expect(LearningAttempt::count())->toBe(0)->and(LearningRun::count())->toBe(1);
+});
+
+it('carries only remaining mistakes into the next correction round and preserves the first result', function () {
+    $this->actingAs($this->owner);
+    $state = operationsStart($this);
+    $path = '/daily/api/runs/'.$state['run_id'];
+    $send = function (string $action, array $extra = []) use (&$state, $path) {
+        $state = $this->postJson($path.'/'.$action, [
+            'client_event_id' => (string) Str::uuid(), 'expected_revision' => $state['revision'], ...$extra,
+        ])->assertOk()->json('state');
+    };
+    $presentation = fn () => $this->getJson($path)->assertOk()->json('presentation.presentation_id');
+    $answerFor = fn (array $task) => match (true) {
+        isset($task['correct_choice_id']) => ['choice_id' => $task['correct_choice_id']],
+        $task['type'] === 'matching_pairs' => ['pairs' => array_map(fn ($pair) => array_intersect_key($pair, array_flip(['left_id', 'right_id'])), $task['correct_pairs'])],
+        $task['type'] === 'word_order' => ['token_ids' => $task['accepted_orders'][0]],
+        default => ['value' => $task['accepted_answers'][0]],
+    };
+    $first = $state['presentation']['presentation_id'];
+    $last = null;
+    foreach ($this->payload['tasks'] as $index => $task) {
+        $current = $state['presentation']['presentation_id'];
+        $last = $current;
+        if ($index === 0 || $index === count($this->payload['tasks']) - 1) {
+            $send('help', ['presentation_id' => $current, 'event_type' => 'unknown']);
+        } else {
+            $send('answers', ['presentation_id' => $current, 'event_type' => 'answer', 'answer' => $answerFor($task)]);
+        }
+        if ($index < count($this->payload['tasks']) - 1) {
+            $send('advance', ['presentation_id' => $current]);
+        }
+    }
+    $summary = $state['summary'];
+    $send('review-mistakes');
+    expect($state['corrections'])->toMatchArray(['started' => false, 'position' => 1, 'total' => 2, 'round' => 1]);
+    expect($presentation())->toBe($first);
+    $send('advance', ['presentation_id' => $first]);
+    expect($state['presentation']['first_result'])->toBeNull();
+    $this->postJson($path.'/advance', ['client_event_id' => (string) Str::uuid(), 'presentation_id' => $first,
+        'expected_revision' => $state['revision']])->assertUnprocessable();
+    $send('help', ['presentation_id' => $first, 'event_type' => 'unknown']);
+    $send('advance', ['presentation_id' => $first]);
+    expect($presentation())->toBe($last);
+    $send('answers', ['presentation_id' => $last, 'event_type' => 'answer', 'answer' => $answerFor(end($this->payload['tasks']))]);
+    expect($state['corrections']['can_finish'])->toBeFalse();
+    $this->postJson($path.'/finish', ['client_event_id' => (string) Str::uuid(),
+        'expected_revision' => $state['revision']])->assertUnprocessable();
+    $send('advance', ['presentation_id' => $last]);
+    $this->getJson($path)->assertOk()->assertJsonPath('corrections.started', false)->assertJsonPath('corrections.round', 2)
+        ->assertJsonPath('corrections.total', 1)->assertJsonPath('corrections.fixed_last_round', 1)
+        ->assertJsonPath('presentation.presentation_id', $first)->assertJsonPath('presentation.last_result', null);
+    $send('advance', ['presentation_id' => $first]);
+    $send('answers', ['presentation_id' => $first, 'event_type' => 'answer', 'answer' => $answerFor($this->payload['tasks'][0])]);
+    expect($state['corrections']['can_finish'])->toBeTrue();
+    $send('finish');
+    expect($state['finished'])->toBeTrue()
+        ->and($state['mistakes_count'])->toBe(2)
+        ->and($state['summary']['score_numerator'])->toBe($summary['score_numerator']);
 });
 
 it('ignores no owner supplied in request bodies and protects vocabulary by the authenticated owner', function () {

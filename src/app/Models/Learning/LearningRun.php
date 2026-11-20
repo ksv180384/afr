@@ -31,6 +31,7 @@ use LogicException;
  * @property \Carbon\CarbonImmutable|null $finished_at Момент завершения прохождения.
  * @property int $revision Номер ревизии записи, изменяемый при обновлении её состояния.
  * @property array|null $result Итоги завершённого прохождения.
+ * @property array|null $corrections Позиции заданий с ошибками и ход их повторения.
  * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
  * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
  * @property int $cursor_position Текущая позиция в прохождении для возобновления.
@@ -61,6 +62,7 @@ class LearningRun extends Model
         'finished_at',
         'revision',
         'result',
+        'corrections',
         'cursor_position',
         'introductions_seen',
     ];
@@ -82,6 +84,7 @@ class LearningRun extends Model
             'cursor_position' => 'integer',
             'introductions_seen' => 'array',
             'result' => 'array',
+            'corrections' => 'array',
             'status' => RunStatus::class,
         ];
     }

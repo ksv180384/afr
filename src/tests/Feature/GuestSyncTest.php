@@ -56,6 +56,21 @@ function syncBatch(array $runs = [], string $level = 'PRE_A1'): array
         'level_events' => [['client_event_id' => (string) Str::uuid(), 'sequence' => 1, 'action' => 'level_selection', 'current_level' => $level, 'timezone' => 'Europe/Moscow', 'client_occurred_at' => now('UTC')->subDay()->toIso8601String()]]];
 }
 
+it('imports an unfinished correction round and permits continuing from its current task', function () {
+    $bundle = syncFixture($this, true, 2);
+    $transition = array_pop($bundle['events']);
+    $bundle['events'][] = [...$transition, 'action' => 'reviewMistakes'];
+    $bundle['events'][] = [...$transition, 'action' => 'advance', 'client_event_id' => (string) Str::uuid(),
+        'sequence' => $transition['sequence'] + 1, 'expected_revision' => $transition['expected_revision'] + 1,
+        'presentation_id' => $bundle['presentation_ids'][0]];
+    $receipt = $this->postJson('/daily/api/guest-sync', syncBatch([$bundle]))
+        ->assertOk()->assertJsonCount(0, 'rejected')->json();
+    $run = $receipt['mapping'][$bundle['guest_run_id']]['server_run_id'];
+    $this->getJson('/daily/api/runs/'.$run)->assertOk()
+        ->assertJsonPath('corrections.started', true)->assertJsonPath('corrections.position', 1)
+        ->assertJsonPath('corrections.total', count($bundle['presentation_ids']))->assertJsonPath('presentation.first_result', null);
+});
+
 it('imports a personal difficult mark independently of review marks and deduplicates retries', function () {
     $bundle = syncFixture($this, true, 2);
     $batch = syncBatch([$bundle]);

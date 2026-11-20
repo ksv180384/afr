@@ -21,7 +21,11 @@ export const createGuestAdapter = ({repository,runId,tabId,onStatus = () => {},o
   };
   const execute = (action,input) => schedule(async () => {
     if (!current) throw guestError('Сначала загрузите занятие.', 'not_found');
-    if (action === 'draft' && (current.presentations[current.cursor].presentation_id !== input.presentation_id || current.presentations[current.cursor].first_result)) return;
+    if (action === 'draft') {
+      const step = current.presentations[current.cursor];
+      const graded = current.corrections ? current.corrections.result : step.first_result;
+      if (step.presentation_id !== input.presentation_id || graded) return;
+    }
     if (!envelopes.has(input.client_event_id)) envelopes.set(input.client_event_id,{...input,expected_revision:current.revision,client_occurred_at:now()});
     const request = envelopes.get(input.client_event_id);
     const run = await repository.mutate((state) => {
@@ -60,6 +64,7 @@ export const createGuestAdapter = ({repository,runId,tabId,onStatus = () => {},o
     start: () => command('resume'),
     answer: (input) => execute('answer',{...input,event_type:'answer'}),
     help: (input) => execute('help',input),
+    reviewMistakes: () => command('reviewMistakes'),
     finish: () => command('finish'),
     storeDraft: (input) => execute('draft',{...input,client_event_id:idFactory()}),
     async storeDraft(input) { await execute('draft',{...input,client_event_id:idFactory()}); },

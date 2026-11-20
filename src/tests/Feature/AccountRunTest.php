@@ -90,13 +90,27 @@ it('records help before grading and recovers the same answer receipt before revi
     $state = accountCommand($this, $state, 'help', ['presentation_id' => $state['presentation']['presentation_id'], 'event_type' => 'help', 'help_kind' => 'audio_transcript']);
     expect($state['assistance'])->toContain('audio_transcript');
     $input = accountInput($state['revision'], ['presentation_id' => $state['presentation']['presentation_id'], 'event_type' => 'answer', 'answer' => ['choice_id' => 'b']]);
-    $receipt = $this->postJson('/daily/api/runs/'.$state['run_id'].'/answers', $input)->assertOk()->json();
+    $receipt = $this->postJson('/daily/api/runs/'.$state['run_id'].'/answers', $input, ['X-Practice-Owner' => (string) $this->learner->id])->assertOk()->json();
     expect($receipt['state']['presentation']['first_result']['score'])->toBe(0);
     $this->postJson('/daily/api/runs/'.$state['run_id'].'/answers', $input)->assertExactJson($receipt);
     $this->postJson('/daily/api/runs/'.$state['run_id'].'/answers', [...$input, 'client_event_id' => (string) Str::uuid()])->assertConflict()->assertJsonPath('revision', $receipt['state']['revision']);
     $loaded = $this->getJson('/daily/api/runs/'.$state['run_id'])->assertOk()->json();
     expect($loaded['position'])->toBe(1);
     expect(LearningAttempt::count())->toBe(2);
+});
+
+it('preloads the owners pinned tasks and answer keys in order only when requested', function () {
+    $run = accountStart($this);
+    $path = '/daily/api/runs/'.$run['run_id'];
+    $this->getJson($path)->assertOk()->assertJsonMissingPath('playback')->assertJsonMissingPath('task.correct_choice_id');
+    $response = $this->getJson($path.'?playback=1')->assertOk()->assertHeader('Cache-Control', 'no-store, private')
+        ->assertJsonCount($run['total'], 'playback.steps')
+        ->assertJsonPath('playback.steps.0.presentation_id', $run['presentation']['presentation_id'])
+        ->assertJsonMissingPath('task.correct_choice_id');
+    $snapshot = $this->versions[0]->payload;
+    expect(array_column($response->json('playback.steps'), 'task'))->toBe($snapshot['tasks'])
+        ->and($response->json('playback.introductions'))->toBe($snapshot['introductions']);
+    $this->actingAs(User::factory()->create())->getJson($path.'?playback=1')->assertNotFound()->assertJsonMissingPath('playback');
 });
 
 it('finishes once using server time and preserves the receipt after midnight and lost acknowledgement', function () {
@@ -154,6 +168,10 @@ it('hides another owners run before replay and rejects future presentations', fu
     $this->actingAs(User::factory()->create());
     $this->getJson('/daily/api/runs/'.$state['run_id'])->assertNotFound();
     $this->postJson('/daily/api/runs/'.$state['run_id'].'/finish', accountInput($state['revision']))->assertNotFound();
+    $this->postJson('/daily/api/runs/'.$state['run_id'].'/help', accountInput($state['revision'], [
+        'presentation_id' => $state['presentation']['presentation_id'], 'event_type' => 'unknown',
+    ]), ['X-Practice-Owner' => (string) $this->learner->id])->assertForbidden()->assertJsonPath('code', 'forbidden');
+    $this->assertDatabaseCount('learning_attempts', 0);
 });
 
 it('selects the next session after low-score completion and replaces the assignment only explicitly', function () {
@@ -186,7 +204,7 @@ it('pins the started version when the active publication changes', function () {
 });
 
 it('uses the profile level as the starting point and keeps the previous run paused', function () {
-    $old = accountStart($this);
+    $old = accountStart($this, ['timezone' => 'UTC']);
     LearningLevel::where('code', 'A1')->update(['published_at' => now('UTC')]);
     $unit = LearningUnit::factory()->create(['level' => 'A1', 'published_at' => now('UTC')]);
     $payload = $this->versions[0]->payload;

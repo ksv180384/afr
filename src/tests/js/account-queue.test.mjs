@@ -10,7 +10,7 @@ class MemoryRepository {
   drafts = new Map();
   failWrites = false;
   async pending(owner,run) { return clone(this.rows.filter(r => r.owner_user_id === owner && (run === undefined || r.run_id === run) && !['acked','dismissed'].includes(r.status)).sort((a,b)=>(a.queue_order ?? a.local_id)-(b.queue_order ?? b.local_id))); }
-  async enqueue(owner,run,action,logical,request) {
+  async enqueue(owner,run,action,logical,request,prediction) {
     if(this.failWrites) throw new Error('quota');
     const old = this.rows.find(r => r.client_event_id === logical.client_event_id);
     if(old) {
@@ -18,7 +18,7 @@ class MemoryRepository {
       assert.equal(old.owner_user_id,owner);
       return clone(old);
     }
-    const row = {local_id:this.rows.length+1,owner_user_id:owner,run_id:run,action,client_event_id:logical.client_event_id,logical_hash:logicalKey(logical),request:clone(request),status:'queued'};
+    const row = {local_id:this.rows.length+1,owner_user_id:owner,run_id:run,action,client_event_id:logical.client_event_id,logical_hash:logicalKey(logical),request:clone(request),prediction:clone(prediction),status:'queued'};
     this.rows.push(row); return clone(row);
   }
   async seal(owner,id,revision) {
@@ -56,8 +56,9 @@ const setup = () => {
   const transport={
     profile:async()=>({owner_user_id:signedIn}),
     loadRun:async()=>clone(state),
-    call:async(action,run,request)=>{
+    call:async(action,run,request,options)=>{
       calls.push({action,run,request:clone(request)});
+      if (run && options?.headers?.['X-Practice-Owner'] !== String(signedIn)) throw error(403,'forbidden');
       if(failBefore) throw failBefore;
       const existing=ledger.get(request.client_event_id);
       if(existing) { assert.equal(existing.hash,logicalKey({action,run,request})); return clone(existing.receipt); }
@@ -78,6 +79,126 @@ const setup = () => {
   return {repository,transport,calls,statuses,options,adapter:createAccountAdapter(options),
     state:()=>state,effects:()=>effects,fail:e=>{failBefore=e;},lose:()=>{loseAfter=true;},signIn:id=>{signedIn=id;},advanceServer:()=>{state.revision++;}};
 };
+
+const playbackRun = () => {
+  const steps = ['p1','p2'].map(presentation_id => ({
+    presentation_id, review_lexeme_key:null,
+    task: {id:'task-'+presentation_id,type:'single_choice',choices:[{id:'a'},{id:'b'}],correct_choice_id:'b',
+      hint:'Подсказка',feedback:{correct:'Верно',incorrect:'Неверно'}},
+  }));
+  const {correct_choice_id, hint, ...task} = steps[0].task;
+  return { owner_user_id:1, run_id:'r1', revision:1, checking_policy_version:1, kind:'daily', status:'in_progress', started:true, finished:false,
+    position:1, total:2, task:{...task,has_hint:true}, assistance:[], vocabulary:[], introductions:[], introduction_seen:false,
+    presentation:{presentation_id:'p1',first_result:null,last_result:null,status:'pending',help_used:false},
+    corrections:null, mistakes_count:0, mistake_positions:[],
+    summary:{processed_steps:0,score_numerator:0,independent_correct_steps:0,technical_skips:0,all_steps_processed:false},
+    playback:{steps,introductions:[]} };
+};
+const playbackInput = {client_event_id:'playback-answer',presentation_id:'p1',answer:{choice_id:'b'}};
+
+test('shows the grade and next task before the first request returns and sends in order without loading the profile', {timeout:2000}, async () => {
+  const {playback,...initial} = playbackRun();
+  const repository = new MemoryRepository();
+  let release;
+  const slowResponse = new Promise(resolve => { release = resolve; });
+  const calls = [];
+  let profileRequests = 0;
+  const result = {correct:true,event_type:'answer'};
+  const graded = {...initial,revision:2,presentation:{...initial.presentation,first_result:result,last_result:result},
+    summary:{...initial.summary,processed_steps:1,score_numerator:1}};
+  const nextTask = {...graded,revision:3,position:2,presentation:{...initial.presentation,presentation_id:'p2'}};
+  const paused = {...nextTask,revision:4,status:'paused',started:false,resume:true};
+  let sequence = 0;
+  const adapter = createAccountAdapter({ownerUserId:1,runId:'r1',repository,idFactory:() => 'command-'+ ++sequence,transport:{
+    profile:async () => { profileRequests++; return {owner_user_id:1}; },
+    loadRun:async (_id, options) => { assert.equal(options.playback,true); return {...initial,playback}; },
+    call:async (action,_id,request,options) => {
+      assert.equal(options.headers['X-Practice-Owner'],'1');
+      calls.push([action,request.expected_revision]);
+      if (action === 'answer') await slowResponse;
+      return {accepted_event_id:request.client_event_id,state:{answer:graded,advance:nextTask,pause:paused}[action]};
+    },
+  }});
+  await adapter.load();
+  const grade = await adapter.answer(playbackInput);
+  assert.equal(grade.presentation.first_result.correct,true);
+  const next = await adapter.load({advanceFrom:'p1'});
+  assert.equal(next.task.id,'task-p2');
+  assert.equal(next.task.correct_choice_id,undefined);
+  assert.equal(next.task.hint,undefined);
+  await adapter.saveDraft({presentation_id:'p2',answer:{choice_id:'a'}});
+  assert.deepEqual(calls,[['answer',1]]);
+  assert.equal((await repository.pending(1,'r1')).length,3);
+  release();
+  await adapter.sync();
+  assert.deepEqual(calls,[['answer',1],['advance',2],['pause',3]]);
+  assert.equal(profileRequests,0);
+  assert.deepEqual(await repository.pending(1,'r1'),[]);
+});
+
+test('retains the background queue on disconnect and blocks dependent events on a revision conflict', {timeout:2000}, async () => {
+  const initial = playbackRun();
+  const repository = new MemoryRepository();
+  let failure = new Error('connection lost');
+  const statuses = [];
+  const calls = [];
+  const adapter = createAccountAdapter({ownerUserId:1,runId:'r1',repository,idFactory:() => 'next',onStatus:s => statuses.push(s.kind),transport:{
+    profile:async () => ({owner_user_id:1}),
+    loadRun:async () => clone(initial),
+    call:async (_action,_id,request) => { calls.push(request); throw failure; },
+  }});
+  await adapter.load();
+  await adapter.answer(playbackInput);
+  await assert.rejects(adapter.sync());
+  assert.equal(statuses.at(-1),'warning');
+  assert.equal((await adapter.load({advanceFrom:'p1'})).position,2);
+  failure = error(409,'revision_conflict');
+  await assert.rejects(adapter.sync(), failure => failure.response?.data?.code === 'playback_conflict');
+  assert.equal(statuses.at(-1),'conflict');
+  assert.deepEqual(calls,[calls[0],calls[0]]);
+  assert.deepEqual((await repository.pending(1,'r1')).map(row => row.status),['conflict','conflict']);
+  assert.equal((await adapter.acceptServerState()).position,1);
+  assert.deepEqual(repository.rows.map(row => row.status),['dismissed','dismissed']);
+});
+
+test('plays correction rounds locally and waits for server confirmation at finish', {timeout:2000}, async () => {
+  const initial = playbackRun();
+  const repository = new MemoryRepository();
+  let release;
+  const blocked = new Promise(resolve => { release = resolve; });
+  const calls = [];
+  let sequence = 0;
+  const nextId = () => 'command-'+ ++sequence;
+  const adapter = createAccountAdapter({ownerUserId:1,runId:'r1',repository,idFactory:nextId,transport:{
+    profile:async () => ({owner_user_id:1}),
+    loadRun:async () => clone(initial),
+    call:async action => { calls.push(action); await blocked; throw new Error('connection lost'); },
+  }});
+  const answer = (presentation_id,choice_id) => adapter.answer({client_event_id:nextId(),presentation_id,answer:{choice_id}});
+  const advance = presentation_id => adapter.load({advanceFrom:presentation_id});
+  await adapter.load();
+  await answer('p1','a');
+  await advance('p1');
+  await answer('p2','a');
+  assert.equal((await adapter.reviewMistakes()).corrections.total,2);
+  await advance('p1');
+  await answer('p1','a');
+  await advance('p1');
+  assert.equal((await answer('p2','b')).corrections.can_finish,false);
+  const round = await advance('p2');
+  assert.equal(round.corrections.round,2);
+  assert.deepEqual(round.corrections.positions,[1]);
+  assert.equal(round.corrections.fixed_last_round,1);
+  await advance('p1');
+  const final = await answer('p1','b');
+  assert.equal(final.corrections.can_finish,true);
+  assert.equal(final.summary.score_numerator,0);
+  const finish = adapter.finish();
+  assert.deepEqual(calls,['answer']);
+  release();
+  await assert.rejects(finish);
+  assert.equal((await repository.pending(1,'r1')).at(-1).action,'answer');
+});
 
 test('timeout after answer commit retries identical sealed bytes and only then displays the grade',async()=>{
   const s=setup(); await s.adapter.load();
@@ -233,15 +354,17 @@ for(const status of [401,419]) {
   });
 }
 
-test('signing in to a different owner never transmits the original owners queue',async()=>{
+test('the server rejects a queued answer after an account change and the original owner can retry it',async()=>{
   const s=setup(); await s.adapter.load();
   const input={client_event_id:'a1',presentation_id:'p1',answer:{choice_id:'b'}};
   s.signIn(2); await assert.rejects(s.adapter.answer(input));
-  assert.equal(s.calls.length,0);
+  assert.equal(s.effects(),0);
+  assert.equal(s.statuses.at(-1).kind,'auth');
   assert.equal((await s.repository.pending(1,'r1')).length,1);
   assert.equal((await s.repository.pending(2,'r1')).length,0);
   s.signIn(1); await s.adapter.answer(input);
-  assert.equal(s.calls.length,1);
+  assert.equal(s.effects(),1);
+  assert.deepEqual(s.calls[0].request,s.calls[1].request);
 });
 
 test('quota failure never claims device persistence or transmits an event',async()=>{
@@ -287,9 +410,9 @@ test('the original UI action also recovers when the connection drops again after
   s.fail(null); s.advanceServer();
   const original=s.transport.call;
   let interrupted=false;
-  s.transport.call=async(action,run,request)=>{
+  s.transport.call=async(action,run,request,options)=>{
     if(request.client_event_id !== input.client_event_id && !interrupted) {interrupted=true;throw new Error('offline again');}
-    return original(action,run,request);
+    return original(action,run,request,options);
   };
   await assert.rejects(s.adapter.answer(input));
   const restored=await s.adapter.answer(input);

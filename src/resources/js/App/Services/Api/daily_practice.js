@@ -6,10 +6,10 @@ export const accountTransport = {
   today: (selection = {}) => get(root + '/today', {params: selection}),
   reviewPlan: (filters = {}) => get(root + '/vocabulary/review-plan', {params: filters}),
   history: (page = 1) => get(root + '/history', {params:{page}}),
-  loadRun: (id) => get(root + '/runs/' + id),
+  loadRun: (id, {playback = false} = {}) => get(root + '/runs/' + id, playback ? {params:{playback:1}} : undefined),
   updateReviewSettings: (input) => patch(root + '/review-settings',input),
   updateProfile: (input) => patch(root + '/profile',input),
-  call: (action, run, input) => post(action === 'start' ? root + '/runs' : root + '/runs/' + run + '/' + (action === 'answer' ? 'answers' : action),input),
+  call: (action, run, input, options) => post(action === 'start' ? root + '/runs' : root + '/runs/' + run + '/' + ({answer:'answers', reviewMistakes:'review-mistakes'}[action] ?? action),input,options),
 };
 
 export const guestContentTransport = {
