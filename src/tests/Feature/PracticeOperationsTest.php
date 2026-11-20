@@ -99,7 +99,10 @@ it('serves 700 metadata entries without fetching all question snapshots', functi
     $response = $this->getJson('/daily/api/content')->assertOk()->assertJsonCount(700, 'sessions');
     expect(strlen($response->getContent()))->toBeLessThan(400000)->and($response->getContent())->not->toContain('correct_choice_id', 'review_items');
     $selects = array_values(array_filter($queries, fn ($sql) => str_contains($sql, 'content_title')));
-    expect($selects)->toHaveCount(1)->and($selects[0])->not->toContain('select *');
+    expect($selects)->toHaveCount(2);
+    foreach ($selects as $select) {
+        expect($select)->not->toContain('select *', 'payload', 'json_extract');
+    }
 });
 
 it('caches immutable content but checks publication again on every request', function () {

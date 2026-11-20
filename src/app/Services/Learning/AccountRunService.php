@@ -85,8 +85,7 @@ final class AccountRunService
             ->whereIn('learning_sessions.external_id', $allowed)->whereNull('learning_sessions.archived_at')->whereNotNull('learning_sessions.active_version_id')
             ->with(['unit', 'levelDefinition', 'activeVersion' => function ($query) use ($compact) {
                 if ($compact) {
-                    $query->select('id', 'session_id', 'status', 'payload->title as home_title', 'payload->duration_minutes as home_duration',
-                        'payload->objectives[0]->title as home_goal');
+                    $query->select('id', 'session_id', 'status', 'content_title', 'content_duration', 'content_goal');
                 }
             }])
             ->orderBy('learning_units.sort_order')->orderBy('learning_sessions.sort_order')->orderBy('learning_sessions.external_id');
@@ -111,8 +110,8 @@ final class AccountRunService
         $access = $accessService->states($outline, $accessService->completed($actor), $profile['current_level']);
         $candidate = $this->candidate($actor, $access, compact: true);
         $next = $candidate ? ['id' => $candidate->external_id, 'level' => $candidate->getRawOriginal('level'),
-            'theme' => $candidate->unit->title, 'duration_minutes' => (int) $candidate->activeVersion->home_duration,
-            'title' => $candidate->activeVersion->home_title, 'goal' => $candidate->activeVersion->home_goal] : null;
+            'theme' => $candidate->unit->title, 'duration_minutes' => (int) $candidate->activeVersion->content_duration,
+            'title' => $candidate->activeVersion->content_title, 'goal' => $candidate->activeVersion->content_goal] : null;
         $active = $this->unfinishedRuns($actor)
             ->where(fn ($query) => $query->where('snapshot->level', $profile['current_level'])->orWhereNotIn('kind', ['daily', 'extra']))
             ->first();

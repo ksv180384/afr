@@ -43,16 +43,16 @@ const palettes = [
 const backgrounds = import.meta.glob('/resources/images/practice/topics/*.{webp,png,jpg}', {
   eager: true, query: '?url', import: 'default',
 });
-const topicStyle = (topic, index) => {
+const topicBackground = topic => topic.background_url ?? ['webp', 'png', 'jpg']
+  .map(extension => backgrounds['/resources/images/practice/topics/' + topic.id + '.' + extension])
+  .find(Boolean);
+const topicBackgrounds = computed(() => new Map(topics.value.map(topic => [topic.id, topicBackground(topic)])));
+const topicStyle = index => {
   const palette = palettes[index % palettes.length];
-  const image = topic.background_url ?? ['webp', 'png', 'jpg']
-    .map(extension => backgrounds['/resources/images/practice/topics/' + topic.id + '.' + extension])
-    .find(Boolean);
   return {
     '--topic-color': palette.surface,
     '--topic-accent': palette.accent,
     '--topic-ink': palette.ink,
-    '--topic-image': image ? 'url("' + image + '")' : undefined,
   };
 };
 let mounted = false;
@@ -81,8 +81,10 @@ watch(() => [props.route.level.id, props.selection?.unit], scrollToLesson);
       :data-topic="topic.id"
       :aria-labelledby="'topic-' + topic.id"
       class="topic"
-      :style="topicStyle(topic, topicIndex)"
+      :style="topicStyle(topicIndex)"
     >
+      <img v-if="topicBackgrounds.get(topic.id)" class="topic-background" :src="topicBackgrounds.get(topic.id)"
+        alt="" loading="lazy" decoding="async" />
       <header class="topic-divider">
         <h2 :id="'topic-' + topic.id" :title="topic.title">
           <span class="topic-number" aria-hidden="true">{{ String(topicIndex + 1).padStart(2, '0') }}</span>
@@ -137,18 +139,25 @@ watch(() => [props.route.level.id, props.selection?.unit], scrollToLesson);
 }
 .topic {
   position: relative;
+  isolation: isolate;
   padding: 8px 24px 0;
   border: 1px solid #dfe9e280;
   border-radius: 28px;
   background-color: var(--topic-color);
-  background-image: var(--topic-image,
-    radial-gradient(ellipse at 0% 20%, var(--topic-accent) 0, transparent 44%),
+  background-image: radial-gradient(ellipse at 0% 20%, var(--topic-accent) 0, transparent 44%),
     radial-gradient(ellipse at 100% 78%, var(--topic-accent) 0, transparent 40%),
-    linear-gradient(90deg, transparent, #ffffff80 45%, #ffffff80 55%, transparent));
-  background-position: center;
-  background-size: cover;
+    linear-gradient(90deg, transparent, #ffffff80 45%, #ffffff80 55%, transparent);
   box-shadow: 0 4px 16px #25475b05;
   scroll-margin-top: 132px;
+}
+.topic-background {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
 }
 .topic-divider {
   position: sticky;

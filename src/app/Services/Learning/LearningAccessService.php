@@ -19,7 +19,7 @@ final class LearningAccessService
         $sessions = LearningSession::query()->whereNull('archived_at')
             ->whereHas('activeVersion', fn ($query) => $query->where('status', 'published'))
             ->with(['activeVersion' => fn ($query) => $query->select('id', 'session_id',
-                'payload->title as access_title', 'payload->prerequisite_ids as access_prerequisites')])
+                'content_title', 'content_prerequisites')])
             ->orderBy('sort_order')->orderBy('external_id')->get()->groupBy('unit_id');
 
         return LearningLevel::query()->whereNull('archived_at')->orderBy('sort_order')->get()->map(fn ($level) => [
@@ -29,9 +29,9 @@ final class LearningAccessService
                 'id' => $unit->external_id, 'title' => $unit->title, 'path' => PracticeUrls::unit($unit),
                 'background_url' => $unit->background_url,
                 'sessions' => ($sessions[$unit->id] ?? collect())->map(fn ($session) => [
-                    'id' => $session->external_id, 'title' => $session->activeVersion->access_title,
+                    'id' => $session->external_id, 'title' => $session->activeVersion->content_title,
                     'path' => $session->slug ? PracticeUrls::unit($unit).'/'.$session->slug : null,
-                    'prerequisite_ids' => json_decode($session->activeVersion->access_prerequisites, true) ?? [],
+                    'prerequisite_ids' => json_decode($session->activeVersion->content_prerequisites, true) ?? [],
                 ])->all(),
             ])->all(),
         ])->all();

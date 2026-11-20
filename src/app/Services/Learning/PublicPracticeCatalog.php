@@ -13,7 +13,7 @@ final class PublicPracticeCatalog
     public function sessions(): Builder
     {
         return LearningSession::query()->whereNull('archived_at')->whereNotNull('slug')
-            ->whereHas('activeVersion', fn ($query) => $query->where('status', 'published')->whereNotNull('published_at')->whereJsonLength('payload->public_page->explanation_blocks', '>', 0)->whereNotNull('payload->public_page->summary'))
+            ->whereHas('activeVersion', fn ($query) => $query->where('status', 'published')->whereNotNull('published_at')->where('public_explanation_count', '>', 0)->whereNotNull('public_summary'))
             ->whereHas('unit', fn ($query) => $query->whereNotNull('published_at')->whereNull('archived_at'))
             ->whereHas('levelDefinition', fn ($query) => $query->published());
     }
@@ -21,15 +21,14 @@ final class PublicPracticeCatalog
     private function summaries(Builder $query)
     {
         return $query->with(['unit', 'activeVersion' => fn ($version) => $version->select([
-            'id', 'session_id', 'published_at', 'payload->title as public_title', 'payload->duration_minutes as public_duration',
-            'payload->public_page->summary as public_summary',
+            'id', 'session_id', 'published_at', 'content_title', 'content_duration', 'public_summary',
         ])])->orderBy('sort_order')->orderBy('external_id')->get();
     }
 
     private function row(LearningSession $session): array
     {
-        return ['id' => $session->external_id, 'title' => $session->activeVersion->public_title,
-            'summary' => $session->activeVersion->public_summary, 'duration' => (int) $session->activeVersion->public_duration,
+        return ['id' => $session->external_id, 'title' => $session->activeVersion->content_title,
+            'summary' => $session->activeVersion->public_summary, 'duration' => (int) $session->activeVersion->content_duration,
             'path' => PracticeUrls::session($session)];
     }
 
