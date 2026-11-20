@@ -494,7 +494,8 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
         </form>
       </template>
     </template>
-    <practice-report v-if="adapter.mode==='account' && view?.session_version_id" :key="view.session_version_id+':'+view.task?.id" :version-id="view.session_version_id" :task-id="view.task?.id" :run-id="adapter.mode==='account'?view.run_id:null" :answer="draft" />
+    <practice-report v-if="adapter.mode==='account' && view?.session_version_id" :key="view.session_version_id+':'+task?.id"
+      :version-id="view.session_version_id" :task-id="task?.id" :run-id="view.run_id" :task="task" :answer="draft" />
   </section>
 </template>
 <style scoped>
