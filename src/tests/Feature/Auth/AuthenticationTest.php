@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User\User;
+use Illuminate\Support\Str;
 
 test('login screen can be rendered', function () {
     $response = $this->get('/login');
@@ -30,6 +31,17 @@ test('unverified users are redirected to email verification notice', function ()
     $this->assertAuthenticated();
     $response->assertRedirect(route('verification.notice', absolute: false));
 });
+
+test('login from a guest lesson retains the lesson through the authentication redirect', function (bool $verified) {
+    $this->withoutVite();
+    config(['daily_practice.enabled' => true]);
+    $user = ($verified ? User::factory() : User::factory()->unverified())->create();
+    $run = (string) Str::uuid();
+
+    $this->get('/login?practice=1&guest_run='.$run)->assertOk();
+    $this->post('/login', ['email' => $user->email, 'password' => 'password'])
+        ->assertRedirect(route($verified ? 'daily' : 'verification.notice', ['guest_run' => $run], absolute: false));
+})->with([true, false]);
 
 test('users can not authenticate with invalid password', function () {
     $user = User::factory()->create();

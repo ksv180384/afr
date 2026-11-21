@@ -4,11 +4,13 @@ namespace App\Http\Controllers\App\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisteredRequest;
+use App\Jobs\SendTelegramLogJob;
 use App\Models\User\Rang;
 use App\Models\User\User;
-use App\Jobs\SendTelegramLogJob;
+use App\Support\Learning\PracticeAuthReturn;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
@@ -19,8 +21,9 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): Response
+    public function create(Request $request): Response
     {
+        PracticeAuthReturn::remember($request);
 
         return Inertia::render('Auth/Register');
     }
@@ -43,10 +46,10 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        SendTelegramLogJob::dispatch('Зарегистрирован новый пользователь: ' . $user->email)->afterResponse();
+        SendTelegramLogJob::dispatch('Зарегистрирован новый пользователь: '.$user->email)->afterResponse();
 
         Auth::login($user);
 
-        return redirect(route('verification.notice', absolute: false));
+        return redirect(route('verification.notice', PracticeAuthReturn::pull($request) ?? [], absolute: false));
     }
 }

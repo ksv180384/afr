@@ -92,7 +92,6 @@ class UserService {
             'config',
             'config.email',
             'config.facebook',
-            'config.skype',
             'config.twitter',
             'config.vk',
             'config.odnoklassniki',
@@ -139,7 +138,7 @@ class UserService {
     private function initAliasInfoView($user, $configView){
         // Поля коллекций, которые отвечают за доступ к данным пользователя
         $arrayFields = [
-            'email', 'facebook',  'skype', 'twitter', 'vk', 'odnoklassniki', 'telegram', 'whatsapp', 'viber',
+            'email', 'facebook', 'twitter', 'vk', 'odnoklassniki', 'telegram', 'whatsapp', 'viber',
             'instagram', 'youtube', 'info',  'residence', 'sex'
         ];
 
@@ -194,9 +193,6 @@ class UserService {
                 $user->sex_title = null;
                 $user->sex_id = null;
             }
-            if($user->config->skype->alias != 'zaregistrirovannym' && $user->config->skype->alias != 'vsem'){
-                $user->skype = null;
-            }
             if($user->config->telegram->alias != 'zaregistrirovannym' && $user->config->telegram->alias != 'vsem'){
                 $user->telegram = null;
             }
@@ -241,9 +237,6 @@ class UserService {
             if($user->config->sex->alias != 'vsem'){
                 $user->sex_title = null;
                 $user->sex_id = null;
-            }
-            if($user->config->skype->alias != 'vsem'){
-                $user->skype = null;
             }
             if($user->config->telegram->alias != 'vsem'){
                 $user->telegram = null;

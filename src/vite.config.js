@@ -12,7 +12,12 @@ export default defineConfig(({ command, mode }) => {
   return {
     base: command === 'serve' ? '/vite/' : undefined,
     optimizeDeps: {
-      include: ['element-plus', 'element-plus/es/locale/lang/ru'],
+      include: [
+        '@vuelidate/core',
+        '@vuelidate/validators',
+        'element-plus',
+        'element-plus/es/locale/lang/ru',
+      ],
     },
     server: {
       host: '0.0.0.0',

@@ -39,7 +39,6 @@ class UserShowResource extends JsonResource
             'updated_at' => $this->updated_at,
             'infos' => [
                 'facebook' => data_get($this, 'infos.facebook'),
-                'skype' => data_get($this, 'infos.skype'),
                 'twitter' => data_get($this, 'infos.twitter'),
                 'vk' => data_get($this, 'infos.vk'),
                 'odnoklassniki' => data_get($this, 'infos.odnoklassniki'),
@@ -54,7 +53,6 @@ class UserShowResource extends JsonResource
                 'yar_birthday' => (bool) data_get($this, 'config.yar_birthday'),
                 'email' => data_get($this, 'config.email'),
                 'facebook' => data_get($this, 'config.facebook'),
-                'skype' => data_get($this, 'config.skype'),
                 'twitter' => data_get($this, 'config.twitter'),
                 'vk' => data_get($this, 'config.vk'),
                 'odnoklassniki' => data_get($this, 'config.odnoklassniki'),

@@ -26,6 +26,7 @@ const status=value=>{
 const run=async (retryRejected=false)=>{
   if(running || !owner.value || !enabled.value || disposed) return;
   const actor=owner.value;
+  const lessonRequested = page.props?.query?.guest_run;
   running=true;
   try {
     await base.archiveBound(actor);
@@ -40,21 +41,25 @@ const run=async (retryRejected=false)=>{
     let worked=false;
     let partial=false; const rejections=[];
     let target=null;
+    let lessonTarget=null;
     for(const repository of sources) {
       let source=await repository.read();
       if(!hasGuestWork(source)) continue;
       if((source.bound_user_id ?? source.sync?.owner_user_id ?? actor)!==actor) continue;
+      const returnToLesson = typeof lessonRequested === 'string' && Object.hasOwn(source.runs ?? {}, lessonRequested);
       if(retryRejected) {
         await repository.mutate((state)=>retryRejectedGuestEvents(state));
         source=await repository.read();
       }
-      if(!source.outbox.length && !source.return_run_id && !source.return_path && !source.sync?.batches.some((batch)=>batch.status==='pending')) continue;
+      if(!returnToLesson && !source.outbox.length && !source.return_run_id && !source.return_path && !source.sync?.batches.some((batch)=>batch.status==='pending')) continue;
       worked=true;
       const result=await syncGuestRepository({ownerUserId:actor,repository,accountRepository,transport:accountTransport,getOwner:()=>owner.value,onStatus:status});
       partial ||= !!result.rejected?.length; rejections.push(...(result.state.sync?.rejected ?? []));
-      const requested=result.state.return_run_id;
+      const requested=returnToLesson ? lessonRequested : result.state.return_run_id;
       if(requested && result.mapping[requested]) {
-        target='/daily/run/'+result.mapping[requested].server_run_id;
+        const path='/daily/run/'+result.mapping[requested].server_run_id;
+        if (returnToLesson) lessonTarget = path;
+        else target = path;
         await repository.mutate((state)=>{state.return_run_id=null;});
       }
       if(!target && ['/daily','/daily/vocabulary'].includes(result.state.return_path)) target=result.state.return_path;
@@ -66,7 +71,8 @@ const run=async (retryRejected=false)=>{
       guestSyncRevision.value++;
       if(partial) status({kind:'partial',message:'Часть гостевых данных не перенесена. Они остались в этом браузере.',rejected:rejections});
       if(!partial) status({kind:'synced',message:'Гостевой прогресс перенесён в аккаунт.'});
-      if(target && page.url.split('?')[0]!==target) router.visit(target);
+      const destination = lessonTarget ?? target;
+      if(destination && page.url.split('?')[0]!==destination) router.visit(destination);
     }
   } catch(error) {
     const auth=[401,419].includes(error.response?.status) || error.code==='owner_changed';

@@ -1,9 +1,12 @@
 <script setup>
 import ReviewSuggestionSetting from '@/App/Components/Learning/ReviewSuggestionSetting.vue';
 import CurrentLevelSetting from '@/App/Components/Learning/CurrentLevelSetting.vue';
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, shallowReactive, watch } from 'vue';
 import { browserTimezone, timezoneLabel } from '@/App/Learning/practiceTime.js';
-import { Head, useForm, usePage } from '@inertiajs/vue3';
+import { createPracticeSettingsController } from '@/App/Learning/practiceSettingsController.js';
+import { usePracticeHome } from '@/App/Learning/practiceHome.js';
+import { accountTransport } from '@/App/Services/Api/daily_practice.js';
+import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 import { Icon } from '@iconify/vue';
 import api from '@/App/Services/Api';
 
@@ -54,8 +57,6 @@ const form = useForm({
   view_vk: props.user.config.vk.id,
   youtube: props.user.infos.youtube,
   view_youtube: props.user.config.youtube.id,
-  skype: props.user.infos.skype,
-  view_skype: props.user.config.skype.id,
   telegram: props.user.infos.telegram,
   view_telegram: props.user.config.telegram.id,
   whatsapp: props.user.infos.whatsapp,
@@ -63,6 +64,18 @@ const form = useForm({
 });
 const avatarLink = ref(props.user.avatar ? props.user.avatar_link : '');
 const tabActive = ref('profile');
+const learningOpened = ref(false);
+const practiceHome = usePracticeHome();
+const practiceSettings = createPracticeSettingsController({
+  transport: accountTransport,
+  getOwner: () => props.authUser?.id,
+  onMutation: owner => practiceHome.invalidate(owner),
+  state: shallowReactive({}),
+});
+watch(tabActive, tab => { if (tab === 'learning') learningOpened.value = true; });
+watch([learningOpened, () => props.authUser?.id, () => props.practiceTimezone], ([opened, owner]) => {
+  if (opened && owner) practiceSettings.load().catch(() => {});
+});
 const isUploadingAvatar = ref(false);
 const timezoneOptions = computed(() => [...new Set([form.timezone, ...props.timezones])].map(value => ({ value, label: timezoneLabel(value) })));
 onMounted(() => { if (!props.practiceTimezone) form.timezone = browserTimezone(); });
@@ -129,8 +142,6 @@ const removeAvatar = async () => {
   >
 
     <div class="profile-content bg-blue-50 p-4 rounded flex-1">
-      <current-level-setting v-if="page.props.daily_practice_enabled" :auth-user="authUser" />
-      <review-suggestion-setting v-if="page.props.daily_practice_enabled" :auth-user="authUser" />
       <afr-tabs v-model="tabActive" class="profile-tabs">
         <afr-tab-plane label="Профиль" name="profile" class="py-4">
 
@@ -394,29 +405,6 @@ const removeAvatar = async () => {
 
                       <div class="contacts-item">
                         <afr-mixed-input
-                          v-model="form.skype"
-                          placeholder="Skype"
-                        >
-                          <template #prepend>
-                            <Icon icon="mdi:skype" width="20px" height="20px" />
-                          </template>
-                          <template #append>
-                            <afr-select
-                              v-model="form.view_skype"
-                            >
-                              <afr-option
-                                v-for="viewConf in userConfigsView"
-                                :key="viewConf.id"
-                                :label="viewConf.title"
-                                :value="viewConf.id"
-                              />
-                            </afr-select>
-                          </template>
-                        </afr-mixed-input>
-                      </div>
-
-                      <div class="contacts-item">
-                        <afr-mixed-input
                           v-model="form.telegram"
                           placeholder="Telegram"
                         >
@@ -486,6 +474,19 @@ const removeAvatar = async () => {
           </form>
 
         </afr-tab-plane>
+        <afr-tab-plane
+          v-if="page.props.daily_practice_enabled"
+          label="Обучение"
+          name="learning"
+          :keep-mounted="learningOpened"
+          class="py-4"
+        >
+          <div class="learning-settings">
+            <current-level-setting class="learning-card" :controller="practiceSettings" />
+            <review-suggestion-setting class="learning-card" :controller="practiceSettings" :auth-user="authUser" compact />
+          </div>
+          <Link href="/daily" class="practice-link">Открыть практику на сегодня <span aria-hidden="true">→</span></Link>
+        </afr-tab-plane>
         <afr-tab-plane label="Сменить пароль" name="change_password" class="py-4">
           <UpdatePasswordForm class="max-w-xl" />
         </afr-tab-plane>
@@ -519,6 +520,34 @@ const removeAvatar = async () => {
 
 .profile-tabs :deep(.afr-tab-plane) {
   overflow: visible;
+}
+
+.learning-settings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  align-items: start;
+  gap: .75rem;
+}
+
+.learning-settings .learning-card {
+  min-width: 0;
+  margin: 0;
+  padding: .75rem 1rem 1rem;
+  border: 1px solid #dbe5f1;
+  border-radius: .75rem;
+  background: #fff;
+  color: #17364d;
+}
+
+.practice-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: .5rem;
+  margin-top: .5rem;
+  color: #155e91;
+  text-decoration: underline;
+  text-underline-offset: .2em;
 }
 
 .form-user-params-container{

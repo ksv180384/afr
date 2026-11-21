@@ -4,6 +4,7 @@ namespace App\Http\Controllers\App\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Support\Learning\PracticeAuthReturn;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,15 +17,14 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): Response
+    public function create(Request $request): Response
     {
-        if (config('daily_practice.enabled') && request()->boolean('practice')) {
-            session()->put('daily_practice_return', true);
-        }
+        $practice = PracticeAuthReturn::remember($request);
 
         return Inertia::render('Auth/Login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => session('status'),
+            'registrationUrl' => route('register', $practice, absolute: false),
         ]);
     }
 
@@ -37,13 +37,15 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $practiceQuery = PracticeAuthReturn::pull($request);
+
         //        return redirect()->intended(route('index', absolute: false));
         if ($request->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $request->user()->hasVerifiedEmail()) {
-            return redirect(route('verification.notice', absolute: false));
+            return redirect(route('verification.notice', $practiceQuery ?? [], absolute: false));
         }
 
-        if ($request->session()->pull('daily_practice_return')) {
-            return redirect('/daily');
+        if ($practiceQuery !== null) {
+            return redirect(route('daily', $practiceQuery, absolute: false));
         }
 
         return back();

@@ -76,7 +76,6 @@ class UserService
                 'infos',
                 'config.email',
                 'config.facebook',
-                'config.skype',
                 'config.twitter',
                 'config.vk',
                 'config.odnoklassniki',

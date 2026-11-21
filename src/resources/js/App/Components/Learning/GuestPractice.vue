@@ -23,23 +23,30 @@ import { returnToPractice, visitPracticeRun } from '@/App/Learning/practiceRunNa
 import { usePracticeFeedback } from '@/App/Learning/usePracticeFeedback.js';
 
 const props = defineProps({runId:String,levels:Array,progressOnly:Boolean,trail:Boolean,selectedSession:Object,routeSelection:Object});
-const state = ref(null);
-const vocabularyMode = ref(false);
 const sharedStore = usePracticeHome();
 const store = shallowRef(sharedStore);
+const cachedGuest = !props.runId && !props.progressOnly && sharedStore.cachedHome(null, props.routeSelection ?? {})
+  ? sharedStore.state.guest : null;
+const state = ref(cachedGuest);
+const vocabularyMode = ref(false);
 const home = computed(() => store.value.state.owner === null ? store.value.state.home : null);
 const selectedAccess = computed(() => home.value?.route.lessons.find(lesson => lesson.id === props.selectedSession?.id));
 const adapter = shallowRef(null);
 const player = ref(null);
-const saving = ref({kind:'loading',message:'Проверяем хранилище браузера…'});
+const saving = ref(cachedGuest ? {kind:'idle',message:''} : {kind:'loading',message:'Проверяем хранилище браузера…'});
 const error = ref('');
 const feedback = usePracticeFeedback({ status: saving, error, source: 'practice-session' });
 const busy = ref(false);
+const loginPath = '/login?practice=1';
+const guestLoginPath = computed(() => {
+  const run = adapter.value ? activeRun : props.runId;
+  return run ? loginPath + '&guest_run=' + encodeURIComponent(run) : loginPath;
+});
 const retryLesson = ref();
 let temporaryScroll = 0;
-const ready = ref(false);
-const level = ref('PRE_A1');
-const timezone = ref(browserTimezone());
+const ready = ref(!!cachedGuest);
+const level = ref(cachedGuest?.current_level ?? 'PRE_A1');
+const timezone = ref(cachedGuest?.timezone ?? browserTimezone());
 let repository;
 let tabId;
 let activeRun;
@@ -151,7 +158,7 @@ const nextTest = (input) => perform(async () => {
 });
 const openVocabulary = () => { if (repository.temporary) { adapter.value = null; vocabularyMode.value = true; } else router.visit('/daily/vocabulary'); };
 const open = id => perform(() => enterRun('/daily/guest/' + id));
-const exit = async () => {
+const exit = () => perform(async () => {
   if (repository.temporary) {
     adapter.value = null;
     activeRun = null;
@@ -159,8 +166,8 @@ const exit = async () => {
     else await initialize(true, true);
     await nextTick();
     requestAnimationFrame(() => window.scrollTo(0, temporaryScroll));
-  } else returnToPractice();
-};
+  } else await returnToPractice(store.value, null);
+});
 const changeProfile = () => perform(async () => {
   await repository.mutate((current) => changeGuestProfile(current,{client_event_id:crypto.randomUUID(),expected_revision:state.value.profile_revision,
     current_level:level.value,timezone:timezone.value,client_occurred_at:new Date().toISOString()}),{profile:true});
@@ -179,8 +186,15 @@ const prepareAuthentication = async () => {
   await repository.mutate((current)=>{current.return_run_id=activeRun ?? props.runId ?? null;current.return_path='/daily';});
   if(repository.temporary) rememberTemporaryGuest(await repository.read());
 };
-const authenticate = (path) => {
-  prepareAuthentication().then(() => router.visit(path+'?practice=1')).catch(fail);
+const openGuestLogin = event => {
+  if (!repository?.temporary || !repository.cached || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+  const source = window.location.href;
+  const destination = event.currentTarget.href;
+  rememberTemporaryGuest({...repository.cached, return_run_id:activeRun ?? null, return_path:'/daily'});
+  event.preventDefault();
+  router.visit(destination, {
+    onFinish: () => { if (window.location.href === source) window.location.assign(destination); },
+  });
 };
 const focus = () => { if (adapter.value && document.hasFocus()) player.value?.reload(); };
 onMounted(() => {
@@ -207,15 +221,45 @@ onBeforeUnmount(() => { window.removeEventListener('focus',focus); unregisterAut
     <section v-if="saving.message && (!feedback.enabled || saving.kind === 'loading' || ['storage','bound'].includes(saving.kind))" class="practice-panel notice" :class="saving.kind">
       <p v-if="!feedback.enabled || saving.kind === 'loading'" role="status">{{ saving.message }}</p><a v-if="saving.kind === 'bound'" href="/daily">Продолжить в аккаунте</a>
       <div v-if="saving.kind === 'storage'" class="actions">
-        <afr-button v-if="saving.kind === 'storage'" :disabled="busy" @click="temporary">Продолжить временно</afr-button>
+        <afr-button :disabled="busy" @click="temporary">Продолжить временно</afr-button>
+        <a v-if="runId && !adapter" class="guest-return" :href="guestLoginPath">Войти в аккаунт</a>
       </div>
     </section>
     <p v-if="error && !feedback.enabled" role="alert" class="error">{{ error }}</p>
     <a v-if="runId && !adapter && error" class="guest-return" href="/practice">К моему пути</a>
     <afr-button v-if="!adapter && home?.content_error" :disabled="busy" @click="perform(() => initialize(true))">Повторить загрузку</afr-button>
     <afr-button v-if="retryLesson !== undefined" :disabled="busy" @click="start(retryLesson)">Повторить загрузку занятия</afr-button>
-    <vocabulary-panel v-if="vocabularyMode" :guest-repository="repository" :route-store="store" @back="vocabularyMode = false; readLocal()" @open-guest-run="vocabularyMode = false; attach($event)" /><session-player v-else-if="adapter" :key="activeRun" ref="player" :adapter="adapter" :locked="locked" :timezone="timezone" :route-store="store" :route-owner="null" :navigation-busy="busy"
-      @exit="exit" @next-lesson="start()" @review="startShortReview" @repeat="start($event.session_id)" @test-next="nextTest" @vocabulary="openVocabulary" />
+    <vocabulary-panel v-if="vocabularyMode" :guest-repository="repository" :route-store="store" @back="vocabularyMode = false; readLocal()" @open-guest-run="vocabularyMode = false; attach($event)" />
+    <session-player
+      v-else-if="adapter"
+      :key="activeRun"
+      ref="player"
+      :adapter="adapter"
+      :locked="locked"
+      :timezone="timezone"
+      :route-store="store"
+      :route-owner="null"
+      :navigation-busy="busy"
+      @exit="exit"
+      @next-lesson="start()"
+      @review="startShortReview"
+      @repeat="start($event.session_id)"
+      @test-next="nextTest"
+      @vocabulary="openVocabulary"
+    >
+      <template #guest-progress>
+        <span class="guest-progress">{{ repository.temporary ? 'Временный прогресс' : 'Прогресс в браузере' }}</span>
+      </template>
+      <template #guest-login>
+        <a
+          class="guest-sign-in"
+          :href="guestLoginPath"
+          aria-label="Войти в аккаунт"
+          title="Войти в аккаунт"
+          @click="openGuestLogin"
+        >Войти</a>
+      </template>
+    </session-player>
     <template v-else-if="ready && state">
       <p v-if="!progressOnly && !home" role="status">Загружаем учебный маршрут…</p>
       <practice-route-topic v-if="!progressOnly && home" :trail="trail" :route="home.route" :store="store" :selection="routeSelection"
@@ -268,7 +312,9 @@ onBeforeUnmount(() => { window.removeEventListener('focus',focus); unregisterAut
         </li></ol>
       </details>
     </template>
-    <p v-if="ready && !vocabularyMode && !trail" class="muted guest-note">Прогресс в этом браузере. <a href="/login?practice=1" @click.prevent="authenticate('/login')">Войти в аккаунт</a></p>
+    <p v-if="ready && !adapter && !vocabularyMode && !trail" class="muted guest-note">
+      Прогресс в этом браузере. <a :href="loginPath" @click="openGuestLogin">Войти в аккаунт</a>
+    </p>
   </section>
 </template>
 <style scoped>
@@ -277,6 +323,9 @@ h2 { font-size:1.2rem; font-weight:bold; margin-bottom:.7rem; }
 .notice { background:#eff6ff; }
 .guest-note { margin-top:1rem; }
 .guest-note a,.guest-return { display:inline-flex; align-items:center; min-height:44px; }
+.guest-progress { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #526a7b; font-size: .75rem; line-height: 1.25; }
+.guest-sign-in { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: .25rem .7rem; border: 1px solid #cadcf0; border-radius: .6rem; background: #eef5fd; font-size: .8125rem; font-weight: 650; text-decoration: none; }
+.guest-sign-in:hover { background: #e1eefb; border-color: #aecae6; }
 .notice.storage,.notice.conflict,.notice.temporary { background:#fffbeb; border-color:#b45309; }
 .error { padding:1rem; background:#fef2f2; }
 .settings { display:grid; grid-template-columns:150px max-content; align-items:end; gap:.5rem; margin-top:.75rem; }

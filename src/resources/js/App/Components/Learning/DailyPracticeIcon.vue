@@ -4,6 +4,7 @@ defineProps({ name: { type: String, required: true } });
 const paths = {
   star: ['m12 3 2.8 5.7 6.3.9-4.6 4.4 1.1 6.3-5.6-3-5.6 3 1.1-6.3L2.9 9.6l6.3-.9Z'],
   help: ['M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2-3 4', 'M12 17h.01', 'M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0Z'],
+  info: ['M12 11v5M12 8h.01', 'M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0Z'],
   settings: ['M4 7h16M4 17h16', 'M8 4v6M16 14v6'],
   reset: ['M3 10a9 9 0 1 1 1 7', 'M3 4v6h6'],
   progress: ['M3 13h4v8H3zM10 8h4v13h-4zM17 3h4v18h-4z'],

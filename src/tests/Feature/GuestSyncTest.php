@@ -284,16 +284,35 @@ it('never resurrects a protected old guest error when an unfinished imported run
     expect($word->fresh()->streak)->toBe(3);
 });
 
-it('registers an unverified learner who can sync from verification without invoking real mail or jobs', function () {
+it('keeps the active guest lesson and imports prior progress when the learner registers', function () {
     \Illuminate\Support\Facades\Event::fake([\Illuminate\Auth\Events\Registered::class]);
-    \Illuminate\Support\Facades\Queue::fake();
+    \Illuminate\Support\Facades\Bus::fake([\App\Jobs\SendTelegramLogJob::class]);
     auth()->logout();
-    $this->post('/register', ['name' => 'mergelearner', 'email' => 'merge@example.test', 'password' => 'Learning-test-12!', 'password_confirmation' => 'Learning-test-12!', 'confirmation_rules' => true])->assertRedirect(route('verification.notice'));
+    $active = syncFixture($this, false, 2);
+    $completed = syncFixture($this, true, 4);
+    $run = $active['guest_run_id'];
+    $query = ['practice' => 1, 'guest_run' => $run];
+    $registration = route('register', $query, absolute: false);
+    $verification = route('verification.notice', ['guest_run' => $run], absolute: false);
+    $this->get(route('login', $query, absolute: false))->assertOk()
+        ->assertInertia(fn (\Inertia\Testing\AssertableInertia $page) => $page->where('registrationUrl', $registration));
+    $this->get($registration)->assertOk();
+    $this->post('/register', [
+        'name' => 'mergelearner',
+        'email' => 'merge@example.test',
+        'password' => 'Learning-test-12!',
+        'password_confirmation' => 'Learning-test-12!',
+        'confirmation_rules' => true,
+    ])->assertRedirect($verification)->assertSessionMissing('daily_practice_return');
     $created = User::where('email', 'merge@example.test')->sole();
     expect($created->email_verified_at)->toBeNull();
-    $this->get('/verify-email')->assertOk();
-    $this->postJson('/daily/api/guest-sync', syncBatch([syncFixture($this, true, 2)]))->assertOk()->assertJsonCount(0, 'rejected');
-    expect(LearningRun::where('user_id', $created->id)->count())->toBe(1);
+    $this->get($verification)->assertOk()
+        ->assertInertia(fn (\Inertia\Testing\AssertableInertia $page) => $page->where('query.guest_run', $run));
+    $mapping = $this->postJson('/daily/api/guest-sync', syncBatch([$active, $completed]))
+        ->assertOk()->assertJsonCount(0, 'rejected')->json('mapping');
+    $this->getJson('/daily/api/runs/'.$mapping[$run]['server_run_id'])->assertOk()
+        ->assertJsonPath('summary.processed_steps', 1)->assertJsonPath('finished', false);
+    expect(LearningRun::where('user_id', $created->id)->where('status', 'completed')->count())->toBe(1);
 });
 
 

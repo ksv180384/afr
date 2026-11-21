@@ -13,6 +13,8 @@ class UserInfo extends Model
 
     public $timestamps = false;
 
+    protected $hidden = ['skype'];
+
     protected $fillable = [
         'user_id',
         'facebook',

@@ -55,22 +55,19 @@ const topicStyle = index => {
     '--topic-ink': palette.ink,
   };
 };
-let mounted = false;
 const scrollToLesson = async () => {
   await nextTick();
-  if (!mounted || window.location.hash) return;
+  const container = path.value;
+  if (!container || window.location.hash) return;
   if (restorePracticeScroll()) return;
   const selectedTopic = props.selection?.unit;
   const target = selectedTopic
-    ? [...path.value.querySelectorAll('[data-topic]')].find(element => element.dataset.topic === selectedTopic)
-    : [...path.value.querySelectorAll('[data-lesson]')].find(element => element.dataset.lesson === current.value?.id);
+    ? [...container.querySelectorAll('[data-topic]')].find(element => element.dataset.topic === selectedTopic)
+    : [...container.querySelectorAll('[data-lesson]')].find(element => element.dataset.lesson === current.value?.id);
   target?.scrollIntoView({ block: selectedTopic ? 'start' : 'center', behavior: 'instant' });
 };
-onMounted(() => {
-  mounted = true;
-  scrollToLesson();
-});
-watch(() => [props.route.level.id, props.selection?.unit], scrollToLesson);
+onMounted(scrollToLesson);
+watch([() => props.route.level.id, () => props.selection?.unit], scrollToLesson);
 </script>
 
 <template>

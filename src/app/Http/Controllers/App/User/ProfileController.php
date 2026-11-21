@@ -41,9 +41,8 @@ class ProfileController extends Controller
         $user = Auth::user()->load([
             'infos',
             'rang',
-            'config:user_id,day_birthday,yar_birthday,email,skype,vk,odnoklassniki,telegram,whatsapp,youtube,info,residence,sex',
+            'config:user_id,day_birthday,yar_birthday,email,vk,odnoklassniki,telegram,whatsapp,youtube,info,residence,sex',
             'config.email',
-            'config.skype',
             'config.vk',
             'config.odnoklassniki',
             'config.telegram',
@@ -81,9 +80,9 @@ class ProfileController extends Controller
 
         $validatedData = collect($request->validated());
         $userData = $validatedData->only(['name', 'birthday', 'gender_id', 'info', 'residence'])->toArray();
-        $userInfoData = $validatedData->only(['odnoklassniki', 'skype', 'telegram', 'vk', 'whatsapp', 'youtube'])->toArray();
+        $userInfoData = $validatedData->only(['odnoklassniki', 'telegram', 'vk', 'whatsapp', 'youtube'])->toArray();
         $userConfigData = $validatedData->only([
-            'view_email', 'view_info', 'view_odnoklassniki', 'view_residence', 'view_sex', 'view_skype',
+            'view_email', 'view_info', 'view_odnoklassniki', 'view_residence', 'view_sex',
             'view_telegram', 'view_vk', 'view_whatsapp', 'view_youtube', 'day_birthday', 'yar_birthday',
         ])->mapWithKeys(function ($value, $key) {
             $keyMapping = [
@@ -92,7 +91,6 @@ class ProfileController extends Controller
                 'view_odnoklassniki' => 'odnoklassniki',
                 'view_residence' => 'residence',
                 'view_sex' => 'sex',
-                'view_skype' => 'skype',
                 'view_telegram' => 'telegram',
                 'view_vk' => 'vk',
                 'view_whatsapp' => 'whatsapp',

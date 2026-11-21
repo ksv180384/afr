@@ -14,6 +14,10 @@ const props = defineProps({
 
 const page = usePage();
 const form = useForm({});
+const practiceUrl = computed(() => {
+  const guestRun = page.props.query?.guest_run;
+  return typeof guestRun === 'string' && guestRun ? '/daily?' + new URLSearchParams({guest_run: guestRun}) : '/daily';
+});
 
 const submit = () => {
   form.post(route('verification.send'));
@@ -41,7 +45,7 @@ const verificationLinkSent = computed(
         Новая ссылка для подтверждения отправлена на Email, указанный при регистрации.
       </div>
 
-      <Link v-if="page.props.daily_practice_enabled" href="/daily" class="link">Продолжить практику до подтверждения Email</Link>
+      <Link v-if="page.props.daily_practice_enabled" :href="practiceUrl" class="link">Продолжить практику до подтверждения Email</Link>
       <form @submit.prevent="submit">
         <div class="mt-4 flex flex-col items-center justify-between">
 <!--          <PrimaryButton-->

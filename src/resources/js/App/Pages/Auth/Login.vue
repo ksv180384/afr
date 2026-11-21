@@ -16,6 +16,7 @@ import InputError from '@/App/Components/InputError.vue';
 const props = defineProps({
   canResetPassword: { type: Boolean, },
   status: { type: String, },
+  registrationUrl: { type: String, required: true },
 });
 
 const form = useForm({
@@ -139,7 +140,7 @@ const submit = async () => {
           </Link>
 
           <Link
-            :href="route('register')"
+            :href="registrationUrl"
             class="link-small"
           >
             Регистрация

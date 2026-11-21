@@ -80,6 +80,7 @@ const refreshSuggestion = () => perform(() => loadHome());
 const openRun = id => visitPracticeRun('/daily/run/' + id, home.value?.route, props.routeSelection);
 const openState = state => state?.run_id && !disposed ? openRun(state.run_id) : undefined;
 const continueRun = id => perform(() => openRun(id));
+const exitRun = () => perform(() => returnToPractice(homeStore, owner.value));
 const startLesson = (sessionId = null) => perform(async () => {
   const actor = owner.value;
   const route = home.value?.route;
@@ -205,7 +206,7 @@ onBeforeUnmount(() => { disposed = true; window.removeEventListener('online',onO
         <div v-else-if="pendingActions || retryAction || (!home && error)" class="actions"><afr-button :disabled="busy || syncing" @click="retryFailed">Повторить</afr-button><span class="muted">Автоматические повторы остановлены. Сохранённое действие можно отправить вручную.</span></div>
         <session-player v-if="adapter" :key="runId" ref="player" :adapter="adapter" :locked="locked"
           :route-owner="owner" :route-store="homeStore" :navigation-busy="busy || syncing || pendingStart"
-          @next-lesson="startLesson()" @review="startReview" @repeat="repeat" @test-next="repeat" @vocabulary="router.visit('/daily/vocabulary')" @exit="returnToPractice" />
+          @next-lesson="startLesson()" @review="startReview" @repeat="repeat" @test-next="repeat" @vocabulary="router.visit('/daily/vocabulary')" @exit="exitRun" />
         <template v-else-if="home">
           <template v-if="screen!=='progress'">
             <practice-route-topic :trail="embedded" :route="home.route" :owner="owner" :selection="routeSelection"

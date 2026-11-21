@@ -62,7 +62,7 @@ test('player and all task components render on the server without browser global
     } finally { mounted.unmount(); }
     assert.match(await render('GuestPractice', {levels:[]}), /Проверяем хранилище браузера/);
     assert.match(await render('VocabularyPanel', {}), /Тест по словам/);
-    assert.match(await render('CurrentLevelSetting', {authUser:{id:7}}), /Проверяем сохранённый уровень/);
+    assert.match(await render('CurrentLevelSetting', {controller:{state:{profile:null,error:''}}}), /Проверяем сохранённый уровень/);
     assert.match(await render('PracticeToasts', {notifications:createPracticeNotifications()}), /Уведомления практики/);
     assert.ok((await render('GuestSync', {})).length > 0);
     const card=await render('DailySessionCard',{});

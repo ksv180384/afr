@@ -21,27 +21,40 @@ export function visitPracticeRun(path, route, selection = {}) {
   return new Promise(resolve => router.visit(url, {onFinish: () => resolve()}));
 }
 
-export function returnToPractice() {
-  const current = new URLSearchParams(window.location.search);
-  const selection = new URLSearchParams();
-  const level = current.get('from_level');
-  const unit = current.get('from_unit');
-  if (level && level.length <= 128) selection.set('level', level);
-  if (unit && unit.length <= 128) selection.set('unit', unit);
-  const path = selection.size ? '/practice?' + selection.toString() : '/practice';
+export function practiceReturnDestination(search = window.location.search) {
+  const current = new URLSearchParams(search);
+  const selection = {};
+  for (const key of ['level', 'unit']) {
+    const value = current.get('from_' + key) ?? current.get(key);
+    if (value && value.length <= 128) selection[key] = value;
+  }
+  const query = new URLSearchParams(selection);
   const scroll = Number(current.get('from_scroll'));
-  const position = {path, scroll: Number.isFinite(scroll) ? Math.max(0, scroll) : 0};
-  returnScroll = position;
-  router.visit(path, {
+  return {
+    path: query.size ? '/practice?' + query.toString() : '/practice',
+    selection,
+    scroll: Number.isFinite(scroll) ? Math.max(0, scroll) : 0,
+  };
+}
+
+export async function returnToPractice(store, owner) {
+  const source = window.location.href;
+  const destination = practiceReturnDestination();
+  try { await store.load(owner, 1, {selection: destination.selection}); }
+  catch { /* The destination can open with its normal loading and retry controls. */ }
+  if (window.location.href !== source) return;
+  returnScroll = destination;
+  return new Promise(resolve => router.visit(destination.path, {
     preserveScroll: true,
-    onCancel: () => { if (returnScroll === position) returnScroll = undefined; },
-  });
+    onCancel: () => { if (returnScroll === destination) returnScroll = undefined; },
+    onFinish: resolve,
+  }));
 }
 
 export function restorePracticeScroll() {
   const position = returnScroll;
-  if (!position || window.location.pathname + window.location.search !== position.path) return;
+  if (!position || window.location.pathname + window.location.search !== position.path) return false;
   returnScroll = undefined;
-  requestAnimationFrame(() => window.scrollTo(0, position.scroll));
+  window.scrollTo({top: position.scroll, left: 0, behavior: 'instant'});
   return true;
 }

@@ -13,6 +13,8 @@ class UserConfig extends Model
 
     public $timestamps = false;
 
+    protected $hidden = ['skype'];
+
     protected $fillable = [
         'user_id',
         'day_birthday',
@@ -44,10 +46,6 @@ class UserConfig extends Model
 
     public function facebook(){
         return $this->hasOne(UserConfigsView::class, 'id', 'facebook');
-    }
-
-    public function skype(){
-        return $this->hasOne(UserConfigsView::class, 'id', 'skype');
     }
 
     public function twitter(){

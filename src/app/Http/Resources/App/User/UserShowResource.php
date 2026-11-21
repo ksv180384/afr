@@ -53,9 +53,6 @@ class UserShowResource extends JsonResource
         if(Helper::isShowInfoUser(data_get($this, 'config.odnoklassniki.alias'))){
             $result['ok'] = data_get($this, 'infos.odnoklassniki');
         }
-        if(Helper::isShowInfoUser(data_get($this, 'config.skype.alias'))){
-            $result['skype'] = data_get($this, 'infos.skype');
-        }
         if(Helper::isShowInfoUser(data_get($this, 'config.telegram.alias'))){
             $result['telegram'] = data_get($this, 'infos.telegram');
         }

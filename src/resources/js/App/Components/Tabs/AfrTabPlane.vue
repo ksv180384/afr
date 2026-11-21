@@ -2,6 +2,7 @@
 const props = defineProps({
   label: { type: String, default: '' },
   name: { type: String, default: '' },
+  keepMounted: { type: Boolean, default: false },
 });
 </script>
 

@@ -177,7 +177,11 @@ test('selected routes replace late responses and a second reader reuses the same
   await current;
   old.resolve({...home(), route:{unit:{id:'old'}}});
   assert.equal(await first, null);
-  assert.equal((await store.load(7, 1, options)).home.route.unit.id, 'new');
+  const cached = store.cachedHome(7, options.selection);
+  assert.equal(cached.route.unit.id, 'new');
+  assert.equal((await store.load(7, 1, options)).home, cached);
+  assert.equal(store.cachedHome(7, {unit:'old'}), null);
+  assert.equal(store.cachedHome(8, options.selection), null);
   assert.equal(calls, 2);
 });
 

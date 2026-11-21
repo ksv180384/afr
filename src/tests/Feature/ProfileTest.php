@@ -2,7 +2,9 @@
 
 use App\Models\Learning\LearningProfile;
 use App\Models\Proverb;
+use App\Models\User\Rang;
 use App\Models\User\User;
+use App\Models\User\UserConfigsView;
 use Database\Seeders\Learning\LearningLevelSeeder;
 use Inertia\Testing\AssertableInertia as Assert;
 
@@ -19,6 +21,41 @@ test('profile page is displayed', function () {
         ->get('/profile');
 
     $response->assertOk();
+});
+
+test('legacy Skype details are omitted from profile pages and ignored on update', function () {
+    Proverb::query()->create(['text' => 'Bonjour', 'translation' => 'Привет']);
+    $public = UserConfigsView::query()->create(['alias' => UserConfigsView::VSEM, 'title' => 'Всем']);
+    $user = User::factory()->create();
+    $user->infos()->update(['skype' => 'legacy-name', 'telegram' => 'bonjour']);
+    $user->config()->update(['skype' => $public->id, 'telegram' => $public->id]);
+
+    $this->get(route('user.show', $user->id))->assertOk()
+        ->assertInertia(fn (Assert $page) => $page->missing('user.skype')->where('user.telegram', 'bonjour'));
+
+    $this->actingAs($user)->get('/profile')->assertOk()
+        ->assertInertia(fn (Assert $page) => $page->missing('user.infos.skype')->missing('user.config.skype')
+            ->where('user.infos.telegram', 'bonjour'));
+
+    $this->patch('/profile', [
+        'name' => $user->name,
+        'day_birthday' => false,
+        'yar_birthday' => false,
+        'telegram' => 'salut',
+        'skype' => 'ignored',
+        'view_skype' => $user->config->email,
+    ])->assertSessionHasNoErrors()->assertRedirect('/profile');
+
+    expect($user->infos()->first()->skype)->toBe('legacy-name')
+        ->and($user->infos()->first()->telegram)->toBe('salut')
+        ->and($user->config()->first()->skype)->toBe($public->id);
+
+    $rank = Rang::query()->create(['alias' => 'administrator', 'title' => 'Администратор']);
+    $admin = User::factory()->create(['rang_id' => $rank->id]);
+    $this->actingAs($admin)->get(route('admin.user.show', $user->id))
+        ->assertOk()
+        ->assertInertia(fn (Assert $page) => $page->missing('user.infos.skype')->missing('user.config.skype')
+            ->where('user.infos.telegram', 'salut'));
 });
 
 test('profile information can be updated', function () {

@@ -5,6 +5,8 @@ import { browserTimezone } from './practiceTime.js';
 import { guestShortReviewPlan, guestShortReviewSource } from './guestVocabulary.js';
 import { activeGuestRun, guestPracticeHome, searchGuestRoute } from './guestPracticeHome.js';
 
+const routeKey = selection => JSON.stringify([selection.level ?? null, selection.unit ?? null]);
+
 export const createPracticeHomeStore = ({transport, guestTransport, guestRepository, accountRepository,
   idFactory = () => crypto.randomUUID(), now = () => new Date().toISOString()}) => {
   const state = shallowReactive({
@@ -50,13 +52,19 @@ export const createPracticeHomeStore = ({transport, guestTransport, guestReposit
     state.ready = catalog !== undefined;
   };
 
-  const loadHome = (owner, selection, force) => {
-    setOwner(owner);
-    const key = JSON.stringify([selection.level ?? null, selection.unit ?? null]);
-    if (homeRequest?.key === key) return homeRequest.promise;
+  const cachedHome = (owner, selection = {}) => {
+    if (state.owner !== owner || !state.ready || selectionKey !== routeKey(selection)) return null;
     const date = state.home?.local_date;
     const sameDay = !date || date === guestDate(now(), state.home.profile.timezone);
-    if (!force && state.ready && selectionKey === key && sameDay) return Promise.resolve({home: state.home, history: state.history});
+    return sameDay ? state.home : null;
+  };
+
+  const loadHome = (owner, selection, force) => {
+    setOwner(owner);
+    const key = routeKey(selection);
+    if (homeRequest?.key === key) return homeRequest.promise;
+    const cached = !force && cachedHome(owner, selection);
+    if (cached) return Promise.resolve({home: cached, history: state.history});
     if (selectionKey !== key) {
       state.home = null;
       state.ready = false;
@@ -298,7 +306,7 @@ export const createPracticeHomeStore = ({transport, guestTransport, guestReposit
     await refresh(owner, 1, {selection: currentSelection});
   });
   return {
-    state, load, refresh, loadHistory, invalidate, updateGuest, start, loadReviewPlan, startReview, changeLevel, accountRepository, guestRepository, setOwner,
+    state, load, refresh, cachedHome, loadHistory, invalidate, updateGuest, start, loadReviewPlan, startReview, changeLevel, accountRepository, guestRepository, setOwner,
     searchGuest: (query, completedOnly) => searchGuestRoute(state.guest, catalog, query, completedOnly),
     resetProfile: () => { profileRequest = undefined; state.profilePending = false; },
   };

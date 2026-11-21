@@ -29,8 +29,12 @@ const changeTab = (tabName) => {
       </button>
     </template>
   </div>
-  <template v-for="afrTabPlane in slotsDefault">
-    <component :is="afrTabPlane" v-if="model === afrTabPlane.props.name"></component>
+  <template v-for="afrTabPlane in slotsDefault" :key="afrTabPlane.props.name">
+    <component
+      :is="afrTabPlane"
+      v-if="model === afrTabPlane.props.name || afrTabPlane.props['keep-mounted']"
+      v-show="model === afrTabPlane.props.name"
+    />
   </template>
   <div v-if="position === 'bottom'" class="afr-tabs-footer" role="group" aria-label="Разделы">
     <template v-for="tab in slotsDefault">

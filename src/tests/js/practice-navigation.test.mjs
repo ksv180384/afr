@@ -5,8 +5,42 @@ import { createServer } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { createSSRApp, h } from 'vue';
 import { renderToString } from '@vue/server-renderer';
-import { createInertiaApp } from '@inertiajs/vue3';
+import { createInertiaApp, router } from '@inertiajs/vue3';
 import { createHeadManager } from '@inertiajs/core';
+import { restorePracticeScroll, returnToPractice } from '../../resources/js/App/Learning/practiceRunNavigation.js';
+
+test('return from a lesson waits for the selected route and restores its scroll once', async (context) => {
+  const origin = 'http://localhost:5000';
+  const scrolls = [];
+  globalThis.window = {
+    location: new URL('/daily/run/d0f0?from_level=PRE_A1&from_unit=PRE_A1-U02&from_scroll=720', origin),
+    scrollTo: value => scrolls.push(value),
+  };
+  context.after(() => { delete globalThis.window; });
+  const visits = [];
+  context.mock.method(router, 'visit', (path, options) => {
+    assert.equal(options.preserveScroll, true);
+    visits.push(path);
+    window.location = new URL(path, origin);
+    options.onFinish();
+  });
+  let resolve;
+  const pendingRoute = new Promise(done => { resolve = done; });
+  const store = {load(owner, page, options) {
+    assert.equal(owner,7);
+    assert.equal(page,1);
+    assert.deepEqual(options.selection,{level:'PRE_A1',unit:'PRE_A1-U02'});
+    return pendingRoute;
+  }};
+  const returning = returnToPractice(store, 7);
+  assert.deepEqual(visits, []);
+  resolve();
+  await returning;
+  assert.deepEqual(visits, ['/practice?level=PRE_A1&unit=PRE_A1-U02']);
+  assert.equal(restorePracticeScroll(), true);
+  assert.equal(restorePracticeScroll(), false);
+  assert.deepEqual(scrolls, [{top:720,left:0,behavior:'instant'}]);
+});
 
 test('practice and home metadata replace each other without retaining a previous canonical or robots tag', async () => {
   const root = fileURLToPath(new URL('../../', import.meta.url));

@@ -7,8 +7,8 @@ export const accountTransport = {
   reviewPlan: (filters = {}) => get(root + '/vocabulary/review-plan', {params: filters}),
   history: (page = 1) => get(root + '/history', {params:{page}}),
   loadRun: (id, {playback = false} = {}) => get(root + '/runs/' + id, playback ? {params:{playback:1}} : undefined),
-  updateReviewSettings: (input) => patch(root + '/review-settings',input),
-  updateProfile: (input) => patch(root + '/profile',input),
+  updateReviewSettings: (input, options) => patch(root + '/review-settings',input,options),
+  updateProfile: (input, options) => patch(root + '/profile',input,options),
   call: (action, run, input, options) => post(action === 'start' ? root + '/runs' : root + '/runs/' + run + '/' + ({answer:'answers', reviewMistakes:'review-mistakes'}[action] ?? action),input,options),
 };
 

@@ -1,7 +1,7 @@
 <script setup>
 import { ref, shallowReactive, watch } from 'vue';
 import AfrButton from '@/App/Components/Form/AfrButton.vue';
-import { createReviewSettingsController } from '@/App/Learning/reviewSettingsController.js';
+import { createPracticeSettingsController } from '@/App/Learning/practiceSettingsController.js';
 import { reviewDurationLabel, reviewWordCount } from '@/App/Learning/shortReview.js';
 import { accountTransport } from '@/App/Services/Api/daily_practice.js';
 
@@ -14,7 +14,7 @@ const props = defineProps({
 const emit = defineEmits(['start', 'dismissed']);
 const hidden = ref(false);
 const state = shallowReactive({});
-const controller = createReviewSettingsController({
+const controller = createPracticeSettingsController({
   transport: accountTransport,
   guestRepository: props.store.guestRepository,
   getOwner: () => props.owner,

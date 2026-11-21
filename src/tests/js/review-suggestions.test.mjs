@@ -4,7 +4,7 @@ import { randomUUID } from 'node:crypto';
 import { nextLocalMidnight, changeGuestReviewSettings, reviewSuggestionsView } from '../../resources/js/App/Learning/reviewSuggestions.js';
 import { newGuestState, migrateGuestState } from '../../resources/js/App/Learning/guestProgress.js';
 import { freezeGuestBatch, acknowledgeGuestBatch, hasGuestWork } from '../../resources/js/App/Learning/guestSync.js';
-import { createReviewSettingsController } from '../../resources/js/App/Learning/reviewSettingsController.js';
+import { createPracticeSettingsController } from '../../resources/js/App/Learning/practiceSettingsController.js';
 
 const now='2026-11-06T12:00:00.000Z';
 const seed=()=>newGuestState({idFactory:randomUUID,now,timezone:'Europe/Moscow'});
@@ -55,30 +55,63 @@ test('lost acknowledgement retries the original request without resending level 
     requests.push(structuredClone(request));profile={...profile,revision:2,review_suggestions:{...profile.review_suggestions,enabled:false}};
     if(lost){lost=false;throw new Error('offline');}return {profile};
   }};
-  const controller=createReviewSettingsController({transport,getOwner:()=>7,idFactory:randomUUID});await controller.load();
+  const controller=createPracticeSettingsController({transport,getOwner:()=>7,idFactory:randomUUID});await controller.load();
   await assert.rejects(controller.save('toggle',false),/offline/);assert.equal(controller.state.pending,true);
   await controller.save();assert.deepEqual(requests[0],requests[1]);assert.equal(requests[1].expected_revision,1);assert.ok(!('current_level' in requests[0]));assert.ok(!('timezone' in requests[0]));
   assert.equal(controller.state.profile.review_suggestions.enabled,false);assert.equal(controller.state.pending,false);
 });
 
-test('a stale device refreshes a revision conflict and requires a fresh explicit choice',async()=>{
-  let profile=account();let calls=0;const controller=createReviewSettingsController({idFactory:randomUUID,getOwner:()=>7,transport:{profile:async()=>structuredClone(profile),updateReviewSettings:async()=>{
-    calls++;profile={...profile,revision:2,review_suggestions:{...profile.review_suggestions,enabled:false}};throw Object.assign(new Error('conflict'),{response:{status:409}});
+test('a stale device uses the current profile from a revision conflict and requires a fresh choice',async()=>{
+  let profile=account();let calls=0;let reads=0;
+  const controller=createPracticeSettingsController({idFactory:randomUUID,getOwner:()=>7,transport:{profile:async()=>{reads++;return structuredClone(profile);},updateReviewSettings:async()=>{
+    calls++;profile={...profile,revision:2,review_suggestions:{...profile.review_suggestions,enabled:false}};
+    throw Object.assign(new Error('conflict'),{response:{status:409,data:{code:'revision_conflict',state:{profile}}}});
   }}});
-  await controller.load();await assert.rejects(controller.save('toggle',true),/Повторите выбор/);assert.equal(calls,1);assert.equal(controller.state.pending,false);assert.equal(controller.state.profile.review_suggestions.enabled,false);
+  await controller.load();await assert.rejects(controller.save('toggle',true),/повторите выбор/);
+  assert.equal(calls,1);assert.equal(reads,1);assert.equal(controller.state.pending,false);assert.equal(controller.state.profile.review_suggestions.enabled,false);
 });
 
 test('account change or wrong authenticated identity prevents the settings write',async()=>{
-  let owner=7;let calls=0;let reads=0;
-  const controller=createReviewSettingsController({idFactory:randomUUID,getOwner:()=>owner,transport:{profile:async()=>{reads++;if(reads===2)owner=8;return account();},updateReviewSettings:async()=>{calls++;}}});
-  await controller.load();await assert.rejects(controller.save('toggle',false),/Аккаунт изменился/);assert.equal(calls,0);
-  const wrong=createReviewSettingsController({idFactory:randomUUID,getOwner:()=>7,transport:{profile:async()=>account(8)}});await assert.rejects(wrong.load(),/исходный аккаунт/);
+  let owner=7;let calls=0;
+  const controller=createPracticeSettingsController({idFactory:randomUUID,getOwner:()=>owner,transport:{profile:async()=>account(),updateReviewSettings:async()=>{calls++;}}});
+  await controller.load();owner=8;
+  await assert.rejects(controller.save('toggle',false),/исходный аккаунт/);assert.equal(calls,0);
+  const wrong=createPracticeSettingsController({idFactory:randomUUID,getOwner:()=>7,transport:{profile:async()=>account(8)}});await assert.rejects(wrong.load(),/исходный аккаунт/);
+});
+
+test('the learning settings share one initial read and use each save receipt for the next revision', async () => {
+  let profile = account();
+  const calls = [];
+  const update = (operation, updateProfile) => async (input, options) => {
+    calls.push(operation);
+    assert.equal(options.headers['X-Practice-Owner'], '7');
+    assert.equal(input.expected_revision, profile.revision);
+    profile = { ...updateProfile(input), revision: profile.revision + 1 };
+    return { profile: structuredClone(profile) };
+  };
+  const controller = createPracticeSettingsController({ getOwner: () => 7, transport: {
+    async profile() { calls.push('load'); return structuredClone(profile); },
+    updateProfile: update('level', input => ({ ...profile, current_level: input.current_level, timezone: input.timezone })),
+    updateReviewSettings: update('review', input => ({
+      ...profile, review_suggestions: { ...profile.review_suggestions, enabled: input.enabled },
+    })),
+  } });
+
+  await Promise.all([controller.load(), controller.load()]);
+  await controller.save('toggle', false);
+  await controller.saveLevel('A1');
+  await controller.save('toggle', true);
+
+  assert.deepEqual(calls, ['load', 'review', 'level', 'review']);
+  assert.equal(controller.state.profile.current_level, 'A1');
+  assert.equal(controller.state.profile.review_suggestions.enabled, true);
+  assert.equal(controller.state.profile.revision, 4);
 });
 
 test('guest controller persists in its supplied repository without profile or run mutations',async()=>{
   let local=seed();const before=structuredClone(local);const repository={read:async()=>structuredClone(local),mutate:async apply=>{const next=structuredClone(local);const result=apply(next);local=next;return result;}};
-  const c=createReviewSettingsController({guestRepository:repository,getOwner:()=>null,idFactory:randomUUID,now:()=>now});await c.load();await c.save('snooze_today');
-  const reload=createReviewSettingsController({guestRepository:repository,getOwner:()=>null,now:()=>now});await reload.load();assert.equal(reload.state.profile.review_suggestions.can_suggest,false);reload.state.error='old storage error';await reload.load();assert.equal(reload.state.error,'');
+  const c=createPracticeSettingsController({guestRepository:repository,getOwner:()=>null,idFactory:randomUUID,now:()=>now});await c.load();await c.save('snooze_today');
+  const reload=createPracticeSettingsController({guestRepository:repository,getOwner:()=>null,now:()=>now});await reload.load();assert.equal(reload.state.profile.review_suggestions.can_suggest,false);reload.state.error='old storage error';await reload.load();assert.equal(reload.state.error,'');
   assert.equal(local.profile_revision,before.profile_revision);assert.deepEqual(local.runs,before.runs);assert.deepEqual(local.outbox,before.outbox);
 });
 

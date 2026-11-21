@@ -6,6 +6,7 @@ import { assertPlayerAdapter } from '@/App/Learning/playerAdapter.js';
 import { answerComplete, emptyAnswer, questionSupport } from '@/App/Learning/playerUi.js';
 import { createAudioPlayer } from '@/App/Learning/audioPlayer.js';
 import { usePracticeFeedback } from '@/App/Learning/usePracticeFeedback.js';
+import { practiceReturnDestination } from '@/App/Learning/practiceRunNavigation.js';
 import PracticeReport from './PracticeReport.vue';
 import ReviewSuggestionCard from './ReviewSuggestionCard.vue';
 import { reviewWordCount } from '@/App/Learning/shortReview.js';
@@ -61,7 +62,8 @@ const loadResultRoute = async () => {
   routeLoading.value = true;
   routeError.value = '';
   try {
-    const result = await props.routeStore.refresh(props.routeOwner);
+    const {selection} = practiceReturnDestination();
+    const result = await props.routeStore.refresh(props.routeOwner, 1, {selection});
     if (disposed || !result) return;
     if (result.home.content_error && !result.home.active_run) throw new Error(result.home.content_error);
     routeResult.value = result.home;
@@ -305,7 +307,12 @@ const exit = async () => {
 };
 defineExpose({prepareAuthentication:async () => {
   if (busy.value) throw new Error('Дождитесь сохранения текущего действия.');
-  if (adapter.saveDraft && view.value?.presentation && !view.value.finished) await adapter.saveDraft({presentation_id:view.value.presentation.presentation_id,answer:JSON.parse(JSON.stringify(draft.value))});
+  if (adapter.saveDraft && view.value?.presentation && !view.value.finished) {
+    busy.value = true;
+    try {
+      await adapter.saveDraft({presentation_id:view.value.presentation.presentation_id,answer:JSON.parse(JSON.stringify(draft.value))});
+    } finally { busy.value = false; }
+  }
 },reload:() => perform(() => adapter.load()),reconcile:() => perform(() => adapter.acceptServerState(), () => { restoredVersion.value++; })});
 const loadForPlayback = async () => {
   const loaded = await adapter.load();
@@ -322,19 +329,24 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
       <p role="alert">{{ error }}</p>
     </div>
     <afr-button v-if="retrying && retry" :disabled="busy" @click="retry()">Повторить отправку</afr-button>
-    <afr-button v-if="!view && error" :disabled="busy" @click="exit">К моему пути</afr-button>
+    <template v-if="!view && error">
+      <afr-button :disabled="busy" @click="exit">К моему пути</afr-button>
+      <slot name="guest-login" />
+    </template>
     <p v-if="!view && !error" role="status" class="loading-message">Загружаем занятие…</p>
+    <header v-if="view" class="player-header">
+      <div class="lesson-title">
+        <h1 :title="view.session.title">{{ view.session.title }}</h1>
+        <slot v-if="activeLesson" name="guest-progress" />
+        <p v-if="!activeLesson" class="level-label">{{ view.session.level === 'PRE_A1' ? 'С нуля' : view.session.level }} · Около {{ view.session.duration_minutes }} мин</p>
+      </div>
+      <div class="header-tools">
+        <slot name="guest-login" />
+        <audio-preferences v-if="activeLesson" class="player-audio-settings" popover :compact="!!$slots['guest-login']" />
+        <afr-button v-if="!view.finished || isPreview" class="exit-lesson" :disabled="busy || navigationBusy" :aria-label="isPreview ? 'Выйти из предпросмотра' : 'Выйти с сохранением'" :title="isPreview ? 'Выйти из предпросмотра' : 'Выйти с сохранением'" @click="exit"><daily-practice-icon name="close" /></afr-button>
+      </div>
+    </header>
     <template v-if="view">
-      <header class="player-header">
-        <div class="lesson-title">
-          <h1 :title="view.session.title">{{ view.session.title }}</h1>
-          <p v-if="!activeLesson" class="level-label">{{ view.session.level === 'PRE_A1' ? 'С нуля' : view.session.level }} · Около {{ view.session.duration_minutes }} мин</p>
-        </div>
-        <div class="header-tools">
-          <audio-preferences v-if="activeLesson" class="player-audio-settings" popover />
-          <afr-button v-if="!view.finished || isPreview" class="exit-lesson" :disabled="busy || navigationBusy" :aria-label="isPreview ? 'Выйти из предпросмотра' : 'Выйти с сохранением'" :title="isPreview ? 'Выйти из предпросмотра' : 'Выйти с сохранением'" @click="exit"><daily-practice-icon name="close" /></afr-button>
-        </div>
-      </header>
       <p v-if="!activeLesson && view.import_meta" class="level-label">Начато до входа · <practice-date :value="view.import_meta.client_started_at || view.import_meta.original_local_date" :timezone="timezone || view.timezone" /></p>
       <p v-else-if="!activeLesson && view.started_at" class="level-label">Начато <practice-date :value="view.started_at" :timezone="timezone || view.timezone" /></p>
       <pronunciation-notes v-if="!view.started" :notes="view.session.pronunciation_notes ?? []" />
@@ -532,7 +544,7 @@ h1 { font-size: clamp(1.05rem, .9rem + .5vw, 1.3rem); line-height: 1.4; font-wei
 .header-tools :deep(.audio-preferences.popover) { position: static; }
 .exit-lesson { width: 40px; height: 44px; padding: 0; background: transparent; border-color: transparent; }
 .exit-lesson :deep(svg) { margin: 0; width: 20px; }
-.player-audio-settings { margin: 0; }
+.player-audio-settings { margin: 0; --vocabulary-control-size: 44px; }
 h2 { font-size: 1.25rem; font-weight: bold; line-height: 1.5; }
 .level-label { color: #475569; font-size: .95rem; margin-bottom: .3rem; }
 .step-progress { display: flex; align-items: center; gap: .85rem; margin: 0 0 .8rem; color: #64748b; font-size: .8rem; flex-shrink: 0; }

@@ -65,9 +65,16 @@ it('preserves a refusal through disabling re-enabling and duplicate delivery aft
 
 it('rejects stale devices changed payloads foreign owners and level fields', function () {
     $input = reviewSettingsInput(1, ['action' => 'toggle', 'enabled' => false]);
-    $this->patchJson('/daily/api/review-settings', $input)->assertOk();
+    $foreign = User::factory()->create();
+    $wrongOwner = ['X-Practice-Owner' => (string) $foreign->id];
+    $this->patchJson('/daily/api/review-settings', $input, $wrongOwner)->assertForbidden();
+    $this->patchJson('/daily/api/profile', [
+        'client_event_id' => (string) Str::uuid(), 'expected_revision' => 1, 'current_level' => 'A1', 'timezone' => 'UTC',
+    ], $wrongOwner)->assertForbidden();
+    $this->patchJson('/daily/api/review-settings', $input, ['X-Practice-Owner' => (string) $this->learner->id])->assertOk();
     $this->patchJson('/daily/api/review-settings', [...$input, 'enabled' => true])->assertConflict()->assertJsonPath('code', 'idempotency_conflict');
-    $this->patchJson('/daily/api/review-settings', reviewSettingsInput())->assertConflict()->assertJsonPath('code', 'revision_conflict');
+    $this->patchJson('/daily/api/review-settings', reviewSettingsInput())->assertConflict()
+        ->assertJsonPath('code', 'revision_conflict')->assertJsonPath('state.profile.revision', 2);
     foreach (['user_id' => 99, 'current_level' => 'B1', 'timezone' => 'UTC'] as $field => $value) {
         $this->patchJson('/daily/api/review-settings', reviewSettingsInput(2, [$field => $value]))->assertUnprocessable();
     }

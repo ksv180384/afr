@@ -85,9 +85,6 @@ const age = computed(() => {
                 <Icon icon="ic:baseline-telegram" width="28px" height="28px" color="#039be5"/>
               </a>
             </div>
-            <span v-if="user.skype" class="contact-item">
-              <Icon icon="mdi:skype" width="28px" height="28px" color="#00a8ef"/> {{ user.skype }}
-            </span>
             <span v-if="user.whatsapp" class="contact-item">
               <Icon icon="ic:baseline-whatsapp" width="28px" height="28px" color="#00a858"/> {{ user.whatsapp }}
             </span>

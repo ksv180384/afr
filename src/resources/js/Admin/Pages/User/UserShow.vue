@@ -98,7 +98,6 @@ const profileFields = computed(() => [
 
 const contactFields = computed(() => [
   { label: 'Facebook', value: user.value.infos?.facebook },
-  { label: 'Skype', value: user.value.infos?.skype },
   { label: 'Twitter', value: user.value.infos?.twitter },
   { label: 'VK', value: user.value.infos?.vk },
   { label: 'Одноклассники', value: user.value.infos?.odnoklassniki },
@@ -114,7 +113,6 @@ const privacyFields = computed(() => [
   { label: 'Год рождения', value: user.value.config?.yar_birthday },
   { label: 'Email', value: user.value.config?.email?.title },
   { label: 'Facebook', value: user.value.config?.facebook?.title },
-  { label: 'Skype', value: user.value.config?.skype?.title },
   { label: 'Twitter', value: user.value.config?.twitter?.title },
   { label: 'VK', value: user.value.config?.vk?.title },
   { label: 'Одноклассники', value: user.value.config?.odnoklassniki?.title },
