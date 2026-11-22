@@ -74,6 +74,7 @@ onBeforeUnmount(() => { alive = false; paused.value = true; window.removeEventLi
         <el-table-column type="expand"><template #default="{ row }"><issues v-if="row.report" :report="row.report" /><p v-else>{{ row.message }}</p></template></el-table-column>
         <el-table-column prop="name" label="Файл" min-width="250" />
         <el-table-column label="Занятий" width="100"><template #default="{ row }">{{ row.sessions.length }}</template></el-table-column>
+        <el-table-column prop="trainingCount" label="Вопросов тренировок" width="150" />
         <el-table-column label="Состояние" width="160"><template #default="{ row }"><el-tag :type="row.status === 'done' ? 'success' : ['error','invalid'].includes(row.status) ? 'danger' : 'info'">{{ labels[row.status] }}</el-tag></template></el-table-column>
         <el-table-column prop="message" label="Результат" min-width="300" />
       </el-table>

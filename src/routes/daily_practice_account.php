@@ -12,6 +12,8 @@ Route::get('/daily/vocabulary', [VocabularyController::class, 'page'])->name('da
 Route::get('/daily/progress', [DailyPracticeController::class, 'page'])->name('daily.progress');
 Route::post('/daily/api/reports', \App\Http\Controllers\App\PracticeReportController::class)->middleware([DailyApiMiddleware::class, 'auth', 'throttle:6,1'])->name('daily.api.reports');
 Route::get('/daily', [DailyPracticeController::class, 'page'])->name('daily');
+Route::post('/daily/api/training', [GuestPracticeController::class, 'training'])
+    ->middleware([DailyApiMiddleware::class, 'throttle:120,1'])->name('daily.training');
 Route::get('/daily/run/{run}', [DailyPracticeController::class, 'page'])->whereUuid('run')->name('daily.run');
 Route::get('/daily/guest/{run}', [DailyPracticeController::class, 'page'])->whereUuid('run')->name('daily.guest');
 Route::get('/daily/api/route/reference', [PracticeRouteController::class, 'reference'])

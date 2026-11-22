@@ -5,11 +5,13 @@ import { router, Link } from '@inertiajs/vue3';
 import api from '@/Admin/Services/Api';
 import Shell from './Shell.vue';
 import Issues from './Issues.vue';
+import TaskFields from './TaskFields.vue';
+import TrainingEditor from './TrainingEditor.vue';
 import { useOperation } from './useOperation';
 import { sessionStatuses, statusLabel } from './editorUi';
 import PublicSessionContent from '@/App/Components/Learning/PublicSessionContent.vue';
 
-const props = defineProps({ authUser: Object, version: Object, validation: Object, publicMeta: Object });
+const props = defineProps({ authUser: Object, version: Object, validation: Object, publicMeta: Object, audioUrls: Object });
 const draft = ref(JSON.parse(JSON.stringify(props.version.payload)));
 const raw = ref('');
 const advanced = ref(false);
@@ -38,15 +40,10 @@ const rename = () => run(() => api.dailyPractice.action('sessions/' + props.vers
         <el-form-item label="Описание"><el-input v-model="draft.description" type="textarea" /></el-form-item>
         <el-form-item label="Продолжительность, минут"><el-input-number v-model="draft.duration_minutes" :min="1" /></el-form-item>
         <el-collapse><el-collapse-item v-for="task in draft.tasks" :key="task.id" :name="task.id" :title="task.id + ' · ' + task.instruction">
-          <el-form-item label="Вопрос / инструкция"><el-input v-model="task.instruction" type="textarea" /></el-form-item>
-          <el-form-item v-if="task.prompt" label="Текст"><el-input v-model="task.prompt.text" type="textarea" /></el-form-item>
-          <el-form-item v-if="task.prompt?.transcription_ru" label="Транскрипция"><el-input v-model="task.prompt.transcription_ru" type="textarea" /></el-form-item>
-          <template v-if="task.prompt?.audio"><el-form-item label="Текст озвучки"><el-input v-model="task.prompt.audio.text" type="textarea" /></el-form-item><el-form-item label="Транскрипция озвучки"><el-input v-model="task.prompt.audio.transcription_ru" type="textarea" /></el-form-item></template>
-          <el-form-item v-for="choice in task.choices ?? []" :key="choice.id" :label="'Вариант ' + choice.id"><el-input v-model="choice.text" /><el-input v-if="choice.text_lang === 'fr'" v-model="choice.transcription_ru" placeholder="Транскрипция" /></el-form-item>
-          <el-form-item v-if="task.choices" label="Правильный вариант"><el-select v-model="task.correct_choice_id"><el-option v-for="choice in task.choices" :key="choice.id" :value="choice.id" :label="choice.id + ': ' + choice.text" /></el-select></el-form-item>
-          <el-form-item label="Объяснение верного ответа"><el-input v-model="task.feedback.correct" type="textarea" /></el-form-item><el-form-item label="Объяснение ошибки"><el-input v-model="task.feedback.incorrect" type="textarea" /></el-form-item>
+          <task-fields :task="task" />
         </el-collapse-item></el-collapse>
         <p class="muted">Словарь, вводные блоки, карточки и остальные поля доступны в режиме «Полный JSON».</p>
+        <training-editor :key="version.checksum" :session="draft" :audio-urls="audioUrls" />
       </el-form>
       <div class="actions"><el-button type="primary" :loading="busy" :disabled="busy" @click="saveContent">Сохранить занятие</el-button><el-button type="danger" :disabled="busy" @click="remove">Удалить полностью</el-button></div>
     </el-card>

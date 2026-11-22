@@ -1,7 +1,17 @@
 import { router } from '@inertiajs/vue3';
 
 let returnScroll;
+let trainingHistoryHandler;
 const runPath = /^\/daily\/(run|guest)\/[0-9a-f-]+$/i;
+
+export function bindTrainingHistory(handler) {
+  trainingHistoryHandler = handler;
+  return () => { if (trainingHistoryHandler === handler) trainingHistoryHandler = undefined; };
+}
+
+export function handlePracticeHistory(event) {
+  trainingHistoryHandler?.(event);
+}
 
 export function visitPracticeRun(path, route, selection = {}) {
   const query = new URLSearchParams();

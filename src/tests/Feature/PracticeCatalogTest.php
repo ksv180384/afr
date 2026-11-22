@@ -12,6 +12,7 @@ use App\Models\User\User;
 use App\Services\Learning\PracticeUrls;
 use App\Services\Learning\PublicPracticeCatalog;
 use Database\Seeders\Learning\LearningLevelSeeder;
+use Illuminate\Support\Str;
 use Inertia\Testing\AssertableInertia as Assert;
 
 beforeEach(function () {
@@ -152,6 +153,33 @@ it('hides a level and restores only its independently published topics', functio
     $this->get($unitPath)->assertOk();
     $this->get($sessionPath)->assertOk();
     $this->get(PracticeUrls::unit($draftTopic))->assertStatus(410);
+});
+
+it('offers only visible levels in profile settings while keeping a saved hidden level', function () {
+    $levels = LearningLevel::whereIn('code', ['C1', 'C2']);
+    $levels->update(['published_at' => now('UTC')]);
+    \App\Models\Proverb::create(['text' => 'Bonjour', 'translation' => 'Здравствуйте']);
+    $learner = User::factory()->create();
+    $profile = LearningProfile::factory()->create(['user_id' => $learner->id, 'current_level' => 'C2']);
+
+    $this->actingAs($this->admin);
+    foreach ($levels->get() as $level) {
+        $this->postJson('/admin/daily-practice/catalog/levels/'.$level->id.'/visibility', ['published' => false])->assertOk();
+    }
+
+    $this->actingAs($learner)->get('/profile')->assertOk()->assertInertia(fn (Assert $page) => $page
+        ->where('practiceLevels', fn ($choices) => array_column($choices->all(), 'code') === ['PRE_A1', 'A1', 'A2', 'B1', 'B2']));
+    $this->getJson('/daily/api/profile')->assertOk()->assertJsonPath('current_level', 'C2');
+
+    $c1 = $levels->where('code', 'C1')->firstOrFail();
+    $this->actingAs($this->admin)->postJson('/admin/daily-practice/catalog/levels/'.$c1->id.'/visibility', ['published' => true])->assertOk();
+    $this->actingAs($learner)->get('/profile')->assertOk()->assertInertia(fn (Assert $page) => $page
+        ->where('practiceLevels', fn ($choices) => array_column($choices->all(), 'code') === ['PRE_A1', 'A1', 'A2', 'B1', 'B2', 'C1']));
+    expect($profile->fresh()->getRawOriginal('current_level'))->toBe('C2');
+
+    $input = ['client_event_id' => (string) Str::uuid(), 'expected_revision' => $profile->revision, 'timezone' => $profile->timezone];
+    $this->patchJson('/daily/api/profile', [...$input, 'current_level' => 'C2'])->assertUnprocessable();
+    $this->patchJson('/daily/api/profile', [...$input, 'current_level' => 'B2'])->assertOk()->assertJsonPath('profile.current_level', 'B2');
 });
 
 it('keeps lastmod stable on reads and excludes pending material from the public page', function () {

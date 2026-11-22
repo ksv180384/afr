@@ -63,6 +63,15 @@ test('player and all task components render on the server without browser global
     assert.match(await render('GuestPractice', {levels:[]}), /Проверяем хранилище браузера/);
     assert.match(await render('VocabularyPanel', {}), /Тест по словам/);
     assert.match(await render('CurrentLevelSetting', {controller:{state:{profile:null,error:''}}}), /Проверяем сохранённый уровень/);
+    const levelSetting = await render('CurrentLevelSetting', {
+      controller: {state: {profile: {current_level: 'C2'}}},
+      levels: [{code: 'B2', title: 'B2'}],
+    });
+    assert.match(levelSetting, /Сохранённый уровень C2 сейчас недоступен/);
+    assert.match(levelSetting, /<option[^>]*disabled[^>]*>Выберите доступный уровень/);
+    assert.match(levelSetting, /<option[^>]*value="B2"/);
+    assert.doesNotMatch(levelSetting, /<option[^>]*value="C[12]"/);
+    assert.match(levelSetting, /<button[^>]*disabled/);
     assert.match(await render('PracticeToasts', {notifications:createPracticeNotifications()}), /Уведомления практики/);
     assert.ok((await render('GuestSync', {})).length > 0);
     const card=await render('DailySessionCard',{});

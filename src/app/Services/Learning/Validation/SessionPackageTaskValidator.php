@@ -20,7 +20,6 @@ final class SessionPackageTaskValidator
                 $this->unique($session[$field] ?? [], 'id', $base.'/'.$field, $report);
             }
             $vocabulary = $this->ids($session['vocabulary'] ?? []);
-            $objectives = $this->ids($session['objectives'] ?? []);
             $tasks = $this->ids($session['tasks'] ?? []);
             foreach ($session['introductions'] ?? [] as $ii => $introduction) {
                 if (! is_array($introduction)) {
@@ -33,18 +32,25 @@ final class SessionPackageTaskValidator
             if (($session['level'] ?? null) === 'PRE_A1' && empty($session['introductions'])) {
                 $report->warning('introduction_required', $base.'/introductions', 'Перед новым материалом PRE_A1 необходимы вводные карточки.');
             }
-            foreach ($session['tasks'] ?? [] as $ti => $task) {
-                if (! is_array($task)) {
-                    continue;
+            $groups = ['tasks' => $session['tasks'] ?? []];
+            $used = [];
+            foreach ($session['training_tasks'] ?? [] as $mode => $items) {
+                $groups['training_tasks/'.$mode] = $items;
+                $this->unique($items, 'id', $base.'/training_tasks/'.$mode, $report);
+            }
+            foreach ($groups as $group => $items) {
+                if (isset($session['training_tasks'])) {
+                    foreach ($items as $index => $item) {
+                        $signature = CanonicalJson::hash(\Illuminate\Support\Arr::except($item, [
+                            'id', 'skill', 'hint', 'feedback', 'objective_ids', 'vocabulary_ids', 'assessed_vocabulary_ids', 'pronunciation_notes',
+                        ]));
+                        if ($group !== 'tasks' && isset($used[$signature])) {
+                            $report->error('duplicate_training_task', $base.'/'.$group.'/'.$index, 'Такой вопрос уже есть в занятии или тренировках.');
+                        }
+                        $used[$signature] = true;
+                    }
                 }
-                $at = $base.'/tasks/'.$ti;
-                $this->references($task['objective_ids'] ?? [], $objectives, $at, 'objective_ids', $report);
-                $this->references($task['vocabulary_ids'] ?? [], $vocabulary, $at, 'vocabulary_ids', $report);
-                $this->references($task['assessed_vocabulary_ids'] ?? [], $task['vocabulary_ids'] ?? [], $at, 'assessed_vocabulary_ids', $report, true, 'invalid_assessed_vocabulary');
-                if (is_string($task['skill'] ?? null) && ! in_array($task['skill'], (array) ($session['skills'] ?? []), true)) {
-                    $report->error('invalid_skill', $at.'/skill', 'Навык шага отсутствует в skills сессии.');
-                }
-                $this->task($task, $at, $report);
+                $this->validateTasks($items, $base.'/'.$group, $session, $report);
             }
             foreach ($session['vocabulary'] ?? [] as $vi => $word) {
                 if (! is_array($word)) {
@@ -65,6 +71,20 @@ final class SessionPackageTaskValidator
             if (empty($session['public_page'])) {
                 $report->warning('public_page_required', $base.'/public_page', 'Для публикации требуется полноценная публичная страница.');
             }
+        }
+    }
+
+    private function validateTasks(array $items, string $path, array $session, PackageValidationReport $report): void
+    {
+        foreach ($items as $index => $task) {
+            $at = $path.'/'.$index;
+            $this->references($task['objective_ids'], $this->ids($session['objectives']), $at, 'objective_ids', $report);
+            $this->references($task['vocabulary_ids'], $this->ids($session['vocabulary']), $at, 'vocabulary_ids', $report);
+            $this->references($task['assessed_vocabulary_ids'], $task['vocabulary_ids'], $at, 'assessed_vocabulary_ids', $report, true, 'invalid_assessed_vocabulary');
+            if (! in_array($task['skill'], $session['skills'], true)) {
+                $report->error('invalid_skill', $at.'/skill', 'Навык шага отсутствует в skills сессии.');
+            }
+            $this->task($task, $at, $report);
         }
     }
 

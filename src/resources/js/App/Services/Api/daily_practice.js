@@ -27,6 +27,7 @@ export const vocabularyTransport = {
 export const reportPracticeProblem = (payload) => post(root+'/reports',payload);
 
 export const practiceRouteTransport = {
+  training: payload => post(root + '/training', payload),
   search: (q, completed) => get(root + '/route/search', {params: {q, completed: Number(completed)}}),
   reference: (path) => get(root + '/route/reference', {params: {path}}),
 };

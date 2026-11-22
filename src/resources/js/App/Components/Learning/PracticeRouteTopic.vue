@@ -5,13 +5,15 @@ let pendingFocus;
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { Link } from '@inertiajs/vue3';
 import AfrButton from '@/App/Components/Form/AfrButton.vue';
-import { restorePracticeScroll } from '@/App/Learning/practiceRunNavigation.js';
+import { bindTrainingHistory, restorePracticeScroll } from '@/App/Learning/practiceRunNavigation.js';
+import { canTrainTopic, trainingModes } from '@/App/Learning/training.js';
 import { practiceRouteTransport } from '@/App/Services/Api/daily_practice.js';
 import FrenchText from './FrenchText.vue';
 import PronunciationNotes from './PronunciationNotes.vue';
 import DailyPracticeIcon from './DailyPracticeIcon.vue';
 import PracticeStatus from './PracticeStatus.vue';
 import PracticeLevelPath from './PracticeLevelPath.vue';
+import TrainingPanel from './TrainingPanel.vue';
 
 const props = defineProps({route: {type: Object, required: true}, selection: Object, owner: Number, guest: Boolean, store: Object, busy: Boolean, trail: Boolean});
 const emit = defineEmits(['start', 'continue']);
@@ -32,11 +34,21 @@ const lessonAction = lesson => {
 const dialog = ref(null);
 const closeButton = ref(null);
 const fragment = ref('');
+let fragmentPath;
 let trigger;
+let unbindTrainingHistory;
 let openedHere = false;
+const trainingSelection = computed(() => {
+  if (!props.trail || !fragment.value.startsWith('#training=')) return null;
+  const [unit, modeId] = fragment.value.slice('#training='.length).split('/');
+  const topic = props.route.topics?.find(topic => encodeURIComponent(topic.id) === unit);
+  const mode = trainingModes.find(mode => mode.id === modeId);
+  return topic && mode ? {topic, mode} : null;
+});
 const panel = computed(() => {
-  if (fragment.value === '#topics' || fragment.value === '#notes') return fragment.value.slice(1);
+  if (['#topics', '#notes'].includes(fragment.value)) return fragment.value.slice(1);
   if (fragment.value.startsWith('#lesson=')) return 'lesson';
+  if (trainingSelection.value) return 'training';
   return '';
 });
 const referenceCard = computed(() => {
@@ -44,16 +56,33 @@ const referenceCard = computed(() => {
   if (panel.value === 'lesson') return props.route.lessons.find(lesson => '#lesson=' + encodeURIComponent(lesson.id) === fragment.value);
   return null;
 });
-const heading = computed(() => ({topics: 'Уровни и темы', notes: 'Памятка', lesson: 'Подробнее'})[panel.value]);
+const heading = computed(() => ({topics: 'Уровни и темы', training: trainingSelection.value?.topic.title, notes: 'Памятка', lesson: 'Подробнее'})[panel.value]);
 const pagePath = () => window.location.pathname + window.location.search;
 const openPanel = (value, event) => {
   trigger = event.currentTarget;
   pendingFocus = {path: pagePath(), id: trigger.id};
   openedHere = true;
-  window.location.hash = value;
+  if (value.startsWith('training=')) {
+    window.history.pushState({...window.history.state, practiceTraining: true}, '', '#' + value);
+  } else {
+    window.location.hash = value;
+  }
   syncFragment();
 };
-const syncFragment = () => { fragment.value = window.location.hash; };
+const openTraining = (topic, mode, event) => openPanel('training=' + encodeURIComponent(topic.id) + '/' + mode.id, event);
+const syncFragment = () => {
+  fragmentPath = pagePath();
+  fragment.value = window.location.hash;
+};
+const handleTrainingHistory = event => {
+  if (!props.trail || fragmentPath !== pagePath()) return;
+  const trainingEntry = event.state?.practiceTraining && window.location.hash.startsWith('#training=');
+  if (!trainingEntry && !fragment.value.startsWith('#training=')) return;
+  // Same-page training entries belong to the dialog. Inertia would remount the route on traversal.
+  event.stopImmediatePropagation();
+  openedHere = Boolean(trainingEntry);
+  syncFragment();
+};
 const closePanel = () => {
   if (openedHere) {
     openedHere = false;
@@ -69,7 +98,7 @@ watch(panel, async value => {
     await nextTick();
     if (panel.value !== value || !dialog.value) return;
     dialog.value.showModal();
-    closeButton.value?.focus();
+    closeButton.value?.focus({preventScroll: true});
   } else if (!value && dialog.value?.open) {
     openedHere = false;
     dialog.value.close();
@@ -87,9 +116,13 @@ onMounted(() => {
     pendingFocus = undefined;
     nextTick(() => document.getElementById(id)?.focus({preventScroll: true}));
   }
+  if (props.trail) unbindTrainingHistory = bindTrainingHistory(handleTrainingHistory);
   window.addEventListener('hashchange', syncFragment);
 });
-onBeforeUnmount(() => window.removeEventListener('hashchange', syncFragment));
+onBeforeUnmount(() => {
+  unbindTrainingHistory?.();
+  window.removeEventListener('hashchange', syncFragment);
+});
 
 const reference = ref(null);
 const referenceBusy = ref(false);
@@ -98,7 +131,7 @@ const loadReference = async (card, onCleanup) => {
   reference.value = null;
   referenceError.value = '';
   referenceBusy.value = false;
-  if (!panel.value || panel.value === 'topics') return;
+  if (!['notes', 'lesson'].includes(panel.value)) return;
   if (!canOpen(card) || !card.path) {
     if (panel.value === 'lesson') referenceError.value = card?.reason || 'Справка для этого материала недоступна.';
     return;
@@ -177,7 +210,7 @@ const search = async () => {
 
     <slot v-if="!trail" />
 
-    <practice-level-path v-if="trail" :route="route" :selection="selection" :busy="busy" @open="openLesson" />
+    <practice-level-path v-if="trail" :route="route" :selection="selection" :busy="busy" @open="openLesson" @train="openTraining" />
 
     <section v-if="!trail" class="route-lessons" aria-labelledby="practice-lessons-title">
       <header class="route-header">
@@ -201,11 +234,11 @@ const search = async () => {
       </ol>
     </section>
 
-    <dialog ref="dialog" class="route-dialog" aria-labelledby="practice-panel-title" @cancel.prevent="closePanel">
+    <dialog ref="dialog" :class="panel === 'training' ? 'training-dialog mobile-dialog-sheet' : 'route-dialog'" aria-labelledby="practice-panel-title" @cancel.prevent="closePanel">
       <div class="dialog-toolbar">
         <header class="route-header">
           <h2 id="practice-panel-title">{{ heading }}</h2>
-          <button ref="closeButton" class="dialog-icon" type="button" aria-label="Закрыть" title="Закрыть" @click="closePanel">
+          <button ref="closeButton" class="dialog-icon" type="button" aria-label="Закрыть" title="Закрыть" autofocus @click="closePanel">
             <daily-practice-icon name="close" />
           </button>
         </header>
@@ -225,7 +258,12 @@ const search = async () => {
           <label class="route-checkbox"><input v-model="completedOnly" type="checkbox" /> Только пройденное</label>
         </form>
       </div>
-      <template v-if="panel === 'topics'">
+      <div v-if="trainingSelection" class="training-content">
+        <training-panel v-if="canTrainTopic(trainingSelection.topic)" :key="(owner ?? 'guest') + fragment"
+          :owner="owner" :unit="trainingSelection.topic.id" :mode="trainingSelection.mode" :guest-repository="store?.guestRepository" />
+        <p v-else role="status">{{ trainingSelection.topic.reason || 'Тренировки этой темы пока недоступны.' }}</p>
+      </div>
+      <template v-else-if="panel === 'topics'">
         <p v-if="searching" role="status">Ищем занятия…</p>
         <p v-if="searchError" role="alert">{{ searchError }}</p>
         <section v-if="results">
@@ -343,6 +381,39 @@ const search = async () => {
 .lesson-text p { color:var(--practice-muted); font-size:.875rem; margin:0; }
 .route-dialog { box-sizing:border-box; position:fixed; inset:0 0 0 auto; margin:0; width:min(100%,35rem); max-width:100%; height:100dvh; max-height:100%; overflow:auto; padding:0 1.25rem 1rem; overflow-x:hidden; background:#fff; color:#17364d; border-left:1px solid #cbd5e1; }
 .route-dialog::backdrop { background:#10284088; }
+.training-dialog {
+  --dialog-width: 46rem;
+  --training-inset: clamp(1rem, 3vw, 1.5rem);
+  padding: 0;
+  overflow: hidden;
+  color: var(--practice-ink);
+  background: white;
+}
+.training-dialog[open] { display: flex; flex-direction: column; }
+.training-dialog:has(.lesson-active) { height: min(52rem, 100%); }
+.training-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  gap: .75rem;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: var(--training-inset) max(var(--training-inset), env(safe-area-inset-right))
+    calc(var(--training-inset) + env(safe-area-inset-bottom)) max(var(--training-inset), env(safe-area-inset-left));
+}
+.training-content:has(.lesson-active) { flex: 1; overflow: hidden; }
+.training-dialog .dialog-toolbar {
+  position: static;
+  flex-shrink: 0;
+  margin: 0;
+  padding-inline: max(var(--training-inset), env(safe-area-inset-left)) max(var(--training-inset), env(safe-area-inset-right));
+}
+:global(html:has(.training-dialog[open])) { overflow: hidden; }
+.training-dialog::backdrop { background:#10284088; }
+@media (max-width: 400px) {
+  .trail-toolbar .route-actions { gap: .3rem; }
+  .trail-toolbar .route-actions .topics-trigger { padding-inline: .5rem; gap: .35rem; }
+}
 .route-dialog[open] { animation: slide-in .25s ease-out; }
 @keyframes slide-in {
   from { transform:translateX(100%); }

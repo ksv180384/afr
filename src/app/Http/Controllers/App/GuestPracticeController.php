@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers\App;
 
+use App\Enums\Learning\LearningLevel;
+use App\Enums\Learning\PracticeErrorCode;
 use App\Http\Controllers\Controller;
 use App\Models\Learning\LearningMedia;
 use App\Models\Learning\LearningSession;
 use App\Services\Learning\AccountRunView;
+use App\Services\Learning\AnswerCheckingException;
+use App\Services\Learning\AvailableLevels;
 use App\Services\Learning\CheckingPolicy;
+use App\Services\Learning\LearningAccessService;
 use App\Services\Learning\MediaLibraryService;
+use App\Services\Learning\TrainingSelection;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class GuestPracticeController extends Controller
 {
@@ -22,6 +30,38 @@ class GuestPracticeController extends Controller
             ->with(['activeVersion' => fn ($query) => $query->select('id', 'session_id', 'version', 'status', 'checksum',
                 'content_title', 'content_duration', 'content_goal', 'content_prerequisites'), 'unit'])->orderBy('learning_units.sort_order')
             ->orderBy('learning_sessions.sort_order')->orderBy('learning_sessions.external_id');
+    }
+
+    public function training(Request $request, TrainingSelection $training, LearningAccessService $access)
+    {
+        $input = $request->validate([
+            'mode' => 'required|in:recall,dialogue',
+            'unit' => 'sometimes|required|string|max:128',
+            'current_level' => ['sometimes', Rule::enum(LearningLevel::class)],
+            'completed' => 'sometimes|array|max:2000', 'completed.*' => 'string|max:160',
+            'current' => 'nullable|string|max:160', 'seen' => 'sometimes|array|max:1000', 'seen.*' => 'string|max:160',
+            'previous' => isset($request->unit) ? 'sometimes|array|max:100' : 'sometimes|array|max:6',
+            'previous.*' => 'string|max:400',
+        ]);
+        $previous = $input['previous'] ?? [];
+        if (isset($input['unit'])) {
+            $states = $request->user()
+                ? $access->forUser($request->user())
+                : $access->states($access->outline(), $input['completed'] ?? [], $input['current_level'] ?? AvailableLevels::first());
+            $topic = $states['units'][$input['unit']] ?? null;
+            if ($topic === null) {
+                return response()->json(['items' => []]);
+            }
+            if ($topic['locked']) {
+                throw new AnswerCheckingException(PracticeErrorCode::Forbidden, $topic['reason']);
+            }
+            return response()->json(['items' => $training->selectTopic($this->published(), $input['mode'], $input['unit'], $previous)]);
+        }
+        [$completed, $current, $seen] = $request->user()
+            ? $training->accountProgress($request->user())
+            : [$input['completed'] ?? [], $input['current'] ?? null, $input['seen'] ?? []];
+        return response()->json(['items' => $training->select($this->published(), $input['mode'], $completed,
+            $current, $seen, $previous)]);
     }
 
     public function index()

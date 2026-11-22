@@ -15,6 +15,8 @@ export async function prepareImport(files, maxBytes = 10 * 1024 * 1024) {
         row.status = 'skipped'; row.message = 'Это не пакет занятий'; continue;
       }
       row.sessions = p.sessions.map(s => s.id);
+      row.trainingCount = p.sessions.reduce((total, session) => total
+        + (session.training_tasks?.recall?.length ?? 0) + (session.training_tasks?.dialogue?.length ?? 0), 0);
       const match = /\.v(\d+)\.json$/i.exec(file.name);
       row.sourceVersion = match ? Number(match[1]) : Math.max(1, ...p.sessions.map(s => s.version ?? 1));
       if (!Number.isSafeInteger(row.sourceVersion) || row.sourceVersion < 1) throw new Error('Неверный номер версии файла');

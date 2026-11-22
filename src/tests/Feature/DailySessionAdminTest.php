@@ -434,6 +434,9 @@ it('imports edits previews and exports all twelve tasks while preserving an old 
     $run = LearningRun::factory()->create(['user_id' => $this->admin->id, 'session_version_id' => $row->id]);
     $old = $run->snapshot;
     $expanded = json_decode(file_get_contents(base_path('tests/Fixtures/Learning/twelve-task-package.json')), true);
+    $training = $expanded['sessions'][0]['tasks'][0];
+    $training['instruction'] = 'Выберите реплику для новой ситуации.';
+    $expanded['sessions'][0]['training_tasks'] = ['dialogue' => [$training], 'recall' => []];
     [, $updated] = adminImport($this, $expanded);
     expect($updated['version_ids'][0])->toBe($row->id)
         ->and($run->fresh()->snapshot)->toBe($old)

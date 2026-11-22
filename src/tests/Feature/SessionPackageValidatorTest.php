@@ -35,6 +35,17 @@ function packageCheck(array|string $data): PackageValidationReport
     return app(SessionPackageValidator::class)->validate(is_string($data) ? $data : json_encode($data, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE));
 }
 
+it('validates additional training questions independently of the main path length', function () {
+    $package = packageData();
+    $task = $package['sessions'][0]['tasks'][0];
+    $task['id'] = 'T1';
+    $task['instruction'] = 'Выберите подходящую реплику.';
+    $package['sessions'][0]['training_tasks'] = ['recall' => [$task], 'dialogue' => []];
+    expect(packageCheck($package)->isValid())->toBeTrue();
+    $package['sessions'][0]['training_tasks']['recall'][0]['vocabulary_ids'] = ['missing'];
+    packageHasIssue(packageCheck($package), 'reference_not_found', '/sessions/0/training_tasks/recall/0/vocabulary_ids/0');
+});
+
 function packageHasIssue(PackageValidationReport $report, string $code, string $path): void
 {
     $issues = $report->toArray()['errors'];

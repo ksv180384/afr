@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { createPreviewAdapter, createTransportAdapter } from '../../resources/js/App/Learning/playerAdapter.js';
+import { createLocalPlayerAdapter, createPreviewAdapter, createTransportAdapter } from '../../resources/js/App/Learning/playerAdapter.js';
+import { trainingSession, trainingModes } from '../../resources/js/App/Learning/training.js';
 import { createAudioPlayer } from '../../resources/js/App/Learning/audioPlayer.js';
 import { emptyAnswer, answerComplete, introductionPages, insertedValue, questionSupport } from '../../resources/js/App/Learning/playerUi.js';
 
@@ -13,6 +14,26 @@ const input = (view, extra = {}) => ({ client_event_id: 'event-' + ++serial, pre
 const correct = (task) => task.type === 'matching_pairs' ? { pairs: task.correct_pairs.map(({ left_id, right_id }) => ({ left_id, right_id })) }
   : task.type === 'word_order' ? { token_ids: task.accepted_orders[0] }
     : task.correct_choice_id ? { choice_id: task.correct_choice_id } : { value: task.accepted_answers[0] };
+
+test('training keeps lesson-local IDs distinct and resumes at the next question', async () => {
+  const source = packages[0].sessions[0];
+  const items = ['one', 'two'].map(id => ({source: id, task: source.tasks[0], level: source.level, vocabulary: source.vocabulary}));
+  const session = trainingSession(trainingModes[0], items);
+  assert.notEqual(session.tasks[0].id, session.tasks[1].id);
+  let saved;
+  const adapter = () => createLocalPlayerAdapter({mode: 'training', saved, loadSession: () => session,
+    persist: state => { saved = structuredClone(state); }});
+  let player = adapter();
+  let view = await player.start();
+  await player.answer(input(view, {answer: correct(view.task)}));
+  await player.load({advanceFrom: view.presentation.presentation_id});
+  player = adapter();
+  view = await player.load();
+  assert.equal(view.position, 2);
+  await player.answer(input(view, {answer: correct(view.task)}));
+  const result = await player.finish();
+  assert.equal(result.summary.independent_correct_steps, 2);
+});
 
 for (const session of packages.flatMap(({ sessions }) => sessions)) {
   test('complete arbitrary preview without global storage or transport: ' + session.id, async () => {

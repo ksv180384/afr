@@ -52,6 +52,7 @@ const heading = ref(null);
 const questionPane = ref(null);
 const activeLesson = computed(() => view.value?.started && !view.value.finished && view.value.total > 0 && !view.value.exhausted);
 const isPreview = computed(() => adapter.mode === 'preview');
+const isTraining = adapter.mode === 'training';
 const routeResult = ref(null);
 const nextLesson = computed(() => routeResult.value?.active_run ?? routeResult.value?.candidate);
 const routeError = ref('');
@@ -125,8 +126,17 @@ const listening = computed(() => task.value?.skill === 'listening');
 const missingAudio = computed(() => listening.value && !task.value?.prompt?.audio);
 const promptVisible = computed(() => !listening.value || transcriptVisible.value);
 const listeningText = computed(() => task.value?.prompt?.audio?.text || task.value?.prompt?.text || '');
-const listeningCue = computed(() => task.value?.prompt?.text_lang !== 'fr' && task.value?.prompt?.text && task.value.prompt.text !== listeningText.value
-  ? task.value.prompt.text : 'Прослушайте фразу.');
+// Keep the published and saved tasks intact while making their instructions explicit.
+const trainingListeningInstructions = new Map([
+  ['Какую запись добавить в словарь?', 'Послушайте карточку и выберите её значение.'],
+  ['Выберите запись для человека, который не слышал сообщение.', 'Прослушайте сообщение и выберите правильный перевод на русский.'],
+]);
+const trainingInstruction = computed(() => isTraining ? trainingListeningInstructions.get(task.value?.prompt?.text) : undefined);
+const listeningCue = computed(() => {
+  const prompt = task.value?.prompt;
+  if (trainingInstruction.value) return '';
+  return prompt?.text_lang !== 'fr' && prompt?.text !== listeningText.value ? prompt?.text : '';
+});
 const listeningTranscription = computed(() => task.value?.prompt?.audio?.transcription_ru || (task.value?.prompt?.text === listeningText.value ? task.value.prompt.transcription_ru : '') || '');
 const referenceIntroductions = computed(() => {
   const introductions = view.value?.introductions.length ? view.value.introductions : [{ id: 'reference', text: 'Выражения для этого вопроса' }];
@@ -246,7 +256,7 @@ const sendHelp = (fields, after) => {
   const input = { client_event_id: crypto.randomUUID(), presentation_id: view.value.presentation.presentation_id, ...fields };
   return perform(() => adapter.help(input), after ? () => {
     if (view.value.presentation?.presentation_id !== input.presentation_id) return;
-    const confirmed = fields.event_type !== 'help' || isPreview.value ? view.value.presentation.last_result?.event_type === fields.event_type
+    const confirmed = fields.event_type !== 'help' || isPreview.value || isTraining ? view.value.presentation.last_result?.event_type === fields.event_type
       : view.value.assistance?.includes(fields.help_kind);
     if (confirmed) after();
   } : undefined);
@@ -323,7 +333,7 @@ onMounted(() => { perform(loadForPlayback); });
 onBeforeUnmount(() => { disposed=true; audio.stop(); });
 </script>
 <template>
-  <section class="session-player" :class="{ 'lesson-active': activeLesson }" :aria-busy="busy">
+  <section class="session-player" :class="{ 'lesson-active': activeLesson, 'training-player': isTraining }" :aria-busy="busy">
     <p v-if="isPreview" class="preview-notice">Предпросмотр · Учебный прогресс и словарь не записываются. После обновления страницы просмотр начнётся заново.</p>
     <div v-if="error" :class="feedback.enabled ? 'player-retry' : 'player-error'">
       <p role="alert">{{ error }}</p>
@@ -338,7 +348,7 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
       <div class="lesson-title">
         <h1 :title="view.session.title">{{ view.session.title }}</h1>
         <slot v-if="activeLesson" name="guest-progress" />
-        <p v-if="!activeLesson" class="level-label">{{ view.session.level === 'PRE_A1' ? 'С нуля' : view.session.level }} · Около {{ view.session.duration_minutes }} мин</p>
+        <p v-if="!activeLesson && !isTraining" class="level-label">{{ view.session.level === 'PRE_A1' ? 'С нуля' : view.session.level }} · Около {{ view.session.duration_minutes }} мин</p>
       </div>
       <div class="header-tools">
         <slot name="guest-login" />
@@ -355,7 +365,7 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
         <afr-button @click="exit">К выбору занятий</afr-button>
       </afr-card>
       <afr-card v-else-if="view.finished" class="player-card result-card">
-        <h2 ref="heading" tabindex="-1">{{ isPreview ? 'Предпросмотр завершён' : reviewFinished ? 'Повторили ' + reviewWordCount(view.total) : 'Занятие завершено' }}</h2>
+        <h2 ref="heading" tabindex="-1">{{ isTraining ? 'Тренировка завершена' : isPreview ? 'Предпросмотр завершён' : reviewFinished ? 'Повторили ' + reviewWordCount(view.total) : 'Занятие завершено' }}</h2>
         <p class="result-score">Самостоятельно: {{ view.summary.independent_correct_steps }} из {{ view.summary.total_steps }}</p>
         <p v-if="corrections">Исправлено заданий · {{ view.mistakes_count }}</p>
         <p v-if="view.summary.technical_skips">Технических пропусков: {{ view.summary.technical_skips }}. Они не являются языковыми ошибками.</p>
@@ -397,9 +407,9 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
         <div class="result-actions" :class="{ 'result-lesson-actions': lessonFinished }" role="group" aria-label="Действия после занятия">
           <afr-button :text="!isPreview && !reviewFinished" :type="isPreview || reviewFinished ? 'primary' : 'default'" :disabled="busy || navigationBusy" @click="exit">
             <daily-practice-icon v-if="!isPreview" name="list" />
-            <span>{{ isPreview ? 'К выбору занятий' : 'К моему пути' }}</span>
+            <span>{{ isTraining ? 'К тренировкам' : isPreview ? 'К выбору занятий' : 'К моему пути' }}</span>
           </afr-button>
-          <afr-button v-if="!isPreview" text @click="emit('vocabulary')">
+          <afr-button v-if="!isPreview && !isTraining" text @click="emit('vocabulary')">
             <daily-practice-icon name="book" />
             <span>Мой словарь</span>
           </afr-button>
@@ -446,11 +456,11 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
           <div class="question-stage">
           <div ref="questionPane" class="question-pane" :inert="referenceOpen || (feedbackOpen && graded && !correcting && !!result)">
           <div :key="view.presentation.presentation_id" class="exercise-card question-enter">
-            <h2 ref="heading" tabindex="-1" class="question-heading">{{ task.instruction }}</h2>
+            <h2 ref="heading" tabindex="-1" class="question-heading">{{ trainingInstruction ?? task.instruction }}</h2>
+            <p v-if="listening && listeningCue" class="listening-cue">{{ listeningCue }}</p>
             <div class="prompt-row" :class="{ 'listening-prompt': listening }">
-            <div v-if="listening" class="question-prompt listening-copy">
-              <p class="listening-layer listening-cue" :class="{ concealed: transcriptVisible }" :aria-hidden="transcriptVisible || undefined">{{ listeningCue }}</p>
-              <french-text class="listening-layer" :class="{ concealed: !transcriptVisible }" :aria-hidden="!transcriptVisible || undefined"
+            <div v-if="listening" class="question-prompt">
+              <french-text :class="{ concealed: !transcriptVisible }" :aria-hidden="!transcriptVisible || undefined"
                 :text="listeningText" :transcription-ru="listeningTranscription" :show-transcription="showPromptPronunciation" reserve-transcription />
             </div>
             <div v-else class="question-prompt">
@@ -557,9 +567,7 @@ h2 { font-size: 1.25rem; font-weight: bold; line-height: 1.5; }
 .question-prompt p { white-space: pre-line; }
 .prompt-row { display: flex; align-items: flex-start; gap: .75rem; }
 .question-prompt { display: grid; gap: .75rem; min-width: 0; }
-.listening-copy { gap: 0; }
-.listening-layer { grid-area: 1 / 1; }
-.listening-cue { align-self: start; padding-top: .35rem; color: #64748b; line-height: 1.5; }
+.listening-cue { margin-bottom: .75rem; color: var(--practice-ink, #1e293b); font-weight: 650; line-height: 1.5; white-space: pre-line; }
 .prompt-row > .practice-audio { margin-left: .25rem; }
 .listening-prompt > .practice-audio { order: -1; margin-left: 0; }
 .concealed { visibility: hidden; }
@@ -571,6 +579,8 @@ h2 { font-size: 1.25rem; font-weight: bold; line-height: 1.5; }
 .help-actions { margin-top: .75rem; align-items: center; gap: .4rem 1rem; }
 .hint-panel { border-top: 1px solid #cbd5e1; padding-top: 1rem; margin-top: 1rem; }
 .lesson-active { height: calc(100svh - 1.5rem); min-height: 540px; display: flex; flex-direction: column; }
+.training-player { width: 100%; }
+.training-player.lesson-active { flex: 1; height: auto; min-height: 0; }
 .exercise-form { display: grid; grid-template-rows: minmax(0, 1fr) auto; flex: 1; min-height: 0; gap: .75rem; }
 .question-stage { position: relative; display: grid; min-height: 0; }
 .question-pane {
@@ -584,6 +594,7 @@ h2 { font-size: 1.25rem; font-weight: bold; line-height: 1.5; }
   border-radius: var(--practice-radius, .85rem);
   background: white;
 }
+.training-player .question-pane { overscroll-behavior: contain; }
 .exercise-card { flex: 1 0 auto; padding: clamp(1rem, 2.8vw, 1.75rem); }
 .introduction-card { min-height: 0; overflow-y: auto; flex: 1; }
 .answer-dock { min-height: 68px; padding: .55rem .8rem; background: #fff; border: 1px solid #d5e1ec; border-radius: .85rem; }

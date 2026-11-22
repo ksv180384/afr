@@ -30,6 +30,83 @@ function practiceReportInput($test, array $extra = []): array
     return ['client_report_id' => (string) Str::uuid(), 'session_version_id' => $test->version->id, 'task_id' => 'Q01', 'text' => 'Проверьте формулировку задания.', 'include_answer' => false, ...$extra];
 }
 
+it('selects training questions from published and introduced material without creating a lesson run', function () {
+    $source = $this->version->payload;
+    $task = $source['tasks'][0];
+    $task['id'] = 'T1';
+    $source['training_tasks'] = ['recall' => [$task]];
+    $this->version->update(['payload' => $source, 'checksum' => CanonicalJson::hash($source)]);
+    $input = ['mode' => 'recall', 'current' => $source['id']];
+    $this->postJson('/daily/api/training', $input)->assertOk()->assertJsonCount(0, 'items');
+    $this->postJson('/daily/api/training', [...$input, 'seen' => $task['vocabulary_ids']])
+        ->assertOk()->assertJsonPath('items.0.task.id', 'T1');
+    $this->postJson('/daily/api/training', ['mode' => 'dialogue', 'completed' => [$source['id']]])
+        ->assertOk()->assertJsonCount(0, 'items');
+    $this->actingAs(User::factory()->create());
+    $this->postJson('/daily/api/training', [...$input, 'completed' => [$source['id']]])
+        ->assertOk()->assertJsonCount(0, 'items');
+    expect(LearningRun::count())->toBe(0);
+});
+
+it('builds each topic training from every published lesson in the selected topic', function () {
+    $unit = $this->version->session->unit;
+    $unit->update(['sort_order' => 1]);
+    $otherUnit = LearningUnit::factory()->create(['sort_order' => 2, 'published_at' => now('UTC')]);
+    $payload = $this->version->payload;
+    $task = $payload['tasks'][0];
+    $payload['training_tasks'] = [
+        'recall' => [[...$task, 'id' => 'R1'], [...$task, 'id' => 'R2']],
+        'dialogue' => [[...$task, 'id' => 'D1']],
+    ];
+    $this->version->update(['payload' => $payload, 'checksum' => CanonicalJson::hash($payload)]);
+    $sources = [$payload['id']];
+    foreach (range(2, 7) as $index) {
+        $source = [...$payload, 'id' => 'TRAINING-LESSON-'.$index];
+        $lesson = LearningSession::factory()->create([
+            'external_id' => $source['id'],
+            'unit_id' => $index === 6 ? $otherUnit->id : $unit->id,
+            'archived_at' => $index === 7 ? now('UTC') : null,
+        ]);
+        $version = LearningSessionVersion::factory()->create([
+            'session_id' => $lesson->id, 'payload' => $source, 'checksum' => CanonicalJson::hash($source),
+            'status' => 'published', 'published_at' => now('UTC'),
+        ]);
+        $lesson->update(['active_version_id' => $version->id]);
+        if ($index <= 5) {
+            $sources[] = $source['id'];
+        }
+    }
+
+    $recall = $this->postJson('/daily/api/training', ['unit' => $unit->external_id, 'mode' => 'recall',
+        'previous' => array_map(fn ($source) => $source.'/R1', $sources)])
+        ->assertOk()->assertJsonCount(6, 'items')->json('items');
+    expect(array_unique(array_column($recall, 'source')))->toEqualCanonicalizing($sources);
+    $fresh = array_filter($recall, fn ($item) => $item['task']['id'] === 'R2');
+    expect(array_column($fresh, 'source'))->toEqualCanonicalizing($sources);
+
+    $nextTraining = ['unit' => $otherUnit->external_id, 'mode' => 'dialogue'];
+    $this->postJson('/daily/api/training', $nextTraining)->assertForbidden()->assertJsonPath('code', 'forbidden');
+    $this->postJson('/daily/api/training', [...$nextTraining, 'current_level' => 'PRE_A1', 'completed' => $sources])
+        ->assertOk()->assertJsonPath('items.0.source', 'TRAINING-LESSON-6');
+
+    $actor = User::factory()->create();
+    $this->actingAs($actor);
+    $this->postJson('/daily/api/training', [...$nextTraining, 'current_level' => 'A1', 'completed' => $sources])->assertForbidden();
+    $dialogue = $this->postJson('/daily/api/training', ['unit' => $unit->external_id, 'mode' => 'dialogue'])
+        ->assertOk()->assertJsonCount(5, 'items')->json('items');
+    expect(array_column($dialogue, 'source'))->toEqualCanonicalizing($sources)
+        ->and(array_unique(array_column(array_column($dialogue, 'task'), 'id')))->toBe(['D1'])
+        ->and(LearningRun::count())->toBe(0);
+    $this->postJson('/daily/api/training', ['unit' => 'UNKNOWN', 'mode' => 'recall'])->assertOk()->assertJsonCount(0, 'items');
+
+    $versions = LearningSession::whereIn('external_id', $sources)->pluck('active_version_id');
+    foreach ($versions as $versionId) {
+        LearningRun::factory()->create(['user_id' => $actor->id, 'session_version_id' => $versionId,
+            'status' => 'completed', 'finished_at' => now('UTC')]);
+    }
+    $this->postJson('/daily/api/training', $nextTraining)->assertOk()->assertJsonPath('items.0.source', 'TRAINING-LESSON-6');
+});
+
 it('opens guest and unverified progress shells without creating account state', function () {
     $this->get('/daily/progress')->assertOk()->assertHeader('X-Robots-Tag', 'noindex, nofollow')
         ->assertInertia(fn (Assert $page) => $page->component('Daily/Index', false)->where('screen', 'progress')->where('enabled', true));

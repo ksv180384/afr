@@ -32,6 +32,7 @@ const props = defineProps({
   genders: { type: Array, },
   userConfigsView: { type: Array, },
   status: { type: String, },
+  practiceLevels: { type: Array, default: () => [] },
   practiceTimezone: { type: String, default: null },
   timezones: { type: Array, default: () => [] },
 });
@@ -482,7 +483,7 @@ const removeAvatar = async () => {
           class="py-4"
         >
           <div class="learning-settings">
-            <current-level-setting class="learning-card" :controller="practiceSettings" />
+            <current-level-setting class="learning-card" :controller="practiceSettings" :levels="practiceLevels" />
             <review-suggestion-setting class="learning-card" :controller="practiceSettings" :auth-user="authUser" compact />
           </div>
           <Link href="/daily" class="practice-link">Открыть практику на сегодня <span aria-hidden="true">→</span></Link>

@@ -14,6 +14,7 @@ use App\Services\App\ProverbService;
 use App\Services\App\UserService;
 use App\Services\App\WordService;
 use App\Services\Learning\AccountRunService;
+use App\Services\Learning\AvailableLevels;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -62,6 +63,7 @@ class ProfileController extends Controller
             'user' => $user,
             'userConfigsView' => $userConfigsView,
             'status' => session('status'),
+            'practiceLevels' => fn () => AvailableLevels::choices(),
             'practiceTimezone' => LearningProfile::query()->where('user_id', $request->user()->id)->value('timezone'),
             'timezones' => array_values(array_filter(\DateTimeZone::listIdentifiers(\DateTimeZone::ALL_WITH_BC), fn (string $zone) => str_contains($zone, '/') || $zone === 'UTC')),
         ]);

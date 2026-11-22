@@ -1467,6 +1467,11 @@
         }
       ]
     },
+    "trainingList": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/task" },
+      "maxItems": 100
+    },
     "task": {
       "oneOf": [
         {
@@ -1797,6 +1802,15 @@
           },
           "minItems": 0,
           "maxItems": 1000
+        },
+        "training_tasks": {
+          "type": "object",
+          "anyOf": [{ "required": ["recall"] }, { "required": ["dialogue"] }],
+          "properties": {
+            "recall": { "$ref": "#/$defs/trainingList" },
+            "dialogue": { "$ref": "#/$defs/trainingList" }
+          },
+          "additionalProperties": false
         },
         "tasks": {
           "type": "array",
