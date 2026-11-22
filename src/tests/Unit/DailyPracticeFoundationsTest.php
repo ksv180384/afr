@@ -99,8 +99,7 @@ it('keeps opt-in settings cacheable without conflating content targets and limit
             ->and($config['session'])->toBe(['min_tasks' => 6, 'max_tasks' => 12])
             ->and($config['vocabulary_test']['max_words'])->toBe(10)
             ->and($config['additional_review'])->toBe(['min_words' => 1, 'max_words' => 3])
-            ->and($config['review']['interval_days'])->toBe([1, 3, 7, 14, 30])
-            ->and($config['promotion']['policies'][1]['checkpoint_score_percent'])->toBe(80);
+            ->and($config['review']['interval_days'])->toBe([1, 3, 7, 14, 30]);
     } finally {
         $previous === null ? $repository->clear('DAILY_PRACTICE_ENABLED') : $repository->set('DAILY_PRACTICE_ENABLED', $previous);
     }

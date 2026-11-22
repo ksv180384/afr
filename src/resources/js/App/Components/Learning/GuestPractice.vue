@@ -122,17 +122,16 @@ const temporary = () => perform(async () => {
   store.value = createPracticeHomeStore({guestTransport: guestContentTransport, guestRepository: repository});
   await initialize(true);
 });
-const enterRun = (path, route = home.value?.route) => {
-  if (!repository.temporary) return visitPracticeRun(path, route, props.routeSelection);
+const enterRun = path => {
+  if (!repository.temporary) return visitPracticeRun(path, props.routeSelection);
   if (!adapter.value) temporaryScroll = window.scrollY;
   attach(path.split('/').pop());
 };
 const start = (sessionId = null) => perform(async () => {
-  const route = home.value?.route;
   try {
     const path = await store.value.start(null, sessionId);
     storedNotice();
-    await enterRun(path, route);
+    await enterRun(path);
   } catch (failure) {
     if (failure.code !== 'content_load') throw failure;
     error.value = 'Не удалось загрузить занятие. Проверьте подключение к интернету.';
@@ -140,9 +139,8 @@ const start = (sessionId = null) => perform(async () => {
 });
 const refreshSuggestion = () => perform(() => readLocal(false));
 const startShortReview = (mode = 'manual') => perform(async () => {
-  const route = home.value?.route;
   const path = await store.value.startReview(null, {mode});
-  await enterRun(path, route);
+  await enterRun(path);
 });
 const nextTest = (input) => perform(async () => {
   const runId = crypto.randomUUID(); const seed = crypto.randomUUID();
@@ -167,8 +165,10 @@ const exit = runId => perform(async () => {
     activeRun = null;
     if (home.value) await readLocal();
     else await initialize(true, true);
-    await nextTick();
-    requestAnimationFrame(() => window.scrollTo(0, temporaryScroll));
+    if (props.routeSelection?.level || props.routeSelection?.unit) {
+      await nextTick();
+      requestAnimationFrame(() => window.scrollTo(0, temporaryScroll));
+    }
   } else await returnToPractice(store.value, null);
 });
 const changeProfile = () => perform(async () => {

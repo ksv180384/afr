@@ -174,6 +174,9 @@ it('accepts a twelve-step import through learner results, version replacement an
     expect($finished['finished'])->toBeTrue()
         ->and($finished['summary']['score_denominator'])->toBe(12)
         ->and($finished['summary']['score_numerator'])->toBe(1);
+    $stored = LearningRun::findOrFail($finished['run_id']);
+    expect($stored->snapshot)->toBeNull()
+        ->and(array_keys($stored->result))->toEqualCanonicalizing(LearningRun::LESSON_RESULT_FIELDS);
     $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('candidate.id', $second['id']);
     expect($complete($start(['kind' => 'extra', 'session_id' => $second['id']]))['finished'])->toBeTrue();
     $this->getJson('/daily/api/vocabulary/review-plan?mode=manual')->assertOk();
@@ -183,6 +186,7 @@ it('accepts a twelve-step import through learner results, version replacement an
     $words = fn () => PersonalVocabulary::where('user_id', $learner->id)->orderBy('id')->get()->toArray();
     $before = $words();
     $this->actingAs($this->editor);
+    $package['sessions'][0]['title'] .= ' (новое название)';
     $reimport = $import($package);
     expect($reimport['created_version_ids'])->toBe([])
         ->and($reimport['updated_version_ids'])->toBe($updated['updated_version_ids'])
@@ -194,6 +198,8 @@ it('accepts a twelve-step import through learner results, version replacement an
 
     $this->actingAs($learner);
     $new = $start(['kind' => 'extra', 'session_id' => $first['id']]);
-    expect(LearningRun::findOrFail($new['run_id'])->snapshot['title'])->toBe($package['sessions'][0]['title']);
-    $this->getJson('/daily/api/runs/'.$finished['run_id'])->assertOk()->assertJsonPath('summary', $finished['summary']);
+    expect(LearningRun::findOrFail($new['run_id'])->snapshot)->toBeNull();
+    expect($new['session']['title'])->toBe($package['sessions'][0]['title']);
+    $this->getJson('/daily/api/runs/'.$finished['run_id'])->assertOk()->assertJsonPath('summary', $finished['summary'])
+        ->assertJsonPath('session.title', $package['sessions'][0]['title']);
 });

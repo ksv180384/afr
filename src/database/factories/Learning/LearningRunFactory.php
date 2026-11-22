@@ -25,7 +25,6 @@ class LearningRunFactory extends Factory
             'status' => RunStatus::InProgress->value,
             'snapshot' => fn (array $attributes): array => isset($attributes['session_id']) ? (LearningSession::findOrFail($attributes['session_id'])->payload ?? []) : [],
             'checking_policy_version' => CheckingPolicy::CURRENT_VERSION,
-            'checking_policy_snapshot' => CheckingPolicy::forVersion(CheckingPolicy::CURRENT_VERSION)->rules,
             'timezone' => 'UTC',
             'local_date' => now('UTC')->toDateString(),
             'started_at' => now('UTC'),

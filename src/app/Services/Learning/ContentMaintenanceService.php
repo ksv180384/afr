@@ -66,7 +66,6 @@ final class ContentMaintenanceService
                 DB::table('learning_profiles')->where('current_level', $id)->update([
                     'current_level' => $other->code, 'revision' => DB::raw('revision + 1'), 'last_level_change_automatic' => false,
                 ]);
-                DB::table('guest_sync_episodes')->where('baseline_current_level', $id)->update(['baseline_current_level' => null]);
                 $this->curricula(LearningCurriculum::where('level', $id)->pluck('id')->all());
                 $this->sessions(LearningSession::where('level', $id)->pluck('id')->all());
                 $units = LearningUnit::where('level', $id)->pluck('id');

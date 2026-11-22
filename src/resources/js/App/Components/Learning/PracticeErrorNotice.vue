@@ -1,13 +1,20 @@
 <script setup>
 import DailyPracticeIcon from './DailyPracticeIcon.vue';
 
-defineProps({ message: { type: String, required: true } });
+defineProps({
+  title: String,
+  message: { type: String, required: true },
+  announce: { type: Boolean, default: true },
+});
 </script>
 
 <template>
-  <div class="practice-error-notice" role="alert">
+  <div class="practice-error-notice" :role="announce ? 'alert' : 'note'">
     <daily-practice-icon name="info" />
-    <p>{{ message }}</p>
+    <div class="notice-content">
+      <p v-if="title" class="notice-title">{{ title }}</p>
+      <p>{{ message }}</p>
+    </div>
   </div>
 </template>
 
@@ -24,5 +31,7 @@ defineProps({ message: { type: String, required: true } });
   color: #862f3a;
   line-height: 1.5;
 }
-.practice-error-notice p { min-width: 0; margin: 0; overflow-wrap: anywhere; }
+.notice-content { min-width: 0; overflow-wrap: anywhere; }
+.notice-content p { margin: 0; }
+.notice-content .notice-title { margin-bottom: .2rem; font-weight: 700; }
 </style>

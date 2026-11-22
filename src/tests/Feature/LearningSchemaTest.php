@@ -7,7 +7,6 @@ use App\Models\Learning\DailyAssignment;
 use App\Models\Learning\GuestEventMapping;
 use App\Models\Learning\GuestSyncBatch;
 use App\Models\Learning\GuestSyncEpisode;
-use App\Models\Learning\LearningActivityDay;
 use App\Models\Learning\LearningAttempt;
 use App\Models\Learning\LearningCatalogRevision;
 use App\Models\Learning\LearningContentReport;
@@ -51,8 +50,6 @@ function schemaEpisode(User $user): GuestSyncEpisode
     return GuestSyncEpisode::create([
         'guest_id' => (string) Str::uuid(),
         'owner_user_id' => $user->id,
-        'baseline_profile_revision' => 1,
-        'baseline_current_level' => 'PRE_A1',
         'started_at' => now('UTC'),
     ]);
 }
@@ -141,7 +138,7 @@ it('guards imported payloads and started snapshots against in-place mutation', f
     $run = LearningRun::factory()->create();
     expect(fn () => $run->update(['checking_policy_version' => 2]))->toThrow(LogicException::class);
     $presentation = LearningPresentation::factory()->create();
-    expect(fn () => $presentation->update(['choice_order' => ['b', 'a']]))->toThrow(LogicException::class);
+    expect(fn () => $presentation->update(['position' => 2]))->toThrow(LogicException::class);
     $source = PersonalVocabularySource::factory()->create();
     expect(fn () => $source->update(['snapshot' => ['changed' => true]]))->toThrow(LogicException::class);
 });
@@ -203,13 +200,12 @@ it('applies only one event and one run success effect per lexeme', function () {
     expect(fn () => VocabularyRunEffect::create(['user_id' => $owner->id, 'lexeme_key' => $word->lexeme_key, 'run_id' => $attempt->run_id]))->toThrow(QueryException::class);
 });
 
-it('counts one assignment per day and never counts a run on two activity days', function () {
+it('allows only one daily assignment per user and derives activity from completed runs', function () {
     $run = LearningRun::factory()->create();
     $assignment = ['user_id' => $run->user_id, 'local_date' => '2026-10-24', 'selected_run_id' => $run->id];
     DailyAssignment::create($assignment);
     expect(fn () => DailyAssignment::create($assignment))->toThrow(QueryException::class);
-    LearningActivityDay::create(['user_id' => $run->user_id, 'local_date' => '2026-10-24', 'qualifying_run_id' => $run->id]);
-    expect(fn () => LearningActivityDay::create(['user_id' => $run->user_id, 'local_date' => '2026-10-25', 'qualifying_run_id' => $run->id]))->toThrow(QueryException::class);
+    expect(Schema::hasTable('learning_activity_days'))->toBeFalse();
 });
 
 it('deduplicates sync batches and source events when the same events are repackaged', function () {
@@ -259,14 +255,13 @@ it('cleans personal data on account deletion while preserving studied content', 
     VocabularyEventEffect::create(['user_id' => $owner->id, 'event_id' => $attempt->id, 'personal_word_id' => $word->id, 'lexeme_key' => $word->lexeme_key, 'effect' => [], 'applied_at' => now('UTC')]);
     VocabularyRunEffect::create(['user_id' => $owner->id, 'lexeme_key' => $word->lexeme_key, 'run_id' => $attempt->run_id]);
     DailyAssignment::create(['user_id' => $owner->id, 'local_date' => '2026-10-24', 'selected_run_id' => $attempt->run_id]);
-    LearningActivityDay::create(['user_id' => $owner->id, 'local_date' => '2026-10-24', 'qualifying_run_id' => $attempt->run_id]);
     $episode = schemaEpisode($owner);
     schemaBatch($episode);
     GuestEventMapping::create(['episode_id' => $episode->id, 'guest_id' => $episode->guest_id, 'owner_user_id' => $owner->id, 'entity_type' => 'event', 'guest_entity_id' => (string) Str::uuid(), 'server_event_id' => $attempt->id]);
     $versionId = $attempt->run->session_id;
     $owner->delete();
 
-    foreach ([LearningProfile::class, LearningRun::class, LearningPresentation::class, LearningAttempt::class, PersonalVocabulary::class, PersonalVocabularySource::class, VocabularyEventEffect::class, VocabularyRunEffect::class, DailyAssignment::class, LearningActivityDay::class, GuestSyncEpisode::class, GuestSyncBatch::class, GuestEventMapping::class] as $model) {
+    foreach ([LearningProfile::class, LearningRun::class, LearningPresentation::class, LearningAttempt::class, PersonalVocabulary::class, PersonalVocabularySource::class, VocabularyEventEffect::class, VocabularyRunEffect::class, DailyAssignment::class, GuestSyncEpisode::class, GuestSyncBatch::class, GuestEventMapping::class] as $model) {
         expect($model::query()->count())->toBe(0);
     }
     expect(LearningSession::query()->find($versionId))->not->toBeNull();

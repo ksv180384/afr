@@ -56,7 +56,7 @@ function vocabularyWord($test, int $index = 0): PersonalVocabulary
 {
     $snapshot = $test->payload['vocabulary'][$index];
     $word = PersonalVocabulary::factory()->create(['user_id' => $test->learner->id, 'lexeme_key' => $snapshot['lexeme_key'], 'snapshot' => $snapshot, 'needs_review' => true]);
-    PersonalVocabularySource::factory()->create(['user_id' => $test->learner->id, 'personal_word_id' => $word->id, 'session_id' => $test->version->id, 'vocabulary_id' => $snapshot['id'], 'snapshot' => $snapshot]);
+    PersonalVocabularySource::factory()->create(['user_id' => $test->learner->id, 'personal_word_id' => $word->id, 'session_id' => $test->version->id, 'snapshot' => $snapshot]);
 
     return $word;
 }

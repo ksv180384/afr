@@ -22,7 +22,6 @@ use LogicException;
  * @property string $task_id Стабильный идентификатор задания внутри версии занятия.
  * @property int $position Позиция задания в прохождении.
  * @property array $snapshot Снимок задания на момент выдачи.
- * @property array|null $choice_order Порядок вариантов ответа, сохранённый для этой выдачи.
  * @property string $status Состояние выданного задания в прохождении.
  * @property bool $help_used Была ли использована подсказка.
  * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
@@ -42,7 +41,6 @@ class LearningPresentation extends Model
         'task_id',
         'position',
         'snapshot',
-        'choice_order',
         'status',
         'help_used',
     ];
@@ -53,7 +51,6 @@ class LearningPresentation extends Model
             'user_id' => 'integer',
             'position' => 'integer',
             'snapshot' => 'array',
-            'choice_order' => 'array',
             'help_used' => 'boolean',
         ];
     }
@@ -61,7 +58,7 @@ class LearningPresentation extends Model
     protected static function booted(): void
     {
         static::updating(function (self $model): void {
-            if ($model->isDirty(['user_id', 'run_id', 'task_id', 'position', 'snapshot', 'choice_order'])) {
+            if ($model->isDirty(['user_id', 'run_id', 'task_id', 'position', 'snapshot'])) {
                 throw new LogicException('LearningPresentation identity and snapshot cannot be changed.');
             }
         });

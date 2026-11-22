@@ -17,7 +17,6 @@ use LogicException;
  * @property int $user_id Пользователь, к которому относится запись.
  * @property int $personal_word_id Запись слова в личном словаре.
  * @property int $session_id Занятие, к которому относится запись.
- * @property string $vocabulary_id Идентификатор словарного элемента в версии занятия.
  * @property array $snapshot Снимок исходного словарного элемента в момент добавления.
  * @property \Carbon\CarbonImmutable $first_added_at Момент первого добавления слова.
  * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
@@ -34,7 +33,6 @@ class PersonalVocabularySource extends Model
         'user_id',
         'personal_word_id',
         'session_id',
-        'vocabulary_id',
         'snapshot',
         'first_added_at',
     ];
@@ -57,7 +55,6 @@ class PersonalVocabularySource extends Model
                 'user_id',
                 'personal_word_id',
                 'session_id',
-                'vocabulary_id',
                 'snapshot',
                 'first_added_at',
             ])) {

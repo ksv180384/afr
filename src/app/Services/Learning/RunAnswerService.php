@@ -27,14 +27,6 @@ final class RunAnswerService
         return $actor->id;
     }
 
-    private function pinned(LearningRun $run): void
-    {
-        $policy = AnswerChecker::policy($run->checking_policy_version);
-        if (CanonicalJson::hash($run->checking_policy_snapshot) !== CanonicalJson::hash($policy->rules)) {
-            throw new AnswerCheckingException(PracticeErrorCode::UnsupportedCheckingPolicy, 'Снимок правил run не поддерживается.');
-        }
-    }
-
     public function accept(?User $actor, string $runId, array $input): array
     {
         $ownerId = $this->owner($actor);
@@ -78,7 +70,7 @@ final class RunAnswerService
                 if ($previous) {
                     return $this->replay($previous, $hash);
                 }
-                $this->pinned($run);
+                AnswerChecker::policy($run->checking_policy_version);
                 if ($run->status !== RunStatus::InProgress || $run->revision !== $input['expected_revision']) {
                     throw new AnswerCheckingException(PracticeErrorCode::RevisionConflict, 'Прохождение изменилось; обновите его состояние.');
                 }
@@ -163,9 +155,9 @@ final class RunAnswerService
                 throw new AnswerCheckingException(PracticeErrorCode::NotFound, 'Прохождение не найдено.');
             }
             if ($run->status === RunStatus::Completed && $run->result !== null) {
-                return $run->result;
+                return $run->completedResult();
             }
-            $this->pinned($run);
+            AnswerChecker::policy($run->checking_policy_version);
             $content = $run->content();
             $items = $content['tasks'] ?? $content['items'] ?? null;
             if (! is_array($items) || ! array_is_list($items)) {

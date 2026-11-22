@@ -18,8 +18,6 @@ use LogicException;
  * @property string $batch_id UUID пакета синхронизации, заданный клиентом.
  * @property string $payload_hash SHA-256 входных данных для проверки, что повторная отправка содержит те же данные.
  * @property string $status Состояние обработки пакета гостевых событий.
- * @property array|null $accepted Результаты по принятым гостевым событиям.
- * @property array|null $rejected Результаты и причины отклонения гостевых событий.
  * @property array|null $receipt Сохранённый результат обработки для повторных запросов.
  * @property \Carbon\CarbonImmutable $received_at Момент получения события или запроса сервером.
  * @property \Carbon\CarbonImmutable|null $completed_at Момент окончания обработки.
@@ -40,8 +38,6 @@ class GuestSyncBatch extends Model
         'batch_id',
         'payload_hash',
         'status',
-        'accepted',
-        'rejected',
         'receipt',
         'received_at',
         'completed_at',
@@ -51,8 +47,6 @@ class GuestSyncBatch extends Model
     {
         return [
             'owner_user_id' => 'integer',
-            'accepted' => 'array',
-            'rejected' => 'array',
             'receipt' => 'array',
             'received_at' => 'immutable_datetime',
             'completed_at' => 'immutable_datetime',

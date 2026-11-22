@@ -21,7 +21,6 @@ class LearningPresentationFactory extends Factory
             'task_id' => 'Q01',
             'position' => 1,
             'snapshot' => ['fixture' => true],
-            'choice_order' => ['a', 'b'],
             'status' => 'pending',
         ];
     }

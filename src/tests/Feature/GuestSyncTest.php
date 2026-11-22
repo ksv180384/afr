@@ -151,7 +151,8 @@ it('retains future or contradictory guest clocks as metadata but credits only th
     $run = LearningRun::find($receipt['mapping'][$bundle['guest_run_id']]['server_run_id']);
     expect($run->import_meta['clock_warning'])->toBeTrue();
     expect($run->import_meta['original_local_date'])->toBe('2099-01-01');
-    expect(\App\Models\Learning\LearningActivityDay::sole()->local_date->format('Y-m-d'))->toBe(\App\Support\Learning\PracticeTime::localDate(\App\Support\Learning\PracticeTime::now(), 'Europe/Moscow'));
+    $time = \App\Support\Learning\PracticeTime::class;
+    expect($time::localDate($run->finished_at, $run->timezone))->toBe($time::localDate($time::now(), 'Europe/Moscow'));
 });
 
 function syncReviewFixture($test, array $source, int $offset, bool $wrong = false): array
@@ -322,9 +323,9 @@ it('replays all twelve guest presentations once and preserves the full result de
     $receipt = $this->postJson('/daily/api/guest-sync', $batch)->assertOk()->json();
     expect($receipt['rejected'])->toBe([]);
     $run = LearningRun::findOrFail($receipt['mapping'][$bundle['guest_run_id']]['server_run_id']);
-    expect($run->status->value)->toBe('completed')->and($run->snapshot)->not->toHaveKey('tasks')
-        ->and($run->presentations()->count())->toBe(12)->and($run->result['score_denominator'])->toBe(12)
-        ->and($run->result['processed_steps'])->toBe(12);
+    expect($run->status->value)->toBe('completed')->and($run->snapshot)->toBeNull()
+        ->and($run->presentations()->count())->toBe(12)->and($run->result['total_steps'])->toBe(12)
+        ->and($run->completedResult()['processed_steps'])->toBe(12);
     $this->postJson('/daily/api/guest-sync', $batch)->assertOk()->assertExactJson($receipt);
     expect(LearningRun::count())->toBe(1);
 });

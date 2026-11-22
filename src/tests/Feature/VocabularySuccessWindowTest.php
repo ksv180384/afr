@@ -80,8 +80,7 @@ it('retains pre-rule imported credits while new projector effects obey the windo
     $this->word->update(['native_revision' => 0, 'first_added_at' => $at->subDay(), 'review_step' => 2, 'streak' => 2,
         'last_reviewed_at' => $at->addMinutes(5), 'next_review_at' => $at->addMinutes(5)->addDays(3)]);
     $episode = GuestSyncEpisode::create(['guest_id' => (string) Str::uuid(), 'owner_user_id' => $this->learner->id, 'status' => 'pending',
-        'baseline_profile_revision' => null, 'baseline_current_level' => null, 'baseline_snapshot' => ['word_ids' => []],
-        'created_word_ids' => [$this->word->id], 'accepted_level_event_ids' => [], 'started_at' => $at]);
+        'created_word_ids' => [$this->word->id], 'started_at' => $at]);
     $events = [];
     foreach ([0, 5, 10] as $index => $minutes) {
         $run = LearningRun::factory()->create(['user_id' => $this->learner->id, 'snapshot' => ['vocabulary' => [$this->word->snapshot]]]);

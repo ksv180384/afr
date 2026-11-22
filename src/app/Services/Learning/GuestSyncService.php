@@ -31,11 +31,8 @@ class GuestSyncService
                     throw new AnswerCheckingException(PracticeErrorCode::Forbidden, 'Гостевой набор уже связан с другим аккаунтом.');
                 }
                 if (! $episode) {
-                    $profile = LearningProfile::where('user_id', $actor->id)->first();
                     $episode = GuestSyncEpisode::create(['guest_id' => $input['guest_id'], 'owner_user_id' => $actor->id, 'status' => 'pending',
-                        'baseline_profile_revision' => $profile?->revision, 'baseline_current_level' => $profile?->getRawOriginal('current_level'),
-                        'baseline_snapshot' => ['word_ids' => PersonalVocabulary::where('user_id', $actor->id)->pluck('id')->all()],
-                        'created_word_ids' => [], 'accepted_level_event_ids' => [], 'started_at' => PracticeTime::now()]);
+                        'created_word_ids' => [], 'started_at' => PracticeTime::now()]);
                 }
                 if (! empty($input['episode_id']) && $input['episode_id'] !== $episode->id) {
                     throw new AnswerCheckingException(PracticeErrorCode::IdempotencyConflict, 'Эпизод переноса не совпадает.');
@@ -74,7 +71,6 @@ class GuestSyncService
                             User::query()->whereKey($actor->id)->whereNull('timezone')->update(['timezone' => $event['timezone']]);
                             $actor->timezone ??= $event['timezone'];
                             $this->ledger->record($episode, $event);
-                            $episode->update(['accepted_level_event_ids' => array_values(array_unique([...($episode->accepted_level_event_ids ?? []), $event['client_event_id']]))]);
                         });
                         $accepted[] = $event['client_event_id'];
                     } catch (AnswerCheckingException|ValidationException|\InvalidArgumentException $error) {
@@ -118,7 +114,7 @@ class GuestSyncService
                     'accepted' => array_values(array_unique($accepted)), 'rejected' => $rejected, 'mapping' => $mapping,
                     'review_snooze_applied' => $reviewSnoozeApplied, 'profile' => app(AccountRunService::class)->profile($actor)];
                 GuestSyncBatch::create(['episode_id' => $episode->id, 'guest_id' => $episode->guest_id, 'owner_user_id' => $actor->id, 'batch_id' => $input['batch_id'],
-                    'payload_hash' => $hash, 'status' => $episode->status, 'accepted' => $receipt['accepted'], 'rejected' => $rejected, 'receipt' => $receipt, 'received_at' => PracticeTime::now(), 'completed_at' => PracticeTime::now()]);
+                    'payload_hash' => $hash, 'status' => $episode->status, 'receipt' => $receipt, 'received_at' => PracticeTime::now(), 'completed_at' => PracticeTime::now()]);
 
                 return $receipt;
             }, 3);

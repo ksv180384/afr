@@ -5,7 +5,6 @@ namespace App\Services\Learning;
 use App\Enums\Learning\PracticeErrorCode;
 use App\Enums\Learning\RunStatus;
 use App\Models\Learning\DailyAssignment;
-use App\Models\Learning\LearningActivityDay;
 use App\Models\Learning\LearningAttempt;
 use App\Models\Learning\LearningProfile;
 use App\Models\Learning\LearningRun;
@@ -14,6 +13,7 @@ use App\Models\Learning\LearningSession;
 use App\Models\User\User;
 use App\Services\Learning\Validation\CanonicalJson;
 use App\Support\Learning\PracticeTime;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -126,9 +126,20 @@ final class AccountRunService
             'active_run' => $activeSummary,
             'candidate' => $next,
             'route' => app(PracticeHomeRoute::class)->make($outline, $access, $profile['current_level'], $selection, $activeSummary, $next, []),
-            'activity_today' => LearningActivityDay::query()->where('user_id', $actor->id)->where('local_date', $date)->exists(),
+            'activity_today' => $this->finishedOn($actor, $date),
             'review_suggestion' => ($review = app(VocabularyTestService::class)->shortPlan($actor, 'suggested'))['total'] ? array_diff_key($review, ['selection' => true]) : null,
             'exhausted' => $candidate === null];
+    }
+
+    private function finishedOn(User $actor, string $date): bool
+    {
+        $day = CarbonImmutable::parse($date, 'UTC');
+
+        // A local completion date may fall on either adjacent UTC day.
+        return LearningRun::query()->where('user_id', $actor->id)->where('status', RunStatus::Completed->value)
+            ->where('finished_at', '>=', $day->subDay())->where('finished_at', '<', $day->addDays(2))
+            ->select(['id', 'finished_at', 'timezone'])->lazyById(100)
+            ->contains(fn (LearningRun $run) => PracticeTime::localDate($run->finished_at, $run->timezone) === $date);
     }
 
     private function unfinishedRuns(User $actor): Builder
@@ -140,13 +151,14 @@ final class AccountRunService
 
     private function homeRun(LearningRun $run): array
     {
-        $run->loadMissing('session:id,external_id,unit_id', 'session.unit:id,title');
-        $session = $run->session;
+        $content = $run->summaryContent();
+        $session = $run->lesson();
+        $session?->loadMissing('unit:id,title');
 
         return ['id' => $run->id, 'status' => $run->status->value, 'kind' => $run->kind,
-            'session_id' => $session?->external_id, 'level' => $run->snapshot['level'] ?? null,
-            'theme' => $session?->unit?->title, 'duration_minutes' => $run->snapshot['duration_minutes'] ?? 3,
-            'title' => $run->snapshot['title'] ?? 'Повторение', 'goal' => $run->snapshot['goal'] ?? $run->snapshot['objectives'][0]['title'] ?? null];
+            'session_id' => $session?->external_id, 'level' => $content['level'] ?? null,
+            'theme' => $session?->unit?->title, 'duration_minutes' => $content['duration_minutes'] ?? 3,
+            'title' => $content['title'] ?? 'Повторение', 'goal' => $content['goal'] ?? $content['objectives'][0]['title'] ?? null];
     }
 
     private function envelope(LearningRunOperation $operation, array $receipt): array
@@ -270,7 +282,7 @@ final class AccountRunService
             $latest = $kind === 'daily' ? DailyAssignment::query()->where('user_id', $actor->id)->orderByDesc('id')->first() : null;
             $selected = $latest?->selected_run_id ? $this->owned($actor, $latest->selected_run_id, true) : null;
             $replace = (bool) ($input['replace_assignment'] ?? false) || ($routeStart && $selected
-                && ($selected->status === RunStatus::Completed || ($selected->snapshot['level'] ?? null) !== $level));
+                && ($selected->status === RunStatus::Completed || ($selected->summaryContent()['level'] ?? null) !== $level));
             if ($selected?->status === RunStatus::Completed && ! $replace && $latest->local_date->format('Y-m-d') === $date) {
                 return ['state' => $this->view->make($actor, $selected)];
             }
@@ -300,17 +312,17 @@ final class AccountRunService
                 $snapshot = $this->content->payload($version);
                 $items = array_map(fn ($task) => PresentationSnapshot::forTask($snapshot, $task['id']), $snapshot['tasks']);
                 $this->unfinishedRuns($actor)->reorder()->whereIn('kind', ['daily', 'extra'])
-                    ->where('snapshot->id', $session->external_id)->delete();
+                    ->where('session_id', $session->id)->delete();
             } else {
                 [$snapshot, $items] = $this->reviewSnapshot($actor, $profile, $input);
             }
             $run = LearningRun::create(['user_id' => $actor->id, 'kind' => $kind, 'status' => 'in_progress', 'session_id' => $version?->id,
-                'content_checksum' => $version?->checksum, 'snapshot' => $version ? LearningRun::contentSummary($snapshot) : $snapshot,
-                ...CheckingPolicy::forVersion(config('daily_practice.checking.current_version'))->runAttributes(),
+                'content_checksum' => $version?->checksum, 'snapshot' => $version ? null : $snapshot,
+                'checking_policy_version' => CheckingPolicy::forVersion(config('daily_practice.checking.current_version'))->version,
                 'timezone' => $timezone, 'local_date' => $date, 'started_at' => PracticeTime::now(), 'revision' => 1, 'cursor_position' => 1, 'introductions_seen' => []]);
             foreach ($items as $index => $item) {
                 $run->presentations()->create(['user_id' => $actor->id, 'task_id' => $item['task']['id'], 'position' => $index + 1,
-                    'snapshot' => $version ? [] : $item, 'choice_order' => array_column($item['task']['choices'] ?? $item['task']['tokens'] ?? [], 'id'), 'status' => 'pending', 'help_used' => false]);
+                    'snapshot' => $version ? [] : $item, 'status' => 'pending', 'help_used' => false]);
             }
             if ($kind === 'daily') {
                 $assignment = DailyAssignment::firstOrCreate(['user_id' => $actor->id, 'local_date' => $date], ['revision' => 1]);
@@ -390,16 +402,14 @@ final class AccountRunService
                 }
                 $finishedAt = PracticeTime::now();
                 $result = [...$summary, ...$this->integrations->finishing($run, $summary, $finishedAt)];
-                if ($run->session_id !== null && $run->import_meta !== null) {
-                    $result['vocabulary_keys'] = array_column($run->content()['vocabulary'] ?? [], 'lexeme_key');
-                }
                 $result['mistakes_count'] = $corrections['initial_total']
                     ?? count(LessonCorrections::positions($run, $run->presentations()->with('firstAttempt')->get()));
-                $snapshot = $run->session_id !== null ? $run->snapshot
-                    : app(VocabularyTestService::class)->completionSnapshot($run->snapshot);
-                $run->update(['status' => 'completed', 'finished_at' => $finishedAt, 'result' => $result,
+                $lesson = $run->session_id !== null;
+                $snapshot = $lesson ? null : app(VocabularyTestService::class)->completionSnapshot($run->snapshot);
+                $run->update(['status' => 'completed', 'finished_at' => $finishedAt,
+                    'result' => $lesson ? array_intersect_key($result, array_flip(LearningRun::LESSON_RESULT_FIELDS)) : $result,
+                    'promoted_to_level' => $result['promotion']['new_level'] ?? null,
                     'snapshot' => $snapshot, 'corrections' => null, 'introductions_seen' => [], 'revision' => $run->revision + 1]);
-                LearningActivityDay::firstOrCreate(['user_id' => $actor->id, 'local_date' => PracticeTime::localDate($finishedAt, $run->timezone)], ['qualifying_run_id' => $run->id]);
                 if ($run->import_meta === null) {
                     $run->presentations()->delete();
                 } else {

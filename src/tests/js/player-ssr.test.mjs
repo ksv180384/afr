@@ -95,23 +95,45 @@ test('player and all task components render on the server without browser global
           (queued = { run_id: run, action, request, client_event_id: logical.client_event_id }),
         seal: async () => queued,
       });
-      accountTransport.today = async () => ({
-        profile: { owner_user_id: 7, revision: 1, timezone: 'UTC' },
-        candidate: { id: 'PRE_A1-U01-L01' },
-      });
       let requests = 0;
       const message = 'Сервер временно недоступен.';
+      const unavailable = () => Object.assign(new Error(message), { response: { status: 503, data: { message } } });
+      accountTransport.today = async () => { throw unavailable(); };
       accountTransport.call = async (action, run) => {
         assert.equal(action, 'start');
         assert.equal(run, null);
         requests++;
-        throw Object.assign(new Error(message), { response: { status: 503, data: { message } } });
+        throw unavailable();
       };
-      startPage = renderer.createApp({ ...DailyPractice, render: () => h('div') }, { authUser: { id: 7 }, enabled: true, embedded: true });
+      const pageProps = { authUser: { id: 7 }, enabled: true, embedded: true };
+      startPage = renderer.createApp({ ...DailyPractice, render: () => h('div') }, pageProps);
       startPage.provide(ssrContextKey, {}).provide(practiceNotificationsKey, notifications);
       startPage.mount({});
       await new Promise(resolve => setImmediate(resolve));
-      await startPage._instance.setupState.startLesson();
+      const page = startPage._instance.setupState;
+      assert.equal(page.error, message);
+      assert.deepEqual(notifications.items.map(({type, message}) => ({type, message})), [{type: 'error', message}]);
+      const failedPage = {
+        ...DailyPractice,
+        setup(props, context) {
+          const state = DailyPractice.setup(props, context);
+          state.error.value = page.error;
+          return state;
+        },
+      };
+      const display = await renderToString(createSSRApp({render: () => h(failedPage, pageProps)})
+        .provide(practiceNotificationsKey, notifications));
+      assert.match(display, /role="note"/);
+      assert.match(display, /Учебный маршрут недоступен/);
+      assert.match(display, /Сервер временно недоступен/);
+      assert.doesNotMatch(display, /Загружаем учебный маршрут|<button\b/);
+
+      accountTransport.today = async () => ({
+        profile: { owner_user_id: 7, revision: 1, timezone: 'UTC' },
+        candidate: { id: 'PRE_A1-U01-L01' },
+      });
+      await page.reconnect();
+      await page.startLesson();
       await nextTick();
       assert.equal(requests, 1);
       assert.deepEqual(notifications.items.map(({type, message, actions}) => ({type, message, actions})), [

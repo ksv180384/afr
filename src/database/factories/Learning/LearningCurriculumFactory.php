@@ -22,8 +22,6 @@ class LearningCurriculumFactory extends Factory
             'level' => LearningLevel::PreA1->value,
             'required_objective_ids' => [],
             'checkpoint_session_ids' => [],
-            'promotion_policy_version' => 1,
-            'promotion_policy_snapshot' => config('daily_practice.promotion.policies.1'),
             'checksum' => hash('sha256', 'test-curriculum'),
             'status' => SessionVersionStatus::Draft->value,
         ];

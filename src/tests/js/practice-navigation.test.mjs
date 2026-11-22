@@ -3,11 +3,11 @@ import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
 import { createServer } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import { createSSRApp, h } from 'vue';
+import { createRenderer, createSSRApp, h, nextTick, reactive, ssrContextKey } from 'vue';
 import { renderToString } from '@vue/server-renderer';
 import { createInertiaApp, router } from '@inertiajs/vue3';
 import { createHeadManager } from '@inertiajs/core';
-import { restorePracticeScroll, returnToPractice } from '../../resources/js/App/Learning/practiceRunNavigation.js';
+import { restorePracticeScroll, returnToPractice, visitPracticeRun } from '../../resources/js/App/Learning/practiceRunNavigation.js';
 
 test('return from a lesson waits for the selected route and restores its scroll once', async (context) => {
   const origin = 'http://localhost:5000';
@@ -40,6 +40,71 @@ test('return from a lesson waits for the selected route and restores its scroll 
   assert.equal(restorePracticeScroll(), true);
   assert.equal(restorePracticeScroll(), false);
   assert.deepEqual(scrolls, [{top:720,left:0,behavior:'instant'}]);
+});
+
+test('return to the main practice route leaves scrolling to the current lesson', async (context) => {
+  const origin = 'http://localhost:5000';
+  globalThis.window = { location: new URL('/practice', origin), scrollY: 720 };
+  context.after(() => { delete globalThis.window; });
+  const visits = [];
+  context.mock.method(router, 'visit', (path, options) => {
+    visits.push([path, options.preserveScroll]);
+    window.location = new URL(path, origin);
+    options.onFinish();
+  });
+  await visitPracticeRun('/daily/run/d0f0');
+  window.location.search = '?from_scroll=720';
+  await returnToPractice({load: (_, __, {selection}) => assert.deepEqual(selection, {})}, 7);
+  assert.deepEqual(visits, [['/daily/run/d0f0', undefined], ['/practice', false]]);
+  assert.equal(restorePracticeScroll(), false);
+});
+
+test('the practice path scrolls after the browser loads and uses the latest lesson target', async (context) => {
+  const root = fileURLToPath(new URL('../../', import.meta.url));
+  const server = await createServer({
+    configFile: false, root, cacheDir: root + 'node_modules/.vite-tests/practice-path-scroll',
+    optimizeDeps: { noDiscovery: true, include: [] }, plugins: [vue()],
+    resolve: { alias: { '@': root + 'resources/js' } },
+    server: { middlewareMode: true, hmr: false }, appType: 'custom', logLevel: 'error',
+  });
+  context.after(() => server.close());
+  const { default: pathComponent } = await server.ssrLoadModule('/resources/js/App/Components/Learning/PracticeLevelPath.vue');
+  const listeners = new Map();
+  const frames = new Map();
+  let frameId = 0;
+  globalThis.window = {
+    location: new URL('http://localhost:5000/practice'),
+    addEventListener: (event, callback) => listeners.set(event, callback),
+    removeEventListener: event => listeners.delete(event),
+  };
+  globalThis.document = { readyState: 'interactive' };
+  globalThis.requestAnimationFrame = callback => (frames.set(++frameId, callback), frameId);
+  globalThis.cancelAnimationFrame = id => frames.delete(id);
+  const scrolls = [];
+  const route = reactive({ level: {id: 'PRE_A1'}, topics: [], current_lesson_id: null });
+  const container = {querySelectorAll: () => route.topics.flatMap(topic => topic.lessons.map(lesson => ({
+    dataset: {lesson: lesson.id}, scrollIntoView: options => scrolls.push([lesson.id, options]),
+  })))};
+  const renderer = createRenderer({createElement: () => container, createComment: () => ({}),
+    insert() {}, remove() {}, patchProp() {}, parentNode: () => null, nextSibling: () => null});
+  const app = renderer.createApp({...pathComponent, render: () => h('div', {ref: 'path'})}, {route});
+  app.provide(ssrContextKey, {});
+  app.mount({});
+  try {
+    assert.equal(frames.size, 0);
+    document.readyState = 'complete';
+    listeners.get('load')();
+    route.topics = [{id: 'unit', lessons: [{id: 'first', status: 'completed'}, {id: 'current', status: 'available'}]}];
+    route.current_lesson_id = 'current';
+    await nextTick();
+    assert.equal(frames.size, 1);
+    assert.deepEqual(scrolls, []);
+    for (const frame of frames.values()) frame();
+    assert.deepEqual(scrolls, [['current', {block: 'center', behavior: 'instant'}]]);
+  } finally {
+    app.unmount();
+    for (const key of ['window', 'document', 'requestAnimationFrame', 'cancelAnimationFrame']) delete globalThis[key];
+  }
 });
 
 test('practice and home metadata replace each other without retaining a previous canonical or robots tag', async () => {

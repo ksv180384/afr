@@ -199,7 +199,7 @@ it('accepts reports for an owners saved vocabulary source after archival without
     $owner = User::factory()->create();
     $snapshot = $this->version->payload['vocabulary'][0];
     $word = \App\Models\Learning\PersonalVocabulary::factory()->create(['user_id' => $owner->id, 'lexeme_key' => $snapshot['lexeme_key'], 'snapshot' => $snapshot]);
-    $word->sources()->create(['user_id' => $owner->id, 'session_id' => $this->version->id, 'vocabulary_id' => $snapshot['id'], 'snapshot' => $snapshot, 'first_added_at' => now('UTC')]);
+    $word->sources()->create(['user_id' => $owner->id, 'session_id' => $this->version->id, 'snapshot' => $snapshot, 'first_added_at' => now('UTC')]);
     $this->version->update(['archived_at' => now('UTC')]);
     $input = practiceReportInput($this, ['task_id' => null]);
     $this->actingAs(User::factory()->create())->postJson('/daily/api/reports', $input)->assertNotFound();

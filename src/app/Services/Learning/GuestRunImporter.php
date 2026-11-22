@@ -137,15 +137,15 @@ class GuestRunImporter
                 } $previousTime = $time;
             }
             $run = LearningRun::create(['user_id' => $actor->id, 'kind' => $bundle['kind'], 'status' => 'in_progress', 'session_id' => $versionId,
-                'content_checksum' => $checksum, 'snapshot' => $versionId ? LearningRun::contentSummary($snapshot) : $snapshot,
-                ...$policy->runAttributes(), 'timezone' => $bundle['timezone'], 'local_date' => $clockWarning ? PracticeTime::localDate($now, $bundle['timezone']) : PracticeTime::localDate($start, $bundle['timezone']),
+                'content_checksum' => $checksum, 'snapshot' => $versionId ? null : $snapshot,
+                'checking_policy_version' => $policy->version, 'timezone' => $bundle['timezone'], 'local_date' => $clockWarning ? PracticeTime::localDate($now, $bundle['timezone']) : PracticeTime::localDate($start, $bundle['timezone']),
                 'started_at' => $now, 'cursor_position' => 1, 'introductions_seen' => [], 'revision' => 1,
                 'import_meta' => ['guest_id' => $episode->guest_id, 'episode_id' => $episode->id, 'guest_run_id' => $bundle['guest_run_id'], 'received_at' => $now->toIso8601String(),
                     'original_local_date' => $bundle['local_date'], 'client_started_at' => $bundle['started_at'], 'clock_warning' => $clockWarning]]);
             $presentations = [];
             foreach ($items as $index => $item) {
                 $presentation = LearningPresentation::create(['user_id' => $actor->id, 'run_id' => $run->id, 'task_id' => $item['task']['id'], 'position' => $index + 1, 'snapshot' => $versionId ? [] : $item,
-                    'choice_order' => array_column($item['task']['choices'] ?? $item['task']['tokens'] ?? [], 'id'), 'status' => 'pending']);
+                    'status' => 'pending']);
                 $presentations[$bundle['presentation_ids'][$index]] = $presentation->id;
             }
             $mapping = GuestEventMapping::create(['episode_id' => $episode->id, 'guest_id' => $episode->guest_id, 'owner_user_id' => $actor->id, 'entity_type' => 'run', 'guest_entity_id' => $bundle['guest_run_id'],
@@ -187,6 +187,7 @@ class GuestRunImporter
             $previous = $this->time($receipt['last_client_time'] ?? null);
             $receipt['clock_warning'] = ($receipt['clock_warning'] ?? false) || ! $time || $time > PracticeTime::now() || ($previous && $time < $previous);
             $attemptId = null;
+            $eventReceipt = [];
             if (in_array($action, ['answer', 'help'], true)) {
                 foreach (['event_type', 'answer', 'help_kind', 'reason'] as $key) {
                     if (array_key_exists($key, $event)) {
@@ -199,7 +200,9 @@ class GuestRunImporter
                 $response = $this->runs->event($actor, $run->id, $action, $input);
                 $attemptId = $response['attempt']['attempt_id'];
             } elseif (in_array($action, ['introduction', 'advance', 'pause', 'resume', 'finish', 'reviewMistakes'], true)) {
-
+                if ($action === 'finish' && $run->session_id !== null) {
+                    $eventReceipt['vocabulary_keys'] = array_column($run->content()['vocabulary'] ?? [], 'lexeme_key');
+                }
                 $context = app(GuestImportContext::class);
                 $context->sourceAt = $action === 'finish' && ! $receipt['clock_warning'] ? $time : null;
                 try {
@@ -210,7 +213,7 @@ class GuestRunImporter
             } else {
                 AnswerChecker::invalid('Неизвестная операция гостя.');
             }
-            $this->ledger->record($episode, $event, ['server_run_id' => $run->id, 'server_event_id' => $attemptId]);
+            $this->ledger->record($episode, $event, ['server_run_id' => $run->id, 'server_event_id' => $attemptId, 'receipt' => $eventReceipt]);
             $receipt['guest_revision']++;
             $receipt['server_revision'] = $response['state']['revision'];
             $receipt['last_sequence'] = $event['sequence'];

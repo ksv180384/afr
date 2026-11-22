@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $stable_id Стабильный идентификатор учебной цели, на который ссылаются пакеты.
  * @property LevelCode $level Код уровня CEFR.
  * @property string $title Название, отображаемое в интерфейсе.
- * @property string|null $definition Определение учебной цели.
  * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
  * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
  */
@@ -25,7 +24,6 @@ class LearningObjective extends Model
         'stable_id',
         'level',
         'title',
-        'definition',
     ];
 
     protected function casts(): array
@@ -38,7 +36,7 @@ class LearningObjective extends Model
     protected static function booted(): void
     {
         static::updating(function (self $model): void {
-            if ($model->isDirty(['stable_id', 'level', 'definition'])) {
+            if ($model->isDirty(['stable_id', 'level'])) {
                 throw new \LogicException('Objective identity and meaning are immutable; use a new stable ID.');
             }
         });

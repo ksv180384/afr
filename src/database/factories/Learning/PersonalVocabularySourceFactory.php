@@ -20,7 +20,6 @@ class PersonalVocabularySourceFactory extends Factory
             'personal_word_id' => PersonalVocabulary::factory(),
             'user_id' => fn (array $attributes): int => PersonalVocabulary::query()->findOrFail($attributes['personal_word_id'])->user_id,
             'session_id' => LearningSession::factory()->withContent(),
-            'vocabulary_id' => 'bonjour',
             'snapshot' => ['fixture' => true],
             'first_added_at' => now('UTC'),
         ];

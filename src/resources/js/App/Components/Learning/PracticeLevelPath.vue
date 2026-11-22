@@ -1,5 +1,5 @@
 <script setup>
-import { computed, nextTick, onMounted, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import DailyPracticeIcon from './DailyPracticeIcon.vue';
 import { restorePracticeScroll } from '@/App/Learning/practiceRunNavigation.js';
 import { canTrainTopic, trainingModes } from '@/App/Learning/training.js';
@@ -60,8 +60,14 @@ const topicStyle = index => {
     '--topic-ink': palette.ink,
   };
 };
-const scrollToLesson = async () => {
-  await nextTick();
+let scrollFrame;
+const scrollToLesson = () => {
+  if (document.readyState !== 'complete') return;
+  cancelAnimationFrame(scrollFrame);
+  // Wait until Inertia and the browser have applied their navigation scroll positions.
+  scrollFrame = requestAnimationFrame(applyScroll);
+};
+const applyScroll = () => {
   const container = path.value;
   if (!container || window.location.hash) return;
   if (restorePracticeScroll()) return;
@@ -71,8 +77,15 @@ const scrollToLesson = async () => {
     : [...container.querySelectorAll('[data-lesson]')].find(element => element.dataset.lesson === current.value?.id);
   target?.scrollIntoView({ block: selectedTopic ? 'start' : 'center', behavior: 'instant' });
 };
-onMounted(scrollToLesson);
-watch([() => props.route.level.id, () => props.selection?.unit], scrollToLesson);
+onMounted(() => {
+  if (document.readyState === 'complete') scrollToLesson();
+  else window.addEventListener('load', scrollToLesson, { once: true });
+});
+watch([() => props.route.level.id, () => props.selection?.unit, () => current.value?.id], scrollToLesson, { flush: 'post' });
+onBeforeUnmount(() => {
+  window.removeEventListener('load', scrollToLesson);
+  cancelAnimationFrame(scrollFrame);
+});
 </script>
 
 <template>

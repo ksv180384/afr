@@ -135,7 +135,7 @@ it('rejects unavailable policies malformed Unicode and duplicate or forged first
     expect(fn () => (new SessionResultCalculator)->calculate([$state, $state], 2, 1))->toThrow(InvalidArgumentException::class);
     $state['first_result']['score'] = 2;
     expect(fn () => (new SessionResultCalculator)->calculate([$state], 1, 1))->toThrow(InvalidArgumentException::class);
-    expect(CheckingPolicy::forVersion(1)->runAttributes())->toBe(['checking_policy_version' => 1, 'checking_policy_snapshot' => CheckingPolicy::forVersion(1)->rules]);
+    expect(CheckingPolicy::forVersion(1)->version)->toBe(1);
 });
 
 it('matches the complete JavaScript results including all transitions and pair details', function () {

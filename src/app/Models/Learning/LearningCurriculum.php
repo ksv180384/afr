@@ -21,8 +21,6 @@ use LogicException;
  * @property LevelCode $level Код уровня CEFR.
  * @property array $required_objective_ids Список стабильных идентификаторов обязательных учебных целей.
  * @property array $checkpoint_session_ids Список внешних идентификаторов контрольных занятий.
- * @property int $promotion_policy_version Версия правил перехода на следующий уровень.
- * @property array $promotion_policy_snapshot Зафиксированные параметры оценки и перехода на следующий уровень.
  * @property string $checksum SHA-256 содержимого для проверки целостности и совпадения версий.
  * @property SessionVersionStatus $status Состояние версии программы: черновик, проверена, опубликована или архивирована.
  * @property int|null $created_by Пользователь, создавший запись.
@@ -45,8 +43,6 @@ class LearningCurriculum extends Model
         'level',
         'required_objective_ids',
         'checkpoint_session_ids',
-        'promotion_policy_version',
-        'promotion_policy_snapshot',
         'checksum',
         'status',
         'created_by',
@@ -62,8 +58,6 @@ class LearningCurriculum extends Model
             'level' => LevelCode::class,
             'required_objective_ids' => 'array',
             'checkpoint_session_ids' => 'array',
-            'promotion_policy_version' => 'integer',
-            'promotion_policy_snapshot' => 'array',
             'created_by' => 'integer',
             'published_by' => 'integer',
             'published_at' => 'immutable_datetime',
@@ -81,8 +75,6 @@ class LearningCurriculum extends Model
                 'level',
                 'required_objective_ids',
                 'checkpoint_session_ids',
-                'promotion_policy_version',
-                'promotion_policy_snapshot',
                 'checksum',
             ])
                 || ($model->getRawOriginal('published_at') !== null && $model->isDirty('published_at'))

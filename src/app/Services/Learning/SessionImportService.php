@@ -144,12 +144,10 @@ final class SessionImportService
             foreach ($package['curricula'] ?? [] as $content) {
                 $curriculum = LearningCurriculum::query()->where('external_id', $content['id'])->where('version', $content['version'])->first();
                 if (! $curriculum) {
-                    $policyVersion = config('daily_practice.promotion.current_policy_version');
                     $curriculum = LearningCurriculum::create([
                         'external_id' => $content['id'], 'version' => $content['version'], 'level' => $content['level'],
                         'required_objective_ids' => $content['required_objective_ids'], 'checkpoint_session_ids' => $content['checkpoint_session_ids'],
-                        'checksum' => CanonicalJson::hash($content), 'promotion_policy_version' => $policyVersion,
-                        'promotion_policy_snapshot' => config('daily_practice.promotion.policies.'.$policyVersion),
+                        'checksum' => CanonicalJson::hash($content),
                         'status' => 'draft', 'created_by' => $actor->id,
                     ]);
                 }

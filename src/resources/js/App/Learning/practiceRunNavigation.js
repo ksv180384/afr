@@ -13,7 +13,7 @@ export function handlePracticeHistory(event) {
   trainingHistoryHandler?.(event);
 }
 
-export function visitPracticeRun(path, route, selection = {}) {
+export function visitPracticeRun(path, selection = {}) {
   const query = new URLSearchParams();
   if (runPath.test(window.location.pathname)) {
     const current = new URLSearchParams(window.location.search);
@@ -21,8 +21,7 @@ export function visitPracticeRun(path, route, selection = {}) {
       if (current.has(key)) query.set(key, current.get(key));
     }
   } else {
-    const level = route?.level?.id ?? selection.level;
-    const unit = route?.unit?.id ?? selection.unit;
+    const {level, unit} = selection;
     if (level) query.set('from_level', level);
     if (unit) query.set('from_unit', unit);
     if (level || unit) query.set('from_scroll', String(Math.round(window.scrollY)));
@@ -39,11 +38,12 @@ export function practiceReturnDestination(search = window.location.search) {
     if (value && value.length <= 128) selection[key] = value;
   }
   const query = new URLSearchParams(selection);
-  const scroll = Number(current.get('from_scroll'));
+  const position = current.get('from_scroll');
+  const scroll = query.size && position ? Number(position) : NaN;
   return {
     path: query.size ? '/practice?' + query.toString() : '/practice',
     selection,
-    scroll: Number.isFinite(scroll) ? Math.max(0, scroll) : 0,
+    scroll: Number.isFinite(scroll) ? Math.max(0, scroll) : null,
   };
 }
 
@@ -51,11 +51,11 @@ export async function returnToPractice(store, owner) {
   const source = window.location.href;
   const destination = practiceReturnDestination();
   try { await store.load(owner, 1, {selection: destination.selection}); }
-  catch { /* The destination can open with its normal loading and retry controls. */ }
+  catch { /* The destination can show its own loading error. */ }
   if (window.location.href !== source) return;
-  returnScroll = destination;
+  returnScroll = destination.scroll === null ? undefined : destination;
   return new Promise(resolve => router.visit(destination.path, {
-    preserveScroll: true,
+    preserveScroll: returnScroll === destination,
     onCancel: () => { if (returnScroll === destination) returnScroll = undefined; },
     onFinish: resolve,
   }));

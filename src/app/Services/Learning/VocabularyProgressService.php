@@ -83,7 +83,7 @@ class VocabularyProgressService
                 }
                 $word->wasRecentlyCreated ? $added++ : $existing++;
                 PersonalVocabularySource::firstOrCreate(['personal_word_id' => $word->id, 'session_id' => $run->session_id], [
-                    'user_id' => $run->user_id, 'vocabulary_id' => $snapshot['id'], 'snapshot' => $snapshot, 'first_added_at' => app(GuestImportContext::class)->sourceAt ?? $at,
+                    'user_id' => $run->user_id, 'snapshot' => $snapshot, 'first_added_at' => app(GuestImportContext::class)->sourceAt ?? $at,
                 ]);
             }
         }

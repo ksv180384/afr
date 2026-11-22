@@ -26,9 +26,8 @@ use LogicException;
  * @property string $kind Тип прохождения, определяющий его сценарий.
  * @property RunStatus $status Состояние прохождения: в процессе, на паузе или завершено.
  * @property int|null $session_id Занятие, к которому относится запись.
- * @property array $snapshot Снимок содержимого прохождения, закреплённый при запуске.
+ * @property array|null $snapshot Содержимое персонального словарного теста или повторения.
  * @property int $checking_policy_version Версия правил проверки ответов.
- * @property array $checking_policy_snapshot Зафиксированные для прохождения параметры проверки ответов.
  * @property string $timezone Часовой пояс IANA для расчёта локальных дат.
  * @property \Carbon\CarbonImmutable $local_date Календарная дата в часовом поясе ученика.
  * @property \Carbon\CarbonImmutable $started_at Момент запуска прохождения.
@@ -36,6 +35,7 @@ use LogicException;
  * @property \Carbon\CarbonImmutable|null $finished_at Момент завершения прохождения.
  * @property int $revision Номер ревизии записи, изменяемый при обновлении её состояния.
  * @property array|null $result Итоги завершённого прохождения.
+ * @property string|null $promoted_to_level Уровень, открытый при завершении этого прохождения.
  * @property array|null $corrections Позиции заданий с ошибками и ход их повторения.
  * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
  * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
@@ -52,6 +52,10 @@ class LearningRun extends Model
 
     protected $table = 'learning_runs';
 
+    public const LESSON_RESULT_FIELDS = [
+        'total_steps', 'independent_correct_steps', 'technical_skips', 'mistakes_count', 'words_added', 'words_existing',
+    ];
+
     protected $fillable = [
         'import_meta',
         'user_id',
@@ -61,7 +65,6 @@ class LearningRun extends Model
         'content_checksum',
         'snapshot',
         'checking_policy_version',
-        'checking_policy_snapshot',
         'timezone',
         'local_date',
         'started_at',
@@ -69,6 +72,7 @@ class LearningRun extends Model
         'finished_at',
         'revision',
         'result',
+        'promoted_to_level',
         'corrections',
         'cursor_position',
         'introductions_seen',
@@ -82,7 +86,6 @@ class LearningRun extends Model
             'session_id' => 'integer',
             'snapshot' => 'array',
             'checking_policy_version' => 'integer',
-            'checking_policy_snapshot' => 'array',
             'local_date' => 'immutable_date:Y-m-d',
             'started_at' => 'immutable_datetime',
             'paused_at' => 'immutable_datetime',
@@ -111,7 +114,6 @@ class LearningRun extends Model
                 'session_id',
                 'content_checksum',
                 'checking_policy_version',
-                'checking_policy_snapshot',
                 'timezone',
                 'local_date',
                 'started_at',
@@ -140,12 +142,14 @@ class LearningRun extends Model
 
     public function content(): array
     {
-        if ($this->content_checksum === null || $this->status === RunStatus::Completed) {
-            return $this->snapshot;
+        if ($this->status === RunStatus::Completed) {
+            return $this->summaryContent();
+        }
+        if ($this->session_id === null || ($this->content_checksum === null && $this->snapshot !== null)) {
+            return $this->snapshot ?? [];
         }
 
-        $this->loadMissing('session:id,checksum');
-        $session = $this->session;
+        $session = $this->lesson();
         if ($session?->checksum === null || ! hash_equals($this->content_checksum, $session->checksum)) {
             throw new AnswerCheckingException(PracticeErrorCode::VersionConflict, 'Занятие обновилось. Начните его заново.');
         }
@@ -153,10 +157,49 @@ class LearningRun extends Model
         return app(SessionContentCache::class)->payload($session);
     }
 
-    public static function contentSummary(array $content): array
+    public function lesson(): ?LearningSession
     {
-        return array_intersect_key($content, array_flip(['id', 'title', 'level', 'duration_minutes']))
-            + ['goal' => $content['objectives'][0]['title'] ?? null];
+        if ($this->session_id === null) {
+            return null;
+        }
+
+        $this->loadMissing('session:id,external_id,level,unit_id,checksum,content_title,content_duration,content_goal');
+
+        return $this->session;
+    }
+
+    public function summaryContent(): array
+    {
+        $lesson = $this->lesson();
+
+        return $lesson ? ['id' => $lesson->external_id, 'level' => $lesson->getRawOriginal('level'),
+            'title' => $lesson->content_title, 'duration_minutes' => (int) ($lesson->content_duration ?? 3),
+            'goal' => $lesson->content_goal] : ($this->snapshot ?? []);
+    }
+
+    public function completedResult(): ?array
+    {
+        $result = $this->result;
+        if ($result === null || $this->session_id === null) {
+            return $result;
+        }
+
+        $total = $result['total_steps'] ?? 0;
+        $correct = $result['independent_correct_steps'] ?? 0;
+
+        return $result + [
+            'checking_policy_version' => $this->checking_policy_version,
+            'processed_steps' => $total,
+            'score_numerator' => $correct,
+            'score_denominator' => $total,
+            'score_percent' => $total ? $correct * 100 / $total : null,
+            'all_steps_processed' => $total > 0,
+            'promotion' => $this->promoted_to_level ? [
+                'old_level' => $this->lesson()?->getRawOriginal('level'),
+                'new_level' => $this->promoted_to_level,
+                'reason' => ['method' => 'published_route_completion'],
+            ] : null,
+        ];
     }
 
     public function presentations(): HasMany

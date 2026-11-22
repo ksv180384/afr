@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Learning\DailyAssignment;
-use App\Models\Learning\LearningActivityDay;
 use App\Models\Learning\LearningAttempt;
 use App\Models\Learning\LearningLevel;
 use App\Models\Learning\LearningRun;
@@ -62,7 +61,7 @@ it('reads today profile shell and history without creating learning state', func
     $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('candidate.id', 'PRE_A1-U01-L01');
     $this->getJson('/daily/api/profile')->assertOk()->assertJsonPath('persisted', false);
     $this->getJson('/daily/api/history')->assertOk();
-    foreach (['learning_profiles', 'daily_assignments', 'learning_runs', 'learning_presentations', 'learning_run_operations', 'learning_activity_days'] as $table) {
+    foreach (['learning_profiles', 'daily_assignments', 'learning_runs', 'learning_presentations', 'learning_run_operations'] as $table) {
         $this->assertDatabaseCount($table, 0);
     }
 });
@@ -121,9 +120,10 @@ it('finishes once using server time and preserves the receipt after midnight and
     $receipt = $this->postJson('/daily/api/runs/'.$state['run_id'].'/finish', $input)->assertOk()->json();
     expect($receipt['state']['finished'])->toBeTrue();
     expect($receipt['state']['summary']['independent_correct_steps'])->toBe(0);
+    $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('activity_today', true);
     $this->travelTo(\Carbon\Carbon::parse('2026-10-26 21:05:00', 'UTC'));
     $this->postJson('/daily/api/runs/'.$state['run_id'].'/finish', $input)->assertExactJson($receipt);
-    expect(LearningActivityDay::sole()->local_date->format('Y-m-d'))->toBe('2026-10-25');
+    $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('activity_today', false);
     expect(DailyAssignment::sole()->local_date->format('Y-m-d'))->toBe('2026-10-24');
     $this->assertDatabaseCount('personal_vocabulary', 6);
     $this->travelBack();
@@ -240,7 +240,7 @@ it('creates frozen review and vocabulary test sets only from owned words', funct
     $review = accountComplete($this, $review);
     accountCommand($this, $review, 'finish');
     expect(DailyAssignment::count())->toBe(0);
-    expect(LearningActivityDay::count())->toBe(1);
+    $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('activity_today', true);
 });
 
 it('rolls back answers and future integration effects atomically and never reapplies accepted effects', function () {
@@ -292,10 +292,10 @@ it('rolls back failed finish integrations before recording the day or a complete
     $input = accountInput($state['revision']);
     $this->postJson('/daily/api/runs/'.$state['run_id'].'/finish', $input)->assertStatus(503);
     expect(LearningRun::find($state['run_id'])->status->value)->toBe('in_progress');
-    expect(LearningActivityDay::count())->toBe(0);
+    $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('activity_today', false);
     $receipt = $this->postJson('/daily/api/runs/'.$state['run_id'].'/finish', $input)->assertOk()->json();
     $this->postJson('/daily/api/runs/'.$state['run_id'].'/finish', $input)->assertExactJson($receipt);
-    expect(LearningActivityDay::count())->toBe(1);
+    $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('activity_today', true);
 });
 
 it('keeps only completed results in history and removes their task data', function () {

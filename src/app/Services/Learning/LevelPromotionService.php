@@ -32,7 +32,7 @@ final class LevelPromotionService
         $promotion = null;
         if ($profile && in_array($run->kind, ['daily', 'extra'], true) && $this->afterManualChange($run, $profile)) {
             $base = $profile->getRawOriginal('current_level');
-            if (($run->snapshot['level'] ?? null) === $base) {
+            if ($run->lesson()?->getRawOriginal('level') === $base) {
                 $route = app(LearningAccessService::class)->completionProgress($actor, $base, $run);
                 if ($route['complete'] && $route['next_level']) {
                     $promotion = ['old_level' => $base, 'new_level' => $route['next_level'],

@@ -64,25 +64,6 @@ return [
         'current_version' => CheckingPolicy::CURRENT_VERSION,
         'supported_versions' => CheckingPolicy::SUPPORTED_VERSIONS,
     ],
-    'promotion' => [
-        'current_policy_version' => 1,
-        // Pin the version and a snapshot to enrollment; missing curriculum disables promotion.
-        'policies' => [
-            1 => [
-                'required_objectives_percent' => 80,
-                'distinct_tasks_per_objective' => 2,
-                'distinct_runs_per_objective' => 2,
-                'distinct_checkpoint_sessions' => 2,
-                'distinct_local_checkpoint_days' => 2,
-                'checkpoint_score_percent' => 80,
-                'required_skill' => 'vocabulary',
-                'min_distinct_skills' => 2,
-                'allow_technical_skips' => false,
-                'requires_published_curriculum' => true,
-                'requires_published_checkpoints' => true,
-            ],
-        ],
-    ],
     // Editorial targets only: never use them as database/import-total limits.
     'content_targets' => [
         'sessions_per_level' => 100,

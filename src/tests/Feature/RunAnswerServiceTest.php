@@ -1,7 +1,6 @@
 <?php
 
 use App\Enums\Learning\RunStatus;
-use App\Models\Learning\LearningActivityDay;
 use App\Models\Learning\LearningAttempt;
 use App\Models\Learning\LearningPresentation;
 use App\Models\Learning\LearningRun;
@@ -9,7 +8,6 @@ use App\Models\Learning\LearningSession;
 use App\Models\Learning\PersonalVocabulary;
 use App\Models\User\User;
 use App\Services\Learning\AnswerCheckingException;
-use App\Services\Learning\CheckingPolicy;
 use App\Services\Learning\PresentationSnapshot;
 use App\Services\Learning\RunAnswerService;
 use App\Services\Learning\SessionResultCalculator;
@@ -28,7 +26,6 @@ beforeEach(function () {
         $this->presentations[] = LearningPresentation::factory()->create([
             'run_id' => $this->run->id, 'position' => $index + 1, 'task_id' => $task['id'],
             'snapshot' => PresentationSnapshot::forTask($this->session, $task['id']),
-            'choice_order' => array_column($task['choices'] ?? [], 'id'),
         ]);
     }
     $this->answers = app(RunAnswerService::class);
@@ -76,9 +73,8 @@ it('stores the first answer and policy-derived result without finishing the run 
         ->and($attempt->client_occurred_at->toIso8601String())->toBe('2000-01-01T00:00:00+00:00')
         ->and($this->run->refresh()->status)->toBe(RunStatus::InProgress)
         ->and($this->run->result)->toBeNull()
-        ->and($this->run->checking_policy_snapshot)->toBe(CheckingPolicy::forVersion(1)->rules)
-        ->and(PersonalVocabulary::count())->toBe(0)
-        ->and(LearningActivityDay::count())->toBe(0);
+        ->and($this->run->checking_policy_version)->toBe(1)
+        ->and(PersonalVocabulary::count())->toBe(0);
 });
 
 it('keeps help first wrong answer and correction distinct without replacing the first score', function () {
@@ -185,15 +181,13 @@ it('rejects invalid input atomically and then accepts a valid first answer', fun
     expect($receipt['result']['first_independent_success'])->toBeTrue();
 })->with(['client_score', 'client_correct', 'client_needs_review', 'client_policy', 'foreign_choice', 'no_answer', 'wrong_uuid', 'wrong_revision_type', 'date_overflow', 'bad_date', 'bad_utf8']);
 
-it('uses the pinned policy and fails closed for unsupported or mismatched snapshots', function () {
+it('uses the pinned policy and fails closed for unsupported versions', function () {
     config(['daily_practice.checking.current_version' => 999]);
     $receipt = $this->answers->accept($this->learner, $this->run->id, learnerEvent($this->run, $this->presentations[0]));
     expect($receipt['result']['checking_policy_version'])->toBe(1);
-    foreach ([['checking_policy_version' => 2], ['checking_policy_snapshot' => ['forged' => true]]] as $attributes) {
-        $run = LearningRun::factory()->create(['user_id' => $this->learner->id, 'session_id' => $this->version->id, ...$attributes]);
-        $presentation = LearningPresentation::factory()->create(['run_id' => $run->id, 'snapshot' => $this->presentations[0]->snapshot]);
-        expect(checkingErrorCode(fn () => $this->answers->accept($this->learner, $run->id, learnerEvent($run, $presentation))))->toBe('unsupported_checking_policy');
-    }
+    $run = LearningRun::factory()->create(['user_id' => $this->learner->id, 'session_id' => $this->version->id, 'checking_policy_version' => 2]);
+    $presentation = LearningPresentation::factory()->create(['run_id' => $run->id, 'snapshot' => $this->presentations[0]->snapshot]);
+    expect(checkingErrorCode(fn () => $this->answers->accept($this->learner, $run->id, learnerEvent($run, $presentation))))->toBe('unsupported_checking_policy');
 });
 
 it('does not change the denominator when presentations are missing', function () {

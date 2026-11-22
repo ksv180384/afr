@@ -121,8 +121,9 @@ final class LearningAccessService
         $entry = collect($this->outline())->firstWhere('id', $level);
         $ids = $entry ? array_merge(...array_map(fn ($unit) => array_column($unit['sessions'], 'id'), $entry['units'])) : [];
         $completed = $this->completed($actor);
-        if ($finishing && in_array($finishing->kind, ['daily', 'extra'], true) && ($finishing->snapshot['level'] ?? null) === $level) {
-            $completed[] = $finishing->snapshot['id'];
+        $lesson = $finishing?->lesson();
+        if ($lesson?->getRawOriginal('level') === $level && in_array($finishing->kind, ['daily', 'extra'], true)) {
+            $completed[] = $lesson->external_id;
         }
         $ready = $entry && $entry['published'] && $ids !== [] && collect($entry['units'])->every(fn ($unit) => $unit['sessions'] !== []);
 

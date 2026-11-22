@@ -235,7 +235,7 @@ it('serializes concurrent account finishes without a second date or result', fun
     $results = raceWorkers($this->actor, [['operation' => 'account_finish', 'run_id' => $state['run_id'], 'input' => $input], ['operation' => 'account_finish', 'run_id' => $state['run_id'], 'input' => $other]]);
     expect(array_column($results, 'ok'))->toBe([true, true]);
     expect($results[0]['receipt']['state'])->toBe($results[1]['receipt']['state']);
-    expect(\App\Models\Learning\LearningActivityDay::count())->toBe(1);
+    expect($service->today($this->actor)['activity_today'])->toBeTrue();
     expect(\App\Models\Learning\LearningRun::find($state['run_id'])->revision)->toBe($state['revision'] + 1);
 })->with([true, false]);
 

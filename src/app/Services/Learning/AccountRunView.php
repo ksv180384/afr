@@ -74,7 +74,7 @@ final class AccountRunView
             'introductions' => array_values(array_filter($snapshot['introductions'] ?? [], fn ($intro) => $intro['before_task_id'] === ($task['id'] ?? null))),
             'introduction_seen' => in_array($presentation?->id, $run->introductions_seen ?? [], true),
             'assistance' => $help, 'vocabulary' => $vocabulary,
-            'summary' => $run->result ?? ($finished ? null : $this->answers->result($actor, $run->id)),
+            'summary' => $finished ? $run->completedResult() : $this->answers->result($actor, $run->id),
             'audioUrls' => array_combine($ids = $this->assets($snapshot), array_map(fn ($id) => route('daily.api.media', ['run' => $run->id, 'media' => $id], false), $ids)) ?: [],
             ...($playback && $run->status->value !== 'completed' && ($snapshot['kind'] ?? null) !== 'checkpoint' ? ['playback' => [
                 'steps' => $presentations->map(function ($step) use ($snapshot) {

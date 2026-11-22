@@ -72,7 +72,7 @@ const selectedRun = computed(() => home.value?.route.lessons.find(lesson => less
 const loadHome = () => homeStore.load(owner.value, 1, {selection: props.routeSelection ?? {}});
 const loadError = failure => practiceErrorMessage(failure, 'Не удалось загрузить практику.');
 const refreshSuggestion = () => perform(() => loadHome());
-const openRun = id => visitPracticeRun('/daily/run/' + id, home.value?.route, props.routeSelection);
+const openRun = id => visitPracticeRun('/daily/run/' + id, props.routeSelection);
 const openState = state => state?.run_id && !disposed ? openRun(state.run_id) : undefined;
 const continueRun = id => perform(() => openRun(id));
 const exitRun = runId => perform(async () => {
@@ -87,9 +87,8 @@ const exitRun = runId => perform(async () => {
 });
 const startLesson = (sessionId = null) => perform(async () => {
   const actor = owner.value;
-  const route = home.value?.route;
   const path = await homeStore.start(actor, sessionId, actorStatus(actor));
-  if (currentActor(actor)) await visitPracticeRun(path, route, props.routeSelection);
+  if (currentActor(actor)) await visitPracticeRun(path, props.routeSelection);
 });
 const reconnect = async () => {
   const actor = owner.value;
@@ -146,9 +145,8 @@ const loadHistory = event => {
 };
 const startReview = (mode = 'manual') => perform(async () => {
   const actor = owner.value;
-  const route = home.value?.route;
   const path = await homeStore.startReview(actor, {mode, onStatus:actorStatus(actor)});
-  if (currentActor(actor)) await visitPracticeRun(path, route, props.routeSelection);
+  if (currentActor(actor)) await visitPracticeRun(path, props.routeSelection);
 });
 const repeat = input => {
   if (input.session_id) return startLesson(input.session_id);
@@ -194,7 +192,7 @@ onBeforeUnmount(() => { disposed = true; window.removeEventListener('online',onO
       <template v-else>
         <p v-if="saving.kind === 'auth'" class="muted"><Link href="/login?practice=1">Войти в аккаунт</Link>, чтобы продолжить занятие. Ваш ответ сохранён.</p>
         <p v-if="!error && saving.message && !feedback.enabled" role="status">{{ saving.message }}</p>
-        <practice-error-notice v-if="error && !feedback.enabled" :message="error" />
+        <practice-error-notice v-if="error && !feedback.enabled && (adapter || home)" :message="error" />
         <div v-if="saving.kind === 'conflict' && (adapter || conflictingRun)" class="actions">
           <afr-button v-if="adapter" @click="player?.reconcile()">Загрузить состояние сервера</afr-button>
           <afr-button v-else :disabled="busy || syncing" @click="continueRun(conflictingRun)">Открыть сохранённое занятие</afr-button>
@@ -248,7 +246,8 @@ onBeforeUnmount(() => { disposed = true; window.removeEventListener('online',onO
             </template>
           </details>
         </template>
-        <p v-else-if="!error" role="status" class="muted">Загружаем учебный маршрут…</p>
+        <practice-error-notice v-else-if="error" title="Учебный маршрут недоступен" :message="error" :announce="!feedback.enabled" />
+        <p v-else role="status" class="muted">Загружаем учебный маршрут…</p>
       </template>
     </div></component>
 </template>

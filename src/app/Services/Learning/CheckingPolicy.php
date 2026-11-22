@@ -15,11 +15,6 @@ final readonly class CheckingPolicy
         public array $rules,
     ) {}
 
-    public function runAttributes(): array
-    {
-        return ['checking_policy_version' => $this->version, 'checking_policy_snapshot' => $this->rules];
-    }
-
     /**
      * Resolve the version pinned to a run, never the latest default.
      * Keep each released version unchanged when adding a new checker.
