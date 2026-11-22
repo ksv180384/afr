@@ -23,12 +23,10 @@ class GuestPracticeController extends Controller
     {
         return LearningSession::query()->select('learning_sessions.*')
             ->join('learning_units', 'learning_units.id', '=', 'learning_sessions.unit_id')
-            ->whereNull('learning_sessions.archived_at')
-            ->whereHas('activeVersion', fn ($query) => $query->where('status', 'published'))
+            ->published()
             ->whereHas('unit', fn ($query) => $query->whereNotNull('published_at')->whereNull('archived_at'))
             ->whereHas('levelDefinition', fn ($query) => $query->published())
-            ->with(['activeVersion' => fn ($query) => $query->select('id', 'session_id', 'version', 'status', 'checksum',
-                'content_title', 'content_duration', 'content_goal', 'content_prerequisites'), 'unit'])->orderBy('learning_units.sort_order')
+            ->with('unit')->orderBy('learning_units.sort_order')
             ->orderBy('learning_sessions.sort_order')->orderBy('learning_sessions.external_id');
     }
 
@@ -66,30 +64,33 @@ class GuestPracticeController extends Controller
 
     public function index()
     {
-        return response()->json(['access_outline' => app(\App\Services\Learning\LearningAccessService::class)->outline(), 'sessions' => $this->published()->get()->map(fn ($session) => [
-            'id' => $session->external_id, 'theme' => $session->unit->title, 'duration_minutes' => (int) $session->activeVersion->content_duration, 'title' => $session->activeVersion->content_title,
-            'level' => $session->getRawOriginal('level'), 'goal' => $session->activeVersion->content_goal, 'session_version_id' => $session->active_version_id,
-            'prerequisite_ids' => json_decode($session->activeVersion->content_prerequisites, true),
+        return response()->json(['access_outline' => app(\App\Services\Learning\LearningAccessService::class)->outline(), 'sessions' => $this->published()->select(['learning_sessions.id', 'learning_sessions.unit_id', 'learning_sessions.level', 'learning_sessions.external_id',
+            'learning_sessions.content_duration', 'learning_sessions.content_title', 'learning_sessions.content_goal', 'learning_sessions.content_prerequisites'])->get()->map(fn ($session) => [
+            'id' => $session->external_id, 'theme' => $session->unit->title, 'duration_minutes' => (int) $session->content_duration, 'title' => $session->content_title,
+            'level' => $session->getRawOriginal('level'), 'goal' => $session->content_goal, 'session_version_id' => $session->id,
+            'prerequisite_ids' => json_decode($session->content_prerequisites, true),
         ])], options: JSON_UNESCAPED_UNICODE);
     }
 
     public function show(string $session, AccountRunView $view, \App\Services\Learning\SessionContentCache $cache)
     {
-        $row = $this->published()->where('learning_sessions.external_id', $session)->firstOrFail();
-        $payload = $cache->payload($row->activeVersion);
+        $row = $this->published()->where('learning_sessions.external_id', $session)
+            ->select('learning_sessions.id', 'learning_sessions.unit_id', 'learning_sessions.checksum')->firstOrFail();
+        $payload = $cache->payload($row);
         $assets = $view->assets($payload);
 
         // Guest checking is local. Only the active published teaching payload is exposed.
-        return response()->json(['access_outline' => app(\App\Services\Learning\LearningAccessService::class)->outline(), 'session_version_id' => $row->active_version_id,
+        return response()->json(['access_outline' => app(\App\Services\Learning\LearningAccessService::class)->outline(), 'session_version_id' => $row->id,
             'checking_policy_version' => CheckingPolicy::CURRENT_VERSION, 'snapshot' => $payload,
-            'checksum' => $row->activeVersion->checksum,
+            'checksum' => $row->checksum,
             'audioUrls' => array_combine($assets, array_map(fn ($id) => route('daily.content.media', ['session' => $session, 'media' => $id], false), $assets)) ?: []]);
     }
 
     public function media(string $session, string $media, AccountRunView $view, MediaLibraryService $library, \App\Services\Learning\SessionContentCache $cache)
     {
-        $row = $this->published()->where('learning_sessions.external_id', $session)->firstOrFail();
-        abort_unless(in_array($media, $view->assets($cache->payload($row->activeVersion)), true), 404);
+        $row = $this->published()->where('learning_sessions.external_id', $session)
+            ->select('learning_sessions.id', 'learning_sessions.unit_id', 'learning_sessions.checksum')->firstOrFail();
+        abort_unless(in_array($media, $view->assets($cache->payload($row)), true), 404);
         $asset = LearningMedia::query()->where('review_status', 'approved')->whereNull('archived_at')->findOrFail($media);
 
         return response()->file($library->file($asset), ['Content-Type' => $asset->mime_type,

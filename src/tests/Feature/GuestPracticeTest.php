@@ -3,7 +3,6 @@
 use App\Models\Learning\LearningLevel;
 use App\Models\Learning\LearningRun;
 use App\Models\Learning\LearningSession;
-use App\Models\Learning\LearningSessionVersion;
 use App\Models\Learning\LearningUnit;
 use App\Models\User\User;
 use App\Services\Learning\Validation\CanonicalJson;
@@ -20,9 +19,7 @@ beforeEach(function () {
     $this->sessions = [];
     foreach ($package['sessions'] as $session) {
         $row = LearningSession::factory()->create(['external_id' => $session['id'], 'unit_id' => $this->unit->id, 'sort_order' => $session['order']]);
-        $version = LearningSessionVersion::factory()->create(['session_id' => $row->id, 'payload' => $session, 'checksum' => CanonicalJson::hash($session), 'status' => 'published', 'published_at' => now('UTC')]);
-        $row->update(['active_version_id' => $version->id]);
-        $this->sessions[] = $row;
+        $this->sessions[] = lessonWithContent(['session_id' => $row->id, 'payload' => $session, 'checksum' => CanonicalJson::hash($session), 'status' => 'published', 'published_at' => now('UTC')]);
     }
 });
 
@@ -44,7 +41,7 @@ it('serves only published guest content in stable order without creating anonymo
 });
 
 it('does not expose draft archived unpublished or private media through guest reads', function () {
-    $this->sessions[0]->activeVersion->update(['status' => 'draft']);
+    $this->sessions[0]->update(['status' => 'draft']);
     $this->get('/daily/api/content/PRE_A1-U01-L01', ['Accept' => 'text/html'])->assertNotFound()->assertJsonPath('code', 'not_found');
     $this->get('/daily/api/content')->assertJsonCount(1, 'sessions');
     $this->sessions[1]->update(['archived_at' => now()]);
@@ -75,7 +72,7 @@ it('keeps account endpoints protected while guests read public teaching snapshot
 
 it('serves all twelve guest tasks without truncation or creating progress', function () {
     $payload = json_decode(file_get_contents(base_path('tests/Fixtures/Learning/twelve-task-package.json')), true)['sessions'][0];
-    $this->sessions[0]->activeVersion->update(['payload' => $payload, 'checksum' => CanonicalJson::hash($payload)]);
+    $this->sessions[0]->update(['payload' => $payload, 'checksum' => CanonicalJson::hash($payload)]);
     $this->getJson('/daily/api/content/'.$payload['id'])->assertOk()->assertJsonCount(12, 'snapshot.tasks')
         ->assertJsonPath('snapshot.tasks.11.id', 'Q12')->assertJsonPath('snapshot.version', 1);
     expect(LearningRun::count())->toBe(0);

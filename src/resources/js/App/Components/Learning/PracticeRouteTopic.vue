@@ -13,6 +13,7 @@ import PronunciationNotes from './PronunciationNotes.vue';
 import DailyPracticeIcon from './DailyPracticeIcon.vue';
 import PracticeStatus from './PracticeStatus.vue';
 import PracticeLevelPath from './PracticeLevelPath.vue';
+import PracticeErrorNotice from './PracticeErrorNotice.vue';
 import TrainingPanel from './TrainingPanel.vue';
 
 const props = defineProps({route: {type: Object, required: true}, selection: Object, owner: Number, guest: Boolean, store: Object, busy: Boolean, trail: Boolean});
@@ -148,8 +149,7 @@ const loadReference = async (card, onCleanup) => {
     if (current) referenceBusy.value = false;
   }
 };
-const referenceAttempt = ref(0);
-watch([referenceCard, panel, referenceAttempt, () => props.owner], ([card], previous, onCleanup) => loadReference(card, onCleanup));
+watch([referenceCard, panel, () => props.owner], ([card], previous, onCleanup) => loadReference(card, onCleanup));
 
 const query = ref('');
 const completedOnly = ref(false);
@@ -184,7 +184,7 @@ const search = async () => {
     if (!props.guest && response.owner_user_id !== owner) throw new Error('Аккаунт изменился.');
     results.value = response;
   } catch {
-    if (id === searchId) searchError.value = 'Не удалось выполнить поиск. Повторите запрос.';
+    if (id === searchId) searchError.value = 'Не удалось выполнить поиск.';
   } finally {
     if (id === searchId) searching.value = false;
   }
@@ -265,7 +265,7 @@ const search = async () => {
       </div>
       <template v-else-if="panel === 'topics'">
         <p v-if="searching" role="status">Ищем занятия…</p>
-        <p v-if="searchError" role="alert">{{ searchError }}</p>
+        <practice-error-notice v-if="searchError" :message="searchError" />
         <section v-if="results">
           <h3>Найденные занятия</h3>
           <p v-if="!results.items.length">Занятия не найдены.</p>
@@ -301,10 +301,7 @@ const search = async () => {
           <p>При выходе прогресс сохраняется. Помощь до ответа учитывается при зачёте.</p>
         </section>
         <p v-if="referenceBusy" role="status">Загружаем справку…</p>
-        <template v-else-if="referenceError">
-          <p role="alert">{{ referenceError }}</p>
-          <afr-button v-if="canOpen(referenceCard)" @click="referenceAttempt++">Повторить загрузку</afr-button>
-        </template>
+        <practice-error-notice v-else-if="referenceError" :message="referenceError" />
         <div v-else-if="reference" class="route-reference">
           <h3>{{ reference.title }}</h3>
           <p v-if="reference.summary">{{ reference.summary }}</p>

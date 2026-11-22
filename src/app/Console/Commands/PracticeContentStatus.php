@@ -63,14 +63,14 @@ class PracticeContentStatus extends Command
                 return count($goal['tasks'] ?? []) >= 2 && count($goal['sessions'] ?? []) >= 2
                     && isset($goal['skills']['vocabulary']) && count($goal['skills'] ?? []) >= 2;
             }));
-            $publishedRows = $catalog->sessions()->where('level', $level['code'])->whereIn('external_id', $planned)->with('activeVersion:id,session_id,checksum')->get();
+            $publishedRows = $catalog->sessions()->where('level', $level['code'])->whereIn('external_id', $planned)->get(['id', 'external_id', 'checksum']);
             $published = $publishedRows->pluck('external_id')->all();
-            $matchingPublished = $publishedRows->filter(fn ($row) => isset($valid[$row->external_id]) && $valid[$row->external_id] === $row->activeVersion->checksum)->count();
+            $matchingPublished = $publishedRows->filter(fn ($row) => isset($valid[$row->external_id]) && $valid[$row->external_id] === $row->checksum)->count();
             $matchingReviewed = LearningSession::where('level', $level['code'])->whereIn('external_id', array_keys($valid))
-                ->with('versions:id,session_id,checksum,reviewed_at')->get()->filter(fn ($row) => $row->versions->contains(
-                    fn ($version) => $version->reviewed_at && $version->checksum === $valid[$row->external_id]))->count();
+                ->whereNotNull('reviewed_at')->get(['external_id', 'checksum'])
+                ->filter(fn ($row) => $row->checksum === $valid[$row->external_id])->count();
             $reviewed = LearningSession::where('level', $level['code'])->whereIn('external_id', $planned)
-                ->whereHas('versions', fn ($query) => $query->whereNotNull('reviewed_at')->whereIn('status', ['reviewed', 'published', 'archived']))->count();
+                ->whereNotNull('reviewed_at')->whereIn('status', ['reviewed', 'published', 'archived'])->count();
             $levels[] = ['level' => $level['code'], 'target' => $level['target_sessions'], 'topics' => count($level['units']),
                 'file_sessions' => count($prepared), 'machine_valid' => count($valid), 'db_reviewed' => $reviewed, 'db_published' => count($published), 'published_matching_files' => $matchingPublished, 'reviewed_matching_files' => $matchingReviewed,
                 'authoring_remaining' => count(array_diff($planned, array_keys($valid))), 'required_objectives' => count($level['required_objective_ids']),

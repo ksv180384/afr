@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\App\Post;
 
+use App\Support\ViewerTime;
 use App\Http\Resources\App\User\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -21,10 +22,10 @@ class PostShowResource extends JsonResource
             'content' => $this->content,
             'user' => UserResource::make($this->user),
             'status' => $this->status,
-            'created_at' => $this->created_at->format('d.m.Y H:i'),
+            'created_at' => ViewerTime::format($this->created_at, $request),
             'created_at_iso' => $this->created_at->toIso8601String(),
             'created' => $this->created_at->diffForHumans(),
-            'updated_at' => $this->updated_at->format('d.m.Y H:i'),
+            'updated_at' => ViewerTime::format($this->updated_at, $request),
             'updated_at_iso' => $this->updated_at->toIso8601String(),
             'updated' => $this->updated_at->diffForHumans(),
         ];

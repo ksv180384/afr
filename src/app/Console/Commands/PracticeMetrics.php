@@ -32,8 +32,8 @@ class PracticeMetrics extends Command
             ->where(fn ($query) => $query->whereIn('event_type', ['help', 'unknown', 'technical_skip'])->orWhere('learning_attempts.result->correct', false))
             ->join('learning_presentations', 'learning_presentations.id', '=', 'learning_attempts.presentation_id')
             ->join('learning_runs', 'learning_runs.id', '=', 'learning_attempts.run_id')
-            ->select('learning_runs.session_version_id', 'learning_presentations.task_id', 'learning_attempts.event_type')
-            ->selectRaw('COUNT(*) as events')->groupBy('learning_runs.session_version_id', 'learning_presentations.task_id', 'learning_attempts.event_type')
+            ->select('learning_runs.session_id', 'learning_presentations.task_id', 'learning_attempts.event_type')
+            ->selectRaw('COUNT(*) as events')->groupBy('learning_runs.session_id', 'learning_presentations.task_id', 'learning_attempts.event_type')
             ->orderByDesc('events')->limit(20)->get()->toArray();
         $report = ['window_days' => $days, 'timezone' => 'UTC', 'starts' => (clone $runs)->count(),
             'finishes' => LearningRun::where('finished_at', '>=', $since)->where('status', 'completed')->count(),

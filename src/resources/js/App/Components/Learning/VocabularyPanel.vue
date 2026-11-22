@@ -491,7 +491,8 @@ onBeforeUnmount(() => { disposed=true; window.removeEventListener('online',recov
           <div v-for="source in word.sources" :key="source.session_version_id" class="source">
             <div class="source-heading">
               <p>{{ source.session_title || 'Занятие' }}</p>
-              <practice-report v-if="owner && source.session_version_id" :version-id="source.session_version_id" compact />
+              <practice-report v-if="owner && (source.lesson_id || source.session_version_id)"
+                :lesson-id="source.lesson_id" :version-id="source.session_version_id" compact />
             </div>
             <french-text v-if="source.snapshot.example" :text="source.snapshot.example.fr" :transcription-ru="source.snapshot.example.transcription_ru" :translation="source.snapshot.example.ru" compact />
           </div>

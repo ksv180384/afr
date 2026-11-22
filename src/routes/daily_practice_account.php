@@ -37,6 +37,7 @@ Route::prefix('daily/api')->name('daily.api.')->middleware([DailyApiMiddleware::
     Route::get('history', [DailyPracticeController::class, 'history'])->name('history');
     Route::post('runs', [DailyPracticeController::class, 'start'])->name('start');
     Route::get('runs/{run}', [DailyPracticeController::class, 'show'])->whereUuid('run')->name('show');
+    Route::post('runs/{run}/discard', [DailyPracticeController::class, 'discard'])->whereUuid('run')->name('discard');
     Route::post('runs/{run}/review-mistakes', [DailyPracticeController::class, 'reviewMistakes'])->whereUuid('run')->name('review-mistakes');
     foreach (['answer' => 'answers', 'help' => 'help', 'pause' => 'pause', 'resume' => 'resume', 'finish' => 'finish', 'advance' => 'advance', 'introduction' => 'introduction'] as $action => $path) {
         Route::post('runs/{run}/'.$path, [DailyPracticeController::class, $action])->whereUuid('run')->name($action);

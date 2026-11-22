@@ -6,7 +6,6 @@ use App\Models\Learning\LearningAttempt;
 use App\Models\Learning\LearningLevel;
 use App\Models\Learning\LearningRun;
 use App\Models\Learning\LearningSession;
-use App\Models\Learning\LearningSessionVersion;
 use App\Models\Learning\LearningUnit;
 use App\Models\User\User;
 use App\Services\Learning\Validation\CanonicalJson;
@@ -24,8 +23,7 @@ beforeEach(function () {
     $this->versions = [];
     foreach ($package['sessions'] as $session) {
         $row = LearningSession::factory()->create(['external_id' => $session['id'], 'unit_id' => $unit->id, 'sort_order' => $session['order']]);
-        $version = LearningSessionVersion::factory()->create(['session_id' => $row->id, 'payload' => $session, 'checksum' => CanonicalJson::hash($session), 'status' => 'published', 'published_at' => now('UTC')]);
-        $row->update(['active_version_id' => $version->id]);
+        $version = lessonWithContent(['session_id' => $row->id, 'payload' => $session, 'checksum' => CanonicalJson::hash($session), 'status' => 'published', 'published_at' => now('UTC')]);
         $this->versions[] = $version;
     }
     $this->actingAs($this->learner);
@@ -74,13 +72,13 @@ it('pins a single daily run on duplicate starts and advances only by explicit op
     $first = $this->postJson('/daily/api/runs', $input)->assertOk()->json();
     $this->postJson('/daily/api/runs', $input)->assertExactJson($first);
     $next = accountStart($this);
-    expect($next['run_id'])->toBe($first['state']['run_id']);
+    expect($next['run_id'])->not->toBe($first['state']['run_id']);
     expect(LearningRun::count())->toBe(1);
     expect($next['timezone'])->toBe('Europe/Moscow');
     $this->assertDatabaseCount('learning_presentations', 6);
     expect($next['task'])->not->toHaveKey('correct_choice_id');
     $this->postJson('/daily/api/runs/'.$next['run_id'].'/advance', accountInput($next['revision'], ['presentation_id' => $next['presentation']['presentation_id']]))->assertUnprocessable();
-    $this->postJson('/daily/api/runs', [...$input, 'kind' => 'extra', 'session_id' => 'PRE_A1-U01-L01'])->assertConflict()->assertJsonPath('code', 'idempotency_conflict');
+    $this->getJson('/daily/api/runs/'.$first['state']['run_id'])->assertNotFound();
 });
 
 it('records help before grading and recovers the same answer receipt before revision checks', function () {
@@ -131,21 +129,14 @@ it('finishes once using server time and preserves the receipt after midnight and
     $this->travelBack();
 });
 
-it('preserves unfinished snapshots through midnight profile changes new publication and pause resume', function () {
-    $state = accountStart($this);
-    $snapshot = LearningRun::find($state['run_id'])->snapshot;
-    $profileInput = accountInput(1, ['current_level' => 'A1', 'timezone' => 'Asia/Tokyo']);
-    $this->patchJson('/daily/api/profile', $profileInput)->assertOk()->assertJsonPath('profile.revision', 2);
-    $this->travel(2)->days();
-    $again = $this->postJson('/daily/api/runs', accountInput(2, ['kind' => 'daily']))->assertOk()->json('state');
-    expect($again['run_id'])->toBe($state['run_id']);
-    $paused = accountCommand($this, $state, 'pause');
-    expect($paused['resume'])->toBeTrue();
-    $resumed = accountCommand($this, $paused, 'resume');
-    expect($resumed['started'])->toBeTrue();
-    expect(LearningRun::find($state['run_id'])->snapshot)->toBe($snapshot);
-    expect($resumed['timezone'])->toBe($state['timezone']);
-    $this->travelBack();
+it('uses the site timezone for new lessons after a profile update', function () {
+    $first = accountStart($this, ['timezone' => 'Europe/Moscow']);
+    $this->patchJson('/daily/api/profile', accountInput(1, ['current_level' => 'PRE_A1', 'timezone' => 'Asia/Tokyo']))
+        ->assertOk()->assertJsonPath('profile.timezone', 'Asia/Tokyo');
+    $this->postJson('/daily/api/runs', accountInput(2, ['kind' => 'daily', 'timezone' => 'UTC']))
+        ->assertOk()->assertJsonPath('state.timezone', 'Asia/Tokyo')->assertJsonPath('state.position', 1);
+    expect($this->learner->fresh()->timezone)->toBe('Asia/Tokyo');
+    $this->getJson('/daily/api/runs/'.$first['run_id'])->assertNotFound();
 });
 
 it('returns JSON for unauthenticated missing invalid disabled and CSRF expired requests', function () {
@@ -189,21 +180,20 @@ it('selects the next session after low-score completion and replaces the assignm
     expect(LearningRun::find($finished['run_id'])->status->value)->toBe('completed');
 });
 
-it('pins the started version when the active publication changes', function () {
+it('rejects a stale open lesson after the current content changes', function () {
     $state = accountStart($this);
-    $snapshot = LearningRun::find($state['run_id'])->snapshot;
-    $payload = $this->versions[0]->payload;
-    $payload['version'] = 2;
-    $payload['title'] = 'Новая редакция';
-    $version = LearningSessionVersion::factory()->create(['session_id' => $this->versions[0]->session_id, 'version' => 2, 'payload' => $payload, 'checksum' => CanonicalJson::hash($payload), 'status' => 'published']);
-    $this->versions[0]->session->update(['active_version_id' => $version->id]);
-    $loaded = $this->getJson('/daily/api/runs/'.$state['run_id'])->assertOk()->json();
-    expect($loaded['session_version_id'])->toBe($this->versions[0]->id);
-    expect($loaded['session']['title'])->toBe($snapshot['title']);
-    expect(LearningRun::find($state['run_id'])->snapshot)->toBe($snapshot);
+    $version = $this->versions[0];
+    $payload = [...$version->payload, 'title' => 'Новый урок'];
+    $version->update(['payload' => $payload, 'checksum' => CanonicalJson::hash($payload)]);
+
+    $this->getJson('/daily/api/runs/'.$state['run_id'])->assertConflict()->assertJsonPath('code', 'version_conflict');
+    $next = accountStart($this, ['route_start' => true]);
+    expect($next['session']['title'])->toBe('Новый урок')->and($next['position'])->toBe(1)
+        ->and($next['run_id'])->not->toBe($state['run_id']);
+    expect(LearningSession::where('external_id', $version->external_id)->count())->toBe(1);
 });
 
-it('uses the profile level as the starting point and keeps the previous run paused', function () {
+it('uses the selected profile level for a new lesson', function () {
     $old = accountStart($this, ['timezone' => 'UTC']);
     LearningLevel::where('code', 'A1')->update(['published_at' => now('UTC')]);
     $unit = LearningUnit::factory()->create(['level' => 'A1', 'published_at' => now('UTC')]);
@@ -212,14 +202,13 @@ it('uses the profile level as the starting point and keeps the previous run paus
     $payload['level'] = 'A1';
     $payload['unit_id'] = $unit->external_id;
     $session = LearningSession::factory()->create(['external_id' => 'A1-NEW', 'level' => 'A1', 'unit_id' => $unit->id]);
-    $version = LearningSessionVersion::factory()->create(['session_id' => $session->id, 'payload' => $payload, 'checksum' => CanonicalJson::hash($payload), 'status' => 'published']);
-    $session->update(['active_version_id' => $version->id]);
+    $version = lessonWithContent(['session_id' => $session->id, 'payload' => $payload, 'checksum' => CanonicalJson::hash($payload), 'status' => 'published']);
     $this->patchJson('/daily/api/profile', accountInput(1, ['current_level' => 'A1', 'timezone' => 'UTC']))->assertOk();
     $selected = $this->postJson('/daily/api/runs', accountInput(2, ['kind' => 'daily']))->assertOk()->json('state');
-    expect($selected['run_id'])->toBe($old['run_id']);
+    expect($selected['run_id'])->not->toBe($old['run_id']);
     $next = $this->postJson('/daily/api/runs', accountInput(2, ['kind' => 'daily', 'replace_assignment' => true]))->assertOk()->json('state');
     expect($next['session']['level'])->toBe('A1');
-    expect(LearningRun::find($old['run_id'])->status->value)->toBe('paused');
+    expect($next['position'])->toBe(1);
     expect(DailyAssignment::sole()->selected_run_id)->toBe($next['run_id']);
 });
 
@@ -232,7 +221,7 @@ it('creates explicit extras independently and enforces prerequisites', function 
     $daily = accountStart($this);
     $again = accountStart($this, ['kind' => 'extra', 'session_id' => 'PRE_A1-U01-L01']);
     expect(count(array_unique([$extra['run_id'], $daily['run_id'], $again['run_id']])))->toBe(3);
-    expect(DailyAssignment::sole()->selected_run_id)->toBe($daily['run_id']);
+    $this->assertDatabaseCount('daily_assignments', 0);
 });
 
 it('creates frozen review and vocabulary test sets only from owned words', function () {
@@ -309,34 +298,31 @@ it('rolls back failed finish integrations before recording the day or a complete
     expect(LearningActivityDay::count())->toBe(1);
 });
 
-it('orders history by accepted server sequence even when the wall clock moves backwards', function () {
-    $this->travelTo(\Carbon\Carbon::parse('2026-10-25 12:00:00', 'UTC'));
-    $first = accountStart($this, ['kind' => 'extra', 'session_id' => 'PRE_A1-U01-L01']);
-    $this->travelTo(\Carbon\Carbon::parse('2026-10-24 12:00:00', 'UTC'));
-    $second = accountStart($this, ['kind' => 'extra', 'session_id' => 'PRE_A1-U01-L01']);
-    $rows = $this->getJson('/daily/api/history')->assertOk()->json('data');
-    expect(array_column($rows, 'id'))->toBe([$second['run_id'], $first['run_id']]);
-    expect($rows[0]['record_sequence'])->toBeGreaterThan($rows[1]['record_sequence']);
-    $this->travelBack();
+it('keeps only completed results in history and removes their task data', function () {
+    $state = accountStart($this);
+    $this->getJson('/daily/api/history')->assertOk()->assertJsonPath('total', 0);
+    $state = accountCommand($this, accountComplete($this, $state), 'finish');
+    expect(LearningRun::findOrFail($state['run_id'])->snapshot)->not->toHaveKey('tasks');
+    $this->assertDatabaseCount('learning_presentations', 0);
+    $this->assertDatabaseCount('learning_attempts', 0);
+    $this->assertDatabaseCount('learning_run_operations', 2);
+    $this->getJson('/daily/api/history')->assertOk()->assertJsonPath('data.0.id', $state['run_id']);
 });
 
-it('refuses to reset an active daily assignment on the same level', function () {
+it('resets an active daily assignment when the learner starts it again', function () {
     $run = accountStart($this);
-    $this->postJson('/daily/api/runs', accountInput(1, ['kind' => 'daily', 'replace_assignment' => true]))->assertUnprocessable();
+    $this->postJson('/daily/api/runs', accountInput(1, ['kind' => 'daily', 'replace_assignment' => true]))
+        ->assertOk()->assertJsonPath('state.position', 1);
     expect(LearningRun::count())->toBe(1);
-    expect(DailyAssignment::sole()->selected_run_id)->toBe($run['run_id']);
+    expect(DailyAssignment::sole()->selected_run_id)->not->toBe($run['run_id']);
 });
 
 
-it('keeps an unfinished six-task snapshot and completes a new twelve-task run including late help and resume', function () {
+it('starts updated twelve-task content from the beginning and completes it with late help', function () {
     $old = accountStart($this);
-    $oldSnapshot = LearningRun::findOrFail($old['run_id'])->snapshot;
     $payload = json_decode(file_get_contents(base_path('tests/Fixtures/Learning/twelve-task-package.json')), true)['sessions'][0];
     $this->versions[0]->update(['payload' => $payload, 'checksum' => CanonicalJson::hash($payload)]);
-    $loaded = $this->getJson('/daily/api/runs/'.$old['run_id'])->assertOk()->json();
-    expect($loaded['total'])->toBe(6)->and(LearningRun::find($old['run_id'])->snapshot)->toBe($oldSnapshot);
-    $old = accountCommand($this, accountComplete($this, $loaded), 'finish');
-    expect($old['summary']['score_denominator'])->toBe(6);
+    $this->getJson('/daily/api/runs/'.$old['run_id'])->assertConflict();
     $state = accountStart($this, ['kind' => 'extra', 'session_id' => $payload['id']]);
     expect($state['total'])->toBe(12);
     foreach ($payload['tasks'] as $index => $task) {
@@ -369,8 +355,7 @@ it('keeps an unfinished six-task snapshot and completes a new twelve-task run in
     expect($state['finished'])->toBeTrue()
         ->and($state['summary']['processed_steps'])->toBe(12)
         ->and($state['summary']['score_denominator'])->toBe(12)
-        ->and($state['summary']['score_numerator'])->toBe(11)
-        ->and(LearningRun::find($old['run_id'])->snapshot)->toBe($oldSnapshot);
+        ->and($state['summary']['score_numerator'])->toBe(11);
 });
 
 
@@ -387,16 +372,16 @@ it('keeps short review blocks below the ordinary lesson minimum', function (int 
     expect($finished['finished'])->toBeTrue()->and($finished['summary']['score_denominator'])->toBe($count);
 })->with([1, 2, 3]);
 
-it('gives an unfinished extra run priority over the completed daily assignment', function () {
+it('leaves an unfinished extra lesson available to start again', function () {
     $first = accountStart($this);
     $finished = accountCommand($this, accountComplete($this, $first), 'finish');
     $this->getJson('/daily/api/today')->assertJsonPath('active_run', null)->assertJsonPath('candidate.id', 'PRE_A1-U01-L02');
     $extra = accountStart($this, ['kind' => 'extra', 'session_id' => 'PRE_A1-U01-L02']);
     $this->getJson('/daily/api/today')->assertOk()
         ->assertJsonPath('run.id', $finished['run_id'])
-        ->assertJsonPath('active_run.id', $extra['run_id'])
+        ->assertJsonPath('active_run', null)
         ->assertJsonPath('route.lessons.0.status', 'completed')
-        ->assertJsonPath('route.lessons.1.status', 'active');
+        ->assertJsonPath('route.lessons.1.status', 'available');
 });
 
 it('rejects a start from a cached profile after the authenticated owner changes', function () {
@@ -405,22 +390,21 @@ it('rejects a start from a cached profile after the authenticated owner changes'
     $this->assertDatabaseCount('learning_profiles', 0);
 });
 
-it('opens the active run for a route start and preserves its pinned first step on resume', function () {
+it('starts an unfinished lesson again instead of resuming its position', function () {
     $first = accountStart($this, ['route_start' => true]);
-    $this->getJson('/daily/api/runs/'.$first['run_id'])->assertOk()
-        ->assertJsonPath('presentation.presentation_id', $first['presentation']['presentation_id'])
-        ->assertJsonPath('introduction_seen', false);
-    $paused = accountCommand($this, $first, 'pause');
-    $operation = accountInput(1, ['kind' => 'extra', 'session_id' => 'PRE_A1-U01-L01', 'route_start' => true]);
-    $this->postJson('/daily/api/runs', $operation)->assertOk()
-        ->assertJsonPath('state.run_id', $first['run_id'])->assertJsonPath('state.status', 'paused');
-    $this->postJson('/daily/api/runs', $operation)->assertOk()
-        ->assertJsonPath('state.run_id', $first['run_id'])->assertJsonPath('accepted_event_id', $operation['client_event_id']);
-    $resumed = accountCommand($this, $paused, 'resume');
-    expect($resumed['presentation']['presentation_id'])->toBe($first['presentation']['presentation_id'])
-        ->and($resumed['introductions'])->toBe($first['introductions'])
-        ->and($resumed['introduction_seen'])->toBeFalse();
+    $first = accountCommand($this, $first, 'help', ['event_type' => 'unknown', 'presentation_id' => $first['presentation']['presentation_id']]);
+    $first = accountCommand($this, $first, 'advance', ['presentation_id' => $first['presentation']['presentation_id']]);
+    expect($first['position'])->toBe(2);
+
+    $input = accountInput(1, ['kind' => 'extra', 'session_id' => $first['session']['id'], 'route_start' => true]);
+    $next = $this->postJson('/daily/api/runs', $input)->assertOk()->assertJsonPath('state.position', 1)
+        ->assertJsonPath('state.presentation.first_result', null)->json('state');
+    expect($next['run_id'])->not->toBe($first['run_id']);
+    $this->postJson('/daily/api/runs', $input)->assertOk()->assertJsonPath('state.run_id', $next['run_id']);
+    $this->getJson('/daily/api/runs/'.$first['run_id'])->assertNotFound();
     $this->assertDatabaseCount('learning_runs', 1);
+    $this->postJson('/daily/api/runs/'.$next['run_id'].'/discard')->assertNoContent();
+    $this->assertDatabaseCount('learning_runs', 0);
 });
 
 it('opens the requested available lesson while keeping another unfinished lesson', function () {
@@ -431,32 +415,31 @@ it('opens the requested available lesson while keeping another unfinished lesson
     $secondInput = ['kind' => 'extra', 'session_id' => 'PRE_A1-U01-L02', 'route_start' => true];
     $repeat = accountStart($this, $firstInput);
     $this->getJson('/daily/api/today')->assertOk()
-        ->assertJsonPath('route.lessons.0.status', 'active')
+        ->assertJsonPath('route.lessons.0.status', 'completed')
         ->assertJsonPath('route.lessons.1.status', 'available');
 
     $second = accountStart($this, $secondInput);
     expect($second['session']['id'])->toBe('PRE_A1-U01-L02');
     $this->getJson('/daily/api/today')->assertOk()
-        ->assertJsonPath('route.lessons.0.run_id', $repeat['run_id'])
-        ->assertJsonPath('route.lessons.1.run_id', $second['run_id']);
-    expect(accountStart($this, $firstInput)['run_id'])->toBe($repeat['run_id']);
-    expect(accountStart($this, $secondInput)['run_id'])->toBe($second['run_id']);
+        ->assertJsonPath('route.lessons.0.run_id', null)
+        ->assertJsonPath('route.lessons.1.run_id', null);
+    expect(accountStart($this, $firstInput)['run_id'])->not->toBe($repeat['run_id']);
+    expect(accountStart($this, $secondInput)['run_id'])->not->toBe($second['run_id']);
     $this->assertDatabaseCount('learning_runs', 3);
 });
 
-it('continues the selected practice level and keeps the previous lesson available', function () {
+it('switches practice levels and starts their unfinished lessons from the beginning', function () {
     LearningLevel::where('code', 'B1')->update(['published_at' => now('UTC')]);
     $unit = LearningUnit::factory()->create(['level' => 'B1', 'published_at' => now('UTC')]);
     $payload = [...$this->versions[0]->payload, 'id' => 'B1-FIRST', 'level' => 'B1', 'unit_id' => $unit->external_id];
     $session = LearningSession::factory()->create(['external_id' => $payload['id'], 'level' => 'B1', 'unit_id' => $unit->id]);
-    $version = LearningSessionVersion::factory()->create([
+    $version = lessonWithContent([
         'session_id' => $session->id,
         'payload' => $payload,
         'checksum' => CanonicalJson::hash($payload),
         'status' => 'published',
         'published_at' => now('UTC'),
     ]);
-    $session->update(['active_version_id' => $version->id]);
 
     $this->patchJson('/daily/api/profile', accountInput(1, ['current_level' => 'B1', 'timezone' => 'UTC']))->assertOk();
     $previous = $this->postJson('/daily/api/runs', accountInput(2, ['kind' => 'daily', 'route_start' => true]))
@@ -466,13 +449,13 @@ it('continues the selected practice level and keeps the previous lesson availabl
         ->assertJsonPath('candidate.level', 'PRE_A1');
     $current = $this->postJson('/daily/api/runs', accountInput(3, ['kind' => 'daily', 'route_start' => true]))
         ->assertOk()->assertJsonPath('state.session.level', 'PRE_A1')->json('state');
-    $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('active_run.id', $current['run_id']);
+    $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('active_run', null);
 
     $this->patchJson('/daily/api/profile', accountInput(3, ['current_level' => 'B1', 'timezone' => 'UTC']))->assertOk();
-    $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('active_run.id', $previous['run_id']);
+    $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('active_run', null);
     $this->postJson('/daily/api/runs', accountInput(4, ['kind' => 'daily', 'route_start' => true]))
-        ->assertOk()->assertJsonPath('state.run_id', $previous['run_id'])
-        ->assertJsonPath('state.presentation.presentation_id', $previous['presentation']['presentation_id']);
+        ->assertOk()->assertJsonPath('state.session.level', 'B1')->assertJsonPath('state.position', 1);
+    $this->getJson('/daily/api/runs/'.$previous['run_id'])->assertNotFound();
     $this->assertDatabaseCount('learning_runs', 2);
 });
 

@@ -19,8 +19,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->prepend(\App\Http\Middleware\PracticeOperations::class);
-        $middleware->trimStrings(except: [fn (Request $request) => $request->is('daily/api/guest-sync', 'daily/api/reports', 'admin/daily-practice/versions/*/save')]);
-        $middleware->convertEmptyStringsToNull(except: [fn (Request $request) => $request->is('daily/api/guest-sync', 'daily/api/reports', 'admin/daily-practice/versions/*/save')]);
+        $preservePayload = fn (Request $request) => $request->is('daily/api/guest-sync', 'daily/api/reports', 'admin/daily-practice/sessions/*/save');
+        $middleware->trimStrings(except: [$preservePayload]);
+        $middleware->convertEmptyStringsToNull(except: [$preservePayload]);
         $middleware->web(append: [
             //            \App\Http\Middleware\PrerenderIfCrawler::class,
             HandleInertiaRequests::class,

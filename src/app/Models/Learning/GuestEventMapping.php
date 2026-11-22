@@ -18,7 +18,6 @@ use LogicException;
  * @property string $guest_entity_id Исходный UUID сущности на клиенте.
  * @property string|null $server_run_id Серверное прохождение, соответствующее гостевому.
  * @property string|null $server_event_id Серверное учебное событие, соответствующее гостевому.
- * @property string|null $server_level_event_id Серверное событие смены уровня, соответствующее гостевому.
  * @property array|null $receipt Сохранённый результат обработки для повторных запросов.
  * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
  * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
@@ -37,7 +36,6 @@ class GuestEventMapping extends Model
         'guest_entity_id',
         'server_run_id',
         'server_event_id',
-        'server_level_event_id',
         'receipt',
     ];
 
@@ -60,7 +58,6 @@ class GuestEventMapping extends Model
                 'guest_entity_id',
                 'server_run_id',
                 'server_event_id',
-                'server_level_event_id',
             ])) {
                 throw new LogicException('GuestEventMapping identity and snapshot cannot be changed.');
             }
@@ -82,10 +79,6 @@ class GuestEventMapping extends Model
         return $this->belongsTo(LearningAttempt::class, 'server_event_id', 'id');
     }
 
-    public function serverLevelEvent(): BelongsTo
-    {
-        return $this->belongsTo(LearningLevelEvent::class, 'server_level_event_id', 'id');
-    }
 
     public function owner(): BelongsTo
     {

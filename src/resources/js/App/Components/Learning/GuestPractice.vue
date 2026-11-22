@@ -12,12 +12,13 @@ import SessionPlayer from './SessionPlayer.vue';
 import VocabularyPanel from './VocabularyPanel.vue';
 import PracticeStatus from './PracticeStatus.vue';
 import PracticeDate from './PracticeDate.vue';
+import PracticeErrorNotice from './PracticeErrorNotice.vue';
 import { browserTimezone } from '@/App/Learning/practiceTime.js';
 import { rememberTemporaryGuest, registerGuestAuthentication } from '@/App/Learning/guestSyncState.js';
 import { guestTestSource } from '@/App/Learning/guestVocabulary.js';
 import { GuestProgressRepository } from '@/App/Learning/guestRepository.js';
 import { createGuestAdapter } from '@/App/Learning/guestAdapter.js';
-import { addGuestRun, changeGuestProfile } from '@/App/Learning/guestProgress.js';
+import { addGuestRun, changeGuestProfile, discardGuestLesson } from '@/App/Learning/guestProgress.js';
 import { guestContentTransport } from '@/App/Services/Api/daily_practice.js';
 import { returnToPractice, visitPracticeRun } from '@/App/Learning/practiceRunNavigation.js';
 import { usePracticeFeedback } from '@/App/Learning/usePracticeFeedback.js';
@@ -42,7 +43,6 @@ const guestLoginPath = computed(() => {
   const run = adapter.value ? activeRun : props.runId;
   return run ? loginPath + '&guest_run=' + encodeURIComponent(run) : loginPath;
 });
-const retryLesson = ref();
 let temporaryScroll = 0;
 const ready = ref(!!cachedGuest);
 const level = ref(cachedGuest?.current_level ?? 'PRE_A1');
@@ -54,7 +54,8 @@ let unsubscribe;
 let unregisterAuthentication;
 const onStatus = (next) => { saving.value = next; };
 const locked = computed(() => ['conflict','storage','bound'].includes(saving.value.kind));
-const runs = computed(() => Object.values(state.value?.runs ?? {}).sort((a,b) => b.record_sequence-a.record_sequence));
+const runs = computed(() => Object.values(state.value?.runs ?? {}).filter(run => run.status === 'completed')
+  .sort((a,b) => b.record_sequence-a.record_sequence));
 const currentRun = computed(() => home.value?.active_run);
 const candidate = computed(() => home.value?.candidate);
 const showNext = computed(() => currentRun.value || !(props.routeSelection?.level || props.routeSelection?.unit) ||
@@ -127,7 +128,6 @@ const enterRun = (path, route = home.value?.route) => {
   attach(path.split('/').pop());
 };
 const start = (sessionId = null) => perform(async () => {
-  retryLesson.value = undefined;
   const route = home.value?.route;
   try {
     const path = await store.value.start(null, sessionId);
@@ -135,8 +135,7 @@ const start = (sessionId = null) => perform(async () => {
     await enterRun(path, route);
   } catch (failure) {
     if (failure.code !== 'content_load') throw failure;
-    retryLesson.value = sessionId;
-    error.value = 'Не удалось загрузить занятие. Повторите после восстановления соединения.';
+    error.value = 'Не удалось загрузить занятие. Проверьте подключение к интернету.';
   }
 });
 const refreshSuggestion = () => perform(() => readLocal(false));
@@ -158,7 +157,11 @@ const nextTest = (input) => perform(async () => {
 });
 const openVocabulary = () => { if (repository.temporary) { adapter.value = null; vocabularyMode.value = true; } else router.visit('/daily/vocabulary'); };
 const open = id => perform(() => enterRun('/daily/guest/' + id));
-const exit = () => perform(async () => {
+const exit = runId => perform(async () => {
+  if (runId) {
+    await repository.mutate(current => discardGuestLesson(current, runId));
+    store.value.invalidate(null);
+  }
   if (repository.temporary) {
     adapter.value = null;
     activeRun = null;
@@ -225,10 +228,8 @@ onBeforeUnmount(() => { window.removeEventListener('focus',focus); unregisterAut
         <a v-if="runId && !adapter" class="guest-return" :href="guestLoginPath">Войти в аккаунт</a>
       </div>
     </section>
-    <p v-if="error && !feedback.enabled" role="alert" class="error">{{ error }}</p>
+    <practice-error-notice v-if="error && !feedback.enabled" :message="error" />
     <a v-if="runId && !adapter && error" class="guest-return" href="/practice">К моему пути</a>
-    <afr-button v-if="!adapter && home?.content_error" :disabled="busy" @click="perform(() => initialize(true))">Повторить загрузку</afr-button>
-    <afr-button v-if="retryLesson !== undefined" :disabled="busy" @click="start(retryLesson)">Повторить загрузку занятия</afr-button>
     <vocabulary-panel v-if="vocabularyMode" :guest-repository="repository" :route-store="store" @back="vocabularyMode = false; readLocal()" @open-guest-run="vocabularyMode = false; attach($event)" />
     <session-player
       v-else-if="adapter"
@@ -296,13 +297,12 @@ onBeforeUnmount(() => { window.removeEventListener('focus',focus); unregisterAut
       </details>
       <section v-if="progressOnly" class="practice-panel">
         <h2>Прогресс в этом браузере</h2>
-        <p>Текущий уровень: {{ state.current_level==='PRE_A1'?'С нуля':state.current_level }}. Завершено прохождений: {{ runs.filter((run)=>run.status==='completed').length }}. Выражений в словаре: {{ Object.keys(state.vocabulary).length }}.</p>
-        <p>Учебные цели и автоматический переход уровня подтверждаются после входа и серверной проверки ответов.</p>
+        <p>Текущий уровень: {{ state.current_level==='PRE_A1'?'С нуля':state.current_level }}. Завершено прохождений: {{ runs.length }}. Выражений в словаре: {{ Object.keys(state.vocabulary).length }}.</p>
         <a href="/daily">Изменить уровень или продолжить занятие</a>
       </section>
       <details v-if="progressOnly" class="practice-panel">
         <summary>История занятий<span v-if="runs.length"> · {{ runs.length }}</span></summary>
-        <p v-if="!runs.length">Начатых занятий пока нет.</p>
+        <p v-if="!runs.length">Завершённых занятий пока нет.</p>
         <ol><li v-for="run in runs" :key="run.id">
           <a v-if="!repository?.temporary" :href="'/daily/guest/'+run.id" @click.prevent="open(run.id)">{{ run.snapshot.title }}</a>
           <afr-button v-else @click="open(run.id)">{{ run.snapshot.title }}</afr-button>
@@ -327,7 +327,6 @@ h2 { font-size:1.2rem; font-weight:bold; margin-bottom:.7rem; }
 .guest-sign-in { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: .25rem .7rem; border: 1px solid #cadcf0; border-radius: .6rem; background: #eef5fd; font-size: .8125rem; font-weight: 650; text-decoration: none; }
 .guest-sign-in:hover { background: #e1eefb; border-color: #aecae6; }
 .notice.storage,.notice.conflict,.notice.temporary { background:#fffbeb; border-color:#b45309; }
-.error { padding:1rem; background:#fef2f2; }
 .settings { display:grid; grid-template-columns:150px max-content; align-items:end; gap:.5rem; margin-top:.75rem; }
 .practice-field { display:grid; gap:.25rem; min-width:0; }
 .practice-field label { font-size:.875rem; }

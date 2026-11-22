@@ -85,7 +85,7 @@ export const createPracticeSettingsController = ({
           client_event_id: idFactory(),
           expected_revision: profile.revision,
           ...(operation === 'level'
-            ? { current_level: value, timezone: profile.persisted === false ? browserTimezone() : profile.timezone }
+            ? { current_level: value, timezone: profile.timezone_configured === false ? browserTimezone() : profile.timezone }
             : { action, ...(action === 'toggle' ? { enabled: value } : {}) }),
         },
       };

@@ -50,7 +50,6 @@ final class CatalogPublicationService
             }
             $this->validate($revision);
             $revision->update(['status' => 'reviewed', 'reviewed_by' => $actor->id, 'reviewed_at' => now('UTC')]);
-            $this->access->audit($actor, 'catalog_review', ['catalog_revision_id' => $id], [], ['checks' => $checks]);
 
             return $revision;
         });
@@ -70,15 +69,7 @@ final class CatalogPublicationService
                 return $target;
             }
 
-            $before = $target->only(['id', 'published_at', 'archived_at']);
             $target->update(['archived_at' => $published ? null : now('UTC')]);
-            $this->access->audit(
-                $actor,
-                $published ? 'catalog_restore' : 'catalog_unpublish',
-                [],
-                [...$before, 'kind' => $kind],
-                [...$target->only(['id', 'published_at', 'archived_at']), 'kind' => $kind],
-            );
 
             return $target;
         });
@@ -102,7 +93,6 @@ final class CatalogPublicationService
             if ($revision->unit_id && \App\Models\Learning\LearningUrlAlias::where('old_path', PracticeUrls::level($target->getRawOriginal('level')).'/'.$revision->content['slug'])->exists()) {
                 throw new ContentOperationException(PracticeErrorCode::RevisionConflict, 'Адрес темы зарезервирован прежней публикацией.');
             }
-            $before = $target->toArray();
             $content = $revision->content;
             $target->fill([
                 'title' => $content['title'], 'summary' => $content['summary'],
@@ -111,7 +101,6 @@ final class CatalogPublicationService
                 ...($revision->unit_id ? ['slug' => $content['slug'], 'sort_order' => $content['order']] : []),
             ])->save();
             $revision->update(['status' => 'published', 'published_by' => $actor->id, 'published_at' => now('UTC')]);
-            $this->access->audit($actor, 'catalog_publish', ['catalog_revision_id' => $id], $before, $target->toArray());
 
             return $revision;
         });

@@ -71,8 +71,9 @@ class VocabularyProgressService
     {
         $added = 0;
         $existing = 0;
-        if ($run->session_version_id !== null) {
-            foreach ($run->snapshot['vocabulary'] ?? [] as $snapshot) {
+        if ($run->session_id !== null) {
+            foreach ($run->content()['vocabulary'] ?? [] as $snapshot) {
+                unset($snapshot['review_items']);
                 $word = PersonalVocabulary::firstOrCreate(['user_id' => $run->user_id, 'lexeme_key' => $snapshot['lexeme_key']], [
                     'snapshot' => $snapshot, 'needs_review' => false, 'streak' => 0, 'errors' => 0, 'review_step' => 0,
                     'first_added_at' => $at, 'next_review_at' => $at->addDay(),
@@ -81,7 +82,7 @@ class VocabularyProgressService
                     app(GuestImportContext::class)->created($word);
                 }
                 $word->wasRecentlyCreated ? $added++ : $existing++;
-                PersonalVocabularySource::firstOrCreate(['personal_word_id' => $word->id, 'session_version_id' => $run->session_version_id], [
+                PersonalVocabularySource::firstOrCreate(['personal_word_id' => $word->id, 'session_id' => $run->session_id], [
                     'user_id' => $run->user_id, 'vocabulary_id' => $snapshot['id'], 'snapshot' => $snapshot, 'first_added_at' => app(GuestImportContext::class)->sourceAt ?? $at,
                 ]);
             }

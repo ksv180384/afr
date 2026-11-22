@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * Хранит обращение о содержании занятия или задания и результат его рассмотрения.
  *
  * @property int $id Первичный ключ записи.
- * @property int $session_version_id Версия занятия, к которой относится запись.
+ * @property int $session_id Занятие, к которому относится запись.
  * @property string|null $task_id Стабильный идентификатор задания внутри версии занятия.
  * @property int|null $user_id Автор обращения, если он связан с аккаунтом.
  * @property string $text Текст обращения пользователя.
@@ -35,7 +35,7 @@ class LearningContentReport extends Model
         'client_report_id',
         'payload_hash',
         'answer_snapshot',
-        'session_version_id',
+        'session_id',
         'task_id',
         'user_id',
         'text',
@@ -49,16 +49,16 @@ class LearningContentReport extends Model
     {
         return [
             'answer_snapshot' => 'array',
-            'session_version_id' => 'integer',
+            'session_id' => 'integer',
             'user_id' => 'integer',
             'processed_by' => 'integer',
             'resolved_at' => 'immutable_datetime',
         ];
     }
 
-    public function sessionVersion(): BelongsTo
+    public function session(): BelongsTo
     {
-        return $this->belongsTo(LearningSessionVersion::class, 'session_version_id', 'id');
+        return $this->belongsTo(LearningSession::class, 'session_id', 'id');
     }
 
     public function user(): BelongsTo

@@ -79,9 +79,8 @@ class GuestVocabularyProjector
                 $apply($mapping);
             } elseif ($action === 'finish') {
                 $run = $runs[$mapping->server_run_id];
-                if ($run->session_version_id !== null) {
-                    foreach ($run->snapshot['vocabulary'] ?? [] as $source) {
-                        $key = $source['lexeme_key'];
+                if ($run->session_id !== null) {
+                    foreach ($run->result['vocabulary_keys'] ?? array_column($run->snapshot['vocabulary'] ?? [], 'lexeme_key') as $key) {
                         if (! isset($visible[$key]) && $eligible->has($key)) {
                             $visible[$key] = ['needs_review' => false, 'is_difficult' => false, 'streak' => 0, 'errors' => 0,
                                 'review_step' => 0, 'last_reviewed_at' => null, 'next_review_at' => $eligible[$key]->first_added_at->addDay()];

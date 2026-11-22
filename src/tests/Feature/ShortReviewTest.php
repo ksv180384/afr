@@ -13,7 +13,8 @@ beforeEach(function () {
     $this->seed(LearningLevelSeeder::class);
     $this->learner = User::factory()->create();$this->actingAs($this->learner);
     $this->travelTo(Carbon\Carbon::parse('2026-11-06T12:00:00Z'));
-    LearningProfile::factory()->create(['user_id' => $this->learner->id, 'current_level' => 'B1', 'timezone' => 'Europe/Moscow']);
+    $this->learner->update(['timezone' => 'Europe/Moscow']);
+    LearningProfile::factory()->create(['user_id' => $this->learner->id, 'current_level' => 'B1']);
 });
 function shortWord($test, int $index = 0, array $attributes = []): PersonalVocabulary
 {

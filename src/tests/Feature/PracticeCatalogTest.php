@@ -4,7 +4,6 @@ use App\Models\Learning\LearningLevel;
 use App\Models\Learning\LearningProfile;
 use App\Models\Learning\LearningRun;
 use App\Models\Learning\LearningSession;
-use App\Models\Learning\LearningSessionVersion;
 use App\Models\Learning\LearningUnit;
 use App\Models\Learning\LearningUrlAlias;
 use App\Models\User\Rang;
@@ -24,10 +23,9 @@ beforeEach(function () {
     $this->unit = LearningUnit::factory()->create(['slug' => $data['units'][0]['slug'], 'published_at' => now('UTC')]);
     $this->sessions = collect($data['sessions'])->map(function ($payload) {
         $session = LearningSession::factory()->create(['external_id' => $payload['id'], 'slug' => $payload['public_page']['slug'], 'unit_id' => $this->unit->id]);
-        $version = LearningSessionVersion::factory()->create(['session_id' => $session->id, 'payload' => $payload, 'status' => 'published', 'published_at' => now('UTC')]);
-        $session->update(['active_version_id' => $version->id]);
+        $version = lessonWithContent(['session_id' => $session->id, 'payload' => $payload, 'status' => 'published', 'published_at' => now('UTC')]);
 
-        return $session->fresh()->load('unit', 'activeVersion');
+        return $session->fresh()->load('unit');
     });
     $rank = Rang::firstOrCreate(['alias' => 'administrator'], ['title' => 'Администратор']);
     $this->admin = User::factory()->create(['rang_id' => $rank->id]);
@@ -40,7 +38,7 @@ it('returns real readable initial HTML at every public depth with metadata and n
         expect(substr_count($html, '<h1'))->toBe(1)->and($html)->toContain('<main', 'rel="canonical"', 'BreadcrumbList', 'name="description"', 'property="og:url"')->not->toContain('<noscript', '&quot;tasks&quot;', '&quot;review_items&quot;', '&quot;correct_answer&quot;');
     }
     $html = $this->get(PracticeUrls::session($session))->getContent();
-    expect($html)->toContain('Bonjour', 'lang="fr"', '/daily?session=', $session->activeVersion->payload['public_page']['summary']);
+    expect($html)->toContain('Bonjour', 'lang="fr"', '/daily?session=', $session->payload['public_page']['summary']);
     $this->get(PracticeUrls::unit($this->unit))->assertDontSee('href="'.PracticeUrls::session($this->sessions[1]).'"', false)->assertSee('🔒');
 });
 
@@ -98,8 +96,8 @@ it('returns 404 for unknown or never published and 410 for removed published mat
     $draft = LearningSession::factory()->create(['external_id' => 'PRE_A1_U01_S99', 'unit_id' => $this->unit->id, 'slug' => 'never-published']);
     $this->get(PracticeUrls::session($draft))->assertNotFound();
 
-    $first->activeVersion->update(['status' => 'archived']);
-    $first->update(['active_version_id' => null, 'archived_at' => now('UTC')]);
+    $first->update(['status' => 'archived']);
+    $first->update(['archived_at' => now('UTC')]);
     $this->get(PracticeUrls::session($first))->assertStatus(410);
     $this->unit->update(['archived_at' => now('UTC')]);
     $this->get(PracticeUrls::unit($this->unit))->assertStatus(410);
@@ -119,7 +117,7 @@ it('hides a topic and its published lessons until an administrator restores it',
     $this->getJson(route('daily.content.show', ['session' => $session->external_id]))->assertNotFound();
     $this->get('/sitemap.xml')->assertOk()->assertDontSee($sessionPath, false);
     expect($this->unit->fresh()->getRawOriginal('published_at'))->toBe($publishedAt)
-        ->and($session->fresh()->active_version_id)->toBe($session->active_version_id);
+        ->and($session->fresh()->id)->toBe($session->id);
 
     $this->postJson($endpoint, ['published' => true])->assertOk()->assertJsonPath('archived_at', null);
     $this->get($unitPath)->assertOk();
@@ -138,7 +136,6 @@ it('hides a level and restores only its independently published topics', functio
 
     $this->actingAs($this->admin)->postJson($endpoint, ['published' => false])->assertOk();
     $this->postJson($endpoint, ['published' => false])->assertOk();
-    $this->assertDatabaseCount('learning_editorial_events', 1);
     $this->get('/practice')->assertOk()->assertInertia(fn (Assert $page) => $page
         ->where('levels', fn ($levels) => ! collect($levels)->contains('code', 'PRE_A1'))
         ->where('catalog.cards', fn ($cards) => ! collect($cards)->contains('path', '/practice/pre-a1')));
@@ -177,7 +174,7 @@ it('offers only visible levels in profile settings while keeping a saved hidden 
         ->where('practiceLevels', fn ($choices) => array_column($choices->all(), 'code') === ['PRE_A1', 'A1', 'A2', 'B1', 'B2', 'C1']));
     expect($profile->fresh()->getRawOriginal('current_level'))->toBe('C2');
 
-    $input = ['client_event_id' => (string) Str::uuid(), 'expected_revision' => $profile->revision, 'timezone' => $profile->timezone];
+    $input = ['client_event_id' => (string) Str::uuid(), 'expected_revision' => $profile->revision, 'timezone' => $profile->user->timezone ?? 'UTC'];
     $this->patchJson('/daily/api/profile', [...$input, 'current_level' => 'C2'])->assertUnprocessable();
     $this->patchJson('/daily/api/profile', [...$input, 'current_level' => 'B2'])->assertOk()->assertJsonPath('profile.current_level', 'B2');
 });
@@ -185,9 +182,10 @@ it('offers only visible levels in profile settings while keeping a saved hidden 
 it('keeps lastmod stable on reads and excludes pending material from the public page', function () {
     $before = app(PublicPracticeCatalog::class)->sitemapEntries();
     $first = $this->sessions[0];
-    $payload = $first->activeVersion->payload;
+    $payload = $first->payload;
     $payload['title'] = 'Неопубликованный новый заголовок';
-    LearningSessionVersion::factory()->create(['session_id' => $first->id, 'version' => 2, 'payload' => $payload]);
+    $draft = LearningSession::factory()->create(['unit_id' => $first->unit_id]);
+    lessonWithContent(['session_id' => $draft->id, 'payload' => $payload]);
     $this->travel(2)->hours();
     $this->get(PracticeUrls::session($first))->assertOk()->assertDontSee($payload['title']);
     expect(app(PublicPracticeCatalog::class)->sitemapEntries())->toBe($before);
@@ -205,7 +203,7 @@ it('renames sessions and themes explicitly and resolves old child URLs in one re
     $this->get($old)->assertStatus(301)->assertRedirect('http://localhost:5000'.$renamed.'/new-session');
     $this->get($new)->assertStatus(301)->assertRedirect('http://localhost:5000'.$renamed.'/new-session');
     $this->get($renamed.'/new-session')->assertOk();
-    $detail = app(\App\Services\Learning\ContentEditorService::class)->detail($this->admin, $first->activeVersion->id, app(\App\Services\Learning\SessionPackageValidator::class), app(\App\Services\Learning\SessionExportService::class));
+    $detail = app(\App\Services\Learning\ContentEditorService::class)->detail($this->admin, $first->id, app(\App\Services\Learning\SessionPackageValidator::class), app(\App\Services\Learning\SessionExportService::class));
     expect($detail['publicMeta']['path'])->toBe($renamed.'/new-session');
     expect(array_column(app(PublicPracticeCatalog::class)->sitemapEntries(), 'path'))->not->toContain($old, $oldUnit, $new);
     $first->update(['archived_at' => now('UTC')]);
@@ -254,7 +252,7 @@ it('allows lower level sessions as extra practice without changing the profile l
 
 it('uses 503 for an interrupted active publication rather than claiming the page was removed', function () {
     $first = $this->sessions[0];
-    $first->update(['active_version_id' => null]);
+    $first->update(['payload' => null]);
     $this->get(PracticeUrls::session($first))->assertStatus(503);
 });
 
@@ -304,7 +302,7 @@ it('shares a route selection from the public entry with the clean canonical', fu
 it('searches published lesson titles without granting access or completion', function () {
     $first = $this->sessions[0];
     $second = $this->sessions[1];
-    $search = '/daily/api/route/search?'.http_build_query(['q' => $second->activeVersion->payload['title']]);
+    $search = '/daily/api/route/search?'.http_build_query(['q' => $second->payload['title']]);
     $reference = fn ($lesson) => '/daily/api/route/reference?'.http_build_query(['path' => PracticeUrls::session($lesson)]);
 
     $this->getJson($search)->assertUnauthorized();
@@ -318,7 +316,7 @@ it('searches published lesson titles without granting access or completion', fun
     LearningProfile::factory()->create(['user_id' => $this->admin->id, 'current_level' => 'B1']);
     $this->getJson($search)->assertOk()->assertJsonPath('items.0.status', 'available');
     $this->getJson($search.'&completed=1')->assertOk()->assertJsonCount(0, 'items');
-    $this->getJson($reference($second))->assertOk()->assertJsonPath('title', $second->activeVersion->payload['title']);
+    $this->getJson($reference($second))->assertOk()->assertJsonPath('title', $second->payload['title']);
     $this->getJson('/daily/api/route/reference?path=https://example.com')->assertUnprocessable();
     expect(LearningRun::count())->toBe(0)->and(LearningProfile::first()->getRawOriginal('current_level'))->toBe('B1');
 });

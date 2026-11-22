@@ -19,7 +19,6 @@ class LearningProfileFactory extends Factory
         return [
             'user_id' => User::factory(),
             'current_level' => LearningLevel::PreA1->value,
-            'timezone' => 'UTC',
             'revision' => 1,
         ];
     }

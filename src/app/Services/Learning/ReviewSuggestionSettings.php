@@ -33,7 +33,7 @@ final class ReviewSuggestionSettings
             // Re-enabling never silently cancels an active refusal for today.
             $profile->review_suggestions_enabled = $input['enabled'];
         } else {
-            $next = PracticeTime::now()->setTimezone(PracticeTime::timezone($profile->timezone))->addDay()->startOfDay()->utc();
+            $next = PracticeTime::now()->setTimezone(PracticeTime::timezone($profile->user->timezone ?? PracticeTime::DEFAULT_TIMEZONE))->addDay()->startOfDay()->utc();
             // A timezone change must not shorten an already accepted refusal.
             $profile->review_suggestions_snoozed_until = $profile->review_suggestions_snoozed_until?->greaterThan($next)
                 ? $profile->review_suggestions_snoozed_until : $next;
@@ -62,7 +62,7 @@ final class ReviewSuggestionSettings
             return false;
         }
         $profile ??= LearningProfile::create(['user_id' => $actor->id, 'current_level' => AvailableLevels::first(),
-            'timezone' => PracticeTime::DEFAULT_TIMEZONE, 'revision' => 1]);
+            'revision' => 1]);
         $profile->update(['review_suggestions_snoozed_until' => $until, 'revision' => $profile->revision + 1]);
 
         return true;

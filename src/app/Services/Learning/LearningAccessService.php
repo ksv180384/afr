@@ -13,25 +13,22 @@ final class LearningAccessService
 {
     public function outline(): array
     {
-        $curricula = \App\Models\Learning\LearningCurriculum::query()->where('status', 'published')->pluck('level')->map(fn ($level) => $level instanceof \BackedEnum ? $level->value : $level)->all();
         $units = LearningUnit::query()->whereNotNull('published_at')->whereNull('archived_at')
             ->orderBy('sort_order')->orderBy('external_id')->get();
-        $sessions = LearningSession::query()->whereNull('archived_at')
-            ->whereHas('activeVersion', fn ($query) => $query->where('status', 'published'))
-            ->with(['activeVersion' => fn ($query) => $query->select('id', 'session_id',
-                'content_title', 'content_prerequisites')])
+        $sessions = LearningSession::query()->published()
+            ->select('id', 'unit_id', 'external_id', 'slug', 'content_title', 'content_prerequisites')
             ->orderBy('sort_order')->orderBy('external_id')->get()->groupBy('unit_id');
 
         return LearningLevel::query()->whereNull('archived_at')->orderBy('sort_order')->get()->map(fn ($level) => [
             'id' => $level->code, 'title' => $level->title, 'path' => PracticeUrls::level($level->code),
-            'published' => $level->published_at !== null, 'has_curriculum' => in_array($level->code, $curricula, true),
+            'published' => $level->published_at !== null,
             'units' => $units->filter(fn ($unit) => $unit->getRawOriginal('level') === $level->code)->values()->map(fn ($unit) => [
                 'id' => $unit->external_id, 'title' => $unit->title, 'path' => PracticeUrls::unit($unit),
                 'background_url' => $unit->background_url,
                 'sessions' => ($sessions[$unit->id] ?? collect())->map(fn ($session) => [
-                    'id' => $session->external_id, 'title' => $session->activeVersion->content_title,
+                    'id' => $session->external_id, 'title' => $session->content_title,
                     'path' => $session->slug ? PracticeUrls::unit($unit).'/'.$session->slug : null,
-                    'prerequisite_ids' => json_decode($session->activeVersion->content_prerequisites, true) ?? [],
+                    'prerequisite_ids' => json_decode($session->content_prerequisites, true) ?? [],
                 ])->all(),
             ])->all(),
         ])->all();
@@ -41,8 +38,7 @@ final class LearningAccessService
     {
         return LearningRun::query()->where('learning_runs.user_id', $actor->id)->where('learning_runs.status', 'completed')
             ->whereIn('learning_runs.kind', ['daily', 'extra'])
-            ->join('learning_session_versions', 'learning_session_versions.id', '=', 'learning_runs.session_version_id')
-            ->join('learning_sessions', 'learning_sessions.id', '=', 'learning_session_versions.session_id')
+            ->join('learning_sessions', 'learning_sessions.id', '=', 'learning_runs.session_id')
             ->distinct()->pluck('learning_sessions.external_id')->all();
     }
 

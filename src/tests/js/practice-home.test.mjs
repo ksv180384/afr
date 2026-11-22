@@ -40,7 +40,7 @@ test('guest home stays neutral until storage is read and concurrent refreshes sh
   assert.equal(Object.keys(repository.state.runs).length,0);
 });
 
-test('two simultaneous guest start actions create one run and later actions continue its stable ID',async()=>{
+test('two simultaneous guest starts share one attempt and a later start replaces it',async()=>{
   const repository=new Repository();const store=make({guestRepository:repository});
   await store.refresh(null);
   const first=store.start(null);const second=store.start(null);
@@ -49,8 +49,9 @@ test('two simultaneous guest start actions create one run and later actions cont
   assert.match(path,/^\/daily\/guest\//);
   assert.equal(Object.keys(repository.state.runs).length,1);
   assert.equal(repository.state.outbox.filter((event)=>event.action==='start').length,1);
-  assert.equal(await store.start(null),path);
+  assert.notEqual(await store.start(null),path);
   assert.equal(Object.keys(repository.state.runs).length,1);
+  assert.equal(repository.state.outbox.filter((event)=>event.action==='start').length,1);
 });
 
 test('late account reads never replace a different actor and GET refresh never starts a run',async()=>{
@@ -60,13 +61,14 @@ test('late account reads never replace a different actor and GET refresh never s
   assert.equal(store.state.owner,8);assert.equal(store.state.home.profile.owner_user_id,8);assert.equal(writes,0);
 });
 
-test('offline catalog refresh preserves the saved continuation and failure to load new content creates nothing',async()=>{
+test('offline catalog and lesson failures create no new attempt',async()=>{
   const repository=new Repository();let online=true;
   const store=make({guestRepository:repository,guestTransport:{...guestTransport,async catalog(){if(!online)throw new Error('offline');return guestTransport.catalog();}}});
   await store.refresh(null);const path=await store.start(null);online=false;
   await store.refresh(null);
   assert.match(store.state.home.content_error,/Нет соединения/);
-  assert.equal(await store.start(null),path);assert.equal(Object.keys(repository.state.runs).length,1);
+  await assert.rejects(store.start(null),/Нет соединения/);
+  assert.deepEqual(Object.keys(repository.state.runs), [path.split('/').pop()]);
   const empty=new Repository();
   const failed=make({guestRepository:empty,guestTransport:{...guestTransport,async session(){throw new Error('offline');}}});
   await failed.refresh(null);
@@ -105,7 +107,7 @@ test('guest level changes preserve all existing run identities and snapshots',as
   assert.equal(store.state.home.profile.current_level,'A1');
   assert.deepEqual(repository.state.runs,runs);
 });
-test('guest practice resumes lessons on the selected level after switching levels', async () => {
+test('guest practice restarts lessons on the selected level after switching levels', async () => {
   const b1Snapshot = {...snapshot, id: 'B1-FIRST', level: 'B1'};
   const b1Lesson = {...lesson, id: b1Snapshot.id, level: 'B1'};
   const accessOutline = [outline[0], {
@@ -123,16 +125,17 @@ test('guest practice resumes lessons on the selected level after switching level
   });
   await store.changeLevel(null, 'B1');
   const b1Path = await store.start(null);
-  assert.equal(store.state.home.active_run.level, 'B1');
+  assert.equal(store.state.home.candidate.level, 'B1');
 
   await store.changeLevel(null, 'PRE_A1');
   assert.equal(store.state.home.active_run, null);
   const beginnerPath = await store.start(null);
   assert.notEqual(beginnerPath, b1Path);
-  assert.equal(store.state.home.active_run.level, 'PRE_A1');
+  assert.equal(store.state.home.candidate.level, 'PRE_A1');
 
   await store.changeLevel(null, 'B1');
-  assert.equal(await store.start(null), b1Path);
+  assert.notEqual(await store.start(null), b1Path);
+  assert.equal(Object.keys(store.state.guest.runs).length, 2);
 });
 
 test('a changed server identity blocks profile writes from a stale account screen',async()=>{
@@ -315,7 +318,7 @@ test('a lost route start receipt keeps the selected lesson and event key when re
   assert.deepEqual(requests[0], requests[1]);
 });
 
-test('guest route starts the selected available lesson and resumes each lesson separately', async () => {
+test('guest route starts and restarts each selected available lesson separately', async () => {
   const second = {...lesson, id: 'PRE_A1-SECOND'};
   const accessOutline = [
     {...outline[0], units: [{...outline[0].units[0], sessions: [lesson, second]}]},
@@ -335,9 +338,9 @@ test('guest route starts the selected available lesson and resumes each lesson s
   assert.equal(store.state.home.route.lessons[1].status, 'available');
   const secondPath = await store.start(null, second.id);
   assert.notEqual(secondPath, firstPath);
-  assert.equal(await store.start(null, lesson.id), firstPath);
-  assert.equal(await store.start(null, second.id), secondPath);
-  assert.deepEqual(loads, [lesson.id, second.id]);
+  assert.notEqual(await store.start(null, lesson.id), firstPath);
+  assert.notEqual(await store.start(null, second.id), secondPath);
+  assert.deepEqual(loads, [lesson.id, second.id, lesson.id, second.id]);
   assert.equal(Object.keys(store.state.guest.runs).length, 2);
 });
 

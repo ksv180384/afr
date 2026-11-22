@@ -10,8 +10,6 @@ use Database\Factories\Learning\LearningCurriculumFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use LogicException;
 
 /**
@@ -102,31 +100,6 @@ class LearningCurriculum extends Model
     public function levelDefinition(): BelongsTo
     {
         return $this->belongsTo(LearningLevel::class, 'level', 'code');
-    }
-
-    public function objectives(): BelongsToMany
-    {
-        return $this->belongsToMany(
-            LearningObjective::class,
-            'learning_curriculum_objectives',
-            'curriculum_id',
-            'objective_id',
-        );
-    }
-
-    public function checkpoints(): BelongsToMany
-    {
-        return $this->belongsToMany(
-            LearningSession::class,
-            'learning_curriculum_checkpoints',
-            'curriculum_id',
-            'session_id',
-        );
-    }
-
-    public function enrollments(): HasMany
-    {
-        return $this->hasMany(LearningCurriculumEnrollment::class, 'curriculum_version_id', 'id');
     }
 
     public function creator(): BelongsTo

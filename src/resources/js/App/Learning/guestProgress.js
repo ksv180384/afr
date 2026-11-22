@@ -73,6 +73,16 @@ export const changeGuestProfile = (state, input) => {
   state.profile_revision++;
   recordGuestEvent(state,{...input,action:'level_selection'});
 };
+export const discardGuestLesson = (state, id) => {
+  const run = state.runs[id];
+  if (!run || run.status === 'completed' || !['daily', 'extra'].includes(run.kind)) return;
+  delete state.runs[id];
+  state.outbox = state.outbox.filter(event => event.run_id !== id);
+  for (const [eventId, receipt] of Object.entries(state.receipts)) {
+    if (receipt.run?.id === id) delete state.receipts[eventId];
+  }
+};
+
 export const addGuestRun = (state, {source,runId,presentationIds,eventId,tabId,now,promotionEventId,kind = 'daily'}) => {
   if (state.bound_user_id !== null) throw guestError('Этот гостевой набор уже связан с аккаунтом. Войдите для продолжения.', 'bound_owner');
   if (kind==='review' && Object.values(state.runs).some(run=>run.status==='in_progress')) throw guestError('Сначала завершите или явно отложите активное занятие.', 'validation_failed');
@@ -84,8 +94,13 @@ export const addGuestRun = (state, {source,runId,presentationIds,eventId,tabId,n
     const access = learningAccess(source.access_outline, completedGuestSessions(state), state.current_level).sessions[snapshot.id];
     if (!access || access.locked) throw guestError(access?.reason || 'Занятие пока недоступно.', 'validation_failed');
   } else if (!completed.includes(snapshot.id) && ((kind !== 'extra' && snapshot.level !== state.current_level) || snapshot.prerequisite_ids.some((id) => !completed.includes(id)))) throw guestError('Сначала завершите предыдущие занятия выбранного уровня.', 'validation_failed');
+  if (['daily','extra'].includes(kind)) {
+    for (const run of Object.values(state.runs)) {
+      if (run.snapshot.id === snapshot.id) discardGuestLesson(state, run.id);
+    }
+  }
   const entry = source.access_outline?.find(level=>level.id===snapshot.level);
-  const completionRoute = entry && !entry.has_curriculum && entry.published && entry.units.length && entry.units.every(unit=>unit.sessions.length)
+  const completionRoute = entry && entry.published && entry.units.length && entry.units.every(unit=>unit.sessions.length)
     ? {level:entry.id,profile_event_id:promotionEventId ?? globalThis.crypto?.randomUUID(),session_ids:entry.units.flatMap(unit=>unit.sessions.map(session=>session.id)),next_level:LEVELS[LEVELS.findIndex(level=>level.code===entry.id)+1]?.code ?? null} : null;
   const run = {id:runId,kind,snapshot,completion_route:completionRoute,session_version_id:source.session_version_id,checking_policy_version:source.checking_policy_version,
     checking_policy_snapshot:copy(checkingPolicy(source.checking_policy_version)),audioUrls:copy(source.audioUrls ?? {}),

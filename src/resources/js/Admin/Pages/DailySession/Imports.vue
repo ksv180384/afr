@@ -23,7 +23,7 @@ const commit = async () => {
   if (result) receipt.value = result;
 };
 
-const changeStatus = (ids, status) => run(() => api.dailyPractice.action('versions/status', { version_ids: ids, status }));
+const changeStatus = (ids, status) => run(() => api.dailyPractice.action('sessions/status', { version_ids: ids, status }));
 </script>
 
 <template>

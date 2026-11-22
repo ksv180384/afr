@@ -13,7 +13,8 @@ class PracticeReportRequest extends FormRequest
 
     public function rules(): array
     {
-        return ['client_report_id' => 'required|uuid', 'session_version_id' => 'required|integer|min:1',
+        return ['client_report_id' => 'required|uuid', 'lesson_id' => 'required_without:session_version_id|integer|min:1',
+            'session_version_id' => 'required_without:lesson_id|integer|min:1',
             'task_id' => 'nullable|string|max:128', 'run_id' => 'nullable|uuid', 'text' => 'required|string|max:4000',
             'include_answer' => 'required|boolean', 'answer' => 'sometimes|array|max:4'];
     }

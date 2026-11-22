@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\DailySession\EditorController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin/daily-practice')->name('admin.daily-practice.')->middleware(['auth', 'verified', 'is-admin', 'throttle:120,1'])->group(function (): void {
-    Route::post('versions/{version}/save', [\App\Http\Controllers\Admin\DailySession\MaintenanceController::class, 'save'])->whereNumber('version');
+    Route::post('sessions/{version}/save', [\App\Http\Controllers\Admin\DailySession\MaintenanceController::class, 'save'])->whereNumber('version');
     Route::post('manage/{kind}/{id}/delete', [\App\Http\Controllers\Admin\DailySession\MaintenanceController::class, 'delete'])->whereIn('kind', ['sessions','units','levels','curricula']);
     Route::get('/', [EditorController::class, 'index'])->name('index');
     Route::post('sessions/{session}/rename', [EditorController::class, 'renameSession'])->whereNumber('session')->name('sessions.rename');
@@ -20,18 +20,20 @@ Route::prefix('admin/daily-practice')->name('admin.daily-practice.')->middleware
     Route::post('media', [EditorController::class, 'storeMedia'])->name('media.store');
     Route::post('media/{media}/approve', [EditorController::class, 'approveMedia'])->whereUuid('media')->name('media.approve');
     Route::get('media/{media}/file', [EditorController::class, 'mediaFile'])->whereUuid('media')->name('media.file');
-    Route::get('versions/{version}', [EditorController::class, 'show'])->whereNumber('version')->name('versions.show');
-    Route::get('versions/{version}/preview', [EditorController::class, 'preview'])->whereNumber('version')->name('versions.preview');
+    Route::get('sessions/{version}', [EditorController::class, 'show'])->whereNumber('version')->name('versions.show');
+    Route::get('sessions/{version}/preview', [EditorController::class, 'preview'])->whereNumber('version')->name('versions.preview');
+    Route::get('versions/{version}/{action?}', [EditorController::class, 'legacyLesson'])
+        ->whereNumber('version')->whereIn('action', ['preview', 'export']);
     Route::get('imports', [EditorController::class, 'imports'])->name('imports');
     Route::post('imports/bulk', [ContentController::class, 'bulk'])->middleware('throttle:60,1,practice-bulk-import')->name('imports.bulk');
     Route::post('imports/preview', [ContentController::class, 'preview'])->middleware('throttle:6,1,practice-import')->name('imports.preview');
     Route::post('imports/{batch}/commit', [ContentController::class, 'commit'])->whereUuid('batch')->name('imports.commit');
     Route::get('imports/{batch}/export', [ContentController::class, 'exportBatch'])->whereUuid('batch')->name('imports.export');
-    Route::get('versions/{version}/export', [ContentController::class, 'exportVersion'])->whereNumber('version')->name('versions.export');
-    Route::post('versions/{version}/review', [ContentController::class, 'reviewVersion'])->whereNumber('version')->name('versions.review');
-    Route::post('versions/{version}/publish', [ContentController::class, 'publishVersion'])->whereNumber('version')->name('versions.publish');
-    Route::post('versions/{version}/archive', [ContentController::class, 'archiveVersion'])->whereNumber('version')->name('versions.archive');
-    Route::post('versions/publish', [ContentController::class, 'publishMany'])->name('versions.publish-many');
+    Route::get('sessions/{version}/export', [ContentController::class, 'exportVersion'])->whereNumber('version')->name('versions.export');
+    Route::post('sessions/{version}/review', [ContentController::class, 'reviewVersion'])->whereNumber('version')->name('versions.review');
+    Route::post('sessions/{version}/publish', [ContentController::class, 'publishVersion'])->whereNumber('version')->name('versions.publish');
+    Route::post('sessions/{version}/archive', [ContentController::class, 'archiveVersion'])->whereNumber('version')->name('versions.archive');
+    Route::post('sessions/publish', [ContentController::class, 'publishMany'])->name('versions.publish-many');
     Route::post('sessions/archive', [ContentController::class, 'archiveSessions'])->name('sessions.archive');
     Route::get('catalog/{revision}/export', [ContentController::class, 'exportCatalog'])->whereNumber('revision')->name('catalog.export');
     Route::get('curricula/{curriculum}/export', [ContentController::class, 'exportCurriculum'])->whereNumber('curriculum')->name('curricula.export');
@@ -41,7 +43,7 @@ Route::prefix('admin/daily-practice')->name('admin.daily-practice.')->middleware
     Route::post('curricula/{curriculum}/review', [ContentController::class, 'reviewCurriculum'])->whereNumber('curriculum')->name('curricula.review');
     Route::post('curricula/{curriculum}/publish', [ContentController::class, 'publishCurriculum'])->whereNumber('curriculum')->name('curricula.publish');
     Route::post('curricula/{curriculum}/archive', [ContentController::class, 'archiveCurriculum'])->whereNumber('curriculum')->name('curricula.archive');
-    Route::post('versions/status', [ContentController::class, 'changeStatus'])->name('versions.status');
+    Route::post('sessions/status', [ContentController::class, 'changeStatus'])->name('versions.status');
     Route::post('catalog/{kind}/{id}/visibility', [ContentController::class, 'setCatalogVisibility'])
         ->whereIn('kind', ['levels', 'units'])->whereNumber('id')->name('catalog.visibility');
     Route::post('catalog/{revision}/publish-direct', [ContentController::class, 'publishCatalogDirect'])->whereNumber('revision')->name('catalog.publish-direct');

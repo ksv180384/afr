@@ -16,7 +16,7 @@ use LogicException;
  * @property int $id Первичный ключ записи.
  * @property int $user_id Пользователь, к которому относится запись.
  * @property int $personal_word_id Запись слова в личном словаре.
- * @property int $session_version_id Версия занятия, к которой относится запись.
+ * @property int $session_id Занятие, к которому относится запись.
  * @property string $vocabulary_id Идентификатор словарного элемента в версии занятия.
  * @property array $snapshot Снимок исходного словарного элемента в момент добавления.
  * @property \Carbon\CarbonImmutable $first_added_at Момент первого добавления слова.
@@ -33,7 +33,7 @@ class PersonalVocabularySource extends Model
     protected $fillable = [
         'user_id',
         'personal_word_id',
-        'session_version_id',
+        'session_id',
         'vocabulary_id',
         'snapshot',
         'first_added_at',
@@ -44,7 +44,7 @@ class PersonalVocabularySource extends Model
         return [
             'user_id' => 'integer',
             'personal_word_id' => 'integer',
-            'session_version_id' => 'integer',
+            'session_id' => 'integer',
             'snapshot' => 'array',
             'first_added_at' => 'immutable_datetime',
         ];
@@ -56,7 +56,7 @@ class PersonalVocabularySource extends Model
             if ($model->isDirty([
                 'user_id',
                 'personal_word_id',
-                'session_version_id',
+                'session_id',
                 'vocabulary_id',
                 'snapshot',
                 'first_added_at',
@@ -76,9 +76,9 @@ class PersonalVocabularySource extends Model
         return $this->belongsTo(PersonalVocabulary::class, 'personal_word_id', 'id');
     }
 
-    public function sessionVersion(): BelongsTo
+    public function session(): BelongsTo
     {
-        return $this->belongsTo(LearningSessionVersion::class, 'session_version_id', 'id');
+        return $this->belongsTo(LearningSession::class, 'session_id', 'id');
     }
 
     public function user(): BelongsTo

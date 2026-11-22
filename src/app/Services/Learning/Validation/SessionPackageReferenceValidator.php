@@ -7,7 +7,6 @@ use App\Models\Learning\LearningCurriculum;
 use App\Models\Learning\LearningMedia;
 use App\Models\Learning\LearningObjective;
 use App\Models\Learning\LearningSession;
-use App\Models\Learning\LearningSessionVersion;
 use App\Models\Learning\LearningUnit;
 use App\Models\Word\Word;
 
@@ -161,17 +160,16 @@ final class SessionPackageReferenceValidator
             foreach ($batch as $id) {
                 $visited[$id] = true;
             }
-            $found = LearningSession::query()->whereIn('external_id', $batch)->with(['unit:id,external_id', 'activeVersion', 'latestVersion'])->get();
+            $found = LearningSession::query()->whereIn('external_id', $batch)->with('unit:id,external_id')
+                ->get(['external_id', 'unit_id', 'level', 'archived_at', 'content_prerequisites', 'payload->kind as content_kind']);
             foreach ($found as $row) {
                 $id = $row->external_id;
                 $rows[$id] = $row;
                 if (isset($incoming[$id])) {
                     continue;
                 }
-                $version = $row->activeVersion ?? $row->latestVersion;
-                $payload = $version?->payload ?? [];
-                $dependencies = array_values(array_filter((array) ($payload['prerequisite_ids'] ?? []), 'is_string'));
-                $state[$id] = ['level' => $row->getRawOriginal('level'), 'kind' => $payload['kind'] ?? null, 'prerequisites' => $dependencies];
+                $dependencies = array_values(array_filter((array) json_decode($row->content_prerequisites ?? '[]', true), 'is_string'));
+                $state[$id] = ['level' => $row->getRawOriginal('level'), 'kind' => $row->content_kind, 'prerequisites' => $dependencies];
                 foreach ($dependencies as $target) {
                     if (! isset($visited[$target])) {
                         $queue[] = $target;
@@ -321,7 +319,7 @@ final class SessionPackageReferenceValidator
         }
         $seenVersions = [];
         foreach (array_chunk(array_keys($lexemes), 100) as $keys) {
-            $versions = LearningSessionVersion::query()->where(function ($query) use ($keys) {
+            $versions = LearningSession::query()->where(function ($query) use ($keys) {
                 foreach ($keys as $key) {
                     $query->orWhere('payload', 'like', '%"lexeme_key"%"'.$key.'"%');
                 }

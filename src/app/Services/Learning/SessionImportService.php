@@ -13,6 +13,7 @@ use App\Models\Learning\SessionImportBatch;
 use App\Models\User\User;
 use App\Services\Learning\Validation\CanonicalJson;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Throwable;
@@ -48,7 +49,7 @@ final class SessionImportService
             throw new ContentOperationException(PracticeErrorCode::Unavailable, 'Не удалось сохранить приватный файл импорта. Повторите загрузку.');
         }
         try {
-            $batch = \Illuminate\Support\Facades\DB::transaction(function () use ($actor, $report, $token, $path, $json, $file, $sessionChecksums): SessionImportBatch {
+            $batch = DB::transaction(function () use ($actor, $report, $token, $path, $json, $file, $sessionChecksums): SessionImportBatch {
                 $batch = SessionImportBatch::create([
                     'file_hash' => $report->fileHash, 'preview_token_hash' => hash('sha256', $token),
                     'created_by' => $actor->id, 'private_path' => $path,
@@ -56,7 +57,6 @@ final class SessionImportService
                     'file_size' => strlen($json), 'status' => 'preview', 'validation_report' => [...$report->toArray(), 'session_checksums' => $sessionChecksums],
                     'expires_at' => now('UTC')->addSeconds(config('daily_practice.import.preview_ttl_seconds')),
                 ]);
-                $this->access->audit($actor, 'import_preview', ['import_batch_id' => $batch->id], [], ['file_hash' => $report->fileHash]);
 
                 return $batch;
             });
@@ -126,36 +126,20 @@ final class SessionImportService
                 ]);
                 $session->update(['sort_order' => $content['order']]);
                 $content['version'] = 1;
-                $version = $session->activeVersion ?? $session->versions()->orderByDesc('id')->first();
-                $wasExisting = $version !== null;
+                $wasExisting = $session->payload !== null;
                 foreach ($content['objectives'] as $objective) {
                     LearningObjective::query()->firstOrCreate(['stable_id' => $objective['id']], ['level' => $content['level'], 'title' => $objective['title']]);
                 }
                 $attributes = [
-                    'version' => $version?->version ?? 1, 'schema_version' => $package['schema_version'], 'payload' => $content,
-                    'checksum' => CanonicalJson::hash($content), 'status' => $version?->status->value ?? 'draft', 'import_batch_id' => $batch->id, 'created_by' => $actor->id,
+                    'schema_version' => $package['schema_version'], 'payload' => $content,
+                    'checksum' => CanonicalJson::hash($content), 'status' => $session->status->value, 'import_batch_id' => $batch->id, 'created_by' => $actor->id,
                 ];
-                if ($version) {
-                    $version->update($attributes);
-                } else {
-                    $version = $session->versions()->create($attributes);
+                if ($wasExisting && ! hash_equals($session->checksum, $attributes['checksum'])) {
+                    $session->runs()->whereIn('status', ['in_progress', 'paused'])->delete();
                 }
-                $assets = [];
-                $collect = function (array $node) use (&$collect, &$assets): void {
-                    if (is_string($node['audio']['asset_id'] ?? null)) {
-                        $assets[] = $node['audio']['asset_id'];
-                    }
-                    foreach ($node as $child) {
-                        if (is_array($child)) {
-                            $collect($child);
-                        }
-                    }
-                };
-                $collect($content);
-                $version->media()->sync(array_unique($assets));
-                $receipt[$wasExisting ? 'updated_version_ids' : 'created_version_ids'][] = $version->id;
-                $receipt['version_ids'][] = $version->id;
-                $this->access->audit($actor, 'session_import', ['session_version_id' => $version->id, 'import_batch_id' => $batch->id], [], ['checksum' => $version->checksum, 'status' => $version->status->value]);
+                $session->update($attributes);
+                $receipt[$wasExisting ? 'updated_version_ids' : 'created_version_ids'][] = $session->id;
+                $receipt['version_ids'][] = $session->id;
             }
             foreach ($package['curricula'] ?? [] as $content) {
                 $curriculum = LearningCurriculum::query()->where('external_id', $content['id'])->where('version', $content['version'])->first();
@@ -168,14 +152,19 @@ final class SessionImportService
                         'promotion_policy_snapshot' => config('daily_practice.promotion.policies.'.$policyVersion),
                         'status' => 'draft', 'created_by' => $actor->id,
                     ]);
-                    $curriculum->objectives()->sync(LearningObjective::query()->whereIn('stable_id', $content['required_objective_ids'])->pluck('id'));
-                    $curriculum->checkpoints()->sync(LearningSession::query()->whereIn('external_id', $content['checkpoint_session_ids'])->pluck('id'));
-                    $this->access->audit($actor, 'curriculum_import', ['curriculum_id' => $curriculum->id, 'import_batch_id' => $batch->id], [], ['checksum' => $curriculum->checksum]);
                 }
                 $receipt['curriculum_ids'][] = $curriculum->id;
             }
             $batch->update(['status' => 'committed', 'receipt' => $receipt, 'committed_at' => now('UTC')]);
-            $this->access->audit($actor, 'import_commit', ['import_batch_id' => $batch->id], [], $receipt);
+            DB::afterCommit(function () use ($disk, $batch): void {
+                try {
+                    if (! $disk->delete($batch->private_path)) {
+                        throw new \RuntimeException('Committed preview cleanup failed.');
+                    }
+                } catch (Throwable $error) {
+                    app(PracticeTelemetry::class)->record('preview_cleanup_failure', ['error_class' => $error::class]);
+                }
+            });
 
             return $receipt;
         });
@@ -185,12 +174,11 @@ final class SessionImportService
     {
         $ids = array_column($sessions, 'id');
         $existing = LearningSession::query()->whereIn('external_id', $ids)
-            ->with(['activeVersion', 'versions' => fn ($query) => $query->latest('id')->limit(1)])
-            ->get()->keyBy('external_id');
+            ->get(['id', 'external_id', 'checksum'])->keyBy('external_id');
         $checksums = [];
         foreach ($ids as $id) {
             $session = $existing->get($id);
-            $checksums[$id] = ($session?->activeVersion ?? $session?->versions->first())?->checksum;
+            $checksums[$id] = $session?->checksum;
         }
 
         return $checksums;
@@ -206,7 +194,6 @@ final class SessionImportService
             ...$target, 'import_batch_id' => $batch->id, 'content' => $content,
             'base_revision' => $baseRevision, 'status' => 'pending', 'created_by' => $actor->id,
         ]);
-        $this->access->audit($actor, 'catalog_import', ['catalog_revision_id' => $revision->id, 'import_batch_id' => $batch->id], [], ['base_revision' => $baseRevision, 'content' => $content]);
 
         return $revision;
     }
@@ -216,7 +203,7 @@ final class SessionImportService
         $deleted = 0;
         SessionImportBatch::query()->where('expires_at', '<=', now('UTC'))->orderBy('id')->chunkById(100, function ($batches) use (&$deleted): void {
             foreach ($batches as $candidate) {
-                \Illuminate\Support\Facades\DB::transaction(function () use ($candidate, &$deleted): void {
+                DB::transaction(function () use ($candidate, &$deleted): void {
                     $batch = SessionImportBatch::query()->lockForUpdate()->findOrFail($candidate->id);
                     if ($batch->expires_at->isFuture() || $batch->status === 'expired') {
                         return;

@@ -12,7 +12,7 @@ const restart = ref(0);
   <Head title="Тестовое занятие"><meta name="robots" content="noindex, nofollow" /></Head>
   <preview-player v-if="frame" :key="restart" :session="version.payload" :scenario="selectedScenario" :audio-urls="audioUrls" />
   <shell v-else :auth-user="authUser" title="Тестовое занятие">
-    <Link :href="'/admin/daily-practice/versions/' + version.id">← К занятию {{ version.external_id }}</Link>
+    <Link :href="'/admin/daily-practice/sessions/' + version.id">← К занятию {{ version.external_id }}</Link>
     <p>Пройдите занятие как ученик: отвечайте, используйте подсказки и проверяйте результат. Проверка не меняет учебный прогресс и словарь администратора.</p>
     <div class="actions"><el-button @click="width = '100%'">Компьютер</el-button><el-button @click="width = '375px'">Телефон · 375 px</el-button><el-button type="primary" @click="restart++">Начать заново</el-button></div>
     <el-form label-position="top"><el-form-item label="Состояние интерфейса"><el-select v-model="selectedScenario" style="width: 100%"><el-option value="session" label="Обычное занятие: ошибка, помощь и результат" /><el-option value="load_error" label="Сбой загрузки и повтор запроса" /><el-option value="empty" label="Пустое занятие и словарь" /><el-option value="exhausted" label="Доступный набор закончился" /><el-option value="save" label="Черновик при выходе (только в памяти)" /></el-select></el-form-item></el-form>

@@ -4,17 +4,19 @@ namespace App\Services\Learning;
 
 use App\Enums\Learning\PracticeErrorCode;
 use App\Models\Learning\PersonalVocabulary;
+use App\Models\Learning\PersonalVocabularySource;
 use App\Models\User\User;
 use App\Support\Learning\PracticeTime;
 
 class VocabularyTestService
 {
+    private array $vocabularyByContent = [];
+
     private function query(User $actor, array $filter = []): \Illuminate\Database\Eloquent\Builder
     {
         $query = PersonalVocabulary::query()->where('user_id', $actor->id)->with([
-            'sources.sessionVersion' => fn ($version) => $version->select('id', 'session_id', 'version', 'payload->title as source_title'),
-            'sources.sessionVersion.session:id,external_id',
-        ]);
+            'sources.session' => fn ($version) => $version->select('id', 'external_id', 'checksum', 'content_title as source_title'),
+                    ]);
         if (($filter['filter'] ?? '') === 'errors') {
             $query->where('needs_review', true);
         }
@@ -25,7 +27,7 @@ class VocabularyTestService
             $query->where('next_review_at', '<=', PracticeTime::now());
         }
         if (! empty($filter['source_session'])) {
-            $query->whereHas('sources.sessionVersion.session', fn ($source) => $source->where('external_id', $filter['source_session']));
+            $query->whereHas('sources.session', fn ($source) => $source->where('external_id', $filter['source_session']));
         }
         if (! empty($filter['q'])) {
             $text = mb_strtolower($filter['q']);
@@ -54,14 +56,11 @@ class VocabularyTestService
         $query = $this->query($actor, $filter);
         $page = $query->orderByDesc('needs_review')->orderBy('next_review_at')->orderBy('id')
             ->paginate(config('daily_practice.operations.vocabulary_page_size'));
-        $sources = \App\Models\Learning\LearningSession::whereHas('versions.vocabularySources', fn ($source) => $source->where('user_id', $actor->id))
-            ->with(['versions' => fn ($versions) => $versions
-                ->whereHas('vocabularySources', fn ($source) => $source->where('user_id', $actor->id))
-                ->select('id', 'session_id', 'version', 'payload->title as source_title')->orderByDesc('version')])
-            ->orderBy('external_id')->get(['id', 'external_id']);
+        $sources = \App\Models\Learning\LearningSession::whereHas('vocabularySources', fn ($source) => $source->where('user_id', $actor->id))
+            ->orderBy('external_id')->get(['id', 'external_id', 'content_title']);
         $options = $sources->map(fn ($session) => [
             'id' => $session->external_id,
-            'title' => $session->versions->first()?->source_title ?? 'Изученное занятие',
+            'title' => $session->content_title ?? 'Изученное занятие',
         ])->sortBy('title')->values();
 
         return ['words' => $page->getCollection()->map(fn ($word) => $this->data($word))->all(),
@@ -78,21 +77,59 @@ class VocabularyTestService
     {
         $sources = $word->sources->sort(function ($a, $b) {
             return ($b->first_added_at <=> $a->first_added_at)
-                ?: strcmp($a->sessionVersion?->session?->external_id ?? '', $b->sessionVersion?->session?->external_id ?? '')
-                ?: (($a->sessionVersion?->version ?? 0) <=> ($b->sessionVersion?->version ?? 0));
+                ?: strcmp($a->session?->external_id ?? '', $b->session?->external_id ?? '')
+               ;
         });
         foreach ($sources as $source) {
-            if ($this->items($source->snapshot)) {
-                return $source->snapshot;
+            $content = $this->sourceContent($source, $word->lexeme_key);
+            if ($this->items($content)) {
+                return $content;
             }
         }
 
         return $sources->isEmpty() || $this->items($word->snapshot) ? $word->snapshot : ($sources->first()?->snapshot ?? $word->snapshot);
     }
 
+    public function sourceContent(PersonalVocabularySource $source, string $key): array
+    {
+        $version = $source->session;
+        $words = [];
+        if ($version) {
+            $cacheKey = $version->id.':'.$version->checksum;
+            $words = $this->vocabularyByContent[$cacheKey] ??= array_column(
+                app(SessionContentCache::class)->payload($version)['vocabulary'] ?? [], null, 'lexeme_key',
+            );
+        }
+
+        return $words[$key] ?? array_diff_key($source->snapshot, ['review_items' => true]);
+    }
+
     public function items(array $source): array
     {
         return ShortReviewSelection::items($source);
+    }
+
+    private function reviewedItems(array $snapshot): array
+    {
+        if (isset($snapshot['reviewed_items'])) {
+            return $snapshot['reviewed_items'];
+        }
+
+        $sources = array_column($snapshot['vocabulary'] ?? [], null, 'lexeme_key');
+        $items = [];
+        foreach ($snapshot['items'] ?? [] as $item) {
+            $key = $item['review_lexeme_key'];
+            $items[$key] = ['id' => $item['task']['id'],
+                'category' => ShortReviewSelection::category($item['task'], $sources[$key] ?? [])];
+        }
+
+        return $items;
+    }
+
+    public function completionSnapshot(array $snapshot): array
+    {
+        return array_intersect_key($snapshot, array_flip(['id', 'title', 'level', 'description', 'duration_minutes',
+            'remaining_word_ids', 'self_check_words', 'review_mode'])) + ['reviewed_items' => $this->reviewedItems($snapshot)];
     }
 
     public function data(PersonalVocabulary $word): array
@@ -108,9 +145,10 @@ class VocabularyTestService
                 $snapshot = $source->snapshot;
                 unset($snapshot['review_items']);
 
-                return ['session_id' => $source->sessionVersion->session->external_id, 'version' => $source->sessionVersion->version,
-                    'session_title' => $source->sessionVersion->source_title ?? $source->sessionVersion->payload['title'] ?? null,
-                    'session_version_id' => $source->session_version_id, 'first_added_at' => $source->first_added_at->toIso8601String(), 'snapshot' => $snapshot];
+                return ['session_id' => $source->session->external_id, 'version' => 1,
+                    'session_title' => $source->session->source_title ?? $source->session->payload['title'] ?? null,
+                    'lesson_id' => $source->session_id, 'session_version_id' => $source->session_id,
+                    'first_added_at' => $source->first_added_at->toIso8601String(), 'snapshot' => $snapshot];
             })->values()->all()];
     }
 
@@ -144,16 +182,10 @@ class VocabularyTestService
         $runs = \App\Models\Learning\LearningRun::where('user_id', $actor->id)->where('kind', 'review')->orderByDesc('started_at')->orderByDesc('id')->get();
         $previousKeys = []; $previousKinds = []; $done = false; $finished = false;
         foreach ($runs as $index => $run) {
-            $snapshot = $run->snapshot;
-            $items = $snapshot['items'] ?? [];
-            foreach ($items as $item) {
-                $key = $item['review_lexeme_key'] ?? null;
-                if (! $key) { continue; }
+            $items = $this->reviewedItems($run->snapshot);
+            foreach ($items as $key => $item) {
                 if ($index === 0) { $previousKeys[] = $key; }
-                if (! isset($previousKinds[$key])) {
-                    $source = collect($snapshot['vocabulary'] ?? [])->firstWhere('lexeme_key', $key) ?? [];
-                    $previousKinds[$key] = ShortReviewSelection::category($item['task'], $source);
-                }
+                $previousKinds[$key] ??= $item['category'];
             }
             $result = $run->result ?? [];
             if ($run->status->value === 'completed' && count($items) >= 1 && count($items) <= 3 && $run->finished_at
@@ -183,7 +215,7 @@ class VocabularyTestService
             if (! $this->items($source)) { $selfCheck++; continue; }
             $due = $word->next_review_at->lessThanOrEqualTo(PracticeTime::now());
             if ($mode === 'suggested' && ! $word->needs_review && ! $due) { continue; }
-            $session = $word->sources->sortByDesc('first_added_at')->first()?->sessionVersion?->session?->external_id ?? $word->lexeme_key;
+            $session = $word->sources->sortByDesc('first_added_at')->first()?->session?->external_id ?? $word->lexeme_key;
             $sources[$word->id] = $source;
             $rows[] = ['key' => $word->lexeme_key, 'id' => $word->id, 'tier' => $word->needs_review ? 0 : ($due ? 1 : 2),
                 'due' => $word->next_review_at->getTimestamp(), 'topic' => preg_replace('/-L[0-9]+$/', '', $session),
@@ -208,10 +240,9 @@ class VocabularyTestService
         $runs = \App\Models\Learning\LearningRun::where('user_id', $actor->id)
             ->whereIn('kind', ['review', 'vocabulary_test'])->orderByDesc('started_at')->orderByDesc('id')->lazy(100);
         foreach ($runs as $run) {
-            foreach ($run->snapshot['items'] ?? [] as $item) {
-                $key = $item['review_lexeme_key'] ?? null;
+            foreach ($this->reviewedItems($run->snapshot) as $key => $item) {
                 if (in_array($key, $keys, true) && ! isset($previous[$key])) {
-                    $previous[$key] = $item['task'];
+                    $previous[$key] = $item;
                 }
             }
             if (count($previous) === count($keys)) { break; }
@@ -275,11 +306,12 @@ class VocabularyTestService
             $source = $this->source($word);
             $previousItem = $previous[$word->lexeme_key] ?? null;
             $previousKind = collect($short['selection'] ?? [])->firstWhere('key', $word->lexeme_key)['previous_kind'] ?? null;
-            if ($previousItem) { $previousKind = ShortReviewSelection::category($previousItem, $source); }
+            if ($previousItem) { $previousKind = $previousItem['category']; }
             $item = ShortReviewSelection::option($source, $seed, $word->lexeme_key, $index, $previousKind, $previousItem['id'] ?? null);
             $source['id'] = 'word-'.$word->id;
             $source['lexeme_key'] = $word->lexeme_key;
             $items[] = PresentationSnapshot::forReview($item, $word->lexeme_key);
+            unset($source['review_items']);
             $vocabulary[] = $source;
         }
 

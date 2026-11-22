@@ -2,7 +2,6 @@
 
 use App\Models\Learning\LearningRun;
 use App\Models\Learning\LearningSession;
-use App\Models\Learning\LearningSessionVersion;
 use App\Models\User\Rang;
 use App\Models\User\User;
 use App\Services\Learning\AccountRunService;
@@ -91,29 +90,27 @@ it('upgrades all five lessons without rewriting old runs and completes every rev
     foreach ($old['catalog_revision_ids'] as $id) {
         $this->postJson('/admin/daily-practice/catalog/'.$id.'/publish-direct')->assertOk();
     }
-    $this->postJson('/admin/daily-practice/versions/status', ['version_ids' => $old['version_ids'], 'status' => 'published'])->assertOk();
+    $this->postJson('/admin/daily-practice/sessions/status', ['version_ids' => $old['version_ids'], 'status' => 'published'])->assertOk();
     $learner = User::factory()->create();
     $runs = app(AccountRunService::class);
     $input = fn (int $revision, array $fields = []) => ['client_event_id' => (string) Str::uuid(), 'expected_revision' => $revision, ...$fields];
     $oldState = $runs->start($learner, $input(1, ['kind' => 'extra', 'session_id' => 'PRE_A1-U01-L01']))['state'];
     $oldRun = LearningRun::findOrFail($oldState['run_id']);
-    $oldSnapshot = $oldRun->snapshot;
-    $checksums = LearningSessionVersion::whereIn('id', $old['version_ids'])->pluck('checksum', 'id')->all();
+    $checksums = LearningSession::whereIn('id', $old['version_ids'])->pluck('checksum', 'id')->all();
     $slugs = LearningSession::pluck('slug', 'external_id')->all();
 
     $new = revisedLessonsImport($this, 2);
-    $this->postJson('/admin/daily-practice/versions/status', ['version_ids' => $new['version_ids'], 'status' => 'published'])->assertOk();
-    expect(LearningSession::count())->toBe(5)->and(LearningSessionVersion::count())->toBe(5);
+    $this->postJson('/admin/daily-practice/sessions/status', ['version_ids' => $new['version_ids'], 'status' => 'published'])->assertOk();
+    expect(LearningSession::count())->toBe(5)->and(LearningSession::count())->toBe(5);
     expect(LearningSession::pluck('slug', 'external_id')->all())->toBe($slugs);
-    expect($oldRun->fresh()->snapshot)->toBe($oldSnapshot);
-    expect($runs->load($learner, $oldRun->id)['session_version_id'])->toBe($oldState['session_version_id']);
-    expect(LearningSessionVersion::whereIn('id', $old['version_ids'])->pluck('checksum', 'id')->all())->not->toBe($checksums);
+    expect($oldRun->fresh())->toBeNull();
+    expect(LearningSession::whereIn('id', $old['version_ids'])->pluck('checksum', 'id')->all())->not->toBe($checksums);
     $again = revisedLessonsImport($this, 2);
     expect($again['created_version_ids'])->toBe([])->and($again['updated_version_ids'])->toHaveCount(5);
 
     foreach (revisedLessonsPackage()['sessions'] as $session) {
         $state = $runs->start($learner, $input($runs->profile($learner)['revision'], ['kind' => 'extra', 'session_id' => $session['id']]))['state'];
-        expect(LearningSessionVersion::findOrFail($state['session_version_id'])->version)->toBe(1);
+        expect(LearningSession::findOrFail($state['session_version_id'])->payload['version'])->toBe(1);
         foreach ($session['tasks'] as $task) {
             $pid = $state['presentation']['presentation_id'];
             if ($state['introductions']) {

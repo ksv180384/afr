@@ -12,6 +12,13 @@ use Illuminate\Validation\ValidationException;
 
 final class MediaLibraryService
 {
+    public function forContent(array $content): \Illuminate\Support\Collection
+    {
+        $ids = app(AccountRunView::class)->assets($content);
+
+        return LearningMedia::query()->whereIn('id', $ids)->get();
+    }
+
     private function invalid(): never
     {
         throw ValidationException::withMessages(['file' => 'Нужен целый PCM WAV: 16 бит, 1–2 канала, 8–96 кГц, до 10 МБ и 5 минут.']);
@@ -81,7 +88,6 @@ final class MediaLibraryService
             return DB::transaction(function () use ($actor, $bytes, $duration, $path) {
                 $media = LearningMedia::create(['disk' => 'learning_private', 'path' => $path, 'mime_type' => 'audio/wav',
                     'size' => strlen($bytes), 'duration_ms' => $duration, 'checksum' => hash('sha256', $bytes), 'created_by' => $actor->id, 'review_status' => 'pending']);
-                app(ContentAccess::class)->audit($actor, 'media_uploaded', [], [], ['media_id' => $media->id]);
 
                 return $media;
             });
@@ -109,7 +115,6 @@ final class MediaLibraryService
             abort_if($media->archived_at !== null, 409, 'Архивный файл нельзя одобрить.');
             $this->file($media);
             $media->update(['review_status' => 'approved', 'reviewed_by' => $actor->id, 'reviewed_at' => now('UTC')]);
-            app(ContentAccess::class)->audit($actor, 'media_approved', [], [], ['media_id' => $id]);
 
             return $media;
         });

@@ -2,7 +2,6 @@
 
 use App\Models\Learning\LearningRun;
 use App\Models\Learning\LearningSession;
-use App\Models\Learning\LearningSessionVersion;
 use App\Models\User\Rang;
 use App\Models\User\User;
 use Database\Seeders\Learning\LearningLevelSeeder;
@@ -44,10 +43,10 @@ function statusImport($test, bool $catalog = true, bool $incomplete = false, boo
 it('publishes whole draft sessions without checklist attestations and replays the same status safely', function () {
     $ids = statusImport($this);
     $input = ['version_ids' => $ids, 'status' => 'published'];
-    $this->postJson('/admin/daily-practice/versions/status', $input)->assertOk()->assertJsonPath('0.status', 'published');
-    $this->postJson('/admin/daily-practice/versions/status', $input)->assertOk();
-    expect(LearningSession::whereNotNull('active_version_id')->count())->toBe(2);
-    foreach (LearningSessionVersion::findMany($ids) as $version) {
+    $this->postJson('/admin/daily-practice/sessions/status', $input)->assertOk()->assertJsonPath('0.status', 'published');
+    $this->postJson('/admin/daily-practice/sessions/status', $input)->assertOk();
+    expect(LearningSession::published()->count())->toBe(2);
+    foreach (LearningSession::findMany($ids) as $version) {
         expect($version->reviewed_at)->toBeNull()->and($version->review_checks)->toBeNull()->and($version->published_at)->not->toBeNull();
     }
     $this->assertDatabaseCount('learning_attempts', 0);
@@ -55,14 +54,14 @@ it('publishes whole draft sessions without checklist attestations and replays th
 
 it('changes published sessions to draft ready and archive atomically without rewriting snapshots or publication dates', function () {
     $ids = statusImport($this);
-    $this->postJson('/admin/daily-practice/versions/status', ['version_ids' => $ids, 'status' => 'published'])->assertOk();
-    $first = LearningSessionVersion::findOrFail($ids[0]);
+    $this->postJson('/admin/daily-practice/sessions/status', ['version_ids' => $ids, 'status' => 'published'])->assertOk();
+    $first = LearningSession::findOrFail($ids[0]);
     $publishedAt = $first->published_at;
     $checksum = $first->checksum;
-    $run = LearningRun::factory()->create(['session_version_id' => $first->id, 'snapshot' => $first->payload]);
+    $run = LearningRun::factory()->create(['session_id' => $first->id, 'snapshot' => $first->payload]);
     $this->travel(1)->hours();
     foreach (['draft', 'reviewed', 'published', 'archived', 'published'] as $status) {
-        $this->postJson('/admin/daily-practice/versions/status', ['version_ids' => $ids, 'status' => $status])->assertOk()->assertJsonPath('0.status', $status);
+        $this->postJson('/admin/daily-practice/sessions/status', ['version_ids' => $ids, 'status' => $status])->assertOk()->assertJsonPath('0.status', $status);
         expect($first->fresh()->published_at->equalTo($publishedAt))->toBeTrue()->and($first->fresh()->checksum)->toBe($checksum)
             ->and($run->fresh()->snapshot)->toBe($first->payload);
     }
@@ -71,29 +70,29 @@ it('changes published sessions to draft ready and archive atomically without rew
 
 it('retains dependency and public content validation when publishing without manual checks', function () {
     $ids = statusImport($this, false);
-    $this->postJson('/admin/daily-practice/versions/status', ['version_ids' => $ids, 'status' => 'published', 'notes' => 'Не сохранять при отказе'])->assertStatus(422);
-    expect(LearningSessionVersion::where('status', 'draft')->count())->toBe(2)->and(LearningSessionVersion::find($ids[0])->editor_notes)->toBeNull();
+    $this->postJson('/admin/daily-practice/sessions/status', ['version_ids' => $ids, 'status' => 'published', 'notes' => 'Не сохранять при отказе'])->assertStatus(422);
+    expect(LearningSession::where('status', 'draft')->count())->toBe(2)->and(LearningSession::find($ids[0])->editor_notes)->toBeNull();
 });
 
 it('blocks incomplete public material even through the simplified publication endpoint', function () {
     $ids = statusImport($this, true, true);
-    $this->postJson('/admin/daily-practice/versions/status', ['version_ids' => $ids, 'status' => 'published'])->assertStatus(422);
-    expect(LearningSession::whereNotNull('active_version_id')->count())->toBe(0);
+    $this->postJson('/admin/daily-practice/sessions/status', ['version_ids' => $ids, 'status' => 'published'])->assertStatus(422);
+    expect(LearningSession::published()->count())->toBe(0);
 });
 
 it('rejects a partial withdrawal that would break another published session', function () {
     $ids = statusImport($this);
-    $this->postJson('/admin/daily-practice/versions/status', ['version_ids' => $ids, 'status' => 'published'])->assertOk();
-    $this->postJson('/admin/daily-practice/versions/status', ['version_ids' => [$ids[0]], 'status' => 'draft'])->assertStatus(409);
-    expect(LearningSession::whereNotNull('active_version_id')->count())->toBe(2);
+    $this->postJson('/admin/daily-practice/sessions/status', ['version_ids' => $ids, 'status' => 'published'])->assertOk();
+    $this->postJson('/admin/daily-practice/sessions/status', ['version_ids' => [$ids[0]], 'status' => 'draft'])->assertStatus(409);
+    expect(LearningSession::published()->count())->toBe(2);
 });
 
 it('validates status requests and denies ordinary users all simplified actions', function () {
     $ids = statusImport($this);
-    $this->postJson('/admin/daily-practice/versions/status', ['version_ids' => $ids, 'status' => 'anything'])->assertStatus(422);
-    $this->postJson('/admin/daily-practice/versions/status', ['version_ids' => [$ids[0], $ids[0]], 'status' => 'draft'])->assertStatus(422);
+    $this->postJson('/admin/daily-practice/sessions/status', ['version_ids' => $ids, 'status' => 'anything'])->assertStatus(422);
+    $this->postJson('/admin/daily-practice/sessions/status', ['version_ids' => [$ids[0], $ids[0]], 'status' => 'draft'])->assertStatus(422);
     $this->actingAs(User::factory()->create());
-    foreach (['versions/status', 'catalog/1/publish-direct', 'curricula/1/publish-direct'] as $path) {
+    foreach (['sessions/status', 'catalog/1/publish-direct', 'curricula/1/publish-direct'] as $path) {
         $this->postJson('/admin/daily-practice/'.$path, ['version_ids' => $ids, 'status' => 'published'])->assertForbidden();
     }
 });
@@ -114,7 +113,7 @@ it('publishes a complete programme without a checklist but still requires its pu
     foreach ($receipt['catalog_revision_ids'] as $revision) {
         $this->postJson('/admin/daily-practice/catalog/'.$revision.'/publish-direct')->assertOk();
     }
-    $this->postJson('/admin/daily-practice/versions/status', ['version_ids' => $receipt['version_ids'], 'status' => 'published'])->assertOk();
+    $this->postJson('/admin/daily-practice/sessions/status', ['version_ids' => $receipt['version_ids'], 'status' => 'published'])->assertOk();
     $this->postJson('/admin/daily-practice/curricula/'.$id.'/publish-direct')->assertOk()->assertJsonPath('status', 'published');
     $publishedAt = App\Models\Learning\LearningCurriculum::findOrFail($id)->published_at;
     $this->postJson('/admin/daily-practice/curricula/'.$id.'/archive')->assertOk();
@@ -126,30 +125,30 @@ it('publishes a complete programme without a checklist but still requires its pu
 
 it('identifies the unpublished prerequisite and explains how to publish dependent sessions together', function () {
     $ids = statusImport($this);
-    $previous = LearningSessionVersion::findOrFail($ids[0]);
-    $this->postJson('/admin/daily-practice/versions/status', ['version_ids' => [$ids[1]], 'status' => 'published'])
+    $previous = LearningSession::findOrFail($ids[0]);
+    $this->postJson('/admin/daily-practice/sessions/status', ['version_ids' => [$ids[1]], 'status' => 'published'])
         ->assertStatus(422)
-        ->assertJsonPath('details.session_id', $previous->session->external_id)
+        ->assertJsonPath('details.session_id', $previous->external_id)
         ->assertJsonPath('details.session_title', $previous->payload['title'])
         ->assertJsonPath('message', fn ($message) => str_contains($message, $previous->payload['title'])
-            && str_contains($message, $previous->session->external_id)
+            && str_contains($message, $previous->external_id)
             && str_contains($message, 'одной группой'));
-    expect(LearningSession::whereNotNull('active_version_id')->count())->toBe(0);
+    expect(LearningSession::published()->count())->toBe(0);
 });
 
 it('publishes a selected dependency group regardless of its selection order', function () {
     $ids = statusImport($this);
-    $this->postJson('/admin/daily-practice/versions/status', ['version_ids' => array_reverse($ids), 'status' => 'published'])->assertOk();
-    expect(LearningSession::whereNotNull('active_version_id')->count())->toBe(2);
+    $this->postJson('/admin/daily-practice/sessions/status', ['version_ids' => array_reverse($ids), 'status' => 'published'])->assertOk();
+    expect(LearningSession::published()->count())->toBe(2);
 });
 
 it('publishes valid sessions when optional related session links are omitted', function (bool $group) {
     $ids = statusImport($this, omitRelated: true);
     $selected = $group ? array_reverse($ids) : [$ids[0]];
-    $before = LearningSessionVersion::findMany($selected)->keyBy('id');
-    $this->postJson('/admin/daily-practice/versions/status', ['version_ids' => $selected, 'status' => 'published'])->assertOk();
-    expect(LearningSession::whereNotNull('active_version_id')->count())->toBe(count($selected));
-    foreach (LearningSessionVersion::findMany($selected) as $version) {
+    $before = LearningSession::findMany($selected)->keyBy('id');
+    $this->postJson('/admin/daily-practice/sessions/status', ['version_ids' => $selected, 'status' => 'published'])->assertOk();
+    expect(LearningSession::published()->count())->toBe(count($selected));
+    foreach (LearningSession::findMany($selected) as $version) {
         expect($version->status->value)->toBe('published')
             ->and($version->payload)->toBe($before[$version->id]->payload)
             ->and($version->checksum)->toBe($before[$version->id]->checksum);

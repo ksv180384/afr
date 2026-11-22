@@ -5,7 +5,6 @@ namespace App\Models\Learning;
 use App\Enums\Learning\LearningLevel as LevelCode;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Справочник учебных целей, которые связывают задания с требованиями программы.
@@ -50,13 +49,4 @@ class LearningObjective extends Model
         return $this->belongsTo(LearningLevel::class, 'level', 'code');
     }
 
-    public function curricula(): BelongsToMany
-    {
-        return $this->belongsToMany(
-            LearningCurriculum::class,
-            'learning_curriculum_objectives',
-            'objective_id',
-            'curriculum_id',
-        );
-    }
 }

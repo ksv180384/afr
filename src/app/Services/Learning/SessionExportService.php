@@ -4,7 +4,7 @@ namespace App\Services\Learning;
 
 use App\Models\Learning\LearningCatalogRevision;
 use App\Models\Learning\LearningCurriculum;
-use App\Models\Learning\LearningSessionVersion;
+use App\Models\Learning\LearningSession;
 use App\Models\Learning\LearningUnit;
 use App\Models\Learning\SessionImportBatch;
 use App\Models\User\User;
@@ -34,14 +34,14 @@ final class SessionExportService
     public function version(User $actor, int $id): array
     {
         $this->access->check($actor);
-        $version = LearningSessionVersion::query()->with('session.unit')->findOrFail($id);
+        $version = LearningSession::query()->with('unit')->findOrFail($id);
 
         // An unchanged unit revision can be reused from an earlier import batch.
         $catalogIds = $version->importBatch?->receipt['catalog_revision_ids'] ?? [];
-        $unitContent = LearningCatalogRevision::query()->where('unit_id', $version->session->unit_id)
+        $unitContent = LearningCatalogRevision::query()->where('unit_id', $version->unit_id)
             ->where(fn ($query) => $query->where('import_batch_id', $version->import_batch_id)->orWhereIn('id', $catalogIds))
             ->orderByDesc('id')->first()?->content
-            ?? $this->unit($version->session->unit);
+            ?? $this->unit($version->unit);
 
         return $this->envelope(['units' => [$unitContent], 'sessions' => [$version->payload]], 'version-'.$version->id);
     }
@@ -54,7 +54,7 @@ final class SessionExportService
             throw new ContentOperationException(\App\Enums\Learning\PracticeErrorCode::RevisionConflict, 'Пакет ещё не импортирован.');
         }
         $receipt = $batch->receipt;
-        $versions = LearningSessionVersion::query()->whereIn('id', $receipt['version_ids'])->get()->keyBy('id');
+        $versions = LearningSession::query()->whereIn('id', $receipt['version_ids'])->get()->keyBy('id');
         $resources = ['sessions' => collect($receipt['version_ids'])->map(fn ($id) => $versions->get($id)?->payload)->filter()->values()->all()];
         $revisions = LearningCatalogRevision::query()->whereIn('id', $receipt['catalog_revision_ids'])->get()->keyBy('id');
         foreach ($receipt['catalog_revision_ids'] as $revisionId) {

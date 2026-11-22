@@ -3,10 +3,10 @@
 use App\Models\Learning\LearningLevel;
 use App\Models\Learning\LearningRun;
 use App\Models\Learning\LearningSession;
-use App\Models\Learning\LearningSessionVersion;
 use App\Models\Learning\LearningUnit;
 use App\Models\User\User;
 use App\Services\Learning\LearningAccessService;
+use App\Services\Learning\Validation\CanonicalJson;
 use App\Services\Learning\PracticeUrls;
 use Database\Seeders\Learning\LearningLevelSeeder;
 use Inertia\Testing\AssertableInertia as Assert;
@@ -27,9 +27,8 @@ beforeEach(function () {
             $payload['public_page']['related_session_ids'] = [];
             $payload['public_page']['slug'] = strtolower(str_replace('_', '-', $id));
             $session = LearningSession::factory()->create(['external_id' => $id, 'level' => $level, 'unit_id' => $unit->id, 'sort_order' => $i, 'slug' => strtolower(str_replace('_', '-', $id))]);
-            $version = LearningSessionVersion::factory()->create(['session_id' => $session->id, 'payload' => $payload, 'status' => 'published', 'published_at' => now('UTC')]);
-            $session->update(['active_version_id' => $version->id]);
-            $this->lessons[$id] = $session->fresh()->load('unit', 'activeVersion');
+            $version = lessonWithContent(['session_id' => $session->id, 'payload' => $payload, 'status' => 'published', 'published_at' => now('UTC')]);
+            $this->lessons[$id] = $session->fresh()->load('unit');
         }
     }
     $this->actingAs($this->learner);
@@ -38,8 +37,8 @@ beforeEach(function () {
 function completeAccessLesson($test, string $id): void
 {
     $session = $test->lessons[$id];
-    LearningRun::factory()->create(['user_id' => $test->learner->id, 'session_version_id' => $session->active_version_id,
-        'snapshot' => $session->activeVersion->payload, 'kind' => 'extra', 'status' => 'completed', 'finished_at' => now('UTC')]);
+    LearningRun::factory()->create(['user_id' => $test->learner->id, 'session_id' => $session->id,
+        'snapshot' => $session->payload, 'kind' => 'extra', 'status' => 'completed', 'finished_at' => now('UTC')]);
 }
 
 it('locks later sessions topics and levels before entry including direct links', function () {
@@ -71,16 +70,17 @@ it('unlocks the next lesson then the next topic then the next level only on comp
 it('keeps completion and replay after a new version while earlier lessons remain unfinished', function () {
     completeAccessLesson($this, 'A1-U1-L1');
     $session = $this->lessons['A1-U1-L1'];
-    $payload = [...$session->activeVersion->payload, 'version' => 2, 'title' => 'Обновлённое занятие'];
-    $version = LearningSessionVersion::factory()->create(['session_id' => $session->id, 'version' => 2, 'payload' => $payload, 'status' => 'published', 'published_at' => now('UTC')]);
-    $session->update(['active_version_id' => $version->id]);
+    $version = $session;
+    $payload = [...$version->payload, 'title' => 'Обновлённое занятие'];
+    $version->update(['payload' => $payload, 'checksum' => CanonicalJson::hash($payload)]);
     $state = app(LearningAccessService::class)->forUser($this->learner);
     expect($state['sessions']['A1-U1-L1']['completed'])->toBeTrue()->and($state['sessions']['A1-U1-L1']['locked'])->toBeFalse();
     $this->get(PracticeUrls::session($session))->assertOk();
     $this->get('/daily?session=A1-U1-L1')->assertOk();
     $this->postJson('/daily/api/runs', ['client_event_id' => (string) Illuminate\Support\Str::uuid(),
         'expected_revision' => 1, 'kind' => 'extra', 'session_id' => 'A1-U1-L1'])
-        ->assertOk()->assertJsonPath('state.session_version_id', $version->id);
+        ->assertOk()->assertJsonPath('state.session_version_id', $version->id)
+        ->assertJsonPath('state.session.title', 'Обновлённое занятие');
 });
 
 it('does not let missing author prerequisites bypass the route order', function () {
@@ -104,15 +104,14 @@ function accessAddLevel($test, string $level, int $count): void
 {
     LearningLevel::where('code', $level)->update(['published_at' => now('UTC')]);
     $unit = LearningUnit::factory()->create(['level' => $level, 'sort_order' => 1, 'published_at' => now('UTC')]);
-    $template = $test->lessons['PRE_A1-U1-L1']->activeVersion->payload;
+    $template = $test->lessons['PRE_A1-U1-L1']->payload;
     for ($i = 1; $i <= $count; $i++) {
         $id = $level.'-NEW-'.$i;
         $payload = [...$template, 'id' => $id, 'level' => $level, 'unit_id' => $unit->external_id, 'order' => $i, 'prerequisite_ids' => []];
         $payload['public_page']['slug'] = strtolower($id);
         $session = LearningSession::factory()->create(['external_id' => $id, 'level' => $level, 'unit_id' => $unit->id, 'sort_order' => $i, 'slug' => strtolower($id)]);
-        $version = LearningSessionVersion::factory()->create(['session_id' => $session->id, 'payload' => $payload, 'status' => 'published', 'published_at' => now('UTC')]);
-        $session->update(['active_version_id' => $version->id]);
-        $test->lessons[$id] = $session->fresh()->load('unit', 'activeVersion');
+        $version = lessonWithContent(['session_id' => $session->id, 'payload' => $payload, 'status' => 'published', 'published_at' => now('UTC')]);
+        $test->lessons[$id] = $session->fresh()->load('unit');
     }
 }
 
@@ -165,7 +164,7 @@ it('raises the profile after the current published level is complete exactly onc
     $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('candidate.id', 'B2-NEW-1');
     accessFinishLesson($this, 'PRE_A1-U1-L2');
     $this->getJson('/daily/api/profile')->assertOk()->assertJsonPath('current_level', 'B2');
-    expect(\App\Models\Learning\LearningLevelEvent::where('source', 'automatic')->count())->toBe(1);
+    $this->getJson('/daily/api/today')->assertJsonPath('progress.latest_level_event.new_level', 'B2');
 });
 
 it('does not raise a profile on a read or incomplete level and never advances beyond C2', function () {
@@ -176,7 +175,7 @@ it('does not raise a profile on a read or incomplete level and never advances be
     $this->getJson('/daily/api/profile')->assertJsonPath('current_level', 'C2');
     accessFinishLesson($this, 'C2-NEW-1');
     $this->getJson('/daily/api/profile')->assertJsonPath('current_level', 'C2');
-    expect(\App\Models\Learning\LearningLevelEvent::where('source', 'automatic')->count())->toBe(0);
+    $this->getJson('/daily/api/today')->assertJsonPath('progress.latest_level_event', null);
 });
 
 it('keeps an empty profile level closed and distinguishes missing content from progression locks', function () {

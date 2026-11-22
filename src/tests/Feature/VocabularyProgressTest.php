@@ -3,7 +3,6 @@
 use App\Models\Learning\LearningLevel;
 use App\Models\Learning\LearningRun;
 use App\Models\Learning\LearningSession;
-use App\Models\Learning\LearningSessionVersion;
 use App\Models\Learning\LearningUnit;
 use App\Models\Learning\PersonalVocabulary;
 use App\Models\Learning\PersonalVocabularySource;
@@ -24,8 +23,7 @@ beforeEach(function () {
     LearningLevel::where('code', 'PRE_A1')->update(['published_at' => now('UTC')]);
     $unit = LearningUnit::factory()->create(['published_at' => now('UTC')]);
     $session = LearningSession::factory()->create(['unit_id' => $unit->id, 'external_id' => $this->payload['id']]);
-    $this->version = LearningSessionVersion::factory()->create(['session_id' => $session->id, 'payload' => $this->payload, 'checksum' => CanonicalJson::hash($this->payload), 'status' => 'published']);
-    $session->update(['active_version_id' => $this->version->id]);
+    $this->version = lessonWithContent(['session_id' => $session->id, 'payload' => $this->payload, 'checksum' => CanonicalJson::hash($this->payload), 'status' => 'published']);
 });
 
 function vocabularyInput(array $extra = [], int $revision = 1): array
@@ -58,7 +56,7 @@ function vocabularyWord($test, int $index = 0): PersonalVocabulary
 {
     $snapshot = $test->payload['vocabulary'][$index];
     $word = PersonalVocabulary::factory()->create(['user_id' => $test->learner->id, 'lexeme_key' => $snapshot['lexeme_key'], 'snapshot' => $snapshot, 'needs_review' => true]);
-    PersonalVocabularySource::factory()->create(['user_id' => $test->learner->id, 'personal_word_id' => $word->id, 'session_version_id' => $test->version->id, 'vocabulary_id' => $snapshot['id'], 'snapshot' => $snapshot]);
+    PersonalVocabularySource::factory()->create(['user_id' => $test->learner->id, 'personal_word_id' => $word->id, 'session_id' => $test->version->id, 'vocabulary_id' => $snapshot['id'], 'snapshot' => $snapshot]);
 
     return $word;
 }
@@ -68,6 +66,7 @@ it('keeps personal difficult marks through mastery and trains only the marked se
     $context['id'] = 'context-question';
     $context['prompt'] = ['text' => 'Bonjour, Marie !', 'text_lang' => 'fr'];
     $this->payload['vocabulary'][0]['review_items'][] = $context;
+    $this->version->update(['payload' => $this->payload, 'checksum' => CanonicalJson::hash($this->payload)]);
     $word = vocabularyWord($this);
     vocabularyWord($this, 1);
     $this->patchJson('/daily/api/vocabulary/'.$word->id, ['is_difficult' => true])
@@ -187,39 +186,40 @@ it('marks only wrong assessed pairs and deduplicates an accepted event before ef
     $before = VocabularyEventEffect::count();
     $this->postJson('/daily/api/runs/'.$state['run_id'].'/answers', $input)->assertExactJson($receipt);
     expect(VocabularyEventEffect::count())->toBe($before);
-    expect(PersonalVocabulary::where('needs_review', true)->count())->toBe(2);
+    expect(PersonalVocabulary::where('needs_review', true)->count())->toBe(0);
+    $state = $receipt['state'];
+    while ($state['position'] < $state['total']) {
+        $state = vocabularyCommand($this, $state, 'advance', ['presentation_id' => $state['presentation']['presentation_id']]);
+        $task = $this->payload['tasks'][$state['position'] - 1];
+        $answer = match ($task['type']) {
+            'single_choice' => ['choice_id' => $task['correct_choice_id']],
+            'word_order' => ['token_ids' => $task['accepted_orders'][0]],
+            'fill_blank' => $task['input_mode'] === 'choice' ? ['choice_id' => $task['correct_choice_id']] : ['value' => $task['accepted_answers'][0]],
+            'short_answer' => ['value' => $task['accepted_answers'][0]],
+        };
+        $state = vocabularyCommand($this, $state, 'answers', ['presentation_id' => $state['presentation']['presentation_id'],
+            'event_type' => 'answer', 'answer' => $answer]);
+    }
+    vocabularyCommand($this, $state, 'finish');
     expect(PersonalVocabulary::where('errors', 1)->count())->toBe(2);
 });
 
-it('preserves studied source examples after archive and chooses the latest studied source rather than a new publication', function () {
+it('uses current lesson material with a stable studied vocabulary source', function () {
     $word = vocabularyWord($this);
     $lesson = vocabularyStart($this);
-    $later = $this->payload;
-    $later['version'] = 2;
-    $later['title'] = 'Название второй версии';
-    $later['vocabulary'][0]['fr'] = 'bonjour nouvelle version';
-    $new = LearningSessionVersion::factory()->create(['session_id' => $this->version->session_id, 'version' => 2, 'payload' => $later, 'checksum' => CanonicalJson::hash($later), 'status' => 'published']);
-    $this->version->session->update(['active_version_id' => $new->id, 'archived_at' => now()]);
+    $content = $this->payload;
+    $content['title'] = 'Обновлённое занятие';
+    $content['vocabulary'][0]['fr'] = 'bonjour nouvelle version';
+    $content['vocabulary'][0]['example'] = ['fr' => 'Bonjour Léa !', 'ru' => 'Здравствуйте, Леа!'];
+    $this->version->update(['payload' => $content, 'checksum' => CanonicalJson::hash($content)]);
+
     $this->getJson('/daily/api/vocabulary')->assertOk()
-        ->assertJsonPath('words.0.snapshot.fr', 'bonjour')
-        ->assertJsonPath('source_session_options.0.id', $this->payload['id'])
-        ->assertJsonPath('source_session_options.0.title', $this->payload['title'])
-        ->assertJsonPath('words.0.sources.0.session_title', $this->payload['title']);
-    $state = vocabularyStart($this, ['kind' => 'vocabulary_test', 'session_id' => null, 'word_ids' => [$word->id]]);
-    expect($state['kind'])->toBe('vocabulary_test');
-    expect($this->getJson('/daily/api/runs/'.$lesson['run_id'])->json('status'))->toBe('in_progress');
-    expect($state['vocabulary'][0]['fr'])->toBe('bonjour');
-    $source = $later['vocabulary'][0];
-    $source['example'] = ['fr' => 'Bonjour Léa !', 'ru' => 'Здравствуйте, Леа!', 'transcription_ru' => 'бо(н)жур леа́'];
-    PersonalVocabularySource::factory()->create(['user_id' => $this->learner->id, 'personal_word_id' => $word->id, 'session_version_id' => $new->id, 'snapshot' => $source, 'first_added_at' => now()->addMinute()]);
-    $this->getJson('/daily/api/vocabulary')
         ->assertJsonPath('words.0.snapshot.fr', 'bonjour nouvelle version')
         ->assertJsonPath('words.0.snapshot.example.fr', 'Bonjour Léa !')
-        ->assertJsonPath('source_session_options.0.title', $later['title'])
-        ->assertJsonFragment(['session_version_id' => $new->id, 'session_title' => $later['title']]);
-    $this->getJson('/daily/api/vocabulary?q=nonexistent-expression')->assertOk()
-        ->assertJsonCount(0, 'words')->assertJsonPath('source_session_options.0.title', $later['title']);
-    expect($this->getJson('/daily/api/runs/'.$state['run_id'])->json('vocabulary.0.fr'))->toBe('bonjour');
+        ->assertJsonPath('words.0.sources.0.session_version_id', $this->version->id);
+    $state = vocabularyStart($this, ['kind' => 'vocabulary_test', 'session_id' => null, 'word_ids' => [$word->id]]);
+    expect($state['vocabulary'][0]['fr'])->toBe('bonjour nouvelle version');
+    $this->getJson('/daily/api/runs/'.$lesson['run_id'])->assertConflict();
 });
 
 it('filters owners words offers self check and handles zero one two and multiple blocks without changing pinned selection', function () {
@@ -277,7 +277,7 @@ it('matches the guest parity fixture for every interval and a success followed b
     $presentations = [];
     foreach ($fixture['events'] as $index => $entry) {
         if (! isset($runs[$entry['run']])) {
-            $runs[$entry['run']] = LearningRun::factory()->create(['user_id' => $this->learner->id, 'session_version_id' => $this->version->id]);
+            $runs[$entry['run']] = LearningRun::factory()->create(['user_id' => $this->learner->id, 'session_id' => $this->version->id]);
             $presentations[$entry['run']] = \App\Models\Learning\LearningPresentation::factory()->create(['run_id' => $runs[$entry['run']]->id, 'user_id' => $this->learner->id]);
         }
         $run = $runs[$entry['run']];

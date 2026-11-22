@@ -16,27 +16,21 @@ function card(entry, access, published = true) {
   };
 }
 
-function routeView(outline, access, profileLevel, selection, active, candidate, runs) {
+function routeView(outline, access, profileLevel, selection, candidate) {
   const inferredLevel = selection.unit && outline.find(level => level.units.some(unit => unit.id === selection.unit));
   const levelId = selection.level ?? inferredLevel?.id ?? profileLevel;
   const level = outline.find(entry => entry.id === levelId);
   const units = level?.published ? level.units : [];
   const findUnit = id => id && units.find(unit => unit.sessions.some(session => session.id === id));
-  const unitId = selection.unit ?? (findUnit(active?.session_id) || findUnit(candidate?.id) || units[0])?.id;
+  const unitId = selection.unit ?? (findUnit(candidate?.id) || units[0])?.id;
   const unit = units.find(entry => entry.id === unitId);
   const lessonCard = session => {
     const state = access.sessions[session.id];
-    const current = activeGuestRun(runs, profileLevel, session.id);
-    const lesson = card(session, state);
-    if (current) {
-      lesson.status = 'active';
-      lesson.reason = '';
-    }
     return {
-      ...lesson,
+      ...card(session, state),
       completed: state?.completed ?? false,
       review_only: state?.review_only ?? false,
-      run_id: current?.id ?? null,
+      run_id: null,
     };
   };
   const lessons = (unit?.sessions ?? []).map(lessonCard);
@@ -60,7 +54,7 @@ function routeView(outline, access, profileLevel, selection, active, candidate, 
     unit: unitId == null ? null : card(unit ?? { id: unitId }, access.units[unitId], !!unit?.sessions.length),
     lessons,
     topics,
-    current_lesson_id: active?.session_id ?? candidate?.id ?? null,
+    current_lesson_id: candidate?.id ?? null,
     contents,
   };
 }
@@ -107,7 +101,7 @@ export function guestPracticeHome(local, catalog, selection, now, contentError =
     duration_minutes: next.duration_minutes, goal: next.goal ?? null,
   } : null;
   const runs = Object.values(local.runs);
-  const current = activeGuestRun(local.runs, local.current_level);
+  const current = activeGuestRun(runs.filter(run => !['daily', 'extra'].includes(run.kind)), local.current_level);
   const sessionId = current && ['daily', 'extra'].includes(current.kind) ? current.snapshot.id : null;
   const active = current ? {
     id: current.id,
@@ -128,7 +122,7 @@ export function guestPracticeHome(local, catalog, selection, now, contentError =
     active_run: active,
     run: active,
     candidate,
-    route: routeView(outline, access, local.current_level, selection, active, candidate, local.runs),
+    route: routeView(outline, access, local.current_level, selection, candidate),
     review_suggestion: review.total ? suggestion : null,
     exhausted: !candidate,
     content_error: contentError,

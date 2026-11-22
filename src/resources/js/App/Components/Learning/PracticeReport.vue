@@ -7,7 +7,7 @@ import AfrCheckbox from '@/App/Components/Form/AfrCheckbox.vue';
 import DailyPracticeIcon from './DailyPracticeIcon.vue';
 import { reportPracticeProblem } from '@/App/Services/Api/daily_practice.js';
 import { reportAnswerText } from '@/App/Learning/playerUi.js';
-const props=defineProps({versionId:Number,taskId:String,runId:String,task:Object,answer:Object,compact:Boolean});
+const props=defineProps({lessonId:Number,versionId:Number,taskId:String,runId:String,task:Object,answer:Object,compact:Boolean});
 const inputId='practice-report-'+getCurrentInstance().uid;
 const page=usePage();
 const userId=computed(()=>page.props?.auth?.user?.id ?? null);
@@ -35,7 +35,8 @@ const submit=async()=>{
   const owner=userId.value;
   busy.value=true; message.value='';
   const attachAnswer = includeAnswer.value && canAttach.value;
-  pending.value ??= {client_report_id:crypto.randomUUID(),session_version_id:props.versionId,task_id:props.taskId ?? null,
+  const lesson = props.lessonId ? { lesson_id: props.lessonId } : { session_version_id: props.versionId };
+  pending.value ??= {client_report_id:crypto.randomUUID(),...lesson,task_id:props.taskId ?? null,
     ...(props.runId ? {run_id:props.runId}:{}),text:text.value,include_answer:attachAnswer,
     ...(attachAnswer ? {answer:JSON.parse(JSON.stringify(props.answer))}:{})};
   try {

@@ -3,6 +3,7 @@ import { onMounted, ref, shallowRef } from 'vue';
 import AfrButton from '@/App/Components/Form/AfrButton.vue';
 import AfrCard from '@/App/Components/Card/AfrCard.vue';
 import DailyPracticeIcon from './DailyPracticeIcon.vue';
+import PracticeErrorNotice from './PracticeErrorNotice.vue';
 import SessionPlayer from './SessionPlayer.vue';
 import { trainingSession } from '@/App/Learning/training.js';
 import { completedGuestSessions } from '@/App/Learning/learningAccess.js';
@@ -75,7 +76,7 @@ onMounted(load);
       <small v-else-if="!busy && !error">В этой теме пока нет заданий для этой тренировки.</small>
     </afr-card>
     <p v-if="busy" role="status">Подбираем задания…</p>
-    <div v-if="error" role="alert">{{ error }} <afr-button @click="load">Повторить</afr-button></div>
+    <practice-error-notice v-if="error" :message="error" />
   </template>
 </template>
 <style scoped>

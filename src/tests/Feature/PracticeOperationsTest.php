@@ -4,7 +4,6 @@ use App\Models\Learning\LearningAttempt;
 use App\Models\Learning\LearningLevel;
 use App\Models\Learning\LearningRun;
 use App\Models\Learning\LearningSession;
-use App\Models\Learning\LearningSessionVersion;
 use App\Models\Learning\LearningUnit;
 use App\Models\Learning\PersonalVocabulary;
 use App\Models\User\User;
@@ -25,9 +24,8 @@ beforeEach(function () {
     $this->unit = LearningUnit::factory()->create(['published_at' => now('UTC')]);
     $this->payload = json_decode(file_get_contents(resource_path('practice/templates/pre-a1-u01-examples.json')), true)['sessions'][0];
     $this->session = LearningSession::factory()->create(['unit_id' => $this->unit->id, 'external_id' => $this->payload['id']]);
-    $this->version = LearningSessionVersion::factory()->create(['session_id' => $this->session->id, 'payload' => $this->payload,
+    $this->version = lessonWithContent(['session_id' => $this->session->id, 'payload' => $this->payload,
         'checksum' => CanonicalJson::hash($this->payload), 'status' => 'published', 'published_at' => now('UTC')]);
-    $this->session->update(['active_version_id' => $this->version->id]);
     $this->owner = User::factory()->create();
     $this->stranger = User::factory()->create();
 });
@@ -48,7 +46,7 @@ it('hides foreign run reads commands media and presentations without creating at
             ...$path === 'answers' ? ['event_type' => 'answer', 'answer' => ['choice_id' => 'a']] : [],
             ...$path === 'help' ? ['event_type' => 'unknown'] : []])->assertNotFound();
     }
-    $this->get('/admin/daily-practice/versions/'.$this->version->id.'/export')->assertForbidden();
+    $this->get('/admin/daily-practice/sessions/'.$this->version->id.'/export')->assertForbidden();
     expect(LearningAttempt::count())->toBe(0)->and(LearningRun::count())->toBe(1);
 });
 
@@ -147,8 +145,7 @@ it('paginates only the owners vocabulary and never hydrates full session payload
 it('serves 700 metadata entries without fetching all question snapshots', function () {
     for ($n = 2; $n <= 700; $n++) {
         $session = LearningSession::factory()->create(['unit_id' => $this->unit->id, 'external_id' => 'QA-SESSION-'.$n, 'sort_order' => $n]);
-        $version = LearningSessionVersion::factory()->create(['session_id' => $session->id, 'payload' => $this->payload, 'status' => 'published']);
-        $session->update(['active_version_id' => $version->id]);
+        $version = lessonWithContent(['session_id' => $session->id, 'payload' => $this->payload, 'status' => 'published']);
     }
     $queries = [];
     DB::listen(function ($query) use (&$queries) {
@@ -171,7 +168,7 @@ it('caches immutable content but checks publication again on every request', fun
         $queries[] = $query->sql;
     });
     $this->getJson('/daily/api/content/'.$this->session->external_id)->assertOk()->assertHeader('Cache-Control', 'no-store, private');
-    expect(array_filter($queries, fn ($sql) => str_starts_with($sql, 'select * from "learning_session_versions"')))->toBe([]);
+    expect(array_filter($queries, fn ($sql) => str_starts_with($sql, 'select "payload" from "learning_sessions"')))->toBe([]);
     $this->session->update(['archived_at' => now('UTC')]);
     $this->getJson('/daily/api/content/'.$this->session->external_id)->assertNotFound();
 });
@@ -198,7 +195,7 @@ it('reports aggregate starts finishes returning learners and steps without ident
     $input = ['client_event_id' => (string) Str::uuid(), 'expected_revision' => 1, 'presentation_id' => $run['presentation']['presentation_id'], 'event_type' => 'unknown'];
     app(AccountRunService::class)->event($this->owner, $run['run_id'], 'help', $input);
     app(AccountRunService::class)->event($this->owner, $run['run_id'], 'help', $input);
-    LearningRun::factory()->create(['user_id' => $this->owner->id, 'session_version_id' => $this->version->id, 'snapshot' => $this->payload,
+    LearningRun::factory()->create(['user_id' => $this->owner->id, 'session_id' => $this->version->id, 'snapshot' => $this->payload,
         'status' => 'completed', 'started_at' => now('UTC')->subDays(2), 'local_date' => now('UTC')->subDays(2)->toDateString(), 'finished_at' => now('UTC')->subDay()]);
     $this->withoutMockingConsoleOutput();
     expect(\Illuminate\Support\Facades\Artisan::call('daily-practice:metrics', ['--days' => 7]))->toBe(0);
@@ -213,32 +210,30 @@ it('closes new starts without removing runs snapshots or receipts when disabled'
     $run = operationsStart($this);
     config(['daily_practice.enabled' => false]);
     $this->actingAs($this->owner)->postJson('/daily/api/runs', ['client_event_id' => (string) Str::uuid(), 'expected_revision' => 2, 'kind' => 'daily'])->assertServiceUnavailable();
-    expect(LearningRun::findOrFail($run['run_id'])->snapshot)->toBe($this->payload);
+    expect(LearningRun::findOrFail($run['run_id'])->snapshot)->not->toHaveKey('tasks');
     $this->get('/daily')->assertOk();
 });
 it('isolates source filters and reads only version metadata for paginated word sources', function () {
     $word = PersonalVocabulary::factory()->create(['user_id' => $this->owner->id, 'snapshot' => $this->payload['vocabulary'][0]]);
     \App\Models\Learning\PersonalVocabularySource::factory()->create(['user_id' => $this->owner->id, 'personal_word_id' => $word->id,
-        'session_version_id' => $this->version->id, 'snapshot' => $this->payload['vocabulary'][0]]);
+        'session_id' => $this->version->id, 'snapshot' => $this->payload['vocabulary'][0]]);
     $queries = [];
     DB::listen(function ($query) use (&$queries) {
         $queries[] = $query->sql;
     });
     $this->actingAs($this->owner)->getJson('/daily/api/vocabulary?source_session='.$this->session->external_id)->assertOk()->assertJsonCount(1, 'words')->assertJsonPath('words.0.sources.0.session_id', $this->session->external_id);
-    expect(array_filter($queries, fn ($sql) => str_starts_with($sql, 'select * from "learning_session_versions"')))->toBe([]);
+    expect(array_filter($queries, fn ($sql) => str_starts_with($sql, 'select "payload" from "learning_sessions"')))->toHaveCount(1);
     $this->actingAs($this->stranger)->getJson('/daily/api/vocabulary?q=bonjour')->assertOk()->assertJsonCount(0, 'words')->assertJsonCount(0, 'source_sessions');
 });
 
-it('keeps a cached old version separate from a newly published version and existing run', function () {
+it('refreshes the catalog cache and refuses to grade a stale open lesson', function () {
     $run = operationsStart($this);
     $this->getJson('/daily/api/content/'.$this->session->external_id)->assertOk();
     $next = $this->payload;
     $next['title'] = 'Updated teaching material';
-    $version = LearningSessionVersion::factory()->create(['session_id' => $this->session->id, 'version' => 2, 'payload' => $next,
-        'checksum' => CanonicalJson::hash($next), 'status' => 'published', 'published_at' => now('UTC')]);
-    $this->session->update(['active_version_id' => $version->id]);
+    $this->version->update(['payload' => $next, 'checksum' => CanonicalJson::hash($next)]);
     $this->getJson('/daily/api/content/'.$this->session->external_id)->assertOk()->assertJsonPath('snapshot.title', $next['title']);
-    expect(LearningRun::findOrFail($run['run_id'])->snapshot)->toBe($this->payload);
+    $this->actingAs($this->owner)->getJson('/daily/api/runs/'.$run['run_id'])->assertConflict();
 });
 
 it('does not mark a preview expired when file deletion fails', function () {

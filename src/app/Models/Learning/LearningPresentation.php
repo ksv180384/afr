@@ -77,6 +77,11 @@ class LearningPresentation extends Model
         return $this->belongsTo(LearningRun::class, 'run_id', 'id');
     }
 
+    public function taskSnapshot(array $content): array
+    {
+        return $this->snapshot ?: \App\Services\Learning\PresentationSnapshot::forTask($content, $this->task_id);
+    }
+
     public function attempts(): HasMany
     {
         return $this->hasMany(LearningAttempt::class, 'presentation_id', 'id');

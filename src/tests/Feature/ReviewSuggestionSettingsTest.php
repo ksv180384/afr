@@ -30,14 +30,15 @@ it('reads safe defaults without persisting a new profile and changes only review
     $receipt = $this->patchJson('/daily/api/review-settings', reviewSettingsInput(1, ['action' => 'toggle', 'enabled' => false]))
         ->assertOk()->assertJsonPath('profile.current_level', 'PRE_A1')->assertJsonPath('profile.review_suggestions.enabled', false)->json();
     $this->getJson('/daily/api/profile')->assertJsonPath('revision', 2)->assertJsonPath('review_suggestions.enabled', false);
-    $this->assertDatabaseCount('learning_level_events', 0);
+
     $this->assertDatabaseCount('personal_vocabulary', 0);
     $this->assertDatabaseCount('learning_runs', 0);
 });
 
 it('uses next local midnight across DST instead of an elapsed day', function ($now, $timezone, $until) {
     $this->travelTo(Carbon\Carbon::parse($now));
-    LearningProfile::factory()->create(['user_id' => $this->learner->id, 'current_level' => 'B1', 'timezone' => $timezone]);
+    $this->learner->update(['timezone' => $timezone]);
+    LearningProfile::factory()->create(['user_id' => $this->learner->id, 'current_level' => 'B1']);
     $this->patchJson('/daily/api/review-settings', reviewSettingsInput())->assertOk()
         ->assertJsonPath('profile.review_suggestions.snoozed_until', $until)->assertJsonPath('profile.current_level', 'B1');
     $this->travelTo(Carbon\Carbon::parse($until)->subSecond());
@@ -110,12 +111,13 @@ it('keeps old-schema profile reads and updates usable until the additive migrati
 
 it('merges only an unconflicted guest refusal and never guest enabled preferences', function () {
     $this->travelTo(Carbon\Carbon::parse('2026-11-06T12:00:00Z'));
-    $profile = LearningProfile::factory()->create(['user_id' => $this->learner->id, 'current_level' => 'B1', 'timezone' => 'Europe/Moscow']);
+    $this->learner->update(['timezone' => 'Europe/Moscow']);
+    $profile = LearningProfile::factory()->create(['user_id' => $this->learner->id, 'current_level' => 'B1']);
     $input = reviewGuestBatch(['review_snooze' => ['until' => '2026-11-06T21:00:00+00:00', 'timezone' => 'Europe/Moscow', 'expected_revision' => 1]]);
     $receipt = $this->postJson('/daily/api/guest-sync', $input)->assertOk()->assertJsonPath('review_snooze_applied', true)->assertJsonPath('profile.current_level', 'B1')->json();
     $this->postJson('/daily/api/guest-sync', $input)->assertExactJson($receipt);
     expect($profile->fresh()->revision)->toBe(2);
-    $this->assertDatabaseCount('learning_level_events', 0); $this->assertDatabaseCount('personal_vocabulary', 0);
+     $this->assertDatabaseCount('personal_vocabulary', 0);
     $this->actingAs(User::factory()->create())->postJson('/daily/api/guest-sync', [...$input, 'batch_id' => (string) Str::uuid()])->assertForbidden();
 });
 

@@ -20,7 +20,7 @@ it('imports on a migrated database without a seeder or a local content bank', fu
     $this->postJson('/admin/daily-practice/imports/'.$preview['batch_id'].'/commit', [
         'token' => $preview['token'], 'file_hash' => $preview['file_hash'],
     ])->assertOk();
-    $this->assertDatabaseCount('learning_session_versions', 2);
+    $this->assertDatabaseCount('learning_sessions', 2);
 });
 
 it('initializes missing levels repeatedly without overwriting editorial data', function () {

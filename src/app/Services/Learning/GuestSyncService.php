@@ -6,7 +6,6 @@ use App\Enums\Learning\LearningLevel;
 use App\Enums\Learning\PracticeErrorCode;
 use App\Models\Learning\GuestSyncBatch;
 use App\Models\Learning\GuestSyncEpisode;
-use App\Models\Learning\LearningLevelEvent;
 use App\Models\Learning\LearningProfile;
 use App\Models\Learning\PersonalVocabulary;
 use App\Models\User\User;
@@ -67,14 +66,14 @@ class GuestSyncService
 
                                 return;
                             }
-                            $profile = LearningProfile::firstOrCreate(['user_id' => $actor->id], ['current_level' => $event['current_level'], 'timezone' => $event['timezone'], 'revision' => 1]);
+                            $profile = LearningProfile::firstOrCreate(['user_id' => $actor->id], ['current_level' => $event['current_level'], 'revision' => 1]);
                             $old = LearningLevel::from($profile->getRawOriginal('current_level'));
                             $guest = LearningLevel::from($event['current_level']);
                             $next = $old->rank() >= $guest->rank() ? $old : $guest;
-                            $level = LearningLevelEvent::create(['user_id' => $actor->id, 'old_level' => $old->value, 'new_level' => $next->value, 'source' => 'guest_merge',
-                                'source_event_id' => $event['client_event_id'], 'reason' => ['episode_id' => $episode->id, 'guest_level' => $guest->value], 'occurred_at' => PracticeTime::now()]);
-                            $profile->update(['current_level' => $next->value, 'revision' => $profile->revision + 1]);
-                            $this->ledger->record($episode, $event, ['server_level_event_id' => $level->id]);
+                            $profile->update(['current_level' => $next->value, 'revision' => $profile->revision + 1, 'last_level_change_automatic' => false]);
+                            User::query()->whereKey($actor->id)->whereNull('timezone')->update(['timezone' => $event['timezone']]);
+                            $actor->timezone ??= $event['timezone'];
+                            $this->ledger->record($episode, $event);
                             $episode->update(['accepted_level_event_ids' => array_values(array_unique([...($episode->accepted_level_event_ids ?? []), $event['client_event_id']]))]);
                         });
                         $accepted[] = $event['client_event_id'];

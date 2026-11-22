@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use LogicException;
 
 /**
@@ -105,10 +104,6 @@ class LearningAttempt extends Model
         return $this->hasMany(VocabularyEventEffect::class, 'event_id', 'id');
     }
 
-    public function objectiveEvidence(): HasMany
-    {
-        return $this->hasMany(LearningObjectiveEvidence::class, 'event_id', 'id');
-    }
 
     public function user(): BelongsTo
     {

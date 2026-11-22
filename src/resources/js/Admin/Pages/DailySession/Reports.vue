@@ -30,7 +30,7 @@ const change = (report, field, value) => { drafts.value[report.id] = { ...(draft
           </el-form>
         </div></template></el-table-column>
         <el-table-column prop="id" label="#" width="80" />
-        <el-table-column label="Занятие" min-width="240"><template #default="{ row }"><Link :href="'/admin/daily-practice/versions/' + row.session_version_id" class="el-link el-link--primary">{{ row.session_version?.session?.external_id || 'Версия #' + row.session_version_id }}</Link><div class="muted">{{ row.task_id || 'Всё занятие' }}</div></template></el-table-column>
+        <el-table-column label="Занятие" min-width="240"><template #default="{ row }"><Link :href="'/admin/daily-practice/sessions/' + row.session_id" class="el-link el-link--primary">{{ row.session?.external_id || 'Занятие #' + row.session_id }}</Link><div class="muted">{{ row.task_id || 'Всё занятие' }}</div></template></el-table-column>
         <el-table-column prop="text" label="Сообщение" min-width="300" show-overflow-tooltip />
         <el-table-column label="Статус" width="150"><template #default="{ row }"><el-tag>{{ statuses.find(status => status.value === row.status)?.label || row.status }}</el-tag></template></el-table-column>
         <el-table-column prop="created_at" label="Дата" min-width="200" />

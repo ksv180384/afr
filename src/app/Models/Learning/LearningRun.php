@@ -3,11 +3,16 @@
 namespace App\Models\Learning;
 
 use App\Enums\Learning\RunStatus;
+use App\Enums\Learning\PracticeErrorCode;
 use App\Models\User\User;
+use App\Services\Learning\AnswerCheckingException;
+use App\Services\Learning\SessionContentCache;
 use App\Support\Learning\UsesUtcDates;
 use Database\Factories\Learning\LearningRunFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -20,7 +25,7 @@ use LogicException;
  * @property int $user_id Пользователь, к которому относится запись.
  * @property string $kind Тип прохождения, определяющий его сценарий.
  * @property RunStatus $status Состояние прохождения: в процессе, на паузе или завершено.
- * @property int|null $session_version_id Версия занятия, к которой относится запись.
+ * @property int|null $session_id Занятие, к которому относится запись.
  * @property array $snapshot Снимок содержимого прохождения, закреплённый при запуске.
  * @property int $checking_policy_version Версия правил проверки ответов.
  * @property array $checking_policy_snapshot Зафиксированные для прохождения параметры проверки ответов.
@@ -42,6 +47,7 @@ class LearningRun extends Model
 {
     use HasFactory;
     use HasUuids;
+    use MassPrunable;
     use UsesUtcDates;
 
     protected $table = 'learning_runs';
@@ -51,7 +57,8 @@ class LearningRun extends Model
         'user_id',
         'kind',
         'status',
-        'session_version_id',
+        'session_id',
+        'content_checksum',
         'snapshot',
         'checking_policy_version',
         'checking_policy_snapshot',
@@ -72,7 +79,7 @@ class LearningRun extends Model
         return [
             'import_meta' => 'array',
             'user_id' => 'integer',
-            'session_version_id' => 'integer',
+            'session_id' => 'integer',
             'snapshot' => 'array',
             'checking_policy_version' => 'integer',
             'checking_policy_snapshot' => 'array',
@@ -101,14 +108,14 @@ class LearningRun extends Model
                 'import_meta',
                 'user_id',
                 'kind',
-                'session_version_id',
-                'snapshot',
+                'session_id',
+                'content_checksum',
                 'checking_policy_version',
                 'checking_policy_snapshot',
                 'timezone',
                 'local_date',
                 'started_at',
-            ])) {
+            ]) || ($model->isDirty('snapshot') && $model->status !== RunStatus::Completed)) {
                 throw new LogicException('LearningRun identity and snapshot cannot be changed.');
             }
         });
@@ -119,9 +126,37 @@ class LearningRun extends Model
         return LearningRunFactory::new();
     }
 
-    public function sessionVersion(): BelongsTo
+    public function prunable(): Builder
     {
-        return $this->belongsTo(LearningSessionVersion::class, 'session_version_id', 'id');
+        return static::query()->whereIn('kind', ['daily', 'extra'])
+            ->whereIn('status', [RunStatus::InProgress->value, RunStatus::Paused->value])
+            ->where('updated_at', '<=', \App\Support\Learning\PracticeTime::now()->subDay());
+    }
+
+    public function session(): BelongsTo
+    {
+        return $this->belongsTo(LearningSession::class, 'session_id', 'id');
+    }
+
+    public function content(): array
+    {
+        if ($this->content_checksum === null || $this->status === RunStatus::Completed) {
+            return $this->snapshot;
+        }
+
+        $this->loadMissing('session:id,checksum');
+        $session = $this->session;
+        if ($session?->checksum === null || ! hash_equals($this->content_checksum, $session->checksum)) {
+            throw new AnswerCheckingException(PracticeErrorCode::VersionConflict, 'Занятие обновилось. Начните его заново.');
+        }
+
+        return app(SessionContentCache::class)->payload($session);
+    }
+
+    public static function contentSummary(array $content): array
+    {
+        return array_intersect_key($content, array_flip(['id', 'title', 'level', 'duration_minutes']))
+            + ['goal' => $content['objectives'][0]['title'] ?? null];
     }
 
     public function presentations(): HasMany

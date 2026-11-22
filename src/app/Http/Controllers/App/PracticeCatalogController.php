@@ -32,7 +32,7 @@ class PracticeCatalogController extends Controller
         $alias = LearningUrlAlias::where('old_path', '/'.$request->path())->first();
         if ($alias) {
             if ($alias->session_id) {
-                $target = LearningSession::with('unit.levelDefinition', 'activeVersion')->findOrFail($alias->session_id);
+                $target = LearningSession::with('unit.levelDefinition')->findOrFail($alias->session_id);
                 $catalog->assertSession($target);
                 $path = PracticeUrls::session($target);
             } else {

@@ -2,7 +2,7 @@
 
 namespace Database\Factories\Learning;
 
-use App\Models\Learning\LearningSessionVersion;
+use App\Models\Learning\LearningSession;
 use App\Models\Learning\PersonalVocabulary;
 use App\Models\Learning\PersonalVocabularySource;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -19,7 +19,7 @@ class PersonalVocabularySourceFactory extends Factory
         return [
             'personal_word_id' => PersonalVocabulary::factory(),
             'user_id' => fn (array $attributes): int => PersonalVocabulary::query()->findOrFail($attributes['personal_word_id'])->user_id,
-            'session_version_id' => LearningSessionVersion::factory(),
+            'session_id' => LearningSession::factory()->withContent(),
             'vocabulary_id' => 'bonjour',
             'snapshot' => ['fixture' => true],
             'first_added_at' => now('UTC'),

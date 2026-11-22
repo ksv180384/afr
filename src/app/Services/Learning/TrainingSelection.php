@@ -18,11 +18,13 @@ final class TrainingSelection
             ->where('snapshot->level', $access->profileLevel($actor))->latest('started_at')->first();
         $current = $recent?->snapshot['id'] ?? null;
         $seen = [];
-        if ($recent && ! in_array($current, $completed, true)) {
-            $introductions = collect($recent->snapshot['introductions'] ?? [])->groupBy('before_task_id');
+        if ($recent && ! in_array($current, $completed, true)
+            && ($recent->content_checksum === null || $recent->session?->checksum === $recent->content_checksum)) {
+            $content = $recent->content();
+            $introductions = collect($content['introductions'] ?? [])->groupBy('before_task_id');
             foreach ($recent->presentations()->select('id', 'task_id', 'snapshot')->withExists('firstAttempt')->get() as $step) {
                 if ($step->first_attempt_exists) {
-                    array_push($seen, ...($step->snapshot['task']['vocabulary_ids'] ?? []));
+                    array_push($seen, ...($step->taskSnapshot($content)['task']['vocabulary_ids'] ?? []));
                 }
                 if (in_array($step->id, $recent->introductions_seen ?? [], true)) {
                     foreach ($introductions->get($step->task_id, []) as $intro) {
@@ -44,7 +46,7 @@ final class TrainingSelection
         $lessons = $pool->reorder()->orderByRaw('CASE WHEN learning_sessions.external_id = ? THEN 0 ELSE 1 END', [$current ?? ''])
             ->inRandomOrder()->limit(7)->get();
         foreach ($lessons as $lesson) {
-            $source = $lesson->activeVersion->payload;
+            $source = $lesson->payload;
             $complete = in_array($source['id'], $completed, true);
             $items = $this->sourceItems($source, $mode, $complete ? null : $seen);
             if ($source['id'] === $current) {
@@ -66,7 +68,7 @@ final class TrainingSelection
         $perLesson = [];
         $extra = [];
         foreach ($lessons as $lesson) {
-            $items = $this->order($this->sourceItems($lesson->activeVersion->payload, $mode), $previous);
+            $items = $this->order($this->sourceItems($lesson->payload, $mode), $previous);
             if ($items->isNotEmpty()) {
                 $perLesson[] = $items->shift();
                 array_push($extra, ...$items);
@@ -80,8 +82,7 @@ final class TrainingSelection
 
     private function withTraining(Builder $published, string $mode): Builder
     {
-        return $published->whereHas('activeVersion', fn ($version) => $version->whereJsonLength('payload->training_tasks->'.$mode, '>', 0))
-            ->with(['activeVersion' => fn ($version) => $version->select('id', 'session_id', 'payload')]);
+        return $published->whereJsonLength('payload->training_tasks->'.$mode, '>', 0);
     }
 
     private function sourceItems(array $source, string $mode, ?array $seen = null): array

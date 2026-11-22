@@ -5,9 +5,11 @@ import AfrCard from '@/App/Components/Card/AfrCard.vue';
 import { assertPlayerAdapter } from '@/App/Learning/playerAdapter.js';
 import { answerComplete, emptyAnswer, questionSupport } from '@/App/Learning/playerUi.js';
 import { createAudioPlayer } from '@/App/Learning/audioPlayer.js';
+import { practiceErrorMessage } from '@/App/Learning/practiceNotifications.js';
 import { usePracticeFeedback } from '@/App/Learning/usePracticeFeedback.js';
 import { practiceReturnDestination } from '@/App/Learning/practiceRunNavigation.js';
 import PracticeReport from './PracticeReport.vue';
+import PracticeErrorNotice from './PracticeErrorNotice.vue';
 import ReviewSuggestionCard from './ReviewSuggestionCard.vue';
 import { reviewWordCount } from '@/App/Learning/shortReview.js';
 import FrenchText from './FrenchText.vue';
@@ -34,9 +36,6 @@ const view = ref(null);
 const draft = ref(null);
 const busy = ref(false);
 const error = ref('');
-const feedback = usePracticeFeedback({ error, source: 'practice-session' });
-const retry = ref(null);
-const retrying = ref(false);
 let disposed = false;
 const transcriptVisible = ref(false);
 const languageSupportVisible = ref(false);
@@ -53,6 +52,7 @@ const questionPane = ref(null);
 const activeLesson = computed(() => view.value?.started && !view.value.finished && view.value.total > 0 && !view.value.exhausted);
 const isPreview = computed(() => adapter.mode === 'preview');
 const isTraining = adapter.mode === 'training';
+const feedback = isTraining ? null : usePracticeFeedback({ error, source: 'practice-session' });
 const routeResult = ref(null);
 const nextLesson = computed(() => routeResult.value?.active_run ?? routeResult.value?.candidate);
 const routeError = ref('');
@@ -171,20 +171,15 @@ const perform = async (operation, after) => {
   if (busy.value || disposed) return;
   busy.value = true;
   error.value = '';
-  retry.value = () => perform(operation, after);
   try {
     const next = await operation();
     if (disposed) return;
     if (next) view.value = next;
     if (after) await after();
-    retry.value = null;
-    retrying.value = false;
   } catch (failure) {
-    const status=failure.response?.status;
-    retrying.value = (!status && !failure.code) || failure.code === 'revision_conflict' || status === 409 || status === 429 || status >= 500;
-    if (failure.code === 'revision_conflict') retry.value = () => perform(() => adapter.load(),focusQuestion);
-    if (!retrying.value) retry.value = null;
-    error.value = [401,419].includes(status) ? 'Войдите в свой аккаунт, чтобы продолжить занятие.' : (failure.response?.data?.message || failure.message || 'Не удалось открыть занятие.');
+    error.value = [401, 419].includes(failure.response?.status)
+      ? 'Войдите в свой аккаунт, чтобы продолжить занятие.'
+      : practiceErrorMessage(failure, 'Не удалось выполнить действие.');
   } finally { busy.value = false; }
 };
 const focusQuestion = async () => { await nextTick(); heading.value?.focus({ preventScroll: true }); };
@@ -310,6 +305,10 @@ const next = () => {
 const exit = async () => {
   if (busy.value || props.navigationBusy) return;
   audio.stop();
+  if (['account','guest'].includes(adapter.mode) && ['daily','extra'].includes(view.value?.kind) && !view.value.finished) {
+    emit('exit', view.value.run_id);
+    return;
+  }
   if (typeof adapter.saveDraft === 'function' && view.value?.presentation && !view.value.finished && (['account','guest'].includes(adapter.mode) || !graded.value)) {
     await perform(async () => { await adapter.saveDraft({ presentation_id: view.value.presentation.presentation_id, answer: JSON.parse(JSON.stringify(draft.value)) }); return null; },
       () => emit('exit'));
@@ -335,10 +334,7 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
 <template>
   <section class="session-player" :class="{ 'lesson-active': activeLesson, 'training-player': isTraining }" :aria-busy="busy">
     <p v-if="isPreview" class="preview-notice">Предпросмотр · Учебный прогресс и словарь не записываются. После обновления страницы просмотр начнётся заново.</p>
-    <div v-if="error" :class="feedback.enabled ? 'player-retry' : 'player-error'">
-      <p role="alert">{{ error }}</p>
-    </div>
-    <afr-button v-if="retrying && retry" :disabled="busy" @click="retry()">Повторить отправку</afr-button>
+    <practice-error-notice v-if="error && !feedback?.enabled" :message="error" />
     <template v-if="!view && error">
       <afr-button :disabled="busy" @click="exit">К моему пути</afr-button>
       <slot name="guest-login" />
@@ -353,7 +349,7 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
       <div class="header-tools">
         <slot name="guest-login" />
         <audio-preferences v-if="activeLesson" class="player-audio-settings" popover :compact="!!$slots['guest-login']" />
-        <afr-button v-if="!view.finished || isPreview" class="exit-lesson" :disabled="busy || navigationBusy" :aria-label="isPreview ? 'Выйти из предпросмотра' : 'Выйти с сохранением'" :title="isPreview ? 'Выйти из предпросмотра' : 'Выйти с сохранением'" @click="exit"><daily-practice-icon name="close" /></afr-button>
+        <afr-button v-if="!view.finished || isPreview" class="exit-lesson" :disabled="busy || navigationBusy" :aria-label="isPreview ? 'Выйти из предпросмотра' : 'Выйти из занятия'" :title="isPreview ? 'Выйти из предпросмотра' : 'Выйти из занятия'" @click="exit"><daily-practice-icon name="close" /></afr-button>
       </div>
     </header>
     <template v-if="view">
@@ -378,10 +374,7 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
         <p v-if="view.summary.words_added !== undefined">Добавлено выражений: {{ view.summary.words_added }}. Уже были в словаре: {{ view.summary.words_existing }}.</p>
         <div v-if="lessonFinished && routeStore" class="result-next">
           <p v-if="routeLoading" role="status">Проверяем следующий урок…</p>
-          <template v-else-if="routeError">
-            <p role="status">{{ routeError }}</p>
-            <afr-button :disabled="navigationBusy" @click="loadResultRoute">Проверить снова</afr-button>
-          </template>
+          <practice-error-notice v-else-if="routeError" :message="routeError" />
           <button v-else-if="nextLesson" type="button" class="result-next-action"
             :disabled="locked || busy || navigationBusy" @click="emit('next-lesson')">
             <span class="result-next-copy">
@@ -396,13 +389,12 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
           :owner="routeOwner" :store="routeStore" :busy="locked || busy || navigationBusy"
           @start="emit('review', 'suggested')" @dismissed="loadResultRoute" />
         <p v-if="view.self_check_words?.length">Для {{ view.self_check_words.length }} выражений доступна самопроверка в словаре без зачёта.</p>
-        <div v-if="view.has_next_test_block || (reviewFinished && (anotherReview?.total || anotherReviewError))" class="result-extra">
+        <practice-error-notice v-if="reviewFinished && anotherReviewError" message="Не удалось проверить, какие слова доступны для повторения." />
+        <div v-if="view.has_next_test_block || (reviewFinished && anotherReview?.total)" class="result-extra">
           <afr-button v-if="view.has_next_test_block" type="primary" :disabled="busy || locked || navigationBusy"
             @click="emit('test-next', {continue_run_id:view.run_id})">Следующий блок слов</afr-button>
           <afr-button v-if="reviewFinished && anotherReview?.total" :disabled="locked || busy || navigationBusy || anotherReviewLoading"
             @click="emit('review', 'manual')">Ещё {{ reviewWordCount(anotherReview.total) }}</afr-button>
-          <afr-button v-if="reviewFinished && anotherReviewError" :disabled="navigationBusy"
-            @click="loadAnotherReview">Проверить, что ещё можно повторить</afr-button>
         </div>
         <div class="result-actions" :class="{ 'result-lesson-actions': lessonFinished }" role="group" aria-label="Действия после занятия">
           <afr-button :text="!isPreview && !reviewFinished" :type="isPreview || reviewFinished ? 'primary' : 'default'" :disabled="busy || navigationBusy" @click="exit">
@@ -516,8 +508,8 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
         </form>
       </template>
     </template>
-    <practice-report v-if="adapter.mode==='account' && view?.session_version_id" :key="view.session_version_id+':'+task?.id"
-      :version-id="view.session_version_id" :task-id="task?.id" :run-id="view.run_id" :task="task" :answer="draft" />
+    <practice-report v-if="adapter.mode==='account' && (view?.lesson_id || view?.session_version_id)" :key="(view.lesson_id || view.session_version_id)+':'+task?.id"
+      :lesson-id="view.lesson_id" :version-id="view.session_version_id" :task-id="task?.id" :run-id="view.run_id" :task="task" :answer="draft" />
   </section>
 </template>
 <style scoped>
@@ -611,7 +603,6 @@ h2 { font-size: 1.25rem; font-weight: bold; line-height: 1.5; }
 .pronunciation-toggle[aria-checked="true"] .switch-track span { margin-left: auto; }
 .session-player :deep(button) { max-width: 100%; white-space: normal; }
 .session-player :deep(:focus-visible) { outline: 3px solid #1d4ed8; outline-offset: 3px; }
-.player-error { background: #fef2f2; border: 1px solid #b91c1c; padding: 1rem; margin-bottom: 1rem; border-radius: .25rem; }
 .loading-message { padding: 2rem; }
 .overview-card p, .result-card p { margin: .75rem 0; line-height: 1.6; }
 .overview-card :deep(button) { margin-top: 1rem; }

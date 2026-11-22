@@ -86,9 +86,9 @@ final class RunAnswerService
                 if (! $presentation) {
                     throw new AnswerCheckingException(PracticeErrorCode::NotFound, 'Предъявление не найдено в этом прохождении.');
                 }
-                $this->bound($run, $presentation);
+                $snapshot = $this->bound($run->content(), $presentation);
                 $state = $this->state($presentation);
-                $state = $this->evaluator->apply($presentation->snapshot, $state, $event, $run->checking_policy_version);
+                $state = $this->evaluator->apply($snapshot, $state, $event, $run->checking_policy_version);
                 $result = $state['last_result'];
                 $revision = $run->revision + 1;
                 $attempt = LearningAttempt::create([
@@ -131,12 +131,15 @@ final class RunAnswerService
             'result' => array_diff_key($attempt->result, ['run_revision' => true])];
     }
 
-    private function bound(LearningRun $run, LearningPresentation $presentation): void
+    private function bound(array $content, LearningPresentation $presentation): array
     {
-        if (($presentation->snapshot['task']['id'] ?? null) !== $presentation->task_id) {
+        $snapshot = $presentation->taskSnapshot($content);
+        if (($snapshot['task']['id'] ?? null) !== $presentation->task_id) {
             throw new AnswerCheckingException(PracticeErrorCode::Unavailable, 'Идентификатор задания не совпадает со снимком предъявления.');
         }
-        PresentationSnapshot::bound($run->snapshot, $presentation->position, $presentation->snapshot);
+        PresentationSnapshot::bound($content, $presentation->position, $snapshot);
+
+        return $snapshot;
     }
 
     private function state(LearningPresentation $presentation): array
@@ -159,14 +162,18 @@ final class RunAnswerService
             if (! $run) {
                 throw new AnswerCheckingException(PracticeErrorCode::NotFound, 'Прохождение не найдено.');
             }
+            if ($run->status === RunStatus::Completed && $run->result !== null) {
+                return $run->result;
+            }
             $this->pinned($run);
-            $items = $run->snapshot['tasks'] ?? $run->snapshot['items'] ?? null;
+            $content = $run->content();
+            $items = $content['tasks'] ?? $content['items'] ?? null;
             if (! is_array($items) || ! array_is_list($items)) {
                 throw new AnswerCheckingException(PracticeErrorCode::Unavailable, 'Снимок оцениваемых шагов недоступен.');
             }
             $states = [];
             foreach ($run->presentations()->with('firstAttempt')->get() as $presentation) {
-                $this->bound($run, $presentation);
+                $this->bound($content, $presentation);
                 $states[] = $this->state($presentation);
             }
 

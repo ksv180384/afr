@@ -6,7 +6,6 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\ProfileUpdateRequest;
 use App\Http\Requests\User\UploadAvatar;
-use App\Models\Learning\LearningProfile;
 use App\Models\User\Gender;
 use App\Models\User\UserConfigsView;
 use App\Rules\CustomCurrentPassword;
@@ -64,7 +63,7 @@ class ProfileController extends Controller
             'userConfigsView' => $userConfigsView,
             'status' => session('status'),
             'practiceLevels' => fn () => AvailableLevels::choices(),
-            'practiceTimezone' => LearningProfile::query()->where('user_id', $request->user()->id)->value('timezone'),
+            'practiceTimezone' => $request->user()->timezone,
             'timezones' => array_values(array_filter(\DateTimeZone::listIdentifiers(\DateTimeZone::ALL_WITH_BC), fn (string $zone) => str_contains($zone, '/') || $zone === 'UTC')),
         ]);
     }

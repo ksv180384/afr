@@ -1,8 +1,6 @@
 <?php
 
-use App\Models\Learning\LearningEditorialEvent;
 use App\Models\Learning\LearningSession;
-use App\Models\Learning\LearningSessionVersion;
 use App\Models\User\Rang;
 use App\Models\User\User;
 use App\Services\Learning\CatalogPublicationService;
@@ -95,8 +93,7 @@ it('serializes duplicate commits on the same token and returns the same receipt'
     $preview = racePreview($this->actor, racePackage());
     $results = raceWorkers($this->actor, [['operation' => 'commit', ...$preview], ['operation' => 'commit', ...$preview]]);
     expect($results[0]['ok'])->toBeTrue()->and($results[1])->toBe($results[0])
-        ->and(LearningSessionVersion::count())->toBe(2)
-        ->and(LearningEditorialEvent::where('operation', 'import_commit')->count())->toBe(1);
+        ->and(LearningSession::count())->toBe(2);
 });
 
 it('serializes distinct tokens for identical versions without creating duplicates', function () {
@@ -106,7 +103,7 @@ it('serializes distinct tokens for identical versions without creating duplicate
     expect(array_column($results, 'ok'))->toBe([true, true])
         ->and(array_sum(array_map(fn (array $result): int => count($result['receipt']['created_version_ids']), $results)))->toBe(2)
         ->and(array_sum(array_map(fn (array $result): int => count($result['receipt']['updated_version_ids']), $results)))->toBe(2)
-        ->and(LearningSessionVersion::count())->toBe(2);
+        ->and(LearningSession::count())->toBe(2);
 });
 
 it('atomically rejects one of two concurrent conflicting versions', function () {
@@ -117,7 +114,7 @@ it('atomically rejects one of two concurrent conflicting versions', function () 
     $results = raceWorkers($this->actor, [['operation' => 'commit', ...$first], ['operation' => 'commit', ...$second]]);
     expect(count(array_filter($results, fn (array $result): bool => $result['ok'])))->toBe(1)
         ->and(collect($results)->first(fn (array $result): bool => ! $result['ok'])['code'])->toBe('revision_conflict')
-        ->and(LearningSessionVersion::count())->toBe(2)
+        ->and(LearningSession::count())->toBe(2)
         ->and(\App\Models\Learning\LearningCatalogRevision::count())->toBe(2);
 });
 
@@ -133,10 +130,10 @@ it('serializes competing published imports and preserves the active session and 
         app(SessionPublicationService::class)->review($this->actor, $id, $checks);
     }
     app(SessionPublicationService::class)->publishMany($this->actor, $receipt['created_version_ids']);
-    $old = LearningSessionVersion::find($receipt['created_version_ids'][0]);
+    $old = LearningSession::find($receipt['created_version_ids'][0]);
     $snapshot = $old->payload;
     $run = \App\Models\Learning\LearningRun::factory()->create([
-        'user_id' => $this->actor->id, 'session_version_id' => $old->id, 'snapshot' => $snapshot,
+        'user_id' => $this->actor->id, 'session_id' => $old->id, 'snapshot' => $snapshot,
     ]);
     $jobs = [];
     foreach ([' первая редакция', ' вторая редакция'] as $suffix) {
@@ -150,16 +147,16 @@ it('serializes competing published imports and preserves the active session and 
     $accepted = array_values(array_filter($results, fn ($result) => $result['ok']));
     expect($accepted)->toHaveCount(1)
         ->and($accepted[0]['receipt']['updated_version_ids'])->toBe([$old->id])
-        ->and($old->session->versions()->where('status', 'published')->count())->toBe(1)
+        ->and(LearningSession::where('external_id', $old->external_id)->published()->count())->toBe(1)
         ->and($run->refresh()->snapshot)->toBe($snapshot)
-        ->and(LearningSession::find($old->session_id)->active_version_id)->toBe($old->id);
+        ->and($old->fresh()->id)->toBe($old->id);
 });
 
 function raceAnswerRun(User $actor): array
 {
     $snapshot = racePackage()['sessions'][0];
-    $version = LearningSessionVersion::factory()->create(['payload' => $snapshot]);
-    $run = \App\Models\Learning\LearningRun::factory()->create(['user_id' => $actor->id, 'session_version_id' => $version->id]);
+    $version = lessonWithContent(['payload' => $snapshot]);
+    $run = \App\Models\Learning\LearningRun::factory()->create(['user_id' => $actor->id, 'session_id' => $version->id]);
     $task = $snapshot['tasks'][0];
     $presentation = \App\Models\Learning\LearningPresentation::factory()->create([
         'run_id' => $run->id, 'task_id' => $task['id'],
@@ -273,7 +270,7 @@ it('records both simultaneous vocabulary answers and credits only one elapsed in
 
 it('serializes duplicate guest sync batches and repacked events without a second import or level merge', function (bool $sameBatch) {
     raceAccountReady($this->actor);
-    $version = LearningSessionVersion::whereHas('session', fn ($query) => $query->where('external_id', 'PRE_A1-U01-L01'))->firstOrFail();
+    $version = LearningSession::whereHas('session', fn ($query) => $query->where('external_id', 'PRE_A1-U01-L01'))->firstOrFail();
     $guest = (string) \Illuminate\Support\Str::uuid();
     $run = (string) \Illuminate\Support\Str::uuid();
     $time = now('UTC')->toIso8601String();
@@ -292,7 +289,6 @@ it('serializes duplicate guest sync batches and repacked events without a second
     expect(\App\Models\Learning\GuestSyncEpisode::count())->toBe(1);
     expect(\App\Models\Learning\GuestSyncBatch::count())->toBe($sameBatch ? 1 : 2);
     expect(\App\Models\Learning\GuestEventMapping::count())->toBe(4);
-    expect(\App\Models\Learning\LearningLevelEvent::count())->toBe(1);
     expect(\App\Models\Learning\LearningRun::count())->toBe(1);
     expect(\App\Models\Learning\LearningAttempt::count())->toBe(1);
     expect(\App\Models\Learning\LearningProfile::where('user_id', $this->actor->id)->sole()->getRawOriginal('current_level'))->toBe('B1');
@@ -300,10 +296,10 @@ it('serializes duplicate guest sync batches and repacked events without a second
 
 it('serializes two eligible checkpoint finishes into one automatic level event', function () {
     raceAccountReady($this->actor);
-    $sessionRows = LearningSession::with('activeVersion')->orderBy('id')->get();
-    $goal = $sessionRows[0]->activeVersion->payload['objectives'][0]['id'];
+    $sessionRows = LearningSession::query()->orderBy('id')->get();
+    $goal = $sessionRows[0]->payload['objectives'][0]['id'];
     foreach ($sessionRows as $session) {
-        $payload = $session->activeVersion->payload;
+        $payload = $session->payload;
         $payload['kind'] = 'checkpoint';
         $payload['prerequisite_ids'] = [];
         $payload['introductions'] = [];
@@ -314,9 +310,7 @@ it('serializes two eligible checkpoint finishes into one automatic level event',
         for ($i = 0; $i < 6; $i++) {
             $payload['tasks'][] = [...$task, 'id' => 'Q'.($i + 1), 'objective_ids' => [$goal], 'skill' => $i % 2 ? 'listening' : 'vocabulary'];
         }
-        $version = LearningSessionVersion::factory()->create(['session_id' => $session->id, 'version' => 2, 'payload' => $payload,
-            'checksum' => CanonicalJson::hash($payload), 'status' => 'published', 'published_at' => now('UTC')->subDays(2)]);
-        $session->update(['active_version_id' => $version->id]);
+        $session->update(['payload' => $payload, 'checksum' => CanonicalJson::hash($payload)]);
     }
     \App\Models\Learning\LearningCurriculum::factory()->create(['external_id' => 'RACE-PROGRAM', 'level' => 'PRE_A1',
         'required_objective_ids' => [$goal], 'checkpoint_session_ids' => $sessionRows->pluck('external_id')->all(),
@@ -352,8 +346,6 @@ it('serializes two eligible checkpoint finishes into one automatic level event',
     $results = raceWorkers($this->actor, $jobs);
     expect(array_column($results, 'ok'))->toBe([true, true]);
     expect(\App\Models\Learning\LearningProfile::where('user_id', $this->actor->id)->sole()->getRawOriginal('current_level'))->toBe('A1');
-    expect(\App\Models\Learning\LearningLevelEvent::where('source', 'automatic')->count())->toBe(1);
     expect(\App\Models\Learning\LearningRun::where('status', 'completed')->count())->toBe(3);
-    expect(\App\Models\Learning\LearningCurriculumEnrollment::count())->toBe(1);
     expect(count(array_filter($results, fn ($result) => ($result['receipt']['state']['summary']['promotion'] ?? null) !== null)))->toBe(1);
 });

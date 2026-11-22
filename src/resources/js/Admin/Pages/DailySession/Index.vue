@@ -28,7 +28,7 @@ const dateFormat = new Intl.DateTimeFormat('ru-RU', {
 });
 const formatCreated = (_row, _column, value) => value ? dateFormat.format(new Date(value)) : '—';
 const remove = row => run(() => deleteContent('sessions', row.session_id, row.title), true);
-const changeStatus = (ids, status) => run(() => api.dailyPractice.action('versions/status', { version_ids: ids, status }), true);
+const changeStatus = (ids, status) => run(() => api.dailyPractice.action('sessions/status', { version_ids: ids, status }), true);
 </script>
 <template>
   <shell :auth-user="authUser" fixed-height>
@@ -49,7 +49,7 @@ const changeStatus = (ids, status) => run(() => api.dailyPractice.action('versio
           <el-table-column prop="external_id" label="ID" width="145" />
           <el-table-column label="Занятие" min-width="220">
             <template #default="{ row }">
-              <Link :href="'/admin/daily-practice/versions/' + row.id" class="el-link el-link--primary">{{ row.title }}</Link>
+              <Link :href="'/admin/daily-practice/sessions/' + row.id" class="el-link el-link--primary">{{ row.title }}</Link>
             </template>
           </el-table-column>
           <el-table-column prop="level" label="Уровень" width="100" />
@@ -60,7 +60,7 @@ const changeStatus = (ids, status) => run(() => api.dailyPractice.action('versio
           <el-table-column fixed="right" width="58" align="center">
             <template #default="{ row }">
               <row-actions :label="'Действия для ' + row.external_id" :disabled="busy">
-                <el-dropdown-item :icon="VideoPlay" @click="router.visit('/admin/daily-practice/versions/' + row.id + '/preview')">
+                <el-dropdown-item :icon="VideoPlay" @click="router.visit('/admin/daily-practice/sessions/' + row.id + '/preview')">
                   Пройти тестовое занятие
                 </el-dropdown-item>
                 <el-dropdown-item :icon="Delete" class="delete-action" divided @click="remove(row)">Удалить</el-dropdown-item>

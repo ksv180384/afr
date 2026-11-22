@@ -19,7 +19,7 @@ class DailyPracticeController extends Controller
     {
         $selectedCompleted = false;
         $selected = config('daily_practice.enabled') && is_string($request->query('session'))
-            ? app(\App\Services\Learning\PublicPracticeCatalog::class)->sessions()->where('external_id', $request->query('session'))->with('activeVersion')->first() : null;
+            ? app(\App\Services\Learning\PublicPracticeCatalog::class)->sessions()->where('external_id', $request->query('session'))->first() : null;
 
         if ($selected && $request->user()) {
             $access = app(\App\Services\Learning\LearningAccessService::class)->forUser($request->user())['sessions'][$selected->external_id] ?? null;
@@ -34,7 +34,7 @@ class DailyPracticeController extends Controller
             $routeSelection = ['level' => $selected->getRawOriginal('level'), 'unit' => $selected->unit->external_id];
         }
 
-        return Inertia::render('Daily/Index', ['selectedSession' => $selected ? ['id' => $selected->external_id, 'title' => $selected->activeVersion->payload['title'], 'completed' => $selectedCompleted] : null, 'authUser' => Helper::getUserData(), 'runId' => $request->routeIs('daily.guest') ? null : $run, 'guestRunId' => $request->routeIs('daily.guest') ? $run : null,
+        return Inertia::render('Daily/Index', ['selectedSession' => $selected ? ['id' => $selected->external_id, 'title' => $selected->payload['title'], 'completed' => $selectedCompleted] : null, 'authUser' => Helper::getUserData(), 'runId' => $request->routeIs('daily.guest') ? null : $run, 'guestRunId' => $request->routeIs('daily.guest') ? $run : null,
             'routeSelection' => (object) $routeSelection, 'screen' => $request->routeIs('daily.progress') ? 'progress' : 'today', 'enabled' => (bool) config('daily_practice.enabled'), 'levels' => \App\Services\Learning\AvailableLevels::choices()])
             ->toResponse($request)->withHeaders(['Cache-Control' => 'private, no-store', 'X-Robots-Tag' => 'noindex, nofollow']);
     }
@@ -59,6 +59,13 @@ class DailyPracticeController extends Controller
         return response()->json($service->load($request->user(), $run, $request->boolean('playback')));
     }
 
+    public function discard(AccountRunRequest $request, string $run, AccountRunService $service)
+    {
+        $service->discard($request->user(), $run);
+
+        return response()->noContent();
+    }
+
     private function mutate(AccountRunRequest $request, AccountRunService $service, \Closure $action, ?string $run = null)
     {
         try {
@@ -67,7 +74,7 @@ class DailyPracticeController extends Controller
             if ($error->errorCode->httpStatus() === 422) {
                 return response()->json(['code' => $error->errorCode->value, 'message' => $error->getMessage(), 'errors' => ['request' => [$error->getMessage()]]], 422);
             }
-            if ($error->errorCode->httpStatus() !== 409) {
+            if ($error->errorCode->httpStatus() !== 409 || $error->errorCode === \App\Enums\Learning\PracticeErrorCode::VersionConflict) {
                 throw $error;
             }
             $state = $run ? $service->load($request->user(), $run) : $service->today($request->user());
@@ -139,7 +146,7 @@ class DailyPracticeController extends Controller
 
     public function media(AccountRunRequest $request, string $run, string $media, AccountRunService $service, AccountRunView $view, MediaLibraryService $library)
     {
-        $snapshot = $service->owned($request->user(), $run)->snapshot;
+        $snapshot = $service->owned($request->user(), $run)->content();
         abort_unless(in_array($media, $view->assets($snapshot), true), 404);
         $asset = LearningMedia::query()->findOrFail($media);
 

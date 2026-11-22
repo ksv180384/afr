@@ -11,14 +11,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Учебные настройки пользователя: уровень, часовой пояс и предложения повторения.
+ * Учебные настройки пользователя: уровень и предложения повторения.
  *
  * @property int $id Первичный ключ записи.
  * @property int $user_id Пользователь, к которому относится запись.
  * @property LevelCode $current_level Текущий уровень, по которому подбираются занятия.
- * @property string $timezone Часовой пояс IANA для расчёта локальных дат.
  * @property int $revision Номер ревизии записи, изменяемый при обновлении её состояния.
- * @property string|null $last_manual_level_event_id Последнее ручное изменение уровня.
+ * @property \Carbon\CarbonImmutable|null $last_manual_level_changed_at Последнее ручное изменение уровня.
+ * @property bool $last_level_change_automatic Последнее изменение уровня было автоматическим.
  * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
  * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
  * @property bool $review_suggestions_enabled Разрешено ли предлагать пользователю повторения.
@@ -34,11 +34,11 @@ class LearningProfile extends Model
     protected $fillable = [
         'user_id',
         'current_level',
-        'timezone',
         'revision',
         'review_suggestions_enabled',
         'review_suggestions_snoozed_until',
-        'last_manual_level_event_id',
+        'last_manual_level_changed_at',
+        'last_level_change_automatic',
     ];
 
     protected function casts(): array
@@ -47,10 +47,14 @@ class LearningProfile extends Model
             'user_id' => 'integer',
             'current_level' => LevelCode::class,
             'revision' => 'integer',
+            'last_manual_level_changed_at' => 'immutable_datetime',
+            'last_level_change_automatic' => 'boolean',
             'review_suggestions_enabled' => 'boolean',
             'review_suggestions_snoozed_until' => 'immutable_datetime',
         ];
     }
+
+    protected $attributes = ['last_level_change_automatic' => false];
 
     protected static function newFactory(): LearningProfileFactory
     {
@@ -62,10 +66,6 @@ class LearningProfile extends Model
         return $this->belongsTo(LearningLevel::class, 'current_level', 'code');
     }
 
-    public function lastManualLevelEvent(): BelongsTo
-    {
-        return $this->belongsTo(LearningLevelEvent::class, 'last_manual_level_event_id', 'id');
-    }
 
     public function user(): BelongsTo
     {

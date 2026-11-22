@@ -73,6 +73,57 @@ test('player and all task components render on the server without browser global
     assert.doesNotMatch(levelSetting, /<option[^>]*value="C[12]"/);
     assert.match(levelSetting, /<button[^>]*disabled/);
     assert.match(await render('PracticeToasts', {notifications:createPracticeNotifications()}), /Уведомления практики/);
+    const requestError = await render('PracticeErrorNotice', {message: 'Не удалось загрузить практику.'});
+    assert.match(requestError, /role="alert"/);
+    assert.match(requestError, /Не удалось загрузить практику/);
+    assert.doesNotMatch(requestError, /<button\b|<a\b/);
+    const { default: DailyPractice } = await server.ssrLoadModule('/resources/js/App/Pages/Daily/Index.vue');
+    const { accountTransport } = await server.ssrLoadModule('/resources/js/App/Services/Api/daily_practice.js');
+    const { usePracticeHome } = await server.ssrLoadModule('/resources/js/App/Learning/practiceHome.js');
+    const { practiceNotificationsKey } = await server.ssrLoadModule('/resources/js/App/Learning/practiceNotifications.js');
+    const { today, call } = accountTransport;
+    const notifications = createPracticeNotifications();
+    let startPage;
+    let store;
+    try {
+      globalThis.window = { scrollY: 900, addEventListener() {}, removeEventListener() {} };
+      store = usePracticeHome();
+      let queued;
+      Object.assign(store.accountRepository, {
+        pending: async () => queued ? [queued] : [],
+        enqueue: async (owner, run, action, logical, request) =>
+          (queued = { run_id: run, action, request, client_event_id: logical.client_event_id }),
+        seal: async () => queued,
+      });
+      accountTransport.today = async () => ({
+        profile: { owner_user_id: 7, revision: 1, timezone: 'UTC' },
+        candidate: { id: 'PRE_A1-U01-L01' },
+      });
+      let requests = 0;
+      const message = 'Сервер временно недоступен.';
+      accountTransport.call = async (action, run) => {
+        assert.equal(action, 'start');
+        assert.equal(run, null);
+        requests++;
+        throw Object.assign(new Error(message), { response: { status: 503, data: { message } } });
+      };
+      startPage = renderer.createApp({ ...DailyPractice, render: () => h('div') }, { authUser: { id: 7 }, enabled: true, embedded: true });
+      startPage.provide(ssrContextKey, {}).provide(practiceNotificationsKey, notifications);
+      startPage.mount({});
+      await new Promise(resolve => setImmediate(resolve));
+      await startPage._instance.setupState.startLesson();
+      await nextTick();
+      assert.equal(requests, 1);
+      assert.deepEqual(notifications.items.map(({type, message, actions}) => ({type, message, actions})), [
+        {type: 'error', message, actions: undefined},
+      ]);
+      assert.equal(window.scrollY, 900);
+    } finally {
+      startPage?.unmount();
+      store?.guestRepository.close();
+      Object.assign(accountTransport, { today, call });
+      delete globalThis.window;
+    }
     assert.ok((await render('GuestSync', {})).length > 0);
     const card=await render('DailySessionCard',{});
     assert.match(card,/Проверяем сохранённую практику/);

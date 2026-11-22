@@ -5,7 +5,6 @@ use App\Models\Learning\LearningLevel;
 use App\Models\Learning\LearningProfile;
 use App\Models\Learning\LearningRun;
 use App\Models\Learning\LearningSession;
-use App\Models\Learning\LearningSessionVersion;
 use App\Models\Learning\LearningUnit;
 use App\Models\User\User;
 use App\Services\Learning\AccountRunService;
@@ -22,8 +21,7 @@ beforeEach(function () {
     $unit = LearningUnit::factory()->create(['published_at' => now('UTC')]);
     $payload = json_decode(file_get_contents(resource_path('practice/templates/pre-a1-u01-examples.json')), true)['sessions'][0];
     $session = LearningSession::factory()->create(['external_id' => $payload['id'], 'unit_id' => $unit->id]);
-    $this->version = LearningSessionVersion::factory()->create(['session_id' => $session->id, 'payload' => $payload, 'checksum' => CanonicalJson::hash($payload), 'status' => 'published', 'published_at' => now('UTC')]);
-    $session->update(['active_version_id' => $this->version->id]);
+    $this->version = lessonWithContent(['session_id' => $session->id, 'payload' => $payload, 'checksum' => CanonicalJson::hash($payload), 'status' => 'published', 'published_at' => now('UTC')]);
 });
 function practiceReportInput($test, array $extra = []): array
 {
@@ -49,7 +47,7 @@ it('selects training questions from published and introduced material without cr
 });
 
 it('builds each topic training from every published lesson in the selected topic', function () {
-    $unit = $this->version->session->unit;
+    $unit = $this->version->unit;
     $unit->update(['sort_order' => 1]);
     $otherUnit = LearningUnit::factory()->create(['sort_order' => 2, 'published_at' => now('UTC')]);
     $payload = $this->version->payload;
@@ -67,11 +65,10 @@ it('builds each topic training from every published lesson in the selected topic
             'unit_id' => $index === 6 ? $otherUnit->id : $unit->id,
             'archived_at' => $index === 7 ? now('UTC') : null,
         ]);
-        $version = LearningSessionVersion::factory()->create([
+        $version = lessonWithContent([
             'session_id' => $lesson->id, 'payload' => $source, 'checksum' => CanonicalJson::hash($source),
             'status' => 'published', 'published_at' => now('UTC'),
         ]);
-        $lesson->update(['active_version_id' => $version->id]);
         if ($index <= 5) {
             $sources[] = $source['id'];
         }
@@ -99,9 +96,9 @@ it('builds each topic training from every published lesson in the selected topic
         ->and(LearningRun::count())->toBe(0);
     $this->postJson('/daily/api/training', ['unit' => 'UNKNOWN', 'mode' => 'recall'])->assertOk()->assertJsonCount(0, 'items');
 
-    $versions = LearningSession::whereIn('external_id', $sources)->pluck('active_version_id');
+    $versions = LearningSession::whereIn('external_id', $sources)->pluck('id');
     foreach ($versions as $versionId) {
-        LearningRun::factory()->create(['user_id' => $actor->id, 'session_version_id' => $versionId,
+        LearningRun::factory()->create(['user_id' => $actor->id, 'session_id' => $versionId,
             'status' => 'completed', 'finished_at' => now('UTC')]);
     }
     $this->postJson('/daily/api/training', $nextTraining)->assertOk()->assertJsonPath('items.0.source', 'TRAINING-LESSON-6');
@@ -157,9 +154,9 @@ it('validates the exact version and step and refuses draft and hidden catalog re
     $this->actingAs(User::factory()->create());
     $this->postJson('/daily/api/reports', practiceReportInput($this, ['task_id' => 'MISSING']))->assertUnprocessable();
     $this->postJson('/daily/api/reports', practiceReportInput($this, ['user_id' => 123]))->assertUnprocessable();
-    $draft = LearningSessionVersion::factory()->create(['session_id' => $this->version->session_id, 'version' => 2, 'payload' => $this->version->payload]);
+    $draft = lessonWithContent(['payload' => $this->version->payload]);
     $this->postJson('/daily/api/reports', practiceReportInput($this, ['session_version_id' => $draft->id]))->assertNotFound();
-    $this->version->session->unit->update(['archived_at' => now('UTC')]);
+    $this->version->unit->update(['archived_at' => now('UTC')]);
     $this->postJson('/daily/api/reports', practiceReportInput($this))->assertNotFound();
     expect(LearningContentReport::count())->toBe(0);
 });
@@ -168,12 +165,12 @@ it('allows an owner to report their archived run and hides another owners run be
     $owner = User::factory()->create();
     $service = app(AccountRunService::class);
     $state = $service->start($owner, ['client_event_id' => (string) Str::uuid(), 'expected_revision' => 1, 'kind' => 'daily'])['state'];
-    $this->version->session->update(['archived_at' => now('UTC')]);
+    $this->version->update(['archived_at' => now('UTC')]);
     $input = practiceReportInput($this, ['run_id' => $state['run_id']]);
     $this->actingAs(User::factory()->create())->postJson('/daily/api/reports', $input)->assertNotFound();
     $this->actingAs($owner)->postJson('/daily/api/reports', $input)->assertOk();
     expect(LearningContentReport::sole()->user_id)->toBe($owner->id);
-    $other = LearningSessionVersion::factory()->create();
+    $other = lessonWithContent();
     $this->postJson('/daily/api/reports', practiceReportInput($this, ['run_id' => $state['run_id'], 'session_version_id' => $other->id]))->assertNotFound();
 });
 
@@ -202,8 +199,8 @@ it('accepts reports for an owners saved vocabulary source after archival without
     $owner = User::factory()->create();
     $snapshot = $this->version->payload['vocabulary'][0];
     $word = \App\Models\Learning\PersonalVocabulary::factory()->create(['user_id' => $owner->id, 'lexeme_key' => $snapshot['lexeme_key'], 'snapshot' => $snapshot]);
-    $word->sources()->create(['user_id' => $owner->id, 'session_version_id' => $this->version->id, 'vocabulary_id' => $snapshot['id'], 'snapshot' => $snapshot, 'first_added_at' => now('UTC')]);
-    $this->version->session->update(['archived_at' => now('UTC')]);
+    $word->sources()->create(['user_id' => $owner->id, 'session_id' => $this->version->id, 'vocabulary_id' => $snapshot['id'], 'snapshot' => $snapshot, 'first_added_at' => now('UTC')]);
+    $this->version->update(['archived_at' => now('UTC')]);
     $input = practiceReportInput($this, ['task_id' => null]);
     $this->actingAs(User::factory()->create())->postJson('/daily/api/reports', $input)->assertNotFound();
     $this->actingAs($owner)->postJson('/daily/api/reports', $input)->assertOk();

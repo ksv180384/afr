@@ -29,9 +29,9 @@ final class CurriculumPublicationService
             throw new ContentOperationException(PracticeErrorCode::ValidationFailed, 'Обязательные цели недоступны.');
         }
         $remaining = array_fill_keys($curriculum->required_objective_ids, true);
-        foreach (LearningSession::query()->where('level', $curriculum->getRawOriginal('level'))->whereNull('archived_at')->whereNotNull('active_version_id')->with('activeVersion')->lazyById(100) as $session) {
-            if ($session->activeVersion?->status === SessionVersionStatus::Published) {
-                foreach ($session->activeVersion->payload['tasks'] as $task) {
+        foreach (LearningSession::query()->where('level', $curriculum->getRawOriginal('level'))->published()->lazyById(100) as $session) {
+            if ($session?->status === SessionVersionStatus::Published) {
+                foreach ($session->payload['tasks'] as $task) {
                     foreach ($task['objective_ids'] as $id) {
                         unset($remaining[$id]);
                     }
@@ -45,8 +45,8 @@ final class CurriculumPublicationService
             throw new ContentOperationException(PracticeErrorCode::ValidationFailed, 'Не все обязательные цели представлены опубликованными заданиями.');
         }
         foreach ($curriculum->checkpoint_session_ids as $id) {
-            $session = LearningSession::query()->with('activeVersion')->where('external_id', $id)->first();
-            if (! $session || $session->archived_at || $session->activeVersion?->status !== SessionVersionStatus::Published || ($session->activeVersion->payload['kind'] ?? null) !== 'checkpoint') {
+            $session = LearningSession::query()->where('external_id', $id)->first();
+            if (! $session || $session->archived_at || $session?->status !== SessionVersionStatus::Published || ($session->payload['kind'] ?? null) !== 'checkpoint') {
                 throw new ContentOperationException(PracticeErrorCode::ValidationFailed, 'Контроль программы ещё не опубликован.', ['session_id' => $id]);
             }
         }
@@ -62,7 +62,6 @@ final class CurriculumPublicationService
             }
             $this->ready($curriculum);
             $curriculum->update(['status' => 'reviewed']);
-            $this->access->audit($actor, 'curriculum_review', ['curriculum_id' => $id], [], ['checks' => $checks]);
 
             return $curriculum;
         });
@@ -78,14 +77,11 @@ final class CurriculumPublicationService
             if ($requireReview && $curriculum->status !== SessionVersionStatus::Reviewed) {
                 throw new ContentOperationException(PracticeErrorCode::RevisionConflict, 'Перед публикацией программы требуется review.');
             }
-            $previousStatus = $curriculum->status->value;
             $this->ready($curriculum);
             foreach (LearningCurriculum::query()->where('level', $curriculum->getRawOriginal('level'))->where('status', 'published')->get() as $old) {
                 $old->update(['status' => 'archived', 'archived_at' => now('UTC')]);
-                $this->access->audit($actor, 'curriculum_supersede', ['curriculum_id' => $old->id], ['status' => 'published'], ['replacement_id' => $id]);
             }
             $curriculum->update(['status' => 'published', 'published_by' => $actor->id, 'published_at' => $curriculum->published_at ?? now('UTC'), 'archived_at' => null]);
-            $this->access->audit($actor, 'curriculum_publish', ['curriculum_id' => $id], ['status' => $previousStatus], ['status' => 'published']);
 
             return $curriculum;
         });
@@ -96,9 +92,7 @@ final class CurriculumPublicationService
         return $this->transaction->run($actor, function () use ($actor, $id): LearningCurriculum {
             $curriculum = LearningCurriculum::query()->findOrFail($id);
             if ($curriculum->status !== SessionVersionStatus::Archived) {
-                $before = $curriculum->status->value;
                 $curriculum->update(['status' => 'archived', 'archived_at' => now('UTC')]);
-                $this->access->audit($actor, 'curriculum_archive', ['curriculum_id' => $id], ['status' => $before], ['status' => 'archived']);
             }
 
             return $curriculum;

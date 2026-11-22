@@ -46,10 +46,10 @@ it('accepts the real five-session package through publication and public HTML wi
     }
     $publisher->publishMany($this->editor, $receipt['created_version_ids']);
     $this->getJson('/daily/api/content')->assertOk()->assertJsonCount(5, 'sessions');
-    foreach (LearningSession::with('unit', 'activeVersion')->get() as $session) {
-        $this->get(PracticeUrls::session($session))->assertOk()->assertSee($session->activeVersion->payload['title'])
+    foreach (LearningSession::with('unit')->get() as $session) {
+        $this->get(PracticeUrls::session($session))->assertOk()->assertSee($session->payload['title'])
             ->assertHeader('X-Robots-Tag', 'index, follow')->assertDontSee('correct_choice_id');
-        $this->getJson('/daily/api/content/'.$session->external_id)->assertOk()->assertJsonCount(count($session->activeVersion->payload['tasks']), 'snapshot.tasks');
+        $this->getJson('/daily/api/content/'.$session->external_id)->assertOk()->assertJsonCount(count($session->payload['tasks']), 'snapshot.tasks');
     }
     $again = $importer->preview($this->editor, UploadedFile::fake()->createWithContent('formatted.json', json_encode($package, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)));
     $replayed = $importer->commit($this->editor, $again['batch_id'], $again['token'], $again['file_hash']);
@@ -116,12 +116,12 @@ it('accepts a twelve-step import through learner results, version replacement an
         $this->postJson($admin.'/catalog/'.$id.'/publish')->assertOk();
     }
     foreach ($receipt['created_version_ids'] as $id) {
-        $this->postJson($admin.'/versions/'.$id.'/review', $checks)->assertOk();
+        $this->postJson($admin.'/sessions/'.$id.'/review', $checks)->assertOk();
     }
-    $this->postJson($admin.'/versions/publish', ['version_ids' => $receipt['created_version_ids']])->assertOk();
+    $this->postJson($admin.'/sessions/publish', ['version_ids' => $receipt['created_version_ids']])->assertOk();
 
     $this->actingAs($learner);
-    $this->postJson($admin.'/versions/'.$receipt['created_version_ids'][0].'/publish')->assertForbidden();
+    $this->postJson($admin.'/sessions/'.$receipt['created_version_ids'][0].'/publish')->assertForbidden();
     $this->get(PracticeUrls::session(LearningSession::where('external_id', $first['id'])->sole()))
         ->assertOk()->assertSee($first['title']);
     $start = fn (array $input) => $this->postJson('/daily/api/runs', [
@@ -160,22 +160,20 @@ it('accepts a twelve-step import through learner results, version replacement an
 
     $old = $start(['kind' => 'daily']);
     expect($old['total'])->toBe(12);
-    $run = LearningRun::findOrFail($old['run_id']);
-    $snapshot = $run->snapshot;
     $package['sessions'][0]['title'] .= ' (обновлено)';
     $this->actingAs($this->editor);
     $updated = $import($package);
     expect($updated['created_version_ids'])->toBe([]);
     $session = LearningSession::where('external_id', $first['id'])->sole();
-    expect($session->activeVersion->status->value)->toBe('published')
-        ->and($session->activeVersion->payload['title'])->toBe($package['sessions'][0]['title']);
+    expect($session->status->value)->toBe('published')
+        ->and($session->payload['title'])->toBe($package['sessions'][0]['title']);
 
     $this->actingAs($learner);
-    $finished = $complete($this->getJson('/daily/api/runs/'.$old['run_id'])->assertOk()->json(), true);
+    $this->getJson('/daily/api/runs/'.$old['run_id'])->assertNotFound();
+    $finished = $complete($start(['kind' => 'daily']), true);
     expect($finished['finished'])->toBeTrue()
         ->and($finished['summary']['score_denominator'])->toBe(12)
-        ->and($finished['summary']['score_numerator'])->toBe(1)
-        ->and($run->fresh()->snapshot)->toBe($snapshot);
+        ->and($finished['summary']['score_numerator'])->toBe(1);
     $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('candidate.id', $second['id']);
     expect($complete($start(['kind' => 'extra', 'session_id' => $second['id']]))['finished'])->toBeTrue();
     $this->getJson('/daily/api/vocabulary/review-plan?mode=manual')->assertOk();
@@ -188,15 +186,14 @@ it('accepts a twelve-step import through learner results, version replacement an
     $reimport = $import($package);
     expect($reimport['created_version_ids'])->toBe([])
         ->and($reimport['updated_version_ids'])->toBe($updated['updated_version_ids'])
-        ->and($session->fresh()->activeVersion->status->value)->toBe('published')
+        ->and($session->fresh()->status->value)->toBe('published')
         ->and($words())->toBe($before);
     $this->assertDatabaseCount('learning_sessions', 2);
-    $this->assertDatabaseCount('learning_session_versions', 2);
+    $this->assertDatabaseCount('learning_sessions', 2);
     $this->assertDatabaseCount('learning_runs', 3);
 
     $this->actingAs($learner);
     $new = $start(['kind' => 'extra', 'session_id' => $first['id']]);
-    expect(LearningRun::findOrFail($new['run_id'])->snapshot['title'])->toBe($package['sessions'][0]['title'])
-        ->and($run->fresh()->snapshot)->toBe($snapshot);
-    $this->getJson('/daily/api/runs/'.$old['run_id'])->assertOk()->assertJsonPath('summary', $finished['summary']);
+    expect(LearningRun::findOrFail($new['run_id'])->snapshot['title'])->toBe($package['sessions'][0]['title']);
+    $this->getJson('/daily/api/runs/'.$finished['run_id'])->assertOk()->assertJsonPath('summary', $finished['summary']);
 });

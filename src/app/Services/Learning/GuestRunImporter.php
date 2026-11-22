@@ -7,10 +7,9 @@ use App\Models\Learning\DailyAssignment;
 use App\Models\Learning\GuestEventMapping;
 use App\Models\Learning\GuestSyncEpisode;
 use App\Models\Learning\LearningPresentation;
-use App\Models\Learning\LearningProfile;
 use App\Models\Learning\LearningRun;
 use App\Models\Learning\LearningRunOperation;
-use App\Models\Learning\LearningSessionVersion;
+use App\Models\Learning\LearningSession;
 use App\Models\Learning\PersonalVocabulary;
 use App\Models\User\User;
 use App\Services\Learning\Validation\CanonicalJson;
@@ -35,7 +34,8 @@ class GuestRunImporter
     private function source(User $actor, array $bundle): array
     {
         if (in_array($bundle['kind'], ['daily', 'extra'], true)) {
-            $version = LearningSessionVersion::find($bundle['session_version_id'] ?? null);
+            $lessonKey = $bundle['snapshot']['id'] ?? null;
+            $version = LearningSession::query()->where('external_id', $lessonKey)->first();
             if (! $version || ! $version->published_at) {
                 throw new AnswerCheckingException(PracticeErrorCode::VersionConflict, 'Изученная версия не найдена или не была опубликована.');
             }
@@ -43,14 +43,13 @@ class GuestRunImporter
                 throw new AnswerCheckingException(PracticeErrorCode::VersionConflict, 'Снимок гостевого занятия отличается от изученной версии.');
             }
             $prerequisites = $version->payload['prerequisite_ids'] ?? [];
-            $completed = LearningRun::query()->join('learning_session_versions', 'learning_runs.session_version_id', '=', 'learning_session_versions.id')
-                ->join('learning_sessions', 'learning_session_versions.session_id', '=', 'learning_sessions.id')->where('learning_runs.user_id', $actor->id)
+            $completed = LearningRun::query()->join('learning_sessions', 'learning_runs.session_id', '=', 'learning_sessions.id')->where('learning_runs.user_id', $actor->id)
                 ->where('learning_runs.status', 'completed')->whereIn('learning_sessions.external_id', $prerequisites)->distinct()->count('learning_sessions.external_id');
             if ($completed !== count(array_unique($prerequisites))) {
                 throw new AnswerCheckingException(PracticeErrorCode::VersionConflict, 'Сначала перенесите завершённые предыдущие занятия.');
             }
 
-            return [$version->id, $version->payload, array_map(fn ($task) => PresentationSnapshot::forTask($version->payload, $task['id']), $version->payload['tasks'])];
+            return [$version->id, $version->payload, array_map(fn ($task) => PresentationSnapshot::forTask($version->payload, $task['id']), $version->payload['tasks']), $version->checksum];
         }
         $snapshot = $bundle['snapshot'];
         $review = $snapshot['review_items'] ?? null;
@@ -61,7 +60,9 @@ class GuestRunImporter
         if (count(array_unique($keys)) !== count($review)) {
             AnswerChecker::invalid('Слово повторяется в одном тесте.');
         }
-        $words = PersonalVocabulary::where('user_id', $actor->id)->whereIn('lexeme_key', $keys)->with('sources')->get()->keyBy('lexeme_key');
+        $words = PersonalVocabulary::where('user_id', $actor->id)->whereIn('lexeme_key', $keys)
+            ->with('sources.session')->get()->keyBy('lexeme_key');
+        $reviews = app(VocabularyTestService::class);
         $items = [];
         $vocabulary = [];
         foreach ($review as $item) {
@@ -69,7 +70,8 @@ class GuestRunImporter
             if (! $word) {
                 throw new AnswerCheckingException(PracticeErrorCode::NotFound, 'Источник гостевого повторения ещё не перенесён.');
             }
-            $sources = $word->sources->isEmpty() ? [$word->snapshot] : $word->sources->pluck('snapshot')->all();
+            $sources = $word->sources->isEmpty() ? [$word->snapshot]
+                : $word->sources->map(fn ($source) => $reviews->sourceContent($source, $word->lexeme_key));
             $matched = null;
             foreach ($sources as $source) {
                 foreach ($source['review_items'] ?? [] as $option) {
@@ -84,6 +86,7 @@ class GuestRunImporter
             $matched['id'] = 'word-'.$word->id;
             $matched['lexeme_key'] = $word->lexeme_key;
             $items[] = PresentationSnapshot::forReview($item['task'], $word->lexeme_key);
+            unset($matched['review_items']);
             $vocabulary[] = $matched;
         }
         $remaining = PersonalVocabulary::where('user_id', $actor->id)->whereIn('lexeme_key', $snapshot['remaining_word_ids'] ?? [])->pluck('id')->all();
@@ -116,7 +119,9 @@ class GuestRunImporter
             if ($this->ledger->previous($episode, $first)) {
                 throw new AnswerCheckingException(PracticeErrorCode::IdempotencyConflict, 'Старт уже относится к другому прохождению.');
             }
-            [$versionId,$snapshot,$items] = $this->source($actor, $bundle);
+            $source = $this->source($actor, $bundle);
+            [$versionId, $snapshot, $items] = $source;
+            $checksum = $source[3] ?? null;
             if (count($items) !== count($bundle['presentation_ids'])) {
                 AnswerChecker::invalid('Порядок показов не соответствует версии.');
             }
@@ -131,15 +136,15 @@ class GuestRunImporter
                     $clockWarning = true;
                 } $previousTime = $time;
             }
-            app(ObjectiveProgressService::class)->pin($actor, $snapshot['level']);
-            $run = LearningRun::create(['user_id' => $actor->id, 'kind' => $bundle['kind'], 'status' => 'in_progress', 'session_version_id' => $versionId, 'snapshot' => $snapshot,
+            $run = LearningRun::create(['user_id' => $actor->id, 'kind' => $bundle['kind'], 'status' => 'in_progress', 'session_id' => $versionId,
+                'content_checksum' => $checksum, 'snapshot' => $versionId ? LearningRun::contentSummary($snapshot) : $snapshot,
                 ...$policy->runAttributes(), 'timezone' => $bundle['timezone'], 'local_date' => $clockWarning ? PracticeTime::localDate($now, $bundle['timezone']) : PracticeTime::localDate($start, $bundle['timezone']),
                 'started_at' => $now, 'cursor_position' => 1, 'introductions_seen' => [], 'revision' => 1,
                 'import_meta' => ['guest_id' => $episode->guest_id, 'episode_id' => $episode->id, 'guest_run_id' => $bundle['guest_run_id'], 'received_at' => $now->toIso8601String(),
                     'original_local_date' => $bundle['local_date'], 'client_started_at' => $bundle['started_at'], 'clock_warning' => $clockWarning]]);
             $presentations = [];
             foreach ($items as $index => $item) {
-                $presentation = LearningPresentation::create(['user_id' => $actor->id, 'run_id' => $run->id, 'task_id' => $item['task']['id'], 'position' => $index + 1, 'snapshot' => $item,
+                $presentation = LearningPresentation::create(['user_id' => $actor->id, 'run_id' => $run->id, 'task_id' => $item['task']['id'], 'position' => $index + 1, 'snapshot' => $versionId ? [] : $item,
                     'choice_order' => array_column($item['task']['choices'] ?? $item['task']['tokens'] ?? [], 'id'), 'status' => 'pending']);
                 $presentations[$bundle['presentation_ids'][$index]] = $presentation->id;
             }
@@ -149,8 +154,7 @@ class GuestRunImporter
             LearningRunOperation::create(['user_id' => $actor->id, 'run_id' => $run->id, 'client_event_id' => $first['client_event_id'], 'operation' => 'start', 'payload_hash' => CanonicalJson::hash($first),
                 'receipt' => ['state' => $this->view->make($actor, $run)], 'received_at' => $now]);
             if ($bundle['kind'] === 'daily' && ! $clockWarning && $run->local_date->format('Y-m-d') === PracticeTime::localDate($now, $bundle['timezone'])) {
-                $profile = LearningProfile::where('user_id', $actor->id)->first();
-                $date = PracticeTime::localDate($now, $profile?->timezone ?? $bundle['timezone']);
+                $date = PracticeTime::localDate($now, $actor->timezone ?? $bundle['timezone']);
                 if ($date === $run->local_date->format('Y-m-d')) {
                     $assignment = DailyAssignment::firstOrCreate(['user_id' => $actor->id, 'local_date' => $date], ['revision' => 1]);
                     if (! $assignment->selected_run_id) {

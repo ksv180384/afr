@@ -39,7 +39,7 @@ final class PracticeUrls
             if ($target->slug !== $input['expected_slug']) {
                 throw ValidationException::withMessages(['expected_slug' => 'Адрес изменён другим редактором. Обновите страницу.']);
             }
-            if ($type === 'unit' ? ! $target->published_at : ! $target->versions()->whereNotNull('published_at')->exists()) {
+            if (! $target->published_at) {
                 throw ValidationException::withMessages(['slug' => 'Сначала опубликуйте материал.']);
             }
             $slug = $input['slug'];
@@ -61,7 +61,6 @@ final class PracticeUrls
                 $session->refresh()->load('unit');
                 $this->alias($before[$session->id], self::session($session), ['session_id' => $session->id]);
             }
-            $this->access->audit($actor, 'public_url_rename', [], ['type' => $type, 'id' => $id, 'slug' => $oldSlug], ['slug' => $slug]);
 
             return ['path' => $type === 'unit' ? self::unit($target) : self::session($target->refresh()->load('unit'))];
         });

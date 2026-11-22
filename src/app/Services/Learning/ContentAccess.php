@@ -3,7 +3,6 @@
 namespace App\Services\Learning;
 
 use App\Enums\Learning\PracticeErrorCode;
-use App\Models\Learning\LearningEditorialEvent;
 use App\Models\User\User;
 
 final class ContentAccess
@@ -30,18 +29,6 @@ final class ContentAccess
                 throw new ContentOperationException(PracticeErrorCode::ValidationFailed, 'Подтвердите все пункты редакторской проверки.', ['missing_check' => $key]);
             }
         }
-    }
-
-    public function audit(User $actor, string $operation, array $target, array $before = [], array $after = []): void
-    {
-        LearningEditorialEvent::create([
-            ...$target,
-            'actor_id' => $actor->id,
-            'operation' => $operation,
-            'previous_state' => $before,
-            'new_state' => $after,
-            'occurred_at' => now('UTC'),
-        ]);
     }
 
     public function validateReport(\App\DTOs\Learning\PackageValidationReport $report): array

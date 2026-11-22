@@ -41,7 +41,19 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function lessonWithContent(array $attributes = []): \App\Models\Learning\LearningSession
 {
-    // ..
+    $sessionId = $attributes['session_id'] ?? null;
+    unset($attributes['session_id'], $attributes['version']);
+    $payload = $attributes['payload'] ?? ['fixture' => true];
+    $attributes += ['payload' => $payload, 'checksum' => \App\Services\Learning\Validation\CanonicalJson::hash($payload)];
+
+    if ($sessionId === null) {
+        return \App\Models\Learning\LearningSession::factory()->create($attributes);
+    }
+
+    $session = \App\Models\Learning\LearningSession::findOrFail($sessionId);
+    $session->update($attributes);
+
+    return $session->refresh();
 }

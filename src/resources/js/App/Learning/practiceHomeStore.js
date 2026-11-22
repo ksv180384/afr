@@ -3,7 +3,7 @@ import { addGuestRun, changeGuestProfile, guestDate } from './guestProgress.js';
 import { startAccountRun, deliverAccountQueue } from './accountAdapter.js';
 import { browserTimezone } from './practiceTime.js';
 import { guestShortReviewPlan, guestShortReviewSource } from './guestVocabulary.js';
-import { activeGuestRun, guestPracticeHome, searchGuestRoute } from './guestPracticeHome.js';
+import { guestPracticeHome, searchGuestRoute } from './guestPracticeHome.js';
 
 const routeKey = selection => JSON.stringify([selection.level ?? null, selection.unit ?? null]);
 
@@ -97,7 +97,7 @@ export const createPracticeHomeStore = ({transport, guestTransport, guestReposit
             } catch {
               if (homeRequest !== request) return null;
               catalog = null;
-              contentError = 'Нет соединения с библиотекой. Сохранённые занятия можно продолжить.';
+              contentError = 'Нет соединения с библиотекой. Для запуска занятия нужно подключение.';
             }
           }
           state.guest = local;
@@ -176,12 +176,9 @@ export const createPracticeHomeStore = ({transport, guestTransport, guestReposit
     await load(owner, 1, {selection: currentSelection});
     assertOwner(token);
     const home = state.home;
-    const active = sessionId === null ? home.active_run?.id
-      : home.route?.lessons.find(lesson => lesson.id === sessionId)?.run_id;
     if (owner !== null) {
       const pending = await accountRepository.pending(owner, null);
       assertOwner(token);
-      if (!pending.length && active) return '/daily/run/' + active;
       if (!pending.length && !sessionId && !home.candidate) throw new Error('Новых доступных занятий пока нет.');
       const profile = home.profile;
       const onStatus = value => {
@@ -195,14 +192,13 @@ export const createPracticeHomeStore = ({transport, guestTransport, guestReposit
         : await startAccountRun({
             ownerUserId: owner, profile, repository: accountRepository, transport, onStatus, onMutation,
             input: {client_event_id: idFactory(), expected_revision: profile.revision, route_start: true,
-              timezone: profile.persisted === false ? browserTimezone() : profile.timezone,
+              timezone: profile.timezone_configured === false ? browserTimezone() : profile.timezone,
               ...(sessionId ? {kind: 'extra', session_id: sessionId} : {kind: 'daily'})},
           });
       assertOwner(token);
       invalidate(owner);
       return '/daily/run/' + view.run_id;
     }
-    if (active) return '/daily/guest/' + active;
     const lessonId = sessionId ?? home.candidate?.id;
     if (!lessonId) throw new Error(home.content_error || 'Новых доступных занятий пока нет.');
     let source;
@@ -216,8 +212,6 @@ export const createPracticeHomeStore = ({transport, guestTransport, guestReposit
       eventId: idFactory(), tabId: idFactory(), now: now(), kind: sessionId ? 'extra' : 'daily'};
     const chosen = await guestRepository.mutate(local => {
       assertOwner(token);
-      const existing = activeGuestRun(local.runs, local.current_level, sessionId);
-      if (existing) return existing.id;
       addGuestRun(local, input);
       return runId;
     }, {run_id: runId});
@@ -252,7 +246,7 @@ export const createPracticeHomeStore = ({transport, guestTransport, guestReposit
       if (profile.owner_user_id !== owner) throw new Error('Войдите в исходный аккаунт.');
       const input = {
         client_event_id: idFactory(), expected_revision: profile.revision, kind: 'review', review_mode: mode,
-        timezone: profile.persisted ? profile.timezone : browserTimezone(),
+        timezone: profile.timezone_configured === false ? browserTimezone() : profile.timezone,
       };
       if (mode === 'manual' && wordIds?.length) input.word_ids = [...wordIds];
       const view = await startAccountRun({
@@ -283,7 +277,7 @@ export const createPracticeHomeStore = ({transport, guestTransport, guestReposit
     if(!state.ready) await load(owner);
     if(token!==generation) throw new Error('Аккаунт изменился.');
     if(owner !== null) {
-      profileRequest ??= {client_event_id:idFactory(),expected_revision:state.home.profile.revision,current_level:level,timezone:state.home.profile.persisted === false ? browserTimezone() : state.home.profile.timezone};
+      profileRequest ??= {client_event_id:idFactory(),expected_revision:state.home.profile.revision,current_level:level,timezone:state.home.profile.timezone_configured === false ? browserTimezone() : state.home.profile.timezone};
       state.profilePending=true;
       const profile=await transport.profile();
       if(profile.owner_user_id!==owner || token!==generation) throw new Error('Войдите в исходный аккаунт.');

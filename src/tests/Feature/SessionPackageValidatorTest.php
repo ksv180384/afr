@@ -4,7 +4,6 @@ use App\DTOs\Learning\PackageValidationReport;
 use App\Http\Requests\Admin\DailySession\UploadSessionPackageRequest;
 use App\Models\Learning\LearningMedia;
 use App\Models\Learning\LearningSession;
-use App\Models\Learning\LearningSessionVersion;
 use App\Models\Learning\LearningUnit;
 use App\Models\User\Rang;
 use App\Models\User\User;
@@ -67,7 +66,7 @@ function packageExisting(array $session, ?array $unit = null): LearningSession
         'unit_id' => $unitRow->id,
         'sort_order' => $session['order'],
     ]);
-    LearningSessionVersion::factory()->create([
+    lessonWithContent([
         'session_id' => $row->id,
         'version' => $session['version'],
         'payload' => $session,
@@ -215,8 +214,8 @@ it('resolves existing draft prerequisites and detects cycles crossing the databa
     $data['sessions'][0]['prerequisite_ids'] = [$second['id']];
     $data['sessions'][0]['public_page']['related_session_ids'] = [];
     expect(packageCheck($data)->toArray()['errors'])->toBe([]);
-    LearningSessionVersion::factory()->create([
-        'session_id' => $row->id, 'version' => 2,
+
+    $row->update([
         'payload' => [...$second, 'version' => 2, 'prerequisite_ids' => [$first['id']]],
     ]);
     packageHasIssue(packageCheck($data), 'prerequisite_cycle', '/sessions/0/prerequisite_ids/0');
@@ -280,7 +279,7 @@ it('never writes to application tables while validating valid or invalid content
     packageCheck(packageFixture('invalid/prerequisite-cycle.json'));
     expect(array_values(array_filter($queries, fn (string $sql): bool => preg_match('/^\s*(insert|update|delete|replace|create|alter|drop)/i', $sql) === 1)))->toBe([])
         ->and(LearningSession::count())->toBe(0)
-        ->and(LearningSessionVersion::count())->toBe(0);
+        ->and(LearningSession::count())->toBe(0);
 });
 
 it('limits error output explicitly and does not retain state across calls', function () {
@@ -454,8 +453,8 @@ it('resolves objectives and checkpoints from the database and enforces their lev
     $data['curricula'][0]['required_objective_ids'][0] = $foreign->stable_id;
     packageHasIssue(packageCheck($data), 'reference_level_mismatch', '/curricula/0/required_objective_ids/0');
     $data['curricula'][0]['required_objective_ids'][0] = $objective->stable_id;
-    LearningSessionVersion::factory()->create([
-        'session_id' => $row->id, 'version' => 2,
+
+    $row->update([
         'payload' => [...$checkpoint, 'kind' => 'practice', 'version' => 2],
     ]);
     packageHasIssue(packageCheck($data), 'invalid_checkpoint', '/curricula/0/checkpoint_session_ids/0');

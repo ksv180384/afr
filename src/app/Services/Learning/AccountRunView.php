@@ -11,15 +11,17 @@ final class AccountRunView
 
     public function make(User $actor, LearningRun $run, bool $playback = false): array
     {
-        $snapshot = $run->snapshot;
-        $presentations = $run->presentations()->with(['firstAttempt', 'lastAttempt'])->orderBy('position')->get();
+        $finished = $run->status->value === 'completed';
+        $snapshot = $run->content();
+        $presentations = $finished ? collect() : $run->presentations()->with(['firstAttempt', 'lastAttempt'])->orderBy('position')->get();
         $presentation = $presentations->firstWhere('position', $run->cursor_position);
-        $task = $presentation?->snapshot['task'] ?? null;
+        $step = $presentation?->taskSnapshot($snapshot);
+        $task = $step['task'] ?? null;
         $help = $presentation ? $presentation->attempts()->where('event_type', 'help')->get(['payload'])->pluck('payload.help_kind')->unique()->values()->all() : [];
         $first = $presentation?->firstAttempt?->result;
         $last = $presentation?->lastAttempt?->result;
         $answer = $presentation?->lastAttempt?->payload['answer'] ?? $presentation?->firstAttempt?->payload['answer'] ?? null;
-        $corrections = $run->corrections;
+        $corrections = $finished ? null : $run->corrections;
         $mistakePositions = $corrections ? [] : LessonCorrections::positions($run, $presentations);
         if ($corrections) {
             $attempt = LessonCorrections::attempt($run);
@@ -39,8 +41,8 @@ final class AccountRunView
                 unset($task['hint']);
             }
         }
-        if ($task && $presentation?->snapshot['review_lexeme_key']) {
-            $task['vocabulary_ids'] = array_column(array_values(array_filter($snapshot['vocabulary'] ?? [], fn ($word) => ($word['lexeme_key'] ?? null) === $presentation->snapshot['review_lexeme_key'])), 'id');
+        if ($task && ($step['review_lexeme_key'] ?? null)) {
+            $task['vocabulary_ids'] = array_column(array_values(array_filter($snapshot['vocabulary'] ?? [], fn ($word) => ($word['lexeme_key'] ?? null) === $step['review_lexeme_key'])), 'id');
         }
         $vocabulary = array_map(function ($word) {
             unset($word['review_items']);
@@ -50,7 +52,7 @@ final class AccountRunView
 
         return [
             'has_next_test_block' => ! empty($snapshot['remaining_word_ids']), 'self_check_words' => $snapshot['self_check_words'] ?? [], 'import_meta' => $run->import_meta, 'owner_user_id' => $actor->id, 'run_id' => $run->id, 'mode' => 'account', 'kind' => $run->kind,
-            'session_version_id' => $run->session_version_id, 'checking_policy_version' => $run->checking_policy_version,
+            'lesson_id' => $run->session_id, 'session_version_id' => $run->session_id, 'checking_policy_version' => $run->checking_policy_version,
             'activity_date' => $run->finished_at ? \App\Support\Learning\PracticeTime::localDate($run->finished_at, $run->timezone) : null,
             'revision' => $run->revision, 'status' => $run->status->value, 'started' => $run->status->value !== 'paused', 'resume' => $run->status->value === 'paused',
             'finished' => $run->status->value === 'completed', 'timezone' => $run->timezone, 'local_date' => $run->local_date->format('Y-m-d'),
@@ -60,8 +62,8 @@ final class AccountRunView
                 'pronunciation_notes' => $snapshot['pronunciation_notes'] ?? []],
             'task' => $task, 'presentation' => $presentation ? ['presentation_id' => $presentation->id, 'status' => $presentation->status,
                 'help_used' => $presentation->help_used, 'answer' => $answer, 'first_result' => $first, 'last_result' => $last] : null,
-            'position' => $run->cursor_position, 'total' => $presentations->count(),
-            'mistakes_count' => $corrections ? ($corrections['initial_total'] ?? count($corrections['positions'])) : count($mistakePositions),
+            'position' => $run->cursor_position, 'total' => $finished ? ($run->result['total_steps'] ?? 0) : $presentations->count(),
+            'mistakes_count' => $run->result['mistakes_count'] ?? ($corrections ? ($corrections['initial_total'] ?? count($corrections['positions'])) : count($mistakePositions)),
             'mistake_positions' => $mistakePositions,
             'corrections' => $corrections ? [
                 'started' => $corrections['started'], 'position' => $corrections['index'] + 1, 'total' => count($corrections['positions']),
@@ -72,13 +74,14 @@ final class AccountRunView
             'introductions' => array_values(array_filter($snapshot['introductions'] ?? [], fn ($intro) => $intro['before_task_id'] === ($task['id'] ?? null))),
             'introduction_seen' => in_array($presentation?->id, $run->introductions_seen ?? [], true),
             'assistance' => $help, 'vocabulary' => $vocabulary,
-            'summary' => $run->result ?? $this->answers->result($actor, $run->id),
+            'summary' => $run->result ?? ($finished ? null : $this->answers->result($actor, $run->id)),
             'audioUrls' => array_combine($ids = $this->assets($snapshot), array_map(fn ($id) => route('daily.api.media', ['run' => $run->id, 'media' => $id], false), $ids)) ?: [],
             ...($playback && $run->status->value !== 'completed' && ($snapshot['kind'] ?? null) !== 'checkpoint' ? ['playback' => [
-                'steps' => $presentations->map(fn ($step) => [
-                    'presentation_id' => $step->id, 'task' => $step->snapshot['task'],
-                    'review_lexeme_key' => $step->snapshot['review_lexeme_key'],
-                ])->all(),
+                'steps' => $presentations->map(function ($step) use ($snapshot) {
+                    $item = $step->taskSnapshot($snapshot);
+
+                    return ['presentation_id' => $step->id, 'task' => $item['task'], 'review_lexeme_key' => $item['review_lexeme_key']];
+                })->all(),
                 'introductions' => $snapshot['introductions'] ?? [],
             ]] : []),
         ];

@@ -4,7 +4,7 @@ namespace Database\Factories\Learning;
 
 use App\Enums\Learning\RunStatus;
 use App\Models\Learning\LearningRun;
-use App\Models\Learning\LearningSessionVersion;
+use App\Models\Learning\LearningSession;
 use App\Models\User\User;
 use App\Services\Learning\CheckingPolicy;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -20,10 +20,10 @@ class LearningRunFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'session_version_id' => LearningSessionVersion::factory(),
+            'session_id' => LearningSession::factory()->withContent(),
             'kind' => 'daily',
             'status' => RunStatus::InProgress->value,
-            'snapshot' => fn (array $attributes): array => LearningSessionVersion::query()->findOrFail($attributes['session_version_id'])->payload,
+            'snapshot' => fn (array $attributes): array => isset($attributes['session_id']) ? (LearningSession::findOrFail($attributes['session_id'])->payload ?? []) : [],
             'checking_policy_version' => CheckingPolicy::CURRENT_VERSION,
             'checking_policy_snapshot' => CheckingPolicy::forVersion(CheckingPolicy::CURRENT_VERSION)->rules,
             'timezone' => 'UTC',

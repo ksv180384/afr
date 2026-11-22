@@ -3,11 +3,9 @@
 use App\Enums\Learning\SessionVersionStatus;
 use App\Models\Learning\LearningCatalogRevision;
 use App\Models\Learning\LearningCurriculum;
-use App\Models\Learning\LearningEditorialEvent;
 use App\Models\Learning\LearningLevel;
 use App\Models\Learning\LearningRun;
 use App\Models\Learning\LearningSession;
-use App\Models\Learning\LearningSessionVersion;
 use App\Models\Learning\LearningUnit;
 use App\Models\Learning\SessionImportBatch;
 use App\Models\User\Rang;
@@ -89,24 +87,22 @@ it('commits once with canonical checksums and pending catalog then replays the s
     $receipt = lifecycleCommit($this->admin, $preview);
     expect($receipt['created_version_ids'])->toHaveCount(2)
         ->and($receipt['catalog_revision_ids'])->toHaveCount(2)
-        ->and(LearningSession::whereNotNull('active_version_id')->count())->toBe(0)
+        ->and(LearningSession::published()->count())->toBe(0)
         ->and(LearningCatalogRevision::where('status', 'pending')->count())->toBe(2)
         ->and(LearningUnit::first()->published_at)->toBeNull()
         ->and(LearningLevel::where('code', 'PRE_A1')->first()->title)->toBe('С нуля');
-    foreach (LearningSessionVersion::all() as $version) {
+    foreach (LearningSession::all() as $version) {
         expect($version->status)->toBe(SessionVersionStatus::Draft)
             ->and($version->checksum)->toBe(CanonicalJson::hash($version->payload))
             ->and($version->checksum)->not->toBe($preview['file_hash']);
     }
-    $events = LearningEditorialEvent::count();
-    expect(lifecycleCommit($this->admin, $preview))->toBe($receipt)
-        ->and(LearningEditorialEvent::count())->toBe($events);
+    expect(lifecycleCommit($this->admin, $preview))->toBe($receipt);
     $again = lifecycleCommit($this->admin, lifecyclePreview($this->admin));
     expect($again['created_version_ids'])->toBe([])
         ->and($again['updated_version_ids'])->toBe($receipt['created_version_ids'])
         ->and($again['catalog_revision_ids'])->toBe($receipt['catalog_revision_ids'])
-        ->and(LearningSessionVersion::count())->toBe(2)
-        ->and(LearningSessionVersion::where('status', 'draft')->count())->toBe(2);
+        ->and(LearningSession::count())->toBe(2)
+        ->and(LearningSession::where('status', 'draft')->count())->toBe(2);
 });
 
 it('rejects wrong owner token hash expiry and removed privileges', function (string $kind) {
@@ -134,7 +130,7 @@ it('revalidates content conflicts after preview and rolls back the whole package
     lifecycleCommit($this->admin, $first);
     expect(fn () => lifecycleCommit($this->admin, $second))->toThrow(ContentOperationException::class)
         ->and(SessionImportBatch::find($second['batch_id'])->status)->toBe('preview')
-        ->and(LearningSessionVersion::count())->toBe(2)
+        ->and(LearningSession::count())->toBe(2)
         ->and(LearningCatalogRevision::count())->toBe(2);
 });
 
@@ -146,7 +142,7 @@ it('rolls back earlier inserts if a later catalog unique constraint fails', func
     LearningUnit::factory()->create(['level' => 'PRE_A1', 'sort_order' => 5, 'slug' => 'existing']);
     expect(fn () => lifecycleCommit($this->admin, $preview))->toThrow(ContentOperationException::class)
         ->and(LearningCatalogRevision::count())->toBe(0)
-        ->and(LearningSessionVersion::count())->toBe(0)
+        ->and(LearningSession::count())->toBe(0)
         ->and(SessionImportBatch::find($preview['batch_id'])->status)->toBe('preview');
 });
 
@@ -177,18 +173,18 @@ it('requires explicit editorial checks and published catalog', function () {
     expect(fn () => $this->publisher->publish($this->admin, $id))->toThrow(ContentOperationException::class);
     lifecycleReview($this->admin, $receipt);
     $this->publisher->publishMany($this->admin, $receipt['created_version_ids']);
-    expect(LearningSession::whereNotNull('active_version_id')->count())->toBe(2);
+    expect(LearningSession::published()->count())->toBe(2);
 });
 
-it('updates the stable published session while preserving the run snapshot and publication date', function () {
+it('replaces published content in place and discards an unfinished attempt', function () {
     $receipt = lifecycleCommit($this->admin, lifecyclePreview($this->admin));
     lifecyclePublishCatalog($this->admin, $receipt);
     lifecycleReview($this->admin, $receipt);
     $this->publisher->publishMany($this->admin, $receipt['created_version_ids']);
-    $old = LearningSessionVersion::find($receipt['created_version_ids'][0]);
+    $old = LearningSession::find($receipt['created_version_ids'][0]);
     $snapshot = $old->payload;
     $publishedAt = $old->published_at->toIso8601String();
-    $run = LearningRun::factory()->create(['user_id' => $this->admin->id, 'session_version_id' => $old->id, 'snapshot' => $snapshot]);
+    $run = LearningRun::factory()->create(['user_id' => $this->admin->id, 'session_id' => $old->id, 'snapshot' => $snapshot]);
     $data = lifecycleData();
     $data['sessions'] = [$data['sessions'][0]];
     $data['sessions'][0]['version'] = 2;
@@ -201,10 +197,8 @@ it('updates the stable published session while preserving the run snapshot and p
         ->and($old->payload['title'])->toBe($data['sessions'][0]['title'])
         ->and($old->payload['version'])->toBe(1)
         ->and($old->published_at->toIso8601String())->toBe($publishedAt)
-        ->and($run->refresh()->session_version_id)->toBe($old->id)
-        ->and($run->snapshot)->toBe($snapshot)
-        ->and($old->session->active_version_id)->toBe($old->id)
-        ->and($old->session->versions()->where('status', 'published')->count())->toBe(1);
+        ->and($run->fresh())->toBeNull()
+        ->and(LearningSession::where('external_id', $old->external_id)->published()->count())->toBe(1);
 });
 
 it('refuses dangling public dependencies and can archive the whole dependent group without deleting history', function () {
@@ -216,24 +210,23 @@ it('refuses dangling public dependencies and can archive the whole dependent gro
     expect(fn () => $this->publisher->archive($this->admin, [$ids[0]]))->toThrow(ContentOperationException::class);
     $result = $this->publisher->archive($this->admin, $ids);
     expect($result['archived_session_ids'])->toBe($ids)
-        ->and(LearningSession::whereNotNull('active_version_id')->count())->toBe(0)
-        ->and(LearningSessionVersion::count())->toBe(2)
-        ->and(LearningSessionVersion::where('status', 'archived')->count())->toBe(2)
-        ->and(LearningEditorialEvent::where('operation', 'session_archive')->count())->toBe(2);
+        ->and(LearningSession::published()->count())->toBe(0)
+        ->and(LearningSession::count())->toBe(2)
+        ->and(LearningSession::where('status', 'archived')->count())->toBe(2);
 });
 
 it('exports immutable imported resources after cleanup and keeps commit receipts replayable', function () {
     $preview = lifecyclePreview($this->admin);
     $receipt = lifecycleCommit($this->admin, $preview);
+    Storage::disk('learning_private')->assertMissing(SessionImportBatch::findOrFail($preview['batch_id'])->private_path);
     SessionImportBatch::find($preview['batch_id'])->update(['expires_at' => now('UTC')->subSecond()]);
-    expect($this->importer->pruneExpired())->toBe(1);
-    Storage::disk('learning_private')->assertMissing(SessionImportBatch::find($preview['batch_id'])->private_path);
+    expect($this->importer->pruneExpired())->toBe(0);
     expect(lifecycleCommit($this->admin, $preview))->toBe($receipt);
     $export = app(SessionExportService::class)->batch($this->admin, $preview['batch_id']);
     expect(CanonicalJson::hash($export))->toBe(CanonicalJson::hash(lifecycleData()))
         ->and(app(SessionPackageValidator::class)->validate(CanonicalJson::encode($export))->isValid())->toBeTrue();
     $versionExport = app(SessionExportService::class)->version($this->admin, $receipt['created_version_ids'][0]);
-    expect($versionExport['sessions'][0])->toBe(LearningSessionVersion::find($receipt['created_version_ids'][0])->payload);
+    expect($versionExport['sessions'][0])->toBe(LearningSession::find($receipt['created_version_ids'][0])->payload);
     expect($this->importer->pruneExpired())->toBe(0);
 });
 
@@ -264,8 +257,8 @@ it('protects every HTTP operation and supports uploads downloads and validation 
     $receipt = $this->postJson($url, ['token' => $preview['token'], 'file_hash' => $preview['file_hash']])->assertOk()->json();
     $this->postJson($url, ['token' => $preview['token'], 'file_hash' => $preview['file_hash']])->assertOk()->assertExactJson($receipt);
     $this->get($prefix.'/imports/'.$preview['batch_id'].'/export')->assertOk()->assertHeader('Cache-Control', 'no-store, private');
-    $this->get($prefix.'/versions/'.$receipt['created_version_ids'][0].'/export')->assertOk()->assertDownload('session-version-'.$receipt['created_version_ids'][0].'.json');
-    $this->postJson($prefix.'/versions/'.$receipt['created_version_ids'][0].'/review', ['checks' => ['language' => true]])->assertUnprocessable();
+    $this->get($prefix.'/sessions/'.$receipt['created_version_ids'][0].'/export')->assertOk()->assertDownload('session-version-'.$receipt['created_version_ids'][0].'.json');
+    $this->postJson($prefix.'/sessions/'.$receipt['created_version_ids'][0].'/review', ['checks' => ['language' => true]])->assertUnprocessable();
 });
 
 function lifecycleCheckpointPackage(): array
@@ -291,7 +284,7 @@ function lifecycleCheckpointPackage(): array
     return $data;
 }
 
-it('publishes versioned curricula only with ready checkpoints and preserves pinned enrollments', function () {
+it('publishes editorial curricula only with ready checkpoints', function () {
     $preview = lifecyclePreview($this->admin, lifecycleCheckpointPackage());
     $receipt = lifecycleCommit($this->admin, $preview);
     $service = app(CurriculumPublicationService::class);
@@ -303,7 +296,6 @@ it('publishes versioned curricula only with ready checkpoints and preserves pinn
     $this->publisher->publishMany($this->admin, $receipt['created_version_ids']);
     $service->review($this->admin, $id, lifecycleChecks());
     $old = $service->publish($this->admin, $id);
-    $enrollment = \App\Models\Learning\LearningCurriculumEnrollment::factory()->create(['user_id' => $this->admin->id, 'curriculum_version_id' => $old->id]);
     expect(fn () => $this->publisher->archive($this->admin, LearningSession::pluck('id')->all()))->toThrow(ContentOperationException::class);
     $data = lifecycleCheckpointPackage();
     $next = $data['curricula'][0];
@@ -313,12 +305,10 @@ it('publishes versioned curricula only with ready checkpoints and preserves pinn
     $service->review($this->admin, $newId, lifecycleChecks());
     $service->publish($this->admin, $newId);
     expect($old->refresh()->status)->toBe(SessionVersionStatus::Archived)
-        ->and($enrollment->refresh()->curriculum_version_id)->toBe($old->id)
         ->and(LearningCurriculum::where('status', 'published')->count())->toBe(1);
     $service->archive($this->admin, $newId);
     $this->publisher->archive($this->admin, LearningSession::pluck('id')->all());
-    expect(LearningCurriculum::count())->toBe(2)
-        ->and($enrollment->refresh()->exists)->toBeTrue();
+    expect(LearningCurriculum::count())->toBe(2);
 });
 
 it('rolls back the entire publication group when the last version is not reviewed', function () {
@@ -326,9 +316,8 @@ it('rolls back the entire publication group when the last version is not reviewe
     lifecyclePublishCatalog($this->admin, $receipt);
     $this->publisher->review($this->admin, $receipt['created_version_ids'][0], lifecycleChecks());
     expect(fn () => $this->publisher->publishMany($this->admin, $receipt['created_version_ids']))->toThrow(ContentOperationException::class)
-        ->and(LearningSession::whereNotNull('active_version_id')->count())->toBe(0)
-        ->and(LearningSessionVersion::where('status', 'published')->count())->toBe(0)
-        ->and(LearningEditorialEvent::where('operation', 'session_publish')->count())->toBe(0);
+        ->and(LearningSession::published()->count())->toBe(0)
+        ->and(LearningSession::where('status', 'published')->count())->toBe(0);
 });
 
 it('stores UTC instants and expires previews at precisely the boundary in a non-UTC application', function () {
@@ -353,20 +342,6 @@ it('keeps snapshots immutable for catalog revisions and draft curriculum version
     expect(fn () => $revision->update(['content' => ['changed' => true]]))->toThrow(LogicException::class);
     $curriculum = LearningCurriculum::find($receipt['curriculum_ids'][0]);
     expect(fn () => $curriculum->update(['checkpoint_session_ids' => []]))->toThrow(LogicException::class);
-});
-
-it('rolls preview database records back and removes private files if journaling fails', function () {
-    LearningEditorialEvent::creating(function (): void {
-        throw new RuntimeException('Test audit failure');
-    });
-    try {
-        expect(fn () => lifecyclePreview($this->admin))->toThrow(RuntimeException::class, 'Test audit failure')
-            ->and(SessionImportBatch::count())->toBe(0)
-            ->and(Storage::disk('learning_private')->allFiles('previews'))->toBe([]);
-    } finally {
-        LearningEditorialEvent::flushEventListeners();
-        LearningEditorialEvent::clearBootedModels();
-    }
 });
 
 it('serves JSON authorization errors in production without converting them into Inertia pages', function () {
@@ -427,7 +402,7 @@ it('rejects editorial notes exceeding TEXT byte capacity without changing review
     $receipt = lifecycleCommit($this->admin, lifecyclePreview($this->admin));
     $id = $receipt['created_version_ids'][0];
     expect(fn () => $this->publisher->review($this->admin, $id, lifecycleChecks(), str_repeat('😀', 17000)))->toThrow(ContentOperationException::class)
-        ->and(LearningSessionVersion::find($id)->status)->toBe(SessionVersionStatus::Draft);
+        ->and(LearningSession::find($id)->status)->toBe(SessionVersionStatus::Draft);
 });
 
 it('publishes revised material at the stable explicitly renamed URL', function () {
@@ -448,7 +423,7 @@ it('publishes revised material at the stable explicitly renamed URL', function (
     $next = lifecycleCommit($this->admin, lifecyclePreview($this->admin, $data));
     lifecycleReview($this->admin, $next);
     expect($next['created_version_ids'])->toBe([])
-        ->and($next['updated_version_ids'])->toBe([$session->active_version_id]);
+        ->and($next['updated_version_ids'])->toBe([$session->id]);
     $this->withoutVite()->get($renamed)->assertOk()->assertSee($data['sessions'][0]['public_page']['summary']);
     $this->get($old)->assertStatus(301)->assertRedirect(url($renamed));
     expect($session->fresh()->slug)->toBe('stable-published-address');
@@ -457,9 +432,9 @@ it('reserves old public addresses during publication as well as renaming', funct
     $receipt = lifecycleCommit($this->admin, lifecyclePreview($this->admin));
     lifecyclePublishCatalog($this->admin, $receipt);
     lifecycleReview($this->admin, $receipt);
-    $first = LearningSessionVersion::findOrFail($receipt['created_version_ids'][0])->load('session.unit');
-    $path = \App\Services\Learning\PracticeUrls::unit($first->session->unit).'/'.$first->payload['public_page']['slug'];
-    \App\Models\Learning\LearningUrlAlias::create(['old_path' => $path, 'target_path' => '/practice/pre-a1/another/old-material', 'session_id' => LearningSessionVersion::findOrFail($receipt['created_version_ids'][1])->session_id]);
+    $first = LearningSession::findOrFail($receipt['created_version_ids'][0])->load('unit');
+    $path = \App\Services\Learning\PracticeUrls::unit($first->unit).'/'.$first->payload['public_page']['slug'];
+    \App\Models\Learning\LearningUrlAlias::create(['old_path' => $path, 'target_path' => '/practice/pre-a1/another/old-material', 'session_id' => $receipt['created_version_ids'][1]]);
     expect(fn () => $this->publisher->publishMany($this->admin, $receipt['created_version_ids']))->toThrow(ContentOperationException::class);
-    expect($first->fresh()->status->value)->toBe('reviewed')->and($first->session->fresh()->active_version_id)->toBeNull();
+    expect($first->fresh()->status->value)->toBe('reviewed')->and(LearningSession::published()->whereKey($first->id)->exists())->toBeFalse();
 });

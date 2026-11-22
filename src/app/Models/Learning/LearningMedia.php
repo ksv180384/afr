@@ -7,7 +7,6 @@ use App\Support\Learning\UsesUtcDates;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Карточка загруженного аудиофайла для занятий с результатом редакторской проверки.
@@ -60,15 +59,6 @@ class LearningMedia extends Model
         ];
     }
 
-    public function versions(): BelongsToMany
-    {
-        return $this->belongsToMany(
-            LearningSessionVersion::class,
-            'learning_session_version_media',
-            'media_id',
-            'session_version_id',
-        );
-    }
 
     public function creator(): BelongsTo
     {

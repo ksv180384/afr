@@ -12,18 +12,12 @@ use App\Models\Learning\LearningAttempt;
 use App\Models\Learning\LearningCatalogRevision;
 use App\Models\Learning\LearningContentReport;
 use App\Models\Learning\LearningCurriculum;
-use App\Models\Learning\LearningCurriculumEnrollment;
-use App\Models\Learning\LearningEditorialEvent;
 use App\Models\Learning\LearningLevel;
-use App\Models\Learning\LearningLevelEvent;
 use App\Models\Learning\LearningMedia;
-use App\Models\Learning\LearningObjective;
-use App\Models\Learning\LearningObjectiveEvidence;
 use App\Models\Learning\LearningPresentation;
 use App\Models\Learning\LearningProfile;
 use App\Models\Learning\LearningRun;
 use App\Models\Learning\LearningSession;
-use App\Models\Learning\LearningSessionVersion;
 use App\Models\Learning\LearningUnit;
 use App\Models\Learning\LearningUrlAlias;
 use App\Models\Learning\PersonalVocabulary;
@@ -41,11 +35,11 @@ beforeEach(function () {
     $this->seed(LearningLevelSeeder::class);
 });
 
-function schemaAttempt(User $user, ?LearningSessionVersion $version = null): LearningAttempt
+function schemaAttempt(User $user, ?LearningSession $version = null): LearningAttempt
 {
     $run = LearningRun::factory()->create([
         'user_id' => $user->id,
-        ...($version ? ['session_version_id' => $version->id] : []),
+        ...($version ? ['session_id' => $version->id] : []),
     ]);
     $presentation = LearningPresentation::factory()->create(['run_id' => $run->id, 'user_id' => $user->id]);
 
@@ -76,25 +70,6 @@ function schemaBatch(GuestSyncEpisode $episode, ?string $batchId = null): GuestS
     ]);
 }
 
-function schemaEvidence(LearningAttempt $event, LearningCurriculumEnrollment $enrollment, LearningObjective $objective): array
-{
-    $version = $event->run->sessionVersion;
-
-    return [
-        'user_id' => $event->user_id,
-        'enrollment_id' => $enrollment->id,
-        'objective_id' => $objective->id,
-        'event_id' => $event->id,
-        'run_id' => $event->run_id,
-        'session_id' => $version->session_id,
-        'session_version_id' => $version->id,
-        'task_id' => 'Q01',
-        'skill' => 'vocabulary',
-        'eligible' => true,
-        'occurred_at' => now('UTC'),
-    ];
-}
-
 it('seeds seven ordered levels idempotently without users or overwriting editorial descriptions', function () {
     $level = LearningLevel::query()->where('code', 'PRE_A1')->firstOrFail();
     $level->update(['title' => 'Редакторское название', 'summary' => 'Сохранённое описание']);
@@ -112,7 +87,7 @@ it('creates a unique account profile with PRE_A1 and no initial level', function
     $profile = LearningProfile::create(['user_id' => $user->id])->refresh();
 
     expect($profile->current_level)->toBe(LevelCode::PreA1)
-        ->and($profile->timezone)->toBe('UTC')
+        ->and($profile->user->timezone)->toBeNull()
         ->and($profile->revision)->toBe(1)
         ->and($profile->user->is($user))->toBeTrue()
         ->and(Schema::hasColumn('learning_profiles', 'initial_level'))->toBeFalse();
@@ -129,55 +104,34 @@ it('requires account ownership rather than creating anonymous server users', fun
 it('supports two runs and two studied sources for one personal lexeme', function () {
     $owner = User::factory()->create();
     $first = LearningRun::factory()->create(['user_id' => $owner->id]);
-    $second = LearningRun::factory()->create(['user_id' => $owner->id, 'session_version_id' => $first->session_version_id]);
+    $second = LearningRun::factory()->create(['user_id' => $owner->id, 'session_id' => $first->session_id]);
     $word = PersonalVocabulary::factory()->create(['user_id' => $owner->id, 'lexeme_key' => 'fr:bonjour:greeting']);
-    PersonalVocabularySource::factory()->create(['personal_word_id' => $word->id, 'session_version_id' => $first->session_version_id]);
+    PersonalVocabularySource::factory()->create(['personal_word_id' => $word->id, 'session_id' => $first->session_id]);
     PersonalVocabularySource::factory()->create(['personal_word_id' => $word->id]);
 
     expect($first->id)->not->toBe($second->id)
         ->and($word->sources()->count())->toBe(2)
-        ->and($first->sessionVersion->runs()->count())->toBe(2)
+        ->and($first->session->runs()->count())->toBe(2)
         ->and(PersonalVocabulary::query()->count())->toBe(1);
 });
 
-it('enforces unique version numbers and active versions belonging to the same session', function () {
-    $version = LearningSessionVersion::factory()->create();
-    $session = $version->session;
-    $session->update(['active_version_id' => $version->id]);
-    expect($session->fresh()->activeVersion->is($version))->toBeTrue();
+it('updates one content row while preserving the lesson reference', function () {
+    $lesson = lessonWithContent();
+    $run = LearningRun::factory()->create(['session_id' => $lesson->id]);
+    lessonWithContent(['session_id' => $lesson->id, 'payload' => ['updated' => true]]);
 
-    expect(fn () => LearningSessionVersion::factory()->create(['session_id' => $session->id, 'version' => 1]))->toThrow(QueryException::class);
-    $other = LearningSessionVersion::factory()->create();
-    expect(fn () => $session->update(['active_version_id' => $other->id]))->toThrow(QueryException::class);
+    expect($run->fresh()->session->payload)->toBe(['updated' => true])
+        ->and(LearningSession::count())->toBe(1)
+        ->and(Schema::hasTable('learning_session_versions'))->toBeFalse();
 });
 
-it('rejects units and curricula from another level at the database boundary', function () {
+it('rejects units from another level at the database boundary', function () {
     $unit = LearningUnit::factory()->create(['level' => 'A1']);
     expect(fn () => LearningSession::factory()->create(['unit_id' => $unit->id, 'level' => 'PRE_A1']))->toThrow(QueryException::class);
-    $curriculum = LearningCurriculum::factory()->create(['level' => 'A1']);
-    expect(fn () => LearningCurriculumEnrollment::factory()->create(['curriculum_version_id' => $curriculum->id, 'level' => 'PRE_A1']))->toThrow(QueryException::class);
-});
-
-it('preserves pinned runs and vocabulary when publishing and archiving content versions', function () {
-    $owner = User::factory()->create();
-    $old = LearningSessionVersion::factory()->create(['status' => 'published', 'published_at' => now('UTC')]);
-    $run = LearningRun::factory()->create(['user_id' => $owner->id, 'session_version_id' => $old->id]);
-    $source = PersonalVocabularySource::factory()->create(['session_version_id' => $old->id]);
-    $new = LearningSessionVersion::factory()->create(['session_id' => $old->session_id, 'version' => 2, 'status' => 'published', 'published_at' => now('UTC'), 'payload' => ['fixture' => 'v2']]);
-    $old->session->update(['active_version_id' => $new->id]);
-    $old->update(['status' => 'archived', 'archived_at' => now('UTC')]);
-
-    expect($run->fresh()->sessionVersion->id)->toBe($old->id)
-        ->and($run->fresh()->snapshot)->toBe(['fixture' => true])
-        ->and($source->fresh()->sessionVersion->status)->toBe(SessionVersionStatus::Archived)
-        ->and($old->session->fresh()->activeVersion->id)->toBe($new->id);
-    expect(fn () => $old->delete())->toThrow(QueryException::class);
-    expect(fn () => LearningSessionVersion::query()->whereKey($old->id)->delete())->toThrow(QueryException::class);
-    expect(fn () => $old->session->delete())->toThrow(QueryException::class);
 });
 
 it('guards imported payloads and started snapshots against in-place mutation', function () {
-    $version = LearningSessionVersion::factory()->create();
+    $version = lessonWithContent();
     $version->update(['payload' => ['changed' => true]]);
     expect($version->fresh()->payload)->toBe(['changed' => true]);
     $version = $version->fresh();
@@ -190,8 +144,6 @@ it('guards imported payloads and started snapshots against in-place mutation', f
     expect(fn () => $presentation->update(['choice_order' => ['b', 'a']]))->toThrow(LogicException::class);
     $source = PersonalVocabularySource::factory()->create();
     expect(fn () => $source->update(['snapshot' => ['changed' => true]]))->toThrow(LogicException::class);
-    $enrollment = LearningCurriculumEnrollment::factory()->create();
-    expect(fn () => $enrollment->update(['promotion_policy_version' => 2]))->toThrow(LogicException::class);
 });
 
 it('does not change a completed result or a published curriculum snapshot', function () {
@@ -236,7 +188,7 @@ it('deduplicates personal words and their versioned sources', function () {
     $word = PersonalVocabulary::factory()->create();
     expect(fn () => PersonalVocabulary::factory()->create(['user_id' => $word->user_id, 'lexeme_key' => $word->lexeme_key]))->toThrow(QueryException::class);
     $source = PersonalVocabularySource::factory()->create(['personal_word_id' => $word->id]);
-    expect(fn () => PersonalVocabularySource::factory()->create(['personal_word_id' => $word->id, 'session_version_id' => $source->session_version_id]))->toThrow(QueryException::class);
+    expect(fn () => PersonalVocabularySource::factory()->create(['personal_word_id' => $word->id, 'session_id' => $source->session_id]))->toThrow(QueryException::class);
 });
 
 it('applies only one event and one run success effect per lexeme', function () {
@@ -284,89 +236,40 @@ it('binds guest identity and server mappings to one account', function () {
     expect(fn () => GuestEventMapping::create(['episode_id' => $episode->id, 'guest_id' => $episode->guest_id, 'owner_user_id' => $owner->id, 'entity_type' => 'run', 'guest_entity_id' => (string) Str::uuid(), 'server_run_id' => $run->id]))->toThrow(QueryException::class);
 });
 
-it('retains objective identity independently from changing content versions', function () {
-    $owner = User::factory()->create();
-    $enrollment = LearningCurriculumEnrollment::factory()->create(['user_id' => $owner->id]);
-    $objective = LearningObjective::create(['stable_id' => 'PRE_A1.TEST', 'level' => 'PRE_A1', 'title' => 'Тестовая цель']);
-    $enrollment->curriculum->objectives()->attach($objective->id);
-    $version = LearningSessionVersion::factory()->create();
-    $enrollment->curriculum->checkpoints()->attach($version->session_id);
-    $first = schemaAttempt($owner, $version);
-    $data = schemaEvidence($first, $enrollment, $objective);
-    LearningObjectiveEvidence::create($data);
-    expect(fn () => LearningObjectiveEvidence::create($data))->toThrow(QueryException::class);
-    $next = LearningSessionVersion::factory()->create(['session_id' => $version->session_id, 'version' => 2]);
-    $second = schemaAttempt($owner, $next);
-    LearningObjectiveEvidence::create(schemaEvidence($second, $enrollment, $objective));
-
-    $evidence = $enrollment->evidence()->get();
-    expect($evidence)->toHaveCount(2)
-        ->and($evidence->unique(fn (LearningObjectiveEvidence $row): string => $row->session_id.':'.$row->task_id))->toHaveCount(1)
-        ->and($enrollment->curriculum->objectives()->count())->toBe(1);
-});
-
-it('retains import media catalog and editorial records with real typed relationships', function () {
+it('links imported content and resolves media from the current payload', function () {
     $creator = User::factory()->create();
     $import = SessionImportBatch::create(['file_hash' => hash('sha256', 'file'), 'preview_token_hash' => hash('sha256', 'token'), 'created_by' => $creator->id, 'private_path' => 'imports/fixture.json', 'original_filename' => 'fixture.json', 'file_size' => 100, 'expires_at' => now('UTC')->addMinutes(30)]);
     expect(fn () => SessionImportBatch::create(['file_hash' => hash('sha256', 'file2'), 'preview_token_hash' => $import->preview_token_hash, 'private_path' => 'imports/fixture2.json', 'original_filename' => 'fixture2.json', 'file_size' => 100, 'expires_at' => now('UTC')->addMinutes(30)]))->toThrow(QueryException::class);
-    $version = LearningSessionVersion::factory()->create(['import_batch_id' => $import->id]);
+    $version = lessonWithContent(['import_batch_id' => $import->id]);
     $media = LearningMedia::create(['disk' => 'local', 'path' => 'audio/fixture.mp3', 'mime_type' => 'audio/mpeg', 'size' => 100, 'checksum' => hash('sha256', 'audio')]);
-    $version->media()->attach($media->id);
     $revision = LearningCatalogRevision::create(['level_code' => 'PRE_A1', 'content' => ['summary' => 'Редакция'], 'base_revision' => 0, 'import_batch_id' => $import->id]);
-    $audit = LearningEditorialEvent::create(['actor_id' => $creator->id, 'session_version_id' => $version->id, 'operation' => 'import', 'new_state' => ['status' => 'draft'], 'occurred_at' => now('UTC')]);
-    LearningContentReport::create(['session_version_id' => $version->id, 'text' => 'Проверить формулировку']);
+    LearningContentReport::create(['session_id' => $version->id, 'text' => 'Проверить формулировку']);
     LearningUrlAlias::create(['old_path' => '/practice/old', 'target_path' => '/practice/new', 'session_id' => $version->session_id]);
-    expect($version->media()->first()->is($media))->toBeTrue()
-        ->and($audit->sessionVersion->is($version))->toBeTrue()
-        ->and($revision->importBatch->is($import))->toBeTrue();
-    expect(fn () => $media->delete())->toThrow(QueryException::class);
+    expect($revision->importBatch->is($import))->toBeTrue();
+    expect(app(\App\Services\Learning\MediaLibraryService::class)->forContent(['audio' => ['asset_id' => $media->id]])->sole()->is($media))->toBeTrue();
     expect(fn () => $import->delete())->toThrow(QueryException::class);
 });
 
 it('cleans personal data on account deletion while preserving studied content', function () {
     $owner = User::factory()->create();
-    $levelEvent = LearningLevelEvent::create(['user_id' => $owner->id, 'old_level' => 'PRE_A1', 'new_level' => 'A1', 'source' => 'manual', 'source_event_id' => (string) Str::uuid(), 'occurred_at' => now('UTC')]);
-    LearningProfile::factory()->create(['user_id' => $owner->id, 'last_manual_level_event_id' => $levelEvent->id]);
+    LearningProfile::factory()->create(['user_id' => $owner->id, 'last_manual_level_changed_at' => now('UTC')]);
     $attempt = schemaAttempt($owner);
     $word = PersonalVocabulary::factory()->create(['user_id' => $owner->id]);
-    PersonalVocabularySource::factory()->create(['personal_word_id' => $word->id, 'session_version_id' => $attempt->run->session_version_id]);
+    PersonalVocabularySource::factory()->create(['personal_word_id' => $word->id, 'session_id' => $attempt->run->session_id]);
     VocabularyEventEffect::create(['user_id' => $owner->id, 'event_id' => $attempt->id, 'personal_word_id' => $word->id, 'lexeme_key' => $word->lexeme_key, 'effect' => [], 'applied_at' => now('UTC')]);
     VocabularyRunEffect::create(['user_id' => $owner->id, 'lexeme_key' => $word->lexeme_key, 'run_id' => $attempt->run_id]);
     DailyAssignment::create(['user_id' => $owner->id, 'local_date' => '2026-10-24', 'selected_run_id' => $attempt->run_id]);
     LearningActivityDay::create(['user_id' => $owner->id, 'local_date' => '2026-10-24', 'qualifying_run_id' => $attempt->run_id]);
-    $enrollment = LearningCurriculumEnrollment::factory()->create(['user_id' => $owner->id]);
-    $objective = LearningObjective::create(['stable_id' => 'PRE_A1.DELETE', 'level' => 'PRE_A1', 'title' => 'Цель']);
-    LearningObjectiveEvidence::create(schemaEvidence($attempt, $enrollment, $objective));
     $episode = schemaEpisode($owner);
     schemaBatch($episode);
     GuestEventMapping::create(['episode_id' => $episode->id, 'guest_id' => $episode->guest_id, 'owner_user_id' => $owner->id, 'entity_type' => 'event', 'guest_entity_id' => (string) Str::uuid(), 'server_event_id' => $attempt->id]);
-    $versionId = $attempt->run->session_version_id;
+    $versionId = $attempt->run->session_id;
     $owner->delete();
 
-    foreach ([LearningProfile::class, LearningLevelEvent::class, LearningRun::class, LearningPresentation::class, LearningAttempt::class, PersonalVocabulary::class, PersonalVocabularySource::class, VocabularyEventEffect::class, VocabularyRunEffect::class, DailyAssignment::class, LearningActivityDay::class, LearningCurriculumEnrollment::class, LearningObjectiveEvidence::class, GuestSyncEpisode::class, GuestSyncBatch::class, GuestEventMapping::class] as $model) {
+    foreach ([LearningProfile::class, LearningRun::class, LearningPresentation::class, LearningAttempt::class, PersonalVocabulary::class, PersonalVocabularySource::class, VocabularyEventEffect::class, VocabularyRunEffect::class, DailyAssignment::class, LearningActivityDay::class, GuestSyncEpisode::class, GuestSyncBatch::class, GuestEventMapping::class] as $model) {
         expect($model::query()->count())->toBe(0);
     }
-    expect(LearningSessionVersion::query()->find($versionId))->not->toBeNull();
-});
-
-it('rolls back only learning tables without changing lessons or games', function () {
-    $legacy = [
-        'lessons' => Schema::getColumnListing('lessons'),
-        'game_sessions' => Schema::getColumnListing('game_sessions'),
-    ];
-    $paths = glob(database_path('migrations/2026_10_24_030*_create_learning_*_tables.php'));
-    expect($paths)->toHaveCount(4);
-    foreach (array_reverse($paths) as $path) {
-        (require $path)->down();
-    }
-    expect(Schema::hasTable('learning_levels'))->toBeFalse()
-        ->and(Schema::getColumnListing('lessons'))->toBe($legacy['lessons'])
-        ->and(Schema::getColumnListing('game_sessions'))->toBe($legacy['game_sessions']);
-    foreach ($paths as $path) {
-        (require $path)->up();
-    }
-    $this->seed(LearningLevelSeeder::class);
-    expect(LearningLevel::query()->count())->toBe(7);
+    expect(LearningSession::query()->find($versionId))->not->toBeNull();
 });
 
 it('keeps opaque external and lexeme identifiers case-sensitive like the JSON contract', function () {
@@ -380,19 +283,6 @@ it('keeps opaque external and lexeme identifiers case-sensitive like the JSON co
         ->and(PersonalVocabulary::query()->count())->toBe(2);
 });
 
-it('rejects objective evidence pointing to a different session or run version', function () {
-    $owner = User::factory()->create();
-    $enrollment = LearningCurriculumEnrollment::factory()->create(['user_id' => $owner->id]);
-    $objective = LearningObjective::create(['stable_id' => 'PRE_A1.CONSISTENT', 'level' => 'PRE_A1', 'title' => 'Цель']);
-    $event = schemaAttempt($owner);
-    $other = LearningSessionVersion::factory()->create();
-    $data = schemaEvidence($event, $enrollment, $objective);
-    $data['session_version_id'] = $other->id;
-    expect(fn () => LearningObjectiveEvidence::create($data))->toThrow(QueryException::class);
-    $data['session_id'] = $other->session_id;
-    expect(fn () => LearningObjectiveEvidence::create($data))->toThrow(QueryException::class);
-});
-
 it('uses NULL for nonfirst answers so several corrections remain possible', function () {
     $event = schemaAttempt(User::factory()->create());
     foreach ([2, 3] as $sequence) {
@@ -404,14 +294,14 @@ it('uses NULL for nonfirst answers so several corrections remain possible', func
 
 it('supports immutable vocabulary-test snapshots without a session version', function () {
     $snapshot = ['fixture' => true, 'lexeme_keys' => ['fr:bonjour:greeting'], 'order' => ['R01']];
-    $run = LearningRun::factory()->create(['kind' => 'vocabulary_test', 'session_version_id' => null, 'snapshot' => $snapshot]);
-    expect($run->fresh()->session_version_id)->toBeNull()
+    $run = LearningRun::factory()->create(['kind' => 'vocabulary_test', 'session_id' => null, 'snapshot' => $snapshot]);
+    expect($run->fresh()->session_id)->toBeNull()
         ->and($run->fresh()->snapshot)->toBe($snapshot);
     expect(fn () => $run->update(['snapshot' => ['order' => ['different']]]))->toThrow(LogicException::class);
 });
 
 it('cannot erase publication timestamps to bypass immutable content', function () {
-    $version = LearningSessionVersion::factory()->create(['published_at' => now('UTC'), 'status' => 'published']);
+    $version = lessonWithContent(['published_at' => now('UTC'), 'status' => 'published']);
     expect(fn () => $version->update(['published_at' => null]))->toThrow(LogicException::class);
     $curriculum = LearningCurriculum::factory()->create(['published_at' => now('UTC'), 'status' => 'published']);
     expect(fn () => $curriculum->update(['published_at' => null]))->toThrow(LogicException::class);

@@ -15,7 +15,7 @@ const props = defineProps({ authUser: Object, version: Object, validation: Objec
 const draft = ref(JSON.parse(JSON.stringify(props.version.payload)));
 const raw = ref('');
 const advanced = ref(false);
-const saveContent = () => run(async () => { const content = advanced.value ? JSON.parse(raw.value) : draft.value; return api.dailyPractice.action('versions/' + props.version.id + '/save', { content, checksum: props.version.checksum }); }, true);
+const saveContent = () => run(async () => { const content = advanced.value ? JSON.parse(raw.value) : draft.value; return api.dailyPractice.action('sessions/' + props.version.id + '/save', { content, checksum: props.version.checksum }); }, true);
 const remove = () => run(async () => { const result = await deleteContent('sessions', props.version.session_id, props.version.title); if (result) router.visit('/admin/daily-practice'); return result; });
 const status = ref(props.version.status);
 const notes = ref(props.version.editor_notes ?? '');
@@ -24,13 +24,13 @@ const slug = ref(props.publicMeta.session_slug ?? '');
 const confirmed = ref(false);
 const publicWidth = ref('100%');
 const { busy, failure, run } = useOperation();
-const saveStatus = () => run(() => api.dailyPractice.action('versions/status', { version_ids: [props.version.id], status: status.value, notes: notes.value }), true);
+const saveStatus = () => run(() => api.dailyPractice.action('sessions/status', { version_ids: [props.version.id], status: status.value, notes: notes.value }), true);
 const rename = () => run(() => api.dailyPractice.action('sessions/' + props.version.session_id + '/rename', { slug: slug.value, expected_slug: props.publicMeta.session_slug, confirmed: confirmed.value }), true);
 </script>
 <template>
   <shell :auth-user="authUser" :title="version.title">
     <div class="actions"><el-tag>{{ statusLabel(version.status) }}</el-tag><el-text>{{ version.external_id }} · {{ version.level }} · {{ version.steps }} вопросов</el-text></div>
-    <div class="actions"><Link :href="'/admin/daily-practice/versions/' + version.id + '/preview'"><el-button>Пройти тестовое занятие</el-button></Link><el-link :href="'/admin/daily-practice/versions/' + version.id + '/export'">Экспорт JSON</el-link><el-link v-if="version.import_batch_id" :href="'/admin/daily-practice/imports/' + version.import_batch_id + '/export'">Экспорт пакета</el-link></div>
+    <div class="actions"><Link :href="'/admin/daily-practice/sessions/' + version.id + '/preview'"><el-button>Пройти тестовое занятие</el-button></Link><el-link :href="'/admin/daily-practice/sessions/' + version.id + '/export'">Экспорт JSON</el-link><el-link v-if="version.import_batch_id" :href="'/admin/daily-practice/imports/' + version.import_batch_id + '/export'">Экспорт пакета</el-link></div>
     <issues :report="failure" />
     <el-card class="panel" shadow="never"><template #header>Редактирование занятия</template>
       <el-switch v-model="advanced" active-text="Полный JSON" @change="value => { if (value) raw = JSON.stringify(draft, null, 2); else { try { draft = JSON.parse(raw); } catch { advanced = true; } } }" />

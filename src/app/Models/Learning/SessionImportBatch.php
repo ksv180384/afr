@@ -60,9 +60,9 @@ class SessionImportBatch extends Model
         ];
     }
 
-    public function versions(): HasMany
+    public function sessions(): HasMany
     {
-        return $this->hasMany(LearningSessionVersion::class, 'import_batch_id', 'id');
+        return $this->hasMany(LearningSession::class, 'import_batch_id', 'id');
     }
 
     public function catalogRevisions(): HasMany

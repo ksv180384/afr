@@ -12,23 +12,21 @@ final class PublicPracticeCatalog
 {
     public function sessions(): Builder
     {
-        return LearningSession::query()->whereNull('archived_at')->whereNotNull('slug')
-            ->whereHas('activeVersion', fn ($query) => $query->where('status', 'published')->whereNotNull('published_at')->where('public_explanation_count', '>', 0)->whereNotNull('public_summary'))
+        return LearningSession::query()->published()->whereNotNull('slug')->whereNotNull('published_at')->where('public_explanation_count', '>', 0)->whereNotNull('public_summary')
             ->whereHas('unit', fn ($query) => $query->whereNotNull('published_at')->whereNull('archived_at'))
             ->whereHas('levelDefinition', fn ($query) => $query->published());
     }
 
     private function summaries(Builder $query)
     {
-        return $query->with(['unit', 'activeVersion' => fn ($version) => $version->select([
-            'id', 'session_id', 'published_at', 'content_title', 'content_duration', 'public_summary',
-        ])])->orderBy('sort_order')->orderBy('external_id')->get();
+        return $query->with('unit')->select('id', 'unit_id', 'slug', 'external_id', 'content_title', 'content_duration', 'public_summary')
+            ->orderBy('sort_order')->orderBy('external_id')->get();
     }
 
     private function row(LearningSession $session): array
     {
-        return ['id' => $session->external_id, 'title' => $session->activeVersion->content_title,
-            'summary' => $session->activeVersion->public_summary, 'duration' => (int) $session->activeVersion->content_duration,
+        return ['id' => $session->external_id, 'title' => $session->content_title,
+            'summary' => $session->public_summary, 'duration' => (int) $session->content_duration,
             'path' => PracticeUrls::session($session)];
     }
 
@@ -47,19 +45,18 @@ final class PublicPracticeCatalog
 
     public function assertSession(LearningSession $session): void
     {
-        $ever = $session->versions()->whereNotNull('published_at')->exists();
-        abort_unless($ever, 404);
+        abort_unless($session->published_at, 404);
         $this->assertUnit($session->unit);
         abort_if($session->archived_at, 410, 'Материал снят с публикации.');
-        abort_unless($session->activeVersion, 503, 'Материал временно недоступен.');
-        abort_if($session->activeVersion->status->value !== 'published', 410, 'Материал снят с публикации.');
+        abort_unless($session->payload, 503, 'Материал временно недоступен.');
+        abort_if($session->status->value !== 'published', 410, 'Материал снят с публикации.');
     }
 
     public function modified(?string $level = null, ?int $unitId = null): ?string
     {
         $levels = LearningLevel::whereNotNull('published_at')->when($level, fn ($query) => $query->where('code', $level));
         $units = LearningUnit::whereNotNull('published_at')->when($level, fn ($query) => $query->where('level', $level))->when($unitId, fn ($query) => $query->whereKey($unitId));
-        $sessions = LearningSession::whereHas('versions', fn ($query) => $query->whereNotNull('published_at'))
+        $sessions = LearningSession::whereNotNull('published_at')
             ->when($level, fn ($query) => $query->where('level', $level))->when($unitId, fn ($query) => $query->where('unit_id', $unitId));
         $date = collect([$levels->max('updated_at'), $units->max('updated_at'), $sessions->max('updated_at')])->filter()->max();
 
@@ -102,16 +99,16 @@ final class PublicPracticeCatalog
             return $this->dto('unit', $unit->title, $unit->summary, PracticeUrls::unit($unit), $breadcrumbs, $sessions->map(fn ($row) => $this->row($row))->all(),
                 $sessions->isNotEmpty(), $this->modified($code, $unit->id), $unit->learning_outcomes ?? [], $unit->pronunciation_notes ?? []);
         }
-        $session = $unit->sessions()->where('slug', $sessionSlug)->with('activeVersion', 'unit.levelDefinition')->firstOrFail();
+        $session = $unit->sessions()->where('slug', $sessionSlug)->with('unit.levelDefinition')->firstOrFail();
         $this->assertSession($session);
-        $payload = $session->activeVersion->payload;
+        $payload = $session->payload;
         $public = $payload['public_page'] ?? [];
         abort_unless(! empty($public['explanation_blocks']) && ! empty($public['summary']), 404);
         $path = PracticeUrls::session($session);
         $breadcrumbs[] = ['title' => $payload['title'], 'path' => $path];
         $links = $this->summaries($this->sessions()->whereIn('external_id', array_unique([...($public['related_session_ids'] ?? []), ...$payload['prerequisite_ids']])))->map(fn ($row) => $this->row($row))->all();
         $index = $sessions->search(fn ($row) => $row->id === $session->id);
-        $date = collect([$session->updated_at, $session->activeVersion->published_at, $unit->updated_at, $level->updated_at])->filter()->max()?->toIso8601String();
+        $date = collect([$session->updated_at, $session->published_at, $unit->updated_at, $level->updated_at])->filter()->max()?->toIso8601String();
         $page = $this->dto('session', $payload['title'], $public['summary'], $path, $breadcrumbs, [], true, $date);
         $page['seo']['title'] = $public['seo_title'];
         $page['seo']['description'] = $public['seo_description'];
@@ -158,9 +155,9 @@ final class PublicPracticeCatalog
                     continue;
                 }
                 $entries[] = ['path' => PracticeUrls::unit($unit), 'modified' => $this->modified($level->code, $unit->id)];
-                foreach ($this->sessions()->where('unit_id', $unit->id)->with(['activeVersion' => fn ($query) => $query->select('id', 'published_at')])->get() as $session) {
+                foreach ($this->sessions()->where('unit_id', $unit->id)->get(['id', 'unit_id', 'slug', 'updated_at', 'published_at']) as $session) {
                     $session->setRelation('unit', $unit);
-                    $date = collect([$session->updated_at, $session->activeVersion->published_at, $unit->updated_at, $level->updated_at])->filter()->max();
+                    $date = collect([$session->updated_at, $session->published_at, $unit->updated_at, $level->updated_at])->filter()->max();
                     $entries[] = ['path' => PracticeUrls::session($session), 'modified' => $date?->toIso8601String()];
                 }
             }

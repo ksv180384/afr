@@ -4,7 +4,6 @@ use App\Models\Learning\LearningLevel;
 use App\Models\Learning\LearningProfile;
 use App\Models\Learning\LearningRun;
 use App\Models\Learning\LearningSession;
-use App\Models\Learning\LearningSessionVersion;
 use App\Models\Learning\LearningUnit;
 use App\Models\Learning\PersonalVocabulary;
 use App\Models\User\User;
@@ -23,8 +22,7 @@ beforeEach(function () {
     LearningLevel::where('code', 'PRE_A1')->update(['published_at' => now('UTC')]);
     $unit = LearningUnit::factory()->create(['published_at' => now('UTC')]);
     $row = LearningSession::factory()->create(['unit_id' => $unit->id, 'external_id' => $this->payload['id']]);
-    $this->version = LearningSessionVersion::factory()->create(['session_id' => $row->id, 'payload' => $this->payload, 'checksum' => CanonicalJson::hash($this->payload), 'status' => 'published', 'published_at' => now('UTC')->subDays(10)]);
-    $row->update(['active_version_id' => $this->version->id]);
+    $this->version = lessonWithContent(['session_id' => $row->id, 'payload' => $this->payload, 'checksum' => CanonicalJson::hash($this->payload), 'status' => 'published', 'published_at' => now('UTC')->subDays(10)]);
 });
 
 function syncFixture($test, bool $finish = true, int $offset = 1): array
@@ -89,7 +87,7 @@ it('imports a personal difficult mark independently of review marks and deduplic
 });
 
 it('rechecks a completed run and preserves higher level and existing vocabulary while adding sources', function () {
-    $profile = LearningProfile::factory()->create(['user_id' => $this->learner->id, 'current_level' => 'B1', 'timezone' => 'UTC']);
+    $profile = LearningProfile::factory()->create(['user_id' => $this->learner->id, 'current_level' => 'B1']);
     $snapshot = $this->payload['vocabulary'][0];
     $word = PersonalVocabulary::factory()->create(['user_id' => $this->learner->id, 'lexeme_key' => $snapshot['lexeme_key'], 'snapshot' => $snapshot, 'needs_review' => false, 'streak' => 2, 'errors' => 9, 'review_step' => 4, 'next_review_at' => now('UTC')->addDays(14)]);
     $before = $word->toArray();
@@ -324,7 +322,7 @@ it('replays all twelve guest presentations once and preserves the full result de
     $receipt = $this->postJson('/daily/api/guest-sync', $batch)->assertOk()->json();
     expect($receipt['rejected'])->toBe([]);
     $run = LearningRun::findOrFail($receipt['mapping'][$bundle['guest_run_id']]['server_run_id']);
-    expect($run->status->value)->toBe('completed')->and($run->snapshot['tasks'])->toHaveCount(12)
+    expect($run->status->value)->toBe('completed')->and($run->snapshot)->not->toHaveKey('tasks')
         ->and($run->presentations()->count())->toBe(12)->and($run->result['score_denominator'])->toBe(12)
         ->and($run->result['processed_steps'])->toBe(12);
     $this->postJson('/daily/api/guest-sync', $batch)->assertOk()->assertExactJson($receipt);

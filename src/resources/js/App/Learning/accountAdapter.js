@@ -3,7 +3,7 @@ import { accountPlayback, playbackPrediction, projectAccountAction } from './acc
 
 const id = () => crypto.randomUUID();
 const statusError = (message, status, code) => Object.assign(new Error(message), { response: { status, data: { message, code } } });
-const localFailure = error => new Error('Не удалось сохранить на устройстве. Не закрывайте страницу: повторите сохранение вручную.', {cause:error});
+const localFailure = error => new Error('Не удалось сохранить на устройстве.', {cause:error});
 const playbackConflict = () => statusError('Ход занятия на сервере изменился. Ваши ответы сохранены на устройстве. Загрузите состояние сервера, чтобы продолжить.',409,'playback_conflict');
 
 const deliveries = new WeakMap();
@@ -95,7 +95,7 @@ const deliverQueue = async ({ ownerUserId, runId, repository, transport, state =
           continue;
         }
         if (receipt.accepted_event_id !== sealed.client_event_id || receipt.state?.owner_user_id !== ownerUserId) {
-          throw statusError('Сервер не подтвердил событие. Повторите тот же запрос.',503,'unavailable');
+          throw statusError('Сервер не подтвердил сохранение.',503,'unavailable');
         }
         onMutation();
         try { await repository.mark(ownerUserId, sealed.local_id, 'acked', receipt); }
@@ -108,13 +108,13 @@ const deliverQueue = async ({ ownerUserId, runId, repository, transport, state =
         recovered = true;
         break;
       }
-      if (!recovered) throw statusError('Не удалось обновить занятие. Повторите отправку вручную.',503,'unavailable');
+      if (!recovered) throw statusError('Не удалось обновить занятие.',503,'unavailable');
     }
     onStatus({kind:'idle',message:''});
     return state;
   } catch (error) {
     const status = error.response?.status;
-    const message = error.response?.data?.message ?? (status >= 500 ? 'Сервер временно недоступен. Повторите отправку сохранённого события.' : error.message);
+    const message = error.response?.data?.message ?? (status >= 500 ? 'Сервер временно недоступен.' : error.message);
     if (error.response?.data?.code === 'playback_conflict') {
       onStatus({kind:'conflict',message});
       try {
@@ -129,9 +129,9 @@ const deliverQueue = async ({ ownerUserId, runId, repository, transport, state =
       }
       onStatus({kind:'error',message:error.response?.data?.message || 'Это занятие сейчас недоступно. Выберите другое в практике.'});
     } else if (!error.message.startsWith('Не удалось сохранить на устройстве.')) {
-      onStatus({kind:'pending',message:'Не удалось связаться с сервером. Ответ сохранён на устройстве. Повторите отправку вручную.'});
+      onStatus({kind:'pending',message:'Не удалось связаться с сервером. Действие сохранено на устройстве.'});
     }
-    throw Object.assign(new Error(status ? message : (error.message.startsWith('Не удалось сохранить на устройстве.') ? error.message : 'Нет соединения. Изменения сохранены на устройстве. Повторите отправку вручную.'), {cause:error}), { response:error.response });
+    throw Object.assign(new Error(status ? message : (error.message.startsWith('Не удалось сохранить на устройстве.') ? error.message : 'Нет соединения. Действие сохранено на устройстве.'), {cause:error}), { response:error.response });
   }
 };
 
@@ -292,7 +292,7 @@ export const createAccountAdapter = ({ ownerUserId, runId, repository, transport
     async acceptServerState() {
       if (background) await background.catch(() => {});
       const pending = await repository.pending(ownerUserId,runId);
-      if (pending.some(row => row.status !== 'conflict')) throw new Error('Есть неподтверждённое событие. Сначала повторите отправку.');
+      if (pending.some(row => row.status !== 'conflict')) throw new Error('Сервер ещё не подтвердил предыдущее действие.');
       for (const row of pending) {
         await repository.mark(ownerUserId,row.local_id,'dismissed');
       }

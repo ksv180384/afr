@@ -3,7 +3,7 @@
 use App\Models\Learning\LearningContentReport;
 use App\Models\Learning\LearningLevel;
 use App\Models\Learning\LearningRun;
-use App\Models\Learning\LearningSessionVersion;
+use App\Models\Learning\LearningSession;
 use App\Models\Learning\LearningUnit;
 use App\Models\User\Rang;
 use App\Models\User\User;
@@ -114,7 +114,7 @@ it('denies guests ordinary users and unverified administrators before reading or
     $this->assertDatabaseCount('learning_content_reports', 0);
 })->with([
     ['GET', ''], ['GET', 'catalog'], ['GET', 'reports'], ['GET', 'media'],
-    ['GET', 'versions/1'], ['GET', 'versions/1/preview'], ['POST', 'reports'], ['POST', 'reports/1'],
+    ['GET', 'sessions/1'], ['GET', 'sessions/1/preview'], ['POST', 'reports'], ['POST', 'reports/1'],
     ['POST', 'catalog/levels/1/visibility'], ['POST', 'catalog/units/1/visibility'],
     ['POST', 'media'], ['POST', 'media/00000000-0000-4000-8000-000000000001/approve'],
     ['GET', 'media/00000000-0000-4000-8000-000000000001/file'],
@@ -130,8 +130,8 @@ it('replaces imported lessons by stable ID without creating another content reco
     $changed = adminPackage();
     $changed['sessions'][0]['title'] = 'Другой текст';
     adminImport($this, $changed);
-    expect(LearningSessionVersion::find($receipt['version_ids'][0])->payload['title'])->toBe('Другой текст');
-    expect(LearningSessionVersion::count())->toBe(2);
+    expect(LearningSession::find($receipt['version_ids'][0])->payload['title'])->toBe('Другой текст');
+    expect(LearningSession::count())->toBe(2);
 });
 
 it('lists filters and paginates versions and exposes authorized snapshot previews without progress writes', function () {
@@ -141,9 +141,13 @@ it('lists filters and paginates versions and exposes authorized snapshot preview
         ->assertOk()->assertHeader('X-Robots-Tag', 'noindex, nofollow')
         ->assertInertia(fn (Assert $page) => $page->component('DailySession/Index', false)->has('versions', 1)->where('paginate.total', 1));
     $this->get('/admin/daily-practice?search=not-present')->assertInertia(fn (Assert $p) => $p->has('versions', 0));
-    $this->get('/admin/daily-practice/versions/'.$id)->assertInertia(fn (Assert $p) => $p->component('DailySession/Show', false)
+    $this->get('/admin/daily-practice/sessions/'.$id)->assertInertia(fn (Assert $p) => $p->component('DailySession/Show', false)
         ->missing('history')->missing('previous')->where('version.payload.id', 'PRE_A1-U01-L01')->has('publicMeta.breadcrumbs', 4)->where('publicMeta.missing', []));
-    $this->get('/admin/daily-practice/versions/'.$id.'/preview?frame=1')->assertInertia(fn (Assert $p) => $p->component('DailySession/Preview', false)->where('frame', true));
+    $this->get('/admin/daily-practice/sessions/'.$id.'/preview?frame=1')->assertInertia(fn (Assert $p) => $p->component('DailySession/Preview', false)->where('frame', true));
+    $legacyId = $receipt['version_ids'][1];
+    LearningSession::whereKey($id)->update(['legacy_content_id' => $legacyId]);
+    $this->get('/admin/daily-practice/versions/'.$legacyId)->assertRedirect('/admin/daily-practice/sessions/'.$id);
+    $this->get('/admin/daily-practice/versions/'.$legacyId.'/preview?frame=1')->assertRedirect('/admin/daily-practice/sessions/'.$id.'/preview?frame=1');
     $this->get('/admin/daily-practice/catalog')->assertInertia(fn (Assert $p) => $p->component('DailySession/Catalog', false)->has('revisions.data', 2));
     expect(LearningRun::count())->toBe(0);
     $this->assertDatabaseCount('personal_vocabulary', 0);
@@ -154,8 +158,8 @@ it('requires explicit checks then publishes catalog and versions through the HTT
     [, $receipt] = adminImport($this);
     $id = $receipt['version_ids'][0];
     $checks = array_fill_keys(ContentAccess::REVIEW_CHECKS, true);
-    $this->postJson('/admin/daily-practice/versions/'.$id.'/publish')->assertConflict();
-    $this->postJson('/admin/daily-practice/versions/'.$id.'/review', ['checks' => []])->assertUnprocessable();
+    $this->postJson('/admin/daily-practice/sessions/'.$id.'/publish')->assertConflict();
+    $this->postJson('/admin/daily-practice/sessions/'.$id.'/review', ['checks' => []])->assertUnprocessable();
     foreach ($receipt['catalog_revision_ids'] as $revision) {
         $this->get('/admin/daily-practice/catalog/'.$revision.'/export')->assertOk()->assertDownload('catalog-'.$revision.'.json');
         $this->getJson('/admin/daily-practice/catalog/'.$revision.'/diff')->assertOk()->assertJsonStructure(['before', 'after', 'base_revision']);
@@ -163,13 +167,13 @@ it('requires explicit checks then publishes catalog and versions through the HTT
         $this->postJson('/admin/daily-practice/catalog/'.$revision.'/publish')->assertOk();
     }
     foreach ($receipt['version_ids'] as $version) {
-        $this->postJson('/admin/daily-practice/versions/'.$version.'/review', ['checks' => $checks, 'notes' => 'Проверено'])->assertOk();
+        $this->postJson('/admin/daily-practice/sessions/'.$version.'/review', ['checks' => $checks, 'notes' => 'Проверено'])->assertOk();
     }
-    $this->postJson('/admin/daily-practice/versions/publish', ['version_ids' => $receipt['version_ids']])->assertOk();
-    $this->get('/admin/daily-practice/versions/'.$id.'/export')->assertOk()->assertDownload('session-version-'.$id.'.json');
-    $this->postJson('/admin/daily-practice/versions/'.$id.'/archive')->assertConflict();
-    $this->postJson('/admin/daily-practice/sessions/archive', ['session_ids' => LearningSessionVersion::query()->pluck('session_id')->all()])->assertOk();
-    expect(LearningSessionVersion::find($id)->status->value)->toBe('archived');
+    $this->postJson('/admin/daily-practice/sessions/publish', ['version_ids' => $receipt['version_ids']])->assertOk();
+    $this->get('/admin/daily-practice/sessions/'.$id.'/export')->assertOk()->assertDownload('session-version-'.$id.'.json');
+    $this->postJson('/admin/daily-practice/sessions/'.$id.'/archive')->assertConflict();
+    $this->postJson('/admin/daily-practice/sessions/archive', ['session_ids' => LearningSession::query()->pluck('id')->all()])->assertOk();
+    expect(LearningSession::find($id)->status->value)->toBe('archived');
 });
 
 it('stores incomplete public content as draft but blocks review and publication', function () {
@@ -177,15 +181,15 @@ it('stores incomplete public content as draft but blocks review and publication'
     unset($package['sessions'][0]['public_page']);
     [, $receipt] = adminImport($this, $package);
     $id = $receipt['version_ids'][0];
-    $this->get('/admin/daily-practice/versions/'.$id)->assertInertia(fn (Assert $p) => $p->has('publicMeta.missing', 5));
-    $this->postJson('/admin/daily-practice/versions/'.$id.'/review', ['checks' => array_fill_keys(ContentAccess::REVIEW_CHECKS, true)])->assertUnprocessable();
-    expect(LearningSessionVersion::find($id)->status->value)->toBe('draft');
+    $this->get('/admin/daily-practice/sessions/'.$id)->assertInertia(fn (Assert $p) => $p->has('publicMeta.missing', 5));
+    $this->postJson('/admin/daily-practice/sessions/'.$id.'/review', ['checks' => array_fill_keys(ContentAccess::REVIEW_CHECKS, true)])->assertUnprocessable();
+    expect(LearningSession::find($id)->status->value)->toBe('draft');
 });
 
 it('creates and processes task reports without altering content', function () {
     [, $receipt] = adminImport($this);
     $id = $receipt['version_ids'][0];
-    $before = LearningSessionVersion::find($id)->payload;
+    $before = LearningSession::find($id)->payload;
     $this->postJson('/admin/daily-practice/reports', ['version_id' => $id, 'task_id' => 'MISSING', 'text' => 'Ошибка'])->assertUnprocessable();
     $report = $this->postJson('/admin/daily-practice/reports', ['version_id' => $id, 'task_id' => 'Q01', 'text' => 'Проверить звук'])->assertCreated()->json('id');
     $this->postJson('/admin/daily-practice/reports/'.$report, ['status' => 'invalid'])->assertUnprocessable();
@@ -193,7 +197,7 @@ it('creates and processes task reports without altering content', function () {
     expect(LearningContentReport::find($report)->processed_by)->toBe($this->admin->id);
     expect(LearningContentReport::find($report)->resolved_at)->not->toBeNull();
     $this->get('/admin/daily-practice/reports?status=resolved')->assertInertia(fn (Assert $p) => $p->has('reports.data', 1));
-    expect(LearningSessionVersion::find($id)->payload)->toBe($before);
+    expect(LearningSession::find($id)->payload)->toBe($before);
 });
 
 it('validates real WAV bytes duration and protected playback before explicit media approval', function () {
@@ -245,9 +249,9 @@ it('shows curriculum coverage and controls and runs their review publish archive
         $this->postJson('/admin/daily-practice/catalog/'.$revision.'/publish')->assertOk();
     }
     foreach ($receipt['version_ids'] as $version) {
-        $this->postJson('/admin/daily-practice/versions/'.$version.'/review', ['checks' => $checks])->assertOk();
+        $this->postJson('/admin/daily-practice/sessions/'.$version.'/review', ['checks' => $checks])->assertOk();
     }
-    $this->postJson('/admin/daily-practice/versions/publish', ['version_ids' => $receipt['version_ids']])->assertOk();
+    $this->postJson('/admin/daily-practice/sessions/publish', ['version_ids' => $receipt['version_ids']])->assertOk();
     $this->get('/admin/daily-practice/catalog')->assertInertia(fn (Assert $p) => $p->has('curricula.data.0.coverage', 3)
         ->where('curricula.data.0.checkpoints.0.ready', true)->where('coverage.published_sessions', 2));
     $this->postJson('/admin/daily-practice/curricula/'.$id.'/review', ['checks' => $checks])->assertOk();
@@ -257,9 +261,9 @@ it('shows curriculum coverage and controls and runs their review publish archive
 
 it('rechecks revoked admin access and validates preview scenarios and filters', function () {
     [, $receipt] = adminImport($this);
-    $this->getJson('/admin/daily-practice/versions/'.$receipt['version_ids'][0].'/preview?scenario=unknown')->assertUnprocessable();
+    $this->getJson('/admin/daily-practice/sessions/'.$receipt['version_ids'][0].'/preview?scenario=unknown')->assertUnprocessable();
     foreach (['load_error', 'empty', 'exhausted', 'save'] as $scenario) {
-        $this->get('/admin/daily-practice/versions/'.$receipt['version_ids'][0].'/preview?frame=1&scenario='.$scenario)
+        $this->get('/admin/daily-practice/sessions/'.$receipt['version_ids'][0].'/preview?frame=1&scenario='.$scenario)
             ->assertInertia(fn (Assert $p) => $p->where('scenario', $scenario));
     }
     $this->getJson('/admin/daily-practice?page=0')->assertUnprocessable();
@@ -294,31 +298,30 @@ it('redirects the retired media page and cleans expired import files without a s
 
 it('edits lesson content and rejects stale edits', function () {
     [, $receipt] = adminImport($this);
-    $row = LearningSessionVersion::findOrFail($receipt['version_ids'][0]);
+    $row = LearningSession::findOrFail($receipt['version_ids'][0]);
     $content = $row->payload;
     $content['title'] = 'Изменено в редакторе';
-    $this->postJson('/admin/daily-practice/versions/'.$row->id.'/save', ['content' => $content, 'checksum' => $row->checksum])->assertOk();
+    $this->postJson('/admin/daily-practice/sessions/'.$row->id.'/save', ['content' => $content, 'checksum' => $row->checksum])->assertOk();
     expect($row->fresh()->payload['title'])->toBe($content['title']);
-    $this->postJson('/admin/daily-practice/versions/'.$row->id.'/save', ['content' => $content, 'checksum' => $row->checksum])->assertUnprocessable();
+    $this->postJson('/admin/daily-practice/sessions/'.$row->id.'/save', ['content' => $content, 'checksum' => $row->checksum])->assertUnprocessable();
 });
 
 it('requires confirmation and completely deletes a lesson and removes dangling prerequisites', function () {
     [, $receipt] = adminImport($this);
-    $row = LearningSessionVersion::findOrFail($receipt['version_ids'][0]);
-    $url = '/admin/daily-practice/manage/sessions/'.$row->session_id.'/delete';
+    $row = LearningSession::findOrFail($receipt['version_ids'][0]);
+    $url = '/admin/daily-practice/manage/sessions/'.$row->id.'/delete';
     $this->postJson($url)->assertUnprocessable();
     $this->postJson($url, ['confirmed' => true])->assertOk();
-    $this->assertDatabaseMissing('learning_sessions', ['id' => $row->session_id]);
-    $this->assertDatabaseMissing('learning_session_versions', ['id' => $row->id]);
-    expect(LearningSessionVersion::findOrFail($receipt['version_ids'][1])->payload['prerequisite_ids'])->not->toContain($row->payload['id']);
+    $this->assertDatabaseMissing('learning_sessions', ['id' => $row->id]);
+    expect(LearningSession::findOrFail($receipt['version_ids'][1])->payload['prerequisite_ids'])->not->toContain($row->payload['id']);
 });
 
 it('deletes a topic with all its lessons', function () {
     [, $receipt] = adminImport($this);
-    $unit = LearningSessionVersion::findOrFail($receipt['version_ids'][0])->session->unit;
+    $unit = LearningSession::findOrFail($receipt['version_ids'][0])->unit;
     $this->postJson('/admin/daily-practice/manage/units/'.$unit->id.'/delete', ['confirmed' => true])->assertOk();
     $this->assertDatabaseMissing('learning_units', ['id' => $unit->id]);
-    expect(LearningSessionVersion::count())->toBe(0);
+    expect(LearningSession::count())->toBe(0);
 });
 
 it('deletes a level and moves its profiles to the nearest remaining level', function () {
@@ -333,31 +336,28 @@ it('deletes a level and moves its profiles to the nearest remaining level', func
 });
 
 
-it('replaces published content while preserving started run snapshots', function () {
+it('replaces published content and drops unfinished attempts', function () {
     [, $receipt] = adminImport($this);
-    $row = LearningSessionVersion::findOrFail($receipt['version_ids'][0]);
+    $row = LearningSession::findOrFail($receipt['version_ids'][0]);
     $row->update(['status' => 'published', 'published_at' => now()]);
-    $row->session->update(['active_version_id' => $row->id]);
-    $run = LearningRun::factory()->create(['user_id' => $this->admin->id, 'session_version_id' => $row->id]);
-    $snapshot = $run->snapshot;
+    $run = LearningRun::factory()->create(['user_id' => $this->admin->id, 'session_id' => $row->id]);
     $p = adminPackage(); $p['sessions'][0]['title'] = 'Новое содержимое'; $p['sessions'][0]['version'] = 99;
     [, $updated] = adminImport($this, $p);
     expect($updated['version_ids'][0])->toBe($row->id);
     expect($row->fresh()->payload['title'])->toBe('Новое содержимое');
     expect($row->fresh()->status->value)->toBe('published');
-    expect($run->fresh()->snapshot)->toBe($snapshot);
-    expect(LearningSessionVersion::count())->toBe(2);
+    expect($run->fresh())->toBeNull();
+    expect(LearningSession::count())->toBe(2);
 });
 
 it('deletes published lesson runs and sources but retains personal words', function () {
     [, $receipt] = adminImport($this);
-    $row = LearningSessionVersion::findOrFail($receipt['version_ids'][0]);
+    $row = LearningSession::findOrFail($receipt['version_ids'][0]);
     $row->update(['status' => 'published', 'published_at' => now()]);
-    $row->session->update(['active_version_id' => $row->id]);
-    $run = LearningRun::factory()->create(['user_id' => $this->admin->id, 'session_version_id' => $row->id]);
+    $run = LearningRun::factory()->create(['user_id' => $this->admin->id, 'session_id' => $row->id]);
     $word = \App\Models\Learning\PersonalVocabulary::factory()->create(['user_id' => $this->admin->id]);
-    \App\Models\Learning\PersonalVocabularySource::factory()->create(['personal_word_id' => $word->id, 'user_id' => $this->admin->id, 'session_version_id' => $row->id]);
-    $this->postJson('/admin/daily-practice/manage/sessions/'.$row->session_id.'/delete', ['confirmed' => true])->assertOk();
+    \App\Models\Learning\PersonalVocabularySource::factory()->create(['personal_word_id' => $word->id, 'user_id' => $this->admin->id, 'session_id' => $row->id]);
+    $this->postJson('/admin/daily-practice/manage/sessions/'.$row->id.'/delete', ['confirmed' => true])->assertOk();
     $this->assertDatabaseMissing('learning_runs', ['id' => $run->id]);
     $this->assertDatabaseHas('personal_vocabulary', ['id' => $word->id]);
 });
@@ -378,12 +378,12 @@ it('imports multiple packages through successive ordinary requests and replaces 
     $upload = fn ($p) => $this->post('/admin/daily-practice/imports/bulk', ['file' => UploadedFile::fake()->createWithContent('package.json', json_encode($p))], ['Accept' => 'application/json']);
     $one = $upload($first)->assertOk()->assertHeader('Cache-Control', 'no-store, private')->json();
     $upload($second)->assertOk();
-    expect(LearningSessionVersion::count())->toBe(2);
+    expect(LearningSession::count())->toBe(2);
     $first['sessions'][0]['title'] = 'Массовое обновление';
     $again = $upload($first)->assertOk()->json();
     expect($again['updated_version_ids'])->toBe($one['version_ids'])->and($again['created_version_ids'])->toBe([]);
-    expect(LearningSessionVersion::count())->toBe(2);
-    expect(LearningSessionVersion::find($one['version_ids'][0])->payload['title'])->toBe('Массовое обновление');
+    expect(LearningSession::count())->toBe(2);
+    expect(LearningSession::find($one['version_ids'][0])->payload['title'])->toBe('Массовое обновление');
     expect(\App\Models\Learning\LearningCatalogRevision::count())->toBe(2);
 });
 
@@ -391,13 +391,13 @@ it('rejects companion documents on the server and does not partially import inva
     $this->actingAs($this->admin)->post('/admin/daily-practice/imports/bulk', ['file' => UploadedFile::fake()->createWithContent('notes.json', '{"checks":{}}')], ['Accept' => 'application/json'])->assertUnprocessable();
     $p = adminPackage(); $p['sessions'][1]['tasks'][0]['type'] = 'invalid_type';
     $this->post('/admin/daily-practice/imports/bulk', ['file' => UploadedFile::fake()->createWithContent('bad.json', json_encode($p))], ['Accept' => 'application/json'])->assertUnprocessable();
-    expect(LearningSessionVersion::count())->toBe(0);
+    expect(LearningSession::count())->toBe(0);
 });
 
 it('forbids bulk imports by a non administrator', function () {
     $user = User::factory()->create();
     $this->actingAs($user)->post('/admin/daily-practice/imports/bulk', ['file' => UploadedFile::fake()->createWithContent('package.json', json_encode(adminPackage()))], ['Accept' => 'application/json'])->assertForbidden();
-    expect(LearningSessionVersion::count())->toBe(0);
+    expect(LearningSession::count())->toBe(0);
 });
 
 
@@ -409,9 +409,9 @@ it('accepts bulk file bodies above the ordinary operation limit but still enforc
     $this->post('/admin/daily-practice/imports/bulk', [
         'file' => UploadedFile::fake()->createWithContent('large-package.json', $json),
     ], ['Accept' => 'application/json', 'Content-Length' => (string) $size])->assertOk();
-    expect(LearningSessionVersion::count())->toBe(2);
+    expect(LearningSession::count())->toBe(2);
 
-    $this->postJson('/admin/daily-practice/versions/status', [], ['Content-Length' => (string) $size])->assertStatus(413);
+    $this->postJson('/admin/daily-practice/sessions/status', [], ['Content-Length' => (string) $size])->assertStatus(413);
     $this->post('/admin/daily-practice/imports/bulk', [
         'file' => UploadedFile::fake()->createWithContent('package.json', json_encode(adminPackage())),
     ], ['Accept' => 'application/json', 'Content-Length' => (string) (config('daily_practice.import.max_bytes') + 65537)])->assertStatus(413);
@@ -421,39 +421,37 @@ it('accepts bulk file bodies above the ordinary operation limit but still enforc
 it('keeps application imports available without the ignored authoring bank', function () {
     config(['daily_practice.content_path' => storage_path('testing/absent-authoring-bank')]);
     adminImport($this);
-    expect(LearningSessionVersion::count())->toBe(2);
+    expect(LearningSession::count())->toBe(2);
     $this->get('/admin/daily-practice/templates/pre-a1-u01')->assertOk();
     $this->get('/admin/daily-practice/templates/pre-a1-u01-v2')->assertNotFound();
     $this->artisan('daily-practice:content-status')->assertExitCode(1);
 });
 
 
-it('imports edits previews and exports all twelve tasks while preserving an old six-task run', function () {
+it('imports edits previews and exports twelve tasks and drops the old unfinished attempt', function () {
     [, $receipt] = adminImport($this);
-    $row = LearningSessionVersion::findOrFail($receipt['version_ids'][0]);
-    $run = LearningRun::factory()->create(['user_id' => $this->admin->id, 'session_version_id' => $row->id]);
-    $old = $run->snapshot;
+    $row = LearningSession::findOrFail($receipt['version_ids'][0]);
+    $run = LearningRun::factory()->create(['user_id' => $this->admin->id, 'session_id' => $row->id]);
     $expanded = json_decode(file_get_contents(base_path('tests/Fixtures/Learning/twelve-task-package.json')), true);
     $training = $expanded['sessions'][0]['tasks'][0];
     $training['instruction'] = 'Выберите реплику для новой ситуации.';
     $expanded['sessions'][0]['training_tasks'] = ['dialogue' => [$training], 'recall' => []];
     [, $updated] = adminImport($this, $expanded);
     expect($updated['version_ids'][0])->toBe($row->id)
-        ->and($run->fresh()->snapshot)->toBe($old)
-        ->and($old['tasks'])->toHaveCount(6)
+        ->and($run->fresh())->toBeNull()
         ->and($row->fresh()->payload['tasks'])->toHaveCount(12);
     $content = $row->fresh()->payload;
     $content['tasks'][11]['instruction'] = 'Обновлённый двенадцатый вопрос';
-    $saved = $this->postJson('/admin/daily-practice/versions/'.$row->id.'/save', ['content' => $content, 'checksum' => $row->fresh()->checksum]);
+    $saved = $this->postJson('/admin/daily-practice/sessions/'.$row->id.'/save', ['content' => $content, 'checksum' => $row->fresh()->checksum]);
     $saved->assertOk();
-    $this->get('/admin/daily-practice/versions/'.$row->id)->assertInertia(fn (Assert $p) => $p
+    $this->get('/admin/daily-practice/sessions/'.$row->id)->assertInertia(fn (Assert $p) => $p
         ->has('version.payload.tasks', 12)->where('version.payload.tasks.11.instruction', $content['tasks'][11]['instruction']));
-    $this->get('/admin/daily-practice/versions/'.$row->id.'/preview')->assertOk();
-    $export = $this->getJson('/admin/daily-practice/versions/'.$row->id.'/export')->assertOk()
+    $this->get('/admin/daily-practice/sessions/'.$row->id.'/preview')->assertOk();
+    $export = $this->getJson('/admin/daily-practice/sessions/'.$row->id.'/export')->assertOk()
         ->assertJsonPath('schema_version', 1)->assertJsonPath('sessions.0.version', 1)
         ->assertJsonCount(12, 'sessions.0.tasks')->json();
     expect($export['sessions'][0])->toBe($content)
-        ->and($run->fresh()->snapshot)->toBe($old)
-        ->and(LearningSessionVersion::count())->toBe(2);
+        ->and($run->fresh())->toBeNull()
+        ->and(LearningSession::count())->toBe(2);
     $this->getJson('/admin/daily-practice/imports/'.$updated['batch_id'].'/export')->assertOk()->assertJsonCount(12, 'sessions.0.tasks');
 });

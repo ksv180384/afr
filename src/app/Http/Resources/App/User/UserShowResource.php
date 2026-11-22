@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\App\User;
 
+use App\Support\ViewerTime;
 use App\Helpers\Helper;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -23,7 +24,7 @@ class UserShowResource extends JsonResource
             'avatar_link' => $this['avatar_link'],
             'name' => $this['name'],
             'rang' => $this['rang'],
-            'created_at' => Carbon::parse($this['created_at'])->format('d.m.Y'),
+            'created_at' => ViewerTime::format(Carbon::parse($this['created_at']), $request, 'd.m.Y'),
         ];
 
         if(data_get($this, 'config.day_birthday')){

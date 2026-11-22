@@ -9,6 +9,7 @@ import GuestPractice from '@/App/Components/Learning/GuestPractice.vue';
 
 import PracticeRouteTopic from '@/App/Components/Learning/PracticeRouteTopic.vue';
 import PracticeStatus from '@/App/Components/Learning/PracticeStatus.vue';
+import PracticeErrorNotice from '@/App/Components/Learning/PracticeErrorNotice.vue';
 import PracticeDate from '@/App/Components/Learning/PracticeDate.vue';
 import { returnToPractice, visitPracticeRun } from '@/App/Learning/practiceRunNavigation.js';
 import { usePracticeHome } from '@/App/Learning/practiceHome.js';
@@ -16,6 +17,7 @@ import { createAccountAdapter, deliverAccountQueue, startAccountRun } from '@/Ap
 import { guestSyncRevision } from '@/App/Learning/guestSyncState.js';
 import { accountTransport } from '@/App/Services/Api/daily_practice.js';
 import { usePracticeFeedback } from '@/App/Learning/usePracticeFeedback.js';
+import { practiceErrorMessage } from '@/App/Learning/practiceNotifications.js';
 import { browserTimezone } from '@/App/Learning/practiceTime.js';
 
 const props = defineProps({ authUser:Object, runId:String, guestRunId:String, enabled:Boolean, levels:Array, screen:String, selectedSession:Object, routeSelection:Object, embedded:Boolean });
@@ -27,14 +29,12 @@ const history = computed(() => homeStore.state.owner === owner.value ? homeStore
 const busy = ref(false);
 const error = ref('');
 const saving = ref({kind:'idle',message:''});
-const timezone = computed(() => home.value?.profile.persisted ? home.value.profile.timezone : browserTimezone());
+const timezone = computed(() => home.value?.profile.timezone_configured ? home.value.profile.timezone : browserTimezone());
 const pendingStart = ref(false);
-const pendingActions = ref(false);
 const conflictingRun = ref(null);
 const player = ref(null);
 const syncing = ref(false);
 let disposed = false;
-const retryAction = ref(null);
 const onStatus = next => {
   if (next.kind === 'sending') return;
   if (saving.value.kind !== next.kind || saving.value.message !== next.message) saving.value = next;
@@ -44,13 +44,10 @@ const actorStatus = actor => next => { if (currentActor(actor)) onStatus(next); 
 const updatePending = async actor => {
   try {
     const rows = await repository.pending(actor);
-    if (currentActor(actor)) {
-      pendingStart.value = rows.some(row => row.run_id === null);
-      pendingActions.value = rows.some(row => !props.runId || row.run_id !== props.runId);
-    }
+    if (currentActor(actor)) pendingStart.value = rows.some(row => row.run_id === null);
   } catch {}
 };
-const feedback = usePracticeFeedback({source:'practice-session',status:saving,error});
+const feedback = usePracticeFeedback({source:'practice-session', status:saving, error});
 const locked = computed(() => ['pending','auth','storage','conflict'].includes(saving.value.kind));
 const adapter = computed(() => {
   const actor = owner.value;
@@ -72,22 +69,29 @@ const showNext = computed(() => {
 const focused = computed(() => props.enabled && !!(props.authUser ? props.runId : props.guestRunId));
 const pageTitle = computed(() => props.screen === 'progress' ? 'Мой прогресс' : props.runId || props.guestRunId ? 'Занятие' : 'Практика');
 const selectedRun = computed(() => home.value?.route.lessons.find(lesson => lesson.id === props.selectedSession?.id)?.run_id);
-const loadHome = (force = false) => {
-  const options = {selection: props.routeSelection ?? {}};
-  return force ? homeStore.refresh(owner.value, 1, options) : homeStore.load(owner.value, 1, options);
-};
+const loadHome = () => homeStore.load(owner.value, 1, {selection: props.routeSelection ?? {}});
+const loadError = failure => practiceErrorMessage(failure, 'Не удалось загрузить практику.');
 const refreshSuggestion = () => perform(() => loadHome());
 const openRun = id => visitPracticeRun('/daily/run/' + id, home.value?.route, props.routeSelection);
 const openState = state => state?.run_id && !disposed ? openRun(state.run_id) : undefined;
 const continueRun = id => perform(() => openRun(id));
-const exitRun = () => perform(() => returnToPractice(homeStore, owner.value));
+const exitRun = runId => perform(async () => {
+  if (runId) {
+    const actor = owner.value;
+    const pending = await repository.pending(actor, runId);
+    await Promise.all(pending.map(event => repository.mark(actor, event.local_id, 'dismissed')));
+    await accountTransport.call('discard', runId, {});
+    homeStore.invalidate(actor);
+  }
+  await returnToPractice(homeStore, owner.value);
+});
 const startLesson = (sessionId = null) => perform(async () => {
   const actor = owner.value;
   const route = home.value?.route;
   const path = await homeStore.start(actor, sessionId, actorStatus(actor));
   if (currentActor(actor)) await visitPracticeRun(path, route, props.routeSelection);
 });
-const reconnect = async (force = false) => {
+const reconnect = async () => {
   const actor = owner.value;
   if (syncing.value || busy.value || !actor || !props.enabled || disposed) return;
   homeStore.setOwner(actor);
@@ -107,13 +111,13 @@ const reconnect = async (force = false) => {
     }
   } catch (failure) {
     if (currentActor(actor) && !props.runId && failure.response?.data?.code === 'playback_conflict') conflictingRun.value = queueRun;
-    else if (currentActor(actor)) error.value = failure.response?.data?.message || failure.message || 'Не удалось восстановить сохранённое действие. Повторите вручную.';
+    else if (currentActor(actor)) error.value = practiceErrorMessage(failure, 'Не удалось отправить сохранённое действие.');
   } finally {
     await updatePending(actor);
     try {
-      if (!props.runId && actor === owner.value && !disposed) await loadHome(force);
+      if (!props.runId && actor === owner.value && !disposed) await loadHome();
     } catch (failure) {
-      if (currentActor(actor)) error.value ||= failure.response?.data?.message || 'Не удалось загрузить практику. Нажмите «Повторить».';
+      if (currentActor(actor)) error.value ||= loadError(failure);
     }
     if (currentActor(actor)) syncing.value = false;
   }
@@ -123,28 +127,22 @@ const perform = async operation => {
   if (busy.value || syncing.value) return;
   busy.value = true; error.value = '';
   try {
-    const result = await operation();
-    if (currentActor(actor)) retryAction.value = null;
-    return result;
+    return await operation();
   }
   catch (failure) {
     if (!currentActor(actor)) return;
-    const status = failure.response?.status;
-    retryAction.value = !status || status === 409 || status === 429 || status >= 500 ? operation : null;
-    error.value = failure.response?.data?.message || failure.message || 'Не удалось открыть занятие.';
+    error.value = practiceErrorMessage(failure, 'Не удалось выполнить действие.');
   } finally {
     await updatePending(actor);
     if (currentActor(actor)) busy.value = false;
   }
 };
-const retryFailed = () => retryAction.value ? perform(retryAction.value) : reconnect(true);
-const retryBackground = () => adapter.value?.sync().catch(() => {});
 const onOnline = () => {
-  if (adapter.value && saving.value.kind === 'warning') retryBackground();
-  else if (pendingStart.value || saving.value.kind === 'pending') reconnect();
+  if (adapter.value && saving.value.kind === 'warning') adapter.value.sync().catch(() => {});
+  else if (pendingStart.value || saving.value.kind === 'pending' || (!props.runId && !home.value)) reconnect();
 };
 const loadHistory = event => {
-  if (event.target.open && !history.value) homeStore.loadHistory(owner.value).catch(failure => { error.value = failure.message; });
+  if (event.target.open && !history.value) homeStore.loadHistory(owner.value).catch(failure => { error.value = practiceErrorMessage(failure, 'Не удалось загрузить историю занятий.'); });
 };
 const startReview = (mode = 'manual') => perform(async () => {
   const actor = owner.value;
@@ -169,9 +167,7 @@ watch(guestSyncRevision, () => { if (owner.value && props.enabled) reconnect(); 
 watch(owner, actor => {
   homeStore.setOwner(actor);
   error.value = '';
-  retryAction.value = null;
   pendingStart.value = false;
-  pendingActions.value = false;
   conflictingRun.value = null;
   busy.value = false;
   syncing.value = false;
@@ -179,7 +175,10 @@ watch(owner, actor => {
   if (actor && props.enabled) reconnect();
 });
 watch(() => props.routeSelection, () => {
-  if (owner.value && props.enabled && !props.runId) loadHome().catch(failure => { error.value = failure.message; });
+  if (owner.value && props.enabled && !props.runId) {
+    error.value = '';
+    loadHome().catch(failure => { error.value = loadError(failure); });
+  }
 });
 onMounted(() => { reconnect(); window.addEventListener('online',onOnline); });
 onBeforeUnmount(() => { disposed = true; window.removeEventListener('online',onOnline); });
@@ -194,16 +193,12 @@ onBeforeUnmount(() => { disposed = true; window.removeEventListener('online',onO
       <guest-practice v-else-if="!authUser" :run-id="guestRunId" :selected-session="selectedSession" :route-selection="routeSelection" :levels="levels" :progress-only="screen==='progress'" :trail="embedded" />
       <template v-else>
         <p v-if="saving.kind === 'auth'" class="muted"><Link href="/login?practice=1">Войти в аккаунт</Link>, чтобы продолжить занятие. Ваш ответ сохранён.</p>
-        <p v-if="saving.message && !feedback.enabled" role="status">{{ saving.message }}</p>
-        <p v-if="error" role="alert">{{ error }}</p>
+        <p v-if="!error && saving.message && !feedback.enabled" role="status">{{ saving.message }}</p>
+        <practice-error-notice v-if="error && !feedback.enabled" :message="error" />
         <div v-if="saving.kind === 'conflict' && (adapter || conflictingRun)" class="actions">
           <afr-button v-if="adapter" @click="player?.reconcile()">Загрузить состояние сервера</afr-button>
           <afr-button v-else :disabled="busy || syncing" @click="continueRun(conflictingRun)">Открыть сохранённое занятие</afr-button>
         </div>
-        <div v-else-if="adapter && ['warning','storage'].includes(saving.kind)" class="actions">
-          <afr-button text @click="retryBackground">Повторить отправку</afr-button>
-        </div>
-        <div v-else-if="pendingActions || retryAction || (!home && error)" class="actions"><afr-button :disabled="busy || syncing" @click="retryFailed">Повторить</afr-button><span class="muted">Автоматические повторы остановлены. Сохранённое действие можно отправить вручную.</span></div>
         <session-player v-if="adapter" :key="runId" ref="player" :adapter="adapter" :locked="locked"
           :route-owner="owner" :route-store="homeStore" :navigation-busy="busy || syncing || pendingStart"
           @next-lesson="startLesson()" @review="startReview" @repeat="repeat" @test-next="repeat" @vocabulary="router.visit('/daily/vocabulary')" @exit="exitRun" />
@@ -233,21 +228,12 @@ onBeforeUnmount(() => { disposed = true; window.removeEventListener('online',onO
               @start="startReview('suggested')" @dismissed="refreshSuggestion" />
           </template>
           <template v-else>
-            <section class="practice-panel"><h2>Ваш прогресс</h2><div class="progress-stats"><p>Уровень <strong>{{ home.profile.current_level === 'PRE_A1' ? 'С нуля' : home.profile.current_level }}</strong></p><p>Занятий завершено <strong>{{ home.progress?.completed_runs || 0 }}</strong></p><p v-if="home.progress?.required">Целей освоено <strong>{{ home.progress.mastered }} из {{ home.progress.required }}</strong></p></div><Link href="/profile">Изменить уровень и часовой пояс</Link></section>
+            <section class="practice-panel"><h2>Ваш прогресс</h2><div class="progress-stats"><p>Уровень <strong>{{ home.profile.current_level === 'PRE_A1' ? 'С нуля' : home.profile.current_level }}</strong></p><p>Занятий завершено <strong>{{ home.progress?.completed_runs || 0 }}</strong></p></div><Link href="/profile">Изменить уровень и часовой пояс</Link></section>
             <section v-if="home.progress" class="practice-panel">
               <h2>Следующий уровень</h2>
               <p v-if="home.progress.completion_route?.total && home.progress.completion_route.next_level">Для перехода на {{ home.progress.completion_route.next_level }} завершите опубликованные занятия текущего уровня: {{ home.progress.completion_route.completed }} из {{ home.progress.completion_route.total }}. Уровень в профиле повысится автоматически.</p>
-              <p v-else-if="!home.progress.enabled">{{ home.progress.disabled_reason }}</p>
-              <template v-else>
-                <p>До {{ home.progress.next_level }}: освоить {{ home.progress.required_to_master }} целей и пройти два разных контроля.</p>
-                <p>Контролей пройдено: {{ home.progress.checkpoint_count }}.</p>
-                <div class="actions"><afr-button v-for="(item,index) in home.progress.available_checkpoints" :key="item.id" :disabled="busy || pendingStart" @click="repeat({session_id:item.id})">Контроль {{ index+1 }}: {{ item.title }}</afr-button></div>
-                <details class="progress-details"><summary>Как учитывается прогресс</summary>
-                  <p>Цель подтверждается двумя самостоятельными ответами в разных занятиях. Два разных контроля нужно пройти не ниже {{ home.progress.policy.checkpoint_score_percent }}% в разные дни.</p>
-                  <p v-if="home.progress.manual_guard">После ручной смены уровня нужен новый контроль.</p>
-                  <ul><li v-for="goal in home.progress.goals" :key="goal.id">{{ goal.title }} — {{ goal.mastered ? 'Освоена' : 'В процессе' }}</li></ul>
-                </details>
-              </template>
+              <p v-else-if="!home.progress.completion_route?.next_level">Это последний уровень курса.</p>
+              <p v-else>Занятия этого уровня ещё готовятся.</p>
               <p v-if="home.progress.latest_level_event?.source==='automatic'">Ваш уровень повышен до {{ home.progress.latest_level_event.new_level }}.</p>
             </section>
           </template>

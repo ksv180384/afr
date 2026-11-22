@@ -141,17 +141,17 @@ test('profile offers a timezone list without creating learning data on a read', 
 test('profile timezone is validated and saved without changing the selected learning level', function () {
     $this->seed(LearningLevelSeeder::class);
     $user = User::factory()->create();
-    $profile = LearningProfile::factory()->create(['user_id' => $user->id, 'current_level' => 'A1', 'timezone' => 'Europe/Moscow', 'revision' => 3]);
+    $profile = LearningProfile::factory()->create(['user_id' => $user->id, 'current_level' => 'A1', 'revision' => 3]);
     $input = ['name' => $user->name, 'day_birthday' => false, 'yar_birthday' => false];
     $this->actingAs($user)->patch('/profile', [...$input, 'timezone' => 'Europe/Paris'])
         ->assertSessionHasNoErrors()->assertRedirect('/profile');
-    expect($profile->fresh()->timezone)->toBe('Europe/Paris')
+    expect($user->fresh()->timezone)->toBe('Europe/Paris')
         ->and($profile->fresh()->getRawOriginal('current_level'))->toBe('A1')
         ->and($profile->fresh()->revision)->toBe(4);
     $this->patch('/profile', [...$input, 'timezone' => 'Europe/Paris'])->assertSessionHasNoErrors();
     expect($profile->fresh()->revision)->toBe(4);
     $this->patch('/profile', [...$input, 'timezone' => 'Not/A_Timezone'])->assertSessionHasErrors('timezone');
-    expect($profile->fresh()->timezone)->toBe('Europe/Paris');
+    expect($user->fresh()->timezone)->toBe('Europe/Paris');
 });
 
 test('saving the detected timezone initializes it for new practice sessions', function () {
@@ -160,5 +160,14 @@ test('saving the detected timezone initializes it for new practice sessions', fu
     $this->actingAs($user)->patch('/profile', ['name' => $user->name, 'day_birthday' => false, 'yar_birthday' => false, 'timezone' => 'Asia/Vladivostok'])
         ->assertSessionHasNoErrors();
     expect(app(\App\Services\Learning\AccountRunService::class)->profile($user))
-        ->toMatchArray(['timezone' => 'Asia/Vladivostok', 'persisted' => true, 'current_level' => 'PRE_A1']);
+        ->toMatchArray(['timezone' => 'Asia/Vladivostok', 'persisted' => false, 'current_level' => 'PRE_A1']);
+});
+
+test('site dates use the viewer timezone without altering the stored timestamp', function () {
+    $request = \Illuminate\Http\Request::create('/posts');
+    $request->setUserResolver(fn () => new User(['timezone' => 'Asia/Tokyo']));
+    $instant = \Carbon\Carbon::parse('2026-11-22 16:00:00', 'UTC');
+
+    expect(\App\Support\ViewerTime::format($instant, $request))->toBe('23.11.2026 01:00')
+        ->and($instant->format('d.m.Y H:i T'))->toBe('22.11.2026 16:00 UTC');
 });

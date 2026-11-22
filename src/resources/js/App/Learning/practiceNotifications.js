@@ -2,6 +2,9 @@ import { shallowReactive } from 'vue';
 
 export const practiceNotificationsKey = Symbol('practiceNotifications');
 
+export const practiceErrorMessage = (failure, fallback) =>
+  failure?.response?.data?.message || (!failure?.isAxiosError && failure?.message) || fallback;
+
 const silentKinds = new Set(['idle', 'loading', 'sending', 'syncing', 'draft']);
 const successKinds = new Set(['success', 'saved', 'confirmed', 'synced']);
 const warningKinds = new Set(['warning', 'pending', 'auth', 'conflict', 'temporary', 'bound', 'partial']);

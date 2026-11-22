@@ -8,12 +8,14 @@ use App\Http\Requests\Admin\DailySession\EditorRequest;
 use App\Http\Resources\PaginateResource;
 use App\Models\Learning\LearningContentReport;
 use App\Models\Learning\LearningMedia;
+use App\Models\Learning\LearningSession;
 use App\Services\Learning\ContentEditorService;
 use App\Services\Learning\MediaLibraryService;
 use App\Services\Learning\SessionExportService;
 use App\Services\Learning\SessionPackageValidator;
 use App\Services\Learning\TopicBackgroundService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -55,6 +57,13 @@ class EditorController extends Controller
         return Inertia::render('DailySession/Show', ['authUser' => Helper::getUserData(), ...$editor->detail($request->user(), $version, $validator, $export)]);
     }
 
+    public function legacyLesson(EditorRequest $request, int $version, string $action = 'show'): RedirectResponse
+    {
+        $lesson = LearningSession::query()->where('legacy_content_id', $version)->firstOrFail(['id']);
+
+        return redirect()->route('admin.daily-practice.versions.'.$action, [...$request->query(), 'version' => $lesson->id]);
+    }
+
     public function preview(EditorRequest $request, int $version, ContentEditorService $editor, SessionPackageValidator $validator, SessionExportService $export): Response
     {
         $detail = $editor->detail($request->user(), $version, $validator, $export);
@@ -70,7 +79,7 @@ class EditorController extends Controller
 
     public function reports(EditorRequest $request): Response
     {
-        $query = LearningContentReport::query()->with(['sessionVersion:id,session_id,version', 'sessionVersion.session:id,external_id']);
+        $query = LearningContentReport::query()->with('session:id,external_id');
         if ($request->filled('status')) {
             $query->where('status', $request->validated('status'));
         }
