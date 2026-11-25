@@ -13,6 +13,7 @@ use App\Services\Learning\RunAnswerService;
 use App\Services\Learning\SessionResultCalculator;
 use App\Services\Learning\Validation\CanonicalJson;
 use Database\Seeders\Learning\LearningLevelSeeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 beforeEach(function () {
@@ -25,7 +26,6 @@ beforeEach(function () {
     foreach ($this->session['tasks'] as $index => $task) {
         $this->presentations[] = LearningPresentation::factory()->create([
             'run_id' => $this->run->id, 'position' => $index + 1, 'task_id' => $task['id'],
-            'snapshot' => PresentationSnapshot::forTask($this->session, $task['id']),
         ]);
     }
     $this->answers = app(RunAnswerService::class);
@@ -46,7 +46,8 @@ function learnerEvent(LearningRun $run, LearningPresentation $presentation, stri
 {
     return ['client_event_id' => (string) Str::uuid(), 'presentation_id' => $presentation->id,
         'expected_revision' => $run->fresh()->revision, 'event_type' => $type,
-        ...($type === 'answer' ? ['answer' => validTaskAnswer($presentation->snapshot['task'])] : []), ...$fields];
+        ...($type === 'answer' && ! array_key_exists('answer', $fields)
+            ? ['answer' => validTaskAnswer($presentation->taskSnapshot($run->content())['task'])] : []), ...$fields];
 }
 
 function checkingErrorCode(Closure $fn): string
@@ -80,7 +81,7 @@ it('stores the first answer and policy-derived result without finishing the run 
 it('keeps help first wrong answer and correction distinct without replacing the first score', function () {
     $presentation = $this->presentations[0];
     $this->answers->accept($this->learner, $this->run->id, learnerEvent($this->run, $presentation, 'help', ['help_kind' => 'audio_transcript']));
-    $task = $presentation->snapshot['task'];
+    $task = $presentation->taskSnapshot($this->session)['task'];
     $wrong = collect($task['choices'])->first(fn (array $choice): bool => $choice['id'] !== $task['correct_choice_id'])['id'];
     $first = $this->answers->accept($this->learner, $this->run->id, learnerEvent($this->run, $presentation, 'answer', ['answer' => ['choice_id' => $wrong]]));
     $corrected = $this->answers->accept($this->learner, $this->run->id, learnerEvent($this->run, $presentation));
@@ -94,6 +95,38 @@ it('keeps help first wrong answer and correction distinct without replacing the 
         ->and(LearningAttempt::where('is_first_answer', true)->count())->toBe(1)
         ->and(LearningAttempt::whereNull('is_first_answer')->count())->toBe(2)
         ->and($this->answers->result($this->learner, $this->run->id)['score_numerator'])->toBe(0);
+});
+
+it('round-trips compact attempts through migration and replays the same receipt in both formats', function () {
+    $step = $this->presentations[0];
+    $event = learnerEvent($this->run, $step, 'answer', ['client_occurred_at' => '2026-11-24T23:45:12.123456+03:00']);
+    $receipt = $this->answers->accept($this->learner, $this->run->id, $event);
+    $attempt = LearningAttempt::findOrFail($receipt['attempt_id']);
+    $result = $receipt['result'] + ['run_revision' => $receipt['revision']];
+    $details = ['answer' => $event['answer'], 'client_occurred_at' => $event['client_occurred_at']];
+    expect($attempt->payload)->toEqual($details)
+        ->and($attempt->result)->not->toHaveKeys(['checking_policy_version', 'presentation_id', 'task_id', 'event_type', 'is_first_answer'])
+        ->and($attempt->gradingResult(1, $step->task_id))->toBe($result)
+        ->and($attempt->getRawOriginal('result'))->not->toContain('\\u');
+    $migration = require database_path('migrations/2026_11_25_170000_compact_learning_attempts.php');
+    $migration->down();
+    expect($attempt->refresh()->payload)->toEqual($event)
+        ->and($attempt->result)->toBe($result)
+        ->and($this->answers->accept($this->learner, $this->run->id, $event))->toBe($receipt);
+    $migration->up();
+    $migration->up();
+    expect($attempt->refresh()->payload)->toEqual($details)
+        ->and($attempt->payload_hash)->toBe(CanonicalJson::hash(['run_id' => $this->run->id, 'event' => $event]))
+        ->and($this->answers->accept($this->learner, $this->run->id, $event))->toBe($receipt);
+
+    // A completed guest import can keep its event mapping after the original input is discarded.
+    DB::table('learning_runs')->where('id', $this->run->id)->update(['status' => 'completed', 'import_meta' => '{}']);
+    LearningAttempt::trimClosedRun($this->run->refresh());
+    $migration->down();
+    $migration->up();
+    expect($attempt->refresh()->payload)->toBe([])
+        ->and($attempt->result)->not->toHaveKey('feedback')
+        ->and($attempt->result['assessed_lexemes'])->toBe($result['assessed_lexemes']);
 });
 
 it('treats technical skip as a processed step without language errors', function () {
@@ -129,7 +162,7 @@ it('replays the original receipt after other events or completed status without 
     expect($this->answers->accept($this->learner, $this->run->id, $event))->toBe($receipt)
         ->and(LearningAttempt::count())->toBe(2)
         ->and($this->run->refresh()->result)->toBe($summary);
-    $new = learnerEvent($this->run, $this->presentations[0]);
+    $new = learnerEvent($this->run, $this->presentations[0], 'answer', ['answer' => $event['answer']]);
     expect(checkingErrorCode(fn () => $this->answers->accept($this->learner, $this->run->id, $new)))->toBe('revision_conflict');
 });
 
@@ -186,8 +219,8 @@ it('uses the pinned policy and fails closed for unsupported versions', function 
     $receipt = $this->answers->accept($this->learner, $this->run->id, learnerEvent($this->run, $this->presentations[0]));
     expect($receipt['result']['checking_policy_version'])->toBe(1);
     $run = LearningRun::factory()->create(['user_id' => $this->learner->id, 'session_id' => $this->version->id, 'checking_policy_version' => 2]);
-    $presentation = LearningPresentation::factory()->create(['run_id' => $run->id, 'snapshot' => $this->presentations[0]->snapshot]);
-    expect(checkingErrorCode(fn () => $this->answers->accept($this->learner, $run->id, learnerEvent($run, $presentation))))->toBe('unsupported_checking_policy');
+    $presentation = LearningPresentation::factory()->create(['run_id' => $run->id, 'task_id' => $this->presentations[0]->task_id]);
+    expect(checkingErrorCode(fn () => $this->answers->accept($this->learner, $run->id, learnerEvent($run, $presentation, 'unknown'))))->toBe('unsupported_checking_policy');
 });
 
 it('does not change the denominator when presentations are missing', function () {
@@ -196,10 +229,10 @@ it('does not change the denominator when presentations are missing', function ()
     expect($summary['score_denominator'])->toBe(6)->and($summary['processed_steps'])->toBe(0)->and($summary['all_steps_processed'])->toBeFalse();
 });
 
-it('rejects a presentation snapshot that does not match its position in the run', function () {
+it('rejects a task identifier that belongs to a different position in the run', function () {
     $run = LearningRun::factory()->create(['user_id' => $this->learner->id, 'session_id' => $this->version->id]);
-    $presentation = LearningPresentation::factory()->create(['run_id' => $run->id, 'position' => 1, 'snapshot' => $this->presentations[1]->snapshot]);
-    expect(checkingErrorCode(fn () => $this->answers->accept($this->learner, $run->id, learnerEvent($run, $presentation))))->toBe('unavailable')
+    $presentation = LearningPresentation::factory()->create(['run_id' => $run->id, 'position' => 1, 'task_id' => $this->presentations[1]->task_id]);
+    expect(checkingErrorCode(fn () => $this->answers->accept($this->learner, $run->id, learnerEvent($run, $presentation, 'unknown'))))->toBe('unavailable')
         ->and(LearningAttempt::count())->toBe(0);
 });
 
@@ -208,7 +241,7 @@ it('keeps UTC event instants and the local calendar date in a non-UTC applicatio
     date_default_timezone_set('Europe/Moscow');
     try {
         $run = LearningRun::factory()->create(['user_id' => $this->learner->id, 'session_id' => $this->version->id, 'local_date' => '2026-10-24']);
-        $presentation = LearningPresentation::factory()->create(['run_id' => $run->id, 'task_id' => $this->session['tasks'][0]['id'], 'snapshot' => $this->presentations[0]->snapshot]);
+        $presentation = LearningPresentation::factory()->create(['run_id' => $run->id, 'task_id' => $this->session['tasks'][0]['id']]);
         $this->answers->accept($this->learner, $run->id, learnerEvent($run, $presentation));
         expect($run->refresh()->local_date->format('Y-m-d'))->toBe('2026-10-24')
             ->and($presentation->firstAttempt->received_at->getTimezone()->getName())->toBe('UTC');
@@ -220,7 +253,7 @@ it('keeps UTC event instants and the local calendar date in a non-UTC applicatio
 it('rejects answers after current lesson content changes', function () {
     $run = LearningRun::factory()->create(['user_id' => $this->learner->id, 'session_id' => $this->version->id,
         'content_checksum' => $this->version->checksum]);
-    $step = LearningPresentation::factory()->create(['run_id' => $run->id, 'snapshot' => []]);
+    $step = LearningPresentation::factory()->create(['run_id' => $run->id]);
     $content = [...$this->session, 'title' => 'Обновлённый урок'];
     $this->version->update(['payload' => $content, 'checksum' => CanonicalJson::hash($content)]);
     expect(checkingErrorCode(fn () => $this->answers->accept($this->learner, $run->id, learnerEvent($run, $step, 'unknown'))))
@@ -229,14 +262,14 @@ it('rejects answers after current lesson content changes', function () {
 
 it('rejects an inconsistent persisted task identity', function () {
     $run = LearningRun::factory()->create(['user_id' => $this->learner->id, 'session_id' => $this->version->id]);
-    $presentation = LearningPresentation::factory()->create(['run_id' => $run->id, 'task_id' => 'OTHER', 'snapshot' => $this->presentations[0]->snapshot]);
-    expect(checkingErrorCode(fn () => $this->answers->accept($this->learner, $run->id, learnerEvent($run, $presentation))))->toBe('unavailable');
+    $presentation = LearningPresentation::factory()->create(['run_id' => $run->id, 'task_id' => 'OTHER']);
+    expect(checkingErrorCode(fn () => $this->answers->accept($this->learner, $run->id, learnerEvent($run, $presentation, 'unknown'))))->toBe('unavailable');
 });
 
 it('signals a new lexical error on a wrong correction without rewriting an earlier independent score', function () {
     $presentation = $this->presentations[0];
     $first = $this->answers->accept($this->learner, $this->run->id, learnerEvent($this->run, $presentation));
-    $task = $presentation->snapshot['task'];
+    $task = $presentation->taskSnapshot($this->session)['task'];
     $wrong = collect($task['choices'])->first(fn (array $choice): bool => $choice['id'] !== $task['correct_choice_id'])['id'];
     $correction = $this->answers->accept($this->learner, $this->run->id, learnerEvent($this->run, $presentation, 'answer', ['answer' => ['choice_id' => $wrong]]));
     expect($correction['result']['score'])->toBe(1)->and($correction['result']['first_independent_success'])->toBeFalse()
@@ -251,8 +284,7 @@ it('persists all five task types including both fill modes from the complete aut
     $version = lessonWithContent(['payload' => $session]);
     $run = LearningRun::factory()->create(['user_id' => $this->learner->id, 'session_id' => $version->id]);
     foreach ($session['tasks'] as $index => $task) {
-        $presentation = LearningPresentation::factory()->create(['run_id' => $run->id, 'task_id' => $task['id'], 'position' => $index + 1,
-            'snapshot' => PresentationSnapshot::forTask($session, $task['id'])]);
+        $presentation = LearningPresentation::factory()->create(['run_id' => $run->id, 'task_id' => $task['id'], 'position' => $index + 1]);
         $receipt = $this->answers->accept($this->learner, $run->id, learnerEvent($run, $presentation));
         expect($receipt['result']['correct'])->toBeTrue()->and($receipt['result']['score'])->toBe(1);
     }
@@ -264,7 +296,7 @@ it('checks a pinned vocabulary review item without issuing session objective evi
     $task = $word['review_items'][0];
     $snapshot = PresentationSnapshot::forReview($task, $word['lexeme_key']);
     $run = LearningRun::factory()->create(['user_id' => $this->learner->id, 'session_id' => null, 'kind' => 'vocabulary_test', 'snapshot' => ['items' => [$snapshot]]]);
-    $presentation = LearningPresentation::factory()->create(['run_id' => $run->id, 'task_id' => $task['id'], 'snapshot' => $snapshot]);
+    $presentation = LearningPresentation::factory()->create(['run_id' => $run->id, 'task_id' => $task['id']]);
     $receipt = $this->answers->accept($this->learner, $run->id, learnerEvent($run, $presentation));
     expect($receipt['result']['assessed_lexemes'])->toBe([['lexeme_key' => $word['lexeme_key'], 'correct' => true, 'effect' => 'success']])
         ->and($receipt['result']['objective_evidence_eligible'])->toBeFalse()

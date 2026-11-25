@@ -42,6 +42,9 @@ class GuestPracticeController extends Controller
             'previous.*' => 'string|max:400',
         ]);
         $previous = $input['previous'] ?? [];
+        [$completed, $current, $seen] = $request->user()
+            ? $training->accountProgress($request->user())
+            : [$input['completed'] ?? [], $input['current'] ?? null, $input['seen'] ?? []];
         if (isset($input['unit'])) {
             $states = $request->user()
                 ? $access->forUser($request->user())
@@ -53,13 +56,38 @@ class GuestPracticeController extends Controller
             if ($topic['locked']) {
                 throw new AnswerCheckingException(PracticeErrorCode::Forbidden, $topic['reason']);
             }
-            return response()->json(['items' => $training->selectTopic($this->published(), $input['mode'], $input['unit'], $previous)]);
+            return response()->json(['items' => $training->selectTopic($this->published(), $input['mode'], $input['unit'], $previous, $completed, $current, $seen)]);
         }
-        [$completed, $current, $seen] = $request->user()
-            ? $training->accountProgress($request->user())
-            : [$input['completed'] ?? [], $input['current'] ?? null, $input['seen'] ?? []];
         return response()->json(['items' => $training->select($this->published(), $input['mode'], $completed,
             $current, $seen, $previous)]);
+    }
+
+    public function dictionaryUpdates(Request $request)
+    {
+        $input = $request->validate(['sessions' => 'required|array|min:1|max:25', 'sessions.*.id' => 'required|integer|min:1',
+            'sessions.*.session' => 'required|string|max:128|distinct', 'sessions.*.checksum' => 'nullable|string|size:64']);
+        $keys = array_column($input['sessions'], 'session');
+        $known = LearningSession::whereIn('external_id', $keys)->whereNotNull('published_at')
+            ->get(['id', 'legacy_content_id', 'external_id'])->keyBy('external_id');
+        $visible = $this->published()->whereIn('learning_sessions.external_id', $keys)
+            ->select('learning_sessions.id', 'learning_sessions.external_id', 'learning_sessions.checksum')->get()->keyBy('external_id');
+        $updates = [];
+        $removed = [];
+        foreach ($input['sessions'] as $source) {
+            $key = $source['session'];
+            $lesson = $known->get($key);
+            if (!$lesson || !in_array((int) $source['id'], [$lesson->id, (int) $lesson->legacy_content_id], true)) {
+                $removed[] = $key;
+                continue;
+            }
+            $lesson = $visible->get($key);
+            if ($lesson && $lesson->checksum !== ($source['checksum'] ?? null)) {
+                $updates[] = ['session' => $key, 'checksum' => $lesson->checksum,
+                    'vocabulary' => app(\App\Services\Learning\SessionContentCache::class)->payload($lesson)['vocabulary'] ?? []];
+            }
+        }
+
+        return response()->json(['updated' => $updates, 'removed' => $removed]);
     }
 
     public function index()

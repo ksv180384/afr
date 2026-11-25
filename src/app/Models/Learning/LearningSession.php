@@ -4,6 +4,8 @@ namespace App\Models\Learning;
 
 use App\Enums\Learning\LearningLevel as LevelCode;
 use App\Enums\Learning\SessionVersionStatus;
+use App\Services\Learning\PracticeDictionary;
+use App\Support\Learning\EncodesPracticeJson;
 use App\Support\Learning\UsesUtcDates;
 use Database\Factories\Learning\LearningSessionFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,6 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 use LogicException;
 
 /**
@@ -33,6 +36,7 @@ use LogicException;
  */
 class LearningSession extends Model
 {
+    use EncodesPracticeJson;
     use HasFactory;
     use UsesUtcDates;
 
@@ -79,10 +83,38 @@ class LearningSession extends Model
     protected function payload(): Attribute
     {
         return Attribute::make(
-            get: fn (?string $value): ?array => $value === null ? null : json_decode($value, true, 512, JSON_THROW_ON_ERROR),
+            get: fn (?string $value): ?array => $value === null ? null : PracticeDictionary::expand((int) $this->id,
+                json_decode($value, true, 512, JSON_THROW_ON_ERROR)),
             set: fn (?array $value): ?string => $value === null ? null
-                : json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
+                : $this->asJson($value),
         );
+    }
+
+    public function save(array $options = []): bool
+    {
+        if (! $this->isDirty('payload')) {
+            return parent::save($options);
+        }
+        $full = $this->attributes['payload'];
+        $payload = $full === null ? null : json_decode($full, true, 512, JSON_THROW_ON_ERROR);
+        $words = $payload['vocabulary'] ?? [];
+        try {
+            return DB::transaction(function () use ($options, $words, $payload) {
+                if (isset($payload['vocabulary'])) {
+                    $payload['vocabulary'] = array_column($words, 'lexeme_key');
+                    $this->attributes['payload'] = $this->asJson($payload);
+                }
+                $saved = parent::save($options);
+                if ($saved) {
+                    app(PracticeDictionary::class)->sync($this->id, $words, $this->status === SessionVersionStatus::Published);
+                }
+
+                return $saved;
+            });
+        } catch (\Throwable $error) {
+            $this->attributes['payload'] = $full;
+            throw $error;
+        }
     }
 
     protected static function booted(): void

@@ -59,7 +59,7 @@ test('return to the main practice route leaves scrolling to the current lesson',
   assert.equal(restorePracticeScroll(), false);
 });
 
-test('the practice path scrolls after the browser loads and uses the latest lesson target', async (context) => {
+test('the practice path uses the latest target after Inertia resets scroll on navigation', async (context) => {
   const root = fileURLToPath(new URL('../../', import.meta.url));
   const server = await createServer({
     configFile: false, root, cacheDir: root + 'node_modules/.vite-tests/practice-path-scroll',
@@ -80,6 +80,11 @@ test('the practice path scrolls after the browser loads and uses the latest less
   globalThis.document = { readyState: 'interactive' };
   globalThis.requestAnimationFrame = callback => (frames.set(++frameId, callback), frameId);
   globalThis.cancelAnimationFrame = id => frames.delete(id);
+  const nextFrame = () => {
+    const callbacks = [...frames.values()];
+    frames.clear();
+    for (const callback of callbacks) callback();
+  };
   const scrolls = [];
   const route = reactive({ level: {id: 'PRE_A1'}, topics: [], current_lesson_id: null });
   const container = {querySelectorAll: () => route.topics.flatMap(topic => topic.lessons.map(lesson => ({
@@ -98,9 +103,13 @@ test('the practice path scrolls after the browser loads and uses the latest less
     route.current_lesson_id = 'current';
     await nextTick();
     assert.equal(frames.size, 1);
-    assert.deepEqual(scrolls, []);
-    for (const frame of frames.values()) frame();
-    assert.deepEqual(scrolls, [['current', {block: 'center', behavior: 'instant'}]]);
+    // Inertia queues its reset after Vue mounts the cached route.
+    requestAnimationFrame(() => requestAnimationFrame(() => scrolls.push(['reset', 0])));
+    nextFrame();
+    nextFrame();
+    assert.deepEqual(scrolls, [['reset', 0]]);
+    nextFrame();
+    assert.deepEqual(scrolls, [['reset', 0], ['current', {block: 'center', behavior: 'instant'}]]);
   } finally {
     app.unmount();
     for (const key of ['window', 'document', 'requestAnimationFrame', 'cancelAnimationFrame']) delete globalThis[key];

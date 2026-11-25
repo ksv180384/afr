@@ -35,6 +35,29 @@ function operationsStart($test, ?User $owner = null): array
     return app(AccountRunService::class)->start($owner ?? $test->owner, ['client_event_id' => (string) Str::uuid(), 'expected_revision' => 1, 'kind' => 'daily'])['state'];
 }
 
+it('sweeps only expired practice cache keys in bounded batches during ordinary API requests', function () {
+    config(['cache.default' => 'database', 'cache.stores.database.prefix' => 'tenant_%:']);
+    $prefix = Cache::store()->getStore()->getPrefix();
+    $legacy = $prefix.'daily-practice:content:';
+    $current = $prefix.'daily-practice:lesson:';
+    $now = now()->timestamp;
+    $expired = array_map(fn ($i) => $legacy.$i, range(1, 100));
+    $expired[] = $current.'old';
+    $protected = [$current.'live', $prefix.'unrelated', 'tenant-abc:daily-practice:lesson:foreign'];
+    foreach ([...$expired, ...$protected] as $key) {
+        DB::table('cache')->insert(['key' => $key, 'value' => serialize('test'), 'expiration' => $key === $current.'live' ? $now + 600 : $now - 1]);
+    }
+    $this->actingAs($this->owner);
+    $this->getJson('/daily/api/profile')->assertOk();
+    expect(DB::table('cache')->whereIn('key', $expired)->count())->toBe(1);
+    $this->getJson('/daily/api/profile')->assertOk();
+    expect(DB::table('cache')->whereIn('key', $expired)->count())->toBe(1);
+    $this->travel(61)->seconds();
+    $this->getJson('/daily/api/profile')->assertOk();
+    expect(DB::table('cache')->whereIn('key', $expired)->count())->toBe(0)
+        ->and(DB::table('cache')->whereIn('key', $protected)->count())->toBe(3);
+});
+
 it('hides foreign run reads commands media and presentations without creating attempts', function () {
     $run = operationsStart($this);
     $this->actingAs($this->stranger);
@@ -176,7 +199,7 @@ it('caches immutable content but checks publication again on every request', fun
 it('falls back to the immutable database payload if the cache is unavailable', function () {
     Cache::shouldReceive('remember')->once()->andThrow(new RuntimeException('cache unavailable'));
     $payload = app(\App\Services\Learning\SessionContentCache::class)->payload($this->version);
-    expect($payload)->toBe($this->payload);
+    expect(CanonicalJson::hash($payload))->toBe(CanonicalJson::hash($this->payload));
 });
 
 it('logs only allowlisted operational fields and still acknowledges a committed write when logging fails', function () {
@@ -214,15 +237,13 @@ it('closes new starts without removing runs snapshots or receipts when disabled'
     $this->get('/daily')->assertOk();
 });
 it('isolates source filters and reads only version metadata for paginated word sources', function () {
-    $word = PersonalVocabulary::factory()->create(['user_id' => $this->owner->id, 'snapshot' => $this->payload['vocabulary'][0]]);
-    \App\Models\Learning\PersonalVocabularySource::factory()->create(['user_id' => $this->owner->id, 'personal_word_id' => $word->id,
-        'session_id' => $this->version->id, 'snapshot' => $this->payload['vocabulary'][0]]);
+    $word = PersonalVocabulary::factory()->studied($this->payload['vocabulary'][0], $this->version)->create(['user_id' => $this->owner->id]);
     $queries = [];
     DB::listen(function ($query) use (&$queries) {
         $queries[] = $query->sql;
     });
     $this->actingAs($this->owner)->getJson('/daily/api/vocabulary?source_session='.$this->session->external_id)->assertOk()->assertJsonCount(1, 'words')->assertJsonPath('words.0.sources.0.session_id', $this->session->external_id);
-    expect(array_filter($queries, fn ($sql) => str_starts_with($sql, 'select "payload" from "learning_sessions"')))->toHaveCount(1);
+    expect(array_filter($queries, fn ($sql) => str_contains($sql, '"payload"') && str_contains($sql, 'from "learning_sessions"')))->toBeEmpty();
     $this->actingAs($this->stranger)->getJson('/daily/api/vocabulary?q=bonjour')->assertOk()->assertJsonCount(0, 'words')->assertJsonCount(0, 'source_sessions');
 });
 
@@ -267,18 +288,15 @@ it('bounds oversized read responses without reporting them as saved', function (
 it('keeps a large vocabulary browsable and bounds a whole test plan with an explicit filter error', function () {
     $rows = PersonalVocabulary::factory()->count(5001)->raw(['user_id' => $this->owner->id, 'needs_review' => false]);
     foreach (array_chunk($rows, 250) as $chunk) {
-        PersonalVocabulary::insert(array_map(function ($row) {
-            $row['snapshot'] = json_encode($row['snapshot']);
-
-            return $row;
-        }, $chunk));
+        DB::table('learning_lexemes')->insert(array_map(fn ($row) => ['lexeme_key' => $row['lexeme_key'], 'content' => '{}'], $chunk));
+        PersonalVocabulary::insert($chunk);
     }
     $this->actingAs($this->owner)->getJson('/daily/api/vocabulary?page=167')->assertOk()->assertJsonCount(21, 'words')->assertJsonPath('pagination.total', 5001);
     $this->getJson('/daily/api/vocabulary/test-plan')->assertUnprocessable()->assertJsonPath('code', 'validation_failed');
     $this->getJson('/daily/api/vocabulary/test-plan?filter=errors')->assertOk()->assertJsonPath('total', 0);
 });
 it('preserves Unicode case folding in paginated French and Russian searches', function () {
-    PersonalVocabulary::factory()->create(['user_id' => $this->owner->id, 'snapshot' => ['fr' => 'ÉcÔle', 'ru' => ['ШКОЛА'], 'transcription_ru' => 'эко́ль']]);
+    PersonalVocabulary::factory()->studied(['fr' => 'ÉcÔle', 'ru' => ['ШКОЛА'], 'transcription_ru' => 'эко́ль'])->create(['user_id' => $this->owner->id]);
     $this->actingAs($this->owner)->getJson('/daily/api/vocabulary?q='.urlencode('écôle'))->assertOk()->assertJsonCount(1, 'words');
     $this->getJson('/daily/api/vocabulary?q='.urlencode('школа'))->assertOk()->assertJsonCount(1, 'words');
 });

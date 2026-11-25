@@ -43,10 +43,13 @@ export const insertedValue = (value, character, start, end = start) => ({
   value: value.slice(0, start) + character + value.slice(end), caret: start + character.length,
 });
 
+export const isListeningTask = task => task?.skill === 'listening' || (!task?.skill && !!task?.prompt?.audio);
+
 export function questionSupport(level, task, {graded = false, revealed = false, promptVisible = true, hasNotes = false} = {}) {
   const gradual = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'].includes(level);
-  const showAll = graded || revealed || !gradual;
-  const prompt = showAll || level === 'A1';
+  const listening = isListeningTask(task);
+  const showAll = graded || revealed || (!gradual && !listening);
+  const prompt = showAll || (level === 'A1' && !listening);
   const choices = showAll;
   const hasPrompt = promptVisible && (hasNotes ||
     (task?.prompt?.text_lang === 'fr' && !!task.prompt.transcription_ru));

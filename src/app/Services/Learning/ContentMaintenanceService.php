@@ -8,6 +8,7 @@ use App\Models\Learning\LearningSession;
 use App\Models\Learning\LearningUnit;
 use App\Models\User\User;
 use App\Services\Learning\Validation\CanonicalJson;
+use App\Support\Learning\PracticeJson;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
@@ -93,10 +94,15 @@ final class ContentMaintenanceService
         $sessions = LearningSession::whereIn('id', $ids)->get();
         abort_if(count($ids) && $sessions->count() !== count($ids), 404);
         $external = $sessions->pluck('external_id')->all();
-        DB::table('learning_runs')->whereIn('session_id', $ids)->delete();
-        foreach (['personal_vocabulary_sources', 'learning_content_reports'] as $table) {
-            DB::table($table)->whereIn('session_id', $ids)->delete();
+        app(PracticeDictionary::class)->removeSessions($ids);
+        foreach ($sessions as $session) {
+            $summary = ['id' => $session->external_id, 'level' => $session->getRawOriginal('level'),
+                'title' => $session->content_title, 'duration_minutes' => $session->content_duration, 'goal' => $session->content_goal];
+            DB::table('learning_runs')->where('session_id', $session->id)->where('status', 'completed')
+                ->update(['snapshot' => PracticeJson::encode($summary), 'session_id' => null]);
         }
+        DB::table('learning_runs')->whereIn('session_id', $ids)->delete();
+        DB::table('learning_content_reports')->whereIn('session_id', $ids)->delete();
         DB::table('learning_url_aliases')->whereIn('session_id', $ids)->delete();
         LearningSession::whereIn('id', $ids)->delete();
         foreach (LearningSession::whereNotNull('payload')->lazyById(100) as $row) {

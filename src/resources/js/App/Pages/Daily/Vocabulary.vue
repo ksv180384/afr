@@ -3,12 +3,12 @@ import { Head } from '@inertiajs/vue3';
 import PracticeLayout from '@/App/Layouts/PracticeLayout.vue';
 
 import VocabularyPanel from '@/App/Components/Learning/VocabularyPanel.vue';
-defineProps({authUser:Object,enabled:Boolean});
+defineProps({authUser:Object,enabled:Boolean,addedInRun:String});
 </script>
 <template>
   <Head title="Мой словарь"><meta name="robots" content="noindex, nofollow"></Head>
   <practice-layout :auth-user="authUser" title="Мой словарь" hide-heading active="review" :navigation="enabled"><div class="vocabulary-page">
-    <vocabulary-panel v-if="enabled" :auth-user="authUser" />
+    <vocabulary-panel v-if="enabled" :key="addedInRun || 'all'" :auth-user="authUser" :added-in-run="addedInRun" />
     <p v-else role="status">Раздел ещё не открыт для прохождения.</p>
   </div></practice-layout>
 </template>

@@ -4,38 +4,31 @@ namespace App\Models\Learning;
 
 use App\Models\User\User;
 use App\Support\Learning\UsesUtcDates;
-use Database\Factories\Learning\PersonalVocabularySourceFactory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use LogicException;
 
 /**
- * Фиксирует версию занятия и словарный элемент, из которых пользователь добавил слово.
+ * Источник выражения, вычисленный из изученного набора и личного словаря.
  *
- * @property int $id Первичный ключ записи.
+ * @property string $id Составной идентификатор слова и выражения занятия.
  * @property int $user_id Пользователь, к которому относится запись.
  * @property int $personal_word_id Запись слова в личном словаре.
  * @property int $session_id Занятие, к которому относится запись.
- * @property array $snapshot Снимок исходного словарного элемента в момент добавления.
+ * @property int $session_lexeme_id Выражение в изученном занятии.
  * @property \Carbon\CarbonImmutable $first_added_at Момент первого добавления слова.
- * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
- * @property \Illuminate\Support\Carbon|null $updated_at Момент последнего обновления записи.
  */
 class PersonalVocabularySource extends Model
 {
-    use HasFactory;
     use UsesUtcDates;
 
-    protected $table = 'personal_vocabulary_sources';
+    protected $table = 'studied_vocabulary_sources';
 
-    protected $fillable = [
-        'user_id',
-        'personal_word_id',
-        'session_id',
-        'snapshot',
-        'first_added_at',
-    ];
+    protected $keyType = 'string';
+
+    public $incrementing = false;
+
+    public $timestamps = false;
 
     protected function casts(): array
     {
@@ -43,29 +36,21 @@ class PersonalVocabularySource extends Model
             'user_id' => 'integer',
             'personal_word_id' => 'integer',
             'session_id' => 'integer',
-            'snapshot' => 'array',
+            'session_lexeme_id' => 'integer',
             'first_added_at' => 'immutable_datetime',
         ];
     }
 
     protected static function booted(): void
     {
-        static::updating(function (self $model): void {
-            if ($model->isDirty([
-                'user_id',
-                'personal_word_id',
-                'session_id',
-                'snapshot',
-                'first_added_at',
-            ])) {
-                throw new LogicException('PersonalVocabularySource identity and snapshot cannot be changed.');
-            }
-        });
+        $readOnly = fn () => throw new LogicException('Studied sources are derived from lesson completions.');
+        static::saving($readOnly);
+        static::deleting($readOnly);
     }
 
-    protected static function newFactory(): PersonalVocabularySourceFactory
+    public function entry(): BelongsTo
     {
-        return PersonalVocabularySourceFactory::new();
+        return $this->belongsTo(SessionLexeme::class, 'session_lexeme_id');
     }
 
     public function word(): BelongsTo

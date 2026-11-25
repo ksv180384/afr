@@ -42,7 +42,8 @@
   "run_statuses": [
     "in_progress",
     "paused",
-    "completed"
+    "completed",
+    "cancelled"
   ],
   "task_types": [
     "single_choice",

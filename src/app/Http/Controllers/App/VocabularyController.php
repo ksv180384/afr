@@ -10,13 +10,17 @@ use App\Models\User\User;
 use App\Services\Learning\VocabularyTestService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class VocabularyController extends Controller
 {
     public function page(Request $request)
     {
-        return Inertia::render('Daily/Vocabulary', ['authUser' => Helper::getUserData(), 'enabled' => (bool) config('daily_practice.enabled')])
+        $run = $request->query('added_in_run');
+
+        return Inertia::render('Daily/Vocabulary', ['authUser' => Helper::getUserData(), 'enabled' => (bool) config('daily_practice.enabled'),
+            'addedInRun' => is_string($run) && Str::isUuid($run) ? $run : null])
             ->toResponse($request)->withHeaders(['Cache-Control' => 'private, no-store', 'X-Robots-Tag' => 'noindex, nofollow']);
     }
 
@@ -43,7 +47,7 @@ class VocabularyController extends Controller
     public function reviewPlan(VocabularyRequest $request, VocabularyTestService $service)
     {
         $mode = $request->validated('mode') ?? 'manual';
-        $filters = $mode === 'manual' ? $request->safe()->only(['filter', 'source_session', 'q']) : [];
+        $filters = $mode === 'manual' ? $request->safe()->only(['filter', 'source_session', 'added_in_run', 'q']) : [];
         $plan = $service->shortPlan($request->user(), $mode, $filters);
 
         return response()->json(['owner_user_id' => $request->user()->id, ...array_diff_key($plan, ['selection' => true])]);
@@ -55,7 +59,7 @@ class VocabularyController extends Controller
             User::query()->lockForUpdate()->findOrFail($request->user()->id);
             $row = PersonalVocabulary::query()->where('user_id', $request->user()->id)->lockForUpdate()->findOrFail($word);
             $row->update([...$request->safe()->only(['needs_review', 'is_difficult']), 'native_revision' => $row->native_revision + 1]);
-            $row->load('sources.session');
+            $row->load(['lexeme', 'sources.entry', 'sources.session']);
 
             return $service->data($row);
         });

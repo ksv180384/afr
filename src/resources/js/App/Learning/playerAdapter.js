@@ -1,3 +1,4 @@
+import { randomUuid } from './randomUuid.js';
 import { checkingPolicy } from './types/index.js';
 import { initialPresentation, evaluateEvent, calculateSessionResult, taskSnapshot } from './answerChecker.js';
 
@@ -16,7 +17,7 @@ export const createTransportAdapter = ({ mode, actions, saveDraft }) => {
   return Object.freeze(adapter);
 };
 
-export const createLocalPlayerAdapter = ({ mode, loadSession, saved, persist, policyVersion = 1, idFactory = () => crypto.randomUUID() }) => {
+export const createLocalPlayerAdapter = ({ mode, loadSession, saved, persist, policyVersion = 1, idFactory = randomUuid }) => {
   checkingPolicy(policyVersion);
   let session;
   let states = [];

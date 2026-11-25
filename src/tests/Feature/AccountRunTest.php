@@ -4,11 +4,13 @@ use App\Models\Learning\DailyAssignment;
 use App\Models\Learning\LearningAttempt;
 use App\Models\Learning\LearningLevel;
 use App\Models\Learning\LearningRun;
+use App\Models\Learning\LearningRunOperation;
 use App\Models\Learning\LearningSession;
 use App\Models\Learning\LearningUnit;
 use App\Models\User\User;
 use App\Services\Learning\Validation\CanonicalJson;
 use Database\Seeders\Learning\LearningLevelSeeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 beforeEach(function () {
@@ -94,6 +96,25 @@ it('records help before grading and recovers the same answer receipt before revi
     $loaded = $this->getJson('/daily/api/runs/'.$state['run_id'])->assertOk()->json();
     expect($loaded['position'])->toBe(1);
     expect(LearningAttempt::count())->toBe(2);
+
+    $operation = LearningRunOperation::findOrFail($receipt['record_sequence']);
+    $payload = array_diff_key($receipt, array_flip(['accepted_event_id', 'record_sequence']));
+    $legacy = json_encode($payload, JSON_THROW_ON_ERROR);
+    expect(json_decode($operation->getRawOriginal('receipt'), true))->toHaveKey('gzip_v1');
+    expect(strlen($operation->getRawOriginal('receipt')))->toBeLessThan(strlen($legacy));
+
+    $afterAdvance = accountCommand($this, $loaded, 'advance', ['presentation_id' => $loaded['presentation']['presentation_id']]);
+    expect($afterAdvance['position'])->toBe(2);
+    $this->postJson('/daily/api/runs/'.$state['run_id'].'/answers', $input)->assertExactJson($receipt);
+
+    DB::table('learning_run_operations')->where('id', $operation->id)->update(['receipt' => $legacy]);
+    $this->postJson('/daily/api/runs/'.$state['run_id'].'/answers', $input)->assertExactJson($receipt);
+    $migration = require database_path('migrations/2026_11_25_151000_compress_learning_operation_receipts.php');
+    $migration->up();
+    expect(json_decode($operation->fresh()->getRawOriginal('receipt'), true))->toHaveKey('gzip_v1');
+    $this->postJson('/daily/api/runs/'.$state['run_id'].'/answers', $input)->assertExactJson($receipt);
+    $migration->down();
+    expect($operation->fresh()->receipt)->toBe($payload);
 });
 
 it('preloads the owners pinned tasks and answer keys in order only when requested', function () {
@@ -112,17 +133,37 @@ it('preloads the owners pinned tasks and answer keys in order only when requeste
 
 it('finishes once using server time and preserves the receipt after midnight and lost acknowledgement', function () {
     $this->travelTo(\Carbon\Carbon::parse('2026-10-24 20:55:00', 'UTC'));
-    $state = accountStart($this, ['timezone' => 'Europe/Moscow']);
+    $start = accountInput(1, ['kind' => 'daily', 'timezone' => 'Europe/Moscow']);
+    $started = $this->postJson('/daily/api/runs', $start)->assertOk()->json();
+    $state = $started['state'];
+    expect(LearningRun::findOrFail($state['run_id'])->content_checksum)->not->toBeNull();
     $this->postJson('/daily/api/runs/'.$state['run_id'].'/finish', accountInput($state['revision']))->assertUnprocessable();
     $state = accountComplete($this, $state);
     $this->travelTo(\Carbon\Carbon::parse('2026-10-24 21:05:00', 'UTC'));
     $input = accountInput($state['revision']);
     $receipt = $this->postJson('/daily/api/runs/'.$state['run_id'].'/finish', $input)->assertOk()->json();
+    $storedRun = LearningRun::findOrFail($state['run_id']);
+    $storedResult = json_decode($storedRun->getRawOriginal('result'), true, 512, JSON_THROW_ON_ERROR);
+    expect($storedRun->content_checksum)->toBeNull()
+        ->and($storedResult['v'])->toBe(1)
+        ->and($storedResult['s'])->toHaveCount(6)
+        ->and($storedResult['w'])->toBe($receipt['state']['summary']['added_word_ids']);
+    $this->getJson('/daily/api/history')->assertOk()
+        ->assertJsonPath('data.0.result.added_word_ids', $storedResult['w'])
+        ->assertJsonPath('data.0.result.total_steps', $storedResult['s'][0])
+        ->assertJsonMissingPath('data.0.result.s');
+    $finish = LearningRunOperation::findOrFail($receipt['record_sequence']);
+    expect(strlen($finish->getRawOriginal('payload_hash')))->toBe(32)
+        ->and($finish->payload_hash)->toBe(CanonicalJson::hash(['operation' => 'finish', 'run_id' => $state['run_id'], 'input' => $input]))
+        ->and(LearningRunOperation::forRun($storedRun)->whereNotNull('receipt')->count())->toBe(0);
     expect($receipt['state']['finished'])->toBeTrue();
     expect($receipt['state']['summary']['independent_correct_steps'])->toBe(0);
     $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('activity_today', true);
     $this->travelTo(\Carbon\Carbon::parse('2026-10-26 21:05:00', 'UTC'));
     $this->postJson('/daily/api/runs/'.$state['run_id'].'/finish', $input)->assertExactJson($receipt);
+    $this->postJson('/daily/api/runs', $start)->assertOk()->assertJsonPath('state.run_id', $state['run_id'])
+        ->assertJsonPath('state.finished', true)->assertJsonPath('record_sequence', $started['record_sequence']);
+    $this->postJson('/daily/api/runs/'.$state['run_id'].'/finish', [...$input, 'expected_revision' => 1])->assertConflict();
     $this->getJson('/daily/api/today')->assertOk()->assertJsonPath('activity_today', false);
     expect(DailyAssignment::sole()->local_date->format('Y-m-d'))->toBe('2026-10-24');
     $this->assertDatabaseCount('personal_vocabulary', 6);
@@ -226,7 +267,7 @@ it('creates explicit extras independently and enforces prerequisites', function 
 
 it('creates frozen review and vocabulary test sets only from owned words', function () {
     $word = $this->versions[0]->payload['vocabulary'][0];
-    $personal = \App\Models\Learning\PersonalVocabulary::factory()->create(['user_id' => $this->learner->id, 'lexeme_key' => $word['lexeme_key'], 'snapshot' => $word, 'next_review_at' => now('UTC')->subDay()]);
+    $personal = \App\Models\Learning\PersonalVocabulary::factory()->studied($word)->create(['user_id' => $this->learner->id, 'next_review_at' => now('UTC')->subDay()]);
     $foreign = \App\Models\Learning\PersonalVocabulary::factory()->create();
     $this->postJson('/daily/api/runs', accountInput(1, ['kind' => 'review', 'word_ids' => [$foreign->id]]))->assertNotFound();
     $review = accountStart($this, ['kind' => 'review']);
@@ -361,9 +402,9 @@ it('starts updated twelve-task content from the beginning and completes it with 
 
 it('keeps short review blocks below the ordinary lesson minimum', function (int $count) {
     foreach (array_slice($this->versions[0]->payload['vocabulary'], 0, $count) as $word) {
-        \App\Models\Learning\PersonalVocabulary::factory()->create([
+        \App\Models\Learning\PersonalVocabulary::factory()->studied($word)->create([
             'user_id' => $this->learner->id, 'lexeme_key' => $word['lexeme_key'],
-            'snapshot' => $word, 'next_review_at' => now('UTC')->subDay(),
+            'next_review_at' => now('UTC')->subDay(),
         ]);
     }
     $state = accountStart($this, ['kind' => 'review']);

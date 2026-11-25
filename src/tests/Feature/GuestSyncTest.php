@@ -89,7 +89,7 @@ it('imports a personal difficult mark independently of review marks and deduplic
 it('rechecks a completed run and preserves higher level and existing vocabulary while adding sources', function () {
     $profile = LearningProfile::factory()->create(['user_id' => $this->learner->id, 'current_level' => 'B1']);
     $snapshot = $this->payload['vocabulary'][0];
-    $word = PersonalVocabulary::factory()->create(['user_id' => $this->learner->id, 'lexeme_key' => $snapshot['lexeme_key'], 'snapshot' => $snapshot, 'needs_review' => false, 'streak' => 2, 'errors' => 9, 'review_step' => 4, 'next_review_at' => now('UTC')->addDays(14)]);
+    $word = PersonalVocabulary::factory()->create(['user_id' => $this->learner->id, 'lexeme_key' => $snapshot['lexeme_key'], 'needs_review' => false, 'streak' => 2, 'errors' => 9, 'review_step' => 4, 'next_review_at' => now('UTC')->addDays(14)]);
     $before = $word->toArray();
     $bundle = syncFixture($this, true, 2);
     $batch = syncBatch([$bundle]);
@@ -99,7 +99,10 @@ it('rechecks a completed run and preserves higher level and existing vocabulary 
     expect($run->result['independent_correct_steps'])->toBe(0);
     expect($run->status->value)->toBe('completed');
     $this->assertDatabaseCount('personal_vocabulary', 6);
-    $this->assertDatabaseCount('personal_vocabulary_sources', 6);
+    $this->assertDatabaseCount('studied_vocabulary_sources', 6);
+    $guestFinish = \Carbon\CarbonImmutable::parse(last($bundle['events'])['client_occurred_at']);
+    expect($word->sources()->sole()->first_added_at->equalTo($guestFinish))->toBeTrue()
+        ->and($run->finished_at->greaterThan($guestFinish))->toBeTrue();
     foreach (['needs_review', 'streak', 'errors', 'review_step', 'next_review_at'] as $key) {
         expect($word->fresh()->toArray()[$key])->toBe($before[$key]);
     }
@@ -257,7 +260,7 @@ it('uses JSON CSRF validation and feature flag errors for sync and never creates
 
 it('never resurrects a protected old guest error when an unfinished imported run is finished natively', function () {
     $source = $this->payload['vocabulary'][0];
-    $word = PersonalVocabulary::factory()->create(['user_id' => $this->learner->id, 'lexeme_key' => $source['lexeme_key'], 'snapshot' => $source, 'streak' => 2, 'errors' => 9, 'review_step' => 4, 'needs_review' => false]);
+    $word = PersonalVocabulary::factory()->create(['user_id' => $this->learner->id, 'lexeme_key' => $source['lexeme_key'], 'streak' => 2, 'errors' => 9, 'review_step' => 4, 'needs_review' => false]);
     $bundle = syncFixture($this, false, 2);
     $receipt = $this->postJson('/daily/api/guest-sync', syncBatch([$bundle]))->assertOk()->assertJsonCount(0, 'rejected')->json();
     $id = $receipt['mapping'][$bundle['guest_run_id']]['server_run_id'];
@@ -356,4 +359,9 @@ it('throttles imported successes by trusted receipt time across batches and igno
     $this->postJson('/daily/api/guest-sync', $batch)->assertOk()->assertJsonCount(0, 'rejected');
     expect($word->fresh()->review_step)->toBe(2);expect($word->fresh()->streak)->toBe(2);
     expect(\App\Services\Learning\VocabularySuccessWindow::latest($word->fresh())->toIso8601String())->toBe('2026-11-07T12:00:00+00:00');
+    $batch['batch_id'] = (string) Str::uuid();
+    $this->postJson('/daily/api/guest-sync', $batch)->assertOk()->assertJsonCount(0, 'rejected');
+    $credit = \App\Models\Learning\VocabularyRunEffect::where('user_id', $word->user_id)->where('lexeme_key', $word->lexeme_key)->sole();
+    expect($credit->applied_at->toIso8601String())->toBe('2026-11-07T12:00:00+00:00')
+        ->and($word->fresh()->review_step)->toBe(2);
 });

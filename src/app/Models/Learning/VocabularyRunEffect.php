@@ -57,6 +57,25 @@ class VocabularyRunEffect extends Model
         return $this->belongsTo(LearningRun::class, 'run_id', 'id');
     }
 
+    public static function compactClosedRun(LearningRun $run): void
+    {
+        self::compactClosedCredits($run->user_id, $run->vocabularyEffects()->pluck('lexeme_key')->all());
+    }
+
+    public static function compactClosedCredits(int $ownerId, array $keys): void
+    {
+        // Open runs still need their own marker, even when another run earned a later credit.
+        foreach (array_chunk($keys, 100) as $batch) {
+            $credits = self::where('user_id', $ownerId)->whereIn('lexeme_key', $batch)->where('success_applied', true)
+                ->whereHas('run', fn ($runs) => $runs->whereIn('status', ['completed', 'cancelled']))
+                ->orderByDesc('applied_at')->orderByDesc('id')->lockForUpdate()->pluck('lexeme_key', 'id');
+            $obsolete = $credits->duplicatesStrict()->keys();
+            foreach ($obsolete->chunk(500) as $ids) {
+                self::whereIntegerInRaw('id', $ids)->delete();
+            }
+        }
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

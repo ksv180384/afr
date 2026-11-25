@@ -1,8 +1,9 @@
 <script setup>
+import { randomUuid } from '@/App/Learning/randomUuid.js';
 import { computed, nextTick, onBeforeUnmount, onMounted, provide, ref } from 'vue';
 import useClickOutside from '@/Composables/useClickOutside.js';
 import { rememberTemporaryGuest, registerGuestAuthentication } from '@/App/Learning/guestSyncState.js';
-import { router } from '@inertiajs/vue3';
+import { Link, router } from '@inertiajs/vue3';
 import { Icon } from '@iconify/vue';
 import AfrButton from '@/App/Components/Form/AfrButton.vue';
 import AfrInput from '@/App/Components/Form/AfrInput.vue';
@@ -21,18 +22,21 @@ import { addGuestRun, recordGuestEvent } from '@/App/Learning/guestProgress.js';
 import { filterGuestWords, guestWordData, guestTestPlan, guestTestSource } from '@/App/Learning/guestVocabulary.js';
 import { usePracticeHome } from '@/App/Learning/practiceHome.js';
 import { startAccountRun, deliverAccountQueue } from '@/App/Learning/accountAdapter.js';
-import { accountTransport, vocabularyTransport } from '@/App/Services/Api/daily_practice.js';
+import { refreshGuestDictionary } from '@/App/Learning/guestDictionaryUpdates.js';
+import { accountTransport, guestContentTransport, vocabularyTransport } from '@/App/Services/Api/daily_practice.js';
 import { usePracticeFeedback } from '@/App/Learning/usePracticeFeedback.js';
 import { browserTimezone } from '@/App/Learning/practiceTime.js';
 
-const props = defineProps({authUser:Object,guestRepository:Object,routeStore:Object});
+const props = defineProps({authUser:Object,guestRepository:Object,routeStore:Object,addedInRun:String});
 const emit = defineEmits(['open-guest-run','back']);
 const words = ref([]);
 const pagination = ref({current_page:1,last_page:1,total:0});
 const sessions = ref([]);
 const defaultFilters = {filter:'all',source_session:'',q:''};
 const filters = ref({...defaultFilters});
-const appliedFilters = ref({filter:'all'});
+const addedInRun = ref(props.addedInRun);
+const requestFilters = () => Object.fromEntries(Object.entries({...filters.value,added_in_run:addedInRun.value}).filter(([,value])=>value));
+const appliedFilters = ref(requestFilters());
 const shortPlan = ref(null);
 const shortError = ref('');
 const settingsOpen = ref(false);
@@ -125,7 +129,6 @@ const perform = async (action) => {
   }
   finally { busy.value = false; }
 };
-const requestFilters = () => Object.fromEntries(Object.entries(filters.value).filter(([,value])=>value));
 const load = async (page = pagination.value.current_page) => {
   const current = appliedFilters.value;
   if (owner) {
@@ -183,6 +186,10 @@ const resetFilters = () => {
   filters.value = {...defaultFilters};
   return refresh();
 };
+const openEntireDictionary = () => {
+  addedInRun.value = null;
+  return resetFilters();
+};
 const turnPage = (page) => perform(()=>load(page));
 const mark = (word, field = 'needs_review') => perform(async () => {
   markingWordId.value = word.id;
@@ -198,7 +205,7 @@ const mark = (word, field = 'needs_review') => perform(async () => {
       const current = state.vocabulary[word.lexeme_key];
       if (!current) throw new Error('Выражение отсутствует в этом браузере.');
       current[field] = target;
-      recordGuestEvent(state,{action:'vocabulary_mark',lexeme_key:word.lexeme_key,[field]:target,client_event_id:crypto.randomUUID(),client_occurred_at:new Date().toISOString()});
+      recordGuestEvent(state,{action:'vocabulary_mark',lexeme_key:word.lexeme_key,[field]:target,client_event_id:randomUuid(),client_occurred_at:new Date().toISOString()});
     });
     invalidateHome();
     await Promise.all([load(1), loadShortPlan()]);
@@ -227,7 +234,7 @@ const start = (all = false) => perform(async () => {
     const cachedProfile = homeStore.state.owner === owner && homeStore.state.ready ? homeStore.state.home?.profile : null;
     const profile = cachedProfile ?? await accountTransport.profile();
     if (profile.owner_user_id !== owner) throw new Error('Войдите в исходный аккаунт.');
-    const input = {client_event_id:crypto.randomUUID(),expected_revision:profile.revision,kind:'vocabulary_test',word_ids:ids,timezone:profile.persisted ? profile.timezone : browserTimezone()};
+    const input = {client_event_id:randomUuid(),expected_revision:profile.revision,kind:'vocabulary_test',word_ids:ids,timezone:profile.persisted ? profile.timezone : browserTimezone()};
     try {
       openRecoveredStart = true;
       const state = await startAccountRun({ownerUserId:owner,input,profile,repository:accountRepository,transport:accountTransport,onStatus,onMutation:invalidateHome});
@@ -235,10 +242,10 @@ const start = (all = false) => perform(async () => {
       router.visit('/daily/run/'+state.run_id);
     } finally { pendingStart.value = (await accountRepository.pending(owner,null)).length>0; }
   } else {
-    const runId = crypto.randomUUID(); const tabId = crypto.randomUUID(); const seed = crypto.randomUUID(); const eventId = crypto.randomUUID();
+    const runId = randomUuid(); const tabId = randomUuid(); const seed = randomUuid(); const eventId = randomUuid();
     await repository.mutate((state) => {
-      const source = guestTestSource(state,ids,seed,()=>crypto.randomUUID());
-      addGuestRun(state,{source,runId,presentationIds:source.snapshot.tasks.map(()=>crypto.randomUUID()),eventId,tabId,now:new Date().toISOString(),kind:'vocabulary_test'});
+      const source = guestTestSource(state,ids,seed,randomUuid);
+      addGuestRun(state,{source,runId,presentationIds:source.snapshot.tasks.map(randomUuid),eventId,tabId,now:new Date().toISOString(),kind:'vocabulary_test'});
     });
     invalidateHome();
     if (props.guestRepository) emit('open-guest-run',runId);
@@ -297,8 +304,8 @@ onMounted(async () => {
     if (!owner) {
       repository = props.guestRepository ?? homeStore.guestRepository;
       if(!props.guestRepository) await repository.archiveBound();
-      unsubscribe=repository.subscribe('vocabulary-'+crypto.randomUUID(),(notice)=>{if(notice.bound || notice.rotated) router.visit('/daily/vocabulary');});
-      await repository.initialize();
+      unsubscribe=repository.subscribe('vocabulary-'+randomUuid(),(notice)=>{if(notice.bound || notice.rotated) router.visit('/daily/vocabulary');});
+      await refreshGuestDictionary(repository, guestContentTransport, await repository.initialize());
       unregisterAuthentication = registerGuestAuthentication(prepareAuthentication);
     }
     await Promise.all([load(), loadShortPlan()]);
@@ -338,6 +345,19 @@ onBeforeUnmount(() => { disposed=true; window.removeEventListener('online',recov
         </div>
       </div>
     </header>
+    <div v-if="appliedFilters.added_in_run" class="vocabulary-scope">
+      <strong>Новые выражения из занятия</strong>
+      <div class="vocabulary-scope-actions">
+        <afr-button v-if="guestRepository" class="vocabulary-result-link" :disabled="busy" @click="emit('open-guest-run', appliedFilters.added_in_run)">
+          К результату занятия
+        </afr-button>
+        <Link v-else class="vocabulary-result-link" :href="`/daily/${owner ? 'run' : 'guest'}/${encodeURIComponent(appliedFilters.added_in_run)}`">
+          К результату занятия
+        </Link>
+        <afr-button v-if="guestRepository" link :disabled="busy" @click="openEntireDictionary">Весь словарь</afr-button>
+        <Link v-else href="/daily/vocabulary">Весь словарь</Link>
+      </div>
+    </div>
     <div class="vocabulary-toolbar">
       <div class="training-actions">
         <afr-button :disabled="busy || !pagination.total" @click="prepare">Тест по словам</afr-button>
@@ -414,7 +434,11 @@ onBeforeUnmount(() => { disposed=true; window.removeEventListener('online',recov
       <button type="button" class="utility-button filter-reset" :disabled="busy || !canResetFilters"
         aria-label="Сбросить фильтры" title="Сбросить фильтры" @click="resetFilters"><daily-practice-icon name="reset" /></button>
     </form>
-    <p v-if="!busy && !words.length">{{ appliedFilters.filter === 'difficult' ? 'Сложных слов в этой выборке пока нет. В списке «Все выражения» отметьте слова звёздочкой.' : 'В этом списке пока нет выражений. Завершите занятие или измените фильтры.' }}</p>
+    <template v-if="!busy && !words.length">
+      <p v-if="appliedFilters.filter === 'difficult'">Сложных слов в этой выборке пока нет. В списке «Все выражения» отметьте слова звёздочкой.</p>
+      <p v-else-if="appliedFilters.added_in_run">В этой выборке нет новых выражений. Измените фильтры или откройте весь словарь.</p>
+      <p v-else>В этом списке пока нет выражений. Завершите занятие или измените фильтры.</p>
+    </template>
     <section v-if="plan" class="notice">
       <p>Для проверяемого теста: {{ plan.total }}. Для самопроверки без зачёта: {{ plan.self_check_words.length }}.</p>
       <div v-if="plan.total" class="actions">
@@ -538,6 +562,12 @@ h2 {
 }
 .vocabulary-toolbar, .training-actions, .header-tools { display: flex; align-items: center; gap: .5rem; }
 .vocabulary-toolbar { justify-content: space-between; flex-wrap: wrap; margin: .4rem 0; }
+.vocabulary-scope { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.25rem .75rem; margin:.65rem 0; padding:.35rem .75rem; border-radius:.6rem; background:var(--practice-accent); font-size:.875rem; }
+.vocabulary-scope-actions { display:flex; align-items:center; flex-wrap:wrap; gap:.25rem .75rem; }
+.vocabulary-scope a { display:inline-flex; align-items:center; min-height:44px; color:var(--practice-blue); text-decoration:underline; text-underline-offset:.2em; }
+.vocabulary-scope .vocabulary-result-link { min-height:44px; padding:.45rem .75rem; border:1px solid var(--practice-border); border-radius:var(--practice-control-radius); background:var(--practice-surface); color:var(--practice-blue); font-weight:650; text-decoration:none; }
+.vocabulary-scope .vocabulary-result-link:not(:disabled):hover { border-color:var(--practice-blue); }
+.vocabulary-scope .vocabulary-result-link:disabled { opacity:.65; }
 .training-actions { flex-wrap: wrap; }
 .header-tools { position: relative; gap: .15rem; flex-shrink: 0; }
 .utility-button { display: grid; place-items: center; width: var(--vocabulary-control-size); height: var(--vocabulary-control-size); padding: 0; border-radius: .5rem; color: #51718e; }

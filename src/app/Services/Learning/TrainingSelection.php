@@ -15,14 +15,16 @@ final class TrainingSelection
         $access = app(LearningAccessService::class);
         $completed = $access->completed($actor);
         $recent = LearningRun::where('user_id', $actor->id)->whereIn('kind', ['daily', 'extra'])
-            ->where('snapshot->level', $access->profileLevel($actor))->latest('started_at')->first();
-        $current = $recent?->snapshot['id'] ?? null;
+            ->whereRelation('session', 'level', $access->profileLevel($actor))
+            ->latest('started_at')->orderByDesc('id')->first();
+        $lesson = $recent?->lesson();
+        $current = $lesson?->external_id;
         $seen = [];
-        if ($recent && ! in_array($current, $completed, true)
-            && ($recent->content_checksum === null || $recent->session?->checksum === $recent->content_checksum)) {
+        if ($lesson && ! in_array($current, $completed, true)
+            && ($recent->content_checksum === null || $lesson->checksum === $recent->content_checksum)) {
             $content = $recent->content();
             $introductions = collect($content['introductions'] ?? [])->groupBy('before_task_id');
-            foreach ($recent->presentations()->select('id', 'task_id', 'snapshot')->withExists('firstAttempt')->get() as $step) {
+            foreach ($recent->presentations()->select('id', 'task_id', 'position')->withExists('firstAttempt')->get() as $step) {
                 if ($step->first_attempt_exists) {
                     array_push($seen, ...($step->taskSnapshot($content)['task']['vocabulary_ids'] ?? []));
                 }
@@ -62,13 +64,15 @@ final class TrainingSelection
         return $items->all();
     }
 
-    public function selectTopic(Builder $published, string $mode, string $unit, array $previous): array
+    public function selectTopic(Builder $published, string $mode, string $unit, array $previous, array $completed, ?string $current, array $seen): array
     {
-        $lessons = $this->withTraining($published, $mode)->where('learning_units.external_id', $unit)->get();
+        $lessons = $this->withTraining($published, $mode)->where('learning_units.external_id', $unit)
+            ->whereIn('learning_sessions.external_id', array_unique(array_filter([...$completed, $current])))->get();
         $perLesson = [];
         $extra = [];
         foreach ($lessons as $lesson) {
-            $items = $this->order($this->sourceItems($lesson->payload, $mode), $previous);
+            $complete = in_array($lesson->external_id, $completed, true);
+            $items = $this->order($this->sourceItems($lesson->payload, $mode, $complete ? null : $seen), $previous);
             if ($items->isNotEmpty()) {
                 $perLesson[] = $items->shift();
                 array_push($extra, ...$items);

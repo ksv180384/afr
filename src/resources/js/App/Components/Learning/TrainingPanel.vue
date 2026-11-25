@@ -1,12 +1,12 @@
 <script setup>
+import { randomUuid } from '@/App/Learning/randomUuid.js';
 import { onMounted, ref, shallowRef } from 'vue';
 import AfrButton from '@/App/Components/Form/AfrButton.vue';
 import AfrCard from '@/App/Components/Card/AfrCard.vue';
 import DailyPracticeIcon from './DailyPracticeIcon.vue';
 import PracticeErrorNotice from './PracticeErrorNotice.vue';
 import SessionPlayer from './SessionPlayer.vue';
-import { trainingSession } from '@/App/Learning/training.js';
-import { completedGuestSessions } from '@/App/Learning/learningAccess.js';
+import { trainingSession, guestTrainingProgress } from '@/App/Learning/training.js';
 import { createLocalPlayerAdapter } from '@/App/Learning/playerAdapter.js';
 import { practiceRouteTransport } from '@/App/Services/Api/daily_practice.js';
 
@@ -24,15 +24,13 @@ const load = async () => {
   try {
     const guestState = props.owner ? null : await props.guestRepository?.read();
     const ownerKey = props.owner ? 'account.' + props.owner : 'guest.' + (guestState?.guest_id ?? 'new');
-    storageKey = 'afr.training.v1.' + ownerKey + '.' + props.unit + '.' + props.mode.id;
+    // Discard cached training plans built before the introduced-material filter.
+    storageKey = 'afr.training.v2.' + ownerKey + '.' + props.unit + '.' + props.mode.id;
     const saved = read();
     if (saved.session) {
       plan.value = saved;
     } else {
-      const progress = props.owner ? {} : {
-        completed: [...new Set(completedGuestSessions(guestState))],
-        current_level: guestState?.current_level,
-      };
+      const progress = props.owner ? {} : guestTrainingProgress(guestState);
       const {items} = await practiceRouteTransport.training({unit: props.unit, mode: props.mode.id, previous: saved.previous ?? [], ...progress});
       if (items.length) plan.value = {session: trainingSession(props.mode, items), revision: saved.revision};
     }
@@ -50,7 +48,7 @@ const start = async () => {
     persist(next) {
       if (revision !== read().revision) throw new Error('Тренировка изменилась в другой вкладке. Откройте её заново.');
       const data = next.finished ? {previous: session.tasks.slice(0, 100).map(task => task.id)} : {session, state: next};
-      const nextRevision = crypto.randomUUID();
+      const nextRevision = randomUuid();
       localStorage.setItem(storageKey, JSON.stringify({...data, revision: nextRevision}));
       revision = nextRevision;
     },
@@ -73,7 +71,7 @@ onMounted(load);
         {{ plan.state ? 'Продолжить' : 'Начать' }}
         <daily-practice-icon name="chevron" />
       </afr-button>
-      <small v-else-if="!busy && !error">В этой теме пока нет заданий для этой тренировки.</small>
+      <small v-else-if="!busy && !error">Пока нет подходящих заданий. Пройдите занятие этой темы: тренировка подбирается из уже изученного материала.</small>
     </afr-card>
     <p v-if="busy" role="status">Подбираем задания…</p>
     <practice-error-notice v-if="error" :message="error" />

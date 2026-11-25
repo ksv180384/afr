@@ -1,6 +1,8 @@
+import { randomUuid } from './randomUuid.js';
+import { refreshGuestDictionary } from './guestDictionaryUpdates.js';
 import { applyGuestOperation, guestRunView, guestError } from './guestProgress.js';
 
-export const createGuestAdapter = ({repository,runId,tabId,onStatus = () => {},onMutation = () => {},idFactory = () => crypto.randomUUID(),now = () => new Date().toISOString()}) => {
+export const createGuestAdapter = ({repository,runId,tabId,transport,onStatus = () => {},onMutation = () => {},idFactory = randomUuid,now = () => new Date().toISOString()}) => {
   let current;
   let serial = Promise.resolve();
   const envelopes = new Map();
@@ -50,6 +52,7 @@ export const createGuestAdapter = ({repository,runId,tabId,onStatus = () => {},o
       if (advanceFrom) return command('advance',{presentation_id:advanceFrom});
       if (introductionSeen) return command('introduction',{presentation_id:introductionSeen});
       return schedule(async () => {
+        if (transport) await refreshGuestDictionary(repository, transport, await repository.read());
         current = await repository.mutate((state) => {
           const run = state?.runs[runId];
           if (!run) throw guestError('Занятие не найдено в этом браузере.', 'not_found');

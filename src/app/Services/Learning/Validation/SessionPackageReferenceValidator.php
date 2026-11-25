@@ -8,7 +8,6 @@ use App\Models\Learning\LearningMedia;
 use App\Models\Learning\LearningObjective;
 use App\Models\Learning\LearningSession;
 use App\Models\Learning\LearningUnit;
-use App\Models\Word\Word;
 
 final class SessionPackageReferenceValidator
 {
@@ -285,9 +284,9 @@ final class SessionPackageReferenceValidator
     private function lexemesAndMedia(array $package, PackageValidationReport $report): void
     {
         $lexemes = [];
-        $dictionaryIds = [];
         $assets = [];
         foreach ($package['sessions'] as $si => $session) {
+            $sessionKeys = [];
             foreach ($session['vocabulary'] as $vi => $word) {
                 $key = $word['lexeme_key'];
                 $path = '/sessions/'.$si.'/vocabulary/'.$vi;
@@ -296,9 +295,10 @@ final class SessionPackageReferenceValidator
                     $report->warning('lexeme_meaning_review', $path.'/lexeme_key', 'Один lexeme_key имеет разные тексты/переводы: подтвердите одинаковый смысл.');
                 }
                 $lexemes[$key] = ['meaning' => $meaning, 'path' => $path.'/lexeme_key'];
-                if (isset($word['dictionary_word_id'])) {
-                    $dictionaryIds[$word['dictionary_word_id']][] = $path.'/dictionary_word_id';
+                if (isset($sessionKeys[$key])) {
+                    $report->error('duplicate_lexeme', $path.'/lexeme_key', 'Выражение уже есть в словаре этого занятия.');
                 }
+                $sessionKeys[$key] = true;
             }
             $this->audioReferences($session, '/sessions/'.$si, $assets, $report);
             foreach ($session['tasks'] as $ti => $task) {
@@ -307,38 +307,11 @@ final class SessionPackageReferenceValidator
                 }
             }
         }
-        foreach (array_chunk(array_keys($dictionaryIds), 500) as $chunk) {
-            $found = Word::query()->whereIn('id', $chunk)->pluck('id')->all();
-            foreach ($chunk as $id) {
-                if (! in_array($id, $found, false)) {
-                    foreach ($dictionaryIds[$id] as $path) {
-                        $report->error('reference_not_found', $path, 'Необязательная ссылка words указывает на отсутствующую запись.');
-                    }
-                }
-            }
-        }
-        $seenVersions = [];
-        foreach (array_chunk(array_keys($lexemes), 100) as $keys) {
-            $versions = LearningSession::query()->where(function ($query) use ($keys) {
-                foreach ($keys as $key) {
-                    $query->orWhere('payload', 'like', '%"lexeme_key"%"'.$key.'"%');
-                }
-            })->limit(config('daily_practice.import.max_context_nodes') + 1)->get(['id', 'payload']);
-            if ($versions->count() > config('daily_practice.import.max_context_nodes')) {
-                $report->error('context_limit_exceeded', '', 'Слишком много версий для проверки словарных значений.');
-
-                break;
-            }
-            foreach ($versions as $version) {
-                if (isset($seenVersions[$version->id])) {
-                    continue;
-                }
-                $seenVersions[$version->id] = true;
-                foreach ($version->payload['vocabulary'] ?? [] as $word) {
-                    $key = $word['lexeme_key'] ?? null;
-                    if (isset($lexemes[$key]) && [$word['fr'] ?? null, $word['ru'] ?? null] !== $lexemes[$key]['meaning']) {
-                        $report->warning('lexeme_meaning_review', $lexemes[$key]['path'], 'Существующие источники этого ключа отличаются: редактор должен проверить смысл, автоматическое склеивание запрещено.');
-                    }
+        foreach (array_chunk(array_keys($lexemes), 500) as $keys) {
+            foreach (\App\Models\Learning\PracticeLexeme::whereIn('lexeme_key', $keys)->get() as $card) {
+                $key = $card->lexeme_key;
+                if ([$card->content['fr'] ?? null, $card->content['ru'] ?? null] !== $lexemes[$key]['meaning']) {
+                    $report->warning('lexeme_meaning_review', $lexemes[$key]['path'], 'Текст или перевод выражения изменён. Проверьте, что смысл соответствует ключу.');
                 }
             }
         }

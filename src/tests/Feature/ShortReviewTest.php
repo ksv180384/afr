@@ -2,6 +2,7 @@
 
 use App\Models\Learning\LearningProfile;
 use App\Models\Learning\LearningRun;
+use App\Models\Learning\LearningRunOperation;
 use App\Models\Learning\PersonalVocabulary;
 use App\Models\User\User;
 use App\Services\Learning\ShortReviewSelection;
@@ -16,6 +17,15 @@ beforeEach(function () {
     $this->learner->update(['timezone' => 'Europe/Moscow']);
     LearningProfile::factory()->create(['user_id' => $this->learner->id, 'current_level' => 'B1']);
 });
+function changeShortWord(PersonalVocabulary $word, array $content): void
+{
+    $lesson = $word->sources()->firstOrFail()->session;
+    $payload = $lesson->payload;
+    $payload['vocabulary'] = [$content];
+    $lesson->update(['payload' => $payload, 'checksum' => \App\Services\Learning\Validation\CanonicalJson::hash($payload)]);
+    $word->refresh();
+}
+
 function shortWord($test, int $index = 0, array $attributes = []): PersonalVocabulary
 {
     $snapshot = json_decode(file_get_contents(resource_path('practice/templates/pre-a1-u01-examples.json')), true)['sessions'][0]['vocabulary'][0];
@@ -23,7 +33,7 @@ function shortWord($test, int $index = 0, array $attributes = []): PersonalVocab
     $context = $snapshot['review_items'][0];$context['id'] = 'misleading-meaning-'.$index;
     $context['prompt'] = ['text' => 'Bonjour, je suis Marie.', 'text_lang' => 'fr', 'transcription_ru' => 'бо(н)жур, жё сюи мари'];
     $snapshot['review_items'][] = $context;
-    return PersonalVocabulary::factory()->create(['user_id' => $test->learner->id, 'lexeme_key' => $snapshot['lexeme_key'], 'snapshot' => $snapshot,
+    return PersonalVocabulary::factory()->studied($snapshot)->create(['user_id' => $test->learner->id,
         'needs_review' => false, 'next_review_at' => now('UTC')->subHour(), ...$attributes]);
 }
 function shortStart($test, string $mode = 'manual'): array
@@ -56,14 +66,14 @@ it('matches guest priority diversity and rotation fixtures and classifies conten
     $fixture = json_decode(file_get_contents(base_path('tests/Fixtures/Learning/short-review-parity.json')), true);
     foreach ($fixture['cases'] as $case) { expect(array_column(ShortReviewSelection::select($case['rows'], $case['previous']), 'key'))->toBe($case['expected']); }
     $word = shortWord($this);
-    expect(ShortReviewSelection::category($word->snapshot['review_items'][0], $word->snapshot))->toBe('meaning');
-    expect(ShortReviewSelection::category($word->snapshot['review_items'][1], $word->snapshot))->toBe('context');
+    expect(ShortReviewSelection::category($word->sources->first()->entry->content()['review_items'][0], $word->sources->first()->entry->content()))->toBe('meaning');
+    expect(ShortReviewSelection::category($word->sources->first()->entry->content()['review_items'][1], $word->sources->first()->entry->content()))->toBe('context');
 });
 
 it('filters missing questions before counting and rechecks changes between card and start', function () {
     $word = shortWord($this);$good = shortWord($this, 1);
     $this->getJson('/daily/api/vocabulary/review-plan?mode=suggested')->assertJsonPath('total', 2);
-    $snapshot = $word->snapshot;$snapshot['review_items'] = [];$word->update(['snapshot' => $snapshot]);
+    $snapshot = $word->sources->first()->entry->content();$snapshot['review_items'] = [];changeShortWord($word, $snapshot);
     expect(shortStart($this, 'suggested')['total'])->toBe(1);
     $this->getJson('/daily/api/vocabulary')->assertOk()->assertJsonPath('pagination.total', 2);
 });
@@ -74,7 +84,7 @@ it('offers no automatic grade for self-check-only material and permits manual pr
     $manual = $this->getJson('/daily/api/vocabulary/review-plan?mode=manual')->assertJsonPath('total', 1)->assertJsonPath('includes_not_due', true);
     $state = shortStart($this);expect($state['session']['description'])->toContain('ещё не наступил');
     finishShort($this, $state);
-    $snapshot = $word->snapshot;$snapshot['review_items'] = [['id' => 'broken', 'type' => 'single_choice', 'prompt' => ['text' => 'bonjour'], 'choices' => []]];$word->update(['snapshot' => $snapshot]);
+    $snapshot = $word->sources->first()->entry->content();$snapshot['review_items'] = [['id' => 'broken', 'type' => 'single_choice', 'prompt' => ['text' => 'bonjour'], 'choices' => []]];changeShortWord($word, $snapshot);
     $this->getJson('/daily/api/vocabulary/review-plan')->assertJsonPath('total', 0)->assertJsonPath('self_check_count', 1);
     $this->postJson('/daily/api/runs', ['client_event_id' => (string) Str::uuid(), 'expected_revision' => 1, 'kind' => 'review'])->assertStatus(503);
 });
@@ -82,7 +92,10 @@ it('offers no automatic grade for self-check-only material and permits manual pr
 it('suppresses successful blocks today but keeps manual next blocks distinct and snapshots pinned', function () {
     for ($i = 0; $i < 6; $i++) { shortWord($this, $i); }
     $first = shortStart($this, 'suggested');$run = LearningRun::find($first['run_id']);$keys = array_column($run->snapshot['vocabulary'], 'lexeme_key');
-    $word = PersonalVocabulary::where('lexeme_key', $keys[0])->sole();$snapshot = $word->snapshot;$snapshot['review_items'] = [];$word->update(['snapshot' => $snapshot]);
+    $word = PersonalVocabulary::where('lexeme_key', $keys[0])->sole();
+    $content = $word->sources->first()->entry->content();
+    $content['example'] = ['fr' => 'Un autre exemple', 'ru' => 'Другой пример'];
+    changeShortWord($word, $content);
     $this->getJson('/daily/api/runs/'.$run->id)->assertOk()->assertJsonPath('task.id', $first['task']['id']);
     finishShort($this, $first);
     $this->getJson('/daily/api/vocabulary/review-plan?mode=suggested')->assertJsonPath('total', 0)->assertJsonPath('completed_today', true);
@@ -102,14 +115,71 @@ it('keeps active lessons unchanged and obeys disabled or snoozed suggestions', f
     expect($active->fresh()->getAttributes())->toBe($before);$this->assertDatabaseCount('learning_runs', 1);
 });
 
-
-it('retains the personal snapshot after a studied source association is removed', function () {
+it('keeps both an unfinished vocabulary test and an unfinished review available to resume', function () {
     $word = shortWord($this);
-    $source = \App\Models\Learning\PersonalVocabularySource::factory()->create(['user_id' => $this->learner->id, 'personal_word_id' => $word->id, 'snapshot' => $word->snapshot]);
-    $this->getJson('/daily/api/vocabulary/review-plan?mode=suggested')->assertJsonPath('total', 1);
-    $source->delete();
-    $state = shortStart($this, 'suggested');expect($state['total'])->toBe(1);
-    $this->getJson('/daily/api/runs/'.$state['run_id'])->assertJsonPath('task.id', $state['task']['id']);
+    $test = $this->postJson('/daily/api/runs', ['client_event_id' => (string) Str::uuid(), 'expected_revision' => 1,
+        'kind' => 'vocabulary_test', 'word_ids' => [$word->id]])->assertOk()->json('state');
+    $this->postJson('/daily/api/runs/'.$test['run_id'].'/pause', ['client_event_id' => (string) Str::uuid(),
+        'expected_revision' => $test['revision']])->assertOk();
+    $review = shortStart($this, 'suggested');
+
+    $this->getJson('/daily/api/today')->assertOk()
+        ->assertJsonPath('active_run.id', $review['run_id'])
+        ->assertJsonPath('vocabulary_runs.review', $review['run_id'])
+        ->assertJsonPath('vocabulary_runs.vocabulary_test', $test['run_id'])
+        ->assertJsonPath('review_suggestion', null);
+    $this->assertDatabaseCount('learning_runs', 2);
+});
+
+
+it('closes a paused review when its remaining question disappears', function () {
+    $word = shortWord($this);
+    $state = shortStart($this);
+    $this->postJson('/daily/api/runs/'.$state['run_id'].'/pause', ['client_event_id' => (string) Str::uuid(),
+        'expected_revision' => $state['revision']])->assertOk();
+    $content = $word->sources->first()->entry->content();
+    $content['review_items'] = [];
+    changeShortWord($word, $content);
+    $this->getJson('/daily/api/runs/'.$state['run_id'])->assertOk()->assertJsonPath('status', 'cancelled')->assertJsonPath('task', null);
+    $this->getJson('/daily/api/vocabulary/review-plan')->assertOk()->assertJsonPath('total', 0);
+});
+
+it('keeps accepted answers and vocabulary progress when a later review question disappears', function () {
+    shortWord($this, 1);
+    shortWord($this, 2);
+    $state = shortStart($this);
+    $run = LearningRun::findOrFail($state['run_id']);
+    [$first, $second] = $run->snapshot['items'];
+    $event = ['client_event_id' => (string) Str::uuid(), 'expected_revision' => $state['revision'],
+        'presentation_id' => $state['presentation']['presentation_id'], 'event_type' => 'answer',
+        'answer' => ['choice_id' => $first['task']['correct_choice_id']]];
+    $url = '/daily/api/runs/'.$run->id;
+    $receipt = $this->postJson($url.'/answers', $event)->assertOk()->json('attempt');
+    $answered = PersonalVocabulary::where('lexeme_key', $first['review_lexeme_key'])->sole();
+    $progress = $answered->getAttributes();
+    $remaining = PersonalVocabulary::where('lexeme_key', $second['review_lexeme_key'])->sole();
+    $content = $remaining->sources->first()->entry->content();
+    $content['review_items'] = [];
+    changeShortWord($remaining, $content);
+    $this->getJson($url)->assertOk()->assertJsonPath('status', 'cancelled')->assertJsonPath('session.title', $state['session']['title']);
+    expect($run->refresh()->snapshot)->toBe(['title' => $state['session']['title']]);
+    $operations = LearningRunOperation::where('run_id', $run->id)->get();
+    expect($operations)->toHaveCount(2);
+    foreach ($operations as $operation) {
+        expect($operation->getRawOriginal('receipt'))->toBeNull()
+            ->and($operation->receipt)->toBe(['run_id' => $run->id]);
+    }
+    $this->postJson($url.'/answers', $event)->assertOk()->assertJsonPath('state.status', 'cancelled')
+        ->assertJsonPath('record_sequence', $operations->firstWhere('operation', 'answer')->id);
+    $this->postJson($url.'/answers', [...$event, 'expected_revision' => $event['expected_revision'] + 1])->assertConflict();
+    $attempt = $run->attempts()->sole();
+    expect($attempt->payload)->toBe(['answer' => $event['answer']])
+        ->and($attempt->result)->not->toHaveKeys(['feedback', 'solution', 'pairs', 'objective_ids'])
+        ->and($attempt->result['correct'])->toBeTrue()
+        ->and($attempt->result['score'])->toBe(1)
+        ->and($attempt->result['assessed_lexemes'])->toBe($receipt['result']['assessed_lexemes'])
+        ->and($attempt->vocabularyEffects()->sole()->effect['success_applied'])->toBeTrue()
+        ->and($answered->refresh()->getAttributes())->toBe($progress);
 });
 
 it('uses the completion day rather than the start day across local midnight', function () {
@@ -125,18 +195,24 @@ it('uses the completion day rather than the start day across local midnight', fu
 
 it('alternates meaning and context for a single manual word using content rather than suffixes', function () {
     $word = shortWord($this);$first = shortStart($this);
-    $item = LearningRun::find($first['run_id'])->snapshot['items'][0]['task'];expect(ShortReviewSelection::category($item, $word->snapshot))->toBe('context');
-    finishShort($this, $first);$second = shortStart($this);
-    $next = LearningRun::find($second['run_id'])->snapshot['items'][0]['task'];expect(ShortReviewSelection::category($next, $word->snapshot))->toBe('meaning');
+    $item = LearningRun::find($first['run_id'])->snapshot['items'][0]['task'];expect(ShortReviewSelection::category($item, $word->sources->first()->entry->content()))->toBe('context');
+    $finished = finishShort($this, $first);
+    $run = LearningRun::findOrFail($first['run_id']);
+    expect(json_decode($run->getRawOriginal('snapshot'), true)[0])->toBe('rs1')
+        ->and(json_decode($run->getRawOriginal('result'), true)[0])->toBe('vr1');
+    $this->getJson('/daily/api/history')->assertOk()->assertJsonPath('data.0.id', $run->id)
+        ->assertJsonPath('data.0.result.independent_correct_steps', $finished['summary']['independent_correct_steps']);
+    $second = shortStart($this);
+    $next = LearningRun::find($second['run_id'])->snapshot['items'][0]['task'];expect(ShortReviewSelection::category($next, $word->sources->first()->entry->content()))->toBe('meaning');
     expect($next['id'])->not->toBe($item['id']);
 });
 
 it('budgets time for filtered audio and keeps the manual entry after a helped finish', function () {
     $word = shortWord($this, 0, ['needs_review' => true]);
     shortWord($this, 1, ['next_review_at' => now('UTC')->addDay()]);
-    $snapshot = $word->snapshot;
+    $snapshot = $word->sources->first()->entry->content();
     $snapshot['review_items'][1]['prompt']['audio'] = ['text' => str_repeat('Bonjour ', 90), 'lang' => 'fr-FR', 'asset_id' => null];
-    $word->update(['snapshot' => $snapshot]);
+    changeShortWord($word, $snapshot);
     $plan = $this->getJson('/daily/api/vocabulary/review-plan?mode=manual&filter=errors')
         ->assertOk()->assertJsonPath('word_ids', [$word->id])->json();
     expect($plan['estimated_seconds'])->toBeGreaterThanOrEqual(150);

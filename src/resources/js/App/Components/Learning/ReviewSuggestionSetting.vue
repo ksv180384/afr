@@ -1,4 +1,5 @@
 <script setup>
+import { randomUuid } from '@/App/Learning/randomUuid.js';
 import { computed, onBeforeUnmount, onMounted, ref, shallowReactive, watch } from 'vue';
 import { Link } from '@inertiajs/vue3';
 import AfrButton from '@/App/Components/Form/AfrButton.vue';
@@ -29,7 +30,7 @@ watch(()=>settings.value?.snoozed_until,until=>{clearTimeout(expiryTimer);const 
 const reload=()=>{if(!props.controller && !state.busy && !state.pending) load();};
 let unsubscribe;
 watch(()=>props.authUser?.id,()=>{if(!props.controller) load();});
-onMounted(()=>{if(!props.controller){reload();window.addEventListener('focus',reload);unsubscribe=props.guestRepository?.subscribe('review-settings-'+crypto.randomUUID(),reload);}});
+onMounted(()=>{if(!props.controller){reload();window.addEventListener('focus',reload);unsubscribe=props.guestRepository?.subscribe('review-settings-'+randomUuid(),reload);}});
 onBeforeUnmount(()=>{clearTimeout(expiryTimer);window.removeEventListener('focus',reload);unsubscribe?.();});
 </script>
 <template>

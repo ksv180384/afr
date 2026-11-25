@@ -55,10 +55,7 @@ function vocabularyComplete($test, array $state): array
 function vocabularyWord($test, int $index = 0): PersonalVocabulary
 {
     $snapshot = $test->payload['vocabulary'][$index];
-    $word = PersonalVocabulary::factory()->create(['user_id' => $test->learner->id, 'lexeme_key' => $snapshot['lexeme_key'], 'snapshot' => $snapshot, 'needs_review' => true]);
-    PersonalVocabularySource::factory()->create(['user_id' => $test->learner->id, 'personal_word_id' => $word->id, 'session_id' => $test->version->id, 'snapshot' => $snapshot]);
-
-    return $word;
+    return PersonalVocabulary::factory()->studied($snapshot, $test->version)->create(['user_id' => $test->learner->id, 'needs_review' => true]);
 }
 
 it('keeps personal difficult marks through mastery and trains only the marked selection with alternating questions', function () {
@@ -124,15 +121,80 @@ it('adds studied words only at finish and replays accumulated mistakes once with
     $finished = vocabularyComplete($this, $state);
     expect($finished['summary']['words_added'])->toBe(6);
     $this->assertDatabaseCount('personal_vocabulary', 6);
-    $this->assertDatabaseCount('personal_vocabulary_sources', 6);
+    $this->assertDatabaseCount('studied_vocabulary_sources', 6);
     $word = PersonalVocabulary::where('lexeme_key', $this->payload['vocabulary'][0]['lexeme_key'])->sole();
     expect($word->needs_review)->toBeTrue();
     expect($word->errors)->toBeGreaterThan(0);
     $errors = $word->errors;
     vocabularyCommand($this, $finished, 'finish');
     expect($word->fresh()->errors)->toBe($errors);
-    $this->assertDatabaseCount('personal_vocabulary_sources', 6);
+    $this->assertDatabaseCount('studied_vocabulary_sources', 6);
     expect(PersonalVocabulary::where('lexeme_key', 'fr:merci:thanks')->exists())->toBeFalse();
+});
+
+it('shares lesson sets and grants newly edited sources only after the learner finishes again', function () {
+    $first = vocabularyComplete($this, vocabularyStart($this));
+    $other = User::factory()->create();
+    $this->actingAs($other);
+    $second = vocabularyComplete($this, vocabularyStart($this));
+    $set = LearningRun::findOrFail($first['run_id'])->vocabulary_set_id;
+    expect($set)->toBeInt()->and(LearningRun::findOrFail($second['run_id'])->vocabulary_set_id)->toBe($set);
+    $this->assertDatabaseCount('learning_vocabulary_sets', 1);
+    $this->assertDatabaseCount('learning_vocabulary_set_entries', 6);
+    $this->assertDatabaseCount('learning_vocabulary_legacy_studies', 0);
+    $this->assertDatabaseCount('studied_vocabulary_sources', 12);
+
+    $this->actingAs($this->learner);
+    $repeatLesson = fn () => vocabularyComplete($this, vocabularyStart($this, [
+        'expected_revision' => \App\Models\Learning\LearningProfile::where('user_id', $this->learner->id)->value('revision'),
+    ]));
+    $repeat = $repeatLesson();
+    expect(LearningRun::findOrFail($repeat['run_id'])->vocabulary_set_id)->toBeNull();
+    $original = $this->version->fresh()->payload;
+    $extra = [...$original['vocabulary'][0], 'id' => 'salut', 'lexeme_key' => 'fr:salut:edited'];
+    $word = PersonalVocabulary::factory()->studied($extra)->create(['user_id' => $this->learner->id, 'is_difficult' => true]);
+    $edited = $original;
+    $edited['vocabulary'][] = $extra;
+    $update = fn (array $payload) => $this->version->update(['payload' => $payload, 'checksum' => CanonicalJson::hash($payload)]);
+    $update($edited);
+    expect($word->sources()->count())->toBe(1);
+    $this->travel(1)->days();
+    $third = $repeatLesson();
+    expect($word->sources()->count())->toBe(2)
+        ->and($third['summary']['words_added'])->toBe(0)
+        ->and(PersonalVocabulary::where('user_id', $other->id)->where('lexeme_key', $extra['lexeme_key'])->exists())->toBeFalse()
+        ->and(PersonalVocabularySource::where('user_id', $this->learner->id)->where('session_id', $this->version->id)
+            ->where('first_added_at', LearningRun::findOrFail($first['run_id'])->finished_at)->count())->toBe(6);
+
+    $update($original);
+    $update($edited);
+    expect($word->fresh()->is_difficult)->toBeTrue()->and($word->sources()->count())->toBe(1);
+    $repeatLesson();
+    expect($word->sources()->count())->toBe(2);
+});
+
+it('filters the dictionary by the new words from an owned completion including older results', function () {
+    $known = vocabularyWord($this);
+    $this->travel(2)->seconds();
+    $finished = vocabularyComplete($this, vocabularyStart($this));
+    $runId = $finished['run_id'];
+    $ids = $finished['summary']['added_word_ids'];
+    expect($ids)->toHaveCount(5)->not->toContain($known->id);
+    $assertSelection = function () use ($runId, $ids) {
+        $words = $this->getJson('/daily/api/vocabulary?added_in_run='.$runId)->assertOk()->json('words');
+        expect(array_column($words, 'id'))->toEqualCanonicalizing($ids);
+    };
+    $assertSelection();
+
+    $legacy = LearningRun::findOrFail($runId)->result;
+    unset($legacy['added_word_ids']);
+    LearningRun::whereKey($runId)->toBase()->update(['result' => json_encode($legacy, JSON_THROW_ON_ERROR)]);
+    $assertSelection();
+
+    $anotherLearner = User::factory()->create();
+    PersonalVocabulary::factory()->create(['user_id' => $anotherLearner->id]);
+    $this->actingAs($anotherLearner)->getJson('/daily/api/vocabulary?added_in_run='.$runId)
+        ->assertOk()->assertJsonCount(0, 'words');
 });
 
 it('updates existing words immediately, ignores help for streak, and accepts three independent runs', function () {
@@ -156,6 +218,8 @@ it('updates existing words immediately, ignores help for streak, and accepts thr
     }
     expect($word->fresh()->errors)->toBe(1);
     expect($word->fresh()->next_review_at->diffInDays($word->fresh()->last_reviewed_at, true))->toEqual(7);
+    $credit = \App\Models\Learning\VocabularyRunEffect::where('user_id', $word->user_id)->where('lexeme_key', $word->lexeme_key)->sole();
+    expect($credit->run_id)->toBe($state['run_id']);
 });
 
 it('keeps the run success marker through a later error and cannot increment again in that run', function () {
@@ -228,9 +292,9 @@ it('filters owners words offers self check and handles zero one two and multiple
     for ($i = 0; $i < 12; $i++) {
         $snapshot = $this->payload['vocabulary'][0];
         $snapshot['lexeme_key'] = 'fr:test:'.$i;
-        $ids[] = PersonalVocabulary::factory()->create(['user_id' => $this->learner->id, 'lexeme_key' => $snapshot['lexeme_key'], 'snapshot' => $snapshot, 'needs_review' => $i < 8])->id;
+        $ids[] = PersonalVocabulary::factory()->studied($snapshot)->create(['user_id' => $this->learner->id, 'needs_review' => $i < 8])->id;
     }
-    $self = PersonalVocabulary::factory()->create(['user_id' => $this->learner->id, 'snapshot' => ['fr' => 'sans modèle', 'ru' => ['без шаблона'], 'transcription_ru' => 'са(н) модэль'], 'needs_review' => true]);
+    $self = PersonalVocabulary::factory()->studied(['fr' => 'sans modèle', 'ru' => ['без шаблона'], 'transcription_ru' => 'са(н) модэль'])->create(['user_id' => $this->learner->id, 'needs_review' => true]);
     $this->postJson('/daily/api/runs', vocabularyInput(['kind' => 'vocabulary_test', 'word_ids' => [$self->id]]))->assertStatus(503);
     $plan = $this->getJson('/daily/api/vocabulary/test-plan')->assertOk()->assertJsonPath('total', 12)->assertJsonCount(1, 'self_check_words')->json();
     $first = array_slice($plan['word_ids'], 0, 10);
@@ -325,13 +389,13 @@ it('rolls back newly added words sources and effects when finish fails and retri
     $url = '/daily/api/runs/'.$state['run_id'].'/finish';
     $this->postJson($url, $input)->assertStatus(503);
     $this->assertDatabaseCount('personal_vocabulary', 0);
-    $this->assertDatabaseCount('personal_vocabulary_sources', 0);
+    $this->assertDatabaseCount('studied_vocabulary_sources', 0);
     $this->assertDatabaseCount('vocabulary_event_effects', 0);
     $hook->fail = false;
     $receipt = $this->postJson($url, $input)->assertOk()->json();
     $this->postJson($url, $input)->assertExactJson($receipt);
     $this->assertDatabaseCount('personal_vocabulary', 6);
-    $this->assertDatabaseCount('personal_vocabulary_sources', 6);
+    $this->assertDatabaseCount('studied_vocabulary_sources', 6);
 });
 
 

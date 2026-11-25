@@ -1,3 +1,4 @@
+import { randomUuid } from './randomUuid.js';
 import { defaultReviewSuggestions } from './reviewSuggestions.js';
 import { learningAccess, completedGuestSessions } from './learningAccess.js';
 import { initialPresentation, evaluateEvent, calculateSessionResult, taskSnapshot } from './answerChecker.js';
@@ -101,8 +102,8 @@ export const addGuestRun = (state, {source,runId,presentationIds,eventId,tabId,n
   }
   const entry = source.access_outline?.find(level=>level.id===snapshot.level);
   const completionRoute = entry && entry.published && entry.units.length && entry.units.every(unit=>unit.sessions.length)
-    ? {level:entry.id,profile_event_id:promotionEventId ?? globalThis.crypto?.randomUUID(),session_ids:entry.units.flatMap(unit=>unit.sessions.map(session=>session.id)),next_level:LEVELS[LEVELS.findIndex(level=>level.code===entry.id)+1]?.code ?? null} : null;
-  const run = {id:runId,kind,snapshot,completion_route:completionRoute,session_version_id:source.session_version_id,checking_policy_version:source.checking_policy_version,
+    ? {level:entry.id,profile_event_id:promotionEventId ?? (globalThis.crypto ? randomUuid() : undefined),session_ids:entry.units.flatMap(unit=>unit.sessions.map(session=>session.id)),next_level:LEVELS[LEVELS.findIndex(level=>level.code===entry.id)+1]?.code ?? null} : null;
+  const run = {id:runId,kind,snapshot,completion_route:completionRoute,session_version_id:source.session_version_id,content_checksum:source.checksum ?? null,checking_policy_version:source.checking_policy_version,
     checking_policy_snapshot:copy(checkingPolicy(source.checking_policy_version)),audioUrls:copy(source.audioUrls ?? {}),
     timezone:state.timezone,local_date:guestDate(now,state.timezone),started_at:now,finished_at:null,status:'in_progress',revision:1,
     cursor:0,introductions_seen:[],presentations:presentationIds.map(initialPresentation),assistance:{},drafts:{},lease:tabId,result:null,vocabulary_events:[]};
@@ -113,6 +114,9 @@ export const addGuestRun = (state, {source,runId,presentationIds,eventId,tabId,n
   return run;
 };
 export const guestRunView = (run, {restore = false} = {}) => {
+  if (run.status === 'cancelled') return {mode:'guest', kind:run.kind, run_id:run.id, revision:run.revision,
+    status:'cancelled', started:false, finished:true, total:0, session:{title:run.snapshot.title},
+    task:null, presentation:null, summary:{}, vocabulary:[], audioUrls:{}};
   const snapshot = run.snapshot;
   const original = run.presentations[run.cursor];
   const corrections = run.corrections;
@@ -146,6 +150,7 @@ export const applyGuestOperation = (state, runId, tabId, action, input) => {
     return copy(previous.run);
   }
   if (run.lease !== tabId || input.expected_revision !== run.revision) throw guestError('Занятие продолжено в другой вкладке. Загрузите принятую версию.');
+  if (run.status === 'cancelled') return copy(run);
   if (run.status === 'completed') throw guestError('Завершённое занятие неизменно.');
   const current = run.presentations[run.cursor];
   const corrections = run.corrections;

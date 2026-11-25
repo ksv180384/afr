@@ -3,6 +3,7 @@
 namespace App\Models\Learning;
 
 use App\Models\User\User;
+use App\Support\Learning\EncodesPracticeJson;
 use App\Support\Learning\UsesUtcDates;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -28,6 +29,7 @@ use LogicException;
  */
 class LearningCatalogRevision extends Model
 {
+    use EncodesPracticeJson;
     use UsesUtcDates;
 
     protected $table = 'learning_catalog_revisions';

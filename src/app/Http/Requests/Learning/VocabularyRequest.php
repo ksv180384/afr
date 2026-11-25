@@ -17,6 +17,7 @@ class VocabularyRequest extends FormRequest
         $filters = [
             'filter' => ['sometimes', Rule::in(['all', 'errors', 'due', 'difficult'])],
             'source_session' => ['sometimes', 'string', 'max:128'],
+            'added_in_run' => ['sometimes', 'uuid'],
             'q' => ['sometimes', 'string', 'max:100'],
         ];
 

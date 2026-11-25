@@ -6,8 +6,8 @@ use App\Models\Learning\LearningAttempt;
 use App\Models\Learning\LearningRun;
 use App\Models\Learning\PersonalVocabulary;
 use App\Models\Learning\PersonalVocabularySource;
+use App\Models\Learning\SessionLexeme;
 use App\Models\Learning\VocabularyEventEffect;
-use App\Models\Learning\VocabularyRunEffect;
 use Carbon\CarbonImmutable;
 
 class VocabularyProgressService
@@ -48,16 +48,12 @@ class VocabularyProgressService
             $at = $event->received_at;
             if ($kind === 'error') {
                 $word->fill(['needs_review' => true, 'errors' => $word->errors + 1, 'streak' => 0, 'review_step' => 0, 'next_review_at' => $at, 'last_reviewed_at' => $at])->save();
-            } elseif ($kind === 'success') {
-                $runEffect = VocabularyRunEffect::firstOrCreate(['user_id' => $run->user_id, 'lexeme_key' => $key, 'run_id' => $run->id], ['success_applied' => false]);
-                if (! $runEffect->success_applied && VocabularySuccessWindow::allows(VocabularySuccessWindow::latest($word), $at)) {
-                    $step = min(count(self::INTERVAL_DAYS), $word->review_step + 1);
-                    $streak = min(3, $word->streak + 1);
-                    $word->fill(['streak' => $streak, 'review_step' => $step, 'needs_review' => $streak >= 3 ? false : $word->needs_review,
-                        'last_reviewed_at' => $at, 'next_review_at' => $at->addDays(self::INTERVAL_DAYS[$step - 1])])->save();
-                    $runEffect->update(['success_applied' => true, 'applied_at' => $at]);
-                    $applied = true;
-                }
+            } elseif ($kind === 'success' && VocabularySuccessWindow::credit($word, $run, $at)) {
+                $step = min(count(self::INTERVAL_DAYS), $word->review_step + 1);
+                $streak = min(3, $word->streak + 1);
+                $word->fill(['streak' => $streak, 'review_step' => $step, 'needs_review' => $streak >= 3 ? false : $word->needs_review,
+                    'last_reviewed_at' => $at, 'next_review_at' => $at->addDays(self::INTERVAL_DAYS[$step - 1])])->save();
+                $applied = true;
             }
             if ($context->episode === null && ($kind === 'error' || $applied)) {
                 $word->increment('native_revision');
@@ -69,22 +65,35 @@ class VocabularyProgressService
 
     public function finishing(LearningRun $run, CarbonImmutable $at): array
     {
-        $added = 0;
+        $addedIds = [];
         $existing = 0;
         if ($run->session_id !== null) {
-            foreach ($run->content()['vocabulary'] ?? [] as $snapshot) {
-                unset($snapshot['review_items']);
-                $word = PersonalVocabulary::firstOrCreate(['user_id' => $run->user_id, 'lexeme_key' => $snapshot['lexeme_key']], [
-                    'snapshot' => $snapshot, 'needs_review' => false, 'streak' => 0, 'errors' => 0, 'review_step' => 0,
+            $entries = SessionLexeme::where('session_id', $run->session_id)->lockForUpdate()->pluck('id', 'lexeme_key');
+            $studied = PersonalVocabularySource::where('user_id', $run->user_id)->where('session_id', $run->session_id)
+                ->pluck('session_lexeme_id')->flip();
+            $newEntries = [];
+            foreach ($run->content()['vocabulary'] ?? [] as $expression) {
+                $key = $expression['lexeme_key'];
+                if (!isset($entries[$key])) {
+                    continue;
+                }
+                $word = PersonalVocabulary::firstOrCreate(['user_id' => $run->user_id, 'lexeme_key' => $key], [
+                    'needs_review' => false, 'streak' => 0, 'errors' => 0, 'review_step' => 0,
                     'first_added_at' => $at, 'next_review_at' => $at->addDay(),
                 ]);
                 if ($word->wasRecentlyCreated) {
                     app(GuestImportContext::class)->created($word);
+                    $addedIds[] = $word->id;
+                } else {
+                    $existing++;
                 }
-                $word->wasRecentlyCreated ? $added++ : $existing++;
-                PersonalVocabularySource::firstOrCreate(['personal_word_id' => $word->id, 'session_id' => $run->session_id], [
-                    'user_id' => $run->user_id, 'snapshot' => $snapshot, 'first_added_at' => app(GuestImportContext::class)->sourceAt ?? $at,
-                ]);
+                if (! $studied->has($entries[$key])) {
+                    $newEntries[] = $entries[$key];
+                }
+            }
+            if ($newEntries) {
+                $run->vocabulary_set_id = VocabularyStudySets::forEntries($run->session_id, $newEntries);
+                $run->vocabulary_source_at = app(GuestImportContext::class)->sourceAt;
             }
         }
         // Replays are deduplicated per event/lexeme; existing words have already been updated.
@@ -92,6 +101,7 @@ class VocabularyProgressService
             $this->accepted($run, $event);
         }
 
-        return ['words_added' => $added, 'words_existing' => $existing];
+        return ['words_added' => count($addedIds), 'words_existing' => $existing,
+            ...($addedIds ? ['added_word_ids' => $addedIds] : [])];
     }
 }

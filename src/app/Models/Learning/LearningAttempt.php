@@ -2,7 +2,9 @@
 
 namespace App\Models\Learning;
 
+use App\Enums\Learning\RunStatus;
 use App\Models\User\User;
+use App\Support\Learning\EncodesPracticeJson;
 use App\Support\Learning\UsesUtcDates;
 use Database\Factories\Learning\LearningAttemptFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -10,6 +12,8 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 use LogicException;
 
 /**
@@ -33,6 +37,7 @@ use LogicException;
  */
 class LearningAttempt extends Model
 {
+    use EncodesPracticeJson;
     use HasFactory;
     use HasUuids;
     use UsesUtcDates;
@@ -72,6 +77,64 @@ class LearningAttempt extends Model
         return Attribute::make(
             set: fn (?bool $value): ?bool => $value ? true : null,
         );
+    }
+
+    public function requestEnvelope(int $revision): array
+    {
+        return ['client_event_id' => $this->client_event_id, 'presentation_id' => $this->presentation_id,
+            'event_type' => $this->event_type, 'expected_revision' => $revision - 1];
+    }
+
+    private function resultMetadata(int $policyVersion, string $taskId): array
+    {
+        return ['checking_policy_version' => $policyVersion, 'presentation_id' => $this->presentation_id,
+            'task_id' => $taskId, 'event_type' => $this->event_type, 'is_first_answer' => (bool) $this->is_first_answer];
+    }
+
+    public function compactDetails(int $policyVersion, string $taskId, bool $archived = false): void
+    {
+        $result = $this->result;
+        if (! is_int($result['run_revision'] ?? null) || array_key_exists('_v', $result)) {
+            return;
+        }
+        $metadata = $this->resultMetadata($policyVersion, $taskId);
+        foreach ($metadata as $key => $value) {
+            if (($result[$key] ?? null) !== $value) {
+                return;
+            }
+        }
+        if (! ($archived && $this->payload === [])) {
+            $payload = $this->payload;
+            $envelope = $this->requestEnvelope($result['run_revision']);
+            foreach ($envelope as $key => $value) {
+                if (($payload[$key] ?? null) !== $value) {
+                    return;
+                }
+            }
+            $this->payload = array_diff_key($payload, $envelope);
+        }
+        $this->result = ['_v' => 1] + array_diff_key($result, $metadata);
+    }
+
+    public function gradingResult(int $policyVersion, ?string $taskId = null): ?array
+    {
+        $result = $this->result;
+        if (($result['_v'] ?? null) !== 1) {
+            return $result;
+        }
+        unset($result['_v']);
+        $taskId ??= $this->presentation()->value('task_id');
+
+        return $this->resultMetadata($policyVersion, $taskId) + $result;
+    }
+
+    public static function trimClosedRun(LearningRun $run): void
+    {
+        $changes = ['result' => DB::raw("json_remove(result, '$.feedback', '$.solution', '$.pairs', '$.objective_ids')")];
+        if ($run->status === RunStatus::Completed) {
+            $changes['payload'] = '[]';
+        }
+        DB::table('learning_attempts')->where('run_id', $run->id)->update($changes);
     }
 
     protected static function booted(): void

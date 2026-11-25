@@ -11,6 +11,12 @@ final class AccountRunView
 
     public function make(User $actor, LearningRun $run, bool $playback = false): array
     {
+        if ($run->status->value === 'cancelled') {
+            return ['owner_user_id' => $actor->id, 'run_id' => $run->id, 'mode' => 'account', 'kind' => $run->kind,
+                'status' => 'cancelled', 'revision' => $run->revision, 'started' => false, 'resume' => false, 'finished' => true,
+                'session' => ['title' => $run->snapshot['title'] ?? 'Повторение выражений'], 'total' => 0, 'position' => 0,
+                'presentation' => null, 'task' => null, 'summary' => [], 'vocabulary' => [], 'audioUrls' => []];
+        }
         $finished = $run->status->value === 'completed';
         $snapshot = $run->content();
         $presentations = $finished ? collect() : $run->presentations()->with(['firstAttempt', 'lastAttempt'])->orderBy('position')->get();
@@ -18,14 +24,14 @@ final class AccountRunView
         $step = $presentation?->taskSnapshot($snapshot);
         $task = $step['task'] ?? null;
         $help = $presentation ? $presentation->attempts()->where('event_type', 'help')->get(['payload'])->pluck('payload.help_kind')->unique()->values()->all() : [];
-        $first = $presentation?->firstAttempt?->result;
-        $last = $presentation?->lastAttempt?->result;
+        $first = $presentation?->firstAttempt?->gradingResult($run->checking_policy_version, $presentation->task_id);
+        $last = $presentation?->lastAttempt?->gradingResult($run->checking_policy_version, $presentation->task_id);
         $answer = $presentation?->lastAttempt?->payload['answer'] ?? $presentation?->firstAttempt?->payload['answer'] ?? null;
         $corrections = $finished ? null : $run->corrections;
         $mistakePositions = $corrections ? [] : LessonCorrections::positions($run, $presentations);
         if ($corrections) {
             $attempt = LessonCorrections::attempt($run);
-            $first = $last = $attempt?->result;
+            $first = $last = $attempt?->gradingResult($run->checking_policy_version);
             $answer = $attempt?->payload['answer'] ?? null;
         }
         if ($first) {

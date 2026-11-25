@@ -3,6 +3,8 @@
 namespace App\Services\Learning;
 
 use App\Enums\Learning\PracticeErrorCode;
+use App\Enums\Learning\RunStatus;
+use App\Models\Learning\LearningRun;
 use App\Models\Learning\PersonalVocabulary;
 use App\Models\Learning\PersonalVocabularySource;
 use App\Models\User\User;
@@ -10,13 +12,12 @@ use App\Support\Learning\PracticeTime;
 
 class VocabularyTestService
 {
-    private array $vocabularyByContent = [];
-
     private function query(User $actor, array $filter = []): \Illuminate\Database\Eloquent\Builder
     {
         $query = PersonalVocabulary::query()->where('user_id', $actor->id)->with([
-            'sources.session' => fn ($version) => $version->select('id', 'external_id', 'checksum', 'content_title as source_title'),
-                    ]);
+            'lexeme', 'sources.entry',
+            'sources.session' => fn ($session) => $session->select('id', 'external_id', 'content_title as source_title'),
+        ]);
         if (($filter['filter'] ?? '') === 'errors') {
             $query->where('needs_review', true);
         }
@@ -29,19 +30,22 @@ class VocabularyTestService
         if (! empty($filter['source_session'])) {
             $query->whereHas('sources.session', fn ($source) => $source->where('external_id', $filter['source_session']));
         }
+        if (! empty($filter['added_in_run'])) {
+            $query->whereIn('id', $this->addedWordIds($actor, $filter['added_in_run']));
+        }
         if (! empty($filter['q'])) {
             $text = mb_strtolower($filter['q']);
             $ids = [];
-            $metadata = (clone $query)->withoutEagerLoads()->select('id', 'snapshot->fr as search_fr', 'snapshot->ru as search_ru')
-                ->with(['sources' => fn ($source) => $source->select('personal_word_id', 'snapshot->fr as search_fr', 'snapshot->ru as search_ru')]);
+            $metadata = (clone $query)->withoutEagerLoads()->select('id', 'lexeme_key')->with([
+                'lexeme:lexeme_key,content',
+                'sources:id,personal_word_id,session_lexeme_id',
+                'sources.entry' => fn ($entry) => $entry->select('id', 'context->fr as fr', 'context->ru as ru'),
+            ]);
             foreach ($metadata->lazyById(250) as $word) {
-                $matches = function ($item) use ($text): bool {
-                    $translations = json_decode($item->search_ru ?? '[]', true);
-                    $translations = is_array($translations) ? implode(' ', $translations) : ($item->search_ru ?? '');
-
-                    return str_contains(mb_strtolower(($item->search_fr ?? '').' '.$translations), $text);
-                };
-                if ($matches($word) || $word->sources->contains($matches)) {
+                $base = $word->lexeme->content;
+                $matches = fn ($fr, $ru) => str_contains(mb_strtolower($fr.' '.implode(' ', $ru)), $text);
+                if ($matches($base['fr'] ?? '', $base['ru'] ?? []) || $word->sources->contains(fn ($source) =>
+                    $matches($source->entry->fr ?? $base['fr'] ?? '', json_decode($source->entry->ru ?? 'null', true) ?? $base['ru'] ?? []))) {
                     $ids[] = $word->id;
                 }
             }
@@ -49,6 +53,28 @@ class VocabularyTestService
         }
 
         return $query;
+    }
+
+    private function addedWordIds(User $actor, string $runId): array
+    {
+        $run = LearningRun::query()->where('user_id', $actor->id)
+            ->where('status', RunStatus::Completed->value)->whereIn('kind', ['daily', 'extra'])->find($runId);
+        if (! $run || ! ($run->result['words_added'] ?? 0)) {
+            return [];
+        }
+        if (isset($run->result['added_word_ids'])) {
+            return $run->result['added_word_ids'];
+        }
+        if (! $run->finished_at) {
+            return [];
+        }
+
+        // Older results only stored a count. Match the first addition and verify the whole set.
+        $ids = PersonalVocabulary::query()->where('user_id', $actor->id)->where('first_added_at', $run->finished_at)
+            ->whereHas('sources', fn ($source) => $source->where('session_id', $run->session_id))
+            ->pluck('id')->all();
+
+        return count($ids) === (int) $run->result['words_added'] ? $ids : [];
     }
 
     public function listing(User $actor, array $filter): array
@@ -80,28 +106,25 @@ class VocabularyTestService
                 ?: strcmp($a->session?->external_id ?? '', $b->session?->external_id ?? '')
                ;
         });
+        $fallback = $word->lexeme->content + ['lexeme_key' => $word->lexeme_key];
         foreach ($sources as $source) {
-            $content = $this->sourceContent($source, $word->lexeme_key);
+            $content = $this->sourceContent($source, $word);
+            if ($source === $sources->first()) {
+                $fallback = $content;
+            }
             if ($this->items($content)) {
                 return $content;
             }
         }
 
-        return $sources->isEmpty() || $this->items($word->snapshot) ? $word->snapshot : ($sources->first()?->snapshot ?? $word->snapshot);
+        return $fallback;
     }
 
-    public function sourceContent(PersonalVocabularySource $source, string $key): array
+    public function sourceContent(PersonalVocabularySource $source, PersonalVocabulary $word): array
     {
-        $version = $source->session;
-        $words = [];
-        if ($version) {
-            $cacheKey = $version->id.':'.$version->checksum;
-            $words = $this->vocabularyByContent[$cacheKey] ??= array_column(
-                app(SessionContentCache::class)->payload($version)['vocabulary'] ?? [], null, 'lexeme_key',
-            );
-        }
+        $source->entry->setRelation('lexeme', $word->lexeme);
 
-        return $words[$key] ?? array_diff_key($source->snapshot, ['review_items' => true]);
+        return $source->entry->content();
     }
 
     public function items(array $source): array
@@ -141,8 +164,8 @@ class VocabularyTestService
             'is_difficult' => (bool) $word->is_difficult,
             'needs_review' => $word->needs_review, 'streak' => $word->streak, 'errors' => $word->errors, 'review_step' => $word->review_step,
             'next_review_at' => $word->next_review_at->toIso8601String(), 'self_check' => ! $this->items($this->source($word)),
-            'sources' => $word->sources->map(function ($source) {
-                $snapshot = $source->snapshot;
+            'sources' => $word->sources->map(function ($source) use ($word) {
+                $snapshot = $this->sourceContent($source, $word);
                 unset($snapshot['review_items']);
 
                 return ['session_id' => $source->session->external_id, 'version' => 1,
@@ -179,7 +202,7 @@ class VocabularyTestService
     private function shortContext(User $actor): array
     {
         $profile = app(AccountRunService::class)->profile($actor);
-        $runs = \App\Models\Learning\LearningRun::where('user_id', $actor->id)->where('kind', 'review')->orderByDesc('started_at')->orderByDesc('id')->get();
+        $runs = \App\Models\Learning\LearningRun::where('user_id', $actor->id)->where('kind', 'review')->where('status', '!=', 'cancelled')->orderByDesc('started_at')->orderByDesc('id')->get();
         $previousKeys = []; $previousKinds = []; $done = false; $finished = false;
         foreach ($runs as $index => $run) {
             $items = $this->reviewedItems($run->snapshot);
@@ -238,7 +261,7 @@ class VocabularyTestService
     {
         $previous = [];
         $runs = \App\Models\Learning\LearningRun::where('user_id', $actor->id)
-            ->whereIn('kind', ['review', 'vocabulary_test'])->orderByDesc('started_at')->orderByDesc('id')->lazy(100);
+            ->whereIn('kind', ['review', 'vocabulary_test'])->where('status', '!=', 'cancelled')->orderByDesc('started_at')->orderByDesc('id')->lazy(100);
         foreach ($runs as $run) {
             foreach ($this->reviewedItems($run->snapshot) as $key => $item) {
                 if (in_array($key, $keys, true) && ! isset($previous[$key])) {

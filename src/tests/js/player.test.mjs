@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createLocalPlayerAdapter, createPreviewAdapter, createTransportAdapter } from '../../resources/js/App/Learning/playerAdapter.js';
-import { trainingSession, trainingModes } from '../../resources/js/App/Learning/training.js';
+import { trainingSession, trainingModes, guestTrainingProgress } from '../../resources/js/App/Learning/training.js';
 import { createAudioPlayer } from '../../resources/js/App/Learning/audioPlayer.js';
 import { emptyAnswer, answerComplete, introductionPages, insertedValue, questionSupport } from '../../resources/js/App/Learning/playerUi.js';
 
@@ -275,4 +275,26 @@ test('language support before an answer costs independence and after grading pre
   view = await independent.help(input(view, {event_type:'help', help_kind:'language_support'}));
   assert.deepEqual(view.presentation.first_result, first);
   assert.equal(view.presentation.first_result.score, 1);
+});
+
+test('listening hides pronunciation even for beginners and audio-only vocabulary review', () => {
+  const task = {skill:'listening', prompt:{text:'Какую букву назвали?',text_lang:'ru',audio:{text:'La lettre I.'}},
+    choices:[{text:'I',text_lang:'fr',transcription_ru:'и'}]};
+  for (const level of ['PRE_A1','A1','A2']) {
+    assert.deepEqual(questionSupport(level,task),{prompt:false,choices:false,canReveal:true});
+    assert.deepEqual(questionSupport(level,task,{revealed:true}),{prompt:true,choices:true,canReveal:false});
+    assert.deepEqual(questionSupport(level,task,{graded:true}),{prompt:true,choices:true,canReveal:false});
+  }
+  const {skill,...review} = task;
+  assert.equal(questionSupport('PRE_A1',review).choices,false);
+});
+
+test('guest topic training includes seen intros and attempts but not future material or review runs', () => {
+  const snapshot = {id:'L1',level:'PRE_A1',tasks:[{id:'Q1',vocabulary_ids:['bonjour']},{id:'Q2',vocabulary_ids:['i']},{id:'Q3',vocabulary_ids:['m']}],
+    introductions:[{before_task_id:'Q2',vocabulary_ids:['a','i']},{before_task_id:'Q3',vocabulary_ids:['m']}]};
+  const state = {current_level:'PRE_A1',runs:{r:{kind:'daily',started_at:'2026-11-25T10:00:00Z',snapshot,
+    presentations:[{presentation_id:'p1',first_result:{correct:false}},{presentation_id:'p2'},{presentation_id:'p3'}],introductions_seen:['p2']},
+    review:{kind:'review',started_at:'2026-11-25T11:00:00Z',snapshot:{...snapshot,id:'review'}}}};
+  assert.deepEqual(guestTrainingProgress(state),{completed:[],current_level:'PRE_A1',current:'L1',seen:['bonjour','a','i']});
+  assert.deepEqual(guestTrainingProgress(null).seen,[]);
 });

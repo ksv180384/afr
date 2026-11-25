@@ -1,7 +1,8 @@
+import { randomUuid } from './randomUuid.js';
 import { practiceDraftId } from './accountRepository.js';
 import { accountPlayback, playbackPrediction, projectAccountAction } from './accountPlayback.js';
 
-const id = () => crypto.randomUUID();
+const id = () => randomUuid();
 const statusError = (message, status, code) => Object.assign(new Error(message), { response: { status, data: { message, code } } });
 const localFailure = error => new Error('Не удалось сохранить на устройстве.', {cause:error});
 const playbackConflict = () => statusError('Ход занятия на сервере изменился. Ваши ответы сохранены на устройстве. Загрузите состояние сервера, чтобы продолжить.',409,'playback_conflict');
@@ -48,6 +49,10 @@ const deliverQueue = async ({ ownerUserId, runId, repository, transport, state =
     }
     let previousAccepted = false;
     for (let row of rows) {
+      if (state?.status === 'cancelled' && runId === state.run_id) {
+        await repository.mark(ownerUserId, row.local_id, 'dismissed');
+        continue;
+      }
       if (row.prediction && row.status === 'conflict') throw playbackConflict();
       let recovered = false;
       for (let attempt = 0; attempt < 3; attempt++) {
@@ -93,6 +98,13 @@ const deliverQueue = async ({ ownerUserId, runId, repository, transport, state =
             }
           }
           continue;
+        }
+        if (receipt.state?.status === 'cancelled' && runId === receipt.state.run_id && receipt.state.owner_user_id === ownerUserId) {
+          onMutation();
+          await repository.mark(ownerUserId, sealed.local_id, 'dismissed');
+          state = receipt.state;
+          recovered = true;
+          break;
         }
         if (receipt.accepted_event_id !== sealed.client_event_id || receipt.state?.owner_user_id !== ownerUserId) {
           throw statusError('Сервер не подтвердил сохранение.',503,'unavailable');
@@ -163,6 +175,7 @@ export const createAccountAdapter = ({ ownerUserId, runId, repository, transport
   let background = null;
   let queued = false;
   let status = 'loading';
+  let onCancelled;
   const notify = (next) => { status = next.kind; onStatus(next); };
   const deliver = (onStatus = notify) => deliverAccountQueue({ownerUserId,runId,repository,transport,state:confirmed,onStatus,onMutation,idFactory});
   const flushPlayback = () => {
@@ -176,6 +189,11 @@ export const createAccountAdapter = ({ ownerUserId, runId, repository, transport
             confirmed = await deliver(next => notify(next.kind === 'pending' ? {
               kind:'warning', message:'Ответы сохранены на устройстве. Пока не удалось отправить их на сервер.',
             } : next));
+            if (confirmed?.status === 'cancelled') {
+              state = confirmed;
+              playback = null;
+              onCancelled?.(state);
+            }
           } while (queued);
         } catch (error) { queued = true; throw error; }
         finally { background = null; }
@@ -256,6 +274,7 @@ export const createAccountAdapter = ({ ownerUserId, runId, repository, transport
   };
   return Object.freeze({
     mode:'account',
+    onCancelled(listener) { onCancelled = listener; return () => { onCancelled = undefined; }; },
     async load({advanceFrom,introductionSeen} = {}) {
       if (advanceFrom) return command('advance',{presentation_id:advanceFrom});
       if (introductionSeen) return command('introduction',{presentation_id:introductionSeen});

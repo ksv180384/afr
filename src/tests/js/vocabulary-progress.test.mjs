@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { randomUUID } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { newGuestState, changeGuestProfile, addGuestRun, applyGuestOperation, migrateGuestState, guestRunView } from '../../resources/js/App/Learning/guestProgress.js';
-import { applyGuestVocabularyEvent, guestWordSource, guestTestPlan, guestTestSource, selectGuestBlock } from '../../resources/js/App/Learning/guestVocabulary.js';
+import { applyGuestVocabularyEvent, filterGuestWords, finishGuestVocabulary, guestWordSource, guestTestPlan, guestTestSource, selectGuestBlock } from '../../resources/js/App/Learning/guestVocabulary.js';
 
 const session = JSON.parse(readFileSync(new URL('../../resources/practice/templates/pre-a1-u01-examples.json',import.meta.url))).sessions[0];
 const parity = JSON.parse(readFileSync(new URL('../Fixtures/Learning/vocabulary-parity.json',import.meta.url)));
@@ -82,6 +82,20 @@ test('new guest words appear only at finish, preserve transcription and sources,
   end(state,again);
   assert.equal(word.sources.length,1);
   assert.equal(Object.keys(state.vocabulary).length,6);
+});
+
+test('guest dictionary filters out known words for recent and historical runs', () => {
+  const state = stateFor();
+  finishGuestVocabulary(state,{session_version_id:1,snapshot:{...session,vocabulary:session.vocabulary.slice(0,1)}},at);
+  const later = '2026-10-25T12:10:00.000Z';
+  const run = start(state,undefined,'daily',later);
+  end(state,run,later);
+  const filters = {added_in_run:run.id};
+  const expected = session.vocabulary.slice(1).map(word => word.lexeme_key).sort();
+  assert.deepEqual(filterGuestWords(state,filters).map(word => word.lexeme_key).sort(),expected);
+  delete run.result.added_word_keys;
+  assert.deepEqual(filterGuestWords(state,filters).map(word => word.lexeme_key).sort(),expected);
+  assert.deepEqual(filterGuestWords(state,{added_in_run:'missing'}),[]);
 });
 
 test('guest wrong then helped correction then three separate word tests clears the mark without clearing history', () => {

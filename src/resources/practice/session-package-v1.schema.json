@@ -1532,12 +1532,8 @@
           "$ref": "#/$defs/example"
         },
         "dictionary_word_id": {
-          "type": [
-            "integer",
-            "null"
-          ],
-          "minimum": 1,
-          "maximum": 9223372036854775807
+          "type": "null",
+          "description": "Устаревшее поле пакета. Словарь практики использует lexeme_key."
         },
         "review_items": {
           "type": "array",

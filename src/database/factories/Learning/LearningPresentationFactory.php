@@ -20,7 +20,6 @@ class LearningPresentationFactory extends Factory
             'user_id' => fn (array $attributes): int => LearningRun::query()->findOrFail($attributes['run_id'])->user_id,
             'task_id' => 'Q01',
             'position' => 1,
-            'snapshot' => ['fixture' => true],
             'status' => 'pending',
         ];
     }

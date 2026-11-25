@@ -1,3 +1,4 @@
+import { randomUuid } from './randomUuid.js';
 import { browserTimezone } from './practiceTime.js';
 import { changeGuestReviewSettings, reviewSuggestionsView } from './reviewSuggestions.js';
 
@@ -5,7 +6,7 @@ const failureMessage = failure => failure.response?.data?.message ?? failure.mes
 
 export const createPracticeSettingsController = ({
   transport, guestRepository, getOwner, onMutation = () => {}, state = {},
-  now = () => new Date().toISOString(), idFactory = () => crypto.randomUUID(),
+  now = () => new Date().toISOString(), idFactory = randomUuid,
 }) => {
   const emptyState = { busy: false, pending: false, profile: null, error: '', operation: null };
   Object.assign(state, emptyState);

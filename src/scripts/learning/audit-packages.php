@@ -117,14 +117,11 @@ try {
             foreach ($content['objectives'] as $objective) {
                 App\Models\Learning\LearningObjective::firstOrCreate(['stable_id' => $objective['id']], ['level' => $content['level'], 'title' => $objective['title']]);
             }
-            $session = App\Models\Learning\LearningSession::updateOrCreate(['external_id' => $content['id']], [
+            App\Models\Learning\LearningSession::updateOrCreate(['external_id' => $content['id']], [
                 'level' => $content['level'], 'unit_id' => $unit->id, 'sort_order' => $content['order'],
-            ]);
-            $version = App\Models\Learning\LearningSessionVersion::create([
-                'session_id' => $session->id, 'version' => $content['version'], 'schema_version' => $package['schema_version'], 'payload' => $content,
+                'schema_version' => $package['schema_version'], 'payload' => $content,
                 'checksum' => App\Services\Learning\Validation\CanonicalJson::hash($content), 'status' => 'published', 'published_at' => now('UTC'),
             ]);
-            $session->update(['active_version_id' => $version->id]);
         }
         foreach ($package['curricula'] ?? [] as $content) {
             App\Models\Learning\LearningCurriculum::firstOrCreate(['external_id' => $content['id'], 'version' => $content['version']], [

@@ -40,6 +40,22 @@ it('serves only published guest content in stable order without creating anonymo
     }
 });
 
+it('refreshes studied guest expressions and distinguishes archived lessons from deleted ones', function () {
+    [$current, $hidden] = $this->sessions;
+    $hidden->update(['status' => 'archived', 'archived_at' => now()]);
+    $requests = [
+        ['id' => $current->id, 'session' => $current->external_id],
+        ['id' => $hidden->id, 'session' => $hidden->external_id],
+        ['id' => 999999, 'session' => 'removed-lesson'],
+    ];
+    $this->postJson('/daily/api/content/dictionary-updates', ['sessions' => $requests])->assertOk()
+        ->assertJsonCount(1, 'updated')->assertJsonPath('updated.0.session', $current->external_id)
+        ->assertJsonCount(count($current->payload['vocabulary']), 'updated.0.vocabulary')
+        ->assertJsonPath('removed', ['removed-lesson']);
+    $requests[0]['checksum'] = $current->checksum;
+    $this->postJson('/daily/api/content/dictionary-updates', ['sessions' => $requests])->assertOk()->assertJsonCount(0, 'updated');
+});
+
 it('does not expose draft archived unpublished or private media through guest reads', function () {
     $this->sessions[0]->update(['status' => 'draft']);
     $this->get('/daily/api/content/PRE_A1-U01-L01', ['Accept' => 'text/html'])->assertNotFound()->assertJsonPath('code', 'not_found');

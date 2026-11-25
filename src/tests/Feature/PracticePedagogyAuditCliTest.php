@@ -92,3 +92,22 @@ it('refuses to place reports among importable packages', function () {
     expect($process->getExitCode())->toBe(2)->and($process->getErrorOutput())->toContain('outside importable packages')
         ->and(is_dir($directory.'/packages'))->toBeFalse();
 });
+
+it('loads preceding lessons using current lesson storage when validating a dependent package', function () {
+    $directory = sys_get_temp_dir().'/afr-audit-context-'.bin2hex(random_bytes(8));
+    mkdir($directory);
+    $package = json_decode(file_get_contents(base_path('tests/Fixtures/Learning/pre-a1-u01-examples.json')), true);
+    $before = [...$package, 'sessions' => [$package['sessions'][0]]];
+    $before['sessions'][0]['public_page']['related_session_ids'] = [];
+    $after = [...$package, 'sessions' => [$package['sessions'][1]]];
+    file_put_contents($directory.'/before.json', json_encode($before, JSON_THROW_ON_ERROR));
+    file_put_contents($directory.'/after.json', json_encode($after, JSON_THROW_ON_ERROR));
+    $process = new Process([PHP_BINARY, base_path('scripts/learning/audit-packages.php'),
+        '--package='.$directory.'/after.json', '--context='.$directory.'/before.json',
+        '--output-dir='.$directory.'/reports'], base_path());
+    $process->setTimeout(60);
+    $process->run();
+    expect($process->getExitCode(), $process->getErrorOutput())->toBe(0);
+    $report = json_decode(file_get_contents($directory.'/reports/after.pedagogy.json'), true, 512, JSON_THROW_ON_ERROR);
+    expect($report['canonical']['valid'])->toBeTrue()->and($report['context'])->toHaveCount(1);
+});

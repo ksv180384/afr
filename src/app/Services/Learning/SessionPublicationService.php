@@ -175,6 +175,7 @@ final class SessionPublicationService
             if (\App\Models\Learning\LearningUrlAlias::where('old_path', $path)->exists()) {
                 throw new ContentOperationException(PracticeErrorCode::RevisionConflict, 'Адрес зарезервирован прежним опубликованным материалом.');
             }
+            app(PracticeDictionary::class)->publish($session->id);
             $session->update(['status' => 'published', 'published_by' => $actor->id, 'published_at' => $session->published_at ?? now('UTC'),
                 'archived_at' => null, 'slug' => $session->slug ?? $slug, 'sort_order' => $session->payload['order']]);
 

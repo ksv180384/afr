@@ -25,8 +25,10 @@ use App\Models\Learning\SessionImportBatch;
 use App\Models\Learning\VocabularyEventEffect;
 use App\Models\Learning\VocabularyRunEffect;
 use App\Models\User\User;
+use Database\Factories\Learning\PersonalVocabularyFactory;
 use Database\Seeders\Learning\LearningLevelSeeder;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
@@ -103,8 +105,8 @@ it('supports two runs and two studied sources for one personal lexeme', function
     $first = LearningRun::factory()->create(['user_id' => $owner->id]);
     $second = LearningRun::factory()->create(['user_id' => $owner->id, 'session_id' => $first->session_id]);
     $word = PersonalVocabulary::factory()->create(['user_id' => $owner->id, 'lexeme_key' => 'fr:bonjour:greeting']);
-    PersonalVocabularySource::factory()->create(['personal_word_id' => $word->id, 'session_id' => $first->session_id]);
-    PersonalVocabularySource::factory()->create(['personal_word_id' => $word->id]);
+    PersonalVocabularyFactory::addSource($word, $first->session);
+    PersonalVocabularyFactory::addSource($word);
 
     expect($first->id)->not->toBe($second->id)
         ->and($word->sources()->count())->toBe(2)
@@ -139,8 +141,8 @@ it('guards imported payloads and started snapshots against in-place mutation', f
     expect(fn () => $run->update(['checking_policy_version' => 2]))->toThrow(LogicException::class);
     $presentation = LearningPresentation::factory()->create();
     expect(fn () => $presentation->update(['position' => 2]))->toThrow(LogicException::class);
-    $source = PersonalVocabularySource::factory()->create();
-    expect(fn () => $source->update(['snapshot' => ['changed' => true]]))->toThrow(LogicException::class);
+    $source = PersonalVocabulary::factory()->studied([])->create()->sources()->firstOrFail();
+    expect(fn () => $source->delete())->toThrow(LogicException::class);
 });
 
 it('does not change a completed result or a published curriculum snapshot', function () {
@@ -161,11 +163,10 @@ it('rejects cross-account links even with otherwise valid entity IDs', function 
         'assignment' => fn () => DailyAssignment::create(['user_id' => $other->id, 'local_date' => '2026-10-24', 'selected_run_id' => $attempt->run_id]),
         'presentation' => fn () => LearningPresentation::factory()->create(['run_id' => $attempt->run_id, 'user_id' => $other->id, 'position' => 2]),
         'attempt' => fn () => LearningAttempt::factory()->create(['presentation_id' => $attempt->presentation_id, 'user_id' => $other->id, 'sequence' => 2, 'is_first_answer' => null]),
-        'source' => fn () => PersonalVocabularySource::factory()->create(['personal_word_id' => $word->id, 'user_id' => $other->id]),
         'effect' => fn () => VocabularyEventEffect::create(['user_id' => $other->id, 'event_id' => $attempt->id, 'personal_word_id' => $word->id, 'lexeme_key' => $word->lexeme_key, 'effect' => [], 'applied_at' => now('UTC')]),
     };
     expect($operation)->toThrow(QueryException::class);
-})->with(['assignment', 'presentation', 'attempt', 'source', 'effect']);
+})->with(['assignment', 'presentation', 'attempt', 'effect']);
 
 it('deduplicates client events first answers and ordered events without blocking help or corrections', function () {
     $owner = User::factory()->create();
@@ -184,8 +185,11 @@ it('deduplicates client events first answers and ordered events without blocking
 it('deduplicates personal words and their versioned sources', function () {
     $word = PersonalVocabulary::factory()->create();
     expect(fn () => PersonalVocabulary::factory()->create(['user_id' => $word->user_id, 'lexeme_key' => $word->lexeme_key]))->toThrow(QueryException::class);
-    $source = PersonalVocabularySource::factory()->create(['personal_word_id' => $word->id]);
-    expect(fn () => PersonalVocabularySource::factory()->create(['personal_word_id' => $word->id, 'session_id' => $source->session_id]))->toThrow(QueryException::class);
+    PersonalVocabularyFactory::addSource($word);
+    $source = $word->sources()->firstOrFail();
+    expect(fn () => PersonalVocabularyFactory::addSource($word, $source->session))->toThrow(QueryException::class);
+    $other = PersonalVocabulary::factory()->create(['lexeme_key' => $word->lexeme_key]);
+    expect($other->sources()->exists())->toBeFalse();
 });
 
 it('applies only one event and one run success effect per lexeme', function () {
@@ -246,12 +250,35 @@ it('links imported content and resolves media from the current payload', functio
     expect(fn () => $import->delete())->toThrow(QueryException::class);
 });
 
+it('stores compact practice JSON and trims only cancelled vocabulary snapshots during migration', function () {
+    $data = ['title' => 'Тест / révision', 'items' => [(object) [], ['id' => 'étape']]];
+    $revision = LearningCatalogRevision::create(['level_code' => 'PRE_A1', 'base_revision' => 0, 'content' => $data]);
+    $active = LearningRun::factory()->create(['session_id' => null, 'kind' => 'review', 'snapshot' => $data]);
+    $cancelled = LearningRun::factory()->create(['session_id' => null, 'kind' => 'vocabulary_test', 'snapshot' => $data]);
+    $lesson = LearningRun::factory()->create(['snapshot' => null]);
+    $compact = '{"title":"Тест / révision","items":[{},{"id":"étape"}]}';
+    expect($revision->fresh()->getRawOriginal('content'))->toBe($compact)
+        ->and($active->fresh()->getRawOriginal('snapshot'))->toBe($compact);
+
+    $legacy = json_encode($data, JSON_THROW_ON_ERROR);
+    DB::table('learning_catalog_revisions')->where('id', $revision->id)->update(['content' => $legacy]);
+    DB::table('learning_runs')->where('id', $active->id)->update(['snapshot' => $legacy]);
+    DB::table('learning_runs')->where('id', $cancelled->id)->update(['status' => 'cancelled', 'snapshot' => $legacy]);
+    $migration = require database_path('migrations/2026_11_25_180000_compact_catalog_content_and_run_snapshots.php');
+    $migration->up();
+    $migration->up();
+    expect($revision->fresh()->getRawOriginal('content'))->toBe($compact)
+        ->and($active->fresh()->getRawOriginal('snapshot'))->toBe($compact)
+        ->and($cancelled->fresh()->snapshot)->toBe(['title' => $data['title']])
+        ->and($lesson->fresh()->getRawOriginal('snapshot'))->toBeNull();
+});
+
 it('cleans personal data on account deletion while preserving studied content', function () {
     $owner = User::factory()->create();
     LearningProfile::factory()->create(['user_id' => $owner->id, 'last_manual_level_changed_at' => now('UTC')]);
     $attempt = schemaAttempt($owner);
     $word = PersonalVocabulary::factory()->create(['user_id' => $owner->id]);
-    PersonalVocabularySource::factory()->create(['personal_word_id' => $word->id, 'session_id' => $attempt->run->session_id]);
+    PersonalVocabularyFactory::addSource($word, $attempt->run->session);
     VocabularyEventEffect::create(['user_id' => $owner->id, 'event_id' => $attempt->id, 'personal_word_id' => $word->id, 'lexeme_key' => $word->lexeme_key, 'effect' => [], 'applied_at' => now('UTC')]);
     VocabularyRunEffect::create(['user_id' => $owner->id, 'lexeme_key' => $word->lexeme_key, 'run_id' => $attempt->run_id]);
     DailyAssignment::create(['user_id' => $owner->id, 'local_date' => '2026-10-24', 'selected_run_id' => $attempt->run_id]);
@@ -293,6 +320,26 @@ it('supports immutable vocabulary-test snapshots without a session version', fun
     expect($run->fresh()->session_id)->toBeNull()
         ->and($run->fresh()->snapshot)->toBe($snapshot);
     expect(fn () => $run->update(['snapshot' => ['order' => ['different']]]))->toThrow(LogicException::class);
+});
+
+it('drops per-presentation snapshots only when they match the pinned task', function () {
+    $snapshot = ['task' => ['id' => 'R01', 'type' => 'single_choice'], 'lexemes' => [], 'review_lexeme_key' => 'fr:bonjour:greeting'];
+    $run = LearningRun::factory()->create(['kind' => 'vocabulary_test', 'session_id' => null, 'snapshot' => ['items' => [$snapshot]]]);
+    $presentation = LearningPresentation::factory()->create(['run_id' => $run->id, 'task_id' => 'R01']);
+    $migration = require database_path('migrations/2026_11_25_150000_remove_duplicate_learning_presentation_snapshot.php');
+    $migration->down();
+
+    $row = DB::table('learning_presentations')->where('id', $presentation->id);
+    $legacy = $row->value('snapshot');
+    expect(json_decode($legacy, true))->toBe($snapshot);
+    $row->update(['snapshot' => json_encode(['different' => true], JSON_THROW_ON_ERROR)]);
+    expect(fn () => $migration->up())->toThrow(LogicException::class);
+    expect(Schema::hasColumn('learning_presentations', 'snapshot'))->toBeTrue();
+
+    $row->update(['snapshot' => $legacy]);
+    $migration->up();
+    expect(Schema::hasColumn('learning_presentations', 'snapshot'))->toBeFalse();
+    expect($presentation->fresh()->taskSnapshot($run->content()))->toBe($snapshot);
 });
 
 it('cannot erase publication timestamps to bypass immutable content', function () {

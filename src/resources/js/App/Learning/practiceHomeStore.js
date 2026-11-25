@@ -1,4 +1,6 @@
+import { randomUuid } from './randomUuid.js';
 import { shallowReactive } from 'vue';
+import { refreshGuestDictionary } from './guestDictionaryUpdates.js';
 import { addGuestRun, changeGuestProfile, guestDate } from './guestProgress.js';
 import { startAccountRun, deliverAccountQueue } from './accountAdapter.js';
 import { browserTimezone } from './practiceTime.js';
@@ -8,7 +10,7 @@ import { guestPracticeHome, searchGuestRoute } from './guestPracticeHome.js';
 const routeKey = selection => JSON.stringify([selection.level ?? null, selection.unit ?? null]);
 
 export const createPracticeHomeStore = ({transport, guestTransport, guestRepository, accountRepository,
-  idFactory = () => crypto.randomUUID(), now = () => new Date().toISOString()}) => {
+  idFactory = randomUuid, now = () => new Date().toISOString()}) => {
   const state = shallowReactive({
     owner: undefined, home: null, history: null, ready: false, loading: false, busy: false,
     profilePending: false, guest: null, error: '', saving: null,
@@ -85,12 +87,14 @@ export const createPracticeHomeStore = ({transport, guestTransport, guestReposit
         } else {
           await guestRepository.archiveBound();
           if (homeRequest !== request) return null;
-          const local = await guestRepository.initialize() ?? await guestRepository.read();
+          let local = await guestRepository.initialize() ?? await guestRepository.read();
           if (homeRequest !== request) return null;
           if (local.bound_user_id != null) throw new Error('Продолжите в связанном аккаунте.');
           if (force || !catalog) {
             try {
               const response = await guestTransport.catalog();
+              if (homeRequest !== request) return null;
+              local = await refreshGuestDictionary(guestRepository, guestTransport, local);
               if (homeRequest !== request) return null;
               catalog = response;
               contentError = '';

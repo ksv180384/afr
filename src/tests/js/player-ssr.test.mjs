@@ -23,6 +23,7 @@ test('player and all task components render on the server without browser global
     const adapter = { mode: 'preview', load: async () => { loads++; }, start() {}, answer() {}, help() {}, finish() {} };
     assert.match(await render('SessionPlayer', { adapter }), /Загружаем занятие/);
     assert.equal(loads, 0);
+    assert.match(await render('TrainingPanel', {unit:'PRE_A1-U02',mode:{id:'recall',icon:'book',title:'Отработка выражений',description:'Только изученное'}}), /Отработка выражений/);
     // A resumed run retains the assistance history without reopening transient UI.
     const { default: SessionPlayer } = await server.ssrLoadModule('/resources/js/App/Components/Learning/SessionPlayer.vue');
     const savedView = {
@@ -61,7 +62,18 @@ test('player and all task components render on the server without browser global
       assert.equal(helpCalls, 0);
     } finally { mounted.unmount(); }
     assert.match(await render('GuestPractice', {levels:[]}), /Проверяем хранилище браузера/);
-    assert.match(await render('VocabularyPanel', {}), /Тест по словам/);
+    const resumedReview = await render('ReviewSuggestionCard', {resume:true,store:{}});
+    assert.match(resumedReview, /Продолжить повторение/);
+    assert.doesNotMatch(resumedReview, /Не сегодня/);
+    const dictionary = await render('VocabularyPanel', {});
+    assert.match(dictionary, /Тест по словам/);
+    assert.doesNotMatch(dictionary, /К результату занятия/);
+    const addedInRun = 'a34f28d5-1c87-402f-8352-6a87a3c7d71f';
+    for (const [authUser, route] of [[{ id: 7 }, 'run'], [null, 'guest']]) {
+      const addedWords = await render('VocabularyPanel', { authUser, addedInRun });
+      assert.ok(addedWords.includes(`href="/daily/${route}/${addedInRun}"`));
+      assert.match(addedWords, /К результату занятия/);
+    }
     assert.match(await render('CurrentLevelSetting', {controller:{state:{profile:null,error:''}}}), /Проверяем сохранённый уровень/);
     const levelSetting = await render('CurrentLevelSetting', {
       controller: {state: {profile: {current_level: 'C2'}}},
@@ -81,6 +93,32 @@ test('player and all task components render on the server without browser global
     const { accountTransport } = await server.ssrLoadModule('/resources/js/App/Services/Api/daily_practice.js');
     const { usePracticeHome } = await server.ssrLoadModule('/resources/js/App/Learning/practiceHome.js');
     const { practiceNotificationsKey } = await server.ssrLoadModule('/resources/js/App/Learning/practiceNotifications.js');
+    const { default: ReviewSuggestionCard } = await server.ssrLoadModule('/resources/js/App/Components/Learning/ReviewSuggestionCard.vue');
+    const reviewNotifications = createPracticeNotifications({ schedule: () => 1, cancel: () => {} });
+    const guest = { bound_user_id: null, timezone: 'Europe/Moscow', review_suggestions: { enabled: true, snoozed_until: null, revision: 1 } };
+    let canSaveReviewSetting = false;
+    const reviewCard = renderer.createApp({ ...ReviewSuggestionCard, render: () => h('div') }, {
+      suggestion: { total: 3 },
+      store: { guestRepository: { read: async () => guest, mutate: async update => {
+        if (!canSaveReviewSetting) throw new Error('Не удалось сохранить настройку.');
+        return update(guest);
+      } }, invalidate() {} },
+    });
+    reviewCard.provide(ssrContextKey, {}).provide(practiceNotificationsKey, reviewNotifications).mount({});
+    try {
+      const review = reviewCard._instance.setupState;
+      await review.snooze();
+      await nextTick();
+      assert.equal(review.hidden, false);
+      assert.deepEqual(reviewNotifications.items, []);
+      canSaveReviewSetting = true;
+      await review.snooze();
+      await nextTick();
+      assert.equal(review.hidden, true);
+      assert.deepEqual(reviewNotifications.items.map(({ type, message }) => ({ type, message })), [
+        { type: 'success', message: 'Предложение скрыто до завтра.' },
+      ]);
+    } finally { reviewCard.unmount(); }
     const { today, call } = accountTransport;
     const notifications = createPracticeNotifications();
     let startPage;

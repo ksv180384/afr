@@ -20,6 +20,7 @@ Route::get('/daily/api/route/reference', [PracticeRouteController::class, 'refer
     ->middleware([DailyApiMiddleware::class, 'throttle:120,1'])->name('daily.route.reference');
 Route::prefix('daily/api/content')->name('daily.content.')->middleware([DailyApiMiddleware::class, 'throttle:120,1'])->group(function (): void {
     Route::get('/', [GuestPracticeController::class, 'index'])->name('index');
+    Route::post('dictionary-updates', [GuestPracticeController::class, 'dictionaryUpdates'])->name('dictionary-updates');
     Route::get('{session}', [GuestPracticeController::class, 'show'])->where('session', '[A-Za-z0-9_-]+')->name('show');
     Route::get('{session}/media/{media}', [GuestPracticeController::class, 'media'])->where('session', '[A-Za-z0-9_-]+')->whereUuid('media')->name('media');
 });

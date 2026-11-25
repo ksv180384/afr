@@ -1,9 +1,10 @@
+import { randomUuid } from './randomUuid.js';
 import { practiceDraftId } from './accountRepository.js';
 
 const clone = structuredClone;
 const pendingReviewSnooze = state => state?.review_suggestions?.snoozed_until && state.review_suggestions.snoozed_until!==state.sync?.review_snooze_acknowledged_until
   && new Date(state.review_suggestions.snoozed_until).getTime()>Date.now();
-const uuid = () => crypto.randomUUID();
+const uuid = () => randomUuid();
 const ownerError = () => Object.assign(new Error('Войдите в исходный аккаунт. Очередь другого владельца не отправлена.'),{code:'owner_changed'});
 export const hasGuestWork = (state) => !!state && (Object.keys(state.runs ?? {}).length > 0 || (state.outbox ?? []).filter((event)=>event.action==='level_selection').length>1 || pendingReviewSnooze(state) || state.sync?.batches?.some(batch=>batch.status==='pending'));
 export const ensureSyncState = (state) => {

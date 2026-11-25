@@ -248,9 +248,9 @@ it('checks dictionary and media references without downloading anything', functi
     $data['sessions'][0]['vocabulary'][0]['dictionary_word_id'] = 987654321;
     $data['sessions'][0]['tasks'][0]['prompt']['audio']['asset_id'] = '11111111-1111-4111-8111-111111111111';
     $report = packageCheck($data);
-    packageHasIssue($report, 'reference_not_found', '/sessions/0/vocabulary/0/dictionary_word_id');
-    packageHasIssue($report, 'reference_not_found', '/sessions/0/tasks/0/prompt/audio/asset_id');
+    packageHasIssue($report, 'invalid_type', '/sessions/0/vocabulary/0/dictionary_word_id');
     unset($data['sessions'][0]['vocabulary'][0]['dictionary_word_id']);
+    packageHasIssue(packageCheck($data), 'reference_not_found', '/sessions/0/tasks/0/prompt/audio/asset_id');
     $media = LearningMedia::create([
         'disk' => 'local', 'path' => 'learning/fixture.mp3', 'mime_type' => 'audio/mpeg',
         'size' => 100, 'checksum' => hash('sha256', 'fixture'), 'review_status' => 'approved',

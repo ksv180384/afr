@@ -119,7 +119,10 @@ final class SessionImportService
                 ]);
                 $receipt['catalog_revision_ids'][] = $this->catalogRevision($actor, $batch, $content, $unit->revision, ['unit_id' => $unit->id])->id;
             }
+            $dictionary = app(PracticeDictionary::class);
+            $baseline = $dictionary->packageBaseline($package['sessions']);
             foreach ($package['sessions'] as $content) {
+                $content['vocabulary'] = $dictionary->alignImportedWords($content['vocabulary'], $baseline);
                 $unit = LearningUnit::query()->where('external_id', $content['unit_id'])->firstOrFail();
                 $session = LearningSession::query()->firstOrCreate(['external_id' => $content['id']], [
                     'level' => $content['level'], 'unit_id' => $unit->id, 'sort_order' => $content['order'],

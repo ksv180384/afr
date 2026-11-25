@@ -24,10 +24,11 @@ class GuestVocabularyProjector
         $visible = [];
         $applied = [];
         $success = [];
+        $newCredits = [];
         $pending = [];
         $runs = [];
         $mappings = $episode->mappings()->where('entity_type', 'event')->with('serverEvent')->get()->sortBy(fn ($row) => $row->receipt['sequence']);
-        $apply = function ($mapping) use (&$visible, &$applied, &$success, &$lastSuccess, $recorded, $eligible, $episode): void {
+        $apply = function ($mapping) use (&$visible, &$applied, &$success, &$lastSuccess, &$newCredits, $recorded, $eligible, $episode): void {
             $event = $mapping->serverEvent;
             if (! $event) {
                 return;
@@ -57,8 +58,12 @@ class GuestVocabularyProjector
                     $visible[$key] = [...$visible[$key], 'streak' => $streak, 'review_step' => $step,
                         'needs_review' => $streak >= 3 ? false : $visible[$key]['needs_review'],
                         'next_review_at' => $at->addDays(VocabularyProgressService::INTERVAL_DAYS[$step - 1]), 'last_reviewed_at' => $at];
-                    VocabularyRunEffect::firstOrCreate(['user_id' => $episode->owner_user_id, 'lexeme_key' => $key, 'run_id' => $event->run_id],
-                        ['success_applied' => true, 'applied_at' => $at]);
+                    // Replaying a recorded event rebuilds the word, without recreating superseded credits.
+                    if (! $previous) {
+                        VocabularyRunEffect::updateOrCreate(['user_id' => $episode->owner_user_id, 'lexeme_key' => $key, 'run_id' => $event->run_id],
+                            ['success_applied' => true, 'applied_at' => $at]);
+                        $newCredits[$key] = true;
+                    }
                     if (! isset($lastSuccess[$key]) || $at->greaterThan($lastSuccess[$key])) {
                         $lastSuccess[$key] = $at;
                     }
@@ -106,5 +111,6 @@ class GuestVocabularyProjector
         foreach ($visible as $key => $values) {
             $eligible[$key]->fill($values)->save();
         }
+        VocabularyRunEffect::compactClosedCredits($episode->owner_user_id, array_keys($newCredits));
     }
 }

@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $id Первичный ключ записи.
  * @property int $user_id Пользователь, к которому относится запись.
  * @property string $lexeme_key Стабильный ключ слова или выражения для объединения одинаковых слов.
- * @property array $snapshot Снимок слова или выражения для показа и повторения.
+ * @property PracticeLexeme $lexeme Общая карточка выражения в практике.
  * @property bool $needs_review Нужно ли включать слово в повторение.
  * @property bool $is_difficult Личная отметка сложного слова.
  * @property int $streak Количество последовательных успешных проверок слова.
@@ -40,7 +40,6 @@ class PersonalVocabulary extends Model
         'native_revision',
         'user_id',
         'lexeme_key',
-        'snapshot',
         'needs_review',
         'is_difficult',
         'streak',
@@ -56,7 +55,6 @@ class PersonalVocabulary extends Model
         return [
             'native_revision' => 'integer',
             'user_id' => 'integer',
-            'snapshot' => 'array',
             'needs_review' => 'boolean',
             'is_difficult' => 'boolean',
             'streak' => 'integer',
@@ -73,6 +71,11 @@ class PersonalVocabulary extends Model
         return PersonalVocabularyFactory::new();
     }
 
+    public function lexeme(): BelongsTo
+    {
+        return $this->belongsTo(PracticeLexeme::class, 'lexeme_key', 'lexeme_key');
+    }
+
     public function sources(): HasMany
     {
         return $this->hasMany(PersonalVocabularySource::class, 'personal_word_id', 'id');
@@ -85,6 +88,6 @@ class PersonalVocabulary extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'native_revision', 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

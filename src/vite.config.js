@@ -4,7 +4,9 @@ import vue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import { fileURLToPath, URL } from "node:url";
+import { writeFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { fileURLToPath, URL } from 'node:url';
 
 export default defineConfig(({ command, mode }) => {
   const isAdminBuild = process.argv.includes('admin.js');
@@ -23,9 +25,8 @@ export default defineConfig(({ command, mode }) => {
       host: '0.0.0.0',
       port: 5004,
       strictPort: true,
-      origin: 'http://localhost:5000',
+      origin: '',
       hmr: {
-        host: 'localhost',
         clientPort: 5000,
       },
     },
@@ -41,6 +42,18 @@ export default defineConfig(({ command, mode }) => {
         ],
         refresh: true,
       }),
+      {
+        name: 'same-origin-vite-assets',
+        enforce: 'post',
+        configureServer(server) {
+          // Nginx serves Vite under /vite/ on the same host as Laravel.
+          // Use a relative hot URL after laravel-vite-plugin writes the file.
+          server.httpServer?.once('listening', () => {
+            const hotFile = resolve(server.config.root, 'public/hot');
+            writeFileSync(hotFile, server.config.base.replace(/\/$/, ''));
+          });
+        },
+      },
       vue({
         template: {
           transformAssetUrls: {

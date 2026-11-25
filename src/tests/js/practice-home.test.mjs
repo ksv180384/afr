@@ -40,6 +40,18 @@ test('guest home stays neutral until storage is read and concurrent refreshes sh
   assert.equal(Object.keys(repository.state.runs).length,0);
 });
 
+test('guest home exposes both saved vocabulary runs when one is paused', async () => {
+  const repository = new Repository();
+  repository.state.runs = {
+    test: {id:'test', kind:'vocabulary_test', status:'paused', started_at:stamp, record_sequence:1, snapshot},
+    review: {id:'review', kind:'review', status:'in_progress', started_at:stamp, record_sequence:2, snapshot},
+  };
+  const store = make({guestRepository:repository});
+  await store.refresh(null);
+  assert.equal(store.state.home.active_run.id,'review');
+  assert.deepEqual(store.state.home.vocabulary_runs,{review:'review',vocabulary_test:'test'});
+});
+
 test('two simultaneous guest starts share one attempt and a later start replaces it',async()=>{
   const repository=new Repository();const store=make({guestRepository:repository});
   await store.refresh(null);

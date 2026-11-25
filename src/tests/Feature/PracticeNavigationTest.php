@@ -46,7 +46,36 @@ it('selects training questions from published and introduced material without cr
     expect(LearningRun::count())->toBe(0);
 });
 
-it('builds each topic training from every published lesson in the selected topic', function () {
+it('uses answered steps and seen introductions from a linked account lesson for training', function () {
+    $source = $this->version->payload;
+    $first = $source['tasks'][0];
+    $source['training_tasks']['recall'] = [
+        [...$first, 'id' => 'answered', 'vocabulary_ids' => ['bonjour']],
+        [...$first, 'id' => 'introduced', 'vocabulary_ids' => ['salut']],
+        [...$first, 'id' => 'unseen', 'vocabulary_ids' => ['je-mappelle']],
+    ];
+    $this->version->update(['payload' => $source, 'checksum' => CanonicalJson::hash($source)]);
+    $this->actingAs(User::factory()->create());
+    $state = $this->postJson('/daily/api/runs', ['kind' => 'daily', 'expected_revision' => 1,
+        'client_event_id' => (string) Str::uuid()])->assertOk()->json('state');
+    $url = '/daily/api/runs/'.$state['run_id'];
+    $step = ['presentation_id' => $state['presentation']['presentation_id']];
+    expect(LearningRun::findOrFail($state['run_id'])->snapshot)->toBeNull();
+    $this->postJson('/daily/api/training', ['mode' => 'recall'])->assertOk()->assertJsonCount(0, 'items');
+
+    $state = $this->postJson($url.'/answers', $step + ['client_event_id' => (string) Str::uuid(), 'expected_revision' => $state['revision'],
+        'event_type' => 'answer', 'answer' => ['choice_id' => $first['correct_choice_id']]])->assertOk()->json('state');
+    $this->postJson('/daily/api/training', ['mode' => 'recall'])->assertOk()
+        ->assertJsonCount(1, 'items')->assertJsonPath('items.0.task.id', 'answered');
+    $state = $this->postJson($url.'/introduction', $step + ['client_event_id' => (string) Str::uuid(),
+        'expected_revision' => $state['revision']])->assertOk()->json('state');
+    $this->postJson($url.'/pause', ['client_event_id' => (string) Str::uuid(), 'expected_revision' => $state['revision']])->assertOk();
+    $items = $this->postJson('/daily/api/training', ['mode' => 'recall', 'unit' => $this->version->unit->external_id])
+        ->assertOk()->json('items');
+    expect(array_column(array_column($items, 'task'), 'id'))->toEqualCanonicalizing(['answered', 'introduced']);
+});
+
+it('builds topic training only from completed lessons and introduced current material', function () {
     $unit = $this->version->unit;
     $unit->update(['sort_order' => 1]);
     $otherUnit = LearningUnit::factory()->create(['sort_order' => 2, 'published_at' => now('UTC')]);
@@ -75,7 +104,7 @@ it('builds each topic training from every published lesson in the selected topic
     }
 
     $recall = $this->postJson('/daily/api/training', ['unit' => $unit->external_id, 'mode' => 'recall',
-        'previous' => array_map(fn ($source) => $source.'/R1', $sources)])
+        'completed' => $sources, 'previous' => array_map(fn ($source) => $source.'/R1', $sources)])
         ->assertOk()->assertJsonCount(6, 'items')->json('items');
     expect(array_unique(array_column($recall, 'source')))->toEqualCanonicalizing($sources);
     $fresh = array_filter($recall, fn ($item) => $item['task']['id'] === 'R2');
@@ -84,16 +113,20 @@ it('builds each topic training from every published lesson in the selected topic
     $nextTraining = ['unit' => $otherUnit->external_id, 'mode' => 'dialogue'];
     $this->postJson('/daily/api/training', $nextTraining)->assertForbidden()->assertJsonPath('code', 'forbidden');
     $this->postJson('/daily/api/training', [...$nextTraining, 'current_level' => 'PRE_A1', 'completed' => $sources])
-        ->assertOk()->assertJsonPath('items.0.source', 'TRAINING-LESSON-6');
+        ->assertOk()->assertJsonCount(0, 'items');
+
+    $partial = ['unit' => $unit->external_id, 'mode' => 'recall', 'current' => $sources[0]];
+    $this->postJson('/daily/api/training', $partial)->assertOk()->assertJsonCount(0, 'items');
+    $introduced = $this->postJson('/daily/api/training', [...$partial, 'seen' => $task['vocabulary_ids']])
+        ->assertOk()->assertJsonCount(2, 'items')->json('items');
+    expect(array_unique(array_column($introduced, 'source')))->toBe([$sources[0]]);
 
     $actor = User::factory()->create();
     $this->actingAs($actor);
     $this->postJson('/daily/api/training', [...$nextTraining, 'current_level' => 'A1', 'completed' => $sources])->assertForbidden();
-    $dialogue = $this->postJson('/daily/api/training', ['unit' => $unit->external_id, 'mode' => 'dialogue'])
-        ->assertOk()->assertJsonCount(5, 'items')->json('items');
-    expect(array_column($dialogue, 'source'))->toEqualCanonicalizing($sources)
-        ->and(array_unique(array_column(array_column($dialogue, 'task'), 'id')))->toBe(['D1'])
-        ->and(LearningRun::count())->toBe(0);
+    $this->postJson('/daily/api/training', ['unit' => $unit->external_id, 'mode' => 'dialogue', 'completed' => $sources])
+        ->assertOk()->assertJsonCount(0, 'items');
+    expect(LearningRun::count())->toBe(0);
     $this->postJson('/daily/api/training', ['unit' => 'UNKNOWN', 'mode' => 'recall'])->assertOk()->assertJsonCount(0, 'items');
 
     $versions = LearningSession::whereIn('external_id', $sources)->pluck('id');
@@ -101,7 +134,10 @@ it('builds each topic training from every published lesson in the selected topic
         LearningRun::factory()->create(['user_id' => $actor->id, 'session_id' => $versionId,
             'status' => 'completed', 'finished_at' => now('UTC')]);
     }
-    $this->postJson('/daily/api/training', $nextTraining)->assertOk()->assertJsonPath('items.0.source', 'TRAINING-LESSON-6');
+    $this->postJson('/daily/api/training', $nextTraining)->assertOk()->assertJsonCount(0, 'items');
+    $dialogue = $this->postJson('/daily/api/training', ['unit' => $unit->external_id, 'mode' => 'dialogue'])
+        ->assertOk()->assertJsonCount(5, 'items')->json('items');
+    expect(array_column($dialogue, 'source'))->toEqualCanonicalizing($sources);
 });
 
 it('opens guest and unverified progress shells without creating account state', function () {
@@ -198,8 +234,7 @@ it('exposes practice settings only behind the flag on the existing verified prof
 it('accepts reports for an owners saved vocabulary source after archival without exposing it to another account', function () {
     $owner = User::factory()->create();
     $snapshot = $this->version->payload['vocabulary'][0];
-    $word = \App\Models\Learning\PersonalVocabulary::factory()->create(['user_id' => $owner->id, 'lexeme_key' => $snapshot['lexeme_key'], 'snapshot' => $snapshot]);
-    $word->sources()->create(['user_id' => $owner->id, 'session_id' => $this->version->id, 'snapshot' => $snapshot, 'first_added_at' => now('UTC')]);
+    $word = \App\Models\Learning\PersonalVocabulary::factory()->studied($snapshot, $this->version)->create(['user_id' => $owner->id]);
     $this->version->update(['archived_at' => now('UTC')]);
     $input = practiceReportInput($this, ['task_id' => null]);
     $this->actingAs(User::factory()->create())->postJson('/daily/api/reports', $input)->assertNotFound();

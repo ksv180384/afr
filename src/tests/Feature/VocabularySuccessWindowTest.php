@@ -20,8 +20,7 @@ use Illuminate\Support\Str;
 beforeEach(function () {
     $this->seed(LearningLevelSeeder::class);
     $this->learner = User::factory()->create();
-    $this->word = PersonalVocabulary::factory()->create(['user_id' => $this->learner->id, 'lexeme_key' => 'fr:bonjour:greeting', 'needs_review' => true,
-        'snapshot' => ['id' => 'bonjour', 'lexeme_key' => 'fr:bonjour:greeting', 'fr' => 'bonjour'],
+    $this->word = PersonalVocabulary::factory()->studied(['id' => 'bonjour', 'lexeme_key' => 'fr:bonjour:greeting', 'fr' => 'bonjour'])->create(['user_id' => $this->learner->id, 'needs_review' => true,
         'streak' => 0, 'errors' => 0, 'review_step' => 0, 'next_review_at' => '2026-03-28 23:00:00']);
 });
 
@@ -54,6 +53,38 @@ it('matches the 19-case guest fixture across run kinds exact boundaries errors a
         expect($word->next_review_at->toIso8601String())->toBe(CarbonImmutable::parse($entry['next_review_at'])->toIso8601String());
     }
     $this->assertDatabaseCount('vocabulary_event_effects', 19);
+    expect(VocabularyRunEffect::where('success_applied', false)->count())->toBe(0);
+});
+
+it('compacts terminal credits while retaining an overlapping run marker and the exact UTC cutoff', function () {
+    $at = CarbonImmutable::parse('2026-11-06T12:00:00Z');
+    $run = fn ($status) => LearningRun::factory()->create(['user_id' => $this->learner->id,
+        'kind' => 'review', 'session_id' => null, 'status' => $status]);
+    $mark = fn ($run, $when) => VocabularyRunEffect::create(['user_id' => $this->learner->id, 'lexeme_key' => $this->word->lexeme_key,
+        'run_id' => $run->id, 'applied_at' => $when, 'success_applied' => $when !== null]);
+    $old = $run('completed');
+    $open = $run('paused');
+    $latest = $run('cancelled');
+    $mark($old, $at->subDays(2));
+    $mark($open, $at->subDay());
+    $mark($latest, $at);
+    $mark($run('in_progress'), null);
+    $migration = require database_path('migrations/2026_11_25_190000_compact_practice_credits_and_cancelled_receipts.php');
+    $migration->up();
+    $migration->up();
+    expect(VocabularyRunEffect::pluck('run_id')->all())->toEqualCanonicalizing([$open->id, $latest->id]);
+    $next = $run('in_progress');
+    DB::transaction(function () use ($open, $next, $at) {
+        expect(VocabularySuccessWindow::credit($this->word, $open, $at->addDay()))->toBeFalse()
+            ->and(VocabularySuccessWindow::credit($this->word, $next, $at->addDay()->subSecond()))->toBeFalse()
+            ->and(VocabularySuccessWindow::credit($this->word, $next, $at->addDay()))->toBeTrue();
+        $next->update(['status' => 'completed']);
+        VocabularyRunEffect::compactClosedRun($next);
+        $open->update(['status' => 'cancelled']);
+        VocabularyRunEffect::compactClosedRun($open);
+    });
+    expect(VocabularyRunEffect::sole()->run_id)->toBe($next->id)
+        ->and(VocabularySuccessWindow::latest($this->word)->equalTo($at->addDay()))->toBeTrue();
 });
 
 it('uses reliable historical credits without resetting mastered progress or substituting the last view', function (bool $hasCredit) {
@@ -83,7 +114,7 @@ it('retains pre-rule imported credits while new projector effects obey the windo
         'created_word_ids' => [$this->word->id], 'started_at' => $at]);
     $events = [];
     foreach ([0, 5, 10] as $index => $minutes) {
-        $run = LearningRun::factory()->create(['user_id' => $this->learner->id, 'snapshot' => ['vocabulary' => [$this->word->snapshot]]]);
+        $run = LearningRun::factory()->create(['user_id' => $this->learner->id, 'snapshot' => ['vocabulary' => [$this->word->sources->first()->entry->content()]]]);
         $event = windowAttempt($this, $run, $at->addMinutes($minutes)->toIso8601String(), 'success');
         $events[] = $event;
         if ($index < 2) {

@@ -64,8 +64,12 @@ let scrollFrame;
 const scrollToLesson = () => {
   if (document.readyState !== 'complete') return;
   cancelAnimationFrame(scrollFrame);
-  // Wait until Inertia and the browser have applied their navigation scroll positions.
-  scrollFrame = requestAnimationFrame(applyScroll);
+  // Inertia resets scroll two frames after swapping the page.
+  scrollFrame = requestAnimationFrame(() => {
+    scrollFrame = requestAnimationFrame(() => {
+      scrollFrame = requestAnimationFrame(applyScroll);
+    });
+  });
 };
 const applyScroll = () => {
   const container = path.value;

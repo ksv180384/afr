@@ -68,7 +68,7 @@ final class RunAnswerService
                 }
                 $previous = LearningAttempt::query()->where('user_id', $ownerId)->where('client_event_id', $input['client_event_id'])->first();
                 if ($previous) {
-                    return $this->replay($previous, $hash);
+                    return $this->replay($previous, $hash, $run);
                 }
                 AnswerChecker::policy($run->checking_policy_version);
                 if ($run->status !== RunStatus::InProgress || $run->revision !== $input['expected_revision']) {
@@ -78,12 +78,12 @@ final class RunAnswerService
                 if (! $presentation) {
                     throw new AnswerCheckingException(PracticeErrorCode::NotFound, 'Предъявление не найдено в этом прохождении.');
                 }
-                $snapshot = $this->bound($run->content(), $presentation);
-                $state = $this->state($presentation);
+                $snapshot = $presentation->taskSnapshot($run->content());
+                $state = $this->state($run, $presentation);
                 $state = $this->evaluator->apply($snapshot, $state, $event, $run->checking_policy_version);
                 $result = $state['last_result'];
                 $revision = $run->revision + 1;
-                $attempt = LearningAttempt::create([
+                $attempt = new LearningAttempt([
                     'user_id' => $ownerId, 'run_id' => $runId, 'presentation_id' => $presentation->id,
                     'client_event_id' => $input['client_event_id'], 'event_type' => $input['event_type'],
                     'sequence' => ((int) $run->attempts()->max('sequence')) + 1,
@@ -91,10 +91,12 @@ final class RunAnswerService
                     'received_at' => now('UTC'), 'client_occurred_at' => $occurredAt,
                     'result' => [...$result, 'run_revision' => $revision],
                 ]);
+                $attempt->compactDetails($run->checking_policy_version, $presentation->task_id);
+                $attempt->save();
                 $presentation->update(['status' => $state['status'], 'help_used' => $state['help_used']]);
                 $run->update(['revision' => $revision]);
 
-                return $this->receipt($attempt);
+                return $this->receipt($attempt, $run, $presentation);
             }, 3);
         } catch (QueryException $exception) {
             if ((string) $exception->getCode() === '23000') {
@@ -107,36 +109,27 @@ final class RunAnswerService
         }
     }
 
-    private function replay(LearningAttempt $attempt, string $hash): array
+    private function replay(LearningAttempt $attempt, string $hash, ?LearningRun $run = null): array
     {
         if (! hash_equals($attempt->payload_hash, $hash)) {
             throw new AnswerCheckingException(PracticeErrorCode::IdempotencyConflict, 'Этот event ID уже принят с другим содержимым.');
         }
 
-        return $this->receipt($attempt);
+        return $this->receipt($attempt, $run ?? $attempt->run);
     }
 
-    private function receipt(LearningAttempt $attempt): array
+    private function receipt(LearningAttempt $attempt, LearningRun $run, ?LearningPresentation $presentation = null): array
     {
+        $result = $attempt->gradingResult($run->checking_policy_version, $presentation?->task_id);
+
         return ['attempt_id' => $attempt->id, 'client_event_id' => $attempt->client_event_id,
-            'presentation_id' => $attempt->presentation_id, 'sequence' => $attempt->sequence, 'revision' => $attempt->result['run_revision'],
-            'result' => array_diff_key($attempt->result, ['run_revision' => true])];
+            'presentation_id' => $attempt->presentation_id, 'sequence' => $attempt->sequence, 'revision' => $result['run_revision'],
+            'result' => array_diff_key($result, ['run_revision' => true])];
     }
 
-    private function bound(array $content, LearningPresentation $presentation): array
+    private function state(LearningRun $run, LearningPresentation $presentation): array
     {
-        $snapshot = $presentation->taskSnapshot($content);
-        if (($snapshot['task']['id'] ?? null) !== $presentation->task_id) {
-            throw new AnswerCheckingException(PracticeErrorCode::Unavailable, 'Идентификатор задания не совпадает со снимком предъявления.');
-        }
-        PresentationSnapshot::bound($content, $presentation->position, $snapshot);
-
-        return $snapshot;
-    }
-
-    private function state(LearningPresentation $presentation): array
-    {
-        $first = $presentation->firstAttempt?->result;
+        $first = $presentation->firstAttempt?->gradingResult($run->checking_policy_version, $presentation->task_id);
         if ($first !== null) {
             unset($first['run_revision']);
         }
@@ -165,8 +158,8 @@ final class RunAnswerService
             }
             $states = [];
             foreach ($run->presentations()->with('firstAttempt')->get() as $presentation) {
-                $this->bound($content, $presentation);
-                $states[] = $this->state($presentation);
+                $presentation->taskSnapshot($content);
+                $states[] = $this->state($run, $presentation);
             }
 
             return $this->calculator->calculate($states, count($items), $run->checking_policy_version);

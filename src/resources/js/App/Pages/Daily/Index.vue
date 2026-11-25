@@ -1,4 +1,5 @@
 <script setup>
+import { randomUuid } from '@/App/Learning/randomUuid.js';
 import ReviewSuggestionCard from '@/App/Components/Learning/ReviewSuggestionCard.vue';
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
@@ -155,7 +156,7 @@ const repeat = input => {
     const profile = home.value?.profile ?? await accountTransport.profile();
     if (profile.owner_user_id !== actor || actor !== owner.value) throw new Error('Войдите в свой аккаунт, чтобы продолжить.');
     const state = await startAccountRun({ownerUserId:actor,repository,transport:accountTransport,onStatus:actorStatus(actor),profile,onMutation:()=>homeStore.invalidate(actor),input:{
-      client_event_id:crypto.randomUUID(),expected_revision:profile.revision,timezone:timezone.value,
+      client_event_id:randomUuid(),expected_revision:profile.revision,timezone:timezone.value,
       kind:'vocabulary_test',continue_run_id:input.continue_run_id,
     }});
     if (currentActor(actor)) await openState(state);
@@ -199,7 +200,7 @@ onBeforeUnmount(() => { disposed = true; window.removeEventListener('online',onO
         </div>
         <session-player v-if="adapter" :key="runId" ref="player" :adapter="adapter" :locked="locked"
           :route-owner="owner" :route-store="homeStore" :navigation-busy="busy || syncing || pendingStart"
-          @next-lesson="startLesson()" @review="startReview" @repeat="repeat" @test-next="repeat" @vocabulary="router.visit('/daily/vocabulary')" @exit="exitRun" />
+          @next-lesson="startLesson()" @continue-run="continueRun" @review="startReview" @repeat="repeat" @test-next="repeat" @vocabulary="router.visit('/daily/vocabulary')" @exit="exitRun" />
         <template v-else-if="home">
           <template v-if="screen!=='progress'">
             <practice-route-topic :trail="embedded" :route="home.route" :owner="owner" :selection="routeSelection"

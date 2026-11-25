@@ -3,6 +3,7 @@
 namespace App\Models\Learning;
 
 use App\Models\User\User;
+use App\Services\Learning\PresentationSnapshot;
 use App\Support\Learning\UsesUtcDates;
 use Database\Factories\Learning\LearningPresentationFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -21,7 +22,6 @@ use LogicException;
  * @property string $run_id Прохождение, к которому относится запись.
  * @property string $task_id Стабильный идентификатор задания внутри версии занятия.
  * @property int $position Позиция задания в прохождении.
- * @property array $snapshot Снимок задания на момент выдачи.
  * @property string $status Состояние выданного задания в прохождении.
  * @property bool $help_used Была ли использована подсказка.
  * @property \Illuminate\Support\Carbon|null $created_at Момент создания записи.
@@ -40,7 +40,6 @@ class LearningPresentation extends Model
         'run_id',
         'task_id',
         'position',
-        'snapshot',
         'status',
         'help_used',
     ];
@@ -50,7 +49,6 @@ class LearningPresentation extends Model
         return [
             'user_id' => 'integer',
             'position' => 'integer',
-            'snapshot' => 'array',
             'help_used' => 'boolean',
         ];
     }
@@ -58,8 +56,8 @@ class LearningPresentation extends Model
     protected static function booted(): void
     {
         static::updating(function (self $model): void {
-            if ($model->isDirty(['user_id', 'run_id', 'task_id', 'position', 'snapshot'])) {
-                throw new LogicException('LearningPresentation identity and snapshot cannot be changed.');
+            if ($model->isDirty(['user_id', 'run_id', 'task_id', 'position'])) {
+                throw new LogicException('LearningPresentation identity cannot be changed.');
             }
         });
     }
@@ -76,7 +74,7 @@ class LearningPresentation extends Model
 
     public function taskSnapshot(array $content): array
     {
-        return $this->snapshot ?: \App\Services\Learning\PresentationSnapshot::forTask($content, $this->task_id);
+        return PresentationSnapshot::atPosition($content, $this->position, $this->task_id);
     }
 
     public function attempts(): HasMany

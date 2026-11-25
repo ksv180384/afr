@@ -313,7 +313,7 @@ it('requires confirmation and completely deletes a lesson and removes dangling p
     $this->postJson($url)->assertUnprocessable();
     $this->postJson($url, ['confirmed' => true])->assertOk();
     $this->assertDatabaseMissing('learning_sessions', ['id' => $row->id]);
-    expect(LearningSession::findOrFail($receipt['version_ids'][1])->payload['prerequisite_ids'])->not->toContain($row->payload['id']);
+    expect(LearningSession::findOrFail($receipt['version_ids'][1])->payload['prerequisite_ids'])->not->toContain($row->external_id);
 });
 
 it('deletes a topic with all its lessons', function () {
@@ -350,16 +350,50 @@ it('replaces published content and drops unfinished attempts', function () {
     expect(LearningSession::count())->toBe(2);
 });
 
-it('deletes published lesson runs and sources but retains personal words', function () {
+it('removes unfinished lesson runs and personal words that lost their only source', function () {
     [, $receipt] = adminImport($this);
     $row = LearningSession::findOrFail($receipt['version_ids'][0]);
     $row->update(['status' => 'published', 'published_at' => now()]);
     $run = LearningRun::factory()->create(['user_id' => $this->admin->id, 'session_id' => $row->id]);
     $word = \App\Models\Learning\PersonalVocabulary::factory()->create(['user_id' => $this->admin->id]);
-    \App\Models\Learning\PersonalVocabularySource::factory()->create(['personal_word_id' => $word->id, 'user_id' => $this->admin->id, 'session_id' => $row->id]);
+    \Database\Factories\Learning\PersonalVocabularyFactory::addSource($word, $row);
     $this->postJson('/admin/daily-practice/manage/sessions/'.$row->id.'/delete', ['confirmed' => true])->assertOk();
     $this->assertDatabaseMissing('learning_runs', ['id' => $run->id]);
-    $this->assertDatabaseHas('personal_vocabulary', ['id' => $word->id]);
+    $this->assertDatabaseMissing('personal_vocabulary', ['id' => $word->id]);
+});
+
+it('removes only lost studied sources and keeps historical lesson results', function () {
+    [, $receipt] = adminImport($this);
+    [$a, $b] = LearningSession::whereIn('id', $receipt['version_ids'])->orderBy('id')->get();
+    $a->update(['status' => 'published', 'published_at' => now()]);
+    $expression = $a->payload['vocabulary'][0];
+    $key = $expression['lexeme_key'];
+    $content = $b->payload;
+    $variant = $expression;
+    $variant['example'] = ['fr' => 'Bonjour, Léa !', 'ru' => 'Здравствуй, Леа!'];
+    $content['vocabulary'] = [$variant];
+    $b->update(['payload' => $content, 'checksum' => \App\Services\Learning\Validation\CanonicalJson::hash($content)]);
+    $onlyA = \App\Models\Learning\PersonalVocabulary::factory()->studied($expression, $a)->create();
+    $both = \App\Models\Learning\PersonalVocabulary::factory()->studied($expression, $a)->create(['is_difficult' => true, 'streak' => 2]);
+    \Database\Factories\Learning\PersonalVocabularyFactory::addSource($both, $b);
+    $completed = LearningRun::factory()->create(['user_id' => $both->user_id, 'session_id' => $a->id, 'status' => 'completed',
+        'result' => ['total_steps' => 3, 'independent_correct_steps' => 2]]);
+    $content = $a->payload;
+    $content['vocabulary'][0]['ru'] = ['Приветствую'];
+    $a->update(['payload' => $content, 'checksum' => \App\Services\Learning\Validation\CanonicalJson::hash($content)]);
+    expect($b->fresh()->payload['vocabulary'][0]['ru'])->toBe(['Приветствую'])
+        ->and($b->fresh()->checksum)->toBe(\App\Services\Learning\Validation\CanonicalJson::hash($b->fresh()->payload));
+
+    $this->postJson('/admin/daily-practice/manage/sessions/'.$a->id.'/delete', ['confirmed' => true])->assertOk();
+    expect($onlyA->fresh())->toBeNull()->and($both->fresh()->streak)->toBe(2)->and($both->fresh()->is_difficult)->toBeTrue();
+    $this->actingAs(User::findOrFail($both->user_id))->getJson('/daily/api/vocabulary')->assertOk()
+        ->assertJsonPath('words.0.snapshot.example.fr', 'Bonjour, Léa !')->assertJsonCount(1, 'words.0.sources');
+    $this->getJson('/daily/api/runs/'.$completed->id)->assertOk()->assertJsonPath('status', 'completed')
+        ->assertJsonPath('session.title', $a->content_title)->assertJsonPath('summary.independent_correct_steps', 2);
+
+    $this->actingAs($this->admin)->postJson('/admin/daily-practice/manage/sessions/'.$b->id.'/delete', ['confirmed' => true])->assertOk();
+    expect($both->fresh())->toBeNull();
+    $this->assertDatabaseMissing('learning_lexemes', ['lexeme_key' => $key]);
 });
 
 it('deletes programs with their enrollments', function () {

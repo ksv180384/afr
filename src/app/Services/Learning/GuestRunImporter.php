@@ -39,17 +39,18 @@ class GuestRunImporter
             if (! $version || ! $version->published_at) {
                 throw new AnswerCheckingException(PracticeErrorCode::VersionConflict, 'Изученная версия не найдена или не была опубликована.');
             }
-            if (CanonicalJson::hash($bundle['snapshot']) !== CanonicalJson::hash($version->payload)) {
+            $content = $version->payload;
+            if (CanonicalJson::hash(PracticeDictionary::detachSiteDictionary($bundle['snapshot'])) !== CanonicalJson::hash($content)) {
                 throw new AnswerCheckingException(PracticeErrorCode::VersionConflict, 'Снимок гостевого занятия отличается от изученной версии.');
             }
-            $prerequisites = $version->payload['prerequisite_ids'] ?? [];
+            $prerequisites = $content['prerequisite_ids'] ?? [];
             $completed = LearningRun::query()->join('learning_sessions', 'learning_runs.session_id', '=', 'learning_sessions.id')->where('learning_runs.user_id', $actor->id)
                 ->where('learning_runs.status', 'completed')->whereIn('learning_sessions.external_id', $prerequisites)->distinct()->count('learning_sessions.external_id');
             if ($completed !== count(array_unique($prerequisites))) {
                 throw new AnswerCheckingException(PracticeErrorCode::VersionConflict, 'Сначала перенесите завершённые предыдущие занятия.');
             }
 
-            return [$version->id, $version->payload, array_map(fn ($task) => PresentationSnapshot::forTask($version->payload, $task['id']), $version->payload['tasks']), $version->checksum];
+            return [$version->id, $content, array_column($content['tasks'], 'id'), $version->checksum];
         }
         $snapshot = $bundle['snapshot'];
         $review = $snapshot['review_items'] ?? null;
@@ -61,7 +62,7 @@ class GuestRunImporter
             AnswerChecker::invalid('Слово повторяется в одном тесте.');
         }
         $words = PersonalVocabulary::where('user_id', $actor->id)->whereIn('lexeme_key', $keys)
-            ->with('sources.session')->get()->keyBy('lexeme_key');
+            ->with(['lexeme', 'sources.entry'])->get()->keyBy('lexeme_key');
         $reviews = app(VocabularyTestService::class);
         $items = [];
         $vocabulary = [];
@@ -70,8 +71,7 @@ class GuestRunImporter
             if (! $word) {
                 throw new AnswerCheckingException(PracticeErrorCode::NotFound, 'Источник гостевого повторения ещё не перенесён.');
             }
-            $sources = $word->sources->isEmpty() ? [$word->snapshot]
-                : $word->sources->map(fn ($source) => $reviews->sourceContent($source, $word->lexeme_key));
+            $sources = $word->sources->map(fn ($source) => $reviews->sourceContent($source, $word));
             $matched = null;
             foreach ($sources as $source) {
                 foreach ($source['review_items'] ?? [] as $option) {
@@ -92,7 +92,8 @@ class GuestRunImporter
         $remaining = PersonalVocabulary::where('user_id', $actor->id)->whereIn('lexeme_key', $snapshot['remaining_word_ids'] ?? [])->pluck('id')->all();
 
         return [null, ['id' => $bundle['guest_run_id'], 'title' => 'Тест изученных выражений', 'level' => $snapshot['level'] ?? 'PRE_A1', 'duration_minutes' => 3,
-            'description' => 'Начато до входа.', 'items' => $items, 'vocabulary' => $vocabulary, 'introductions' => [], 'remaining_word_ids' => $remaining], $items];
+            'description' => 'Начато до входа.', 'items' => $items, 'vocabulary' => $vocabulary, 'introductions' => [], 'remaining_word_ids' => $remaining],
+            array_map(fn (array $item) => $item['task']['id'], $items), null];
     }
 
     public function import(User $actor, GuestSyncEpisode $episode, array $bundle): array
@@ -119,10 +120,8 @@ class GuestRunImporter
             if ($this->ledger->previous($episode, $first)) {
                 throw new AnswerCheckingException(PracticeErrorCode::IdempotencyConflict, 'Старт уже относится к другому прохождению.');
             }
-            $source = $this->source($actor, $bundle);
-            [$versionId, $snapshot, $items] = $source;
-            $checksum = $source[3] ?? null;
-            if (count($items) !== count($bundle['presentation_ids'])) {
+            [$versionId, $snapshot, $taskIds, $checksum] = $this->source($actor, $bundle);
+            if (count($taskIds) !== count($bundle['presentation_ids'])) {
                 AnswerChecker::invalid('Порядок показов не соответствует версии.');
             }
             $policy = AnswerChecker::policy($bundle['checking_policy_version']);
@@ -143,8 +142,8 @@ class GuestRunImporter
                 'import_meta' => ['guest_id' => $episode->guest_id, 'episode_id' => $episode->id, 'guest_run_id' => $bundle['guest_run_id'], 'received_at' => $now->toIso8601String(),
                     'original_local_date' => $bundle['local_date'], 'client_started_at' => $bundle['started_at'], 'clock_warning' => $clockWarning]]);
             $presentations = [];
-            foreach ($items as $index => $item) {
-                $presentation = LearningPresentation::create(['user_id' => $actor->id, 'run_id' => $run->id, 'task_id' => $item['task']['id'], 'position' => $index + 1, 'snapshot' => $versionId ? [] : $item,
+            foreach ($taskIds as $index => $taskId) {
+                $presentation = LearningPresentation::create(['user_id' => $actor->id, 'run_id' => $run->id, 'task_id' => $taskId, 'position' => $index + 1,
                     'status' => 'pending']);
                 $presentations[$bundle['presentation_ids'][$index]] = $presentation->id;
             }

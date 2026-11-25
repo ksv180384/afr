@@ -1,4 +1,5 @@
 <script setup>
+import { randomUuid } from '@/App/Learning/randomUuid.js';
 import { computed, onBeforeUnmount, onMounted, watch } from 'vue';
 import { router, usePage } from '@inertiajs/vue3';
 import AfrButton from '@/App/Components/Form/AfrButton.vue';
@@ -103,7 +104,7 @@ const feedback=usePracticeFeedback({
 });
 onMounted(()=>{
   base=new GuestProgressRepository({timezone:browserTimezone()});
-  base.subscribe('sync-'+crypto.randomUUID(),()=>{});
+  base.subscribe('sync-'+randomUuid(),()=>{});
   stop=watch(()=>[owner.value,enabled.value],async()=>{
     status({kind:'idle',message:''});
     if(!enabled.value) return;

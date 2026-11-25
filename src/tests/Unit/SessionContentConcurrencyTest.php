@@ -160,7 +160,6 @@ function raceAnswerRun(User $actor): array
     $task = $snapshot['tasks'][0];
     $presentation = \App\Models\Learning\LearningPresentation::factory()->create([
         'run_id' => $run->id, 'task_id' => $task['id'],
-        'snapshot' => \App\Services\Learning\PresentationSnapshot::forTask($snapshot, $task['id']),
     ]);
     $input = ['client_event_id' => (string) \Illuminate\Support\Str::uuid(), 'presentation_id' => $presentation->id,
         'expected_revision' => 1, 'event_type' => 'answer', 'answer' => ['choice_id' => $task['correct_choice_id']]];
@@ -252,7 +251,7 @@ it('serializes competing account answer IDs and returns only one first score', f
 it('records both simultaneous vocabulary answers and credits only one elapsed interval', function () {
     raceAccountReady($this->actor);
     $snapshot = racePackage()['sessions'][0]['vocabulary'][0];
-    $word = \App\Models\Learning\PersonalVocabulary::factory()->create(['user_id' => $this->actor->id, 'lexeme_key' => $snapshot['lexeme_key'], 'snapshot' => $snapshot, 'needs_review' => true]);
+    $word = \App\Models\Learning\PersonalVocabulary::factory()->studied($snapshot)->create(['user_id' => $this->actor->id, 'needs_review' => true]);
     $service = app(\App\Services\Learning\AccountRunService::class);
     $jobs = [];
     for ($i = 0; $i < 2; $i++) {

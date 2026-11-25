@@ -27,7 +27,7 @@ const label = (side, item) => item.text + (pairIndex(side, item.id) >= 0 ? `, п
 </script>
 <template>
   <fieldset :disabled="disabled" class="matching-task">
-    <legend class="pair-instructions">Нажмите на фразу и её перевод. Можно начать с любой стороны.</legend>
+    <legend class="pair-instructions">Выберите две карточки, которые подходят друг к другу. Можно начать с любой стороны.</legend>
     <div class="pair-grid">
       <template v-for="(left, index) in task.left_items" :key="left.id">
         <template v-for="entry in [{ side: 'left', item: left }, { side: 'right', item: rightItems[index] }].filter(entry => entry.item)" :key="entry.side">

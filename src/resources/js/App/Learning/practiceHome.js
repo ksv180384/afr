@@ -1,3 +1,4 @@
+import { randomUuid } from './randomUuid.js';
 import { watch } from 'vue';
 import { createPracticeHomeStore } from './practiceHomeStore.js';
 import { createAccountRepository } from './accountRepository.js';
@@ -19,7 +20,7 @@ export const usePracticeHome = () => {
     watch(guestSyncRevision, () => {
       if (clientStore.state.owner != null) clientStore.invalidate(clientStore.state.owner);
     });
-    clientStore.guestRepository.subscribe('home-'+crypto.randomUUID(),(notice)=>{
+    clientStore.guestRepository.subscribe('home-'+randomUuid(),(notice)=>{
       if (clientStore.state.owner === null && (notice.run_id || notice.profile || notice.bound || notice.rotated)) clientStore.invalidate(null);
     });
   }

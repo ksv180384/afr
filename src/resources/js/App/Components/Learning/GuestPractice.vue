@@ -1,4 +1,5 @@
 <script setup>
+import { randomUuid } from '@/App/Learning/randomUuid.js';
 import ReviewSuggestionCard from './ReviewSuggestionCard.vue';
 import { usePracticeHome } from '@/App/Learning/practiceHome.js';
 import { createPracticeHomeStore } from '@/App/Learning/practiceHomeStore.js';
@@ -30,6 +31,7 @@ const cachedGuest = !props.runId && !props.progressOnly && sharedStore.cachedHom
   ? sharedStore.state.guest : null;
 const state = ref(cachedGuest);
 const vocabularyMode = ref(false);
+const vocabularyAddedRun = ref(null);
 const home = computed(() => store.value.state.owner === null ? store.value.state.home : null);
 const selectedAccess = computed(() => home.value?.route.lessons.find(lesson => lesson.id === props.selectedSession?.id));
 const adapter = shallowRef(null);
@@ -92,7 +94,7 @@ const readLocal = async (resetDraft = true) => {
 const attach = (id) => {
   activeRun = id;
   adapter.value = markRaw(createGuestAdapter({
-    repository, runId:id, tabId, onStatus, onMutation: () => store.value.invalidate(null),
+    repository, runId:id, tabId, transport:guestContentTransport, onStatus, onMutation: () => store.value.invalidate(null),
   }));
 };
 const initialize = async (force = false, homeOnly = false) => {
@@ -143,17 +145,23 @@ const startShortReview = (mode = 'manual') => perform(async () => {
   await enterRun(path);
 });
 const nextTest = (input) => perform(async () => {
-  const runId = crypto.randomUUID(); const seed = crypto.randomUUID();
+  const runId = randomUuid(); const seed = randomUuid();
   await repository.mutate((current) => {
     const previous = current.runs[input.continue_run_id];
     if (!previous || previous.status !== 'completed') throw new Error('Сначала завершите предыдущий блок.');
-    const source = guestTestSource(current,previous.snapshot.remaining_word_ids ?? [],seed,()=>crypto.randomUUID());
-    addGuestRun(current,{source,runId,presentationIds:source.snapshot.tasks.map(()=>crypto.randomUUID()),eventId:crypto.randomUUID(),tabId,now:new Date().toISOString(),kind:'vocabulary_test'});
+    const source = guestTestSource(current,previous.snapshot.remaining_word_ids ?? [],seed,randomUuid);
+    addGuestRun(current,{source,runId,presentationIds:source.snapshot.tasks.map(randomUuid),eventId:randomUuid(),tabId,now:new Date().toISOString(),kind:'vocabulary_test'});
   });
   store.value.invalidate(null);
   await enterRun('/daily/guest/' + runId);
 });
-const openVocabulary = () => { if (repository.temporary) { adapter.value = null; vocabularyMode.value = true; } else router.visit('/daily/vocabulary'); };
+const openVocabulary = (addedInRun = null) => {
+  if (repository.temporary) {
+    vocabularyAddedRun.value = addedInRun;
+    adapter.value = null;
+    vocabularyMode.value = true;
+  } else router.visit('/daily/vocabulary');
+};
 const open = id => perform(() => enterRun('/daily/guest/' + id));
 const exit = runId => perform(async () => {
   if (runId) {
@@ -172,7 +180,7 @@ const exit = runId => perform(async () => {
   } else await returnToPractice(store.value, null);
 });
 const changeProfile = () => perform(async () => {
-  await repository.mutate((current) => changeGuestProfile(current,{client_event_id:crypto.randomUUID(),expected_revision:state.value.profile_revision,
+  await repository.mutate((current) => changeGuestProfile(current,{client_event_id:randomUuid(),expected_revision:state.value.profile_revision,
     current_level:level.value,timezone:timezone.value,client_occurred_at:new Date().toISOString()}),{profile:true});
   await readLocal();
   onStatus(repository.temporary
@@ -201,7 +209,7 @@ const openGuestLogin = event => {
 };
 const focus = () => { if (adapter.value && document.hasFocus()) player.value?.reload(); };
 onMounted(() => {
-  tabId = crypto.randomUUID();
+  tabId = randomUuid();
   timezone.value = browserTimezone();
   repository = sharedStore.guestRepository;
   unsubscribe = repository.subscribe(tabId,(notice) => {
@@ -230,7 +238,8 @@ onBeforeUnmount(() => { window.removeEventListener('focus',focus); unregisterAut
     </section>
     <practice-error-notice v-if="error && !feedback.enabled" :message="error" />
     <a v-if="runId && !adapter && error" class="guest-return" href="/practice">К моему пути</a>
-    <vocabulary-panel v-if="vocabularyMode" :guest-repository="repository" :route-store="store" @back="vocabularyMode = false; readLocal()" @open-guest-run="vocabularyMode = false; attach($event)" />
+    <vocabulary-panel v-if="vocabularyMode" :guest-repository="repository" :route-store="store" :added-in-run="vocabularyAddedRun"
+      @back="vocabularyMode = false; readLocal()" @open-guest-run="vocabularyMode = false; attach($event)" />
     <session-player
       v-else-if="adapter"
       :key="activeRun"
@@ -243,6 +252,7 @@ onBeforeUnmount(() => { window.removeEventListener('focus',focus); unregisterAut
       :navigation-busy="busy"
       @exit="exit"
       @next-lesson="start()"
+      @continue-run="open"
       @review="startShortReview"
       @repeat="start($event.session_id)"
       @test-next="nextTest"

@@ -2,7 +2,10 @@
 
 namespace App\Models\Learning;
 
+use App\Support\Learning\OperationReceipt;
 use App\Support\Learning\UsesUtcDates;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use LogicException;
 
@@ -38,9 +41,40 @@ class LearningRunOperation extends Model
     {
         return [
             'user_id' => 'integer',
-            'receipt' => 'array',
             'received_at' => 'immutable_datetime',
         ];
+    }
+
+    protected function receipt(): Attribute
+    {
+        return Attribute::make(
+            get: fn (?string $stored) => $stored === null ? ['run_id' => $this->run_id] : OperationReceipt::decode($stored),
+            set: fn (?array $receipt) => $receipt === null ? null : OperationReceipt::encode($receipt),
+        );
+    }
+
+    protected function payloadHash(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $stored) => strlen($stored) === 32 ? bin2hex($stored) : $stored,
+            set: function (string $hex): string {
+                if (strlen($hex) !== 64 || ! ctype_xdigit($hex)) {
+                    throw new \InvalidArgumentException('Expected a hexadecimal SHA-256 digest.');
+                }
+
+                return hex2bin($hex);
+            },
+        );
+    }
+
+    public static function forRun(LearningRun $run): Builder
+    {
+        return self::query()->where('user_id', $run->user_id)->where('run_id', $run->id);
+    }
+
+    public static function compactCancelledReceipts(LearningRun $run): void
+    {
+        self::forRun($run)->whereNotNull('receipt')->update(['receipt' => null]);
     }
 
     protected static function booted(): void

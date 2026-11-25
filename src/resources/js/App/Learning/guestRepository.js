@@ -1,3 +1,4 @@
+import { randomUuid } from './randomUuid.js';
 import { migrateGuestState, newGuestState, guestError } from './guestProgress.js';
 import { browserTimezone } from './practiceTime.js';
 
@@ -12,7 +13,7 @@ const migrations = {
 };
 
 export class GuestProgressRepository {
-  constructor({getIndexedDB = () => globalThis.indexedDB, idFactory = () => crypto.randomUUID(), now = () => new Date().toISOString(),
+  constructor({getIndexedDB = () => globalThis.indexedDB, idFactory = randomUuid, now = () => new Date().toISOString(),
     key = 'current', timezone = browserTimezone(), channelFactory = () => typeof BroadcastChannel === 'undefined' ? null : new BroadcastChannel('afr-guest-practice')} = {}) {
     this.options = {getIndexedDB,idFactory,now,timezone,channelFactory,key};
     this.temporary = false;

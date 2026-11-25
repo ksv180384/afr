@@ -13,6 +13,7 @@ export const accountTransport = {
 };
 
 export const guestContentTransport = {
+  dictionaryUpdates: sessions => post(root + '/content/dictionary-updates', {sessions}, {timeout:5000}),
   catalog: () => get(root + '/content'),
   session: (id) => get(root + '/content/' + encodeURIComponent(id)),
 };

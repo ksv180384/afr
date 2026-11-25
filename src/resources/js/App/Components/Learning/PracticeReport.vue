@@ -1,4 +1,5 @@
 <script setup>
+import { randomUuid } from '@/App/Learning/randomUuid.js';
 import { computed, getCurrentInstance, ref, watch } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import AfrButton from '@/App/Components/Form/AfrButton.vue';
@@ -36,7 +37,7 @@ const submit=async()=>{
   busy.value=true; message.value='';
   const attachAnswer = includeAnswer.value && canAttach.value;
   const lesson = props.lessonId ? { lesson_id: props.lessonId } : { session_version_id: props.versionId };
-  pending.value ??= {client_report_id:crypto.randomUUID(),...lesson,task_id:props.taskId ?? null,
+  pending.value ??= {client_report_id:randomUuid(),...lesson,task_id:props.taskId ?? null,
     ...(props.runId ? {run_id:props.runId}:{}),text:text.value,include_answer:attachAnswer,
     ...(attachAnswer ? {answer:JSON.parse(JSON.stringify(props.answer))}:{})};
   try {

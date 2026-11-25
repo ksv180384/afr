@@ -7,8 +7,12 @@ use App\Enums\Learning\PracticeErrorCode;
 use App\Models\User\User;
 use App\Services\Learning\AnswerCheckingException;
 use App\Services\Learning\SessionContentCache;
+use App\Support\Learning\CompletedVocabularyRun;
+use App\Support\Learning\LessonResult;
+use App\Support\Learning\PracticeJson;
 use App\Support\Learning\UsesUtcDates;
 use Database\Factories\Learning\LearningRunFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,6 +30,8 @@ use LogicException;
  * @property string $kind Тип прохождения, определяющий его сценарий.
  * @property RunStatus $status Состояние прохождения: в процессе, на паузе или завершено.
  * @property int|null $session_id Занятие, к которому относится запись.
+ * @property int|null $vocabulary_set_id Общий набор источников, впервые изученных в этом уроке.
+ * @property \Carbon\CarbonImmutable|null $vocabulary_source_at Исходное время завершения гостевого урока.
  * @property array|null $snapshot Содержимое персонального словарного теста или повторения.
  * @property int $checking_policy_version Версия правил проверки ответов.
  * @property string $timezone Часовой пояс IANA для расчёта локальных дат.
@@ -52,9 +58,7 @@ class LearningRun extends Model
 
     protected $table = 'learning_runs';
 
-    public const LESSON_RESULT_FIELDS = [
-        'total_steps', 'independent_correct_steps', 'technical_skips', 'mistakes_count', 'words_added', 'words_existing',
-    ];
+    public const LESSON_RESULT_FIELDS = LessonResult::FIELDS;
 
     protected $fillable = [
         'import_meta',
@@ -84,6 +88,8 @@ class LearningRun extends Model
             'import_meta' => 'array',
             'user_id' => 'integer',
             'session_id' => 'integer',
+            'vocabulary_set_id' => 'integer',
+            'vocabulary_source_at' => 'immutable_datetime',
             'snapshot' => 'array',
             'checking_policy_version' => 'integer',
             'local_date' => 'immutable_date:Y-m-d',
@@ -99,10 +105,60 @@ class LearningRun extends Model
         ];
     }
 
+    protected function castAttributeAsJson($key, $value): string
+    {
+        return $key === 'snapshot' ? PracticeJson::encode($value) : parent::castAttributeAsJson($key, $value);
+    }
+
+    protected function snapshot(): Attribute
+    {
+        return Attribute::get(function (?string $stored) {
+            $snapshot = $this->fromJson($stored);
+
+            return is_array($snapshot) ? CompletedVocabularyRun::expandSnapshot($snapshot) : $snapshot;
+        });
+    }
+
+    protected function result(): Attribute
+    {
+        return Attribute::get(function (?string $stored) {
+            $result = $this->fromJson($stored);
+
+            return is_array($result) ? CompletedVocabularyRun::expandResult(LessonResult::expand($result)) : $result;
+        });
+    }
+
+    private function compactCompletedRun(): void
+    {
+        if ($this->status !== RunStatus::Completed) {
+            return;
+        }
+        if (in_array($this->kind, ['daily', 'extra'], true)) {
+            $this->content_checksum = null;
+            if ($this->result !== null) {
+                $this->result = LessonResult::compact($this->result);
+            }
+        } elseif (in_array($this->kind, ['review', 'vocabulary_test'], true)) {
+            if ($this->snapshot !== null) {
+                $this->snapshot = CompletedVocabularyRun::compactSnapshot($this->snapshot, $this->kind);
+            }
+            if ($this->result !== null) {
+                $this->result = CompletedVocabularyRun::compactResult($this->result);
+            }
+        }
+    }
+
+    public static function cancelledReviewSnapshot(?string $title): ?array
+    {
+        return $title === null ? null : ['title' => $title];
+    }
+
     protected static function booted(): void
     {
+        static::creating(fn (self $run) => $run->compactCompletedRun());
         static::updating(function (self $model): void {
-            if ($model->getOriginal('status') === RunStatus::Completed
+            if ($model->getOriginal('status') === RunStatus::Cancelled
+                || $model->getOriginal('status') === RunStatus::Completed
                 || $model->getRawOriginal('status') === RunStatus::Completed->value
             ) {
                 throw new LogicException('Completed run cannot be changed.');
@@ -117,9 +173,13 @@ class LearningRun extends Model
                 'timezone',
                 'local_date',
                 'started_at',
-            ]) || ($model->isDirty('snapshot') && $model->status !== RunStatus::Completed)) {
+            ]) || ($model->isDirty(['snapshot', 'vocabulary_set_id', 'vocabulary_source_at']) && $model->status !== RunStatus::Completed)) {
                 throw new LogicException('LearningRun identity and snapshot cannot be changed.');
             }
+            if ($model->status === RunStatus::Cancelled && in_array($model->kind, ['review', 'vocabulary_test'], true)) {
+                $model->snapshot = self::cancelledReviewSnapshot($model->snapshot['title'] ?? null);
+            }
+            $model->compactCompletedRun();
         });
     }
 
@@ -180,7 +240,7 @@ class LearningRun extends Model
     public function completedResult(): ?array
     {
         $result = $this->result;
-        if ($result === null || $this->session_id === null) {
+        if ($result === null || !in_array($this->kind, ['daily', 'extra'], true)) {
             return $result;
         }
 
@@ -195,7 +255,7 @@ class LearningRun extends Model
             'score_percent' => $total ? $correct * 100 / $total : null,
             'all_steps_processed' => $total > 0,
             'promotion' => $this->promoted_to_level ? [
-                'old_level' => $this->lesson()?->getRawOriginal('level'),
+                'old_level' => $this->lesson()?->getRawOriginal('level') ?? $this->snapshot['level'] ?? null,
                 'new_level' => $this->promoted_to_level,
                 'reason' => ['method' => 'published_route_completion'],
             ] : null,

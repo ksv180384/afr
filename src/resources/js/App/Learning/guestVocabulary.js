@@ -44,21 +44,22 @@ export const applyGuestVocabularyEvent = (state,run,event,result,{enforceWindow=
   }
 };
 export const finishGuestVocabulary = (state,run,at,options) => {
-  let added=0; let existing=0;
+  const addedKeys = [];
+  let existing = 0;
   if (run.session_version_id !== null) for (const snapshot of run.snapshot.vocabulary ?? []) {
     const key = snapshot.lexeme_key;
     if (!state.vocabulary[key]) {
       state.vocabulary[key] = {id:key,lexeme_key:key,snapshot:copy(snapshot),needs_review:false,streak:0,errors:0,review_step:0,
         first_added_at:at,next_review_at:afterDays(at,1),last_reviewed_at:null,last_independent_success_at:null,sources:[]};
-      added++;
+      addedKeys.push(key);
     } else existing++;
     const word = state.vocabulary[key];
     if (!word.sources.some((source)=>source.session_version_id === run.session_version_id)) word.sources.push({
-      session_version_id:run.session_version_id,session_id:run.snapshot.id,version:run.snapshot.version ?? 1,snapshot:copy(snapshot),first_added_at:at,
+      session_version_id:run.session_version_id,session_id:run.snapshot.id,version:run.snapshot.version ?? 1,checksum:run.content_checksum ?? null,snapshot:copy(snapshot),first_added_at:at,
     });
   }
   for (const item of run.vocabulary_events ?? []) applyGuestVocabularyEvent(state,run,item.event,item.result,options);
-  return {words_added:added,words_existing:existing};
+  return {words_added:addedKeys.length,words_existing:existing,...(addedKeys.length ? {added_word_keys:addedKeys} : {})};
 };
 export const upgradeGuestVocabulary = (state) => {
   state.vocabulary_effects ??= {};
@@ -105,13 +106,26 @@ export const upgradeGuestSuccessClock = state => {
   return state;
 };
 
-export const filterGuestWords = (state,{filter='all',source_session='',q=''}={},instant=new Date().toISOString()) => Object.values(state.vocabulary)
-  .filter((word)=>filter!=='difficult' || word.is_difficult === true)
-  .filter((word)=>filter!=='errors' || word.needs_review)
-  .filter((word)=>filter!=='due' || Date.parse(word.next_review_at) <= Date.parse(instant))
-  .filter((word)=>!source_session || word.sources.some((source)=>source.session_id===source_session))
-  .filter((word)=>!q || (guestWordSource(word).fr+' '+(guestWordSource(word).ru ?? []).join(' ')).toLocaleLowerCase().includes(q.toLocaleLowerCase()))
-  .sort((a,b)=>Number(b.needs_review)-Number(a.needs_review) || a.next_review_at.localeCompare(b.next_review_at) || a.lexeme_key.localeCompare(b.lexeme_key));
+const guestWordsAddedInRun = (state, runId) => {
+  const run = state.runs[runId];
+  if (run?.status !== 'completed' || !run.session_version_id || !run.result?.words_added) return [];
+  if (run.result.added_word_keys) return run.result.added_word_keys;
+  if (!run.finished_at) return [];
+  const words = Object.values(state.vocabulary).filter(word => word.first_added_at === run.finished_at
+    && word.sources.some(source => source.session_version_id === run.session_version_id));
+  return words.length === run.result.words_added ? words.map(word => word.lexeme_key) : [];
+};
+
+export const filterGuestWords = (state,{filter='all',source_session='',q='',added_in_run=''}={},instant=new Date().toISOString()) => {
+  const words = added_in_run ? guestWordsAddedInRun(state, added_in_run).map(key => state.vocabulary[key]).filter(Boolean) : Object.values(state.vocabulary);
+  return words
+    .filter((word)=>filter!=='difficult' || word.is_difficult === true)
+    .filter((word)=>filter!=='errors' || word.needs_review)
+    .filter((word)=>filter!=='due' || Date.parse(word.next_review_at) <= Date.parse(instant))
+    .filter((word)=>!source_session || word.sources.some((source)=>source.session_id===source_session))
+    .filter((word)=>!q || (guestWordSource(word).fr+' '+(guestWordSource(word).ru ?? []).join(' ')).toLocaleLowerCase().includes(q.toLocaleLowerCase()))
+    .sort((a,b)=>Number(b.needs_review)-Number(a.needs_review) || a.next_review_at.localeCompare(b.next_review_at) || a.lexeme_key.localeCompare(b.lexeme_key));
+};
 export const selectGuestBlock = (words,limit=10,errorsOnly=false) => {
   const sorted = [...words].sort((a,b)=>Number(b.needs_review)-Number(a.needs_review) || a.next_review_at.localeCompare(b.next_review_at) || a.lexeme_key.localeCompare(b.lexeme_key));
   const errors = sorted.filter((word)=>word.needs_review);
@@ -137,7 +151,7 @@ export const guestTestPlan = (state,filters={}) => {
 };
 const localDate = (instant,timezone) => {const p=Object.fromEntries(new Intl.DateTimeFormat('en',{timeZone:timezone,year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date(instant)).map(part=>[part.type,part.value]));return `${p.year}-${p.month}-${p.day}`;};
 export const guestShortReviewPlan = (state,instant,mode='manual',filters={}) => {
-  const reviews=Object.values(state.runs).filter(run=>run.kind==='review').sort((a,b)=>b.record_sequence-a.record_sequence);
+  const reviews=Object.values(state.runs).filter(run=>run.kind==='review' && run.status!=='cancelled').sort((a,b)=>b.record_sequence-a.record_sequence);
   const previousKeys=[];const previousKinds={};let done=false;let finished=false;
   for(const [index,run] of reviews.entries()){
     const items=run.snapshot.review_items ?? [];
@@ -184,7 +198,7 @@ export const guestTestSource = (state,keys,seed,idFactory,kind='vocabulary_test'
   const vocabulary = []; const items = [];
   const previous = new Map();
   if (!shortPlan) {
-    const runs = Object.values(state.runs).filter(run => ['review', 'vocabulary_test'].includes(run.kind))
+    const runs = Object.values(state.runs).filter(run => run.status !== 'cancelled' && ['review', 'vocabulary_test'].includes(run.kind))
       .sort((a, b) => b.record_sequence - a.record_sequence);
     for (const run of runs) for (const item of run.snapshot.review_items ?? []) {
       if (!previous.has(item.review_lexeme_key)) previous.set(item.review_lexeme_key, item.task);

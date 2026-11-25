@@ -1,9 +1,11 @@
 <script setup>
+import { randomUuid } from '@/App/Learning/randomUuid.js';
 import { computed, nextTick, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue';
+import { Link } from '@inertiajs/vue3';
 import AfrButton from '@/App/Components/Form/AfrButton.vue';
 import AfrCard from '@/App/Components/Card/AfrCard.vue';
 import { assertPlayerAdapter } from '@/App/Learning/playerAdapter.js';
-import { answerComplete, emptyAnswer, questionSupport } from '@/App/Learning/playerUi.js';
+import { answerComplete, emptyAnswer, questionSupport, isListeningTask } from '@/App/Learning/playerUi.js';
 import { createAudioPlayer } from '@/App/Learning/audioPlayer.js';
 import { practiceErrorMessage } from '@/App/Learning/practiceNotifications.js';
 import { usePracticeFeedback } from '@/App/Learning/usePracticeFeedback.js';
@@ -28,7 +30,7 @@ import DailyPracticeIcon from './DailyPracticeIcon.vue';
 import QuestionOverlay from './QuestionOverlay.vue';
 
 const props = defineProps({ locked: Boolean, timezone: String, routeOwner: Number, routeStore: Object, navigationBusy: Boolean, adapter: { type: Object, required: true }, audioUrls: { type: Object, default: () => ({}) } });
-const emit = defineEmits(['exit', 'repeat', 'review', 'next-lesson', 'test-next', 'vocabulary']);
+const emit = defineEmits(['exit', 'repeat', 'review', 'next-lesson', 'continue-run', 'test-next', 'vocabulary']);
 const adapter = assertPlayerAdapter(props.adapter);
 const audio = createAudioPlayer({ resolveAsset: (id) => props.audioUrls[id] ?? view.value?.audioUrls?.[id] ?? null });
 provide('practiceAudioPlayer', audio);
@@ -54,10 +56,22 @@ const isPreview = computed(() => adapter.mode === 'preview');
 const isTraining = adapter.mode === 'training';
 const feedback = isTraining ? null : usePracticeFeedback({ error, source: 'practice-session' });
 const routeResult = ref(null);
-const nextLesson = computed(() => routeResult.value?.active_run ?? routeResult.value?.candidate);
+const nextLesson = computed(() => routeResult.value?.candidate);
+const ongoingRun = kind => routeResult.value?.vocabulary_runs?.[kind]
+  ?? (routeResult.value?.active_run?.kind === kind ? routeResult.value.active_run.id : null);
+const ongoingVocabularyTest = computed(() => ongoingRun('vocabulary_test'));
+const ongoingReview = computed(() => ongoingRun('review'));
 const routeError = ref('');
 const routeLoading = ref(false);
 const lessonFinished = computed(() => view.value?.finished && ['daily','extra'].includes(view.value.kind));
+const vocabularyInline = adapter.mode === 'guest' && props.routeStore?.guestRepository?.temporary;
+const addedVocabularyPath = computed(() => `/daily/vocabulary?added_in_run=${encodeURIComponent(view.value.run_id)}`);
+const wordPlural = new Intl.PluralRules('ru');
+const newVocabularyLabel = computed(() => {
+  const count = view.value?.summary?.words_added ?? 0;
+  const form = { one: 'новое выражение', few: 'новых выражения' }[wordPlural.select(count)] ?? 'новых выражений';
+  return `${count} ${form} в словаре`;
+});
 const loadResultRoute = async () => {
   if (!props.routeStore || routeLoading.value) return;
   routeLoading.value = true;
@@ -76,7 +90,8 @@ const loadResultRoute = async () => {
 };
 watch(lessonFinished, finished => { if (finished) loadResultRoute(); });
 
-const reviewFinished = computed(() => view.value?.finished && view.value.kind === 'review');
+const cancelled = computed(() => view.value?.status === 'cancelled');
+const reviewFinished = computed(() => view.value?.status !== 'cancelled' && view.value?.finished && view.value.kind === 'review');
 const anotherReview = ref(null);
 const anotherReviewError = ref(false);
 const anotherReviewLoading = ref(false);
@@ -93,7 +108,7 @@ const loadAnotherReview = async () => {
     if (!disposed) anotherReviewLoading.value = false;
   }
 };
-watch(reviewFinished, finished => { if (finished) loadAnotherReview(); });
+watch([reviewFinished, cancelled], ([finished, endedEarly]) => { if (finished || endedEarly) loadAnotherReview(); });
 const task = computed(() => view.value?.task);
 const corrections = computed(() => {
   const current = view.value?.corrections;
@@ -122,7 +137,7 @@ watch(correcting, value => { if (value) feedbackOpen.value = false; });
 const introductory = computed(() => !corrections.value && view.value?.started && !view.value.introduction_seen && view.value.introductions.length > 0);
 const component = computed(() => ({ single_choice: SingleChoiceTask, matching_pairs: MatchingPairsTask, fill_blank: FillBlankTask, word_order: WordOrderTask, short_answer: ShortAnswerTask })[task.value?.type]);
 const ready = computed(() => answerComplete(task.value, draft.value));
-const listening = computed(() => task.value?.skill === 'listening');
+const listening = computed(() => isListeningTask(task.value));
 const missingAudio = computed(() => listening.value && !task.value?.prompt?.audio);
 const promptVisible = computed(() => !listening.value || transcriptVisible.value);
 const listeningText = computed(() => task.value?.prompt?.audio?.text || task.value?.prompt?.text || '');
@@ -243,12 +258,12 @@ const continueIntroduction = () => {
 };
 const submit = () => {
   if (!ready.value || (graded.value && !correcting.value) || busy.value) return;
-  const input = { client_event_id: crypto.randomUUID(), presentation_id: view.value.presentation.presentation_id, answer: JSON.parse(JSON.stringify(draft.value)) };
+  const input = { client_event_id: randomUuid(), presentation_id: view.value.presentation.presentation_id, answer: JSON.parse(JSON.stringify(draft.value)) };
   audio.stop();
   return perform(() => adapter.answer(input), () => { correcting.value = false; feedbackOpen.value = true; });
 };
 const sendHelp = (fields, after) => {
-  const input = { client_event_id: crypto.randomUUID(), presentation_id: view.value.presentation.presentation_id, ...fields };
+  const input = { client_event_id: randomUuid(), presentation_id: view.value.presentation.presentation_id, ...fields };
   return perform(() => adapter.help(input), after ? () => {
     if (view.value.presentation?.presentation_id !== input.presentation_id) return;
     const confirmed = fields.event_type !== 'help' || isPreview.value || isTraining ? view.value.presentation.last_result?.event_type === fields.event_type
@@ -328,8 +343,12 @@ const loadForPlayback = async () => {
   if (!loaded.resume || !['account','guest'].includes(adapter.mode) || props.locked || disposed) return loaded;
   return {...await adapter.start(), restore_assistance: true};
 };
-onMounted(() => { perform(loadForPlayback); });
-onBeforeUnmount(() => { disposed=true; audio.stop(); });
+let unsubscribeCancellation;
+onMounted(() => {
+  unsubscribeCancellation = adapter.onCancelled?.(state => { view.value = state; audio.stop(); });
+  perform(loadForPlayback);
+});
+onBeforeUnmount(() => { disposed=true; unsubscribeCancellation?.(); audio.stop(); });
 </script>
 <template>
   <section class="session-player" :class="{ 'lesson-active': activeLesson, 'training-player': isTraining }" :aria-busy="busy">
@@ -344,7 +363,7 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
       <div class="lesson-title">
         <h1 :title="view.session.title">{{ view.session.title }}</h1>
         <slot v-if="activeLesson" name="guest-progress" />
-        <p v-if="!activeLesson && !isTraining" class="level-label">{{ view.session.level === 'PRE_A1' ? 'С нуля' : view.session.level }} · Около {{ view.session.duration_minutes }} мин</p>
+        <p v-if="!cancelled && !activeLesson && !isTraining" class="level-label">{{ view.session.level === 'PRE_A1' ? 'С нуля' : view.session.level }}<template v-if="!lessonFinished"> · Около {{ view.session.duration_minutes }} мин</template></p>
       </div>
       <div class="header-tools">
         <slot name="guest-login" />
@@ -353,41 +372,66 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
       </div>
     </header>
     <template v-if="view">
-      <p v-if="!activeLesson && view.import_meta" class="level-label">Начато до входа · <practice-date :value="view.import_meta.client_started_at || view.import_meta.original_local_date" :timezone="timezone || view.timezone" /></p>
-      <p v-else-if="!activeLesson && view.started_at" class="level-label">Начато <practice-date :value="view.started_at" :timezone="timezone || view.timezone" /></p>
-      <pronunciation-notes v-if="!view.started" :notes="view.session.pronunciation_notes ?? []" />
-      <afr-card v-if="view.exhausted || !view.total" class="player-card">
+      <p v-if="!activeLesson && !lessonFinished && view.import_meta" class="level-label">Начато до входа · <practice-date :value="view.import_meta.client_started_at || view.import_meta.original_local_date" :timezone="timezone || view.timezone" /></p>
+      <p v-else-if="!activeLesson && !lessonFinished && view.started_at" class="level-label">Начато <practice-date :value="view.started_at" :timezone="timezone || view.timezone" /></p>
+      <pronunciation-notes v-if="!cancelled && !view.started" :notes="view.session.pronunciation_notes ?? []" />
+      <afr-card v-if="cancelled" class="player-card result-card" role="status">
+        <h2 ref="heading" tabindex="-1">{{ view.kind === 'vocabulary_test' ? 'Тест завершён досрочно' : 'Повторение завершено досрочно' }}</h2>
+        <p>Одно из оставшихся заданий стало недоступно после обновления материалов. Все принятые ответы сохранены.</p>
+        <div class="result-actions">
+          <afr-button v-if="anotherReview?.total" type="primary" :disabled="busy || navigationBusy" @click="$emit('review', 'manual')">Начать новое повторение</afr-button>
+          <afr-button :type="anotherReview?.total ? 'default' : 'primary'" @click="exit">К моему пути</afr-button>
+        </div>
+      </afr-card>
+      <afr-card v-else-if="view.exhausted || !view.total" class="player-card">
         <h2>{{ view.exhausted ? 'Доступные занятия закончились' : 'В этом занятии пока нет заданий' }}</h2><p>{{ view.exhausted ? 'Можно вернуться к выбору занятий. Новые материалы появятся позже.' : 'Выберите другой подготовленный материал.' }}</p>
         <afr-button @click="exit">К выбору занятий</afr-button>
       </afr-card>
       <afr-card v-else-if="view.finished" class="player-card result-card">
         <h2 ref="heading" tabindex="-1">{{ isTraining ? 'Тренировка завершена' : isPreview ? 'Предпросмотр завершён' : reviewFinished ? 'Повторили ' + reviewWordCount(view.total) : 'Занятие завершено' }}</h2>
-        <p class="result-score">Самостоятельно: {{ view.summary.independent_correct_steps }} из {{ view.summary.total_steps }}</p>
+        <p v-if="lessonFinished" class="result-score result-lesson-score">
+          <strong>{{ view.summary.independent_correct_steps }} из {{ view.summary.total_steps }}</strong>
+          <span>Правильные ответы с первой попытки без подсказок</span>
+        </p>
+        <p v-else class="result-score">Самостоятельно: {{ view.summary.independent_correct_steps }} из {{ view.summary.total_steps }}</p>
         <p v-if="corrections">Исправлено заданий · {{ view.mistakes_count }}</p>
         <p v-if="view.summary.technical_skips">Технических пропусков: {{ view.summary.technical_skips }}. Они не являются языковыми ошибками.</p>
-        <p v-if="view.finished_at || view.activity_date">Завершено <practice-date :value="view.finished_at || view.activity_date" :timezone="timezone || view.timezone" /></p>
+        <p v-if="!lessonFinished && (view.finished_at || view.activity_date)">Завершено <practice-date :value="view.finished_at || view.activity_date" :timezone="timezone || view.timezone" /></p>
         <p v-if="view.summary.integrations_pending?.length">Результат занятия сохранён. Учебные цели и переход уровня подтверждаются в аккаунте после входа.</p>
         <p v-if="view.summary.objectives?.enrollment_id">Освоено целей закреплённой программы: {{ view.summary.objectives.mastered }} из {{ view.summary.objectives.required }}. Завершение занятия и освоение цели учитываются отдельно.</p>
         <p v-if="view.summary.checkpoint" role="status">{{ view.summary.checkpoint.qualified ? 'Контроль прошёл порог самостоятельных ответов.' : 'Контроль пока не подтверждает переход: недостаточно самостоятельных ответов, был технический пропуск или некорректная исходная дата.' }}</p>
         <p v-if="view.summary.promotion" role="status">Уровень повышен до {{ view.summary.promotion.new_level }}. {{ view.summary.promotion.reason.message }}</p>
         <p v-if="isPreview">Результат относится к этому просмотру. Личный прогресс не изменён.</p>
-        <p v-if="view.summary.words_added !== undefined">Добавлено выражений: {{ view.summary.words_added }}. Уже были в словаре: {{ view.summary.words_existing }}.</p>
+        <div v-if="lessonFinished && view.summary.words_added > 0" class="result-vocabulary">
+          <daily-practice-icon name="book" />
+          <button v-if="vocabularyInline" type="button" class="result-vocabulary-link" @click="emit('vocabulary', view.run_id)">{{ newVocabularyLabel }}</button>
+          <Link v-else :href="addedVocabularyPath" class="result-vocabulary-link">{{ newVocabularyLabel }}</Link>
+        </div>
+        <p v-else-if="!lessonFinished && view.summary.words_added !== undefined">Добавлено выражений: {{ view.summary.words_added }}. Уже были в словаре: {{ view.summary.words_existing }}.</p>
+        <afr-button v-if="lessonFinished" class="result-path" type="primary" :disabled="busy || navigationBusy" @click="exit">
+          <span class="result-path-icon"><daily-practice-icon name="list" /></span>
+          <span>К моему пути</span>
+          <daily-practice-icon class="result-path-arrow" name="chevron" />
+        </afr-button>
         <div v-if="lessonFinished && routeStore" class="result-next">
-          <p v-if="routeLoading" role="status">Проверяем следующий урок…</p>
+          <p v-if="routeLoading && !routeResult" role="status">Проверяем следующий урок…</p>
           <practice-error-notice v-else-if="routeError" :message="routeError" />
-          <button v-else-if="nextLesson" type="button" class="result-next-action"
+          <afr-button v-else-if="ongoingVocabularyTest" class="result-next-action result-vocabulary-test"
+            :disabled="locked || busy || navigationBusy" @click="emit('continue-run', ongoingVocabularyTest)">
+            <span class="result-next-icon"><daily-practice-icon name="book" /></span>
+            <span class="result-next-copy"><strong>Продолжить тест словаря</strong></span>
+            <span class="result-next-arrow"><daily-practice-icon name="chevron" /></span>
+          </afr-button>
+          <afr-button v-else-if="!ongoingReview && nextLesson" class="result-next-action"
             :disabled="locked || busy || navigationBusy" @click="emit('next-lesson')">
             <span class="result-next-copy">
-              <span>{{ routeResult.active_run ? 'Продолжить начатое' : 'Следующее занятие' }}</span>
+              <span>Следующее занятие</span>
               <strong>{{ nextLesson.title }}</strong>
             </span>
             <span class="result-next-arrow"><daily-practice-icon name="chevron" /></span>
-          </button>
-          <p v-else-if="routeResult">На вашем уровне пока нет новых доступных уроков. Можно повторить пройденное.</p>
+          </afr-button>
+          <p v-else-if="routeResult && !ongoingReview">На вашем уровне пока нет новых доступных уроков. Можно повторить пройденное.</p>
         </div>
-        <review-suggestion-card v-if="lessonFinished && routeStore" :suggestion="routeResult?.review_suggestion"
-          :owner="routeOwner" :store="routeStore" :busy="locked || busy || navigationBusy"
-          @start="emit('review', 'suggested')" @dismissed="loadResultRoute" />
         <p v-if="view.self_check_words?.length">Для {{ view.self_check_words.length }} выражений доступна самопроверка в словаре без зачёта.</p>
         <practice-error-notice v-if="reviewFinished && anotherReviewError" message="Не удалось проверить, какие слова доступны для повторения." />
         <div v-if="view.has_next_test_block || (reviewFinished && anotherReview?.total)" class="result-extra">
@@ -396,8 +440,12 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
           <afr-button v-if="reviewFinished && anotherReview?.total" :disabled="locked || busy || navigationBusy || anotherReviewLoading"
             @click="emit('review', 'manual')">Ещё {{ reviewWordCount(anotherReview.total) }}</afr-button>
         </div>
+        <review-suggestion-card v-if="lessonFinished && routeStore" clickable :resume="!!ongoingReview" :suggestion="routeResult?.review_suggestion"
+          :owner="routeOwner" :store="routeStore" :busy="locked || busy || navigationBusy"
+          @start="ongoingReview ? emit('continue-run', ongoingReview) : emit('review', 'suggested')" @dismissed="loadResultRoute" />
         <div class="result-actions" :class="{ 'result-lesson-actions': lessonFinished }" role="group" aria-label="Действия после занятия">
-          <afr-button :text="!isPreview && !reviewFinished" :type="isPreview || reviewFinished ? 'primary' : 'default'" :disabled="busy || navigationBusy" @click="exit">
+          <afr-button v-if="!lessonFinished" :text="!isPreview && !reviewFinished"
+            :type="isPreview || reviewFinished ? 'primary' : 'default'" :disabled="busy || navigationBusy" @click="exit">
             <daily-practice-icon v-if="!isPreview" name="list" />
             <span>{{ isTraining ? 'К тренировкам' : isPreview ? 'К выбору занятий' : 'К моему пути' }}</span>
           </afr-button>
@@ -407,9 +455,22 @@ onBeforeUnmount(() => { disposed=true; audio.stop(); });
           </afr-button>
           <afr-button v-if="lessonFinished" text :disabled="locked || busy || navigationBusy" @click="emit('repeat', {session_id:view.session.id})">
             <daily-practice-icon name="reset" />
-            <span>Пройти ещё раз</span>
+            <span>Пройти урок заново</span>
           </afr-button>
         </div>
+        <details v-if="lessonFinished && (view.import_meta || view.started_at || view.finished_at || view.activity_date)" class="result-details">
+          <summary>Детали занятия <daily-practice-icon name="chevron" /></summary>
+          <dl>
+            <div v-if="view.import_meta || view.started_at">
+              <dt>{{ view.import_meta ? 'Начато до входа' : 'Начато' }}</dt>
+              <dd><practice-date :value="view.import_meta?.client_started_at || view.import_meta?.original_local_date || view.started_at" :timezone="timezone || view.timezone" :relative="false" /></dd>
+            </div>
+            <div v-if="view.finished_at || view.activity_date">
+              <dt>Завершено</dt>
+              <dd><practice-date :value="view.finished_at || view.activity_date" :timezone="timezone || view.timezone" :relative="false" /></dd>
+            </div>
+          </dl>
+        </details>
       </afr-card>
       <afr-card v-else-if="!view.started" class="player-card overview-card">
         <h2>Короткое занятие из {{ view.total }} шагов</h2>
@@ -607,36 +668,83 @@ h2 { font-size: 1.25rem; font-weight: bold; line-height: 1.5; }
 .overview-card p, .result-card p { margin: .75rem 0; line-height: 1.6; }
 .overview-card :deep(button) { margin-top: 1rem; }
 .result-score { font-size: 1.5rem; font-weight: bold; }
-.result-next { margin-top: 1rem; }
-.result-next > p { margin: 0; color: var(--practice-muted, #475569); font-size: .875rem; }
-.result-next > .result-next-action {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.result-card .result-lesson-score { display:grid; gap:.15rem; margin:.35rem 0 .3rem; line-height:1.35; }
+.result-lesson-score span { color:var(--practice-muted, #475569); font-size:.875rem; font-weight:500; }
+.result-vocabulary { display:flex; align-items:center; gap:.4rem; width:fit-content; color:var(--practice-blue, #165ca7); }
+.result-vocabulary :deep(svg) { width:1rem; height:1rem; }
+.result-vocabulary-link { display:inline-flex; align-items:center; min-height:44px; font-size:.875rem; font-weight:600; text-align:start; text-decoration:underline; text-underline-offset:.2em; }
+.result-vocabulary-link:hover { color:var(--practice-blue-hover, #114a89); }
+.result-card button.result-path {
+  justify-content: flex-start;
   gap: .75rem;
   width: 100%;
-  padding: .7rem .85rem;
-  border: 1px solid #cddff2;
+  min-height: 3.75rem;
+  margin-top: .5rem;
+  padding: .65rem clamp(.7rem, 3vw, 1rem);
   border-radius: var(--practice-radius, .85rem);
-  background: #f0f6ff;
-  color: #19446d;
+  font-size: 1.1rem;
+  font-weight: 750;
   text-align: start;
 }
-.result-next-action:enabled:hover { background: #e5f0ff; border-color: #a9c8ea; }
-.result-next-action:disabled { opacity: .6; cursor: not-allowed; }
-.result-next-copy { display: grid; gap: .1rem; min-width: 0; }
-.result-next-copy > span { color: #486a8a; font-size: .75rem; }
-.result-next-copy > strong { font-size: 1rem; font-weight: 700; line-height: 1.35; }
-.result-next-arrow {
+.result-card button.result-path:enabled { box-shadow: 0 3px 8px #164a8526; }
+.result-card button.result-path:disabled { background: #e5edf6; color: #4a6480; }
+.result-path-icon {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  border-radius: .7rem;
+  background: #ffffff24;
+}
+.result-path-icon :deep(svg) { width: 1.25rem; height: 1.25rem; }
+.result-path .result-path-arrow { width: 1.15rem; height: 1.15rem; margin-inline: auto .4rem; }
+.result-next { margin-top: 1rem; }
+.result-next > p { margin: 0; color: var(--practice-muted, #475569); font-size: .875rem; }
+.result-next > button.result-next-action {
+  --next-border: #cddff2;
+  --next-hover-border: #a9c8ea;
+  --next-surface: #f0f6ff;
+  --next-hover: #e5f0ff;
+  --next-ink: #19446d;
+  --next-muted: #486a8a;
+  --next-arrow: var(--practice-blue, #165ca7);
+  --next-arrow-ink: #fff;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  width: 100%;
+  padding: .75rem clamp(.7rem, 3vw, 1rem);
+  border: 1px solid var(--next-border);
+  border-radius: var(--practice-radius, .85rem);
+  background: var(--next-surface);
+  color: var(--next-ink);
+  text-align: start;
+}
+.result-next > button.result-next-action:enabled:hover { background: var(--next-hover); border-color: var(--next-hover-border); }
+.result-next > button.result-next-action:disabled { opacity: .6; }
+.result-next > button.result-vocabulary-test {
+  --next-border: #d9cff4;
+  --next-hover-border: #b7a4e9;
+  --next-surface: #f6f2ff;
+  --next-hover: #eee6ff;
+  --next-ink: #362565;
+  --next-muted: #635483;
+  --next-arrow: #e9dfff;
+  --next-arrow-ink: #563c93;
+}
+.result-next-copy { display: grid; flex: 1; gap: .15rem; min-width: 0; }
+.result-next-copy > span { color: var(--next-muted); font-size: .8rem; line-height: 1.3; }
+.result-next-copy > strong { font-size: 1rem; font-weight: 750; line-height: 1.35; }
+.result-next-icon, .result-next-arrow {
   display: grid;
   flex-shrink: 0;
   place-items: center;
-  width: 2.125rem;
-  height: 2.125rem;
-  border-radius: .55rem;
-  background: var(--practice-blue, #165ca7);
-  color: white;
+  background: var(--next-arrow);
+  color: var(--next-arrow-ink);
 }
+.result-next-icon { width: 2.5rem; height: 2.5rem; border-radius: .7rem; }
+.result-next-arrow { width: 2rem; height: 2rem; border-radius: .55rem; }
 .result-next-arrow :deep(svg), .result-actions :deep(svg) { width: 1rem; height: 1rem; margin: 0; }
 .result-extra { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
 .result-actions {
@@ -648,6 +756,13 @@ h2 { font-size: 1.25rem; font-weight: bold; line-height: 1.5; }
   border-top: 1px solid #e1e9f1;
 }
 .result-actions > button { gap: .4rem; min-height: 44px; font-size: .8125rem; line-height: 1.25; }
+.result-details { color:var(--practice-muted, #475569); font-size:.8125rem; }
+.result-details summary { display:flex; align-items:center; gap:.35rem; width:fit-content; min-height:44px; padding-inline:.5rem; cursor:pointer; list-style:none; }
+.result-details summary::-webkit-details-marker { display:none; }
+.result-details summary :deep(svg) { width:.85rem; height:.85rem; }
+.result-details[open] summary :deep(svg) { transform:rotate(90deg); }
+.result-details dl { display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; padding:0 .5rem .5rem; }
+.result-details dt { font-weight:650; }
 @media (prefers-reduced-motion: no-preference) {
   .question-enter { animation: question-enter 180ms ease-out; transform-origin: center top; }
   .step-progress-fill { transition: transform 280ms ease-out; }
@@ -664,8 +779,7 @@ h2 { font-size: 1.25rem; font-weight: bold; line-height: 1.5; }
   .primary-action :deep(button) { min-width: 130px; }
   .question-heading { font-size: 1.15rem; line-height: 1.4; }
   .secondary-actions { font-size: .85rem; }
-  .result-lesson-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .2rem; }
-  .result-lesson-actions > button { flex-direction: column; justify-content: flex-start; padding: .45rem .15rem; }
+  .result-lesson-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .2rem .35rem; }
 }
 @media (prefers-reduced-motion: reduce) { .session-player :deep(*) { transition: none !important; } }
 </style>

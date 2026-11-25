@@ -101,7 +101,8 @@ export function guestPracticeHome(local, catalog, selection, now, contentError =
     duration_minutes: next.duration_minutes, goal: next.goal ?? null,
   } : null;
   const runs = Object.values(local.runs);
-  const current = activeGuestRun(runs.filter(run => !['daily', 'extra'].includes(run.kind)), local.current_level);
+  const vocabularyRuns = runs.filter(run => ['review', 'vocabulary_test'].includes(run.kind));
+  const current = activeGuestRun(vocabularyRuns, local.current_level);
   const sessionId = current && ['daily', 'extra'].includes(current.kind) ? current.snapshot.id : null;
   const active = current ? {
     id: current.id,
@@ -120,6 +121,10 @@ export function guestPracticeHome(local, catalog, selection, now, contentError =
   return {
     profile: { current_level: local.current_level, timezone: local.timezone, revision: local.profile_revision },
     active_run: active,
+    vocabulary_runs: {
+      review: activeGuestRun(vocabularyRuns.filter(run => run.kind === 'review'), local.current_level)?.id ?? null,
+      vocabulary_test: activeGuestRun(vocabularyRuns.filter(run => run.kind === 'vocabulary_test'), local.current_level)?.id ?? null,
+    },
     run: active,
     candidate,
     route: routeView(outline, access, local.current_level, selection, candidate),

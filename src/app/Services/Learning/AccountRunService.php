@@ -10,6 +10,7 @@ use App\Models\Learning\LearningProfile;
 use App\Models\Learning\LearningRun;
 use App\Models\Learning\LearningRunOperation;
 use App\Models\Learning\LearningSession;
+use App\Models\Learning\VocabularyRunEffect;
 use App\Models\User\User;
 use App\Services\Learning\Validation\CanonicalJson;
 use App\Support\Learning\PracticeTime;
@@ -29,7 +30,12 @@ final class AccountRunService
             $query->lockForUpdate();
         }
 
-        return $query->find($id) ?? throw new AnswerCheckingException(PracticeErrorCode::NotFound, 'Прохождение не найдено.');
+        $run = $query->find($id) ?? throw new AnswerCheckingException(PracticeErrorCode::NotFound, 'Прохождение не найдено.');
+        if ($lock) {
+            app(PracticeDictionary::class)->checkReview($run);
+        }
+
+        return $run;
     }
 
     public function load(User $actor, string $id, bool $playback = false): array
@@ -114,16 +120,22 @@ final class AccountRunService
         $next = $candidate ? ['id' => $candidate->external_id, 'level' => $candidate->getRawOriginal('level'),
             'theme' => $candidate->unit->title, 'duration_minutes' => (int) $candidate->content_duration,
             'title' => $candidate->content_title, 'goal' => $candidate->content_goal] : null;
-        $active = $this->unfinishedRuns($actor)
-            ->whereNotIn('kind', ['daily', 'extra'])
-            ->first();
+        $unfinishedVocabulary = $this->unfinishedRuns($actor)->whereIn('kind', ['review', 'vocabulary_test']);
+        $active = (clone $unfinishedVocabulary)->first();
         $activeSummary = $active ? $this->homeRun($active) : null;
+        $vocabularyRuns = ['review' => null, 'vocabulary_test' => null];
+        if ($active) {
+            $otherKind = $active->kind === 'review' ? 'vocabulary_test' : 'review';
+            $vocabularyRuns[$active->kind] = $active->id;
+            $vocabularyRuns[$otherKind] = $unfinishedVocabulary->where('kind', $otherKind)->value('id');
+        }
         $progress = app(LevelPromotionService::class)->progress($actor);
 
         return ['progress' => $progress, 'profile' => $profile, 'local_date' => $date, 'assignment' => $show ? ['id' => $assignment->id,
             'local_date' => $assignment->local_date->format('Y-m-d'), 'revision' => $assignment->revision, 'selected_run_id' => $selected->id] : null,
             'run' => $show ? $this->homeRun($selected) : null,
             'active_run' => $activeSummary,
+            'vocabulary_runs' => $vocabularyRuns,
             'candidate' => $next,
             'route' => app(PracticeHomeRoute::class)->make($outline, $access, $profile['current_level'], $selection, $activeSummary, $next, []),
             'activity_today' => $this->finishedOn($actor, $date),
@@ -186,8 +198,9 @@ final class AccountRunService
                 }
 
                 $receipt = $previous->receipt;
-                if (isset($receipt['run_id'])) {
-                    $receipt = ['state' => $this->view->make($actor, $run ?? $this->owned($actor, $receipt['run_id']))];
+                $target = $run ?? ($previous->run_id ? $this->owned($actor, $previous->run_id) : null);
+                if ($target && ($target->status === RunStatus::Cancelled || isset($receipt['run_id']))) {
+                    $receipt = ['state' => $this->view->make($actor, $target)];
                 }
 
                 return $this->envelope($previous, $receipt);
@@ -195,10 +208,13 @@ final class AccountRunService
             if (! in_array($name, ['answer', 'help'], true) && LearningAttempt::query()->where('user_id', $actor->id)->where('client_event_id', $input['client_event_id'])->exists()) {
                 throw new AnswerCheckingException(PracticeErrorCode::IdempotencyConflict, 'Этот ID уже использован для ответа.');
             }
+            if ($run?->status === RunStatus::Cancelled) {
+                return ['state' => $this->view->make($actor, $run)];
+            }
             $receipt = $apply($run);
             $record = LearningRunOperation::create(['user_id' => $actor->id, 'client_event_id' => $input['client_event_id'],
                 'run_id' => $receipt['state']['run_id'] ?? $runId, 'operation' => $name, 'payload_hash' => $hash,
-                'receipt' => $name === 'finish' ? ['run_id' => $runId] : $receipt, 'received_at' => PracticeTime::now()]);
+                'receipt' => $name === 'finish' ? null : $receipt, 'received_at' => PracticeTime::now()]);
 
             return $this->envelope($record, $receipt);
         }, 3);
@@ -310,19 +326,20 @@ final class AccountRunService
                 }
                 $version = $session;
                 $snapshot = $this->content->payload($version);
-                $items = array_map(fn ($task) => PresentationSnapshot::forTask($snapshot, $task['id']), $snapshot['tasks']);
+                $taskIds = array_column($snapshot['tasks'], 'id');
                 $this->unfinishedRuns($actor)->reorder()->whereIn('kind', ['daily', 'extra'])
                     ->where('session_id', $session->id)->delete();
             } else {
                 [$snapshot, $items] = $this->reviewSnapshot($actor, $profile, $input);
+                $taskIds = array_map(fn (array $item) => $item['task']['id'], $items);
             }
             $run = LearningRun::create(['user_id' => $actor->id, 'kind' => $kind, 'status' => 'in_progress', 'session_id' => $version?->id,
                 'content_checksum' => $version?->checksum, 'snapshot' => $version ? null : $snapshot,
                 'checking_policy_version' => CheckingPolicy::forVersion(config('daily_practice.checking.current_version'))->version,
                 'timezone' => $timezone, 'local_date' => $date, 'started_at' => PracticeTime::now(), 'revision' => 1, 'cursor_position' => 1, 'introductions_seen' => []]);
-            foreach ($items as $index => $item) {
-                $run->presentations()->create(['user_id' => $actor->id, 'task_id' => $item['task']['id'], 'position' => $index + 1,
-                    'snapshot' => $version ? [] : $item, 'status' => 'pending', 'help_used' => false]);
+            foreach ($taskIds as $index => $taskId) {
+                $run->presentations()->create(['user_id' => $actor->id, 'task_id' => $taskId, 'position' => $index + 1,
+                    'status' => 'pending', 'help_used' => false]);
             }
             if ($kind === 'daily') {
                 $assignment = DailyAssignment::firstOrCreate(['user_id' => $actor->id, 'local_date' => $date], ['revision' => 1]);
@@ -410,16 +427,15 @@ final class AccountRunService
                     'result' => $lesson ? array_intersect_key($result, array_flip(LearningRun::LESSON_RESULT_FIELDS)) : $result,
                     'promoted_to_level' => $result['promotion']['new_level'] ?? null,
                     'snapshot' => $snapshot, 'corrections' => null, 'introductions_seen' => [], 'revision' => $run->revision + 1]);
+                VocabularyRunEffect::compactClosedRun($run);
                 if ($run->import_meta === null) {
                     $run->presentations()->delete();
                 } else {
-                    $run->presentations()->update(['snapshot' => '[]']);
-                    $run->attempts()->update(['payload' => '[]',
-                        'result' => DB::raw("json_remove(result, '$.feedback', '$.solution', '$.pairs', '$.objective_ids')")]);
+                    LearningAttempt::trimClosedRun($run);
                 }
-                $operations = LearningRunOperation::query()->where('run_id', $run->id);
+                $operations = LearningRunOperation::forRun($run);
                 (clone $operations)->where('operation', '!=', 'start')->delete();
-                $operations->where('operation', 'start')->update(['receipt' => json_encode(['run_id' => $run->id], JSON_THROW_ON_ERROR)]);
+                $operations->where('operation', 'start')->update(['receipt' => null]);
             } elseif (in_array($name, ['pause', 'resume'], true)) {
                 if ($run->status === RunStatus::Completed) {
                     throw new AnswerCheckingException(PracticeErrorCode::RevisionConflict, 'Завершённое прохождение неизменно.');

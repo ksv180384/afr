@@ -6,14 +6,21 @@ use App\Enums\Learning\PracticeErrorCode;
 
 final class PresentationSnapshot
 {
-    public static function forTask(array $session, string $taskId): array
+    public static function atPosition(array $runSnapshot, int $position, string $taskId): array
     {
-        foreach ($session['tasks'] as $task) {
-            if ($task['id'] === $taskId) {
-                return ['task' => $task, 'lexemes' => array_map(fn (array $word): array => ['id' => $word['id'], 'lexeme_key' => $word['lexeme_key']], $session['vocabulary']), 'review_lexeme_key' => null];
-            }
+        $index = $position - 1;
+        if (isset($runSnapshot['tasks'][$index])) {
+            $snapshot = ['task' => $runSnapshot['tasks'][$index],
+                'lexemes' => array_map(fn (array $word): array => ['id' => $word['id'], 'lexeme_key' => $word['lexeme_key']], $runSnapshot['vocabulary']),
+                'review_lexeme_key' => null];
+        } else {
+            $snapshot = $runSnapshot['items'][$index] ?? null;
         }
-        throw new AnswerCheckingException(PracticeErrorCode::Unavailable, 'Задание отсутствует в снимке сессии.');
+        if (($snapshot['task']['id'] ?? null) !== $taskId) {
+            throw new AnswerCheckingException(PracticeErrorCode::Unavailable, 'Задание не соответствует позиции в закреплённом прохождении.');
+        }
+
+        return $snapshot;
     }
 
     public static function forReview(array $reviewItem, string $lexemeKey): array
@@ -23,18 +30,5 @@ final class PresentationSnapshot
         }
 
         return ['task' => $reviewItem, 'lexemes' => [], 'review_lexeme_key' => $lexemeKey];
-    }
-
-    public static function bound(array $runSnapshot, int $position, array $snapshot): void
-    {
-        $expected = null;
-        if (isset($runSnapshot['tasks'][$position - 1])) {
-            $expected = self::forTask($runSnapshot, $runSnapshot['tasks'][$position - 1]['id']);
-        } elseif (isset($runSnapshot['items'][$position - 1])) {
-            $expected = $runSnapshot['items'][$position - 1];
-        }
-        if ($expected === null || \App\Services\Learning\Validation\CanonicalJson::hash($expected) !== \App\Services\Learning\Validation\CanonicalJson::hash($snapshot)) {
-            throw new AnswerCheckingException(PracticeErrorCode::Unavailable, 'Предъявление не соответствует закреплённому снимку run.');
-        }
     }
 }
