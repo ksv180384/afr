@@ -22,16 +22,15 @@ const props = defineProps({
         </div>
 
         <div class="header-actions">
-          <Search/>
-          <Authentication class="ms-5" :auth-user="authUser"/>
+          <Search class="header-search" />
+          <Authentication :auth-user="authUser" />
+          <afr-sidebar
+            :user="authUser"
+            :menu="menu"
+            :widgets-menu="widgetsMenu"
+            :sub-menu="subMenu"
+          />
         </div>
-
-        <afr-sidebar
-          :user="authUser"
-          :menu="menu"
-          :widgetsMenu="widgetsMenu"
-          :sub-menu="subMenu"
-        />
       </div>
     </div>
   </header>
@@ -50,7 +49,11 @@ header:has(.menu-mini[aria-expanded="true"]) { z-index: 20; }
 }
 
 .header-actions{
-  @apply hidden lg:flex flex-row items-center;
+  @apply flex items-center gap-2 lg:gap-5;
+}
+
+.header-search {
+  @apply hidden lg:block;
 }
 
 .navigation{

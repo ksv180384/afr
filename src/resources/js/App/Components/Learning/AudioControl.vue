@@ -1,9 +1,14 @@
 <script setup>
-import { inject, onBeforeUnmount, ref, watch } from 'vue';
+import { inject, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import AfrButton from '@/App/Components/Form/AfrButton.vue';
 import DailyPracticeIcon from './DailyPracticeIcon.vue';
 import { usePracticeFeedback } from '@/App/Learning/usePracticeFeedback.js';
-const props = defineProps({ audio: { type: Object, required: true }, label: { type: String, default: 'Прослушать фразу' }, compact: Boolean });
+const props = defineProps({
+  audio: { type: Object, required: true },
+  label: { type: String, default: 'Прослушать фразу' },
+  compact: Boolean,
+  autoplay: Boolean,
+});
 const emit = defineEmits(['available', 'unavailable']);
 const player = inject('practiceAudioPlayer');
 const status = ref('idle');
@@ -21,6 +26,7 @@ const play = (slow = false) => {
   } });
 };
 const stopIfActive = () => { if (active()) player?.stop(); };
+onMounted(() => { if (props.autoplay) play(); });
 watch([() => props.audio.asset_id, () => props.audio.text, () => props.audio.lang], () => {
   stopIfActive();
   message.value = '';

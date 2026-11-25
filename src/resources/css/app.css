@@ -101,10 +101,14 @@ dialog.mobile-dialog-sheet {
     margin: auto;
     padding: 1.5rem;
     overflow: auto;
-    border-radius: 1rem;
+    border-radius: var(--dialog-radius, 1rem);
 }
 
 @media (max-width: 640px), (max-width: 900px) and (orientation: landscape) and (pointer: coarse) {
+    html:has(dialog.mobile-dialog-sheet[open]) {
+        scrollbar-gutter: auto;
+    }
+
     dialog.mobile-dialog-sheet {
         position: fixed;
         inset: auto 0 0;

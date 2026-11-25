@@ -66,6 +66,9 @@ defineExpose({
         :disabled="disabled"
         @input="onInput"
       />
+      <div v-if="$slots.suffix" class="afr-input-suffix">
+        <slot name="suffix" />
+      </div>
     </div>
   </div>
 </template>
@@ -80,7 +83,11 @@ defineExpose({
 }
 
 .afr-input{
-  @apply border border-gray-300 rounded overflow-clip;
+  @apply flex items-center overflow-clip rounded border border-gray-300;
+}
+
+.afr-input-suffix {
+  @apply flex shrink-0 items-center;
 }
 
 .size-large{
@@ -94,7 +101,7 @@ defineExpose({
 }
 
 .afr-input input{
-  @apply py-1 px-3 w-full;
+  @apply min-w-0 flex-1 px-3 py-1;
 }
 
 .is-prepend .afr-mixed-prepend .afr-input{

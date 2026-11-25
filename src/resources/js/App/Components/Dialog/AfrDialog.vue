@@ -1,9 +1,8 @@
 <script setup>
-import { computed, useSlots, ref, watch } from 'vue';
-import { getScrollbarWidth } from '@/Helpers/helper.js';
-
-import ShowEventsTrigger from '@/App/Components/Dialog/ShowEventsTrigger.vue';
+import { nextTick, onBeforeUnmount, onMounted, ref, useId, watch } from 'vue';
 import AfrCloseBtn from '@/App/Components/Form/AfrCloseBtn.vue';
+
+defineOptions({ inheritAttrs: false });
 
 const props = defineProps({
   modelValue: { type: Boolean, default: false },
@@ -12,111 +11,144 @@ const props = defineProps({
   fullScreen: { type: Boolean, default: false },
   classStyle: { type: String, default: '' },
 });
-const emits = defineEmits(['update:modelValue', 'open', 'opened', 'close', 'closed']);
+const emit = defineEmits(['update:modelValue', 'open', 'opened', 'close', 'closed']);
 
-const slots = useSlots();
-const showEventsTrigger = ref(props.modelValue);
-const styleWidth = computed(() => props.width ? `width: ${props.width};` : '');
-const classCenter = computed(() => props.center ? 'justify-center' : '');
-const classFullScreen = computed(() => props.fullScreen ? '!w-screen !h-screen flex flex-col' : '');
+const mounted = ref(false);
+const dialog = ref(null);
+const titleId = useId();
+let opener = null;
+let pressedBackdrop = false;
 
-watch(
-  () => props.modelValue,
-  (newVal) => {
-    if(newVal){
-      showEventsTrigger.value = true;
-    }
+onMounted(() => {
+  mounted.value = true;
+});
+
+watch([dialog, () => props.modelValue], ([element, visible]) => {
+  if (!element || element.open === visible) return;
+
+  if (!visible) {
+    element.close();
+    return;
   }
-);
 
-watch(
-  () => props.modelValue,
-  (newVal) => {
-    if(newVal){
-      document.body.style.overflow = 'hidden';
-      document.body.style.marginRight = `${getScrollbarWidth()}px`;
-    }
-    else{
-      document.body.style.overflow = '';
-      document.body.style.marginRight = '0';
-    }
-  }
-);
+  opener = document.activeElement;
+  pressedBackdrop = false;
+  element.showModal();
+  emit('open');
+  nextTick(() => {
+    if (element.open) emit('opened');
+  });
+}, { flush: 'post' });
 
-const onOpen = () => {
-  emits('open');
-}
-
-const onOpened = () => {
-  emits('opened');
-}
+const close = () => dialog.value?.close();
 
 const onClose = () => {
-  emits('update:modelValue', false);
-  emits('close');
-}
+  if (dialog.value?.open) return;
 
-const onClosed = () => {
-  emits('closed');
-}
+  opener?.focus({ preventScroll: true });
+  opener = null;
+  if (props.modelValue) emit('update:modelValue', false);
+  emit('close');
+  emit('closed');
+};
 
-const close = () => {
-  showEventsTrigger.value = false;
+const isBackdrop = (event) => {
+  if (event.target !== dialog.value) return false;
 
-}
+  const { left, top, right, bottom } = dialog.value.getBoundingClientRect();
+  return event.clientX < left || event.clientX > right || event.clientY < top || event.clientY > bottom;
+};
+
+onBeforeUnmount(() => {
+  if (dialog.value?.open) close();
+});
 </script>
 
 <template>
-  <Teleport to="body">
+  <Teleport v-if="mounted" to="body">
     <dialog
-      v-if="modelValue"
-      class="afr-overlay"
-      :class="[classCenter, classStyle]"
-      @click.self="close"
+      ref="dialog"
+      class="afr-dialog mobile-dialog-sheet"
+      :class="[classStyle, { 'afr-dialog--top': !center, 'afr-dialog--full-screen': fullScreen }]"
+      :style="{ '--dialog-width': width || '50rem' }"
+      :aria-labelledby="$slots.header ? titleId : undefined"
+      :aria-label="$slots.header ? undefined : 'Диалог'"
+      v-bind="$attrs"
+      @cancel.prevent="close"
+      @close="onClose"
+      @pointerdown="pressedBackdrop = isBackdrop($event)"
+      @click.self="pressedBackdrop && isBackdrop($event) && close()"
     >
-
-      <ShowEventsTrigger
-        v-if="showEventsTrigger"
-        @open="onOpen"
-        @opened="onOpened"
-        @close="onClose"
-        @closed="onClosed"
-      />
-
-      <div class="afr-dialog" :class="[classFullScreen]" :style="[styleWidth]">
-        <div v-if="slots.header" class="afr-dialog-header">
-          <slot name="header"/>
-          <afr-close-btn class="absolute right-2 top-1/2 transform -translate-y-1/2" @click="close"/>
+      <template v-if="modelValue">
+        <div class="dialog-header">
+          <div v-if="$slots.header" :id="titleId" class="dialog-title">
+            <slot name="header" />
+          </div>
+          <afr-close-btn class="dialog-close" size="large" @click="close" />
         </div>
-        <div class="afr-dialog-body overflow-auto">
-          <slot/>
+        <div class="dialog-content">
+          <slot />
+          <div v-if="$slots.footer" class="dialog-footer">
+            <slot name="footer" />
+          </div>
         </div>
-        <div v-if="slots.footer" class="afr-dialog-footer">
-          <slot name="footer"/>
-        </div>
-      </div>
+      </template>
     </dialog>
   </Teleport>
 </template>
 
 <style scoped>
-.afr-overlay {
-  @apply fixed top-0 h-screen left-0 w-screen bg-gray-800 z-50 bg-opacity-20 flex flex-col items-center overflow-auto max-w-full max-h-full;
+:global(html:has(.afr-dialog[open])) {
+  overflow: hidden;
+  scrollbar-gutter: stable;
 }
 
 .afr-dialog {
-  @apply bg-white rounded overflow-clip shadow-lg max-w-full;
+  --dialog-radius: .875rem;
+  --dialog-gutter: clamp(1rem, 5vw, 1.5rem);
+  --dialog-padding-start: max(var(--dialog-gutter), env(safe-area-inset-left, 0px));
+  --dialog-padding-end: max(var(--dialog-gutter), env(safe-area-inset-right, 0px));
+  @apply fixed border border-sky-100 bg-white p-0 text-slate-700 shadow-xl;
 }
 
-.afr-dialog-header{
-  @apply bg-blue-100 text-center py-3 px-2 relative;
+.afr-dialog::backdrop {
+  @apply bg-slate-900/40;
 }
 
-.afr-dialog-body{
-  @apply py-1 px-2;
+.afr-dialog.afr-dialog--top {
+  margin-block-start: 0;
 }
 
-.afr-dialog-footer{
-  @apply border-t border-gray-300 py-1 px-2 mt-1;
+.afr-dialog.afr-dialog--full-screen {
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border-radius: 0;
+}
+
+.dialog-header {
+  @apply grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 border-b border-sky-100 bg-sky-50 py-3;
+  padding-inline: var(--dialog-padding-start) var(--dialog-padding-end);
+}
+
+.dialog-title {
+  @apply min-w-0 break-words text-lg font-bold leading-snug text-sky-950;
+}
+
+.afr-dialog .dialog-close {
+  @apply col-start-2 row-start-1 rounded-lg text-sky-700 hover:bg-sky-100 hover:text-sky-900
+    focus-visible:-outline-offset-2;
+}
+
+.dialog-content {
+  padding-inline: var(--dialog-padding-start) var(--dialog-padding-end);
+  padding-block: 1.25rem calc(1rem + env(safe-area-inset-bottom, 0px));
+}
+
+.dialog-footer {
+  @apply mt-4 border-t border-sky-100 pt-3;
 }
 </style>

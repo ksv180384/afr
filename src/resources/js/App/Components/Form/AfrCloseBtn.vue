@@ -1,6 +1,5 @@
 <script setup>
 import { computed } from 'vue';
-import { Icon } from '@iconify/vue';
 
 const props = defineProps({
   styleClass: { type: String, default: '' },
@@ -17,30 +16,48 @@ const classSize = computed(() => `size-${props.size}`);
 </script>
 
 <template>
-  <div
+  <button
+    type="button"
+    aria-label="Закрыть"
     class="afr-close-btn"
-    :class="[{ styleClass: styleClass }, classSize]"
+    :class="[styleClass, classSize]"
   >
-    <Icon icon="jam:close" />
-  </div>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="m6 6 12 12M18 6 6 18" />
+    </svg>
+  </button>
 </template>
 
 <style scoped>
-.afr-close-btn{
-  @apply flex items-center justify-center cursor-pointer rounded hover:bg-red-500 select-none
-         transition duration-200 hover:text-red-50;
-  font-size: 22px;
-  width: 32px;
-  height: 32px;
+.afr-close-btn {
+  @apply grid cursor-pointer select-none place-items-center rounded
+    hover:bg-red-500 hover:text-red-50 focus-visible:outline focus-visible:outline-2
+    focus-visible:outline-offset-2 focus-visible:outline-blue-600 motion-safe:transition-colors;
 }
 
-.size-large{
-  @apply text-xl w-[38px] h-[38px];
+.size-large {
+  @apply size-11;
 }
-.size-default{
-  @apply text-base w-[32px] h-[32px];
+.size-default {
+  @apply size-8;
 }
-.size-small{
-  @apply text-sm w-[24px] h-[24px];
+.size-small {
+  @apply size-6;
+}
+
+.afr-close-btn svg {
+  @apply size-4;
+}
+
+.size-large svg {
+  @apply size-5;
 }
 </style>

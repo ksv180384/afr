@@ -3,7 +3,6 @@ import { nextTick, ref, watch, onMounted, onBeforeUnmount } from 'vue';
 
 // import AfrSidebarMenu from '@/App/Components/Header/Sidebar/AfrSidebarMenu.vue';
 import AfrSidebarSubMenu from '@/App/Components/Header/Sidebar/AfrSidebarSubMenu.vue';
-import ProfileControl from '@/App/Components/Header/Authentification/ProfileControl.vue';
 
 const props = defineProps({
   user: { type: Object, default: {} },
@@ -84,15 +83,10 @@ onBeforeUnmount(() => {
 
 <template>
 <div class="afr-sidebar">
-  <div class="flex items-center gap-2">
-    <template v-if="user">
-      <profile-control :user="user"/>
-    </template>
-    <button ref="menuButton" type="button" class="menu-mini" aria-label="Меню сайта"
-      :aria-expanded="isSidebarVisible" aria-controls="site-mobile-menu" @click="toggleSidebar">
-      <span class="menu-bars" aria-hidden="true"></span>
-    </button>
-  </div>
+  <button ref="menuButton" type="button" class="menu-mini" aria-label="Меню сайта"
+    :aria-expanded="isSidebarVisible" aria-controls="site-mobile-menu" @click="toggleSidebar">
+    <span class="menu-bars" aria-hidden="true"></span>
+  </button>
 
   <transition name="transition-bg-sidebar">
     <div v-if="isSidebarVisible" class="bg-sidebar" @click="toggleSidebar"></div>

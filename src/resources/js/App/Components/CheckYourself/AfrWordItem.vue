@@ -1,46 +1,57 @@
 <script setup>
-import { computed, ref } from 'vue';
+import AfrButton from '@/App/Components/Form/AfrButton.vue';
+import DailyPracticeIcon from '@/App/Components/Learning/DailyPracticeIcon.vue';
 
-const props = defineProps({
-  word: { type: Object, default: {} },
-  answer: { type: Object, default: {} },
+defineProps({
+  word: { type: Object, required: true },
+  incorrect: Boolean,
 });
-const emits = defineEmits(['click']);
-
-const isClickError = ref(0);
-const wordClassError = computed(() => {
-  return isClickError.value ? 'text-red-500 hover:text-red-500' : 'hover:text-green-500';
-});
-
-const onClick = () => {
-  const isCorrect = props.answer.id === props.word.id;
-  if(!isCorrect){
-    clickError(props.word.id);
-  }
-  emits('click', isCorrect);
-}
-
-const clickError = (idWord) => {
-  isClickError.value = idWord;
-  setTimeout(() => {
-    isClickError.value = false;
-  }, 500);
-}
+defineEmits(['choose']);
 </script>
 
 <template>
-  <div
-    class="word-item"
-    :class="wordClassError"
-    :title="word.translation"
-    @click="onClick()"
+  <afr-button
+    class="word-option"
+    :class="{ 'word-option--incorrect': incorrect }"
+    :aria-disabled="incorrect || undefined"
+    @click="!incorrect && $emit('choose', word.id)"
   >
-    {{ word.translation }}
-  </div>
+    <span>{{ word.translation }}</span>
+    <span class="option-mark" aria-hidden="true">
+      <daily-practice-icon v-if="incorrect" name="close" />
+    </span>
+    <span v-if="incorrect" class="sr-only">Неверный перевод</span>
+  </afr-button>
 </template>
 
 <style scoped>
-.word-item{
-  @apply text-center cursor-pointer py-1 my-1 transition duration-500 text-nowrap truncate px-4;
+button.word-option {
+  @apply min-h-12 w-full justify-between gap-3 whitespace-normal rounded-xl border border-slate-200
+    bg-white px-4 py-2.5 text-left leading-snug text-slate-800 shadow-sm;
+  overflow-wrap: anywhere;
+}
+
+.word-option:not([aria-disabled]):hover {
+  @apply border-sky-300 bg-sky-50 text-sky-900;
+}
+
+.word-option:focus-visible {
+  @apply outline outline-2 outline-offset-2 outline-sky-700;
+}
+
+.option-mark {
+  @apply grid size-4 shrink-0 place-items-center rounded-full border border-slate-300;
+}
+
+button.word-option--incorrect {
+  @apply cursor-default border-rose-200 bg-rose-50 text-rose-900;
+}
+
+.word-option--incorrect .option-mark {
+  @apply border-0 text-rose-700;
+}
+
+.option-mark svg {
+  @apply size-4;
 }
 </style>
