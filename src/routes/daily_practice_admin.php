@@ -12,6 +12,14 @@ Route::prefix('admin/daily-practice')->name('admin.daily-practice.')->middleware
     Route::post('units/{unit}/rename', [EditorController::class, 'renameUnit'])->whereNumber('unit')->name('units.rename');
     Route::post('units/{unit}/background', [EditorController::class, 'uploadUnitBackground'])
         ->whereNumber('unit')->name('units.background');
+    if (app()->environment('local')) {
+        Route::controller(\App\Http\Controllers\Admin\DailySession\PronunciationController::class)
+            ->prefix('pronunciation')->name('pronunciation.')->group(function (): void {
+                Route::get('/', 'index')->name('index');
+                Route::post('generate', 'generate')->name('generate');
+                Route::post('status', 'status')->name('status');
+            });
+    }
     Route::get('catalog', [EditorController::class, 'catalog'])->name('catalog');
     Route::get('reports', [EditorController::class, 'reports'])->name('reports');
     Route::post('reports', [EditorController::class, 'storeReport'])->name('reports.store');

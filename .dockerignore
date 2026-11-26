@@ -1,2 +1,3 @@
 # Runtime and test artefacts are mounted from the host; do not send them to Docker during build.
 src/storage/
+src/public/practice-audio/

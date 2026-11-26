@@ -9,6 +9,7 @@ const trigger = ref(null);
 const fieldId = 'audio-preferences-' + getCurrentInstance().uid;
 const voices = ref([]);
 const voice = ref('');
+const recordingVoice = ref('lea');
 const pace = ref('normal');
 const selectedVoice = computed(() => voices.value.some(option => option.id === voice.value) ? voice.value : '');
 let unwatch;
@@ -21,7 +22,7 @@ const onOutside = event => {
 };
 onMounted(() => {
   if (!player) return;
-  ({voice: voice.value, pace: pace.value} = player.preferences());
+  ({voice: voice.value, recordingVoice: recordingVoice.value, pace: pace.value} = player.preferences());
   unwatch = player.watchVoices(options => { voices.value = options; });
   document.addEventListener('pointerdown', onOutside);
 });
@@ -39,8 +40,17 @@ const setPace = value => { pace.value = value; player.configure({pace: value}); 
         <button type="button" class="settings-close" aria-label="Закрыть настройки озвучивания" @click="close"><daily-practice-icon name="close" /></button>
       </header>
       <div class="settings-content">
-        <div class="voice-field">
-          <label :for="fieldId + '-voice'">Французский голос</label>
+        <div v-if="player.lookupRecording" class="voice-field">
+          <label :for="fieldId + '-recording'">Голос записи</label>
+          <div class="voice-select">
+            <select :id="fieldId + '-recording'" v-model="recordingVoice" @change="player.configure({recordingVoice})">
+              <option value="lea">Lea</option><option value="paul">Paul</option>
+            </select>
+            <daily-practice-icon name="chevron" />
+          </div>
+        </div>
+        <div v-if="voices.length || !player.lookupRecording" class="voice-field">
+          <label :for="fieldId + '-voice'">{{ player.lookupRecording ? 'Голос для фраз без записи' : 'Французский голос' }}</label>
           <div class="voice-select">
             <select :id="fieldId + '-voice'" :value="selectedVoice" :disabled="!voices.length" @change="setVoice($event.target.value)">
               <option value="">Автоматический выбор</option>
@@ -48,7 +58,7 @@ const setPace = value => { pace.value = value; player.configure({pace: value}); 
             </select>
             <daily-practice-icon name="chevron" />
           </div>
-          <p v-if="!voices.length" class="voice-note">В этом браузере пока нет французского голоса.</p>
+          <p v-if="!voices.length" class="voice-note">Браузер пока не показывает французские голоса.</p>
         </div>
         <fieldset class="pace-field">
           <legend>Темп речи</legend>

@@ -1,5 +1,16 @@
 version: '3.8'
 services:
+  pronunciation:
+    profiles: ["audio"]
+    build: ./_docker/pronunciation
+    environment:
+      COMFYUI_URL: ${COMFYUI_URL:-http://host.docker.internal:8188}
+    volumes:
+      - pronunciation-queue:/queue
+      - ./src/public/practice-audio:/recordings
+    networks:
+      - afr
+
   # nginx
   afr-nginx:
     container_name: afr-nginx
@@ -67,3 +78,6 @@ services:
 
 networks:
   afr:
+
+volumes:
+  pronunciation-queue:

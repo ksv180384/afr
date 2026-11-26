@@ -160,16 +160,19 @@ const speechEnv = (voices = []) => {
   return { env, utterances, timeout: () => timeout(), voicesChanged: () => [...listeners].forEach(listener => listener()), cancellations: () => cancellations };
 };
 
-test('French voice only; async voices; slow/replay/stop and late events', () => {
-  const voices = [{ lang: 'en-US' }];
+test('speech starts on the tap even before the browser lists its French voices', () => {
+  const voices = [];
   const fake = speechEnv(voices);
   const states = [];
   const player = createAudioPlayer({ environment: () => fake.env });
   player.play({ text: 'Bonjour' }, { slow: true, onState: ({ state }) => states.push(state) });
-  assert.equal(fake.utterances.length, 0);
-  voices.push({ lang: 'fr-FR' });
+  assert.equal(fake.utterances.length, 1);
+  const [utterance] = fake.utterances;
+  assert.equal(utterance.voice, undefined);
+  const french = { lang: 'fr-FR' };
+  voices.push(french);
   fake.voicesChanged();
-  const utterance = fake.utterances[0];
+  assert.equal(fake.utterances.length, 1);
   assert.equal(utterance.lang, 'fr-FR');
   assert.equal(utterance.rate, 0.65);
   utterance.onstart();
@@ -179,19 +182,44 @@ test('French voice only; async voices; slow/replay/stop and late events', () => 
   assert.equal(fake.cancellations(), 1);
   player.play({ text: 'Salut' });
   assert.equal(fake.utterances.length, 2);
+  assert.equal(fake.utterances[1].voice, french);
+  fake.utterances[1].onend();
+  assert.equal(fake.cancellations(), 1);
 });
 
-test('missing French voice and timeout cancel pending speech; no fallback to English', () => {
-  for (const voices of [[{ lang: 'en-US' }], [{ lang: 'fr-FR' }]]) {
-    const fake = speechEnv(voices);
-    const states = [];
-    createAudioPlayer({ environment: () => fake.env }).play({ text: 'Bonjour' }, { onState: ({ state }) => states.push(state) });
-    fake.timeout();
-    fake.voicesChanged();
-    assert.deepEqual(states, ['loading', 'error']);
-    assert.equal(fake.utterances.length, voices[0].lang === 'fr-FR' ? 1 : 0);
-    assert.equal(fake.cancellations(), voices[0].lang === 'fr-FR' ? 1 : 0);
-  }
+test('a list with only English voices asks for French rather than using an English voice', () => {
+  const voices = [{ lang: 'en-US' }];
+  const fake = speechEnv(voices);
+  const player = createAudioPlayer({ environment: () => fake.env });
+  const states = [];
+  player.play({ text: 'Bonjour' }, { onState: state => states.push(state) });
+  assert.deepEqual(states.map(({state}) => state), ['loading', 'error']);
+  assert.match(states[1].message, /Французский голос недоступен/);
+  voices.push({ lang: 'fr-FR' });
+  fake.voicesChanged();
+  assert.equal(fake.utterances.length, 0);
+  player.play({ text: 'Bonjour' });
+  assert.equal(fake.utterances[0].voice.lang, 'fr-FR');
+});
+
+test('a browser that cannot select a French voice reports the device setting', () => {
+  const fake = speechEnv();
+  const states = [];
+  createAudioPlayer({ environment: () => fake.env }).play({ text: 'Bonjour', lang: 'fr-CA' }, { onState: state => states.push(state) });
+  const [utterance] = fake.utterances;
+  assert.equal(utterance.lang, 'fr-CA');
+  utterance.onerror({ error: 'language-unavailable' });
+  assert.deepEqual(states.map(({state}) => state), ['loading', 'error']);
+  assert.match(states[1].message, /Французский голос недоступен/);
+});
+
+test('speech that never starts is cancelled on timeout', () => {
+  const fake = speechEnv([{ lang: 'fr-FR' }]);
+  const states = [];
+  createAudioPlayer({ environment: () => fake.env }).play({ text: 'Bonjour' }, { onState: ({state}) => states.push(state) });
+  fake.timeout();
+  assert.deepEqual(states, ['loading', 'error']);
+  assert.equal(fake.cancellations(), 1);
 });
 
 test('asset failures and stalled playback surface an error', async () => {
@@ -217,6 +245,24 @@ test('asset failures and stalled playback surface an error', async () => {
   assert.equal(media.paused, true);
 });
 
+
+test('practice recordings play without system voices and support both narrators and existing media', () => {
+  const urls = [];
+  const env = {setTimeout, clearTimeout, Audio: class {
+    constructor(url) { urls.push(url); }
+    play() { return Promise.resolve(); }
+    pause() {}
+  }};
+  const player = createAudioPlayer({environment: () => env, resolveAsset: () => '/uploaded.wav'});
+  const recordings = {lea: '/lea.mp3', paul: '/paul.mp3'};
+  player.play({text: 'Salut', recordings});
+  player.configure({recordingVoice: 'paul'});
+  player.play({text: 'Salut', recordings});
+  player.play({text: 'Salut', recordings: {lea: '/lea.mp3'}}, {slow: true});
+  player.play({asset_id: 'uploaded', recordings});
+  player.stop();
+  assert.deepEqual(urls, ['/lea.mp3', '/paul.mp3', '/lea.mp3', '/uploaded.wav']);
+});
 
 test('voice and pace persist and fall back to a French voice without splitting the passage', () => {
   const voices = [{voiceURI:'en', lang:'en-GB'}, {voiceURI:'fr-ca', lang:'fr-CA'}, {voiceURI:'fr-fr', lang:'fr-FR'}];

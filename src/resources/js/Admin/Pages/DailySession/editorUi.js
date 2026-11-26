@@ -9,6 +9,7 @@ export const practiceSections = [
   { path: '/admin/daily-practice', label: 'Занятия' },
   { path: '/admin/daily-practice/imports', label: 'Импорт' },
   { path: '/admin/daily-practice/catalog', label: 'Уровни, темы и программы' },
+  { path: '/admin/daily-practice/pronunciation', label: 'Озвучка', local: true },
   { path: '/admin/daily-practice/reports', label: 'Обращения' },
 ];
 export const activePracticeSection = (url) => {

@@ -14,6 +14,7 @@ import PracticeDate from './PracticeDate.vue';
 import FrenchText from './FrenchText.vue';
 import AudioControl from './AudioControl.vue';
 import AudioPreferences from './AudioPreferences.vue';
+import { lookupRecording } from '@/App/Learning/recordingLookup.js';
 import { createAudioPlayer } from '@/App/Learning/audioPlayer.js';
 import { reviewDurationLabel, reviewWordCount } from '@/App/Learning/shortReview.js';
 import ReviewSuggestionSetting from './ReviewSuggestionSetting.vue';
@@ -114,7 +115,7 @@ const invalidateHome = () => {
   homeStore.invalidate(owner ?? null);
 };
 const timezone=ref(browserTimezone());
-const audio = createAudioPlayer();
+const audio = createAudioPlayer({ lookupRecording });
 provide('practiceAudioPlayer',audio);
 const onStatus = value => { if (value.kind !== 'sending' && (saving.value.kind !== value.kind || saving.value.message !== value.message)) saving.value = value; };
 const saved = () => onStatus(repository?.temporary ? {kind:'temporary',message:'Временный режим: данные исчезнут при закрытии страницы.'}
@@ -518,7 +519,10 @@ onBeforeUnmount(() => { disposed=true; window.removeEventListener('online',recov
               <practice-report v-if="owner && (source.lesson_id || source.session_version_id)"
                 :lesson-id="source.lesson_id" :version-id="source.session_version_id" compact />
             </div>
-            <french-text v-if="source.snapshot.example" :text="source.snapshot.example.fr" :transcription-ru="source.snapshot.example.transcription_ru" :translation="source.snapshot.example.ru" compact />
+            <template v-if="source.snapshot.example">
+              <french-text :text="source.snapshot.example.fr" :transcription-ru="source.snapshot.example.transcription_ru" :translation="source.snapshot.example.ru" compact />
+              <audio-control v-if="expandedWords[word.id]" :audio="{text: source.snapshot.example.fr, lang: 'fr-FR'}" label="Прослушать пример" compact />
+            </template>
           </div>
         </div>
       </li>

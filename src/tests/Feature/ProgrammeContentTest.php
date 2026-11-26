@@ -14,14 +14,16 @@ function programmeFirstPackage(): array
     return json_decode(file_get_contents((config('daily_practice.content_path').'/programme/packages/PRE_A1/PRE_A1-U01.v1.json')), true, 512, JSON_THROW_ON_ERROR);
 }
 
-it('keeps the authored programme map separate from 700 ready sessions', function () {
+it('keeps the extensible programme map separate from prepared and published sessions', function () {
     $map = json_decode(file_get_contents((config('daily_practice.content_path').'/programme/map.v1.json')), true);
     expect($map['status'])->toBe('authoring_plan')->and($map['levels'])->toHaveCount(7);
+    expect($map['target_sessions'])->toBe(array_sum(array_column($map['levels'], 'target_sessions')));
     foreach ($map['levels'] as $level) {
-        expect($level['units'])->toHaveCount(20)->and($level['checkpoint_session_ids'])->toHaveCount(4);
+        expect(count($level['units']))->toBeGreaterThanOrEqual(20);
+        expect(count($level['checkpoint_session_ids']))->toBeGreaterThanOrEqual(4);
         $ids = [];
         foreach ($level['units'] as $unit) {
-            expect($unit['sessions'])->toHaveCount(5)->and($unit['vocabulary_plan'])->not->toBeEmpty();
+            expect($unit['sessions'])->not->toBeEmpty()->and($unit['vocabulary_plan'])->not->toBeEmpty();
             foreach ($unit['sessions'] as $session) {
                 expect($session['status'])->toBe('planned');
                 foreach ($session['prerequisite_ids'] as $id) {
@@ -30,7 +32,11 @@ it('keeps the authored programme map separate from 700 ready sessions', function
                 $ids[] = $session['id'];
             }
         }
-        expect(array_unique($ids))->toHaveCount(100);
+        expect($ids)->toHaveCount($level['target_sessions']);
+        expect(array_unique($ids))->toHaveCount(count($ids));
+        foreach ($level['checkpoint_session_ids'] as $checkpoint) {
+            expect($ids)->toContain($checkpoint);
+        }
     }
 });
 
@@ -85,8 +91,8 @@ it('reports planned and prepared content separately without publishing or creati
             }
         }
     }
-    expect($report['stage_17_complete'])->toBeFalse()->and($report['target_sessions'])->toBe(700)->and($report['file_sessions'])->toBe(count($prepared))
+    expect($report['stage_17_complete'])->toBeFalse()->and($report['target_sessions'])->toBe(array_sum(array_column($map['levels'], 'target_sessions')))->and($report['file_sessions'])->toBe(count($prepared))
         ->and($report['machine_valid_sessions'])->toBeGreaterThanOrEqual(5)->toBeLessThanOrEqual(count($prepared))
-        ->and($report['authoring_remaining'])->toBe(700 - $report['machine_valid_sessions'])->and($report['db_published_sessions'])->toBe(0);
+        ->and($report['authoring_remaining'])->toBe($report['target_sessions'] - $report['machine_valid_sessions'])->and($report['db_published_sessions'])->toBe(0);
     expect(\App\Models\Learning\LearningSession::count())->toBe(0)->and(\App\Models\Learning\LearningRun::count())->toBe(0);
 });

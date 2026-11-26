@@ -13,12 +13,14 @@ const emit = defineEmits(['available', 'unavailable']);
 const player = inject('practiceAudioPlayer');
 const status = ref('idle');
 const message = ref('');
+const recordings = ref({});
+const preparing = ref(false);
 const feedback = usePracticeFeedback({ error: message, errorType: 'warning' });
 const active = () => ['loading', 'playing'].includes(status.value);
 const play = (slow = false) => {
   message.value = '';
   if (!player) { message.value = 'Озвучивание недоступно.'; emit('unavailable'); return; }
-  player.play(props.audio, { slow, onState: (next) => {
+  player.play({...props.audio, recordings: recordings.value}, { slow, onState: (next) => {
     status.value = next.state;
     message.value = next.message;
     if (next.state === 'playing') emit('available');
@@ -26,20 +28,32 @@ const play = (slow = false) => {
   } });
 };
 const stopIfActive = () => { if (active()) player?.stop(); };
-onMounted(() => { if (props.autoplay) play(); });
-watch([() => props.audio.asset_id, () => props.audio.text, () => props.audio.lang], () => {
-  stopIfActive();
-  message.value = '';
+onMounted(() => {
+  watch([() => props.audio.asset_id, () => props.audio.text, () => props.audio.lang], async ([asset, text, lang], previous, onCleanup) => {
+    let current = true;
+    onCleanup(() => { current = false; });
+    stopIfActive();
+    message.value = '';
+    recordings.value = {};
+    preparing.value = !!(player?.lookupRecording && text && !asset && /^fr(?:[-_]|$)/i.test(lang || 'fr'));
+    if (preparing.value) {
+      const files = await player.lookupRecording(text);
+      if (!current) return;
+      recordings.value = files;
+      preparing.value = false;
+    }
+    if (props.autoplay && !previous?.length) play();
+  }, {immediate: true});
 });
 onBeforeUnmount(stopIfActive);
 </script>
 <template>
   <div class="practice-audio" :class="{ compact }">
     <div class="audio-actions">
-      <afr-button class="audio-play" :class="{ playing: active() }" :aria-label="active() ? 'Остановить звук' : label" :title="active() ? 'Остановить звук' : label" @click="active() ? player.stop() : play()">
+      <afr-button :disabled="preparing" class="audio-play" :class="{ playing: active() }" :aria-label="active() ? 'Остановить звук' : label" :title="active() ? 'Остановить звук' : label" @click="active() ? player.stop() : play()">
         <daily-practice-icon :name="active() ? 'pause' : 'play'" />
       </afr-button>
-      <afr-button class="audio-slow" aria-label="Прослушать медленнее" title="Прослушать медленнее" @click="play(true)">
+      <afr-button :disabled="preparing" class="audio-slow" aria-label="Прослушать медленнее" title="Прослушать медленнее" @click="play(true)">
         <daily-practice-icon name="clock" />
       </afr-button>
       <span class="sr-only" role="status">{{ status === 'loading' ? 'Подготовка звука…' : status === 'playing' ? 'Воспроизводится' : '' }}</span>

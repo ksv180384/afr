@@ -40,6 +40,7 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
+            'local_pronunciation' => $request->is('admin/*') && app()->environment('local'),
             'daily_practice_enabled' => (bool) config('daily_practice.enabled'),
             'auth' => [
                 'user' => $request->user(),

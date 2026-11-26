@@ -13,7 +13,7 @@ class PracticeContentStatus extends Command
 {
     protected $signature = 'daily-practice:content-status {--json : Emit machine-readable authoring/publication inventory}';
 
-    protected $description = 'Compare the 140-topic authoring plan, real packages, objective coverage and actual publication';
+    protected $description = 'Compare the authoring plan, real packages, objective coverage and actual publication';
 
     public function handle(SessionPackageValidator $validator, PublicPracticeCatalog $catalog): int
     {
@@ -81,7 +81,7 @@ class PracticeContentStatus extends Command
         $complete = collect($levels)->every(fn ($level) => $level['authoring_remaining'] === 0 && $level['reviewed_matching_files'] >= $level['target']
             && $level['published_matching_files'] >= $level['target'] && $level['objectives_missing_evidence'] === [] && $level['published_checkpoints'] === $level['planned_checkpoints']);
         $report = ['generated_at_utc' => CarbonImmutable::now('UTC')->toIso8601String(), 'stage_17_complete' => $complete,
-            'target_sessions' => 700, 'file_sessions' => array_sum(array_column($levels, 'file_sessions')), 'machine_valid_sessions' => array_sum(array_column($levels, 'machine_valid')),
+            'target_sessions' => array_sum(array_column($levels, 'target')), 'file_sessions' => array_sum(array_column($levels, 'file_sessions')), 'machine_valid_sessions' => array_sum(array_column($levels, 'machine_valid')),
             'db_reviewed_sessions' => array_sum(array_column($levels, 'db_reviewed')), 'db_published_sessions' => array_sum(array_column($levels, 'db_published')),
             'authoring_remaining' => array_sum(array_column($levels, 'authoring_remaining')), 'levels' => $levels, 'packages' => $packages,
             'notice' => 'Machine validation is not language/pronunciation review. Planned slots are never counted as prepared or published.'];

@@ -7,6 +7,7 @@ import { activePracticeSection, practiceSections } from './editorUi';
 
 defineProps({ authUser: Object, fixedHeight: Boolean, compactHeading: Boolean, title: { type: String, default: 'Задания на сегодня' } });
 const page = usePage();
+const sections = computed(() => practiceSections.filter(section => !section.local || page.props.local_pronunciation));
 const active = computed(() => activePracticeSection(page.url));
 </script>
 <template>
@@ -14,7 +15,7 @@ const active = computed(() => activePracticeSection(page.url));
     <Head :title="title"><meta name="robots" content="noindex, nofollow" /></Head>
     <el-config-provider :locale="ru"><section class="daily-admin" :class="{ 'daily-admin--fixed': fixedHeight, 'daily-admin--compact': compactHeading || fixedHeight }">
       <nav aria-label="Управление практикой">
-        <Link v-for="section in practiceSections" :key="section.path" :href="section.path" class="practice-tab" :class="{ active: active === section.path }" :aria-current="active === section.path ? 'page' : undefined">{{ section.label }}</Link>
+        <Link v-for="section in sections" :key="section.path" :href="section.path" class="practice-tab" :class="{ active: active === section.path }" :aria-current="active === section.path ? 'page' : undefined">{{ section.label }}</Link>
       </nav>
       <h1 :class="{ 'sr-only': compactHeading || fixedHeight }">{{ title }}</h1>
       <slot />
