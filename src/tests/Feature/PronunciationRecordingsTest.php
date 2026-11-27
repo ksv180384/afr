@@ -67,6 +67,44 @@ it('queues only missing voices in bulk and can regenerate a single selected take
     }
 });
 
+it('counts recordings outside the requested page while the bulk queue is still running', function () {
+    app()->instance('env', 'local');
+    \Illuminate\Support\Facades\Route::middleware('web')->group(base_path('routes/daily_practice_admin.php'));
+    $this->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class);
+    $rank = \App\Models\User\Rang::firstOrCreate(['alias' => 'administrator'], ['title' => 'Администратор']);
+    $this->actingAs(\App\Models\User\User::factory()->create(['rang_id' => $rank->id]));
+    LearningSession::factory()->withContent(['vocabulary' => [
+        ['id' => 'bonjour', 'lexeme_key' => 'fr:bonjour', 'fr' => 'bonjour', 'ru' => ['здравствуйте']],
+        ['id' => 'salut', 'lexeme_key' => 'fr:salut', 'fr' => 'salut', 'ru' => ['привет']],
+    ]])->create();
+    Http::fake(['http://pronunciation:8080/jobs*' => Http::response(['pending' => 2, 'failed' => 0, 'jobs' => []])]);
+
+    $root = sys_get_temp_dir().'/afr-coverage-'.Str::uuid();
+    app()->usePublicPath($root);
+    $visible = PronunciationRecordings::key('bonjour');
+    $offPage = PronunciationRecordings::key('salut');
+    $prefix = $root.'/practice-audio/'.substr($offPage, 0, 2).'/'.$offPage;
+    File::ensureDirectoryExists(dirname($prefix));
+    $url = '/admin/daily-practice/pronunciation/status';
+    try {
+        File::put($prefix.'-lea.mp3', 'test fixture');
+        $this->postJson($url, ['keys' => [$visible]])->assertOk()
+            ->assertJsonPath('pending', 2)
+            ->assertJsonPath('coverage', ['ready' => 0, 'total' => 2]);
+
+        File::put($prefix.'-paul.mp3', 'test fixture');
+        $this->postJson($url, ['keys' => [$visible]])->assertOk()
+            ->assertJsonPath('pending', 2)
+            ->assertJsonPath('coverage', ['ready' => 1, 'total' => 2])
+            ->assertJsonPath('files', [$visible => []]);
+        $this->postJson($url, ['keys' => []])->assertOk()
+            ->assertJsonPath('coverage', ['ready' => 1, 'total' => 2])
+            ->assertJsonPath('files', []);
+    } finally {
+        File::deleteDirectory($root);
+    }
+});
+
 it('does not expose local generation routes outside local development', function () {
     Http::preventStrayRequests();
     foreach (['generate', 'status'] as $action) {

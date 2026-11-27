@@ -59,6 +59,19 @@ test('return to the main practice route leaves scrolling to the current lesson',
   assert.equal(restorePracticeScroll(), false);
 });
 
+test('starting a lesson remembers the topic chosen on the rendered trail', async context => {
+  globalThis.window = {
+    location: new URL('http://localhost:5000/practice?level=A1&unit=A1-U01#topic-A1-U03'),
+    scrollY: 640,
+  };
+  context.after(() => { delete globalThis.window; });
+  context.mock.method(router, 'visit', (path, options) => {
+    assert.equal(path, '/daily/run/d0f0?from_level=A1&from_unit=A1-U03&from_scroll=640');
+    options.onFinish();
+  });
+  await visitPracticeRun('/daily/run/d0f0', {level: 'A1', unit: 'A1-U01'});
+});
+
 test('the practice path uses the latest target after Inertia resets scroll on navigation', async (context) => {
   const root = fileURLToPath(new URL('../../', import.meta.url));
   const server = await createServer({

@@ -1,13 +1,18 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
-import DailyPracticeIcon from './DailyPracticeIcon.vue';
-import { restorePracticeScroll } from '@/App/Learning/practiceRunNavigation.js';
+import PracticeTopicPicker from './PracticeTopicPicker.vue';
+import PracticePathIcon from './PracticePathIcon.vue';
+import { practiceTopicFromHash, restorePracticeScroll } from '@/App/Learning/practiceRunNavigation.js';
 import { canTrainTopic, trainingModes } from '@/App/Learning/training.js';
+import satchelIllustration from './assets/lesson-satchel.webp';
+import flagIllustration from './assets/lesson-flag.webp';
+import pencilIllustration from './assets/lesson-pencil.webp';
+import medalIllustration from './assets/lesson-medal.webp';
 import expressionsIllustration from './assets/training-expressions.webp';
 import dialoguesIllustration from './assets/training-dialogues.webp';
 
-const props = defineProps({ route: Object, selection: Object, busy: Boolean });
-const emit = defineEmits(['open', 'train']);
+const props = defineProps({ route: Object, currentLevel: String, selection: Object, busy: Boolean });
+const emit = defineEmits(['open', 'train', 'topics']);
 const trainingIllustrations = { recall: expressionsIllustration, dialogue: dialoguesIllustration };
 const path = ref(null);
 const topics = computed(() => props.route.topics ?? []);
@@ -17,13 +22,21 @@ const current = computed(() => lessons.value.find(lesson => lesson.id === props.
   ?? lessons.value.find(lesson => lesson.status === 'available')
   ?? lessons.value.at(-1));
 const states = {
-  active: { icon: 'play', label: 'Продолжить занятие' },
-  available: { icon: 'play', label: 'Начать занятие' },
-  completed: { icon: 'check', label: 'Повторить занятие' },
-  locked: { icon: 'lock', label: 'Занятие закрыто' },
-  unavailable: { icon: 'dash', label: 'Занятие недоступно' },
+  next: { illustration: flagIllustration, label: 'Начать занятие' },
+  started: { illustration: pencilIllustration, label: 'Начать занятие заново' },
+  active: { illustration: pencilIllustration, label: 'Продолжить занятие' },
+  available: { illustration: satchelIllustration, label: 'Начать занятие' },
+  completed: { illustration: medalIllustration, label: 'Повторить занятие' },
+  locked: { illustration: satchelIllustration, badge: 'lock', label: 'Занятие закрыто' },
+  unavailable: { illustration: satchelIllustration, badge: 'dash', label: 'Занятие недоступно' },
 };
-const state = lesson => states[lesson.status] ?? states.unavailable;
+const state = lesson => {
+  if (lesson.status === 'available') {
+    if (lesson.started) return states.started;
+    if (lesson.id === current.value?.id) return states.next;
+  }
+  return states[lesson.status] ?? states.unavailable;
+};
 const canOpen = lesson => ['active', 'available', 'completed'].includes(lesson.status);
 const stepOffsets = [0, -1, 0, 1];
 const stepStyle = (index) => {
@@ -73,9 +86,10 @@ const scrollToLesson = () => {
 };
 const applyScroll = () => {
   const container = path.value;
-  if (!container || window.location.hash) return;
+  const hashTopic = practiceTopicFromHash(window.location.hash);
+  if (!container || (window.location.hash && !hashTopic)) return;
   if (restorePracticeScroll()) return;
-  const selectedTopic = props.selection?.unit;
+  const selectedTopic = hashTopic ?? props.selection?.unit;
   const target = selectedTopic
     ? [...container.querySelectorAll('[data-topic]')].find(element => element.dataset.topic === selectedTopic)
     : [...container.querySelectorAll('[data-lesson]')].find(element => element.dataset.lesson === current.value?.id);
@@ -98,16 +112,18 @@ onBeforeUnmount(() => {
       v-for="(topic, topicIndex) in topics"
       :key="topic.id"
       :data-topic="topic.id"
-      :aria-labelledby="'topic-' + topic.id"
+      :id="'topic-' + topic.id"
+      :aria-labelledby="'topic-heading-' + topic.id"
       class="topic"
       :style="topicStyle(topicIndex)"
     >
       <img v-if="topicBackgrounds.get(topic.id)" class="topic-background" :src="topicBackgrounds.get(topic.id)"
         alt="" loading="lazy" decoding="async" />
       <header class="topic-divider">
-        <h2 :id="'topic-' + topic.id" :title="topic.title">
-          <span class="topic-number" aria-hidden="true">{{ String(topicIndex + 1).padStart(2, '0') }}</span>
-          <span class="topic-name">{{ topic.title }}</span>
+        <h2 :id="'topic-heading-' + topic.id" :aria-label="topic.title">
+          <practice-topic-picker :id="topicIndex ? 'practice-topics-' + topic.id : 'practice-topics-trigger'"
+            :current-level="currentLevel" :route-level="route.level.id" :topic="topic" :number="topicIndex + 1"
+            @click="emit('topics', $event)" />
         </h2>
       </header>
       <ol class="lesson-path">
@@ -129,7 +145,7 @@ onBeforeUnmount(() => {
               :title="state(lesson).label"
               @click="emit('open', lesson)"
             >
-              <daily-practice-icon :name="state(lesson).icon" :class="{ 'lesson-icon--play': state(lesson).icon === 'play' }" />
+              <practice-path-icon :illustration="state(lesson).illustration" :badge="state(lesson).badge" />
             </button>
             <span class="lesson-title">{{ lesson.title }}</span>
             <svg
@@ -155,10 +171,8 @@ onBeforeUnmount(() => {
               :title="canTrainTopic(topic) ? undefined : topic.reason"
               @click="emit('train', topic, mode, $event)"
             >
-              <span class="training-node">
-                <img :src="trainingIllustrations[mode.id]" alt="" width="160" height="160" loading="lazy" decoding="async" />
-                <daily-practice-icon v-if="!canTrainTopic(topic)" class="training-lock" name="lock" />
-              </span>
+              <practice-path-icon class="training-node" :illustration="trainingIllustrations[mode.id]"
+                :badge="canTrainTopic(topic) ? undefined : 'lock'" />
               <span class="training-label">{{ mode.label }}</span>
             </button>
           </template>
@@ -166,7 +180,13 @@ onBeforeUnmount(() => {
       </ol>
       <p v-if="!topic.lessons.length" class="empty-path" role="status">Занятия готовятся к публикации.</p>
     </section>
-    <p v-if="!topics.length" class="empty-path" role="status">Занятия этого уровня готовятся к публикации.</p>
+    <template v-if="!topics.length">
+      <div class="topic-divider">
+        <practice-topic-picker id="practice-topics-trigger" :current-level="currentLevel" :route-level="route.level.id"
+          @click="emit('topics', $event)" />
+      </div>
+      <p class="empty-path" role="status">Занятия этого уровня готовятся к публикации.</p>
+    </template>
   </div>
 </template>
 
@@ -188,7 +208,7 @@ onBeforeUnmount(() => {
     radial-gradient(ellipse at 100% 78%, var(--topic-accent) 0, transparent 40%),
     linear-gradient(90deg, transparent, #ffffff80 45%, #ffffff80 55%, transparent);
   box-shadow: 0 4px 16px #25475b05;
-  scroll-margin-top: 132px;
+  scroll-margin-top: var(--practice-route-top);
 }
 .topic-background {
   position: absolute;
@@ -207,44 +227,12 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: var(--practice-topic-heading-height);
+  min-height: var(--practice-topic-heading-height);
 }
 .topic-divider h2 {
-  position: relative;
-  max-width: min(100%, 480px);
-  margin: 0;
-  padding: 10px 48px;
-  border: 1px solid #e6ece7;
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 4px 6px #25475b04, 0 10px 26px #25475b0d;
-  color: #25475b;
-  text-align: center;
-  font-size: 1.1rem;
-  font-weight: 750;
-  line-height: 1.5;
-}
-.topic-number {
-  position: absolute;
-  top: 50%;
-  left: 10px;
   display: grid;
-  place-items: center;
-  width: 28px;
-  height: 28px;
-  transform: translateY(-50%);
-  border-radius: 10px;
-  color: var(--topic-ink);
-  background: var(--topic-color);
-  font-size: .7rem;
-  font-weight: 750;
-  font-variant-numeric: tabular-nums;
-}
-.topic-name {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  max-width: min(100%, 32rem);
+  margin: 0;
 }
 .lesson-path {
   --step-shift: 64px;
@@ -253,14 +241,14 @@ onBeforeUnmount(() => {
   justify-items: center;
   gap: var(--step-gap);
   margin: 0;
-  padding: calc(var(--practice-topic-controls-height) - var(--practice-topic-heading-height) + 18px) 0 42px;
+  padding: 18px 0 42px;
   list-style: none;
 }
 .lesson-step {
   --training-shift: clamp(90px, 26%, 176px);
   position: relative;
   width: 100%;
-  scroll-margin-top: calc(var(--practice-route-top) + var(--practice-topic-controls-height) + 12px);
+  scroll-margin-top: calc(var(--practice-route-top) + var(--practice-topic-heading-height) + 12px);
 }
 .lesson-stop {
   position: relative;
@@ -285,60 +273,36 @@ onBeforeUnmount(() => {
 }
 .training-stop--recall {
   --training-offset: var(--training-shift);
-  --training-top: #fff8e6;
-  --training-bottom: #f5d49a;
-  --training-edge: #bc8d54;
-  --training-border: #f0d7a8;
+  --node-top: #fff8e6;
+  --node-bottom: #f5d49a;
+  --node-edge: #bc8d54;
+  --node-border: #f0d7a8;
   color: #6d4727;
 }
 .training-stop--dialogue {
   --training-offset: calc(-1 * var(--training-shift));
-  --training-top: #faf3ff;
-  --training-bottom: #e9d7f6;
-  --training-edge: #a18abd;
-  --training-border: #e3d2f0;
+  --node-top: #faf3ff;
+  --node-bottom: #e9d7f6;
+  --node-edge: #a18abd;
+  --node-border: #e3d2f0;
   color: #60447f;
 }
 .training-stop--locked {
-  --training-top: #f2f5f6;
-  --training-bottom: #dce5e7;
-  --training-edge: #bac9ce;
-  --training-border: #dce5e7;
+  --node-top: #f2f5f6;
+  --node-bottom: #dce5e7;
+  --node-edge: #bac9ce;
+  --node-border: #dce5e7;
   color: #586e79;
 }
 .training-node {
-  --training-size: clamp(56px, 10vw, 66px);
-  position: relative;
-  display: grid;
-  place-items: center;
-  box-sizing: border-box;
-  width: var(--training-size);
-  height: var(--training-size);
-  border: 2px solid #fff;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at 40% 8%, #ffffffa6, transparent 66%),
-    linear-gradient(155deg, var(--training-top), var(--training-bottom));
-  box-shadow: inset 0 0 0 1px var(--training-border), 0 3px 0 var(--training-edge), 0 5px 10px #25475b1a;
+  --node-size: clamp(56px, 10vw, 66px);
   transition: transform .15s;
-}
-.training-node img { width: 84%; height: 84%; object-fit: contain; }
-.training-stop--locked img { filter: grayscale(1); opacity: .6; }
-.training-node .training-lock {
-  position: absolute;
-  right: -2px;
-  bottom: -2px;
-  width: 21px;
-  height: 21px;
-  padding: 3px;
-  border: 1px solid var(--training-edge);
-  border-radius: 50%;
-  background: white;
 }
 .training-stop:enabled:hover .training-node { transform: translateY(-2px); }
 .training-stop:enabled:active .training-node { transform: translateY(2px); }
 .training-label {
   padding: 3px 8px;
-  border: 1px solid var(--training-border);
+  border: 1px solid var(--node-border);
   border-radius: 12px;
   background: #fff;
   font-size: .8125rem;
@@ -364,52 +328,26 @@ onBeforeUnmount(() => {
   stroke-dasharray: 1 8;
 }
 .level-path .lesson-step .lesson-node {
-  border-radius: 24px;
+  border-radius: var(--node-radius);
 }
 .lesson-node {
-  --node-top: #218e7e;
-  --node-bottom: #087064;
-  --node-edge: #07564d;
+  --node-size: 76px;
+  --node-radius: 24px;
+  --node-top: #f1faf0;
+  --node-bottom: #c5e6d4;
+  --node-edge: #83ae99;
+  --node-border: #c4dfcd;
   --node-ring: #71be9c;
-  --node-depth: 4px;
   position: relative;
   display: grid;
-  place-items: center;
-  width: 76px;
-  height: 76px;
   padding: 0;
-  border: 2px solid #fff;
-  color: #fff;
-  background: radial-gradient(ellipse at 20% 0%, #ffffff30, transparent 68%),
-    linear-gradient(155deg, var(--node-top), var(--node-bottom));
-  box-shadow: 0 var(--node-depth) 0 var(--node-edge), 0 8px 16px #25475b1a;
-  transition: transform .15s, box-shadow .15s, filter .15s;
-}
-.lesson-node::before {
-  position: absolute;
-  inset: 5px;
-  border: 1px solid currentColor;
-  border-radius: 17px;
-  opacity: .25;
-  pointer-events: none;
-  content: '';
-}
-.lesson-node :deep(svg) {
-  width: 32px;
-  height: 32px;
-  stroke-width: 2.2;
-}
-.lesson-node .lesson-icon--play {
-  fill: currentColor;
-  stroke-width: 1.5;
-  transform: translateX(-1px);
+  transition: transform .15s;
 }
 .lesson-node:enabled:hover {
   filter: brightness(1.06);
   transform: translateY(-2px);
 }
 .lesson-node:enabled:active {
-  --node-depth: 2px;
   transform: translateY(2px);
 }
 .lesson-node:focus-visible {
@@ -417,23 +355,24 @@ onBeforeUnmount(() => {
   outline-offset: 9px;
 }
 .status-active .lesson-node {
-  --node-top: #327f9a;
-  --node-bottom: #235b7a;
-  --node-edge: #1c4b65;
+  --node-top: #f1f8ff;
+  --node-bottom: #c3dff2;
+  --node-edge: #89adc8;
+  --node-border: #c5deed;
   --node-ring: #81b8d7;
 }
 .status-completed .lesson-node {
-  --node-top: #e6f7df;
-  --node-bottom: #bddfb7;
-  --node-edge: #86b680;
-  color: #28623b;
+  --node-top: #fff9e8;
+  --node-bottom: #f3ddb0;
+  --node-edge: #c3a06f;
+  --node-border: #efdcb6;
 }
 .status-locked .lesson-node,
 .status-unavailable .lesson-node {
   --node-top: #f0f4f4;
   --node-bottom: #dce5e7;
   --node-edge: #bac9ce;
-  color: #586e79;
+  --node-border: #dce5e7;
 }
 .is-current:is(.status-active, .status-available) .lesson-node::after {
   position: absolute;
@@ -475,21 +414,10 @@ onBeforeUnmount(() => {
     padding-inline: 10px;
     border-radius: 22px;
   }
-  .topic-divider h2 {
-    max-width: 100%;
-    padding-inline: 40px;
-    border-radius: 15px;
-    font-size: 1rem;
-  }
-  .topic-number {
-    left: 8px;
-    width: 25px;
-    height: 25px;
-  }
   .lesson-path {
     --step-shift: clamp(20px, 7vw, 36px);
     --step-gap: 36px;
-    padding-top: calc(var(--practice-topic-controls-height) - var(--practice-topic-heading-height) + 16px);
+    padding-top: 16px;
     padding-bottom: 40px;
   }
 }

@@ -305,6 +305,8 @@ it('keeps the active guest lesson and imports prior progress when the learner re
         'password' => 'Learning-test-12!',
         'password_confirmation' => 'Learning-test-12!',
         'confirmation_rules' => true,
+        'personal_data_consent' => true,
+        'legal_version' => \App\Support\LegalDocuments::VERSION,
     ])->assertRedirect($verification)->assertSessionMissing('daily_practice_return');
     $created = User::where('email', 'merge@example.test')->sole();
     expect($created->email_verified_at)->toBeNull();

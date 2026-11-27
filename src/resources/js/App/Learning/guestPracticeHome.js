@@ -16,7 +16,7 @@ function card(entry, access, published = true) {
   };
 }
 
-function routeView(outline, access, profileLevel, selection, candidate) {
+function routeView(outline, access, profileLevel, selection, candidate, startedLessons) {
   const inferredLevel = selection.unit && outline.find(level => level.units.some(unit => unit.id === selection.unit));
   const levelId = selection.level ?? inferredLevel?.id ?? profileLevel;
   const level = outline.find(entry => entry.id === levelId);
@@ -30,6 +30,7 @@ function routeView(outline, access, profileLevel, selection, candidate) {
       ...card(session, state),
       completed: state?.completed ?? false,
       review_only: state?.review_only ?? false,
+      started: startedLessons.has(session.id),
       run_id: null,
     };
   };
@@ -101,6 +102,9 @@ export function guestPracticeHome(local, catalog, selection, now, contentError =
     duration_minutes: next.duration_minutes, goal: next.goal ?? null,
   } : null;
   const runs = Object.values(local.runs);
+  const startedLessons = new Set(runs
+    .filter(run => ['daily', 'extra'].includes(run.kind) && ['in_progress', 'paused'].includes(run.status))
+    .map(run => run.snapshot.id));
   const vocabularyRuns = runs.filter(run => ['review', 'vocabulary_test'].includes(run.kind));
   const current = activeGuestRun(vocabularyRuns, local.current_level);
   const sessionId = current && ['daily', 'extra'].includes(current.kind) ? current.snapshot.id : null;
@@ -127,7 +131,7 @@ export function guestPracticeHome(local, catalog, selection, now, contentError =
     },
     run: active,
     candidate,
-    route: routeView(outline, access, local.current_level, selection, candidate),
+    route: routeView(outline, access, local.current_level, selection, candidate, startedLessons),
     review_suggestion: review.total ? suggestion : null,
     exhausted: !candidate,
     content_error: contentError,

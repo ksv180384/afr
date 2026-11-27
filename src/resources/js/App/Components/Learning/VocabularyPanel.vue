@@ -7,6 +7,7 @@ import { Link, router } from '@inertiajs/vue3';
 import { Icon } from '@iconify/vue';
 import AfrButton from '@/App/Components/Form/AfrButton.vue';
 import AfrInput from '@/App/Components/Form/AfrInput.vue';
+import Pagination from '@/App/Components/Pagination/Pagination.vue';
 import AfrSelect from '@/App/Components/Form/Select/AfrSelect.vue';
 import AfrOption from '@/App/Components/Form/Select/AfrOption.vue';
 import PracticeReport from './PracticeReport.vue';
@@ -70,7 +71,7 @@ const feedback = usePracticeFeedback({
   source: 'practice-vocabulary', error,
   status: saving,
 });
-const plan = ref(null);
+const startingTest = ref(null);
 const revealed = ref({});
 const expandedWords = ref({});
 const clock = ref(Date.now());
@@ -159,7 +160,6 @@ const load = async (page = pagination.value.current_page) => {
     });
   }
   clock.value = Date.now();
-  plan.value = null;
   if (owner) pendingStart.value = (await accountRepository.pending(owner,null)).length>0;
 };
 const loadShortPlan = async () => {
@@ -191,7 +191,14 @@ const openEntireDictionary = () => {
   addedInRun.value = null;
   return resetFilters();
 };
-const turnPage = (page) => perform(()=>load(page));
+const topPagination = ref(null);
+const turnPage = async (page, fromBottom = false) => {
+  await perform(() => load(page));
+  if (fromBottom && pagination.value.current_page === page) {
+    await nextTick();
+    topPagination.value?.querySelector('[aria-current="page"]')?.focus();
+  }
+};
 const mark = (word, field = 'needs_review') => perform(async () => {
   markingWordId.value = word.id;
   markingField.value = field;
@@ -218,19 +225,11 @@ const mark = (word, field = 'needs_review') => perform(async () => {
     markingField.value = null;
   }
 });
-const prepare = () => perform(async () => {
-  plan.value = owner ? await vocabularyTransport.plan(appliedFilters.value) : guestTestPlan(await repository.read(), appliedFilters.value);
-  if (!plan.value.total) onStatus({kind:'info',message:'Автоматически проверяемых вопросов нет. Откройте самопроверку у выражения ниже; серия и цели от неё не меняются.'});
-});
-const prepareDifficult = () => perform(async () => {
-  filters.value = {...defaultFilters, filter:'difficult'};
-  appliedFilters.value = requestFilters();
-  closeFilters();
-  await Promise.all([load(1), loadShortPlan()]);
-  plan.value = owner ? await vocabularyTransport.plan(appliedFilters.value) : guestTestPlan(await repository.read(), appliedFilters.value);
-});
-const start = (all = false) => perform(async () => {
-  const ids = all ? [...plan.value.word_ids] : plan.value.word_ids.slice(0, 10);
+const openRun = async id => {
+  if (!owner && props.guestRepository) emit('open-guest-run', id);
+  else await new Promise(resolve => router.visit('/daily/' + (owner ? 'run/' : 'guest/') + id, {onFinish: () => resolve()}));
+};
+const startTestRun = async ids => {
   if (owner) {
     const cachedProfile = homeStore.state.owner === owner && homeStore.state.ready ? homeStore.state.home?.profile : null;
     const profile = cachedProfile ?? await accountTransport.profile();
@@ -240,7 +239,7 @@ const start = (all = false) => perform(async () => {
       openRecoveredStart = true;
       const state = await startAccountRun({ownerUserId:owner,input,profile,repository:accountRepository,transport:accountTransport,onStatus,onMutation:invalidateHome});
       openRecoveredStart = false;
-      router.visit('/daily/run/'+state.run_id);
+      if (!disposed) await openRun(state.run_id);
     } finally { pendingStart.value = (await accountRepository.pending(owner,null)).length>0; }
   } else {
     const runId = randomUuid(); const tabId = randomUuid(); const seed = randomUuid(); const eventId = randomUuid();
@@ -249,14 +248,31 @@ const start = (all = false) => perform(async () => {
       addGuestRun(state,{source,runId,presentationIds:source.snapshot.tasks.map(randomUuid),eventId,tabId,now:new Date().toISOString(),kind:'vocabulary_test'});
     });
     invalidateHome();
-    if (props.guestRepository) emit('open-guest-run',runId);
-    else router.visit('/daily/guest/'+runId);
+    if (!disposed) await openRun(runId);
+  }
+};
+const startTest = mode => perform(async () => {
+  if (pendingStart.value) return;
+  startingTest.value = mode;
+  try {
+    const testFilters = { ...appliedFilters.value };
+    if (mode === 'difficult') testFilters.filter = 'difficult';
+    const plan = owner
+      ? await vocabularyTransport.plan(testFilters)
+      : guestTestPlan(await repository.read(), testFilters);
+    if (disposed) return;
+    if (plan.total) {
+      await startTestRun(plan.word_ids);
+    } else {
+      let message = 'В этой выборке пока нет слов для теста.';
+      if (plan.self_check_words.length) message = 'Для этих слов доступна только самопроверка. В словаре нажмите «Показать перевод».';
+      else if (testFilters.filter === 'difficult') message = 'В этой выборке нет сложных слов. Отметьте звёздочкой слова, которые хотите потренировать.';
+      saving.value = {kind:'info', message};
+    }
+  } finally {
+    startingTest.value = null;
   }
 });
-const openReviewRun = async id => {
-  if (!owner && props.guestRepository) emit('open-guest-run', id);
-  else await new Promise(resolve => router.visit('/daily/' + (owner ? 'run/' : 'guest/') + id, {onFinish: () => resolve()}));
-};
 const startShortReview = () => perform(async () => {
   const plan = shortPlan.value;
   if (!plan?.total || plan.active_run_id || pendingStart.value) return;
@@ -264,7 +280,7 @@ const startShortReview = () => perform(async () => {
     openRecoveredStart = true;
     const path = await homeStore.startReview(owner ?? null, {filters:appliedFilters.value, wordIds:plan.word_ids, onStatus});
     openRecoveredStart = false;
-    if (!disposed) await openReviewRun(path.split('/').pop());
+    if (!disposed) await openRun(path.split('/').pop());
   } catch (failure) {
     await loadShortPlan();
     throw failure;
@@ -285,7 +301,7 @@ const recover = async () => {
     const state=await deliverAccountQueue({ownerUserId:owner,runId:null,repository:accountRepository,transport:accountTransport,onStatus,onMutation:invalidateHome});
     pendingStart.value=(await accountRepository.pending(owner,null)).length>0;
     if (state && !disposed) {
-      if (openRecoveredStart) { openRecoveredStart = false; await openReviewRun(state.run_id); }
+      if (openRecoveredStart) { openRecoveredStart = false; await openRun(state.run_id); }
       else await loadShortPlan();
     }
   } catch (failure) {
@@ -361,8 +377,8 @@ onBeforeUnmount(() => { disposed=true; window.removeEventListener('online',recov
     </div>
     <div class="vocabulary-toolbar">
       <div class="training-actions">
-        <afr-button :disabled="busy || !pagination.total" @click="prepare">Тест по словам</afr-button>
-        <afr-button :disabled="busy" @click="prepareDifficult">Тренировать сложные</afr-button>
+        <afr-button :disabled="busy || pendingStart || !pagination.total" :loading="startingTest === 'words'" @click="startTest('words')">Тест по словам</afr-button>
+        <afr-button :disabled="busy || pendingStart" :loading="startingTest === 'difficult'" @click="startTest('difficult')">Тренировать сложные</afr-button>
       </div>
       <afr-button v-if="guestRepository" text @click="emit('back')">К занятиям</afr-button>
     </div>
@@ -440,19 +456,10 @@ onBeforeUnmount(() => { disposed=true; window.removeEventListener('online',recov
       <p v-else-if="appliedFilters.added_in_run">В этой выборке нет новых выражений. Измените фильтры или откройте весь словарь.</p>
       <p v-else>В этом списке пока нет выражений. Завершите занятие или измените фильтры.</p>
     </template>
-    <section v-if="plan" class="notice">
-      <p>Для проверяемого теста: {{ plan.total }}. Для самопроверки без зачёта: {{ plan.self_check_words.length }}.</p>
-      <div v-if="plan.total" class="actions">
-        <afr-button :disabled="busy || pendingStart" @click="start(false)">Короткий тест — до 10 слов</afr-button>
-        <afr-button v-if="plan.total > 10" :disabled="busy || pendingStart" @click="start(true)">Все слова — блоками по 10</afr-button>
-      </div>
-      <p v-if="!plan.total && !feedback.enabled">Автоматически проверяемых вопросов нет. Откройте самопроверку у выражения ниже; серия и цели от неё не меняются.</p>
-    </section>
-    <nav v-if="pagination.last_page>1" class="actions" aria-label="Страницы словаря">
-      <afr-button :disabled="busy || pagination.current_page<=1" @click="turnPage(pagination.current_page-1)">Предыдущая страница</afr-button>
-      <span role="status">Страница {{ pagination.current_page }} из {{ pagination.last_page }} · Всего выражений: {{ pagination.total }}</span>
-      <afr-button :disabled="busy || pagination.current_page>=pagination.last_page" @click="turnPage(pagination.current_page+1)">Следующая страница</afr-button>
-    </nav>
+    <div v-if="pagination.last_page > 1" ref="topPagination" class="vocabulary-pagination">
+      <Pagination :current-page="pagination.current_page" :last-page="pagination.last_page"
+        :disabled="busy" aria-label="Страницы словаря над списком" @change="turnPage" />
+    </div>
     <ol class="word-list">
       <li v-for="word in words" :key="word.id" :class="{ 'word-due': due(word) }">
         <div class="word-main">
@@ -527,6 +534,10 @@ onBeforeUnmount(() => { disposed=true; window.removeEventListener('online',recov
         </div>
       </li>
     </ol>
+    <div v-if="pagination.last_page > 1" class="vocabulary-pagination">
+      <Pagination :current-page="pagination.current_page" :last-page="pagination.last_page"
+        :disabled="busy" aria-label="Страницы словаря под списком" @change="turnPage($event, true)" />
+    </div>
   </section>
 </template>
 <style scoped>
@@ -547,7 +558,6 @@ onBeforeUnmount(() => { disposed=true; window.removeEventListener('online',recov
 }
 .vocabulary-header,
 .short-review,
-.actions,
 .word-actions,
 .word-stats {
   display: flex;
@@ -721,7 +731,9 @@ summary {
 .error {
   background: #fef2f2;
 }
-.actions {
+.vocabulary-pagination {
+  display: flex;
+  justify-content: flex-end;
   margin: .5rem 0;
 }
 .word-list {

@@ -23,11 +23,11 @@ class PostShowResource extends JsonResource
             'user' => UserResource::make($this->user),
             'status' => $this->status,
             'created_at' => ViewerTime::format($this->created_at, $request),
-            'created_at_iso' => $this->created_at->toIso8601String(),
-            'created' => $this->created_at->diffForHumans(),
+            'created_at_iso' => $this->created_at?->toIso8601String(),
+            'created' => $this->created_at?->diffForHumans(),
             'updated_at' => ViewerTime::format($this->updated_at, $request),
-            'updated_at_iso' => $this->updated_at->toIso8601String(),
-            'updated' => $this->updated_at->diffForHumans(),
+            'updated_at_iso' => $this->updated_at?->toIso8601String(),
+            'updated' => $this->updated_at?->diffForHumans(),
         ];
 
         return $result;

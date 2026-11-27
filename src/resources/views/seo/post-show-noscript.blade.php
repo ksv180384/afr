@@ -3,6 +3,7 @@
     $postContent = data_get($post, 'content');
     $postAuthor = data_get($post, 'user.name');
     $postCreatedAt = data_get($post, 'created_at');
+    $postCreatedAtIso = data_get($post, 'created_at_iso');
 @endphp
 
 <noscript>
@@ -22,7 +23,7 @@
                             <span> / </span>
                         @endif
                         @if ($postCreatedAt)
-                            <time>{{ $postCreatedAt }}</time>
+                            <time datetime="{{ $postCreatedAtIso }}">{{ $postCreatedAt }}</time>
                         @endif
                     </p>
                 @endif

@@ -4,8 +4,7 @@ let pendingFocus;
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { Link } from '@inertiajs/vue3';
-import AfrButton from '@/App/Components/Form/AfrButton.vue';
-import { bindTrainingHistory, restorePracticeScroll } from '@/App/Learning/practiceRunNavigation.js';
+import { bindPracticePanelHistory, practiceTopicFromHash, restorePracticeScroll } from '@/App/Learning/practiceRunNavigation.js';
 import { canTrainTopic, trainingModes } from '@/App/Learning/training.js';
 import { practiceRouteTransport } from '@/App/Services/Api/daily_practice.js';
 import FrenchText from './FrenchText.vue';
@@ -16,7 +15,7 @@ import PracticeLevelPath from './PracticeLevelPath.vue';
 import PracticeErrorNotice from './PracticeErrorNotice.vue';
 import TrainingPanel from './TrainingPanel.vue';
 
-const props = defineProps({route: {type: Object, required: true}, selection: Object, owner: Number, guest: Boolean, store: Object, busy: Boolean, trail: Boolean});
+const props = defineProps({route: {type: Object, required: true}, selection: Object, currentLevel: String, owner: Number, guest: Boolean, store: Object, busy: Boolean, trail: Boolean});
 const emit = defineEmits(['start', 'continue']);
 const canOpen = item => ['completed', 'available', 'active'].includes(item?.status);
 const levelTitle = level => level === 'PRE_A1' ? 'С нуля' : level;
@@ -37,7 +36,8 @@ const closeButton = ref(null);
 const fragment = ref('');
 let fragmentPath;
 let trigger;
-let unbindTrainingHistory;
+let unbindPanelHistory;
+const pickerTopic = ref(null);
 let openedHere = false;
 const trainingSelection = computed(() => {
   if (!props.trail || !fragment.value.startsWith('#training=')) return null;
@@ -63,8 +63,9 @@ const openPanel = (value, event) => {
   trigger = event.currentTarget;
   pendingFocus = {path: pagePath(), id: trigger.id};
   openedHere = true;
-  if (value.startsWith('training=')) {
-    window.history.pushState({...window.history.state, practiceTraining: true}, '', '#' + value);
+  if (value === 'topics') pickerTopic.value = trigger.closest('[data-topic]')?.dataset.topic ?? props.route.unit?.id;
+  if (props.trail && (value === 'topics' || value.startsWith('training='))) {
+    window.history.pushState({...window.history.state, practicePanel: true}, '', '#' + value);
   } else {
     window.location.hash = value;
   }
@@ -75,13 +76,15 @@ const syncFragment = () => {
   fragmentPath = pagePath();
   fragment.value = window.location.hash;
 };
-const handleTrainingHistory = event => {
+const isTrailPanel = hash => hash === '#topics' || hash.startsWith('#training=');
+const handlePanelHistory = event => {
   if (!props.trail || fragmentPath !== pagePath()) return;
-  const trainingEntry = event.state?.practiceTraining && window.location.hash.startsWith('#training=');
-  if (!trainingEntry && !fragment.value.startsWith('#training=')) return;
-  // Same-page training entries belong to the dialog. Inertia would remount the route on traversal.
+  const hash = window.location.hash;
+  if (!isTrailPanel(hash) && !isTrailPanel(fragment.value) &&
+      !practiceTopicFromHash(hash) && !practiceTopicFromHash(fragment.value)) return;
+  // Inertia handles page changes; the trail owns its dialog and section fragments.
   event.stopImmediatePropagation();
-  openedHere = Boolean(trainingEntry);
+  openedHere = Boolean(event.state?.practicePanel && isTrailPanel(hash));
   syncFragment();
 };
 const closePanel = () => {
@@ -93,6 +96,26 @@ const closePanel = () => {
     window.history.replaceState(state?.url ? {...state, url: pagePath()} : state, '', pagePath());
     syncFragment();
   }
+};
+const selectLocalTopic = async (event, unit) => {
+  if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  const section = document.getElementById('topic-' + unit);
+  if (!section) return;
+  event.preventDefault();
+  if (trigger?.closest('[data-topic]') === section) {
+    closePanel();
+    return;
+  }
+
+  const hash = '#topic-' + encodeURIComponent(unit);
+  const state = {...window.history.state, url: pagePath() + hash};
+  delete state.practicePanel;
+  window.history.replaceState(state, '', hash);
+  trigger = section.querySelector('.topic-picker');
+  pendingFocus = undefined;
+  syncFragment();
+  await nextTick();
+  section.scrollIntoView({block: 'start', behavior: 'instant'});
 };
 watch(panel, async value => {
   if (value && !dialog.value?.open) {
@@ -117,11 +140,11 @@ onMounted(() => {
     pendingFocus = undefined;
     nextTick(() => document.getElementById(id)?.focus({preventScroll: true}));
   }
-  if (props.trail) unbindTrainingHistory = bindTrainingHistory(handleTrainingHistory);
+  if (props.trail) unbindPanelHistory = bindPracticePanelHistory(handlePanelHistory);
   window.addEventListener('hashchange', syncFragment);
 });
 onBeforeUnmount(() => {
-  unbindTrainingHistory?.();
+  unbindPanelHistory?.();
   window.removeEventListener('hashchange', syncFragment);
 });
 
@@ -193,24 +216,24 @@ const search = async () => {
 
 <template>
   <section class="learn-route" :class="{ 'learn-route--trail': trail }" :aria-labelledby="trail ? undefined : 'practice-route-title'">
-    <header class="route-header" :class="{ 'trail-toolbar': trail }">
-      <div v-if="!trail">
+    <header v-if="!trail" class="route-header">
+      <div>
         <p>{{ route.level.title || levelTitle(route.level.id) }}</p>
         <h2 id="practice-route-title">{{ route.unit?.title || 'Учебный маршрут' }}</h2>
         <p v-if="route.lessons.length">Пройдено {{ completedCount }} из {{ route.lessons.length }} занятий</p>
       </div>
       <div class="route-actions">
-        <button id="practice-topics-trigger" type="button" class="topics-trigger" @click="openPanel('topics', $event)">
-          <daily-practice-icon v-if="trail" name="list" />
+        <button id="practice-topics-trigger" type="button" class="topics-trigger" aria-haspopup="dialog" aria-controls="practice-route-dialog" @click="openPanel('topics', $event)">
           Уровни и темы
         </button>
-        <Link v-if="selected && !trail" href="/practice">К текущему занятию</Link>
+        <Link v-if="selected" href="/practice">К текущему занятию</Link>
       </div>
     </header>
 
     <slot v-if="!trail" />
 
-    <practice-level-path v-if="trail" :route="route" :selection="selection" :busy="busy" @open="openLesson" @train="openTraining" />
+    <practice-level-path v-if="trail" :route="route" :current-level="currentLevel" :selection="selection" :busy="busy"
+      @open="openLesson" @train="openTraining" @topics="openPanel('topics', $event)" />
 
     <section v-if="!trail" class="route-lessons" aria-labelledby="practice-lessons-title">
       <header class="route-header">
@@ -234,7 +257,8 @@ const search = async () => {
       </ol>
     </section>
 
-    <dialog ref="dialog" :class="panel === 'training' ? 'training-dialog mobile-dialog-sheet' : 'route-dialog'" aria-labelledby="practice-panel-title" @cancel.prevent="closePanel">
+    <dialog id="practice-route-dialog" ref="dialog" :class="[panel === 'training' ? 'training-dialog' : 'route-dialog',
+      { 'mobile-dialog-sheet': panel === 'training' || panel === 'topics' }]" aria-labelledby="practice-panel-title" @cancel.prevent="closePanel">
       <div class="dialog-toolbar">
         <header class="route-header">
           <h2 id="practice-panel-title">{{ heading }}</h2>
@@ -263,7 +287,7 @@ const search = async () => {
           :owner="owner" :unit="trainingSelection.topic.id" :mode="trainingSelection.mode" :guest-repository="store?.guestRepository" />
         <p v-else role="status">{{ trainingSelection.topic.reason || 'Тренировки этой темы пока недоступны.' }}</p>
       </div>
-      <template v-else-if="panel === 'topics'">
+      <div v-else-if="panel === 'topics'" class="topics-content">
         <p v-if="searching" role="status">Ищем занятия…</p>
         <practice-error-notice v-if="searchError" :message="searchError" />
         <section v-if="results">
@@ -287,14 +311,17 @@ const search = async () => {
           <summary>{{ level.title || levelTitle(level.id) }} <practice-status :status="level.status" icon-only /></summary>
           <ul class="route-choice-list">
             <li v-for="unit in level.units" :key="unit.id" class="choice-row">
-              <Link :href="topicUrl(level.id, unit.id)" :aria-current="route.unit?.id === unit.id ? 'location' : null">{{ unit.title }}</Link>
+              <a v-if="trail && level.id === route.level.id" :href="topicUrl(level.id, unit.id)"
+                :aria-current="(pickerTopic ?? route.unit?.id) === unit.id ? 'location' : null"
+                @click="selectLocalTopic($event, unit.id)">{{ unit.title }}</a>
+              <Link v-else :href="topicUrl(level.id, unit.id)" :aria-current="route.unit?.id === unit.id ? 'location' : null">{{ unit.title }}</Link>
               <span class="choice-count">{{ unit.session_count }} занятий</span>
               <practice-status :status="unit.status" icon-only />
             </li>
             <li v-if="!level.units.length"><Link :href="topicUrl(level.id)">Открыть уровень</Link></li>
           </ul>
         </details>
-      </template>
+      </div>
       <template v-else-if="panel">
         <section v-if="panel === 'notes'" class="practice-rules" aria-label="Как заниматься">
           <p>Уроки открываются по порядку. Пройденное можно повторить.</p>
@@ -320,36 +347,6 @@ const search = async () => {
 </template>
 
 <style scoped>
-.route-header.trail-toolbar {
-  position: sticky;
-  grid-area: 1 / 1;
-  align-self: start;
-  margin-top: var(--practice-topic-button-offset);
-  top: calc(var(--practice-route-top) + var(--practice-topic-button-offset));
-  z-index: 3;
-  justify-content: flex-end;
-  padding-inline: 16px;
-  pointer-events: none;
-}
-.trail-toolbar .route-actions .topics-trigger {
-  gap: 8px;
-  padding-inline: 12px;
-  border-color: #d6e3dc;
-  border-radius: 13px;
-  background: #fffffff5;
-  color: #42645a;
-  font-size: .875rem;
-  box-shadow: 0 4px 12px #25475b08;
-  pointer-events: auto;
-}
-.trail-toolbar .topics-trigger:hover {
-  background: #f5faf6;
-  border-color: #adcbb8;
-}
-.trail-toolbar .topics-trigger:focus-visible {
-  outline: 3px solid #165ca7;
-  outline-offset: 3px;
-}
 .learn-route {
   display: grid;
   gap: .85rem;
@@ -359,10 +356,7 @@ const search = async () => {
 .learn-route--trail {
   --practice-route-top: 68px;
   --practice-topic-heading-height: 64px;
-  --practice-topic-button-offset: calc(var(--practice-topic-heading-height) + 6px);
-  --practice-topic-controls-height: calc(var(--practice-topic-button-offset) + 44px);
 }
-.learn-route--trail > :deep(.level-path) { grid-area: 1 / 1; }
 .route-header { display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:.6rem 1rem; }
 .route-header h2 { margin:.2rem 0; font-size:1.4rem; font-weight:700; line-height:1.3; }
 .route-header p { margin:0; color:var(--practice-muted); }
@@ -376,7 +370,15 @@ const search = async () => {
 .route-lesson { display:grid; grid-template-columns:minmax(0,1fr) minmax(0, auto); align-items:start; gap:.6rem; padding:.65rem 0; border-top:1px solid #e2e8f0; }
 .lesson-text { display:grid; gap:.2rem; min-width:0; }
 .lesson-text p { color:var(--practice-muted); font-size:.875rem; margin:0; }
-.route-dialog { box-sizing:border-box; position:fixed; inset:0 0 0 auto; margin:0; width:min(100%,35rem); max-width:100%; height:100dvh; max-height:100%; overflow:auto; padding:0 1.25rem 1rem; overflow-x:hidden; background:#fff; color:#17364d; border-left:1px solid #cbd5e1; }
+.route-dialog.mobile-dialog-sheet {
+  --dialog-width: 35rem;
+  overflow: hidden;
+  color: #17364d;
+}
+.route-dialog.mobile-dialog-sheet[open] { display: flex; flex-direction: column; }
+.route-dialog.mobile-dialog-sheet .dialog-toolbar { position: static; flex: none; margin: 0; }
+.topics-content { min-height: 0; overflow: auto; overscroll-behavior: contain; }
+.route-dialog:not(.mobile-dialog-sheet) { box-sizing:border-box; position:fixed; inset:0 0 0 auto; margin:0; width:min(100%,35rem); max-width:100%; height:100dvh; max-height:100%; overflow:auto; padding:0 1.25rem 1rem; overflow-x:hidden; background:#fff; color:#17364d; border-left:1px solid #cbd5e1; }
 .route-dialog::backdrop { background:#10284088; }
 .training-dialog {
   --dialog-width: 46rem;
@@ -405,13 +407,9 @@ const search = async () => {
   margin: 0;
   padding-inline: max(var(--training-inset), env(safe-area-inset-left)) max(var(--training-inset), env(safe-area-inset-right));
 }
-:global(html:has(.training-dialog[open])) { overflow: hidden; }
+:global(html:has(#practice-route-dialog[open].mobile-dialog-sheet)) { overflow: hidden; }
 .training-dialog::backdrop { background:#10284088; }
-@media (max-width: 400px) {
-  .trail-toolbar .route-actions { gap: .3rem; }
-  .trail-toolbar .route-actions .topics-trigger { padding-inline: .5rem; gap: .35rem; }
-}
-.route-dialog[open] { animation: slide-in .25s ease-out; }
+.route-dialog:not(.mobile-dialog-sheet)[open] { animation: slide-in .25s ease-out; }
 @keyframes slide-in {
   from { transform:translateX(100%); }
   to { transform:translateX(0); }
@@ -485,10 +483,10 @@ const search = async () => {
 .route-reference { display:grid; gap:.65rem; }
 .route-reference ul { list-style:disc; padding-left:1.25rem; }
 @media (prefers-reduced-motion: reduce) {
-  .route-dialog[open] { animation:none; }
+  .route-dialog:not(.mobile-dialog-sheet)[open] { animation:none; }
 }
 @media(max-width:800px) {
-  .route-dialog { width:100%; padding-inline:1rem; padding-bottom:calc(1rem + env(safe-area-inset-bottom)); }
+  .route-dialog:not(.mobile-dialog-sheet) { width:100%; padding-inline:1rem; padding-bottom:calc(1rem + env(safe-area-inset-bottom)); }
   .route-lesson { grid-template-columns:minmax(0,1fr); }
 }
 </style>

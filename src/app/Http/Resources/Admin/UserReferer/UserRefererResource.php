@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Admin\UserReferer;
 
 use App\Services\Admin\UserReferer\UserRefererService;
+use App\Support\ViewerTime;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -28,8 +29,8 @@ class UserRefererResource extends JsonResource
             'utm_term' => $this->utm_term,
             'utm_content' => $this->utm_content,
             'user_agent' => $this->user_agent,
-            'created_at' => $this->created_at->format('d.m.Y H:i'),
-            'created' => $this->created_at->diffForHumans(),
+            'created_at' => ViewerTime::format($this->created_at, $request),
+            'created' => $this->created_at?->diffForHumans(),
         ];
     }
 }

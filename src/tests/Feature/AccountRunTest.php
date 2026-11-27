@@ -416,13 +416,17 @@ it('keeps short review blocks below the ordinary lesson minimum', function (int 
 it('leaves an unfinished extra lesson available to start again', function () {
     $first = accountStart($this);
     $finished = accountCommand($this, accountComplete($this, $first), 'finish');
-    $this->getJson('/daily/api/today')->assertJsonPath('active_run', null)->assertJsonPath('candidate.id', 'PRE_A1-U01-L02');
+    $this->getJson('/daily/api/today')->assertJsonPath('active_run', null)->assertJsonPath('candidate.id', 'PRE_A1-U01-L02')
+        ->assertJsonPath('route.topics.0.lessons.1.started', false);
     $extra = accountStart($this, ['kind' => 'extra', 'session_id' => 'PRE_A1-U01-L02']);
     $this->getJson('/daily/api/today')->assertOk()
         ->assertJsonPath('run.id', $finished['run_id'])
         ->assertJsonPath('active_run', null)
         ->assertJsonPath('route.lessons.0.status', 'completed')
-        ->assertJsonPath('route.lessons.1.status', 'available');
+        ->assertJsonPath('route.lessons.1.status', 'available')
+        ->assertJsonPath('route.lessons.0.started', false)
+        ->assertJsonPath('route.topics.0.lessons.1.started', true)
+        ->assertJsonPath('route.lessons.1.run_id', null);
 });
 
 it('rejects a start from a cached profile after the authenticated owner changes', function () {

@@ -5,7 +5,7 @@ namespace App\Services\Learning;
 final class PracticeHomeRoute
 {
     /** Present existing access decisions as compact screen states. */
-    public function make(array $outline, array $access, string $profileLevel, array $selection, ?array $active, ?array $candidate, array $lessonRuns): array
+    public function make(array $outline, array $access, string $profileLevel, array $selection, ?array $active, ?array $candidate, array $startedLessons): array
     {
         $levelId = $selection['level'] ?? $profileLevel;
         if (! isset($selection['level']) && isset($selection['unit'])) {
@@ -34,17 +34,11 @@ final class PracticeHomeRoute
             $unitId ??= $units[0]['id'] ?? null;
         }
         $unit = collect($units)->firstWhere('id', $unitId);
-        $lessonCard = function ($session) use ($lessonRuns, $access) {
+        $lessonCard = function ($session) use ($startedLessons, $access) {
             $state = $access['sessions'][$session['id']] ?? null;
-            $runId = $lessonRuns[$session['id']] ?? null;
-            $card = $this->card($session, $state);
-            if ($runId !== null) {
-                $card['status'] = 'active';
-                $card['reason'] = '';
-            }
-
-            return [...$card,
-                'completed' => $state['completed'] ?? false, 'review_only' => $state['review_only'] ?? false, 'run_id' => $runId];
+            return [...$this->card($session, $state),
+                'started' => isset($startedLessons[$session['id']]),
+                'completed' => $state['completed'] ?? false, 'review_only' => $state['review_only'] ?? false, 'run_id' => null];
         };
         $lessons = array_map($lessonCard, $unit['sessions'] ?? []);
         $topics = array_map(fn ($topic) => [

@@ -29,7 +29,7 @@ const onToggleShow = () => {
           <a :href="route('user.show', { id: comment.user.id })">
             {{ comment.user.name }}
           </a>
-          <div class="text-sm font-normal">
+          <div class="text-sm font-normal" :title="comment.created_at">
             {{ comment.created }}
           </div>
         </div>

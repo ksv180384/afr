@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User\User;
+use App\Support\LegalDocuments;
 use Illuminate\Support\Str;
 
 test('login screen can be rendered', function () {
@@ -12,6 +13,7 @@ test('login screen can be rendered', function () {
 test('users can authenticate using the login screen', function () {
     $user = User::factory()->create();
 
+    LegalDocuments::record($user);
     $response = $this->post('/login', [
         'email' => $user->email,
         'password' => 'password',
@@ -23,6 +25,7 @@ test('users can authenticate using the login screen', function () {
 test('unverified users are redirected to email verification notice', function () {
     $user = User::factory()->unverified()->create();
 
+    LegalDocuments::record($user);
     $response = $this->post('/login', [
         'email' => $user->email,
         'password' => 'password',
@@ -36,6 +39,7 @@ test('login from a guest lesson retains the lesson through the authentication re
     $this->withoutVite();
     config(['daily_practice.enabled' => true]);
     $user = ($verified ? User::factory() : User::factory()->unverified())->create();
+    LegalDocuments::record($user);
     $run = (string) Str::uuid();
 
     $this->get('/login?practice=1&guest_run='.$run)->assertOk();

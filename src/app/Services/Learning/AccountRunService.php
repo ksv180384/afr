@@ -120,6 +120,9 @@ final class AccountRunService
         $next = $candidate ? ['id' => $candidate->external_id, 'level' => $candidate->getRawOriginal('level'),
             'theme' => $candidate->unit->title, 'duration_minutes' => (int) $candidate->content_duration,
             'title' => $candidate->content_title, 'goal' => $candidate->content_goal] : null;
+        $startedLessons = LearningSession::query()->whereIn('id',
+            $this->unfinishedRuns($actor)->reorder()->whereIn('kind', ['daily', 'extra'])->select('session_id')
+        )->pluck('external_id')->flip()->all();
         $unfinishedVocabulary = $this->unfinishedRuns($actor)->whereIn('kind', ['review', 'vocabulary_test']);
         $active = (clone $unfinishedVocabulary)->first();
         $activeSummary = $active ? $this->homeRun($active) : null;
@@ -137,7 +140,7 @@ final class AccountRunService
             'active_run' => $activeSummary,
             'vocabulary_runs' => $vocabularyRuns,
             'candidate' => $next,
-            'route' => app(PracticeHomeRoute::class)->make($outline, $access, $profile['current_level'], $selection, $activeSummary, $next, []),
+            'route' => app(PracticeHomeRoute::class)->make($outline, $access, $profile['current_level'], $selection, $activeSummary, $next, $startedLessons),
             'activity_today' => $this->finishedOn($actor, $date),
             'review_suggestion' => ($review = app(VocabularyTestService::class)->shortPlan($actor, 'suggested'))['total'] ? array_diff_key($review, ['selection' => true]) : null,
             'exhausted' => $candidate === null];

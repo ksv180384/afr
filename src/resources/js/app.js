@@ -5,8 +5,8 @@ import CookieNotice from './App/Components/Info/CookieNotice.vue';
 import GuestSync from './App/Components/Learning/GuestSync.vue';
 import PracticeToasts from './App/Components/Learning/PracticeToasts.vue';
 import { createPracticeNotifications, practiceNotificationsKey } from './App/Learning/practiceNotifications.js';
-import { handlePracticeHistory } from './App/Learning/practiceRunNavigation.js';
 
+import { handlePracticeHistory } from './App/Learning/practiceRunNavigation.js';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createApp, h } from 'vue';
@@ -24,7 +24,7 @@ const notivue = createNotivue({
 
 const pinia = createPinia();
 
-// Training modals handle their same-page entries before Inertia handles page navigation.
+// Same-page practice fragments must be handled before Inertia remounts the page.
 window.addEventListener('popstate', handlePracticeHistory);
 
 createInertiaApp({

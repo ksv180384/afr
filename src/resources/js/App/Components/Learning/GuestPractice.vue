@@ -273,7 +273,7 @@ onBeforeUnmount(() => { window.removeEventListener('focus',focus); unregisterAut
     </session-player>
     <template v-else-if="ready && state">
       <p v-if="!progressOnly && !home" role="status">Загружаем учебный маршрут…</p>
-      <practice-route-topic v-if="!progressOnly && home" :trail="trail" :route="home.route" :store="store" :selection="routeSelection"
+      <practice-route-topic v-if="!progressOnly && home" :trail="trail" :route="home.route" :current-level="home.profile.current_level" :store="store" :selection="routeSelection"
         :busy="busy || locked || dirty" @start="start" @continue="open" guest>
       <section v-if="selectedSession" class="practice-panel lesson-main">
         <p class="muted">Выбранное занятие</p><h2>{{ selectedSession.title }}</h2>

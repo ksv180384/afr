@@ -11,8 +11,9 @@ import { openCookiePreferences } from '@/App/Services/cookiePreferences.js';
         <li>© 2010 - {{ dayjs().format('YYYY') }} гг ApprendreFr.ru</li>
         <li>e-mail: admin@apprendrefr.ru</li>
         <li class="infos-block">
-          <Link class="link mx-10" :href="route('info.terms-user')">Правила пользовательского соглашения</Link>
-          <Link class="link mx-10" :href="route('info.privacy-policy')">Политика по защите персональных данных</Link>
+          <Link class="link" :href="route('info.terms-user')">Правила сайта</Link>
+          <Link class="link" :href="route('info.privacy-policy')">Политика конфиденциальности</Link>
+          <Link class="link" :href="route('info.personal-data-consent')">Согласие на обработку персональных данных</Link>
         </li>
         <li><button type="button" class="link" @click="openCookiePreferences">Настройки cookie</button></li>
       </ul>
@@ -34,6 +35,6 @@ import { openCookiePreferences } from '@/App/Services/cookiePreferences.js';
 }
 
 .infos-block{
-  @apply flex lg:block flex-col;
+  @apply flex flex-wrap items-center justify-center gap-x-6 gap-y-2 px-4;
 }
 </style>

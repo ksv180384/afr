@@ -275,6 +275,7 @@ it('passes the current header identity at every catalog depth without exposing a
 });
 
 it('accepts login and logout POST requests from public practice without losing authentication state', function () {
+    \App\Support\LegalDocuments::record($this->admin);
     $this->admin->update(['password' => Illuminate\Support\Facades\Hash::make(md5('Practice-check-42!'))]);
     $this->post('/login', ['email' => $this->admin->email, 'password' => 'Practice-check-42!'], ['Referer' => 'http://localhost:5000/practice'])->assertRedirect('/practice');
     $this->assertAuthenticatedAs($this->admin);

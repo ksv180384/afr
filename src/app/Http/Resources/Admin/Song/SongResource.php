@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Admin\Song;
 
 use App\Http\Resources\Admin\User\UserMiniResource;
+use App\Support\ViewerTime;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -23,10 +24,10 @@ class SongResource extends JsonResource
             'title' => $this->title,
             'hidden' => $this->hidden,
             'user' => UserMiniResource::make($this->user),
-            'created_at' => !empty($this->created_at) ? $this->created_at->format('d.m.Y H:i') : '',
-            'created' => !empty($this->created_at) ? $this->created_at->diffForHumans() : '',
-            'updated_at' => !empty($this->updated_at) ? $this->updated_at->format('d.m.Y H:i') : '',
-            'updated' => !empty($this->updated_at) ? $this->updated_at->diffForHumans() : '',
+            'created_at' => ViewerTime::format($this->created_at, $request) ?? '',
+            'created' => $this->created_at?->diffForHumans() ?? '',
+            'updated_at' => ViewerTime::format($this->updated_at, $request) ?? '',
+            'updated' => $this->updated_at?->diffForHumans() ?? '',
         ];
     }
 }

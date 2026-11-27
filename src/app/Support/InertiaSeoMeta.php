@@ -25,6 +25,12 @@ class InertiaSeoMeta
         ];
 
         return match ($component) {
+            'Info/LegalDocument' => [
+                ...$meta,
+                'title' => $page['props']['title'].' — apprendrefr.ru',
+                'description' => $page['props']['title'].' сайта apprendrefr.ru',
+                'noIndex' => true,
+            ],
             'Grammar/Grammar' => self::grammarIndex($meta, $appName),
             'Grammar/GrammarShow' => self::grammarShow($meta, $appName, data_get($page, 'props.grammarContent'), $canonicalUrl),
             'Lessons/Lessons' => self::lessonsIndex($meta, $appName),

@@ -8,10 +8,12 @@ use App\Jobs\SendTelegramLogJob;
 use App\Models\User\Rang;
 use App\Models\User\User;
 use App\Support\Learning\PracticeAuthReturn;
+use App\Support\LegalDocuments;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -37,16 +39,21 @@ class RegisteredUserController extends Controller
     {
         $rang = Rang::select(['id'])->where('alias', '=', 'polzovatel')->first();
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make(md5($request->password)),
-            'rang_id' => $rang->id,
-        ]);
+        $user = DB::transaction(function () use ($request, $rang) {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make(md5($request->password)),
+                'rang_id' => $rang->id,
+            ]);
+            LegalDocuments::record($user);
+
+            return $user;
+        });
 
         event(new Registered($user));
 
-        SendTelegramLogJob::dispatch('Зарегистрирован новый пользователь: '.$user->email)->afterResponse();
+        SendTelegramLogJob::dispatch('Зарегистрирован новый пользователь.')->afterResponse();
 
         Auth::login($user);
 

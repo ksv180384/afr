@@ -51,7 +51,7 @@ final class PronunciationController
         return response()->json($this->worker('post', ['items' => $items, 'replace' => $replace]), 202);
     }
 
-    public function status(EditorRequest $request): JsonResponse
+    public function status(EditorRequest $request, PronunciationCatalog $catalog): JsonResponse
     {
         abort_unless(app()->environment('local'), 404);
         $keys = $request->validate(['keys' => 'sometimes|array|max:50', 'keys.*' => ['string', 'regex:/\A[a-f0-9]{64}\z/']])['keys'] ?? [];
@@ -61,7 +61,17 @@ final class PronunciationController
             $files[$key] = PronunciationRecordings::files($key);
         }
 
-        return response()->json($queue + ['files' => $files]);
+        $catalogKeys = array_keys($catalog->rows());
+        $ready = 0;
+        $voiceCount = count(PronunciationRecordings::VOICES);
+        foreach ($catalogKeys as $key) {
+            $recordings = $files[$key] ?? PronunciationRecordings::files($key);
+            if (count($recordings) === $voiceCount) {
+                $ready++;
+            }
+        }
+
+        return response()->json($queue + ['files' => $files, 'coverage' => ['ready' => $ready, 'total' => count($catalogKeys)]]);
     }
 
     private function worker(string $method, array $data): array

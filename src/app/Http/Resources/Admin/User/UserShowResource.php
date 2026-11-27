@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Admin\User;
 
+use App\Support\ViewerTime;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,7 +19,7 @@ class UserShowResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'email_verified_at' => $this->email_verified_at,
+            'email_verified_at' => ViewerTime::format($this->email_verified_at, $request),
             'send_verified_email_at' => $this->send_verified_email_at,
             'avatar' => $this->avatar,
             'avatar_link' => $this->avatar_link,
@@ -35,8 +36,8 @@ class UserShowResource extends JsonResource
             'is_moderator' => $this->is_moderator,
             'is_ban' => $this->is_ban,
             'confirm_token' => $this->confirm_token,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at' => ViewerTime::format($this->created_at, $request),
+            'updated_at' => ViewerTime::format($this->updated_at, $request),
             'infos' => [
                 'facebook' => data_get($this, 'infos.facebook'),
                 'twitter' => data_get($this, 'infos.twitter'),

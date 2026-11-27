@@ -1,16 +1,22 @@
 import { router } from '@inertiajs/vue3';
 
 let returnScroll;
-let trainingHistoryHandler;
+let panelHistoryHandler;
 const runPath = /^\/daily\/(run|guest)\/[0-9a-f-]+$/i;
 
-export function bindTrainingHistory(handler) {
-  trainingHistoryHandler = handler;
-  return () => { if (trainingHistoryHandler === handler) trainingHistoryHandler = undefined; };
+export function bindPracticePanelHistory(handler) {
+  panelHistoryHandler = handler;
+  return () => { if (panelHistoryHandler === handler) panelHistoryHandler = undefined; };
 }
 
 export function handlePracticeHistory(event) {
-  trainingHistoryHandler?.(event);
+  panelHistoryHandler?.(event);
+}
+
+export function practiceTopicFromHash(hash) {
+  if (!hash.startsWith('#topic-')) return null;
+  try { return decodeURIComponent(hash.slice('#topic-'.length)) || null; }
+  catch { return null; }
 }
 
 export function visitPracticeRun(path, selection = {}) {
@@ -21,7 +27,8 @@ export function visitPracticeRun(path, selection = {}) {
       if (current.has(key)) query.set(key, current.get(key));
     }
   } else {
-    const {level, unit} = selection;
+    const {level} = selection;
+    const unit = (window.location.pathname === '/practice' && practiceTopicFromHash(window.location.hash)) || selection.unit;
     if (level) query.set('from_level', level);
     if (unit) query.set('from_unit', unit);
     if (level || unit) query.set('from_scroll', String(Math.round(window.scrollY)));

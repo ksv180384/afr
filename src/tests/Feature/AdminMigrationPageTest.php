@@ -18,6 +18,7 @@ test('a verified administrator can log in and apply the pending practice migrati
     $admin = \App\Models\User\User::factory()->create(['rang_id' => $rank->id]);
     $profile = \App\Models\Learning\LearningProfile::factory()->create(['user_id' => $admin->id, 'revision' => 4]);
 
+    \App\Support\LegalDocuments::record($admin);
     $this->post(route('login'), ['email' => $admin->email, 'password' => 'password'])->assertRedirect();
     $this->assertAuthenticatedAs($admin);
     $this->get(route('admin.migrations'))->assertOk()->assertSee($name);

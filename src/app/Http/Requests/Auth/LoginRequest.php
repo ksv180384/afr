@@ -2,11 +2,13 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\User\User;
+use App\Support\LegalDocuments;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
@@ -42,7 +44,16 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->getCredentials(), $this->boolean('remember'))) {
+        $acceptAgreements = function (User $user): bool {
+            if (! LegalDocuments::acceptedBy($user)) {
+                Validator::make($this->only(array_keys(LegalDocuments::RULES)), LegalDocuments::RULES, LegalDocuments::MESSAGES)->validate();
+                LegalDocuments::record($user);
+            }
+
+            return true;
+        };
+
+        if (! Auth::attemptWhen($this->getCredentials(), $acceptAgreements, $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([

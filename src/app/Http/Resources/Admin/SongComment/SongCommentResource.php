@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Admin\SongComment;
 
+use App\Support\ViewerTime;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,10 +21,10 @@ class SongCommentResource extends JsonResource
             'song' => $this->song,
             'user' => $this->user,
             'is_hidden' => $this->is_hidden,
-            'created_at' => $this->created_at->format('d.m.Y H:i'),
-            'created' => $this->created_at->diffForHumans(),
-            'updated_at' => $this->updated_at->format('d.m.Y H:i'),
-            'updated' => $this->updated_at->diffForHumans(),
+            'created_at' => ViewerTime::format($this->created_at, $request),
+            'created' => $this->created_at?->diffForHumans(),
+            'updated_at' => ViewerTime::format($this->updated_at, $request),
+            'updated' => $this->updated_at?->diffForHumans(),
         ];
 
         return $result;

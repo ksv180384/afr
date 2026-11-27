@@ -348,6 +348,8 @@ test('guest route starts and restarts each selected available lesson separately'
   await store.refresh(null, 1, {selection: {level: 'PRE_A1'}});
   const firstPath = await store.start(null, lesson.id);
   assert.equal(store.state.home.route.lessons[1].status, 'available');
+  assert.equal(store.state.home.route.topics[0].lessons[0].started, true);
+  assert.equal(store.state.home.route.topics[0].lessons[1].started, false);
   const secondPath = await store.start(null, second.id);
   assert.notEqual(secondPath, firstPath);
   assert.notEqual(await store.start(null, lesson.id), firstPath);

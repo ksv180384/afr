@@ -29,8 +29,10 @@ let sequence = 0;
 
 const files = row => changes.value[row.key] ?? row.files;
 const incomplete = row => !files(row).lea || !files(row).paul;
-const missing = computed(() => props.rows.filter(incomplete).length);
-const ready = computed(() => props.rows.length - missing.value);
+const listedReady = computed(() => props.rows.filter(row => !incomplete(row)).length);
+const ready = computed(() => status.value.coverage?.ready ?? listedReady.value);
+const total = computed(() => status.value.coverage?.total ?? props.rows.length);
+const missing = computed(() => total.value - ready.value);
 const formatCount = new Intl.NumberFormat('ru-RU').format;
 const searchable = text => text.normalize('NFD').replace(/\p{M}/gu, '').replace(/’/g, "'").toLowerCase();
 const filtered = computed(() => {
@@ -82,8 +84,19 @@ function playbackFailed() {
   previewError.value = 'Не удалось воспроизвести запись';
   ElMessage.error(previewError.value);
 }
-function reloadFiles() {
-  router.reload({ only: ['rows'], preserveScroll: true, onSuccess: () => { changes.value = {}; } });
+function reloadFiles(onFinish) {
+  const revision = sequence;
+  router.reload({
+    only: ['rows'],
+    preserveScroll: true,
+    onSuccess: () => {
+      if (revision === sequence) {
+        changes.value = {};
+        status.value = { ...status.value, coverage: null };
+      }
+    },
+    onFinish,
+  });
 }
 async function refresh() {
   clearTimeout(timer);
@@ -91,13 +104,17 @@ async function refresh() {
   try {
     const next = await api.dailyPractice.action('pronunciation/status', { keys: visible.value.map(row => row.key) });
     if (revision !== sequence) return;
-    if (status.value.pending && !next.pending) reloadFiles();
+    const wasPending = status.value.pending;
     status.value = next;
     changes.value = { ...changes.value, ...next.files };
     failure.value = null;
-    if (next.pending) timer = setTimeout(refresh, 4000);
+    if (!next.pending && (wasPending || next.coverage.ready !== listedReady.value || next.coverage.total !== props.rows.length)) {
+      reloadFiles();
+    }
   } catch (error) {
     if (revision === sequence) failure.value = errorReport(error);
+  } finally {
+    if (revision === sequence && status.value.pending) timer = setTimeout(refresh, 4000);
   }
 }
 async function generate(row, mode, voice) {
@@ -131,16 +148,16 @@ onBeforeUnmount(() => { ++sequence; ++playAttempt; clearTimeout(timer); audio.va
           <div class="panel-heading">
             <h2>Озвучено обоими голосами</h2>
             <div class="status-actions">
-              <el-button circle text :icon="Refresh" aria-label="Обновить статус" title="Обновить статус" @click="reloadFiles(); refresh()" />
+              <el-button circle text :icon="Refresh" aria-label="Обновить статус" title="Обновить статус" @click="reloadFiles(refresh)" />
               <admin-info label="Как перенести записи на хостинг">
                 Скопируйте папку <code>public/practice-audio</code> вместе с подпапками в публичный каталог сайта.
               </admin-info>
             </div>
           </div>
           <div class="coverage">
-            <strong>{{ formatCount(ready) }}</strong><span>из {{ formatCount(rows.length) }}</span>
+            <strong>{{ formatCount(ready) }}</strong><span>из {{ formatCount(total) }}</span>
           </div>
-          <el-progress :percentage="rows.length ? 100 * ready / rows.length : 0" :show-text="false" :stroke-width="5" aria-label="Доля полностью озвученных слов и фраз" />
+          <el-progress :percentage="total ? 100 * ready / total : 0" :show-text="false" :stroke-width="5" aria-label="Доля полностью озвученных слов и фраз" />
           <div class="queue-state" role="status">
             <span><i :class="{ pending: status.pending }" />{{ status.pending ? 'В очереди: ' + formatCount(status.pending) : 'Очередь пуста' }}</span>
             <span v-if="status.failed" class="error-text">Ошибок: {{ formatCount(status.failed) }}</span>

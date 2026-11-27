@@ -2,18 +2,21 @@
 
 namespace App\Support;
 
+use App\Support\Learning\PracticeTime;
 use Carbon\CarbonImmutable;
 use DateTimeInterface;
 use Illuminate\Http\Request;
 
 final class ViewerTime
 {
-    public static function format(DateTimeInterface $date, Request $request, string $format = 'd.m.Y H:i'): string
+    public static function format(?DateTimeInterface $date, Request $request, string $format = 'd.m.Y H:i'): ?string
     {
-        $timezone = $request->user()?->timezone;
+        if ($date === null) {
+            return null;
+        }
 
-        return $timezone === null
-            ? $date->format($format)
-            : CarbonImmutable::instance($date)->setTimezone($timezone)->format($format);
+        $timezone = $request->user()?->timezone ?? PracticeTime::DEFAULT_TIMEZONE;
+
+        return CarbonImmutable::instance($date)->setTimezone($timezone)->format($format);
     }
 }

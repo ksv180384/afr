@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use App\Models\User\User;
-use App\Rules\IsTrue;
+use App\Support\LegalDocuments;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules;
 
@@ -28,7 +28,7 @@ class RegisteredRequest extends FormRequest
             'name' => 'required|string|max:20|unique:'.User::class,
             'email' => 'required|string|lowercase|email|max:100|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'confirmation_rules' => ['required', 'boolean', new IsTrue('Подтвердите, что принимаете правила и политику сайта.')],
+            ...LegalDocuments::RULES,
         ];
     }
 
@@ -47,8 +47,7 @@ class RegisteredRequest extends FormRequest
             'email.unique' => 'Пользователь с таким Email уже существует.',
             'email.password' => 'Пароль не должно быть пустым.',
             'email.confirmed' => 'Неверно подтвержден пароль.',
-            'confirmation_rules.required' => 'Подтвердите, что принимаете правила и политику сайта.',
-            'confirmation_rules.boolean' => 'Подтвердите, что принимаете правила и политику сайта.',
+            ...LegalDocuments::MESSAGES,
         ];
     }
 }

@@ -222,6 +222,10 @@ const showModalWord = (word) => {
   @apply flex justify-end mt-2 lg:mt-0;
 }
 
+@media (max-width: 600px) {
+  .dictionary-pagination-container { width: 100%; }
+}
+
 .dictionary-words-container{
   @apply flex flex-wrap justify-center py-4 gap-6;
 }

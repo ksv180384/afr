@@ -203,7 +203,7 @@ onBeforeUnmount(() => { disposed = true; window.removeEventListener('online',onO
           @next-lesson="startLesson()" @continue-run="continueRun" @review="startReview" @repeat="repeat" @test-next="repeat" @vocabulary="router.visit('/daily/vocabulary')" @exit="exitRun" />
         <template v-else-if="home">
           <template v-if="screen!=='progress'">
-            <practice-route-topic :trail="embedded" :route="home.route" :owner="owner" :selection="routeSelection"
+            <practice-route-topic :trail="embedded" :route="home.route" :current-level="home.profile.current_level" :owner="owner" :selection="routeSelection"
               :busy="busy || syncing || pendingStart" @start="startLesson" @continue="continueRun">
             <section v-if="selectedSession" class="practice-panel lesson-main">
               <p class="eyebrow">Выбранное занятие</p><h2>{{ selectedSession.title }}</h2>

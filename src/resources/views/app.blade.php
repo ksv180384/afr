@@ -49,7 +49,15 @@
 <body class="font-sans antialiased">
 @inertia
 
-@if ($seo['pageType'] === 'Post/PostShow')
+@if ($seo['pageType'] === 'Info/LegalDocument')
+    <noscript>
+        <article lang="ru" style="max-width:48rem;margin:auto;padding:1rem">
+            <h1>{{ $page['props']['title'] }}</h1>
+            <p>Редакция от {{ $page['props']['revision'] }}</p>
+            {!! $page['props']['content'] !!}
+        </article>
+    </noscript>
+@elseif ($seo['pageType'] === 'Post/PostShow')
     @include('seo.post-show-noscript', ['post' => data_get($page, 'props.post')])
 @elseif ($seo['pageType'] === 'Grammar/GrammarShow')
     @include('seo.grammar-show-noscript', ['grammarContent' => data_get($page, 'props.grammarContent')])

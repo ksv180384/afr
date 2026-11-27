@@ -1,8 +1,9 @@
 <script setup>
-import { ref, useId } from 'vue';
-import { Link, useForm } from '@inertiajs/vue3';
+import { ref, useId, watch } from 'vue';
+import { Link, useForm, usePage } from '@inertiajs/vue3';
 import AfrButton from '@/App/Components/Form/AfrButton.vue';
 import AfrCheckbox from '@/App/Components/Form/AfrCheckbox.vue';
+import AfrLegalAgreements from '@/App/Components/Form/AfrLegalAgreements.vue';
 import AfrInput from '@/App/Components/Form/AfrInput.vue';
 import AfrInputErrorMessage from '@/App/Components/Form/AfrInputErrorMessage.vue';
 
@@ -13,20 +14,42 @@ defineProps({
 const emit = defineEmits(['success']);
 
 const id = useId();
+const needsAgreements = ref(false);
 const passwordVisible = ref(false);
 const form = useForm({
   email: '',
   password: '',
   remember: false,
+  confirmation_rules: false,
+  personal_data_consent: false,
+  legal_version: usePage().props.legalVersion,
+});
+
+watch(() => form.email, () => {
+  needsAgreements.value = false;
+  form.reset('confirmation_rules', 'personal_data_consent');
+  form.clearErrors('confirmation_rules', 'personal_data_consent', 'legal_version');
 });
 
 const submit = (url) => {
   if (form.processing) return;
 
   form.post(url, {
-    onSuccess: () => emit('success'),
-    onFinish: () => {
+    onSuccess: () => {
       form.reset('password');
+      emit('success');
+    },
+    onError: (errors) => {
+      if (errors.confirmation_rules || errors.personal_data_consent || errors.legal_version) {
+        if (!needsAgreements.value) {
+          form.clearErrors('confirmation_rules', 'personal_data_consent');
+        }
+        needsAgreements.value = true;
+      } else {
+        form.reset('password');
+      }
+    },
+    onFinish: () => {
       passwordVisible.value = false;
     },
   });
@@ -131,14 +154,28 @@ const submit = (url) => {
       </Link>
     </div>
 
+    <p v-if="needsAgreements" class="text-sm text-slate-700" role="status">
+      Для этого аккаунта нужно подтвердить действующие документы.
+    </p>
+    <AfrLegalAgreements
+      v-if="needsAgreements"
+      class="border-t border-sky-100 pt-4"
+      v-model:rules="form.confirmation_rules"
+      v-model:consent="form.personal_data_consent"
+      :errors="form.errors"
+      @update:rules="form.clearErrors('confirmation_rules')"
+      @update:consent="form.clearErrors('personal_data_consent')"
+    />
+
     <afr-button
       class="login-submit w-full"
       type="primary"
       native-type="submit"
       :loading="form.processing"
+      :disabled="needsAgreements && (!form.confirmation_rules || !form.personal_data_consent)"
       :aria-busy="form.processing"
     >
-      {{ form.processing ? 'Входим…' : 'Войти' }}
+      {{ form.processing ? 'Входим…' : needsAgreements ? 'Подтвердить и войти' : 'Войти' }}
     </afr-button>
 
     <div class="login-footer">

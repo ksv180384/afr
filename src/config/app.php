@@ -2,6 +2,8 @@
 
 return [
 
+    'legal_postal_address' => env('LEGAL_OPERATOR_POSTAL_ADDRESS'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

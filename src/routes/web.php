@@ -50,10 +50,11 @@ Route::get('/dictionary', [\App\Http\Controllers\App\DictionaryController::class
 Route::get('/dictionary/word/{id}', [\App\Http\Controllers\App\DictionaryController::class, 'show'])->whereNumber('id')->name('dictionary.show');
 Route::get('/games', [\App\Http\Controllers\App\GamesController::class, 'index'])->name('games');
 Route::get('/games/falling-translations', [\App\Http\Controllers\App\GamesController::class, 'fallingTranslations'])->name('games.falling-translations');
-Route::get('/info/terms-user', [\App\Http\Controllers\App\Info\InfoController::class, 'termsUser'])->name('info.terms-user');
+Route::get('/info/terms-user', [\App\Http\Controllers\App\Info\InfoController::class, 'show'])->defaults('document', 'terms')->name('info.terms-user');
 Route::post('/cookie-preferences', \App\Http\Controllers\App\Info\CookiePreferencesController::class)
     ->name('info.cookie-preferences');
-Route::get('/privacy-policy', [\App\Http\Controllers\App\Info\InfoController::class, 'privacyPolicy'])->name('info.privacy-policy');
+Route::get('/privacy-policy', [\App\Http\Controllers\App\Info\InfoController::class, 'show'])->defaults('document', 'privacy')->name('info.privacy-policy');
+Route::get('/personal-data-consent', [\App\Http\Controllers\App\Info\InfoController::class, 'show'])->defaults('document', 'consent')->name('info.personal-data-consent');
 
 Route::get('/sitemap.xml', \App\Http\Controllers\App\SitemapController::class)->name('sitemap');
 

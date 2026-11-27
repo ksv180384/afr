@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Auth;
+use App\Support\LegalDocuments;
 use Illuminate\Support\Facades\Event;
 
 test('registration screen can be rendered', function () {
@@ -19,8 +19,11 @@ test('new users can register', function () {
         'password' => 'password',
         'password_confirmation' => 'password',
         'confirmation_rules' => true,
+        'personal_data_consent' => true,
+        'legal_version' => LegalDocuments::VERSION,
     ]);
 
     $this->assertAuthenticated();
+    expect(LegalDocuments::acceptedBy(auth()->user()))->toBeTrue();
     $response->assertRedirect(route('verification.notice', absolute: false));
 });

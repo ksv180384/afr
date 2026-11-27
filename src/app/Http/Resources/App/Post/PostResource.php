@@ -24,9 +24,9 @@ class PostResource extends JsonResource
             'comments_count' => $this->comments_count,
             'status' => $this->status,
             'created_at' => ViewerTime::format($this->created_at, $request),
-            'created' => $this->created_at->diffForHumans(),
+            'created' => $this->created_at?->diffForHumans(),
             'updated_at' => ViewerTime::format($this->updated_at, $request),
-            'updated' => $this->updated_at->diffForHumans(),
+            'updated' => $this->updated_at?->diffForHumans(),
         ];
 
         return $result;

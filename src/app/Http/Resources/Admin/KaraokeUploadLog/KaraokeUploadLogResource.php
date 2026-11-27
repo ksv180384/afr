@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Admin\KaraokeUploadLog;
 
+use App\Support\ViewerTime;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -42,8 +43,8 @@ class KaraokeUploadLogResource extends JsonResource
             'duration_matched' => $this->duration_matched,
             'user_id' => $this->user_id,
             'user' => $this->user ? $this->user->only(['id', 'name']) : null,
-            'created_at' => $this->created_at->format('d.m.Y H:i'),
-            'created' => $this->created_at->diffForHumans(),
+            'created_at' => ViewerTime::format($this->created_at, $request),
+            'created' => $this->created_at?->diffForHumans(),
         ];
     }
 }

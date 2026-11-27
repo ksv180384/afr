@@ -24,6 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->convertEmptyStringsToNull(except: [$preservePayload]);
         $middleware->web(append: [
             //            \App\Http\Middleware\PrerenderIfCrawler::class,
+            \App\Http\Middleware\CheckRememberedAgreements::class,
             HandleInertiaRequests::class,
             \App\Http\Middleware\PracticeRobots::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,

@@ -6,50 +6,25 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Services\App\ProverbService;
 use App\Services\App\WordService;
+use App\Support\LegalDocuments;
+use Carbon\CarbonImmutable;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class InfoController extends Controller
 {
-    /**
-     * @param WordService $wordService
-     * @param ProverbService $proverbService
-     * @return Response
-     */
-    public function termsUser(
-        WordService $wordService,
-        ProverbService $proverbService,
-    ): Response
+    public function show(string $document, WordService $words, ProverbService $proverbs): Response
     {
-        $words = $wordService->wordsRandom();
-        $proverb = $proverbService->proverbRandomOne();
-        $authUser = Helper::getUserData();
+        $title = LegalDocuments::TITLES[$document];
 
-        return Inertia::render('Info/TermsUser', [
-            'words' => $words,
-            'proverb' => $proverb,
-            'authUser' => $authUser,
-        ]);
-    }
-
-    /**
-     * @param WordService $wordService
-     * @param ProverbService $proverbService
-     * @return Response
-     */
-    public function privacyPolicy(
-        WordService $wordService,
-        ProverbService $proverbService,
-    ): Response
-    {
-        $words = $wordService->wordsRandom();
-        $proverb = $proverbService->proverbRandomOne();
-        $authUser = Helper::getUserData();
-
-        return Inertia::render('Info/PrivacyPolicy', [
-            'words' => $words,
-            'proverb' => $proverb,
-            'authUser' => $authUser,
+        return Inertia::render('Info/LegalDocument', [
+            'title' => $title,
+            'document' => $document,
+            'revision' => CarbonImmutable::parse(LegalDocuments::VERSION)->locale('ru')->isoFormat('D MMMM YYYY [года]'),
+            'content' => view('legal.'.$document)->render(),
+            'words' => $words->wordsRandom(),
+            'proverb' => $proverbs->proverbRandom()->first(),
+            'authUser' => Helper::getUserData(),
         ]);
     }
 }

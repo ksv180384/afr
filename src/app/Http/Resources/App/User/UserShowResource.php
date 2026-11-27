@@ -19,12 +19,13 @@ class UserShowResource extends JsonResource
     {
 //        dd(data_get($this, 'config.email.alias'));
 
+        $createdAt = $this['created_at'];
         $result = [
             'id' => $this['id'],
             'avatar_link' => $this['avatar_link'],
             'name' => $this['name'],
             'rang' => $this['rang'],
-            'created_at' => ViewerTime::format(Carbon::parse($this['created_at']), $request, 'd.m.Y'),
+            'created_at' => ViewerTime::format($createdAt ? Carbon::parse($createdAt) : null, $request, 'd.m.Y'),
         ];
 
         if(data_get($this, 'config.day_birthday')){
